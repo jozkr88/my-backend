@@ -168,6 +168,24 @@ app.post("/api/think", async (req, res) => {
       if (/\b(exit|leave|close joz|exit joz)\b/.test(clean)) return res.json({ action: "back", target: "/" });
     }
 
+
+
+if (currentPortal === "the-vibe-energy") {
+  if (/\b(launch in space|open in space|view in ar|launch ar)\b/.test(clean)) {
+    console.log("🚀 Voice → Launch AR for n2x.glb in the-vibe-energy");
+    return res.json({ action: "launch_in_space_n2x", target: null });
+  }
+}
+
+if (currentPortal === "meet-joz") {
+  if (/\b(launch in space|open in space|view in ar|launch ar)\b/.test(clean)) {
+    console.log("🚀 Voice → Launch AR for workf-m.glb in meet-joz");
+    return res.json({ action: "launch_in_space_workf", target: null });
+  }
+}
+
+
+
     // --- global back ---
     if (["back", "go back", "exit", "return"].some((cmd) => clean.includes(cmd))) {
       return res.json({ action: "back", target: currentPortal === "root" ? null : "/" });
@@ -219,4 +237,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`✅ Server running on port ${port}`);
 });
-
