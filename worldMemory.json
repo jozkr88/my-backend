@@ -1,0 +1,145 @@
+{
+  "brain": {
+    "action": "portal",
+    "context": {
+      "position": [
+        0,
+        1,
+        2
+      ],
+      "type": "entry",
+      "target": "/vibe/the-vibe-energy",
+      "mesh": "enter"
+    },
+    "commands": [
+      "enter",
+      "explore",
+      "open brain",
+      "go inside",
+      "enter brain",
+      "go inside brain",
+      "open the brain",
+      "open portal"
+    ],
+    "lastUpdated": "2025-11-02T00:23:56.694Z"
+  },
+  "vibe": {
+    "action": "activate",
+    "context": {
+      "type": "energy field",
+      "target": "/vibe/the-vibe-energy"
+    },
+    "commands": [
+      "vibe",
+      "show vibe",
+      "open vibe",
+      "enter vibe",
+      "go into vibe"
+    ],
+    "lastUpdated": "2025-11-01T20:12:55.968Z"
+  },
+  "skills": {
+    "action": "showPanel",
+    "context": {
+      "type": "menu"
+    },
+    "commands": [
+      "show skills",
+      "open skills",
+      "skills"
+    ],
+    "lastUpdated": "2025-11-01T20:12:55.969Z"
+  },
+  "aura": {
+    "action": "portal",
+    "context": {
+      "type": "portal",
+      "target": "/vibe/the-aura"
+    },
+    "commands": [
+      "enter aura",
+      "open aura",
+      "go into aura"
+    ],
+    "lastUpdated": "2025-10-31T11:42:49.354Z"
+  },
+  "enter_portal": {
+    "action": "portal",
+    "context": {},
+    "commands": [
+      "enter",
+      "explore",
+      "go inside",
+      "open the portal",
+      "step into the brain"
+    ],
+    "lastUpdated": "2025-10-31T12:11:34.390Z"
+  },
+  "ball": {
+    "action": "portal",
+    "context": {
+      "target": "/vibe/meet-joz"
+    },
+    "commands": [
+      "meet joz",
+      "talk to joz",
+      "joz",
+      "open ball",
+      "go to ball",
+      "meet",
+      "meet jaws",
+      "meet jos"
+    ],
+    "lastUpdated": "2025-11-02T00:23:56.695Z"
+  },
+  "n2x": {
+    "action": "toggleNeurons",
+    "context": {
+      "target": null
+    },
+    "commands": [
+      "pause neurons",
+      "pause animation",
+      "stop animation",
+      "stop neurons",
+      "pause",
+      "resume neurons",
+      "resume animation",
+      "continue animation",
+      "toggle neurons",
+      "play",
+      "play neurons",
+      "start neurons",
+      "start animation"
+    ],
+    "lastUpdated": "2025-11-02T00:23:56.688Z"
+  },
+  "model1": {
+    "action": "sequenceControl",
+    "context": {
+      "target": "/vibe/meet-joz"
+    },
+    "commands": [
+      "vibe",
+      "discover",
+      "skills",
+      "show skills",
+      "open skills",
+      "next",
+      "continue",
+      "back",
+      "previous",
+      "rewind",
+      "reset",
+      "exit",
+      "leave",
+      "close joz",
+      "exit joz",
+      "pause",
+      "stop",
+      "resume",
+      "play"
+    ],
+    "lastUpdated": "2025-11-01T10:02:54.229Z"
+  }
+}
