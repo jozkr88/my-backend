@@ -139,6 +139,50 @@ app.post("/api/think", async (req, res) => {
     const clean = transcript.toLowerCase().trim();
     console.log("🎙️ Reasoning about:", clean, "inside portal:", currentPortal);
 
+// --- ✉️ Direct voice command: Contact or Email Joz ---
+if (
+  /\b(contact|email|message|send (an )?email|reach out|write to)\b/.test(clean)
+) {
+  console.log("📧 Voice → Contact Joz (mailto:joz@madebyjoz.com)");
+  return res.json({
+    action: "contact_joz",
+    target: "mailto:joz@madebyjoz.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
+    awareness: "Opening your email app to contact Joz at joz@madebyjoz.com."
+  });
+}
+
+// --- 📞 Direct voice command: Call Joz ---
+if (/\b(call|phone|ring|dial|call joz|phone joz)\b/.test(clean)) {
+  console.log("📞 Voice → Call Joz");
+  return res.json({
+    action: "call_joz",
+    target: "tel:+41764973894", // update this number
+    awareness: "Tap here to call Joz"
+  });
+}
+
+
+// --- 🧹 Voice: Hide or Show contact buttons ---
+if (/\b(remove|hide|close|dismiss)\b/.test(clean)) {
+  console.log("🧹 Voice → Hide contact buttons");
+  return res.json({
+    action: "hide_contact_buttons",
+    target: null,
+    awareness: "Contact button hidden. Say 'show contact' to bring it back."
+  });
+}
+
+if (/\b(show|bring back|display|open)\b/.test(clean)) {
+  console.log("✨ Voice → Show contact buttons");
+  return res.json({
+    action: "show_contact_buttons",
+    target: null,
+    awareness: "Contact button visible again."
+  });
+}
+
+
+
     // --- the-vibe-energy logic ---
     if (currentPortal === "the-vibe-energy") {
       if (/\b(pause|stop|pause neurons|stop neurons|pause animation|stop animation)\b/.test(clean)) {
@@ -187,9 +231,25 @@ if (currentPortal === "meet-joz") {
 
 
     // --- global back ---
-    if (["back", "go back", "exit", "return"].some((cmd) => clean.includes(cmd))) {
-      return res.json({ action: "back", target: currentPortal === "root" ? null : "/" });
-    }
+  // --- handle AR launch before back ---
+if (/\b(launch in space|open in space|view in ar|view in space|launch ar|show in space)\b/.test(clean)) {
+  if (currentPortal === "the-vibe-energy") {
+    console.log("🚀 Voice → Launch AR for n2x.glb in the-vibe-energy");
+    return res.json({ action: "launch_in_space_n2x", target: null });
+  }
+  if (currentPortal === "meet-joz") {
+    console.log("🚀 Voice → Launch AR for workf-m.glb in meet-joz");
+    return res.json({ action: "launch_in_space_workf", target: null });
+  }
+}
+
+
+
+// --- safer global back (don’t match words like “space”) ---
+if (/\b(back|go back|exit|return|leave portal|close portal)\b/.test(clean)) {
+  console.log("🚪 Voice → Exit portal → /");
+  return res.json({ action: "back", target: currentPortal === "root" ? null : "/" });
+}
 
     // --- world memory match ---
     for (const [mesh, data] of Object.entries(worldMemory)) {
