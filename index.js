@@ -133,7 +133,7 @@ const portalState = {
 
 app.post("/api/think", async (req, res) => {
   try {
-    const { transcript, currentPortal = "root" } = req.body;
+    const { transcript, currentPortal = "root", currentMesh = null } = req.body;
     if (!transcript) return res.status(400).json({ error: "Missing transcript" });
 
     const clean = transcript.toLowerCase().trim();
@@ -202,15 +202,25 @@ if (/\b(show|bring back|display|open)\b/.test(clean)) {
     if (!global.portalState) global.portalState = { "meet-joz": "vibe" };
     const state = global.portalState["meet-joz"];
 
-    // --- meet-joz logic ---
-    if (currentPortal === "meet-joz") {
-      if (/\bvibe\b/.test(clean)) return res.json({ action: "vibe", target: null });
-      if (/\bdiscover\b/.test(clean)) return res.json({ action: "discover", target: null });
-      if (/\b(skills|show skills|open skills)\b/.test(clean)) return res.json({ action: "skills", target: null });
-      if (/\b(pause|stop)\b/.test(clean)) return res.json({ action: "pause", target: null });
-      if (/\b(play|resume|continue)\b/.test(clean)) return res.json({ action: "resume", target: null });
-      if (/\b(exit|leave|close joz|exit joz)\b/.test(clean)) return res.json({ action: "back", target: "/" });
-    }
+  if (currentPortal === "meet-joz") {
+  // 🎬 Core actions
+  if (/\bvibe\b/.test(clean)) return res.json({ action: "vibe", target: null });
+  if (/\bdiscover\b/.test(clean)) return res.json({ action: "discover", target: null });
+  if (/\b(skills|show skills|open skills)\b/.test(clean)) return res.json({ action: "skills", target: null });
+
+  // ⏸ Pause/resume
+  if (/\b(pause|stop)\b/.test(clean)) return res.json({ action: "pause", target: null });
+  if (/\b(play|resume|continue)\b/.test(clean)) return res.json({ action: "resume", target: null });
+
+  // 🚪 Exit portal entirely
+  if (/\b(exit|leave|close joz|exit joz)\b/.test(clean))
+    return res.json({ action: "back", target: "/" });
+
+
+
+
+  
+}
 
 
 
@@ -245,10 +255,129 @@ if (/\b(launch in space|open in space|view in ar|view in space|launch ar|show in
 
 
 
-// --- safer global back (don’t match words like “space”) ---
-if (/\b(back|go back|exit|return|leave portal|close portal)\b/.test(clean)) {
-  console.log("🚪 Voice → Exit portal → /");
-  return res.json({ action: "back", target: currentPortal === "root" ? null : "/" });
+// --- 🧭 contextual back behavior for meet-joz ---
+// --- 🧭 contextual back behavior for meet-joz (improved) ---
+if (currentPortal === "meet-joz") {
+  if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
+    console.log("↩️ Voice → Back detected in meet-joz | currentMesh:", currentMesh);
+
+    const mesh = (currentMesh || "").toLowerCase();
+
+    // 🧩 From Discover → rewind fully to vibe (0)
+    if (mesh.includes("discover")) {
+      console.log("↩️ From discover → rewind fully to vibe (0)");
+      return res.json({ action: "vibe_back", target: null });
+    }
+
+    // 🧩 From Skills → rewind to discover (frame 70)
+    if (mesh.includes("skills")) {
+      console.log("↩️ From skills → rewind to discover (frame 70)");
+      return res.json({ action: "vibe_back1", target: null });
+    }
+
+// 🧩 At vibe → exit portal completely
+if (mesh.includes("vibe")) {
+  console.log("🚪 Voice → 'back' at vibe → exit portal");
+  return res.json({ action: "vibe_back", target: "/" }); // ✅ tell frontend to exit
+}
+
+
+    // 🧩 Already at vibe → nothing more to do
+    if (mesh.includes("vibe")) {
+      console.log("↩️ Already at vibe → no further back");
+      return res.json({ action: null, target: null });
+    }
+
+    // 🧩 Fallback safety: assume discover → vibe
+    console.log("↩️ Unknown mesh context, assuming discover → vibe");
+    return res.json({ action: "vibe_back", target: null });
+  }
+}
+
+if (currentPortal === "meet-joz") {
+  const mesh = (currentMesh || "").toLowerCase().trim();
+  console.log("🧭 Current mesh (context):", mesh);
+
+  // === SECTION NAVIGATION — FULLY CONTEXT AWARE ===
+
+  // --- VIBE ---
+  if (/\bvibe\b/.test(clean)) {
+    console.log("🟢 Already at or limited to vibe → ignore");
+    return res.json({ action: null, target: null });
+  }
+
+  // --- DISCOVER ---
+  if (/\bdiscover\b/.test(clean)) {
+    // ❌ no voice-trigger forward jumps allowed
+    console.log("🚫 Voice → Forward 'discover' blocked (only click can trigger)");
+    return res.json({
+      action: null,
+      target: null,
+      awareness: "Discover opens only by interaction, not voice.",
+    });
+  }
+
+  // --- SKILLS ---
+  if (/\b(skills|show skills|open skills)\b/.test(clean)) {
+    // ❌ disallow forward jumps completely
+    console.log("🚫 Voice → Forward 'skills' blocked (only click can trigger)");
+    return res.json({
+      action: null,
+      target: null,
+      awareness: "Skills opens only from Discover via click, not voice.",
+    });
+  }
+
+  // --- BACK COMMAND ---
+  if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
+    console.log("↩️ Voice → Back detected in meet-joz | currentMesh:", mesh);
+
+    if (mesh === "skills") {
+      console.log("↩️ From skills → discover (frame 70)");
+      return res.json({ action: "vibe_back1", target: null });
+    }
+    if (mesh === "discover") {
+      console.log("↩️ From discover → vibe (frame 0)");
+      return res.json({ action: "vibe_back", target: null });
+    }
+    if (mesh === "vibe") {
+      console.log("↩️ Already at vibe → nothing more to rewind");
+      return res.json({ action: null, target: null });
+    }
+
+    // fallback safety
+    console.log("↩️ Unknown mesh context, assume discover → vibe");
+    return res.json({ action: "vibe_back", target: null });
+  }
+
+  // --- PAUSE / RESUME ---
+  if (/\b(pause|stop)\b/.test(clean)) {
+    console.log("⏸️ Voice → Pause animation");
+    return res.json({ action: "pause", target: null });
+  }
+  if (/\b(play|resume|continue)\b/.test(clean)) {
+    console.log("▶️ Voice → Resume animation");
+    return res.json({ action: "resume", target: null });
+  }
+
+  // --- EXIT PORTAL ---
+  if (/\b(exit|leave|close joz|exit joz)\b/.test(clean)) {
+    console.log("🚪 Voice → Exit meet-joz → /");
+    return res.json({ action: "back", target: "/" });
+  }
+}
+
+
+// --- global exit from portal ---
+if (/\b(exit|leave portal|close portal|exit joz|leave joz)\b/.test(clean)) {
+  console.log("🚪 Voice → Exit meet-joz → /");
+  return res.json({ action: "back", target: "/" });
+}
+
+// --- fallback back for root-level navigation ---
+if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
+  console.log("↩️ Voice → Root-level back (ignored)");
+  return res.json({ action: null, target: null });
 }
 
     // --- world memory match ---
