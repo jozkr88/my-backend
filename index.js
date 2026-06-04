@@ -5,13 +5,14 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 
+
 dotenv.config();
 
 const app = express();
 
 // ✅ Universal CORS setup — works for DreamHost frontend + Vercel backend
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // or "https://madebyjoz.com"
+  res.setHeader("Access-Control-Allow-Origin", "*"); // or "https://neomaxxing.com"
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
@@ -139,15 +140,34 @@ app.post("/api/think", async (req, res) => {
     const clean = transcript.toLowerCase().trim();
     console.log("🎙️ Reasoning about:", clean, "inside portal:", currentPortal);
 
+// --- 🧭 Root-level direct navigation ---
+if (currentPortal === "root") {
+  if (/\b(enter|explore|go inside|step inside|open portal|open the flex|open maxx|open max)\b/.test(clean)) {
+    console.log("🧠 Root voice → open maxx portal");
+    return res.json({
+      action: "brain",
+      target: "/neo/maxx",
+    });
+  }
+
+  if (/\b(meet joz|neo meet joz|talk to joz|open ball|go to ball|open meet joz)\b/.test(clean)) {
+    console.log("🧠 Root voice → open meet-joz portal");
+    return res.json({
+      action: "ball",
+      target: "/neo/meet-joz",
+    });
+  }
+}
+
 // --- ✉️ Direct voice command: Contact or Email Joz ---
 if (
   /\b(contact|email|message|send (an )?email|reach out|write to)\b/.test(clean)
 ) {
-  console.log("📧 Voice → Contact Joz (mailto:joz@madebyjoz.com)");
+  console.log("📧 Voice → Contact Joz (mailto:joz@neomaxxing.com)");
   return res.json({
     action: "contact_joz",
-    target: "mailto:joz@madebyjoz.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
-    awareness: "Opening your email app to contact Joz at joz@madebyjoz.com."
+    target: "mailto:joz@neomaxxing.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
+    awareness: "Opening your email app to contact Joz at joz@neomaxxing.com."
   });
 }
 
@@ -163,7 +183,7 @@ if (/\b(call|phone|ring|dial|call joz|phone joz)\b/.test(clean)) {
 
 
 // --- 🧹 Voice: Hide or Show contact buttons ---
-if (/\b(remove|hide|close|dismiss)\b/.test(clean)) {
+if (/\b(remove|hide|close|dismiss)\b.*\b(contact|button|buttons)\b|\bhide contact\b|\bhide buttons\b/.test(clean)) {
   console.log("🧹 Voice → Hide contact buttons");
   return res.json({
     action: "hide_contact_buttons",
@@ -172,7 +192,7 @@ if (/\b(remove|hide|close|dismiss)\b/.test(clean)) {
   });
 }
 
-if (/\b(show|bring back|display|open)\b/.test(clean)) {
+if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow contact\b|\bshow buttons\b/.test(clean)) {
   console.log("✨ Voice → Show contact buttons");
   return res.json({
     action: "show_contact_buttons",
@@ -204,9 +224,9 @@ if (/\b(show|bring back|display|open)\b/.test(clean)) {
 
   if (currentPortal === "meet-joz") {
   // 🎬 Core actions
-  if (/\bvibe\b/.test(clean)) return res.json({ action: "vibe", target: null });
-  if (/\bdiscover\b/.test(clean)) return res.json({ action: "discover", target: null });
-  if (/\b(skills|show skills|open skills)\b/.test(clean)) return res.json({ action: "skills", target: null });
+  if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) return res.json({ action: "vibe", target: null });
+  if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) return res.json({ action: "discover", target: null });
+  if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) return res.json({ action: "skills", target: null });
 
   // ⏸ Pause/resume
   if (/\b(pause|stop)\b/.test(clean)) return res.json({ action: "pause", target: null });
@@ -244,11 +264,11 @@ if (currentPortal === "meet-joz") {
   // --- handle AR launch before back ---
 if (/\b(launch in space|open in space|view in ar|view in space|launch ar|show in space)\b/.test(clean)) {
   if (currentPortal === "the-vibe-energy") {
-    console.log("🚀 Voice → Launch AR for n2x.glb in the-vibe-energy");
+    console.log("🚀 Voice → Launch AR for neurovibes.glb in the-vibe-energy");
     return res.json({ action: "launch_in_space_n2x", target: null });
   }
   if (currentPortal === "meet-joz") {
-    console.log("🚀 Voice → Launch AR for workf-m.glb in meet-joz");
+    console.log("🚀 Voice → Launch AR for Joz.glb in meet-joz");
     return res.json({ action: "launch_in_space_workf", target: null });
   }
 }
@@ -301,30 +321,30 @@ if (currentPortal === "meet-joz") {
   // === SECTION NAVIGATION — FULLY CONTEXT AWARE ===
 
   // --- VIBE ---
-  if (/\bvibe\b/.test(clean)) {
-    console.log("🟢 Already at or limited to vibe → ignore");
+  if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) {
+    console.log("🟢 Already at or limited to flex/vibe → ignore");
     return res.json({ action: null, target: null });
   }
 
   // --- DISCOVER ---
-  if (/\bdiscover\b/.test(clean)) {
+  if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) {
     // ❌ no voice-trigger forward jumps allowed
-    console.log("🚫 Voice → Forward 'discover' blocked (only click can trigger)");
+    console.log("🚫 Voice → Forward 'ascend/discover' blocked (only click can trigger)");
     return res.json({
       action: null,
       target: null,
-      awareness: "Discover opens only by interaction, not voice.",
+      awareness: "Ascend opens only by interaction, not voice.",
     });
   }
 
   // --- SKILLS ---
-  if (/\b(skills|show skills|open skills)\b/.test(clean)) {
+  if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) {
     // ❌ disallow forward jumps completely
-    console.log("🚫 Voice → Forward 'skills' blocked (only click can trigger)");
+    console.log("🚫 Voice → Forward 'mogg/skills' blocked (only click can trigger)");
     return res.json({
       action: null,
       target: null,
-      awareness: "Skills opens only from Discover via click, not voice.",
+      awareness: "Mogg opens only from Ascend via click, not voice.",
     });
   }
 
