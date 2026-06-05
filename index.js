@@ -341,6 +341,12 @@ function classifyMeetJozCommand(clean, currentMesh) {
   return null;
 }
 
+function queueReasoningEvent(event) {
+  logReasoningEvent(event).catch((error) => {
+    console.error("⚠️ Failed to queue reasoning event:", error?.message || error);
+  });
+}
+
 app.post("/api/think", async (req, res) => {
   const startedAt = performance.now();
   const sendThinkResult = (payload, source = "unknown") => {
@@ -435,7 +441,7 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
         if (dbMatch) {
           const guarded = applyMeetJozGuardrails(dbMatch, currentMesh);
           console.log("🗄️ meet-joz voice → postgres route", guarded);
-          await logReasoningEvent({
+          queueReasoningEvent({
             portalKey: "meet-joz",
             currentState: normalizeMeshName(currentMesh),
             transcript,
@@ -452,7 +458,7 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
       const match = applyMeetJozGuardrails(classifyMeetJozCommand(clean, currentMesh), currentMesh);
       if (match) {
         console.log("🧠 meet-joz voice → canonical route", match);
-        await logReasoningEvent({
+        queueReasoningEvent({
           portalKey: "meet-joz",
           currentState: normalizeMeshName(currentMesh),
           transcript,
@@ -499,6 +505,11 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
 }
 
     // --- world memory match ---
+    if (currentPortal === "meet-joz") {
+      console.log("🛡️ Skipping world-memory fallback inside meet-joz");
+      return sendThinkResult({ action: null, target: null }, "meet_joz_no_world_memory");
+    }
+
     for (const [mesh, data] of Object.entries(worldMemory)) {
       const cmds = (data.commands || []).map((c) => c.toLowerCase());
       if (cmds.some((cmd) => new RegExp(`\\b${cmd}\\b`, "i").test(clean))) {
@@ -510,7 +521,7 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
         const action = normalizeAction(mesh) || mesh;
         const target = canonicalTargetForMesh(mesh) || safeTarget(data.context?.target);
         console.log(`🎯 Match: "${clean}" → ${mesh}`, { action, target });
-        await logReasoningEvent({
+        queueReasoningEvent({
           portalKey: currentPortal,
           currentState: normalizeMeshName(currentMesh),
           transcript,
@@ -560,7 +571,7 @@ Rules:
     const parsed = JSON.parse(content);
     const action = normalizeAction(parsed.action);
     const target = safeTarget(parsed.target);
-    await logReasoningEvent({
+    queueReasoningEvent({
       portalKey: currentPortal,
       currentState: normalizeMeshName(currentMesh),
       transcript,
