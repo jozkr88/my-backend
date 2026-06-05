@@ -198,7 +198,7 @@ function classifyRootCommand(clean) {
     return { action: "brain", target: SITE_TARGETS.maxx };
   }
 
-  if (/\b(meet joz|neo meet joz|talk to joz|open ball|go to ball|open meet joz)\b/.test(clean)) {
+  if (/\b(meet joz|meet joe|meet joes|meet joe's|neo meet joz|neo meet joe|talk to joz|talk to joe|open ball|go to ball|open meet joz|open meet joe)\b/.test(clean)) {
     return { action: "ball", target: SITE_TARGETS.meetJoz };
   }
 
@@ -209,10 +209,15 @@ function classifyMeetJozCommand(clean, currentMesh) {
   const mesh = normalizeMeshName(currentMesh);
 
   if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) {
-    return { action: mesh === "vibe" ? null : "vibe", target: null };
+    return mesh === "vibe"
+      ? { action: null, target: null, awareness: "Already on Flex." }
+      : { action: "vibe", target: null };
   }
 
   if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) {
+    if (mesh === "discover") {
+      return { action: null, target: null, awareness: "Already on Ascend." };
+    }
     if (mesh === "vibe") {
       return {
         action: null,
@@ -224,14 +229,9 @@ function classifyMeetJozCommand(clean, currentMesh) {
   }
 
   if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) {
-    if (mesh !== "skills") {
-      return {
-        action: null,
-        target: null,
-        awareness: "Mogg opens only from Ascend via click, not voice.",
-      };
-    }
-    return { action: null, target: null };
+    return mesh === "skills"
+      ? { action: null, target: null, awareness: "Already on Mogg." }
+      : { action: "skills", target: null };
   }
 
   if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
