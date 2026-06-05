@@ -417,8 +417,22 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
     const prompt = `
 You are a reasoning agent for a 3D interactive world.
 Current portal: "${currentPortal}"
+Current mesh: "${currentMesh || "none"}"
 User said: "${transcript}"
-Return JSON like: { "action": "<mesh>", "target": "<path or null>" }
+
+Return ONLY valid JSON in this shape:
+{ "action": "<known_action_or_null>", "target": "<safe_path_or_null>" }
+
+Rules:
+- Only use known actions already present in the app, such as:
+  "brain", "ball", "vibe", "discover", "skills", "pause", "resume",
+  "back", "vibe_back", "vibe_back1", "n2x_pause", "n2x_resume",
+  "launch_in_space_n2x", "launch_in_space_workf",
+  "hide_contact_buttons", "show_contact_buttons", "contact_joz", "call_joz"
+- If unsure, return { "action": null, "target": null }.
+- Never invent mesh names or action names.
+- target must be either null, a safe app path beginning with "/", or a mailto:/tel: link.
+- Never return plain words like "monk_character" as target.
 `;
 
     const response = await openai.chat.completions.create({
@@ -433,7 +447,13 @@ Return JSON like: { "action": "<mesh>", "target": "<path or null>" }
     let content = response.choices?.[0]?.message?.content?.trim() || "";
     content = content.replace(/```json|```/g, "").trim();
     const parsed = JSON.parse(content);
-    res.json({ action: parsed.action?.toLowerCase?.() || null, target: parsed.target || null });
+    const action = typeof parsed.action === "string" ? parsed.action.toLowerCase().trim() : null;
+    const target =
+      typeof parsed.target === "string" &&
+      (parsed.target.startsWith("/") || parsed.target.startsWith("mailto:") || parsed.target.startsWith("tel:"))
+        ? parsed.target
+        : null;
+    res.json({ action, target });
   } catch (err) {
     console.error("❌ Reasoning failed:", err);
     res.status(500).json({ error: err.message });
