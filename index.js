@@ -4,9 +4,12 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import { getPortalTransition, initDatabase, isDatabaseEnabled, logReasoningEvent } from "./db.js";
 
 
 dotenv.config();
+
+await initDatabase();
 
 const app = express();
 
@@ -132,6 +135,15 @@ const SITE_TARGETS = {
   meetJoz: "/neo/meet-joz",
 };
 
+const SAFE_APP_TARGETS = new Set([
+  "/",
+  "/neo/maxx",
+  "/neo/meet-joz",
+  "/vibe/the-vibe-energy",
+  "/vibe/the-aura",
+  "/vibe/meet-joz",
+]);
+
 const KNOWN_ACTIONS = new Set([
   "brain",
   "ball",
@@ -153,13 +165,41 @@ const KNOWN_ACTIONS = new Set([
   "call_joz",
 ]);
 
+const MEET_JOZ_ALLOWED_TRANSITIONS = {
+  vibe: new Set(["vibe", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
+  discover: new Set(["discover", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
+  skills: new Set(["skills", "vibe_back1", "pause", "resume", "back", "launch_in_space_workf"]),
+};
+
+function normalizeTranscript(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[’']/g, "")
+    .replace(/\bmeet\s+joe?s\b/g, "meet joz")
+    .replace(/\bneo\s+meet\s+joe?s\b/g, "neo meet joz")
+    .replace(/\btalk\s+to\s+joe\b/g, "talk to joz")
+    .replace(/\bopen\s+meet\s+joe\b/g, "open meet joz")
+    .replace(/\bjoe?s\b/g, "joz")
+    .replace(/\bflax\b/g, "flex")
+    .replace(/\bmogs\b/g, "mogg")
+    .replace(/\bascent\b/g, "ascend")
+    .replace(/\baccent\b/g, "ascend")
+    .replace(/\bsend\b/g, "ascend")
+    .replace(/\boffend\b/g, "ascend")
+    .replace(/\bmark\b/g, "mogg")
+    .replace(/\bmug\b/g, "mogg")
+    .replace(/\bmocha\b/g, "mogg")
+    .replace(/\bmoch\b/g, "mogg")
+    .replace(/\bmog\b/g, "mogg")
+    .replace(/\bmax\b/g, "maxx")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function safeTarget(value) {
-  return (
-    typeof value === "string" &&
-    (value.startsWith("/") || value.startsWith("mailto:") || value.startsWith("tel:"))
-  )
-    ? value
-    : null;
+  if (typeof value !== "string") return null;
+  if (value.startsWith("mailto:") || value.startsWith("tel:")) return value;
+  return SAFE_APP_TARGETS.has(value) ? value : null;
 }
 
 function normalizeMeshName(mesh) {
@@ -193,12 +233,45 @@ function normalizeAction(action) {
   return KNOWN_ACTIONS.has(lower) ? lower : null;
 }
 
+function detectMeetJozCommandKey(clean) {
+  if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) return "flex";
+  if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) return "ascend";
+  if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) return "mogg";
+  if (/\b(back|go back|previous|step back|return)\b/.test(clean)) return "back";
+  if (/\b(pause|stop)\b/.test(clean)) return "pause";
+  if (/\b(play|resume|continue)\b/.test(clean)) return "resume";
+  if (/\b(exit|leave|close joz|exit joz)\b/.test(clean)) return "exit";
+  if (/\b(launch in space|open in space|view in ar|launch ar|view in space|show in space)\b/.test(clean)) {
+    return "launch";
+  }
+  return null;
+}
+
+function applyMeetJozGuardrails(result, currentMesh) {
+  if (!result) return result;
+
+  const mesh = normalizeMeshName(currentMesh);
+  const action = normalizeAction(result.action);
+
+  if (!mesh || !action) return result;
+
+  const allowed = MEET_JOZ_ALLOWED_TRANSITIONS[mesh];
+  if (!allowed || allowed.has(action)) return { ...result, action };
+
+  console.warn("🛡️ Blocked invalid meet-joz transition:", { mesh, action });
+  return {
+    action: null,
+    target: null,
+    awareness: "That step is not available from the current state.",
+  };
+}
+
 function classifyRootCommand(clean) {
   if (/\b(enter|explore|go inside|step inside|open portal|open the flex|open maxx|open max)\b/.test(clean)) {
     return { action: "brain", target: SITE_TARGETS.maxx };
   }
 
-  if (/\b(meet joz|meet joe|meet joes|meet joe's|neo meet joz|neo meet joe|talk to joz|talk to joe|open ball|go to ball|open meet joz|open meet joe)\b/.test(clean)) {
+  if (/\b(meet joz|neo meet joz|talk to joz|open ball|go to ball|open meet joz)\b/.test(clean)) {
     return { action: "ball", target: SITE_TARGETS.meetJoz };
   }
 
@@ -209,29 +282,46 @@ function classifyMeetJozCommand(clean, currentMesh) {
   const mesh = normalizeMeshName(currentMesh);
 
   if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) {
-    return mesh === "vibe"
-      ? { action: null, target: null, awareness: "Already on Flex." }
-      : { action: "vibe", target: null };
+    if (mesh === "vibe") {
+      return { action: "vibe", target: null, awareness: "Opening Ascend." };
+    }
+    if (mesh === "discover") {
+      return { action: null, target: null, awareness: "Already past Flex. Say Ascend." };
+    }
+    if (mesh === "skills") {
+      return { action: null, target: null, awareness: "Already past Flex. Say Mogg or Back." };
+    }
+    return { action: null, target: null, awareness: "Flex is the first step." };
   }
 
   if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) {
     if (mesh === "discover") {
-      return { action: null, target: null, awareness: "Already on Ascend." };
+      return { action: "discover", target: null, awareness: "Opening Mogg." };
     }
     if (mesh === "vibe") {
       return {
         action: null,
         target: null,
-        awareness: "Ascend opens only by interaction, not voice.",
+        awareness: "Say Flex first.",
       };
     }
-    return { action: "discover", target: null };
+    if (mesh === "skills") {
+      return { action: null, target: null, awareness: "Already past Ascend. Say Mogg or Back." };
+    }
+    return { action: null, target: null, awareness: "Ascend is the second step." };
   }
 
   if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) {
-    return mesh === "skills"
-      ? { action: null, target: null, awareness: "Already on Mogg." }
-      : { action: "skills", target: null };
+    if (mesh === "skills") {
+      return { action: "skills", target: null, awareness: "Opening workf." };
+    }
+    if (mesh === "discover") {
+      return { action: null, target: null, awareness: "Say Ascend first." };
+    }
+    if (mesh === "vibe") {
+      return { action: null, target: null, awareness: "Say Flex first." };
+    }
+    return { action: null, target: null, awareness: "Mogg is the third step." };
   }
 
   if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
@@ -256,8 +346,8 @@ app.post("/api/think", async (req, res) => {
     const { transcript, currentPortal = "root", currentMesh = null } = req.body;
     if (!transcript) return res.status(400).json({ error: "Missing transcript" });
 
-    const clean = transcript.toLowerCase().trim();
-    console.log("🎙️ Reasoning about:", clean, "inside portal:", currentPortal);
+    const clean = normalizeTranscript(transcript);
+    console.log("🎙️ Reasoning about:", transcript, "→", clean, "inside portal:", currentPortal);
 
     if (currentPortal === "root") {
       const match = classifyRootCommand(clean);
@@ -326,9 +416,39 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
     }
 
     if (currentPortal === "meet-joz") {
-      const match = classifyMeetJozCommand(clean, currentMesh);
+      const commandKey = detectMeetJozCommandKey(clean);
+      if (commandKey && isDatabaseEnabled()) {
+        const dbMatch = await getPortalTransition("meet-joz", normalizeMeshName(currentMesh), commandKey);
+        if (dbMatch) {
+          const guarded = applyMeetJozGuardrails(dbMatch, currentMesh);
+          console.log("🗄️ meet-joz voice → postgres route", guarded);
+          await logReasoningEvent({
+            portalKey: "meet-joz",
+            currentState: normalizeMeshName(currentMesh),
+            transcript,
+            normalizedTranscript: clean,
+            commandKey,
+            resolvedAction: guarded.action,
+            resolvedTarget: guarded.target,
+            source: "postgres",
+          });
+          return res.json(guarded);
+        }
+      }
+
+      const match = applyMeetJozGuardrails(classifyMeetJozCommand(clean, currentMesh), currentMesh);
       if (match) {
         console.log("🧠 meet-joz voice → canonical route", match);
+        await logReasoningEvent({
+          portalKey: "meet-joz",
+          currentState: normalizeMeshName(currentMesh),
+          transcript,
+          normalizedTranscript: clean,
+          commandKey,
+          resolvedAction: match.action,
+          resolvedTarget: match.target,
+          source: "memory",
+        });
         return res.json(match);
       }
     }
@@ -377,6 +497,16 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
         const action = normalizeAction(mesh) || mesh;
         const target = canonicalTargetForMesh(mesh) || safeTarget(data.context?.target);
         console.log(`🎯 Match: "${clean}" → ${mesh}`, { action, target });
+        await logReasoningEvent({
+          portalKey: currentPortal,
+          currentState: normalizeMeshName(currentMesh),
+          transcript,
+          normalizedTranscript: clean,
+          commandKey: null,
+          resolvedAction: action,
+          resolvedTarget: target,
+          source: "world-memory",
+        });
         return res.json({ action, target });
       }
     }
@@ -417,6 +547,16 @@ Rules:
     const parsed = JSON.parse(content);
     const action = normalizeAction(parsed.action);
     const target = safeTarget(parsed.target);
+    await logReasoningEvent({
+      portalKey: currentPortal,
+      currentState: normalizeMeshName(currentMesh),
+      transcript,
+      normalizedTranscript: clean,
+      commandKey: null,
+      resolvedAction: action,
+      resolvedTarget: target,
+      source: "llm",
+    });
     res.json({ action, target });
   } catch (err) {
     console.error("❌ Reasoning failed:", err);
