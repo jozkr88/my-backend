@@ -342,6 +342,19 @@ function classifyMeetJozCommand(clean, currentMesh) {
 }
 
 app.post("/api/think", async (req, res) => {
+  const startedAt = performance.now();
+  const sendThinkResult = (payload, source = "unknown") => {
+    const backendSeconds = Number(((performance.now() - startedAt) / 1000).toFixed(2));
+    console.log(`⏱️ /api/think ${source}: ${backendSeconds}s`);
+    return res.json({
+      ...payload,
+      timing: {
+        backendSeconds,
+        source,
+      },
+    });
+  };
+
   try {
     const { transcript, currentPortal = "root", currentMesh = null } = req.body;
     if (!transcript) return res.status(400).json({ error: "Missing transcript" });
@@ -353,7 +366,7 @@ app.post("/api/think", async (req, res) => {
       const match = classifyRootCommand(clean);
       if (match) {
         console.log("🧠 Root voice → canonical route", match);
-        return res.json(match);
+        return sendThinkResult(match, "root");
       }
     }
 
@@ -362,56 +375,56 @@ if (
   /\b(contact|email|message|send (an )?email|reach out|write to)\b/.test(clean)
 ) {
   console.log("📧 Voice → Contact Joz (mailto:joz@neomaxxing.com)");
-  return res.json({
+  return sendThinkResult({
     action: "contact_joz",
     target: "mailto:joz@neomaxxing.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
     awareness: "Opening your email app to contact Joz at joz@neomaxxing.com."
-  });
+  }, "contact");
 }
 
 // --- 📞 Direct voice command: Call Joz ---
 if (/\b(call|phone|ring|dial|call joz|phone joz)\b/.test(clean)) {
   console.log("📞 Voice → Call Joz");
-  return res.json({
+  return sendThinkResult({
     action: "call_joz",
     target: "tel:+41764973894", // update this number
     awareness: "Tap here to call Joz"
-  });
+  }, "call");
 }
 
 
 // --- 🧹 Voice: Hide or Show contact buttons ---
 if (/\b(remove|hide|close|dismiss)\b.*\b(contact|button|buttons)\b|\bhide contact\b|\bhide buttons\b/.test(clean)) {
   console.log("🧹 Voice → Hide contact buttons");
-  return res.json({
+  return sendThinkResult({
     action: "hide_contact_buttons",
     target: null,
     awareness: "Contact button hidden. Say 'show contact' to bring it back."
-  });
+  }, "hide_contact_buttons");
 }
 
 if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow contact\b|\bshow buttons\b/.test(clean)) {
   console.log("✨ Voice → Show contact buttons");
-  return res.json({
+  return sendThinkResult({
     action: "show_contact_buttons",
     target: null,
     awareness: "Contact button visible again."
-  });
+  }, "show_contact_buttons");
 }
 
     // --- the-vibe-energy logic ---
     if (currentPortal === "the-vibe-energy") {
       if (/\b(pause|stop|pause neurons|stop neurons|pause animation|stop animation)\b/.test(clean)) {
         console.log("⏸️ Voice → Pause neurons (n2x)");
-        return res.json({ action: "n2x_pause", target: null });
+        return sendThinkResult({ action: "n2x_pause", target: null }, "n2x_pause");
       }
       if (/\b(play|resume|continue|start|resume neurons|play neurons|start neurons|resume animation|play animation)\b/.test(clean)) {
         console.log("▶️ Voice → Resume neurons (n2x)");
-        return res.json({ action: "n2x_resume", target: null });
+        return sendThinkResult({ action: "n2x_resume", target: null }, "n2x_resume");
       }
       if (/\b(back|exit|leave|return|go back)\b/.test(clean)) {
         console.log("🚪 Voice → Exit the-vibe-energy → /");
-        return res.json({ action: "back", target: "/" });
+        return sendThinkResult({ action: "back", target: "/" }, "vibe_energy_back");
       }
     }
 
@@ -432,7 +445,7 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
             resolvedTarget: guarded.target,
             source: "postgres",
           });
-          return res.json(guarded);
+          return sendThinkResult(guarded, "postgres");
         }
       }
 
@@ -449,14 +462,14 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
           resolvedTarget: match.target,
           source: "memory",
         });
-        return res.json(match);
+        return sendThinkResult(match, "memory");
       }
     }
 
     if (currentPortal === "the-vibe-energy") {
   if (/\b(launch in space|open in space|view in ar|launch ar)\b/.test(clean)) {
     console.log("🚀 Voice → Launch AR for n2x.glb in the-vibe-energy");
-    return res.json({ action: "launch_in_space_n2x", target: null });
+    return sendThinkResult({ action: "launch_in_space_n2x", target: null }, "n2x_launch");
   }
 }
 
@@ -465,24 +478,24 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
 if (/\b(launch in space|open in space|view in ar|view in space|launch ar|show in space)\b/.test(clean)) {
   if (currentPortal === "the-vibe-energy") {
     console.log("🚀 Voice → Launch AR for neurovibes.glb in the-vibe-energy");
-    return res.json({ action: "launch_in_space_n2x", target: null });
+    return sendThinkResult({ action: "launch_in_space_n2x", target: null }, "global_n2x_launch");
   }
   if (currentPortal === "meet-joz") {
     console.log("🚀 Voice → Launch AR for Joz.glb in meet-joz");
-    return res.json({ action: "launch_in_space_workf", target: null });
+    return sendThinkResult({ action: "launch_in_space_workf", target: null }, "global_meet_joz_launch");
   }
 }
 
 // --- global exit from portal ---
 if (/\b(exit|leave portal|close portal|exit joz|leave joz)\b/.test(clean)) {
   console.log("🚪 Voice → Exit meet-joz → /");
-  return res.json({ action: "back", target: "/" });
+  return sendThinkResult({ action: "back", target: "/" }, "global_exit");
 }
 
 // --- fallback back for root-level navigation ---
 if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
   console.log("↩️ Voice → Root-level back (ignored)");
-  return res.json({ action: null, target: null });
+  return sendThinkResult({ action: null, target: null }, "root_back_ignored");
 }
 
     // --- world memory match ---
@@ -492,7 +505,7 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
         const normalizedMesh = normalizeMeshName(mesh);
         if ((normalizedMesh === "vibe" || mesh === "brain" || mesh === "enter_portal") && currentPortal === "root") {
           console.log("🧭 Ignoring stale root world-memory route for:", mesh);
-          return res.json({ action: null, target: null });
+          return sendThinkResult({ action: null, target: null }, "world_memory_ignored");
         }
         const action = normalizeAction(mesh) || mesh;
         const target = canonicalTargetForMesh(mesh) || safeTarget(data.context?.target);
@@ -507,7 +520,7 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
           resolvedTarget: target,
           source: "world-memory",
         });
-        return res.json({ action, target });
+        return sendThinkResult({ action, target }, "world_memory");
       }
     }
 
@@ -557,7 +570,7 @@ Rules:
       resolvedTarget: target,
       source: "llm",
     });
-    res.json({ action, target });
+    return sendThinkResult({ action, target }, "llm");
   } catch (err) {
     console.error("❌ Reasoning failed:", err);
     res.status(500).json({ error: err.message });
