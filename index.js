@@ -127,10 +127,129 @@ app.get("/api/world-memory", (req, res) => res.json(worldMemory));
 // ------------------------------------------------------------
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// 🧠 Track local portal states (non-persistent)
-const portalState = {
-  "meet-joz": "vibe",
+const SITE_TARGETS = {
+  maxx: "/neo/maxx",
+  meetJoz: "/neo/meet-joz",
 };
+
+const KNOWN_ACTIONS = new Set([
+  "brain",
+  "ball",
+  "vibe",
+  "discover",
+  "skills",
+  "pause",
+  "resume",
+  "back",
+  "vibe_back",
+  "vibe_back1",
+  "n2x_pause",
+  "n2x_resume",
+  "launch_in_space_n2x",
+  "launch_in_space_workf",
+  "hide_contact_buttons",
+  "show_contact_buttons",
+  "contact_joz",
+  "call_joz",
+]);
+
+function safeTarget(value) {
+  return (
+    typeof value === "string" &&
+    (value.startsWith("/") || value.startsWith("mailto:") || value.startsWith("tel:"))
+  )
+    ? value
+    : null;
+}
+
+function normalizeMeshName(mesh) {
+  const lower = String(mesh || "").toLowerCase().trim();
+  if (!lower) return "";
+  if (/(^|\b)(vibe|flex)(\b|$)/.test(lower)) return "vibe";
+  if (/(^|\b)(discover|ascend)(\b|$)/.test(lower)) return "discover";
+  if (/(^|\b)(skills|mogg)(\b|$)/.test(lower)) return "skills";
+  return lower;
+}
+
+function canonicalTargetForMesh(mesh) {
+  switch (mesh) {
+    case "brain":
+    case "enter_portal":
+    case "vibe":
+      return SITE_TARGETS.maxx;
+    case "ball":
+      return SITE_TARGETS.meetJoz;
+    default:
+      return null;
+  }
+}
+
+function normalizeAction(action) {
+  const lower = String(action || "").toLowerCase().trim();
+  if (!lower) return null;
+  if (lower === "flex") return "vibe";
+  if (lower === "ascend") return "discover";
+  if (lower === "mogg") return "skills";
+  return KNOWN_ACTIONS.has(lower) ? lower : null;
+}
+
+function classifyRootCommand(clean) {
+  if (/\b(enter|explore|go inside|step inside|open portal|open the flex|open maxx|open max)\b/.test(clean)) {
+    return { action: "brain", target: SITE_TARGETS.maxx };
+  }
+
+  if (/\b(meet joz|neo meet joz|talk to joz|open ball|go to ball|open meet joz)\b/.test(clean)) {
+    return { action: "ball", target: SITE_TARGETS.meetJoz };
+  }
+
+  return null;
+}
+
+function classifyMeetJozCommand(clean, currentMesh) {
+  const mesh = normalizeMeshName(currentMesh);
+
+  if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) {
+    return { action: mesh === "vibe" ? null : "vibe", target: null };
+  }
+
+  if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) {
+    if (mesh === "vibe") {
+      return {
+        action: null,
+        target: null,
+        awareness: "Ascend opens only by interaction, not voice.",
+      };
+    }
+    return { action: "discover", target: null };
+  }
+
+  if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) {
+    if (mesh !== "skills") {
+      return {
+        action: null,
+        target: null,
+        awareness: "Mogg opens only from Ascend via click, not voice.",
+      };
+    }
+    return { action: null, target: null };
+  }
+
+  if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
+    if (mesh === "skills") return { action: "vibe_back1", target: null };
+    if (mesh === "discover") return { action: "vibe_back", target: null };
+    if (mesh === "vibe") return { action: "vibe_back", target: "/" };
+    return { action: "vibe_back", target: null };
+  }
+
+  if (/\b(pause|stop)\b/.test(clean)) return { action: "pause", target: null };
+  if (/\b(play|resume|continue)\b/.test(clean)) return { action: "resume", target: null };
+  if (/\b(exit|leave|close joz|exit joz)\b/.test(clean)) return { action: "back", target: "/" };
+  if (/\b(launch in space|open in space|view in ar|launch ar|view in space|show in space)\b/.test(clean)) {
+    return { action: "launch_in_space_workf", target: null };
+  }
+
+  return null;
+}
 
 app.post("/api/think", async (req, res) => {
   try {
@@ -140,24 +259,13 @@ app.post("/api/think", async (req, res) => {
     const clean = transcript.toLowerCase().trim();
     console.log("🎙️ Reasoning about:", clean, "inside portal:", currentPortal);
 
-// --- 🧭 Root-level direct navigation ---
-if (currentPortal === "root") {
-  if (/\b(enter|explore|go inside|step inside|open portal|open the flex|open maxx|open max)\b/.test(clean)) {
-    console.log("🧠 Root voice → open maxx portal");
-    return res.json({
-      action: "brain",
-      target: "/neo/maxx",
-    });
-  }
-
-  if (/\b(meet joz|neo meet joz|talk to joz|open ball|go to ball|open meet joz)\b/.test(clean)) {
-    console.log("🧠 Root voice → open meet-joz portal");
-    return res.json({
-      action: "ball",
-      target: "/neo/meet-joz",
-    });
-  }
-}
+    if (currentPortal === "root") {
+      const match = classifyRootCommand(clean);
+      if (match) {
+        console.log("🧠 Root voice → canonical route", match);
+        return res.json(match);
+      }
+    }
 
 // --- ✉️ Direct voice command: Contact or Email Joz ---
 if (
@@ -201,8 +309,6 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
   });
 }
 
-
-
     // --- the-vibe-energy logic ---
     if (currentPortal === "the-vibe-energy") {
       if (/\b(pause|stop|pause neurons|stop neurons|pause animation|stop animation)\b/.test(clean)) {
@@ -219,46 +325,20 @@ if (/\b(show|bring back|display|open)\b.*\b(contact|button|buttons)\b|\bshow con
       }
     }
 
-    if (!global.portalState) global.portalState = { "meet-joz": "vibe" };
-    const state = global.portalState["meet-joz"];
+    if (currentPortal === "meet-joz") {
+      const match = classifyMeetJozCommand(clean, currentMesh);
+      if (match) {
+        console.log("🧠 meet-joz voice → canonical route", match);
+        return res.json(match);
+      }
+    }
 
-  if (currentPortal === "meet-joz") {
-  // 🎬 Core actions
-  if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) return res.json({ action: "vibe", target: null });
-  if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) return res.json({ action: "discover", target: null });
-  if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) return res.json({ action: "skills", target: null });
-
-  // ⏸ Pause/resume
-  if (/\b(pause|stop)\b/.test(clean)) return res.json({ action: "pause", target: null });
-  if (/\b(play|resume|continue)\b/.test(clean)) return res.json({ action: "resume", target: null });
-
-  // 🚪 Exit portal entirely
-  if (/\b(exit|leave|close joz|exit joz)\b/.test(clean))
-    return res.json({ action: "back", target: "/" });
-
-
-
-
-  
-}
-
-
-
-if (currentPortal === "the-vibe-energy") {
+    if (currentPortal === "the-vibe-energy") {
   if (/\b(launch in space|open in space|view in ar|launch ar)\b/.test(clean)) {
     console.log("🚀 Voice → Launch AR for n2x.glb in the-vibe-energy");
     return res.json({ action: "launch_in_space_n2x", target: null });
   }
 }
-
-if (currentPortal === "meet-joz") {
-  if (/\b(launch in space|open in space|view in ar|launch ar)\b/.test(clean)) {
-    console.log("🚀 Voice → Launch AR for workf-m.glb in meet-joz");
-    return res.json({ action: "launch_in_space_workf", target: null });
-  }
-}
-
-
 
     // --- global back ---
   // --- handle AR launch before back ---
@@ -272,121 +352,6 @@ if (/\b(launch in space|open in space|view in ar|view in space|launch ar|show in
     return res.json({ action: "launch_in_space_workf", target: null });
   }
 }
-
-
-
-// --- 🧭 contextual back behavior for meet-joz ---
-// --- 🧭 contextual back behavior for meet-joz (improved) ---
-if (currentPortal === "meet-joz") {
-  if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
-    console.log("↩️ Voice → Back detected in meet-joz | currentMesh:", currentMesh);
-
-    const mesh = (currentMesh || "").toLowerCase();
-
-    // 🧩 From Discover → rewind fully to vibe (0)
-    if (mesh.includes("discover")) {
-      console.log("↩️ From discover → rewind fully to vibe (0)");
-      return res.json({ action: "vibe_back", target: null });
-    }
-
-    // 🧩 From Skills → rewind to discover (frame 70)
-    if (mesh.includes("skills")) {
-      console.log("↩️ From skills → rewind to discover (frame 70)");
-      return res.json({ action: "vibe_back1", target: null });
-    }
-
-// 🧩 At vibe → exit portal completely
-if (mesh.includes("vibe")) {
-  console.log("🚪 Voice → 'back' at vibe → exit portal");
-  return res.json({ action: "vibe_back", target: "/" }); // ✅ tell frontend to exit
-}
-
-
-    // 🧩 Already at vibe → nothing more to do
-    if (mesh.includes("vibe")) {
-      console.log("↩️ Already at vibe → no further back");
-      return res.json({ action: null, target: null });
-    }
-
-    // 🧩 Fallback safety: assume discover → vibe
-    console.log("↩️ Unknown mesh context, assuming discover → vibe");
-    return res.json({ action: "vibe_back", target: null });
-  }
-}
-
-if (currentPortal === "meet-joz") {
-  const mesh = (currentMesh || "").toLowerCase().trim();
-  console.log("🧭 Current mesh (context):", mesh);
-
-  // === SECTION NAVIGATION — FULLY CONTEXT AWARE ===
-
-  // --- VIBE ---
-  if (/\b(vibe|flex|open flex|show flex)\b/.test(clean)) {
-    console.log("🟢 Already at or limited to flex/vibe → ignore");
-    return res.json({ action: null, target: null });
-  }
-
-  // --- DISCOVER ---
-  if (/\b(discover|ascend|open ascend|show ascend)\b/.test(clean)) {
-    // ❌ no voice-trigger forward jumps allowed
-    console.log("🚫 Voice → Forward 'ascend/discover' blocked (only click can trigger)");
-    return res.json({
-      action: null,
-      target: null,
-      awareness: "Ascend opens only by interaction, not voice.",
-    });
-  }
-
-  // --- SKILLS ---
-  if (/\b(skills|mogg|show mogg|open mogg|show skills|open skills)\b/.test(clean)) {
-    // ❌ disallow forward jumps completely
-    console.log("🚫 Voice → Forward 'mogg/skills' blocked (only click can trigger)");
-    return res.json({
-      action: null,
-      target: null,
-      awareness: "Mogg opens only from Ascend via click, not voice.",
-    });
-  }
-
-  // --- BACK COMMAND ---
-  if (/\b(back|go back|previous|step back|return)\b/.test(clean)) {
-    console.log("↩️ Voice → Back detected in meet-joz | currentMesh:", mesh);
-
-    if (mesh === "skills") {
-      console.log("↩️ From skills → discover (frame 70)");
-      return res.json({ action: "vibe_back1", target: null });
-    }
-    if (mesh === "discover") {
-      console.log("↩️ From discover → vibe (frame 0)");
-      return res.json({ action: "vibe_back", target: null });
-    }
-    if (mesh === "vibe") {
-      console.log("↩️ Already at vibe → nothing more to rewind");
-      return res.json({ action: null, target: null });
-    }
-
-    // fallback safety
-    console.log("↩️ Unknown mesh context, assume discover → vibe");
-    return res.json({ action: "vibe_back", target: null });
-  }
-
-  // --- PAUSE / RESUME ---
-  if (/\b(pause|stop)\b/.test(clean)) {
-    console.log("⏸️ Voice → Pause animation");
-    return res.json({ action: "pause", target: null });
-  }
-  if (/\b(play|resume|continue)\b/.test(clean)) {
-    console.log("▶️ Voice → Resume animation");
-    return res.json({ action: "resume", target: null });
-  }
-
-  // --- EXIT PORTAL ---
-  if (/\b(exit|leave|close joz|exit joz)\b/.test(clean)) {
-    console.log("🚪 Voice → Exit meet-joz → /");
-    return res.json({ action: "back", target: "/" });
-  }
-}
-
 
 // --- global exit from portal ---
 if (/\b(exit|leave portal|close portal|exit joz|leave joz)\b/.test(clean)) {
@@ -404,12 +369,15 @@ if (/\b(back|go back|return|leave)\b/.test(clean) && currentPortal === "root") {
     for (const [mesh, data] of Object.entries(worldMemory)) {
       const cmds = (data.commands || []).map((c) => c.toLowerCase());
       if (cmds.some((cmd) => new RegExp(`\\b${cmd}\\b`, "i").test(clean))) {
-        if (mesh === "vibe" && currentPortal === "root") {
-          console.log("🧭 Ignoring 'vibe' from root");
+        const normalizedMesh = normalizeMeshName(mesh);
+        if ((normalizedMesh === "vibe" || mesh === "brain" || mesh === "enter_portal") && currentPortal === "root") {
+          console.log("🧭 Ignoring stale root world-memory route for:", mesh);
           return res.json({ action: null, target: null });
         }
-        console.log(`🎯 Match: "${clean}" → ${mesh}`);
-        return res.json({ action: mesh, target: data.context?.target || null });
+        const action = normalizeAction(mesh) || mesh;
+        const target = canonicalTargetForMesh(mesh) || safeTarget(data.context?.target);
+        console.log(`🎯 Match: "${clean}" → ${mesh}`, { action, target });
+        return res.json({ action, target });
       }
     }
 
@@ -447,12 +415,8 @@ Rules:
     let content = response.choices?.[0]?.message?.content?.trim() || "";
     content = content.replace(/```json|```/g, "").trim();
     const parsed = JSON.parse(content);
-    const action = typeof parsed.action === "string" ? parsed.action.toLowerCase().trim() : null;
-    const target =
-      typeof parsed.target === "string" &&
-      (parsed.target.startsWith("/") || parsed.target.startsWith("mailto:") || parsed.target.startsWith("tel:"))
-        ? parsed.target
-        : null;
+    const action = normalizeAction(parsed.action);
+    const target = safeTarget(parsed.target);
     res.json({ action, target });
   } catch (err) {
     console.error("❌ Reasoning failed:", err);
