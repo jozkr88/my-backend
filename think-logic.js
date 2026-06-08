@@ -35,7 +35,7 @@ export const KNOWN_ACTIONS = new Set([
 
 export const MEET_JOZ_ALLOWED_TRANSITIONS = {
   vibe: new Set(["vibe", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
-  discover: new Set(["discover", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
+  discover: new Set(["discover", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
   skills: new Set(["skills", "vibe_back1", "pause", "resume", "back", "launch_in_space_workf"]),
 };
 
@@ -89,6 +89,14 @@ const ROOT_BRAIN_PHRASES = [
   "go inside the brain",
   "open the brain",
   "inside the brain",
+  "enter the mind",
+  "enter mind",
+  "open the mind",
+  "open mind",
+  "show the philosophy",
+  "show philosophy",
+  "open philosophy",
+  "the philosophy",
 ];
 
 const ROOT_MEET_JOZ_PHRASES = [
@@ -137,7 +145,7 @@ export const APP_CONTEXT = {
     summary: "A 3D voice-navigable portfolio world with multiple portals, animated GLB scenes, semantic text objects, and desktop/mobile-specific interactions including AR launch flows.",
     surfaces: [
       "root landing scene with a wireframe head, a brain portal, and a Meet Joz entry",
-      "MAXX portal for neuroplasticity, neurodesign, and AI/human-neuron storytelling",
+      "MAXX portal for neuroplasticity and abstract inside-the-brain storytelling",
       "meet-joz portal for identity, prestige, scale, aesthetics, work, and capability storytelling",
     ],
   },
@@ -172,24 +180,22 @@ export const WORLD_CONTEXT = {
   "the-vibe-energy": {
     summary: "The MAXX explainer portal. It is an abstract inside-the-brain environment rather than literal outer space.",
     assets: {
-      n2x: {
-        file: "n2x.glb",
-        role: "Primary explainer model",
+      neurotransmitters: {
+        role: "Primary neuron explainer scene",
         meaning: [
           "Contains the Human Neuron and AI Neuron comparison",
           "Shows the educational animation about new experience formation, neuroplasticity, and neurogenesis",
+          "The glossy balls with holes symbolize neurotransmitters",
         ],
       },
-      neurodesign: {
-        file: "neurodesign.glb",
-        role: "Secondary transformation model",
+      insideTheBrain: {
+        role: "Secondary inside-the-brain layer",
         meaning: [
           "Contains The Elite Beauty, Ascension, and 10/10 Frame Mogg",
-          "Represents the neurodesign and aesthetic-performance layer after the explainer",
+          "Represents a deeper abstract inside-the-brain layer after the explainer",
         ],
       },
       neurotransmitters: {
-        file: "AnimatedModel",
         role: "Large glossy balls with holes",
         meaning: "Animated neurotransmitter forms moving through the abstract brain environment",
       },
@@ -199,10 +205,10 @@ export const WORLD_CONTEXT = {
       },
     },
     interactions: [
-      "Clicking the n2x explainer reveals neurodesign",
-      "Spatial Capability acts as a desktop button to show neurodesign",
+      "Clicking the main neuron explainer reveals the deeper inside-the-brain layer",
+      "Spatial Capability acts as a desktop button to show the deeper inside-the-brain layer",
       "On mobile, Spatial Capability opens AR",
-      "On desktop, saying pause shows neurodesign and saying play or resume returns to the n2x explainer",
+      "On desktop, saying pause reveals the deeper inside-the-brain layer and saying play or resume returns to the neurotransmitter scene",
       "On mobile, saying view in space or space maxx opens AR",
     ],
   },
@@ -282,7 +288,7 @@ export const WORLD_CONTEXT = {
         aliases: ["skills", "mogg"],
         meaning: [
           "Work, credentials, execution, enterprise capability, and institutional proof state",
-          "Associated with deeper capability content such as workf, major institutions, and professional proof-points",
+          "Associated with deeper capability content such as Skills, major institutions, and professional proof-points",
           "This is the third step and should not be opened before Ascend/Discover",
         ],
       },
@@ -397,6 +403,18 @@ export function classifyRootCommand(clean) {
     return { action: "ball", target: SITE_TARGETS.meetJoz };
   }
 
+  if (hasPhrase(clean, MEET_JOZ_FLEX_PHRASES)) {
+    return { action: "vibe", target: SITE_TARGETS.meetJoz, awareness: "Cross-jumping to Flex." };
+  }
+
+  if (hasPhrase(clean, MEET_JOZ_DISCOVER_PHRASES)) {
+    return { action: "discover", target: SITE_TARGETS.meetJoz, awareness: "Cross-jumping to Ascend." };
+  }
+
+  if (hasPhrase(clean, MEET_JOZ_SKILLS_PHRASES)) {
+    return { action: "skills", target: SITE_TARGETS.meetJoz, awareness: "Cross-jumping to Mogg." };
+  }
+
   return null;
 }
 
@@ -411,17 +429,17 @@ export function classifyMeetJozCommand(clean, currentMesh) {
   }
 
   if (hasPhrase(clean, MEET_JOZ_DISCOVER_PHRASES)) {
-    if (mesh === "discover") return { action: "discover", target: null, awareness: "Opening Mogg." };
+    if (mesh === "discover") return { action: "discover", target: null, awareness: "Opening Ascend." };
     if (mesh === "vibe") return { action: null, target: null, awareness: "Say Flex first." };
-    if (mesh === "skills") return { action: null, target: null, awareness: "Already past Ascend. Say Mogg or Back." };
+    if (mesh === "skills") return { action: null, target: null, awareness: "Already past Ascend. Say Mogg, Skills, or Back." };
     return { action: null, target: null, awareness: "Ascend is the second step." };
   }
 
   if (hasPhrase(clean, MEET_JOZ_SKILLS_PHRASES)) {
-    if (mesh === "skills") return { action: "skills", target: null, awareness: "Opening workf." };
-    if (mesh === "discover") return { action: null, target: null, awareness: "Say Ascend first." };
-    if (mesh === "vibe") return { action: null, target: null, awareness: "Say Flex first." };
-    return { action: null, target: null, awareness: "Mogg is the third step." };
+    if (mesh === "skills") return { action: "skills", target: null, awareness: "Opening Mogg." };
+    if (mesh === "discover") return { action: "skills", target: null, awareness: "Opening Mogg." };
+    if (mesh === "vibe") return { action: "skills", target: null, awareness: "Cross-jumping to Mogg." };
+    return { action: "skills", target: null, awareness: "Opening Mogg." };
   }
 
   if (hasPhrase(clean, BACK_PHRASES)) {
@@ -480,7 +498,7 @@ export function classifyMaxxCommand(clean) {
     return {
       action: "n2x_pause",
       target: null,
-      awareness: "Pausing n2x and showing neurodesign.",
+      awareness: "Pausing the neurons and revealing the inside of the brain.",
     };
   }
 
@@ -488,7 +506,7 @@ export function classifyMaxxCommand(clean) {
     return {
       action: "n2x_resume",
       target: null,
-      awareness: "Resuming the n2x explainer.",
+      awareness: "Returning to the neurotransmitter scene.",
     };
   }
 
@@ -496,7 +514,7 @@ export function classifyMaxxCommand(clean) {
     return {
       action: "launch_in_space_n2x",
       target: null,
-      awareness: "Opening MAXX in AR.",
+      awareness: "Opening the brain scene in AR.",
     };
   }
 
@@ -512,7 +530,7 @@ export function classifyGlobalCommand(clean, currentPortal) {
     return {
       action: "launch_in_space_n2x",
       target: null,
-      awareness: "Opening MAXX in AR.",
+      awareness: "Opening the brain scene in AR.",
     };
   }
 
@@ -530,4 +548,3 @@ export function classifyGlobalCommand(clean, currentPortal) {
 
   return null;
 }
-
