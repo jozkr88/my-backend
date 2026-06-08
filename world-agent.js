@@ -201,6 +201,36 @@ function resolveBinaryAction(clean, allowedActions) {
   return null;
 }
 
+function resolveCrossPortalAction(clean, currentPortal) {
+  if (currentPortal === "maxx" || currentPortal === "the-vibe-energy") {
+    if (hasPhrase(clean, BASE_ALIASES.vibe)) {
+      return {
+        action: "vibe",
+        target: SITE_TARGETS.meetJoz,
+        awareness: "Cross-jumping to Flex.",
+      };
+    }
+
+    if (hasPhrase(clean, BASE_ALIASES.discover)) {
+      return {
+        action: "discover",
+        target: SITE_TARGETS.meetJoz,
+        awareness: "Cross-jumping to Ascend.",
+      };
+    }
+
+    if (hasPhrase(clean, BASE_ALIASES.skills)) {
+      return {
+        action: "skills",
+        target: SITE_TARGETS.meetJoz,
+        awareness: "Cross-jumping to Mogg.",
+      };
+    }
+  }
+
+  return null;
+}
+
 function buildInteractiveCandidates(currentPortal, worldMap, worldMemory, agentContext) {
   const knownMeshes = Array.isArray(agentContext?.knownInteractiveMeshes)
     ? agentContext.knownInteractiveMeshes
@@ -239,6 +269,9 @@ export function resolveAgenticAction({ clean, currentPortal, currentMesh, agentC
 
   const binaryResult = resolveBinaryAction(clean, allowedActions);
   if (binaryResult) return binaryResult;
+
+  const crossPortalResult = resolveCrossPortalAction(clean, currentPortal);
+  if (crossPortalResult) return crossPortalResult;
 
   const candidates = buildInteractiveCandidates(currentPortal, worldMap, worldMemory, agentContext);
 
