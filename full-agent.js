@@ -81,6 +81,7 @@ export function approveAgentProposal({ clean, context, worldMap, worldMemory, pr
     "hide_contact_buttons",
     "show_contact_buttons",
   ]);
+  const crossPortalActions = new Set(["brain", "ball", "vibe", "discover", "skills"]);
 
   if (!normalizedAction && !normalizedTarget) {
     return {
@@ -91,7 +92,13 @@ export function approveAgentProposal({ clean, context, worldMap, worldMemory, pr
     };
   }
 
-  if (normalizedAction && allowedActions.size && !allowedActions.has(normalizedAction) && !utilityActions.has(normalizedAction)) {
+  if (
+    normalizedAction &&
+    allowedActions.size &&
+    !allowedActions.has(normalizedAction) &&
+    !utilityActions.has(normalizedAction) &&
+    !(crossPortalActions.has(normalizedAction) && normalizedTarget)
+  ) {
     return {
       action: null,
       target: null,
