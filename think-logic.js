@@ -174,6 +174,7 @@ export const WORLD_CONTEXT = {
     summary: "Cosmic landing scene with a wireframe head, a glowing brain portal, and a separate Meet Joz call-to-action.",
     semantics: [
       "enter, go inside, open the portal, or enter the brain opens the MAXX portal",
+      "asking why at root means the user wants the philosophical brain journey and should enter MAXX",
       "ball or Meet Joz opens the meet-joz portal",
     ],
   },
@@ -210,6 +211,7 @@ export const WORLD_CONTEXT = {
       "On mobile, Spatial Capability opens AR",
       "On desktop, saying pause reveals the deeper inside-the-brain layer and saying play or resume returns to the neurotransmitter scene",
       "On mobile, saying view in space or space maxx opens AR",
+      "From MAXX, flex, ascend, and mogg or skills can cross-jump into the sequential Meet Joz portal",
     ],
   },
   "meet-joz": {
