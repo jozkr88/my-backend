@@ -1,6 +1,5 @@
 import {
   APP_CONTEXT,
-  classifyMaxxCommand,
   getWorldContext,
   normalizeAction,
   normalizeMeshName,
@@ -83,7 +82,6 @@ export function approveAgentProposal({ clean, context, worldMap, worldMemory, pr
     "show_contact_buttons",
   ]);
   const crossPortalActions = new Set(["brain", "ball", "vibe", "discover", "skills"]);
-  const currentPortal = context?.currentPortal || context?.portal || "root";
 
   if (!normalizedAction && !normalizedTarget) {
     return {
@@ -92,21 +90,6 @@ export function approveAgentProposal({ clean, context, worldMap, worldMemory, pr
       awareness: proposal?.response || proposal?.awareness || null,
       source: "agent_noop",
     };
-  }
-
-  if (
-    (currentPortal === "the-vibe-energy" || currentPortal === "maxx") &&
-    ["n2x_pause", "n2x_resume", "launch_in_space_n2x", "back"].includes(normalizedAction || "")
-  ) {
-    const classifiedMaxxCommand = classifyMaxxCommand(clean);
-    if (!classifiedMaxxCommand || classifiedMaxxCommand.action !== normalizedAction) {
-      return {
-        action: null,
-        target: null,
-        awareness: "That step is not available from the current state.",
-        source: "agent_blocked",
-      };
-    }
   }
 
   if (

@@ -351,7 +351,10 @@ app.post("/api/think", async (req, res) => {
       return sendThinkResult(utilityMatch, "utility");
     }
 
-    const maxxMatch = currentPortal === "the-vibe-energy" ? classifyMaxxCommand(clean) : null;
+    const maxxMatch =
+      currentPortal === "the-vibe-energy" || currentPortal === "maxx"
+        ? classifyMaxxCommand(clean)
+        : null;
     if (maxxMatch) {
       console.log("🧠 MAXX voice → canonical route", maxxMatch);
       return sendThinkResult(maxxMatch, "maxx");

@@ -1,143 +1,113 @@
-import {
-  APP_CONTEXT,
-  classifyMaxxCommand,
-  getWorldContext,
-  normalizeAction,
-  normalizeMeshName,
-  normalizeTranscript,
-  safeTarget,
-} from "./think-logic.js";
-import { resolveAgenticAction } from "./world-agent.js";
+import test from "node:test";
+import assert from "node:assert/strict";
+import { approveAgentProposal, buildAgentSnapshot } from "./full-agent.js";
 
-function toArray(value) {
-  return Array.isArray(value) ? value : [];
-}
+const worldMap = [
+  { name: "Enter", mesh: "Enter", synonyms: ["enter", "open maxx"] },
+  { name: "Skills", mesh: "skills", synonyms: ["skills", "mogg"] },
+];
 
-function toEntries(value) {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return [];
-  return Object.entries(value);
-}
+const worldMemory = {
+  brain: {
+    action: "portal",
+    context: { target: "/neo/maxx" },
+    commands: ["enter the brain", "enter the mind"],
+  },
+};
 
-function summarizeWorldMemory(worldMemory, knownMeshes = []) {
-  const known = new Set(knownMeshes.map((value) => normalizeMeshName(value) || String(value || "").toLowerCase().trim()).filter(Boolean));
-
-  return toEntries(worldMemory)
-    .filter(([mesh]) => !known.size || known.has(normalizeMeshName(mesh) || String(mesh || "").toLowerCase().trim()))
-    .slice(0, 12)
-    .map(([mesh, value]) => ({
-      mesh,
-      commands: toArray(value?.commands).slice(0, 10),
-      target: safeTarget(value?.context?.target),
-      action: String(value?.action || "").trim() || null,
-    }));
-}
-
-export function buildAgentSnapshot({ input, context, worldMap, worldMemory }) {
-  const currentPortal = context?.currentPortal || context?.portal || "root";
-  const currentMesh = normalizeMeshName(context?.currentMesh || context?.mesh || "");
-
-  return {
-    input: String(input || "").trim(),
-    normalizedInput: normalizeTranscript(input),
-    appContext: APP_CONTEXT,
-    worldContext: getWorldContext(currentPortal),
-    currentPortal,
-    currentMesh,
-    currentPath: context?.currentPath || "/",
-    allowedActions: toArray(context?.allowedActions),
-    structuredState: context?.structuredState || null,
-    knownInteractiveMeshes: toArray(context?.knownInteractiveMeshes),
-    uiState: context?.uiState || {},
-    voiceState: context?.voiceState || {},
-    worldMap: toArray(worldMap).slice(0, 24),
-    worldMemory: summarizeWorldMemory(worldMemory, context?.knownInteractiveMeshes),
-  };
-}
-
-export function approveAgentProposal({ clean, context, worldMap, worldMemory, proposal = null }) {
-  const deterministic = resolveAgenticAction({
-    clean,
-    currentPortal: context?.currentPortal || context?.portal || "root",
-    currentMesh: context?.currentMesh || context?.mesh || null,
-    agentContext: context || {},
+test("builds an agent snapshot from world state", () => {
+  const snapshot = buildAgentSnapshot({
+    input: "enter the mind",
+    context: {
+      currentPortal: "root",
+      currentMesh: "brain",
+      allowedActions: ["brain", "ball"],
+      knownInteractiveMeshes: ["brain", "ball"],
+    },
     worldMap,
     worldMemory,
   });
 
-  if (deterministic) {
-    return {
-      action: deterministic.action ?? null,
-      target: deterministic.target ?? null,
-      awareness: deterministic.awareness ?? null,
-      source: "deterministic",
-    };
-  }
+  assert.equal(snapshot.currentPortal, "root");
+  assert.equal(snapshot.currentMesh, "brain");
+  assert.equal(snapshot.normalizedInput, "enter the mind");
+  assert.equal(snapshot.allowedActions.length, 2);
+});
 
-  const normalizedAction = normalizeAction(proposal?.proposedAction || proposal?.action);
-  const normalizedTarget = safeTarget(proposal?.proposedTarget || proposal?.target);
-  const allowedActions = new Set(toArray(context?.allowedActions).map((value) => normalizeAction(value)).filter(Boolean));
-  const utilityActions = new Set([
-    "contact_joz",
-    "call_joz",
-    "hide_contact_buttons",
-    "show_contact_buttons",
-  ]);
-  const crossPortalActions = new Set(["brain", "ball", "vibe", "discover", "skills"]);
-  const currentPortal = context?.currentPortal || context?.portal || "root";
+test("deterministic route overrides any open-ended proposal", () => {
+  const approved = approveAgentProposal({
+    clean: "enter the mind",
+    context: {
+      currentPortal: "root",
+      currentMesh: "brain",
+      allowedActions: ["brain", "ball"],
+      knownInteractiveMeshes: ["brain", "ball"],
+    },
+    worldMap,
+    worldMemory,
+    proposal: {
+      proposedAction: "skills",
+      proposedTarget: null,
+      response: "Opening skills.",
+    },
+  });
 
-  if (!normalizedAction && !normalizedTarget) {
-    return {
-      action: null,
-      target: null,
-      awareness: proposal?.response || proposal?.awareness || null,
-      source: "agent_noop",
-    };
-  }
+  assert.deepEqual(approved, {
+    action: "brain",
+    target: "/neo/maxx",
+    awareness: null,
+    source: "deterministic",
+  });
+});
 
-  if (
-    (currentPortal === "the-vibe-energy" || currentPortal === "maxx") &&
-    ["n2x_pause", "n2x_resume", "launch_in_space_n2x", "back"].includes(normalizedAction || "")
-  ) {
-    const classifiedMaxxCommand = classifyMaxxCommand(clean);
-    if (!classifiedMaxxCommand || classifiedMaxxCommand.action !== normalizedAction) {
-      return {
-        action: null,
-        target: null,
-        awareness: "That step is not available from the current state.",
-        source: "agent_blocked",
-      };
-    }
-  }
+test("agent proposals are blocked when outside legal actions", () => {
+  const approved = approveAgentProposal({
+    clean: "show me mogg",
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "vibe",
+      allowedActions: ["vibe", "vibe_back", "pause", "resume", "back"],
+      knownInteractiveMeshes: ["vibe", "discover", "skills"],
+    },
+    worldMap,
+    worldMemory,
+    proposal: {
+      proposedAction: "skills",
+      proposedTarget: null,
+      response: "Opening skills.",
+    },
+  });
 
-  if (
-    normalizedAction &&
-    allowedActions.size &&
-    !allowedActions.has(normalizedAction) &&
-    !utilityActions.has(normalizedAction) &&
-    !(crossPortalActions.has(normalizedAction) && normalizedTarget)
-  ) {
-    return {
-      action: null,
-      target: null,
-      awareness: "That step is not available from the current state.",
-      source: "agent_blocked",
-    };
-  }
+  assert.deepEqual(approved, {
+    action: null,
+    target: null,
+    awareness: "That step is not available from the current state.",
+    source: "deterministic",
+  });
+});
 
-  return {
-    action: normalizedAction,
-    target: normalizedTarget,
-    awareness: proposal?.response || proposal?.awareness || null,
+test("legal agent proposals pass when deterministic does not resolve first", () => {
+  const approved = approveAgentProposal({
+    clean: "show contact",
+    context: {
+      currentPortal: "root",
+      currentMesh: "brain",
+      allowedActions: ["brain", "ball"],
+      knownInteractiveMeshes: ["brain", "ball"],
+    },
+    worldMap,
+    worldMemory,
+    proposal: {
+      proposedAction: "show_contact_buttons",
+      proposedTarget: null,
+      response: "Showing contact buttons.",
+    },
+  });
+
+  assert.deepEqual(approved, {
+    action: "show_contact_buttons",
+    target: null,
+    awareness: "Showing contact buttons.",
     source: "agent_proposal",
-  };
-}
-
-export function buildFallbackAgentReply({ approved, snapshot }) {
-  if (approved?.awareness) return approved.awareness;
-
-  if (approved?.action || approved?.target) {
-    return `I understood that in ${snapshot.currentPortal}.`;
-  }
-
-  return `I'm aware you're in ${snapshot.currentPortal}. Ask for one of the available world actions.`;
-}
+  });
+});

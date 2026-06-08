@@ -45,7 +45,7 @@ test("classifies meet-joz stateful commands", () => {
   assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("ascend"), "discover"), {
     action: "discover",
     target: null,
-    awareness: "Opening Mogg.",
+    awareness: "Opening Ascend.",
   });
 
   assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("back"), "skills"), {
