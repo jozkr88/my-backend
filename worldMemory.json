@@ -1,4 +1,73 @@
 {
+  "0": {
+    "commands": [],
+    "name": "Enter",
+    "mesh": "Enter",
+    "description": "A glowing brain portal that leads into the Vibe Energy world.",
+    "synonyms": [
+      "enter",
+      "go inside",
+      "brain portal",
+      "start",
+      "explore",
+      "open"
+    ],
+    "lastUpdated": "2026-06-07T18:42:19.891Z"
+  },
+  "1": {
+    "commands": [],
+    "name": "Vibe",
+    "mesh": "Vibe",
+    "description": "The central vibe sphere that controls energy and sound.",
+    "synonyms": [
+      "flex",
+      "show flex",
+      "energy sphere",
+      "start flex",
+      "activate flex"
+    ],
+    "lastUpdated": "2026-06-07T18:42:19.891Z"
+  },
+  "2": {
+    "commands": [],
+    "name": "Skills",
+    "mesh": "skills",
+    "description": "A rotating skills hologram showing talents and abilities.",
+    "synonyms": [
+      "skills",
+      "show skills",
+      "my abilities",
+      "talents",
+      "resume"
+    ],
+    "lastUpdated": "2026-06-07T18:42:19.891Z"
+  },
+  "3": {
+    "commands": [],
+    "name": "Discover",
+    "mesh": "Discover",
+    "description": "The discovery stage showing projects and creations.",
+    "synonyms": [
+      "discover",
+      "projects",
+      "explore projects",
+      "show creations"
+    ],
+    "lastUpdated": "2026-06-07T18:42:19.891Z"
+  },
+  "4": {
+    "commands": [],
+    "name": "Back",
+    "mesh": "back",
+    "description": "Moves to the previous scene or exits the current view.",
+    "synonyms": [
+      "back",
+      "go back",
+      "previous",
+      "exit"
+    ],
+    "lastUpdated": "2026-06-07T18:42:19.891Z"
+  },
   "brain": {
     "action": "portal",
     "context": {
@@ -8,7 +77,7 @@
         2
       ],
       "type": "entry",
-      "target": "/vibe/the-vibe-energy",
+      "target": "/neo/maxx",
       "mesh": "enter"
     },
     "commands": [
@@ -19,9 +88,11 @@
       "enter brain",
       "go inside brain",
       "open the brain",
-      "open portal"
+      "open portal",
+      "open the flex",
+      "open maxx"
     ],
-    "lastUpdated": "2025-11-02T00:23:56.694Z"
+    "lastUpdated": "2026-06-07T18:42:19.895Z"
   },
   "vibe": {
     "action": "activate",
@@ -64,7 +135,7 @@
     "lastUpdated": "2025-10-31T11:42:49.354Z"
   },
   "enter_portal": {
-    "action": "portal",
+    "action": "defined",
     "context": {},
     "commands": [
       "enter",
@@ -73,12 +144,12 @@
       "open the portal",
       "step into the brain"
     ],
-    "lastUpdated": "2025-10-31T12:11:34.390Z"
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
   },
   "ball": {
     "action": "portal",
     "context": {
-      "target": "/vibe/meet-joz"
+      "target": "/neo/meet-joz"
     },
     "commands": [
       "meet joz",
@@ -88,9 +159,10 @@
       "go to ball",
       "meet",
       "meet jaws",
-      "meet jos"
+      "meet jos",
+      "neo meet joz"
     ],
-    "lastUpdated": "2025-11-02T00:23:56.695Z"
+    "lastUpdated": "2026-06-07T18:42:19.896Z"
   },
   "n2x": {
     "action": "toggleNeurons",
@@ -112,7 +184,7 @@
       "start neurons",
       "start animation"
     ],
-    "lastUpdated": "2025-11-02T00:23:56.688Z"
+    "lastUpdated": "2026-06-07T18:42:19.883Z"
   },
   "model1": {
     "action": "sequenceControl",
@@ -141,5 +213,391 @@
       "play"
     ],
     "lastUpdated": "2025-11-01T10:02:54.229Z"
+  },
+  "me": {
+    "action": "toggleResume",
+    "context": {
+      "target": null
+    },
+    "commands": [
+      "pause joz",
+      "pause animation",
+      "stop animation",
+      "stop joz",
+      "pause",
+      "resume joz",
+      "resume animation",
+      "continue animation",
+      "toggle joz",
+      "play",
+      "play animation",
+      "start joz",
+      "start animation"
+    ],
+    "lastUpdated": "2025-11-03T17:31:59.018Z"
+  },
+  "worldIndex": {
+    "action": "scan",
+    "context": {
+      "date": "2025-11-04T13:09:25.499Z"
+    },
+    "commands": [
+      "public/a.glb",
+      "public/a1.glb",
+      "public/a1x.glb",
+      "public/a2.glb",
+      "public/a2x copy.glb",
+      "public/a2x.glb",
+      "public/a2xd.glb",
+      "public/a3.glb",
+      "public/a3x.glb",
+      "public/a4.glb",
+      "public/a4x.glb",
+      "public/a5.glb",
+      "public/a6.glb",
+      "public/art1.glb",
+      "public/aura.glb",
+      "public/aurx.glb",
+      "public/avp.glb",
+      "public/axx.glb",
+      "public/b1.glb",
+      "public/b2.glb",
+      "public/b3.glb",
+      "public/b4.glb",
+      "public/b4glb.glb",
+      "public/b5.glb",
+      "public/b6.glb",
+      "public/backdrop.glb",
+      "public/backx.glb",
+      "public/ball.glb",
+      "public/bx.glb",
+      "public/bx1.glb",
+      "public/c.glb",
+      "public/c1.glb",
+      "public/canvasx-desktop-hd.glb",
+      "public/canvasx-desktop.glb",
+      "public/canvasx-mobile.glb",
+      "public/cb1.glb",
+      "public/cb2.glb",
+      "public/cb3.glb",
+      "public/cd.glb",
+      "public/chart.glb",
+      "public/chat.glb",
+      "public/cortisol.glb",
+      "public/cube.glb",
+      "public/cube1s.glb",
+      "public/cuber.glb",
+      "public/cubexd.glb",
+      "public/cx.glb",
+      "public/diamond-adr.glb",
+      "public/diamond-m.glb",
+      "public/diamond.glb",
+      "public/discover-d.glb",
+      "public/discover-m.glb",
+      "public/discover-s.glb",
+      "public/dopamine.glb",
+      "public/endorphins.glb",
+      "public/enter.glb",
+      "public/feels.glb",
+      "public/fov-d.glb",
+      "public/fov-m.glb",
+      "public/fovi-candidate.glb",
+      "public/fovi.glb",
+      "public/fovix.glb",
+      "public/gaba.glb",
+      "public/glassx.glb",
+      "public/heart.glb",
+      "public/hit.glb",
+      "public/jk-d.glb",
+      "public/jk1.glb",
+      "public/jkx-d.glb",
+      "public/jkx-m.glb",
+      "public/jo-k.-1.glb",
+      "public/jo-k.-2.glb",
+      "public/jo-k..glb",
+      "public/jo-k.glb",
+      "public/joz.glb",
+      "public/lca.glb",
+      "public/m1x.glb",
+      "public/m1xc.gltf",
+      "public/m2x.glb",
+      "public/m3x.glb",
+      "public/m4x.glb",
+      "public/m5x.glb",
+      "public/m6x.glb",
+      "public/me-m.glb",
+      "public/me..glb",
+      "public/me.glb",
+      "public/meet-joz.glb",
+      "public/model,glb.glb",
+      "public/model.glb",
+      "public/model1.glb",
+      "public/mx5.glb",
+      "public/n1.glb",
+      "public/n2x copy.glb",
+      "public/n2x-m.glb",
+      "public/n2x.glb",
+      "public/n2xx.glb",
+      "public/n3.glb",
+      "public/n3xx.glb",
+      "public/neurodesign-m.glb",
+      "public/neurodesign.glb",
+      "public/open-d.glb",
+      "public/open.glb",
+      "public/oxytocin.glb",
+      "public/platforms.glb",
+      "public/ps.glb",
+      "public/pt.glb",
+      "public/qualia.glb",
+      "public/serotonin.glb",
+      "public/sjx.glb",
+      "public/skills-m.glb",
+      "public/skills.glb",
+      "public/skils.glb",
+      "public/skilss.glb",
+      "public/sphere1s.glb",
+      "public/textd.glb",
+      "public/the-vibe.glb",
+      "public/toolkit-desktop.glb",
+      "public/toolkit-m.glb",
+      "public/toolkit-mobile.glb",
+      "public/toolkit-x.glb",
+      "public/toolkit-xd.glb",
+      "public/toolkit.glb",
+      "public/tools.obj.glb",
+      "public/tx.glb",
+      "public/untitled folder/toolkit-x.glb",
+      "public/untitled folder/toolkit.glb",
+      "public/ux.glb",
+      "public/welcome.glb",
+      "public/woorldx.glb",
+      "public/work-m.glb",
+      "public/workf-m.glb",
+      "public/workf.glb",
+      "public/workff.glb",
+      "public/worldx-m.glb",
+      "public/worldx.glb",
+      "public/xd1.glb",
+      "public/zait.glb",
+      "public/zeir.glb",
+      "public/zeit-desktop.glb",
+      "public/zeit-mobile.glb",
+      "public/zeit.glb",
+      "src/app.js",
+      "src/buffergeometry.js",
+      "src/cube.js",
+      "src/dracoloader.js",
+      "src/glbloader.js",
+      "src/glbpreloader.js",
+      "src/galaxywebgl.js",
+      "src/galaxywebgpu.js",
+      "src/glass.js",
+      "src/glass.jsx",
+      "src/glasspillbutton.js",
+      "src/imagepreloader.js",
+      "src/loadingscreen.js",
+      "src/loadingscreen1.js",
+      "src/metaballs.js",
+      "src/modal.js",
+      "src/model.js",
+      "src/model1x.js",
+      "src/model2x.js",
+      "src/modelpreloader.js",
+      "src/modelvisibilitycontext.js",
+      "src/modelx.js",
+      "src/particlecanvas.js",
+      "src/particles.js",
+      "src/particlesdemo.js",
+      "src/preloadcontext.js",
+      "src/preloader.js",
+      "src/root.js",
+      "src/rotatingcube.js",
+      "src/roundedrectgeometry.js",
+      "src/threejscomponent.js",
+      "src/toolkit.js",
+      "src/world00.js",
+      "src/zeit.js",
+      "src/alpha-hash-fix.js",
+      "src/applyalphahash.js",
+      "src/data/worldmap.js",
+      "src/draco/dracoloader.js",
+      "src/draco/draco_decoder.js",
+      "src/draco/draco_encoder.js",
+      "src/draco/draco_wasm_wrapper.js",
+      "src/draco/gltf/draco_decoder.js",
+      "src/draco/gltf/draco_encoder.js",
+      "src/draco/gltf/draco_wasm_wrapper.js",
+      "src/gltf/draco_decoder.js",
+      "src/gltf/draco_encoder.js",
+      "src/gltf/draco_wasm_wrapper.js",
+      "src/hooks/useautovoice.js",
+      "src/hooks/useautonomousagent.js",
+      "src/hooks/usellmagenticreasoning.js",
+      "src/hooks/usesafespeechrecognition.js",
+      "src/index.js",
+      "src/joz.js",
+      "src/polyfills.js",
+      "src/server.js",
+      "src/transparency-fix.js",
+      "src/twopassglass.js",
+      "src/usecursor.js",
+      "src/utils/llmclient.js",
+      "src/utils/tools.js",
+      "src/utils/voice.js",
+      "src/voice-glow.js"
+    ],
+    "lastUpdated": "2025-11-04T13:09:25.509Z"
+  },
+  "Text": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "BezierCircle": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "BezierCircle001": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "BezierCircle002": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu002": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu001": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu004": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu005": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu006": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu007": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu008": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu009": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu010": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu011": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "uu012": {
+    "commands": [
+      "enter",
+      "go inside",
+      "open portal"
+    ],
+    "action": "portal",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "maxx": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "meet-joz": {
+    "commands": [],
+    "action": "defined",
+    "context": {},
+    "lastUpdated": "2026-06-07T18:42:26.625Z"
   }
 }
