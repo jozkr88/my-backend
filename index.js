@@ -4,7 +4,14 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
-import { getPortalTransition, initDatabase, isDatabaseEnabled, logReasoningEvent } from "./db.js";
+import { fileURLToPath } from "url";
+import {
+  getPortalTransition,
+  getStructuredWorldState,
+  initDatabase,
+  isDatabaseEnabled,
+  logReasoningEvent,
+} from "./db.js";
 import {
   APP_CONTEXT,
   SITE_TARGETS,
@@ -22,6 +29,9 @@ import {
   applyMeetJozGuardrails,
   canonicalTargetForMesh,
 } from "./think-logic.js";
+import { resolveAgenticAction } from "./world-agent.js";
+import { approveAgentProposal, buildAgentSnapshot, buildFallbackAgentReply } from "./full-agent.js";
+import { buildReasoningLayers } from "./reasoning-layers.js";
 
 
 dotenv.config();
@@ -29,6 +39,12 @@ dotenv.config();
 await initDatabase();
 
 const app = express();
+const isEphemeralFilesystem =
+  process.env.VERCEL === "1" ||
+  process.env.VERCEL === "true" ||
+  Boolean(process.env.RENDER) ||
+  process.env.DISABLE_FILE_MEMORY === "1";
+const canPersistToLocalDisk = !isEphemeralFilesystem;
 
 // ✅ Universal CORS setup — works for DreamHost frontend + Vercel backend
 app.use((req, res, next) => {
@@ -72,8 +88,8 @@ try {
 
 // 🔹 Save helper
 function saveWorldMemory() {
-  if (process.env.VERCEL) {
-    console.log("💾 Skipping worldMemory save on Vercel (read-only)");
+  if (!canPersistToLocalDisk) {
+    console.log("💾 Skipping worldMemory save on ephemeral host");
     return;
   }
 
@@ -91,7 +107,7 @@ function saveWorldMemory() {
 app.post("/api/world-map", (req, res) => {
   worldMap = req.body.worldMap || {};
   mergeWorldMapIntoMemory(worldMap);
-  if (!process.env.VERCEL) saveWorldMemory();
+  if (canPersistToLocalDisk) saveWorldMemory();
   console.log("🌍 Updated worldMap with", Object.keys(worldMap).length, "entries");
   res.json({ success: true });
 });
@@ -125,17 +141,108 @@ app.post("/api/world-memory", (req, res) => {
     lastUpdated: new Date().toISOString(),
   };
 
-  if (!process.env.VERCEL) saveWorldMemory();
+  if (canPersistToLocalDisk) saveWorldMemory();
   console.log(`🌍 Learned about "${mesh}" →`, worldMemory[mesh]);
   res.json({ success: true, memory: worldMemory });
 });
 
 app.get("/api/world-memory", (req, res) => res.json(worldMemory));
 
+app.post("/api/agentic", async (req, res) => {
+  try {
+    const input = String(req.body?.input || req.body?.transcript || "").trim();
+    const context = req.body?.context || {};
+    const currentPortal = context?.currentPortal || context?.portal || "root";
+    const structuredPortalKey = currentPortal === "maxx" ? "the-vibe-energy" : currentPortal;
+    const currentStateKey = inferStructuredStateKey(currentPortal, context?.currentMesh || context?.mesh || null);
+    const structuredState = currentStateKey ? await getStructuredWorldState(structuredPortalKey, currentStateKey) : null;
+
+    if (!input) {
+      return res.status(400).json({ error: "Missing input" });
+    }
+
+    const enrichedContext = {
+      ...context,
+      structuredState,
+      structuredAvailableActions: structuredState?.availableActions || [],
+      allowedActions: context?.allowedActions || structuredState?.availableActions || [],
+      knownInteractiveMeshes:
+        context?.knownInteractiveMeshes ||
+        structuredState?.objects?.map((entry) => entry.mesh).filter(Boolean) ||
+        [],
+    };
+    const snapshot = buildAgentSnapshot({ input, context: enrichedContext, worldMap, worldMemory });
+    let proposal = null;
+
+    if (process.env.OPENAI_API_KEY) {
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          temperature: 0.2,
+          response_format: { type: "json_object" },
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a world-aware agent for a 3D interactive portfolio. Return only JSON with keys intent, response, proposedAction, proposedTarget, confidence. Do not propose actions outside the current world's legal actions unless it is a contact or call utility action.",
+            },
+            {
+              role: "user",
+              content: JSON.stringify(snapshot),
+            },
+          ],
+        });
+
+        const content = response.choices?.[0]?.message?.content?.trim() || "{}";
+        proposal = JSON.parse(content);
+      } catch (error) {
+        console.error("⚠️ /api/agentic model call failed:", error?.message || error);
+      }
+    }
+
+    const clean = snapshot.normalizedInput;
+    const approved = approveAgentProposal({ clean, context: snapshot, worldMap, worldMemory, proposal });
+    const reply = proposal?.response || buildFallbackAgentReply({ approved, snapshot });
+
+    return res.json({
+      intent: String(proposal?.intent || approved?.action || "").trim() || "noop",
+      response: reply,
+      params: {
+        action: approved?.action || null,
+        target: approved?.target || null,
+        awareness: approved?.awareness || null,
+        source: approved?.source || "agent_noop",
+      },
+      approvedAction: approved?.action || null,
+      approvedTarget: approved?.target || null,
+      approvedAwareness: approved?.awareness || null,
+      snapshot,
+    });
+  } catch (error) {
+    console.error("❌ /api/agentic failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 // ------------------------------------------------------------
 // 3️⃣ AI Reasoning Endpoint
 // ------------------------------------------------------------
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+function inferStructuredStateKey(currentPortal, currentMesh) {
+  if (currentPortal === "root") return "root";
+  if (currentPortal === "meet-joz") return normalizeMeshName(currentMesh) || "vibe";
+  if (currentPortal === "the-vibe-energy" || currentPortal === "maxx") {
+    const mesh = normalizeMeshName(currentMesh);
+    if (mesh === "brain_entry") return "brain_entry";
+    if (mesh === "signal_flow") return "signal_flow";
+    if (mesh === "new_pathways") return "new_pathways";
+    if (mesh === "memory_building") return "memory_building";
+    if (mesh === "inside_the_brain" || mesh === "inside the brain") return "inside_the_brain";
+    return "signal_flow";
+  }
+  return null;
+}
 
 function mergeWorldMapIntoMemory(nextWorldMap) {
   for (const [mesh, info] of Object.entries(nextWorldMap || {})) {
@@ -162,13 +269,31 @@ function sendReasonedResult(sendThinkResult, payload, source, reasoningEvent = n
   return sendThinkResult(payload, source);
 }
 
+function decorateThinkPayload(payload, currentPortal, currentMesh) {
+  const reasoning = buildReasoningLayers({
+    currentPortal,
+    currentMesh,
+    action: payload?.action || null,
+  });
+
+  if (!reasoning) return payload;
+
+  return {
+    ...payload,
+    awareness: payload?.awareness || reasoning.awareness || null,
+    reasoning,
+  };
+}
+
 app.post("/api/think", async (req, res) => {
   const startedAt = performance.now();
+  let currentPortalForResponse = "root";
+  let currentMeshForResponse = null;
   const sendThinkResult = (payload, source = "unknown") => {
     const backendSeconds = Number(((performance.now() - startedAt) / 1000).toFixed(2));
     console.log(`⏱️ /api/think ${source}: ${backendSeconds}s`);
     return res.json({
-      ...payload,
+      ...decorateThinkPayload(payload, currentPortalForResponse, currentMeshForResponse),
       timing: {
         backendSeconds,
         source,
@@ -177,11 +302,42 @@ app.post("/api/think", async (req, res) => {
   };
 
   try {
-    const { transcript, currentPortal = "root", currentMesh = null } = req.body;
+    const { transcript, currentPortal = "root", currentMesh = null, agentContext = null } = req.body;
+    currentPortalForResponse = currentPortal;
+    currentMeshForResponse = currentMesh;
     if (!transcript) return res.status(400).json({ error: "Missing transcript" });
 
     const clean = normalizeTranscript(transcript);
     console.log("🎙️ Reasoning about:", transcript, "→", clean, "inside portal:", currentPortal);
+    const allowedActions = Array.isArray(agentContext?.allowedActions)
+      ? agentContext.allowedActions.map((value) => String(value || "").trim()).filter(Boolean)
+      : null;
+    const structuredPortalKey = currentPortal === "maxx" ? "the-vibe-energy" : currentPortal;
+    const currentStateKey = inferStructuredStateKey(currentPortal, currentMesh);
+    const structuredState = currentStateKey ? await getStructuredWorldState(structuredPortalKey, currentStateKey) : null;
+    const enrichedAgentContext = {
+      ...(agentContext || {}),
+      structuredState,
+      structuredAvailableActions: structuredState?.availableActions || [],
+      allowedActions: agentContext?.allowedActions || structuredState?.availableActions || [],
+      knownInteractiveMeshes:
+        agentContext?.knownInteractiveMeshes ||
+        structuredState?.objects?.map((entry) => entry.mesh).filter(Boolean) ||
+        [],
+    };
+
+    const agenticMatch = resolveAgenticAction({
+      clean,
+      currentPortal,
+      currentMesh,
+      agentContext: enrichedAgentContext,
+      worldMap,
+      worldMemory,
+    });
+    if (agenticMatch) {
+      console.log("🧠 World agent → live graph route", agenticMatch);
+      return sendThinkResult(agenticMatch, "agentic");
+    }
 
     const rootMatch = currentPortal === "root" ? classifyRootCommand(clean) : null;
     if (rootMatch) {
@@ -275,11 +431,16 @@ app.post("/api/think", async (req, res) => {
 
     // --- fallback to LLM ---
     const portalContext = getWorldContext(currentPortal);
+    const allowedActionsPrompt = allowedActions?.length
+      ? `Allowed actions (guardrail): ${JSON.stringify(allowedActions)}`
+      : "Allowed actions (guardrail): not provided";
     const prompt = `
 You are a reasoning agent for a 3D interactive world.
 App context: ${JSON.stringify(APP_CONTEXT)}
 Current portal: "${currentPortal}"
 Current mesh: "${currentMesh || "none"}"
+Agent context: ${agentContext ? JSON.stringify(agentContext) : "none"}
+${allowedActionsPrompt}
 User said: "${transcript}"
 Known portal context: ${portalContext ? JSON.stringify(portalContext) : "none"}
 
@@ -297,8 +458,9 @@ Rules:
 - target must be either null, a safe app path beginning with "/", or a mailto:/tel: link.
 - Never return plain words like "monk_character" as target.
 - Use the app context and portal context to interpret semantic phrases correctly.
-- In the MAXX portal, Human Neuron and AI Neuron belong to n2x.glb, Spatial Capability is an interaction surface, the neurodesign layer contains The Elite Beauty, Ascension, and 10/10 Frame Mogg, and desktop pause/play toggles between neurodesign and n2x.
+- In the MAXX portal, the glossy balls with holes symbolize neurotransmitters, Human Neuron and AI Neuron are concept labels inside the abstract brain scene, Spatial Capability is an interaction surface, and pause/play toggles between the neurotransmitter scene and the deeper inside-the-brain layer.
 - In meet-joz, worldx.glb is the surrounding semantic world and is not interactive, model1.glb is the main interactive object, Ascend/Discover is the clout-scale-heart-prestige layer, Skills/Mogg is the deeper work-capability layer, and back actions can visually unwind the sequence toward root.
+- If Allowed actions (guardrail) is provided, do not return an action outside that list unless the action is "contact_joz", "call_joz", "hide_contact_buttons", or "show_contact_buttons".
 `;
 
     const response = await openai.chat.completions.create({
@@ -315,6 +477,22 @@ Rules:
     const parsed = JSON.parse(content);
     const action = normalizeAction(parsed.action);
     const target = safeTarget(parsed.target);
+    const utilityActions = new Set([
+      "contact_joz",
+      "call_joz",
+      "hide_contact_buttons",
+      "show_contact_buttons",
+    ]);
+    if (allowedActions?.length && action && !utilityActions.has(action) && !allowedActions.includes(action)) {
+      return sendThinkResult(
+        {
+          action: null,
+          target: null,
+          awareness: "That step is not available from the current state.",
+        },
+        "llm_guardrail",
+      );
+    }
     queueReasoningEvent({
       portalKey: currentPortal,
       currentState: normalizeMeshName(currentMesh),
@@ -334,7 +512,23 @@ Rules:
 
 
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`✅ Server running on port ${port}`);
-});
+const port = process.env.PORT || 3001;
+const host = (process.env.HOST || "").trim();
+const isDirectRun =
+  typeof process !== "undefined" &&
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+
+if (isDirectRun) {
+  if (host) {
+    app.listen(port, host, () => {
+      console.log(`✅ Server running on http://${host}:${port}`);
+    });
+  } else {
+    app.listen(port, () => {
+      console.log(`✅ Server running on port ${port}`);
+    });
+  }
+}
+
+export default app;

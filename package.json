@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "PORT=3001 node index.js",
-    "test": "node --test think-logic.test.js"
+    "dev": "HOST=127.0.0.1 PORT=3001 node index.js",
+    "test": "node --test think-logic.test.js world-agent.test.js full-agent.test.js structured-world.test.js reasoning-layers.test.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
