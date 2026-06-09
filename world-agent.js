@@ -37,7 +37,7 @@ const BASE_ALIASES = {
   ],
   vibe: ["vibe", "flex", "open flex", "show flex"],
   discover: ["discover", "ascend", "open ascend", "show ascend"],
-  skills: ["skills", "mogg", "show mogg", "open mogg", "show skills", "open skills"],
+  skills: ["skills", "mogg", "show mogg", "open mogg", "show skills", "open skills", "surprise me"],
   pause: ["pause", "stop", "pause neurons", "stop neurons", "pause animation", "stop animation"],
   resume: [
     "play",

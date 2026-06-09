@@ -28,6 +28,12 @@ test("classifies root portal commands", () => {
     action: "ball",
     target: "/neo/meet-joz",
   });
+
+  assert.deepEqual(classifyRootCommand(normalizeTranscript("surprise me")), {
+    action: "skills",
+    target: "/neo/meet-joz",
+    awareness: "Going nuclear to Skills.",
+  });
 });
 
 test("classifies utility commands", () => {
@@ -67,6 +73,11 @@ test("blocks invalid meet-joz transitions", () => {
 
 test("classifies global commands", () => {
   assert.equal(classifyGlobalCommand(normalizeTranscript("view in space"), "meet-joz").action, "launch_in_space_workf");
+  assert.deepEqual(classifyGlobalCommand(normalizeTranscript("surprise me"), "maxx"), {
+    action: "skills",
+    target: "/neo/meet-joz",
+    awareness: "Going nuclear to Skills.",
+  });
   assert.deepEqual(classifyGlobalCommand(normalizeTranscript("back"), "root"), {
     action: null,
     target: null,

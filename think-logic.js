@@ -109,6 +109,7 @@ const ROOT_MEET_JOZ_PHRASES = [
   "go to ball",
 ];
 
+const SURPRISE_ME_PHRASES = ["surprise me"];
 const MEET_JOZ_FLEX_PHRASES = ["vibe", "flex", "open flex", "show flex"];
 const MEET_JOZ_DISCOVER_PHRASES = ["discover", "ascend", "open ascend", "show ascend"];
 const MEET_JOZ_SKILLS_PHRASES = ["skills", "mogg", "show mogg", "open mogg", "show skills", "open skills"];
@@ -405,6 +406,10 @@ export function classifyRootCommand(clean) {
     return { action: "ball", target: SITE_TARGETS.meetJoz };
   }
 
+  if (hasPhrase(clean, SURPRISE_ME_PHRASES)) {
+    return { action: "skills", target: SITE_TARGETS.meetJoz, awareness: "Going nuclear to Skills." };
+  }
+
   if (hasPhrase(clean, MEET_JOZ_FLEX_PHRASES)) {
     return { action: "vibe", target: SITE_TARGETS.meetJoz, awareness: "Cross-jumping to Flex." };
   }
@@ -422,6 +427,11 @@ export function classifyRootCommand(clean) {
 
 export function classifyMeetJozCommand(clean, currentMesh) {
   const mesh = normalizeMeshName(currentMesh);
+
+  if (hasPhrase(clean, SURPRISE_ME_PHRASES)) {
+    if (mesh === "skills") return { action: "skills", target: null, awareness: "Going nuclear to Skills." };
+    return { action: "skills", target: null, awareness: "Going nuclear to Skills." };
+  }
 
   if (hasPhrase(clean, MEET_JOZ_FLEX_PHRASES)) {
     if (mesh === "vibe") return { action: "vibe", target: null, awareness: "Opening Ascend." };
@@ -528,6 +538,14 @@ export function classifyMaxxCommand(clean) {
 }
 
 export function classifyGlobalCommand(clean, currentPortal) {
+  if (hasPhrase(clean, SURPRISE_ME_PHRASES)) {
+    return {
+      action: "skills",
+      target: SITE_TARGETS.meetJoz,
+      awareness: "Going nuclear to Skills.",
+    };
+  }
+
   if (currentPortal === "the-vibe-energy" && hasPhrase(clean, MAXX_AR_PHRASES)) {
     return {
       action: "launch_in_space_n2x",
