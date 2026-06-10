@@ -57,9 +57,9 @@ test("uses allowed actions as the source of truth for current state", () => {
   const result = resolveAgenticAction({
     clean: normalizeTranscript("ascend"),
     currentPortal: "meet-joz",
-    currentMesh: "discover",
+    currentMesh: "vibe",
     agentContext: {
-      allowedActions: ["discover", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"],
+      allowedActions: ["vibe", "discover", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"],
       knownInteractiveMeshes: ["vibe", "discover", "skills"],
     },
     worldMap,
@@ -68,6 +68,25 @@ test("uses allowed actions as the source of truth for current state", () => {
 
   assert.deepEqual(result, {
     action: "discover",
+    target: null,
+  });
+});
+
+test("allows cross-step mogg routing from flex when the state permits it", () => {
+  const result = resolveAgenticAction({
+    clean: normalizeTranscript("mogg"),
+    currentPortal: "meet-joz",
+    currentMesh: "vibe",
+    agentContext: {
+      allowedActions: ["vibe", "discover", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"],
+      knownInteractiveMeshes: ["vibe", "discover", "skills"],
+    },
+    worldMap,
+    worldMemory,
+  });
+
+  assert.deepEqual(result, {
+    action: "skills",
     target: null,
   });
 });
@@ -89,6 +108,25 @@ test("blocks matched intents that are not legal from the current state", () => {
     action: null,
     target: null,
     awareness: "That step is not available from the current state.",
+  });
+});
+
+test("supports contact utilities from root through deterministic agent routing", () => {
+  const result = resolveAgenticAction({
+    clean: normalizeTranscript("contact joz"),
+    currentPortal: "root",
+    currentMesh: "brain",
+    agentContext: {
+      allowedActions: ["brain", "ball", "contact_joz", "call_joz", "show_contact_buttons", "hide_contact_buttons"],
+      knownInteractiveMeshes: ["brain", "ball"],
+    },
+    worldMap,
+    worldMemory,
+  });
+
+  assert.deepEqual(result, {
+    action: "contact_joz",
+    target: "mailto:joz@neomaxxing.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
   });
 });
 

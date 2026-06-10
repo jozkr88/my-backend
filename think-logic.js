@@ -34,9 +34,48 @@ export const KNOWN_ACTIONS = new Set([
 ]);
 
 export const MEET_JOZ_ALLOWED_TRANSITIONS = {
-  vibe: new Set(["vibe", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
-  discover: new Set(["discover", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
-  skills: new Set(["skills", "vibe_back1", "pause", "resume", "back", "launch_in_space_workf"]),
+  vibe: new Set([
+    "vibe",
+    "discover",
+    "skills",
+    "vibe_back",
+    "pause",
+    "resume",
+    "back",
+    "launch_in_space_workf",
+    "contact_joz",
+    "call_joz",
+    "show_contact_buttons",
+    "hide_contact_buttons",
+  ]),
+  discover: new Set([
+    "vibe",
+    "discover",
+    "skills",
+    "vibe_back",
+    "pause",
+    "resume",
+    "back",
+    "launch_in_space_workf",
+    "contact_joz",
+    "call_joz",
+    "show_contact_buttons",
+    "hide_contact_buttons",
+  ]),
+  skills: new Set([
+    "vibe",
+    "discover",
+    "skills",
+    "vibe_back1",
+    "pause",
+    "resume",
+    "back",
+    "launch_in_space_workf",
+    "contact_joz",
+    "call_joz",
+    "show_contact_buttons",
+    "hide_contact_buttons",
+  ]),
 };
 
 const TRANSCRIPT_NORMALIZATIONS = [
@@ -434,17 +473,23 @@ export function classifyMeetJozCommand(clean, currentMesh) {
   }
 
   if (hasPhrase(clean, MEET_JOZ_FLEX_PHRASES)) {
-    if (mesh === "vibe") return { action: "vibe", target: null, awareness: "Opening Ascend." };
-    if (mesh === "discover") return { action: null, target: null, awareness: "Already past Flex. Say Ascend." };
-    if (mesh === "skills") return { action: null, target: null, awareness: "Already past Flex. Say Mogg or Back." };
-    return { action: null, target: null, awareness: "Flex is the first step." };
+    if (mesh === "discover" || mesh === "skills") {
+      return { action: "vibe", target: null, awareness: "Returning to Flex." };
+    }
+
+    return { action: "vibe", target: null, awareness: "Opening Flex." };
   }
 
   if (hasPhrase(clean, MEET_JOZ_DISCOVER_PHRASES)) {
-    if (mesh === "discover") return { action: "discover", target: null, awareness: "Opening Ascend." };
-    if (mesh === "vibe") return { action: null, target: null, awareness: "Say Flex first." };
-    if (mesh === "skills") return { action: null, target: null, awareness: "Already past Ascend. Say Mogg, Skills, or Back." };
-    return { action: null, target: null, awareness: "Ascend is the second step." };
+    if (mesh === "skills") {
+      return { action: "discover", target: null, awareness: "Returning to Ascend." };
+    }
+
+    if (mesh === "vibe" || !mesh) {
+      return { action: "discover", target: null, awareness: "Opening Ascend." };
+    }
+
+    return { action: "discover", target: null, awareness: "Opening Mogg." };
   }
 
   if (hasPhrase(clean, MEET_JOZ_SKILLS_PHRASES)) {

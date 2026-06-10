@@ -61,13 +61,31 @@ const BASE_ALIASES = {
     "show in space",
     "space maxx",
   ],
+  contact_joz: ["contact", "email", "message", "send email", "send an email", "reach out", "write to"],
+  call_joz: ["call", "phone", "ring", "dial", "call joz", "phone joz"],
+  hide_contact_buttons: ["hide contact", "hide buttons", "hide contact buttons", "remove contact", "dismiss contact buttons"],
+  show_contact_buttons: ["show contact", "show buttons", "show contact buttons", "bring back contact", "display contact"],
 };
 
 const DEFAULT_ALLOWED_ACTIONS = {
-  root: ["brain", "ball"],
-  "meet-joz": ["vibe", "discover", "skills", "pause", "resume", "back", "vibe_back", "vibe_back1", "launch_in_space_workf"],
-  "the-vibe-energy": ["n2x_pause", "n2x_resume", "back", "launch_in_space_n2x"],
-  maxx: ["n2x_pause", "n2x_resume", "back", "launch_in_space_n2x"],
+  root: ["brain", "ball", "contact_joz", "call_joz", "show_contact_buttons", "hide_contact_buttons"],
+  "meet-joz": [
+    "vibe",
+    "discover",
+    "skills",
+    "pause",
+    "resume",
+    "back",
+    "vibe_back",
+    "vibe_back1",
+    "launch_in_space_workf",
+    "contact_joz",
+    "call_joz",
+    "show_contact_buttons",
+    "hide_contact_buttons",
+  ],
+  "the-vibe-energy": ["n2x_pause", "n2x_resume", "back", "launch_in_space_n2x", "contact_joz", "call_joz", "show_contact_buttons", "hide_contact_buttons"],
+  maxx: ["n2x_pause", "n2x_resume", "back", "launch_in_space_n2x", "contact_joz", "call_joz", "show_contact_buttons", "hide_contact_buttons"],
 };
 
 const PORTAL_TARGETS = {
@@ -201,6 +219,40 @@ function resolveBinaryAction(clean, allowedActions) {
   return null;
 }
 
+function resolveUtilityAction(clean, allowedActions) {
+  if (hasPhrase(clean, BASE_ALIASES.hide_contact_buttons)) {
+    if (allowedActions.has("hide_contact_buttons")) return { action: "hide_contact_buttons", target: null };
+    return { action: null, target: null, awareness: "That step is not available from the current state." };
+  }
+
+  if (hasPhrase(clean, BASE_ALIASES.show_contact_buttons)) {
+    if (allowedActions.has("show_contact_buttons")) return { action: "show_contact_buttons", target: null };
+    return { action: null, target: null, awareness: "That step is not available from the current state." };
+  }
+
+  if (hasPhrase(clean, BASE_ALIASES.contact_joz)) {
+    if (allowedActions.has("contact_joz")) {
+      return {
+        action: "contact_joz",
+        target: "mailto:joz@neomaxxing.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
+      };
+    }
+    return { action: null, target: null, awareness: "That step is not available from the current state." };
+  }
+
+  if (hasPhrase(clean, BASE_ALIASES.call_joz)) {
+    if (allowedActions.has("call_joz")) {
+      return {
+        action: "call_joz",
+        target: "tel:+41764973894",
+      };
+    }
+    return { action: null, target: null, awareness: "That step is not available from the current state." };
+  }
+
+  return null;
+}
+
 function resolveCrossPortalAction(clean, currentPortal) {
   if (currentPortal === "maxx" || currentPortal === "the-vibe-energy") {
     if (hasPhrase(clean, BASE_ALIASES.vibe)) {
@@ -263,6 +315,9 @@ export function resolveAgenticAction({ clean, currentPortal, currentMesh, agentC
   const allowedActions = getAllowedActions(currentPortal, agentContext);
   const structuredTransition = resolveStructuredTransition(clean, allowedActions, agentContext?.structuredState);
   if (structuredTransition) return structuredTransition;
+
+  const utilityResult = resolveUtilityAction(clean, allowedActions);
+  if (utilityResult) return utilityResult;
 
   const backResult = resolveBackAction({ currentPortal, currentMesh, allowedActions, clean });
   if (backResult) return backResult;
