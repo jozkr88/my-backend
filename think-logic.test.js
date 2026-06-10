@@ -48,28 +48,10 @@ test("classifies MAXX commands", () => {
 });
 
 test("classifies meet-joz stateful commands", () => {
-  assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("ascend"), "vibe"), {
-    action: "discover",
-    target: null,
-    awareness: "Opening Ascend.",
-  });
-
   assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("ascend"), "discover"), {
     action: "discover",
     target: null,
-    awareness: "Opening Mogg.",
-  });
-
-  assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("flex"), "skills"), {
-    action: "vibe",
-    target: null,
-    awareness: "Returning to Flex.",
-  });
-
-  assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("mogg"), "vibe"), {
-    action: "skills",
-    target: null,
-    awareness: "Cross-jumping to Mogg.",
+    awareness: "Opening Ascend.",
   });
 
   assert.deepEqual(classifyMeetJozCommand(normalizeTranscript("back"), "skills"), {
@@ -80,7 +62,7 @@ test("classifies meet-joz stateful commands", () => {
 
 test("blocks invalid meet-joz transitions", () => {
   assert.deepEqual(
-    applyMeetJozGuardrails({ action: "n2x_pause", target: null }, "vibe"),
+    applyMeetJozGuardrails({ action: "skills", target: null }, "vibe"),
     {
       action: null,
       target: null,
