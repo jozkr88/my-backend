@@ -16,6 +16,7 @@ test("normalizes speech-to-text aliases", () => {
   assert.equal(normalizeTranscript("space max"), "space maxx");
   assert.equal(normalizeTranscript("accent"), "ascend");
   assert.equal(normalizeTranscript("mug"), "mogg");
+  assert.equal(normalizeTranscript("plex"), "flex");
 });
 
 test("classifies root portal commands", () => {

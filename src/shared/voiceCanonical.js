@@ -20,6 +20,7 @@ export const TRANSCRIPT_NORMALIZATIONS = [
   [/\bflax\b/g, "flex"],
   [/\bflecks\b/g, "flex"],
   [/\bflux\b/g, "flex"],
+  [/\bplex\b/g, "flex"],
   [/\bmogs\b/g, "mogg"],
   [/\bascent\b/g, "ascend"],
   [/\baccent\b/g, "ascend"],
