@@ -16,8 +16,12 @@ import {
   SURPRISE_ME_PHRASES,
   hasPhrase as sharedHasPhrase,
   normalizeVoiceTranscript,
-} from "./src/shared/voiceCanonical.js";
-import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "./src/shared/voiceActions.js";
+} from "../src/shared/voiceCanonical.js";
+import {
+  isMeetJozActionAllowed,
+} from "../src/shared/appWorld.js";
+import { resolveMeetJozSemanticCommand } from "../src/shared/meetJozSemantics.js";
+import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "../src/shared/voiceActions.js";
 
 export const SITE_TARGETS = {
   maxx: "/neo/maxx",
@@ -35,11 +39,6 @@ export const SAFE_APP_TARGETS = new Set([
 
 export const KNOWN_ACTIONS = KNOWN_VOICE_ACTIONS;
 
-export const MEET_JOZ_ALLOWED_TRANSITIONS = {
-  vibe: new Set(["vibe", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
-  discover: new Set(["discover", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
-  skills: new Set(["skills", "vibe_back1", "pause", "resume", "back", "launch_in_space_workf"]),
-};
 const MEET_JOZ_FLEX_PHRASES = FLEX_PHRASES;
 const MEET_JOZ_DISCOVER_PHRASES = DISCOVER_PHRASES;
 const MEET_JOZ_SKILLS_PHRASES = SKILLS_PHRASES;
@@ -278,9 +277,7 @@ export function applyMeetJozGuardrails(result, currentMesh) {
   const action = normalizeAction(result.action);
 
   if (!mesh || !action) return result;
-
-  const allowed = MEET_JOZ_ALLOWED_TRANSITIONS[mesh];
-  if (!allowed || allowed.has(action)) return { ...result, action };
+  if (isMeetJozActionAllowed(mesh, action)) return { ...result, action };
 
   return {
     action: null,
@@ -325,38 +322,14 @@ export function classifyMeetJozCommand(clean, currentMesh) {
     return { action: "skills", target: null, awareness: "Going nuclear to Skills." };
   }
 
-  if (hasPhrase(clean, MEET_JOZ_FLEX_PHRASES)) {
-    if (mesh === "vibe") return { action: "vibe", target: null, awareness: "Opening Ascend." };
-    if (mesh === "discover") return { action: null, target: null, awareness: "Already past Flex. Say Ascend." };
-    if (mesh === "skills") return { action: null, target: null, awareness: "Already past Flex. Say Mogg or Back." };
-    return { action: null, target: null, awareness: "Flex is the first step." };
-  }
-
-  if (hasPhrase(clean, MEET_JOZ_DISCOVER_PHRASES)) {
-    if (mesh === "discover") return { action: "discover", target: null, awareness: "Opening Ascend." };
-    if (mesh === "vibe") return { action: null, target: null, awareness: "Say Flex first." };
-    if (mesh === "skills") return { action: null, target: null, awareness: "Already past Ascend. Say Mogg, Skills, or Back." };
-    return { action: null, target: null, awareness: "Ascend is the second step." };
-  }
-
-  if (hasPhrase(clean, MEET_JOZ_SKILLS_PHRASES)) {
-    if (mesh === "skills") return { action: "skills", target: null, awareness: "Opening Mogg." };
-    if (mesh === "discover") return { action: "skills", target: null, awareness: "Opening Mogg." };
-    if (mesh === "vibe") return { action: "skills", target: null, awareness: "Cross-jumping to Mogg." };
-    return { action: "skills", target: null, awareness: "Opening Mogg." };
-  }
-
-  if (hasPhrase(clean, BACK_PHRASES)) {
-    if (mesh === "skills") return { action: "vibe_back1", target: null };
-    if (mesh === "discover") return { action: "vibe_back", target: null };
-    if (mesh === "vibe") return { action: "vibe_back", target: "/" };
-    return { action: "vibe_back", target: null };
-  }
-
-  if (hasPhrase(clean, PAUSE_PHRASES)) return { action: "pause", target: null };
-  if (hasPhrase(clean, RESUME_PHRASES)) return { action: "resume", target: null };
-  if (hasPhrase(clean, EXIT_PHRASES)) return { action: "back", target: "/" };
-  if (hasPhrase(clean, MAXX_AR_PHRASES)) return { action: "launch_in_space_workf", target: null };
+  if (hasPhrase(clean, MEET_JOZ_FLEX_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "flex");
+  if (hasPhrase(clean, MEET_JOZ_DISCOVER_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "discover");
+  if (hasPhrase(clean, MEET_JOZ_SKILLS_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "skills");
+  if (hasPhrase(clean, BACK_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "back");
+  if (hasPhrase(clean, PAUSE_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "pause");
+  if (hasPhrase(clean, RESUME_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "resume");
+  if (hasPhrase(clean, EXIT_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "exit");
+  if (hasPhrase(clean, MAXX_AR_PHRASES)) return resolveMeetJozSemanticCommand(mesh, "ar");
 
   return null;
 }
