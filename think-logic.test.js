@@ -62,7 +62,7 @@ test("classifies meet-joz stateful commands", () => {
 
 test("blocks invalid meet-joz transitions", () => {
   assert.deepEqual(
-    applyMeetJozGuardrails({ action: "skills", target: null }, "vibe"),
+    applyMeetJozGuardrails({ action: "discover", target: null }, "vibe"),
     {
       action: null,
       target: null,

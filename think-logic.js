@@ -1,3 +1,24 @@
+import {
+  AR_PHRASES,
+  BACK_PHRASES,
+  CALL_PHRASES,
+  CONTACT_PHRASES,
+  DISCOVER_PHRASES,
+  EXIT_PHRASES,
+  FLEX_PHRASES,
+  HIDE_CONTACT_PHRASES,
+  PAUSE_PHRASES,
+  RESUME_PHRASES,
+  ROOT_BRAIN_PHRASES,
+  ROOT_MEET_JOZ_PHRASES,
+  SHOW_CONTACT_PHRASES,
+  SKILLS_PHRASES,
+  SURPRISE_ME_PHRASES,
+  hasPhrase as sharedHasPhrase,
+  normalizeVoiceTranscript,
+} from "./src/shared/voiceCanonical.js";
+import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "./src/shared/voiceActions.js";
+
 export const SITE_TARGETS = {
   maxx: "/neo/maxx",
   meetJoz: "/neo/meet-joz",
@@ -12,134 +33,17 @@ export const SAFE_APP_TARGETS = new Set([
   "/vibe/meet-joz",
 ]);
 
-export const KNOWN_ACTIONS = new Set([
-  "brain",
-  "ball",
-  "vibe",
-  "discover",
-  "skills",
-  "pause",
-  "resume",
-  "back",
-  "vibe_back",
-  "vibe_back1",
-  "n2x_pause",
-  "n2x_resume",
-  "launch_in_space_n2x",
-  "launch_in_space_workf",
-  "hide_contact_buttons",
-  "show_contact_buttons",
-  "contact_joz",
-  "call_joz",
-]);
+export const KNOWN_ACTIONS = KNOWN_VOICE_ACTIONS;
 
 export const MEET_JOZ_ALLOWED_TRANSITIONS = {
-  vibe: new Set(["vibe", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
+  vibe: new Set(["vibe", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
   discover: new Set(["discover", "skills", "vibe_back", "pause", "resume", "back", "launch_in_space_workf"]),
   skills: new Set(["skills", "vibe_back1", "pause", "resume", "back", "launch_in_space_workf"]),
 };
-
-const TRANSCRIPT_NORMALIZATIONS = [
-  [/[’']/g, ""],
-  [/\bmeet\s+joe?s\b/g, "meet joz"],
-  [/\bmeet\s+jose\b/g, "meet joz"],
-  [/\bmeet\s+joes\b/g, "meet joz"],
-  [/\bmeet\s+joze\b/g, "meet joz"],
-  [/\bmeet\s+joas\b/g, "meet joz"],
-  [/\bneo\s+meet\s+joe?s\b/g, "neo meet joz"],
-  [/\bneo\s+meet\s+jose\b/g, "neo meet joz"],
-  [/\btalk\s+to\s+joe\b/g, "talk to joz"],
-  [/\btalk\s+to\s+jose\b/g, "talk to joz"],
-  [/\bopen\s+meet\s+joe\b/g, "open meet joz"],
-  [/\bjoe?s\b/g, "joz"],
-  [/\bjose\b/g, "joz"],
-  [/\bjoes\b/g, "joz"],
-  [/\bflax\b/g, "flex"],
-  [/\bflux\b/g, "flex"],
-  [/\bmogs\b/g, "mogg"],
-  [/\bascent\b/g, "ascend"],
-  [/\baccent\b/g, "ascend"],
-  [/\bsend\b/g, "ascend"],
-  [/\boffend\b/g, "ascend"],
-  [/\bmark\b/g, "mogg"],
-  [/\bmug\b/g, "mogg"],
-  [/\bmocha\b/g, "mogg"],
-  [/\bmoch\b/g, "mogg"],
-  [/\bmog\b/g, "mogg"],
-  [/\bthe max\b/g, "maxx"],
-  [/\bmax\b/g, "maxx"],
-  [/\bspace max\b/g, "space maxx"],
-  [/\bspace maxx\b/g, "space maxx"],
-  [/\bview maxx in space\b/g, "view in space maxx"],
-  [/\bbrain portal\b/g, "brain"],
-  [/\binside brain\b/g, "inside the brain"],
-  [/\s+/g, " "],
-];
-
-const ROOT_BRAIN_PHRASES = [
-  "enter",
-  "explore",
-  "go inside",
-  "step inside",
-  "open portal",
-  "open the portal",
-  "open maxx",
-  "enter maxx",
-  "enter the brain",
-  "go inside the brain",
-  "open the brain",
-  "inside the brain",
-  "enter the mind",
-  "enter mind",
-  "open the mind",
-  "open mind",
-  "show the philosophy",
-  "show philosophy",
-  "open philosophy",
-  "the philosophy",
-];
-
-const ROOT_MEET_JOZ_PHRASES = [
-  "meet joz",
-  "neo meet joz",
-  "talk to joz",
-  "open meet joz",
-  "go to meet joz",
-  "open ball",
-  "go to ball",
-];
-
-const SURPRISE_ME_PHRASES = ["surprise me"];
-const MEET_JOZ_FLEX_PHRASES = ["vibe", "flex", "open flex", "show flex"];
-const MEET_JOZ_DISCOVER_PHRASES = ["discover", "ascend", "open ascend", "show ascend"];
-const MEET_JOZ_SKILLS_PHRASES = ["skills", "mogg", "show mogg", "open mogg", "show skills", "open skills"];
-const BACK_PHRASES = ["back", "go back", "previous", "step back", "return"];
-const PAUSE_PHRASES = ["pause", "stop", "pause neurons", "stop neurons", "pause animation", "stop animation"];
-const RESUME_PHRASES = [
-  "play",
-  "resume",
-  "continue",
-  "start",
-  "resume neurons",
-  "play neurons",
-  "start neurons",
-  "resume animation",
-  "play animation",
-];
-const EXIT_PHRASES = ["exit", "leave", "leave portal", "close portal", "close joz", "exit joz", "leave joz"];
-const MAXX_AR_PHRASES = [
-  "launch in space",
-  "open in space",
-  "view in space",
-  "view in ar",
-  "launch ar",
-  "show in space",
-  "space maxx",
-];
-const CONTACT_PHRASES = ["contact", "email", "message", "send email", "send an email", "reach out", "write to"];
-const CALL_PHRASES = ["call", "phone", "ring", "dial", "call joz", "phone joz"];
-const HIDE_CONTACT_PHRASES = ["hide contact", "hide buttons", "hide contact buttons", "remove contact", "dismiss contact buttons"];
-const SHOW_CONTACT_PHRASES = ["show contact", "show buttons", "show contact buttons", "bring back contact", "display contact"];
+const MEET_JOZ_FLEX_PHRASES = FLEX_PHRASES;
+const MEET_JOZ_DISCOVER_PHRASES = DISCOVER_PHRASES;
+const MEET_JOZ_SKILLS_PHRASES = SKILLS_PHRASES;
+const MAXX_AR_PHRASES = AR_PHRASES;
 
 export const APP_CONTEXT = {
   frontend: {
@@ -312,10 +216,7 @@ export const WORLD_CONTEXT = {
 };
 
 export function hasPhrase(text, phrases) {
-  return phrases.some((phrase) => {
-    const pattern = phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
-    return new RegExp(`\\b${pattern}\\b`, "i").test(text);
-  });
+  return sharedHasPhrase(text, phrases);
 }
 
 export function getWorldContext(currentPortal) {
@@ -323,11 +224,7 @@ export function getWorldContext(currentPortal) {
 }
 
 export function normalizeTranscript(text) {
-  let clean = String(text || "").toLowerCase();
-  for (const [pattern, replacement] of TRANSCRIPT_NORMALIZATIONS) {
-    clean = clean.replace(pattern, replacement);
-  }
-  return clean.trim();
+  return normalizeVoiceTranscript(text);
 }
 
 export function safeTarget(value) {
@@ -359,12 +256,7 @@ export function canonicalTargetForMesh(mesh) {
 }
 
 export function normalizeAction(action) {
-  const lower = String(action || "").toLowerCase().trim();
-  if (!lower) return null;
-  if (lower === "flex") return "vibe";
-  if (lower === "ascend") return "discover";
-  if (lower === "mogg") return "skills";
-  return KNOWN_ACTIONS.has(lower) ? lower : null;
+  return normalizeVoiceAction(action);
 }
 
 export function detectMeetJozCommandKey(clean) {
