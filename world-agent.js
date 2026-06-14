@@ -6,6 +6,7 @@ import {
   normalizeMeshName,
   safeTarget,
 } from "./think-logic.js";
+import { getAllowedActionsForPortalState } from "../src/shared/appWorld.js";
 
 const BASE_ALIASES = {
   brain: [
@@ -63,13 +64,6 @@ const BASE_ALIASES = {
   ],
 };
 
-const DEFAULT_ALLOWED_ACTIONS = {
-  root: ["brain", "ball"],
-  "meet-joz": ["vibe", "discover", "skills", "pause", "resume", "back", "vibe_back", "vibe_back1", "launch_in_space_workf"],
-  "the-vibe-energy": ["n2x_pause", "n2x_resume", "back", "launch_in_space_n2x"],
-  maxx: ["n2x_pause", "n2x_resume", "back", "launch_in_space_n2x"],
-};
-
 const PORTAL_TARGETS = {
   brain: SITE_TARGETS.maxx,
   ball: SITE_TARGETS.meetJoz,
@@ -115,7 +109,7 @@ function collectAliasesForMesh(mesh, worldMap, worldMemory) {
   return Array.from(aliases).filter(Boolean);
 }
 
-function getAllowedActions(currentPortal, agentContext) {
+function getAllowedActions(currentPortal, currentMesh, agentContext) {
   const structured = Array.isArray(agentContext?.structuredAvailableActions)
     ? agentContext.structuredAvailableActions.map((value) => normalizeAction(value) || normalizeToken(value)).filter(Boolean)
     : null;
@@ -125,7 +119,12 @@ function getAllowedActions(currentPortal, agentContext) {
 
   if (structured?.length) return new Set(structured);
   if (explicit?.length) return new Set(explicit);
-  return new Set(DEFAULT_ALLOWED_ACTIONS[currentPortal] || []);
+  return new Set(
+    getAllowedActionsForPortalState(currentPortal, {
+      meetJozLayer: normalizeMeshName(currentMesh),
+      includeUtilityActions: false,
+    })
+  );
 }
 
 function resolveStructuredTransition(clean, allowedActions, structuredState) {
@@ -260,7 +259,7 @@ function buildInteractiveCandidates(currentPortal, worldMap, worldMemory, agentC
 }
 
 export function resolveAgenticAction({ clean, currentPortal, currentMesh, agentContext, worldMap, worldMemory }) {
-  const allowedActions = getAllowedActions(currentPortal, agentContext);
+  const allowedActions = getAllowedActions(currentPortal, currentMesh, agentContext);
   const structuredTransition = resolveStructuredTransition(clean, allowedActions, agentContext?.structuredState);
   if (structuredTransition) return structuredTransition;
 
