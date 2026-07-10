@@ -33,6 +33,54 @@ import { resolveAgenticAction } from "./world-agent.js";
 import { approveAgentProposal, buildAgentSnapshot, buildFallbackAgentReply } from "./full-agent.js";
 import { buildReasoningLayers } from "./reasoning-layers.js";
 
+const JOZ_LLM_IDENTITY = {
+  name: "Joz LLM",
+  role: "Hiring-focused AI agent for Jozef Krupa",
+  website: "meetjoz.com",
+  email: "joz@meetjoz.com",
+};
+
+const JOZ_LLM_CV = {
+  headline: "Agentic AI architecture and applied AI innovation leader",
+  summary: [
+    "Jozef Krupa builds production-minded agentic AI systems, multimodal interfaces, and world-aware interaction architectures.",
+    "His work spans agentic reasoning, memory, structured world graphs, behavioral telemetry, NLP, voice AI, computer vision, spatial computing, and XR.",
+    "He combines strong product thinking with technical implementation and can translate AI capability into deployable systems and stakeholder value.",
+  ],
+  strengths: [
+    "Agentic AI architecture and orchestration",
+    "Time-series and anomaly-detection thinking",
+    "Digital-twin framing for operational decision support",
+    "Python and SQL fluent AI prototyping environments",
+    "Production AI systems with monitoring, iteration, and observability",
+    "Executive and cross-functional communication",
+  ],
+  experience: [
+    "Architected financial AI agents with live data and portfolio-aware logic.",
+    "Built spatial AI, volumetric UI, and multimodal interaction systems across enterprise and innovation environments.",
+    "Led AI-informed experience architecture across regulated and high-scale environments in Asia Pacific, Europe, and the Middle East.",
+    "Designed world-aware interaction systems that connect telemetry, context, memory, and predictive decision flows.",
+  ],
+};
+
+function buildJozLlmSystemPrompt() {
+  return [
+    "You are Joz LLM, a hiring-focused AI agent representing Jozef Krupa.",
+    "Your job is to explain Joz's fit for a role using concrete evidence, precise reasoning, and concise language.",
+    "Be direct, credible, and specific. Avoid hype, filler, and generic recruiting language.",
+    "Frame answers in terms of applied AI, production systems, measurable value, technical depth, and transferability to the target role.",
+    "If the user asks about fit, strengths, first 90 days, anomaly detection, time-series analysis, digital twins, or AI stack, answer as a high-signal hiring conversation.",
+  ].join(" ");
+}
+
+function buildJozLlmContext(runtime = {}) {
+  return {
+    identity: JOZ_LLM_IDENTITY,
+    cv: JOZ_LLM_CV,
+    runtime,
+  };
+}
+
 
 dotenv.config();
 
@@ -228,6 +276,114 @@ app.post("/api/agentic", async (req, res) => {
 // 3️⃣ AI Reasoning Endpoint
 // ------------------------------------------------------------
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+function buildJozLlmFallbackReply(message = "") {
+  const clean = String(message || "").trim().toLowerCase();
+
+  if (clean.includes("fit") || clean.includes("match") || clean.includes("why")) {
+    return [
+      "Joz is a strong fit where applied AI has to move beyond concept and into operational value.",
+      "His strongest overlap is in agentic AI architecture, production-minded AI systems, predictive decision logic, behavioral telemetry, multimodal intelligence, and translating complex technical ideas into deployable products.",
+      "The direct data-science fit is strongest around anomaly thinking, forecasting logic, continuous-signal interpretation, Python-led prototyping, SQL-fluent enterprise environments, and production AI orchestration.",
+    ].join("\n\n");
+  }
+
+  if (
+    clean.includes("time-series") ||
+    clean.includes("timeseries") ||
+    clean.includes("signal") ||
+    clean.includes("anomaly")
+  ) {
+    return [
+      "Joz's strongest angle here is structured applied intelligence over continuous signals and decision flows.",
+      "That maps well to time-series analysis, anomaly detection, and process-state reasoning because he has built systems around live telemetry, predictive logic, multimodal interaction, and dynamic context.",
+      "For an industrial setting, the right approach is drift-aware baselines, multivariate anomaly scoring, change-point detection, operator-facing explanations, and retraining or monitoring loops tied to outcomes.",
+    ].join("\n\n");
+  }
+
+  if (clean.includes("90 days") || clean.includes("first 90") || clean.includes("ramp")) {
+    return [
+      "In the first 30 days, Joz would map the data sources, stakeholders, process bottlenecks, and the current AI or analytics stack.",
+      "By day 60, he would establish a first anomaly-detection or predictive-monitoring use case with clear assumptions, metrics, and observability.",
+      "By day 90, he would aim to ship one production-ready pilot with versioned code, monitoring hooks, stakeholder visibility, and a retraining plan.",
+    ].join("\n\n");
+  }
+
+  if (clean.includes("digital twin") || clean.includes("manufacturing") || clean.includes("pharma")) {
+    return [
+      "Joz would treat the digital twin as a decision layer, not just a visualization layer.",
+      "That means combining process state, time-series signals, anomaly detection, forecasts, operator context, and model confidence into one operational representation.",
+      "The business value is faster diagnosis, better optimization, earlier warning, and clearer actionability for engineering and science teams.",
+    ].join("\n\n");
+  }
+
+  return [
+    "I am Joz LLM, a separate hiring-focused agent for this app.",
+    "I can explain Joz's fit for applied AI, data science, agentic AI, anomaly detection, time-series monitoring, digital twins, and production ML roles.",
+    "Try asking: Why is Joz a fit for this role? What is his strongest AI evidence? What would he do in the first 90 days?",
+  ].join("\n\n");
+}
+
+app.post("/api/joz-llm", async (req, res) => {
+  try {
+    const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
+    const context = req.body?.context || {};
+    const latestUserMessage =
+      [...messages].reverse().find((entry) => entry?.role === "user")?.content || "";
+
+    if (!String(latestUserMessage || "").trim()) {
+      return res.status(400).json({ error: "Missing user message" });
+    }
+
+    const roleAwareContext = buildJozLlmContext({
+      currentPortal: context?.currentPortal || "root",
+      currentMesh: context?.currentMesh || null,
+      currentMeshStage: context?.currentMeshStage || null,
+      targetRole: context?.targetRole || "Data Scientist",
+    });
+
+    let reply = "";
+
+    if (process.env.OPENAI_API_KEY) {
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          temperature: 0.35,
+          messages: [
+            {
+              role: "system",
+              content: buildJozLlmSystemPrompt(),
+            },
+            {
+              role: "system",
+              content: JSON.stringify(roleAwareContext),
+            },
+            ...messages.slice(-8).map((entry) => ({
+              role: entry.role === "assistant" ? "assistant" : "user",
+              content: String(entry.content || ""),
+            })),
+          ],
+        });
+
+        reply = String(response.choices?.[0]?.message?.content || "").trim();
+      } catch (error) {
+        console.error("⚠️ /api/joz-llm model call failed:", error?.message || error);
+      }
+    }
+
+    if (!reply) {
+      reply = buildJozLlmFallbackReply(latestUserMessage);
+    }
+
+    return res.json({
+      reply,
+      mode: process.env.OPENAI_API_KEY ? "model_or_fallback" : "fallback",
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 function inferStructuredStateKey(currentPortal, currentMesh) {
   if (currentPortal === "root") return "root";
