@@ -359,6 +359,92 @@ function getPool() {
   return pool;
 }
 
+async function runQuery(text, params = []) {
+  const db = getPool();
+  if (!db) return { rows: [] };
+  return db.query(text, params);
+}
+
+export async function getPrimaryJozProfile() {
+  const result = await runQuery(
+    `SELECT id, slug, display_name, label, headline, summary, website_url, email, phone, location
+     FROM joz_profiles
+     WHERE is_primary = TRUE
+     ORDER BY id ASC
+     LIMIT 1`
+  );
+  return result.rows[0] || null;
+}
+
+export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8) {
+  const primaryCategory = String(intentMode || "skills").trim().toLowerCase();
+  const categoriesByIntent = {
+    business_need: ["business_need", "case_study", "proof", "bio", "faq"],
+    mindset: ["mindset", "case_study", "proof", "bio", "faq"],
+    skills: ["skills", "case_study", "proof", "bio", "faq"],
+    booking: ["booking", "proof", "bio", "faq"],
+  };
+  const categories =
+    categoriesByIntent[primaryCategory] ||
+    [primaryCategory, "case_study", "proof", "bio", "faq"];
+  const result = await runQuery(
+    `SELECT title, category, summary, body, metadata
+     FROM joz_documents
+     WHERE category = ANY($1::text[])
+     ORDER BY
+       CASE
+         WHEN category = $2 THEN 0
+         WHEN COALESCE(metadata->>'lane', '') = $2 THEN 1
+         WHEN category = 'proof' THEN 2
+         WHEN category = 'bio' THEN 3
+         WHEN category = 'faq' THEN 4
+         ELSE 5
+       END,
+       updated_at DESC,
+       id ASC
+     LIMIT $3`,
+    [categories, primaryCategory, limit]
+  );
+  return result.rows;
+}
+
+export async function createJozConversation({
+  profileId,
+  sessionKey = null,
+  intentMode = null,
+  context = {},
+}) {
+  if (!profileId) return null;
+  const result = await runQuery(
+    `INSERT INTO joz_conversations (profile_id, session_key, intent_mode, context, last_message_at)
+     VALUES ($1, $2, $3, $4::jsonb, NOW())
+     RETURNING id`,
+    [profileId, sessionKey, intentMode, JSON.stringify(context || {})]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function appendJozMessage({
+  conversationId,
+  role,
+  content,
+  messageKind = "chat",
+  metadata = {},
+}) {
+  if (!conversationId || !role || !content) return;
+  await runQuery(
+    `INSERT INTO joz_messages (conversation_id, role, message_kind, content, metadata)
+     VALUES ($1, $2, $3, $4, $5::jsonb)`,
+    [conversationId, role, messageKind, content, JSON.stringify(metadata || {})]
+  );
+  await runQuery(
+    `UPDATE joz_conversations
+     SET last_message_at = NOW(), updated_at = NOW()
+     WHERE id = $1`,
+    [conversationId]
+  );
+}
+
 async function seedWorldModel(db) {
   for (const [portalKey, name, route, summary] of WORLD_MODEL_SEED.portals) {
     await db.query(

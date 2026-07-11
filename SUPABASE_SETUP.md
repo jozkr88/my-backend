@@ -7,6 +7,7 @@ This backend can use Supabase Postgres directly through a standard Postgres conn
 - Create a Supabase project.
 - In Supabase, open the SQL editor.
 - Run [supabase-schema.sql](/Users/jozzox/Downloads/xq/server/supabase-schema.sql).
+- Then run [joz-llm-seed.sql](/Users/jozzox/Downloads/xq/server/joz-llm-seed.sql).
 
 ### 2. Add environment variables
 
@@ -30,6 +31,7 @@ If the DB connection is present, the server will:
 
 - use Postgres for `meet-joz` transitions first
 - log reasoning decisions into `reasoning_events`
+- have the initial Joz LLM profile, button-lane capabilities, and seeded knowledge documents available
 - fall back to file memory if no DB URL is set
 
 ### Notes
