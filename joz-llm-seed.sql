@@ -118,9 +118,9 @@ CROSS JOIN (
       'skills-data-science',
       'Data Science and Signal Reasoning',
       'skills',
-      'Joz strengths relevant to anomaly detection, time-series reasoning, and decision-grade operational intelligence.',
-      'Joz is a strong fit for noisy data, changing conditions, and systems that have to separate weak signal from real operational change. He can frame the problem, shape the signal logic, and connect the output to monitoring, explanation, and action.\n\nThat makes his data-science profile stronger than pure modeling alone. He thinks about the full decision system around the model.\n\nThis lane should help hiring managers feel the fit quickly.',
-      '{"lane":"skills","tags":["data_science","time_series","anomaly_detection","mlops"]}'
+      'Joz strengths relevant to signal reasoning, operational sensing, and decision-grade intelligence systems.',
+      'Joz is a strong fit for noisy signals, changing conditions, and systems that have to separate weak signal from meaningful operational change. Joz frames the problem, shapes the signal logic, and connects the output to monitoring, explanation, and action.\n\nJoz is positioned through agentic AI and applied intelligence framed around the full decision system.\n\nThis lane should help hiring managers feel the fit quickly.',
+      '{"lane":"skills","tags":["signal_reasoning","operational_intelligence","agentic_ai","observability"]}'
     ),
     (
       'business-need-signal-discovery',
@@ -262,9 +262,9 @@ CROSS JOIN (
       'skills-methods-and-modeling',
       'Methods and Modeling',
       'skills',
-      'The modeling range Joz can speak to when the problem requires applied machine learning rather than generic AI language.',
-      'Joz can reason across classical machine learning, predictive modeling, feature design, anomaly detection, signal extraction, model evaluation, and deployment tradeoffs. He is especially strong when the modeling choice has to fit operational constraints rather than exist in isolation.\n\nThis means he can discuss the technical route with credibility while still keeping the answer tied to workflow and business value.\n\nThis lane should help the agent sound technically grounded when the user probes for real data-science depth.',
-      '{"lane":"skills","tags":["modeling","feature_engineering","evaluation","ml"]}'
+      'The technical range Joz can speak to when a problem requires applied intelligence depth rather than generic AI language.',
+      'Joz can reason across signal extraction, retrieval design, context engineering, decision logic, evaluation, interfaces, and deployment tradeoffs. Joz is especially strong when the technical choice has to fit workflow, trust, and operational constraints rather than exist in isolation.\n\nThis means Joz can discuss the technical route with credibility while keeping the answer tied to architecture, orchestration, and business value.\n\nThis lane should help the agent sound technically grounded when the user probes for real applied AI depth.',
+      '{"lane":"skills","tags":["applied_intelligence","context_engineering","evaluation","agentic_ai"]}'
     ),
     (
       'skills-python-and-systems',
@@ -279,7 +279,7 @@ CROSS JOIN (
       'Applied Fit: Anomaly and Forecasting',
       'skills',
       'Why Joz is a particularly strong fit for anomaly detection, forecasting, and process-intelligence problems.',
-      'Joz is strongest where signal quality is imperfect, the environment changes over time, and the model output has to trigger a meaningful operational response. That makes him a strong fit for anomaly detection, forecasting, process monitoring, and decision-support systems.\n\nThe value is not only in spotting a pattern. It is in designing the surrounding logic so the pattern becomes usable in the real world.\n\nThis lane should be used whenever the user is testing fit for deeper applied data-science work.',
+      'Joz is strongest where signal quality is imperfect, the environment changes over time, and the system output has to trigger a meaningful operational response. That makes Joz a strong fit for anomaly detection, forecasting, process monitoring, and decision-support systems.\n\nThe value is not only in spotting a pattern. It is in designing the surrounding logic so the pattern becomes usable in the real world.\n\nThis lane should be used whenever the user is testing fit for deeper applied AI and signal-system work.',
       '{"lane":"skills","tags":["anomaly_detection","forecasting","process_monitoring","fit"]}'
     ),
     (
@@ -359,7 +359,7 @@ CROSS JOIN (
       'Lane Prompt Guide',
       'faq',
       'A short guide to the best prompts for each of the three core Joz LLM lanes.',
-      'For Business Value, strong prompts ask what should be built, how a vague need should be reframed, or what commercial opportunity exists inside a messy process. For Mindset, strong prompts ask how Joz thinks under ambiguity, how he designs for trust, or how he reduces complexity. For Skills, strong prompts ask about anomaly detection, forecasting, applied AI architecture, Python systems, or production readiness.\n\nThis FAQ helps the model keep users inside the strongest prompt space for each button.',
+      'For Business Value, strong prompts ask what should be built, how a vague need should be reframed, or what commercial opportunity exists inside a messy process. For Mindset, strong prompts ask how Joz thinks under ambiguity, how Joz designs for trust, or how Joz reduces complexity. For Skills, strong prompts ask about agentic AI architecture, orchestration, signal reasoning, Python systems, or production readiness.\n\nThis FAQ helps the model keep users inside the strongest prompt space for each button.',
       '{"supporting":true,"tags":["faq","lane_prompts","usage"]}'
     ),
     (
@@ -367,7 +367,7 @@ CROSS JOIN (
       'How to Use Joz LLM',
       'faq',
       'What kinds of questions Joz LLM should answer best.',
-      'Joz LLM is best used for four kinds of conversation: understanding a business need, exploring Joz mindset, validating his skills, and moving toward a booking or hiring step.\n\nStrong questions include: What would Joz build here? Why is Joz a fit for this problem? How does Joz think about anomaly detection, AI systems, or product architecture? What is the best next engagement format?\n\nThis FAQ helps keep the agent focused and high-signal.',
+      'Joz LLM is best used for four kinds of conversation: understanding a business need, exploring Joz mindset, validating Joz skills, and moving toward a booking or hiring step.\n\nStrong questions include: What would Joz build here? Why is Joz a fit for this problem? How does Joz think about agentic AI systems, orchestration, or product architecture? What is the best next engagement format?\n\nThis FAQ helps keep the agent focused and high-signal.',
       '{"supporting":true,"tags":["faq","usage","agent_scope"]}'
     )
 ) AS seed(slug, title, category, summary, body, metadata)

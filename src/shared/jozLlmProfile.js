@@ -48,13 +48,13 @@ export const JOZ_LLM_CV = {
       "Cross-functional translation from design to engineering to executive buy-in",
       "Accessibility, trust, and production-grade experience quality",
     ],
-    dataScience: [
-      "Classical ML framing and model selection",
-      "Anomaly detection and predictive decision logic",
-      "Time-series reasoning and continuous-signal interpretation",
+    signalSystems: [
+      "Signal reasoning and continuous-signal interpretation",
+      "Operational sensing, detection logic, and decision support",
       "Python-led prototyping and production service thinking",
       "SQL, APIs, orchestration, and model-informed UX",
-      "Applied experimentation and measurable operating outcomes",
+      "Telemetry, feedback loops, and measurable operating outcomes",
+      "System framing that connects signals, interfaces, and action",
     ],
   },
   experience: [
@@ -134,32 +134,32 @@ export const JOZ_LLM_CV = {
 
 export const TARGET_DATA_SCIENTIST_ROLE = {
   company: null,
-  title: "Advanced Data Scientist",
-  location: "Industrial / regulated environment",
+  title: "Agentic AI Architecture and Applied Intelligence Lead",
+  location: "Signal-rich / regulated environment",
   mission:
-    "Turn complex operational data into actionable insights through AI/ML, predictive monitoring, and AI-enabled digital twins.",
+    "Turn complex signals, workflows, and interfaces into agentic AI systems that produce actionable decisions and operational intelligence.",
   responsibilities: [
-    "Build and deploy AI/ML models for forecasting, anomaly detection, and process optimization.",
-    "Write packaged, versioned, testable Python code with CI/CD and production observability.",
-    "Work with continuous datasets, time-series analysis, and signal processing.",
-    "Collaborate with engineers, scientists, operators, and IT.",
-    "Create dashboards and visualizations for technical and non-technical stakeholders.",
+    "Architect and ship agentic AI systems with retrieval, orchestration, and production observability.",
+    "Write packaged, versioned, testable Python and service-layer code with clear interfaces.",
+    "Work across continuous signals, telemetry, multimodal inputs, and operational workflows.",
+    "Collaborate with engineers, operators, product leaders, and executive stakeholders.",
+    "Design decision surfaces that make intelligence legible, trusted, and usable.",
   ],
   requirements: [
-    "Classical ML including KNN, SVM, Random Forest, and GBMs",
-    "Deep learning including CNNs, RNNs, GRU, autoencoders",
-    "Time-series and signal processing on noisy, high-dimensional data",
-    "Python and SQL proficiency",
-    "Databricks, MLflow, AWS, or adjacent MLOps exposure",
-    "Strong communication of technical insights",
+    "Agentic AI architecture, orchestration, and context engineering",
+    "LLMs, RAG, embeddings, vector search, and retrieval systems",
+    "Signal reasoning across noisy, high-dimensional operational contexts",
+    "Python, SQL, APIs, and production systems fluency",
+    "Observability, governance, and workflow-aware deployment judgment",
+    "Strong communication of technical and strategic decisions",
   ],
 };
 
 export const JOZ_LLM_SUGGESTIONS = [
   "Why is Joz a fit for this role?",
   "Map Joz to the job description",
-  "Show evidence for time-series and ML",
-  "How would Joz design anomaly detection for industrial data?",
+  "Show evidence for agentic AI and orchestration",
+  "How would Joz design an agentic AI system for a signal-rich environment?",
   "What would Joz do in the first 90 days?",
 ];
 
@@ -186,7 +186,7 @@ const JOZ_REFERENCE_REWRITES = [
 export function buildJozLlmSystemPrompt() {
   return [
     "You are Joz LLM, an elite role-aware hiring agent representing Jozef Krupa.",
-    "Your job is to translate Joz's real background into precise, evidence-based answers for an advanced data-science role focused on operational data, anomaly detection, predictive monitoring, and digital twins.",
+    "Your job is to translate Joz's real background into precise, evidence-based answers focused on agentic AI architecture, applied intelligence systems, multimodal orchestration, and signal-rich operational environments.",
     "Always refer to the subject as Joz.",
     "Never use first-person language such as I, me, my, or mine.",
     "Never use third-person pronouns such as he, him, his, or he's.",
@@ -200,7 +200,7 @@ export function buildJozLlmSystemPrompt() {
     "If the user asks about education, qualifications, regions, or career background, answer directly from the provided profile instead of saying the information is unavailable.",
     "Do not invent employers, degrees, models shipped, or production claims beyond the provided profile.",
     "When there is a gap, position it honestly as adjacent strength plus a concrete ramp plan.",
-    "Bias toward applied AI, data science, time-series, anomaly detection, MLOps, production engineering, and measurable impact.",
+    "Bias toward agentic AI, applied AI architecture, orchestration, multimodal intelligence, production engineering, observability, and measurable impact.",
     "Avoid generic motivational language and avoid sounding like a chatbot.",
   ].join(" ");
 }
@@ -265,7 +265,7 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("match") ||
     clean.includes("why")
   ) {
-    return "Joz is strongest where AI has to work under real constraints. Joz's edge is agentic systems, anomaly thinking, signal interpretation, Python-led delivery, and production-minded architecture.";
+    return "Joz is strongest where AI has to work under real constraints. Joz's edge is agentic systems, signal interpretation, orchestration quality, Python-led delivery, and production-minded architecture.";
   }
 
   if (
@@ -274,7 +274,7 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("signal") ||
     clean.includes("anomaly")
   ) {
-    return "Joz is strongest in structured intelligence over continuous signals. That maps well to time-series reasoning, anomaly detection, process-state interpretation, and monitored retraining loops.";
+    return "Joz is strongest in structured intelligence over continuous signals. That maps well to signal reasoning, process-state interpretation, detection logic, and monitored decision loops.";
   }
 
   if (
@@ -293,5 +293,5 @@ export function buildJozLlmFallbackReply(message = "") {
     return "A digital twin should be a decision layer, not just a visual one. It should combine process state, anomaly signals, forecasts, and model confidence to drive faster diagnosis and clearer action.";
   }
 
-  return "Joz LLM can explain Joz's fit, show AI evidence, and outline how Joz would approach anomaly detection, time-series monitoring, and digital twins.";
+    return "Joz LLM can explain Joz's fit, show agentic AI evidence, and outline how Joz would approach signal-rich systems, orchestration, and operational intelligence.";
 }
