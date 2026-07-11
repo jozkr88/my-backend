@@ -67,16 +67,16 @@ export const JOZ_LLM_LANES = {
     retrievalCategories: ["skills", "case_study", "proof", "bio", "faq"],
     actions: [
       {
+        label: "Open Skills PDF",
+        href: "/documents/joz-agentic-ai-skills.pdf",
+      },
+      {
         label: "Show AI strengths",
-        prompt: "Show Joz's strongest agentic AI systems and orchestration capabilities.",
+        prompt: "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context.",
       },
       {
-        label: "Explain signal fit",
-        prompt: "Why is Joz strong for signal reasoning, anomaly detection, and time-series problem solving?",
-      },
-      {
-        label: "What can Joz build?",
-        prompt: "What can Joz architect and build technically in an advanced AI environment?",
+        label: "Agentic UX",
+        prompt: "Explain Joz's strongest agentic UX orchestration capabilities, with emphasis on multimodal systems, spatial interfaces, and company scale.",
       },
     ],
   },
