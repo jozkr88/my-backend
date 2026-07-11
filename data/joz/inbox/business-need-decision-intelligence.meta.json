@@ -1,0 +1,78 @@
+{
+  "slug": "business-need-decision-intelligence",
+  "title": "Enterprise Decision Intelligence",
+  "category": "capability",
+  "lane": "business_need",
+  "summary": "How Joz turns data, knowledge, and operational signals into clearer priorities and faster decisions.",
+  "tags": [
+    "decision-intelligence",
+    "signals",
+    "executive-intelligence",
+    "context",
+    "prioritisation"
+  ],
+  "impact_score": 96,
+  "priority_label": "high",
+  "verification": "capability_supported",
+  "claims": [
+    "Joz designs systems that distinguish material signals from organisational noise.",
+    "Decision intelligence combines retrieval, context, evidence, confidence, business impact, and recommended action.",
+    "The goal is not more dashboards but better decisions and faster execution."
+  ],
+  "proof_points": [
+    "Current focus on context engineering, RAG, agent memory, retrieval, verification, and AI governance.",
+    "Long-term experience translating complex information into usable enterprise products.",
+    "Transformation work across executives, regional teams, national media, banking, and government."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Mediacorp",
+    "Maybank",
+    "Manulife",
+    "Erste Bank",
+    "Dubai Future Foundation"
+  ],
+  "problems": [
+    "data_silos",
+    "knowledge_fragmentation",
+    "low_trust",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "signal_over_noise"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "agent_memory",
+    "context_engineering",
+    "decision_intelligence",
+    "rag",
+    "verification"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "knowledge_reuse",
+    "productivity_gains"
+  ],
+  "governance": [
+    "access_control",
+    "confidence_handling",
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth"
+  ]
+}

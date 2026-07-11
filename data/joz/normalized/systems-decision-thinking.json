@@ -1,0 +1,56 @@
+{
+  "slug": "systems-decision-thinking",
+  "title": "Decision Thinking",
+  "category": "decision_pattern",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Decision quality matters more than information volume.",
+  "body": "Joz evaluates systems through the lens of decisions.\n\nKey questions include:\n\n- What decision is being made?\n- Who owns it?\n- What information supports it?\n- How trustworthy is the information?\n- What happens if the decision is wrong?\n- How quickly can the organization act?\n\nMany organizational problems appear to be technology problems but are actually decision problems.\n\nImproving decision quality often creates disproportionate business value.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "decisions",
+      "leadership",
+      "prioritisation"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "impact_score": 96,
+    "priority_label": "high",
+    "source_filename": "systems-decision-thinking.md",
+    "source_meta_filename": "systems-decision-thinking.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "organizational_complexity",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "signal_over_noise"
+    ],
+    "capabilities": [
+      "decision_intelligence"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "slug": "business-need-buyer-faq",
+  "title": "Business Need Buyer FAQ",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Compact buyer and recruiter answers for value, ROI, differentiation, delivery, and fit questions.",
+  "body": "Q: Why hire Joz?\nA: Hire Joz when the organisation needs to connect AI, data, workflows, governance, and human decision-making into a measurable operating capability.\n\nQ: Where is the ROI?\nA: In revenue growth, productivity, cost reduction, faster decisions, lower risk, and higher adoption. The exact value should be based on a measured baseline and target.\n\nQ: What problems can Joz solve?\nA: Fragmented knowledge, slow decisions, unclear AI priorities, low adoption, governance gaps, repeated manual work, disconnected customer signals, and weak translation between strategy and implementation.\n\nQ: What makes Joz different?\nA: He combines Agentic AI architecture with enterprise product, engineering, transformation, governance, and human-centred adoption experience.\n\nQ: Is Joz a consultant or builder?\nA: He can operate across problem framing, architecture, prototyping, stakeholder alignment, implementation guidance, and evaluation.\n\nQ: How quickly can value be shown?\nA: A focused prototype can test the value hypothesis early, but timing depends on data access, workflow complexity, integration, and governance requirements.\n\nQ: Does Joz guarantee ROI?\nA: No credible leader should guarantee ROI before discovery. Joz can define the value model, assumptions, baseline, target metrics, and verification approach.\n\nQ: Is Joz suitable for enterprise AI transformation?\nA: Yes, particularly where business, product, technical, governance, and organisational concerns must be handled together.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "buyer",
+      "faq",
+      "fit",
+      "recruiter",
+      "roi"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [
+      "The Business Need lane should answer in business language before technical language.",
+      "Answers should be concise, evidence-based, and explicit about assumptions.",
+      "Joz's differentiation is the combination of AI architecture, enterprise transformation, human adoption, governance, and measurable outcomes."
+    ],
+    "proof_points": [
+      "Enterprise outcomes across financial services, national media, public systems, and technology.",
+      "Current Agentic AI, RAG, context engineering, governance, and decision-intelligence capability."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "impact_score": 91,
+    "priority_label": "high",
+    "source_filename": "business-need-buyer-faq.md",
+    "source_meta_filename": "business-need-buyer-faq.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "knowledge_fragmentation",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "ai_governance",
+      "decision_intelligence"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_risk"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "financial_services",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 3
+  }
+}

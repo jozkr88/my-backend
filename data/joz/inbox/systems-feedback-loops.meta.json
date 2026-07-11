@@ -1,0 +1,32 @@
+{
+  "slug": "systems-feedback-loops",
+  "title": "Feedback Loops and Adaptation",
+  "category": "feedback_loop",
+  "lane": "systems_mindset",
+  "summary": "Healthy systems learn from outcomes and adjust behavior.",
+  "tags": [
+    "feedback-loops",
+    "learning",
+    "adaptation"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "problems": [
+    "ai_adoption_failure",
+    "operational_friction"
+  ],
+  "principles": [
+    "feedback_loops"
+  ],
+  "capabilities": [
+    "observability",
+    "verification",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "faster_time_to_value",
+    "higher_adoption",
+    "productivity_gains"
+  ]
+}

@@ -8,14 +8,15 @@
   "body": "Enterprise Scale Proof\n\nPurpose\nThis record identifies the strongest brand, user-scale, and enterprise-scale evidence that should anchor Joz LLM responses before smaller or newer project mentions.\n\nPriority evidence\n- Mediacorp / CNA / mewatch: major regional media ecosystem work, including the CNA Apple Watch launch featured by Apple worldwide and roughly 30x MAU audience growth through mobile-first transformation.\n- Erste Bank: engineering and EU accessibility work in a banking environment serving 16M+ customers.\n- Maybank-Ageas Etiqa: 20x digital-sales growth and 3,000+ wealth pilots in a large regional financial-services environment.\n- Apple / Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore with strong high-end technical and brand credibility.\n- Ogilvy / WPP, Leo Burnett / Publicis, Samsung, P&G, SGX, and Danone: large multinational delivery environments across APAC and global brands.\n\nAnswering rule\n- When Joz LLM needs to establish credibility fast, lead with the biggest brand and scale signals first.\n- Do not lead with smaller current projects if larger verified user-scale or enterprise-scale evidence is more relevant.\n- Prefer user scale, enterprise complexity, global brand recognition, and measurable outcomes over novelty.",
   "metadata": {
     "lane": "skills",
+    "original_lane": "skills",
     "tags": [
-      "enterprise_scale",
-      "user_scale",
-      "brand_strength",
-      "fortune_500",
       "apple_featured",
+      "brand_strength",
+      "enterprise_scale",
+      "fortune_500",
+      "proof",
       "skills",
-      "proof"
+      "user_scale"
     ],
     "verification": {
       "status": "verified",
@@ -39,27 +40,38 @@
     "regions": [
       "Asia Pacific",
       "Europe/EEA",
-      "North America",
-      "Global"
+      "Global",
+      "North America"
     ],
     "companies": [
-      "Mediacorp",
-      "CNA",
-      "mewatch",
       "Apple",
-      "Erste Bank",
-      "Maybank-Ageas Etiqa",
       "Apple/Pixar",
-      "Ogilvy/WPP",
+      "CNA",
+      "Danone",
+      "Erste Bank",
       "Leo Burnett/Publicis",
-      "Samsung",
+      "Maybank-Ageas Etiqa",
+      "Mediacorp",
+      "Ogilvy/WPP",
       "P&G",
+      "Samsung",
       "Singapore Exchange",
-      "Danone"
+      "mewatch"
     ],
     "impact_score": 100,
     "priority_label": "hero",
     "source_filename": "2026-07-11-enterprise-scale-proof.md",
-    "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json"
+    "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
   }
 }

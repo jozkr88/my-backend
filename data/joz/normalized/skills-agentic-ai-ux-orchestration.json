@@ -1,0 +1,105 @@
+{
+  "slug": "skills-agentic-ai-ux-orchestration",
+  "title": "Agentic AI UX Orchestration",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Human-agent interaction, multimodal systems, spatial AI, behavioural signals, and decision-oriented AI experience design.",
+  "body": "Joz's Agentic AI UX Orchestration capability focuses on how people understand, trust, direct, and collaborate with intelligent systems.\n\nThe capability includes context-aware multimodal interaction across voice, touch, gesture, gaze, haptics, computer vision, and volumetric interfaces. It also includes telemetry and behavioural signals that feed agentic feedback loops, intent modelling, semantic retrieval, personalisation, and anticipatory or autonomous decision support.\n\nThis capability should be presented as an evolution of Joz's enterprise interaction architecture career. His experience designing systems for large user populations gives him a strong foundation for designing AI that fits real human workflows rather than forcing users to adapt to the model.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai-ux",
+      "computer-vision",
+      "multimodal",
+      "personalisation",
+      "spatial-computing",
+      "voice"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz designs context-aware multimodal interactions across voice, touch, gesture, gaze, haptics, and spatial interfaces.",
+      "He maps real-time signals and behavioural data to human mental models and agentic feedback loops.",
+      "His earlier UX and engineering career is a foundation for trusted human-agent orchestration."
+    ],
+    "proof_points": [
+      "Spatial AI and volumetric 3D interface work for Versace/SOA and ArtKorero.",
+      "Python USD(z) and Computer Vision work connected to Apple/Pixar workflows.",
+      "Large-scale interaction architecture across Mediacorp, Maybank, Manulife, Publicis, and Ogilvy."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Dubai",
+      "Silicon Valley",
+      "Singapore"
+    ],
+    "companies": [
+      "Apple",
+      "ArtKorero",
+      "Manulife",
+      "Maybank",
+      "Mediacorp",
+      "Pixar",
+      "Versace"
+    ],
+    "impact_score": 92,
+    "priority_label": "high",
+    "source_filename": "skills-agentic-ai-ux-orchestration.md",
+    "source_meta_filename": "skills-agentic-ai-ux-orchestration.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "manual_knowledge_work",
+      "operational_friction"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "computer_vision",
+      "multimodal_ai",
+      "product_strategy",
+      "rapid_prototyping",
+      "spatial_ai",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption",
+      "productivity_gains"
+    ],
+    "governance": [],
+    "industries": [
+      "creative_services",
+      "media",
+      "spatial_computing",
+      "technology"
+    ],
+    "proofs": [
+      "apple_pixar_cv_workflows",
+      "artkorero_spatial_exhibitions",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction",
+      "versace_spatial_ai_launch"
+    ],
+    "related_proofs": [
+      "apple_pixar_cv_workflows",
+      "artkorero_spatial_exhibitions",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction",
+      "versace_spatial_ai_launch"
+    ],
+    "enterprise_scale_score": 99,
+    "measurable_outcome_count": 3
+  }
+}

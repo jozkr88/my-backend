@@ -1,0 +1,52 @@
+[
+  {
+    "id": "knowledge_fragmentation",
+    "name": "Knowledge Fragmentation",
+    "description": "Critical knowledge is distributed across systems, teams, documents, and individual experts."
+  },
+  {
+    "id": "slow_decision_making",
+    "name": "Slow Decision-Making",
+    "description": "Decisions are delayed by unclear ownership, conflicting evidence, and fragmented information."
+  },
+  {
+    "id": "ai_adoption_failure",
+    "name": "AI Adoption Failure",
+    "description": "AI capabilities are available but are not trusted, integrated, or used consistently."
+  },
+  {
+    "id": "operational_friction",
+    "name": "Operational Friction",
+    "description": "Work is slowed by handoffs, repeated coordination, manual processes, and unclear workflows."
+  },
+  {
+    "id": "data_silos",
+    "name": "Data Silos",
+    "description": "Teams work from disconnected systems and inconsistent information."
+  },
+  {
+    "id": "governance_gaps",
+    "name": "Governance Gaps",
+    "description": "AI systems lack clear controls, accountability, auditability, or human oversight."
+  },
+  {
+    "id": "low_trust",
+    "name": "Low Trust",
+    "description": "Users cannot confidently verify data, recommendations, or AI-generated outputs."
+  },
+  {
+    "id": "manual_knowledge_work",
+    "name": "Manual Knowledge Work",
+    "description": "Employees repeatedly research, summarize, reconcile, and recreate information."
+  },
+  {
+    "id": "unclear_roi",
+    "name": "Unclear ROI",
+    "description": "Technology investment is not connected to a measurable business baseline or outcome."
+  },
+  {
+    "id": "organizational_complexity",
+    "name": "Organizational Complexity",
+    "description": "People, processes, incentives, data, and technology are poorly aligned."
+  }
+]

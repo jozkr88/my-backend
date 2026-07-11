@@ -1,0 +1,818 @@
+{
+  "problems": [
+    {
+      "id": "knowledge_fragmentation",
+      "name": "Knowledge Fragmentation",
+      "description": "Critical knowledge is distributed across systems, teams, documents, and individual experts."
+    },
+    {
+      "id": "slow_decision_making",
+      "name": "Slow Decision-Making",
+      "description": "Decisions are delayed by unclear ownership, conflicting evidence, and fragmented information."
+    },
+    {
+      "id": "ai_adoption_failure",
+      "name": "AI Adoption Failure",
+      "description": "AI capabilities are available but are not trusted, integrated, or used consistently."
+    },
+    {
+      "id": "operational_friction",
+      "name": "Operational Friction",
+      "description": "Work is slowed by handoffs, repeated coordination, manual processes, and unclear workflows."
+    },
+    {
+      "id": "data_silos",
+      "name": "Data Silos",
+      "description": "Teams work from disconnected systems and inconsistent information."
+    },
+    {
+      "id": "governance_gaps",
+      "name": "Governance Gaps",
+      "description": "AI systems lack clear controls, accountability, auditability, or human oversight."
+    },
+    {
+      "id": "low_trust",
+      "name": "Low Trust",
+      "description": "Users cannot confidently verify data, recommendations, or AI-generated outputs."
+    },
+    {
+      "id": "manual_knowledge_work",
+      "name": "Manual Knowledge Work",
+      "description": "Employees repeatedly research, summarize, reconcile, and recreate information."
+    },
+    {
+      "id": "unclear_roi",
+      "name": "Unclear ROI",
+      "description": "Technology investment is not connected to a measurable business baseline or outcome."
+    },
+    {
+      "id": "organizational_complexity",
+      "name": "Organizational Complexity",
+      "description": "People, processes, incentives, data, and technology are poorly aligned."
+    }
+  ],
+  "principles": [
+    {
+      "id": "signal_over_noise",
+      "name": "Signal Over Noise",
+      "description": "More information is not the goal; the goal is clearer prioritization and action."
+    },
+    {
+      "id": "context_creates_intelligence",
+      "name": "Context Creates Intelligence",
+      "description": "Data becomes useful when connected to purpose, history, ownership, confidence, and impact."
+    },
+    {
+      "id": "systems_before_features",
+      "name": "Systems Before Features",
+      "description": "Understand the workflow, incentives, and decision structure before adding technology."
+    },
+    {
+      "id": "trust_before_autonomy",
+      "name": "Trust Before Autonomy",
+      "description": "Autonomy should increase only when evidence, observability, and accountability are credible."
+    },
+    {
+      "id": "human_accountability",
+      "name": "Human Accountability",
+      "description": "AI can support or execute decisions, but responsibility must remain explicit."
+    },
+    {
+      "id": "feedback_loops",
+      "name": "Feedback Loops",
+      "description": "Systems must learn from outcomes and adjust behavior over time."
+    },
+    {
+      "id": "decision_quality",
+      "name": "Decision Quality",
+      "description": "The value of intelligence is measured by the quality and speed of decisions it enables."
+    },
+    {
+      "id": "appropriate_autonomy",
+      "name": "Appropriate Autonomy",
+      "description": "The objective is not maximum automation but the correct balance between agent and human control."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "agentic_ai",
+      "name": "Agentic AI Architecture"
+    },
+    {
+      "id": "rag",
+      "name": "Retrieval-Augmented Generation"
+    },
+    {
+      "id": "context_engineering",
+      "name": "Context Engineering"
+    },
+    {
+      "id": "decision_intelligence",
+      "name": "Decision Intelligence"
+    },
+    {
+      "id": "ai_governance",
+      "name": "AI Governance"
+    },
+    {
+      "id": "knowledge_graphs",
+      "name": "Knowledge Graphs"
+    },
+    {
+      "id": "agent_memory",
+      "name": "Agent Memory"
+    },
+    {
+      "id": "acl_aware_retrieval",
+      "name": "ACL-Aware Retrieval"
+    },
+    {
+      "id": "verification",
+      "name": "Verification Frameworks"
+    },
+    {
+      "id": "observability",
+      "name": "AI Observability"
+    },
+    {
+      "id": "multimodal_ai",
+      "name": "Multimodal AI"
+    },
+    {
+      "id": "computer_vision",
+      "name": "Computer Vision"
+    },
+    {
+      "id": "spatial_ai",
+      "name": "Spatial AI"
+    },
+    {
+      "id": "enterprise_architecture",
+      "name": "Enterprise Architecture"
+    },
+    {
+      "id": "workflow_redesign",
+      "name": "Workflow Redesign"
+    },
+    {
+      "id": "rapid_prototyping",
+      "name": "Rapid AI Prototyping"
+    },
+    {
+      "id": "product_strategy",
+      "name": "Product Strategy"
+    },
+    {
+      "id": "organizational_design",
+      "name": "Organizational Design"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "revenue_growth",
+      "name": "Revenue Growth"
+    },
+    {
+      "id": "higher_adoption",
+      "name": "Higher Adoption"
+    },
+    {
+      "id": "faster_decisions",
+      "name": "Faster Decisions"
+    },
+    {
+      "id": "lower_risk",
+      "name": "Lower Risk"
+    },
+    {
+      "id": "cost_reduction",
+      "name": "Cost Reduction"
+    },
+    {
+      "id": "productivity_gains",
+      "name": "Productivity Gains"
+    },
+    {
+      "id": "lower_operational_friction",
+      "name": "Lower Operational Friction"
+    },
+    {
+      "id": "better_customer_experience",
+      "name": "Better Customer Experience"
+    },
+    {
+      "id": "higher_data_trust",
+      "name": "Higher Data Trust"
+    },
+    {
+      "id": "faster_time_to_value",
+      "name": "Faster Time to Value"
+    },
+    {
+      "id": "knowledge_reuse",
+      "name": "Improved Knowledge Reuse"
+    },
+    {
+      "id": "stronger_governance",
+      "name": "Stronger Governance"
+    }
+  ],
+  "governance": [
+    {
+      "id": "human_approval",
+      "name": "Human Approval"
+    },
+    {
+      "id": "auditability",
+      "name": "Auditability"
+    },
+    {
+      "id": "source_provenance",
+      "name": "Source Provenance"
+    },
+    {
+      "id": "access_control",
+      "name": "Access Control"
+    },
+    {
+      "id": "confidence_handling",
+      "name": "Confidence and Uncertainty Handling"
+    },
+    {
+      "id": "evaluation",
+      "name": "AI Evaluation"
+    },
+    {
+      "id": "observability_control",
+      "name": "Operational Observability"
+    },
+    {
+      "id": "clear_ownership",
+      "name": "Clear Ownership"
+    },
+    {
+      "id": "escalation",
+      "name": "Human Escalation"
+    },
+    {
+      "id": "data_boundaries",
+      "name": "Data Boundaries"
+    }
+  ],
+  "industries": [
+    {
+      "id": "financial_services",
+      "name": "Financial Services"
+    },
+    {
+      "id": "banking",
+      "name": "Banking"
+    },
+    {
+      "id": "insurance",
+      "name": "Insurance"
+    },
+    {
+      "id": "wealth_management",
+      "name": "Wealth Management"
+    },
+    {
+      "id": "media",
+      "name": "Media and Broadcasting"
+    },
+    {
+      "id": "government",
+      "name": "Government and Public Services"
+    },
+    {
+      "id": "technology",
+      "name": "Technology"
+    },
+    {
+      "id": "creative_services",
+      "name": "Creative and Agency Services"
+    },
+    {
+      "id": "retail",
+      "name": "Retail and E-commerce"
+    },
+    {
+      "id": "spatial_computing",
+      "name": "Spatial Computing"
+    }
+  ],
+  "proofs": [
+    {
+      "id": "maybank_digital_sales_growth",
+      "company": "Maybank–Ageas Etiqa",
+      "title": "20× Digital Sales Growth",
+      "description": "Delivered 20× growth in digital sales within 12 months through conversational and machine-learning-enabled experience transformation.",
+      "industries": [
+        "banking",
+        "insurance",
+        "wealth_management"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific"
+      ],
+      "problems": [
+        "operational_friction",
+        "low_trust",
+        "ai_adoption_failure"
+      ],
+      "principles": [
+        "systems_before_features",
+        "context_creates_intelligence",
+        "decision_quality"
+      ],
+      "capabilities": [
+        "product_strategy",
+        "workflow_redesign",
+        "decision_intelligence",
+        "organizational_design"
+      ],
+      "outcomes": [
+        "revenue_growth",
+        "higher_adoption",
+        "better_customer_experience"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 100,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-largest-enterprise-scale-proof",
+        "skills-quantified-business-outcomes"
+      ]
+    },
+    {
+      "id": "mediacorp_audience_growth",
+      "company": "Mediacorp",
+      "title": "30× Monthly Active Audience Growth",
+      "description": "Achieved 30× monthly active audience growth through mobile-first transformation across a national-scale media ecosystem.",
+      "industries": [
+        "media"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific"
+      ],
+      "problems": [
+        "organizational_complexity",
+        "operational_friction",
+        "data_silos"
+      ],
+      "principles": [
+        "systems_before_features",
+        "feedback_loops",
+        "decision_quality"
+      ],
+      "capabilities": [
+        "enterprise_architecture",
+        "product_strategy",
+        "workflow_redesign"
+      ],
+      "outcomes": [
+        "higher_adoption",
+        "better_customer_experience",
+        "revenue_growth"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 99,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-largest-enterprise-scale-proof",
+        "skills-quantified-business-outcomes"
+      ]
+    },
+    {
+      "id": "erste_customer_scale",
+      "company": "Erste Bank",
+      "title": "Engineering and Accessibility at 16M+ Customer Scale",
+      "description": "Drove engineering and European accessibility work across services used by more than 16 million customers.",
+      "industries": [
+        "banking",
+        "financial_services"
+      ],
+      "regions": [
+        "europe"
+      ],
+      "problems": [
+        "organizational_complexity",
+        "low_trust",
+        "operational_friction"
+      ],
+      "principles": [
+        "human_accountability",
+        "systems_before_features"
+      ],
+      "capabilities": [
+        "enterprise_architecture",
+        "workflow_redesign"
+      ],
+      "outcomes": [
+        "better_customer_experience",
+        "lower_risk",
+        "higher_adoption"
+      ],
+      "governance": [
+        "access_control",
+        "clear_ownership"
+      ],
+      "impact_score": 98,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-largest-enterprise-scale-proof",
+        "skills-quantified-business-outcomes"
+      ]
+    },
+    {
+      "id": "manulife_lean_ml_ux",
+      "company": "Manulife",
+      "title": "Lean ML UX Across 11 Markets",
+      "description": "Established a Lean ML UX practice across 11 Asia Pacific markets and advised regional CEOs on digital growth.",
+      "industries": [
+        "insurance",
+        "financial_services",
+        "wealth_management"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific",
+        "usa",
+        "canada"
+      ],
+      "problems": [
+        "ai_adoption_failure",
+        "organizational_complexity",
+        "unclear_roi"
+      ],
+      "principles": [
+        "trust_before_autonomy",
+        "human_accountability",
+        "feedback_loops"
+      ],
+      "capabilities": [
+        "organizational_design",
+        "product_strategy",
+        "decision_intelligence"
+      ],
+      "outcomes": [
+        "higher_adoption",
+        "faster_time_to_value",
+        "better_customer_experience"
+      ],
+      "governance": [
+        "clear_ownership",
+        "human_approval"
+      ],
+      "impact_score": 97,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-largest-enterprise-scale-proof",
+        "skills-career-transition-to-agentic-ai"
+      ]
+    },
+    {
+      "id": "publicis_handoff_reduction",
+      "company": "Leo Burnett/Publicis",
+      "title": "70% Reduction in Handoff Friction",
+      "description": "Reduced agency-wide design-to-engineering handoff friction by 70% through code-based prototyping.",
+      "industries": [
+        "creative_services",
+        "retail"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific"
+      ],
+      "problems": [
+        "operational_friction",
+        "manual_knowledge_work",
+        "organizational_complexity"
+      ],
+      "principles": [
+        "systems_before_features",
+        "feedback_loops"
+      ],
+      "capabilities": [
+        "workflow_redesign",
+        "rapid_prototyping",
+        "enterprise_architecture"
+      ],
+      "outcomes": [
+        "productivity_gains",
+        "cost_reduction",
+        "lower_operational_friction"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 96,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-quantified-business-outcomes"
+      ]
+    },
+    {
+      "id": "marketclue_financial_agents",
+      "company": "MarketClue",
+      "title": "Financial AI Agents with Live Portfolio Context",
+      "description": "Architected financial AI agents using live market data and asset-portfolio context.",
+      "industries": [
+        "financial_services",
+        "wealth_management",
+        "technology"
+      ],
+      "regions": [
+        "usa"
+      ],
+      "problems": [
+        "knowledge_fragmentation",
+        "slow_decision_making",
+        "data_silos"
+      ],
+      "principles": [
+        "context_creates_intelligence",
+        "appropriate_autonomy",
+        "decision_quality"
+      ],
+      "capabilities": [
+        "agentic_ai",
+        "rag",
+        "context_engineering",
+        "agent_memory",
+        "decision_intelligence"
+      ],
+      "outcomes": [
+        "faster_decisions",
+        "higher_data_trust",
+        "productivity_gains"
+      ],
+      "governance": [
+        "source_provenance",
+        "confidence_handling",
+        "evaluation"
+      ],
+      "impact_score": 90,
+      "verification": "project_supported",
+      "source_slugs": [
+        "skills-agentic-ai-architecture",
+        "skills-financial-services-ai",
+        "business-need-decision-intelligence"
+      ]
+    },
+    {
+      "id": "ogilvy_banyan_tree_pitch",
+      "company": "Ogilvy/WPP",
+      "title": "Prototype That Won a Multi-Million-Dollar Pitch",
+      "description": "Built the prototype that won Banyan Tree's multi-million-dollar agency pitch.",
+      "industries": [
+        "creative_services"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific"
+      ],
+      "problems": [
+        "operational_friction",
+        "unclear_roi"
+      ],
+      "principles": [
+        "decision_quality",
+        "systems_before_features"
+      ],
+      "capabilities": [
+        "rapid_prototyping",
+        "product_strategy"
+      ],
+      "outcomes": [
+        "revenue_growth",
+        "better_customer_experience"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 83,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-quantified-business-outcomes"
+      ]
+    },
+    {
+      "id": "sgx_responsive_portals",
+      "company": "Singapore Stock Exchange",
+      "title": "Responsive Listings Portal Re-Engineering",
+      "description": "Re-engineered the Singapore Stock Exchange's responsive listings portals.",
+      "industries": [
+        "financial_services",
+        "banking"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific"
+      ],
+      "problems": [
+        "data_silos",
+        "operational_friction"
+      ],
+      "principles": [
+        "systems_before_features",
+        "human_accountability"
+      ],
+      "capabilities": [
+        "enterprise_architecture",
+        "workflow_redesign"
+      ],
+      "outcomes": [
+        "better_customer_experience",
+        "lower_risk"
+      ],
+      "governance": [
+        "access_control",
+        "clear_ownership"
+      ],
+      "impact_score": 82,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "business-need-enterprise-proof",
+        "skills-largest-enterprise-scale-proof"
+      ]
+    },
+    {
+      "id": "dff_rapid_ai_prototyping",
+      "company": "Dubai Future Foundation",
+      "title": "Rapid AI Prototyping for Public Innovation",
+      "description": "Rapid-prototyped AI initiatives for Dubai Future Foundation and adjacent UAE innovation work.",
+      "industries": [
+        "government",
+        "technology"
+      ],
+      "regions": [
+        "dubai",
+        "uae",
+        "mena"
+      ],
+      "problems": [
+        "organizational_complexity",
+        "ai_adoption_failure"
+      ],
+      "principles": [
+        "appropriate_autonomy",
+        "feedback_loops"
+      ],
+      "capabilities": [
+        "rapid_prototyping",
+        "agentic_ai",
+        "product_strategy"
+      ],
+      "outcomes": [
+        "faster_time_to_value",
+        "higher_adoption"
+      ],
+      "governance": [
+        "evaluation",
+        "clear_ownership"
+      ],
+      "impact_score": 81,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "skills-agentic-ai-architecture",
+        "business-need-why-hire-joz-now"
+      ]
+    },
+    {
+      "id": "apple_pixar_cv_workflows",
+      "company": "Apple/Pixar-adjacent Work",
+      "title": "Python USD(z) and Computer Vision AI Workflows",
+      "description": "Pioneered Python USD(z) and computer-vision AI workflows in Singapore with Apple/Pixar-adjacent work.",
+      "industries": [
+        "technology",
+        "spatial_computing"
+      ],
+      "regions": [
+        "singapore",
+        "asia_pacific"
+      ],
+      "problems": [
+        "manual_knowledge_work",
+        "organizational_complexity"
+      ],
+      "principles": [
+        "feedback_loops",
+        "context_creates_intelligence"
+      ],
+      "capabilities": [
+        "computer_vision",
+        "spatial_ai",
+        "rapid_prototyping"
+      ],
+      "outcomes": [
+        "productivity_gains",
+        "faster_time_to_value"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 80,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "skills-agentic-ai-ux-orchestration",
+        "skills-technical-platform-stack"
+      ]
+    },
+    {
+      "id": "versace_spatial_ai_launch",
+      "company": "Versace/SOA",
+      "title": "First Spatial AI Launch in Dubai",
+      "description": "Designed and launched spatial AI with volumetric 3D UI in Dubai for Versace/SOA.",
+      "industries": [
+        "technology",
+        "spatial_computing",
+        "creative_services"
+      ],
+      "regions": [
+        "dubai",
+        "uae",
+        "mena"
+      ],
+      "problems": [
+        "ai_adoption_failure",
+        "operational_friction"
+      ],
+      "principles": [
+        "appropriate_autonomy",
+        "systems_before_features"
+      ],
+      "capabilities": [
+        "spatial_ai",
+        "multimodal_ai",
+        "rapid_prototyping"
+      ],
+      "outcomes": [
+        "better_customer_experience",
+        "higher_adoption"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 79,
+      "verification": "cv_supported",
+      "source_slugs": [
+        "skills-agentic-ai-ux-orchestration",
+        "business-need-why-hire-joz-now"
+      ]
+    },
+    {
+      "id": "artkorero_spatial_exhibitions",
+      "company": "ArtKorero",
+      "title": "Spatial AI for World-Class Art Exhibitions",
+      "description": "Pioneered spatial AI for world-class art exhibitions in Dubai through ArtKorero.",
+      "industries": [
+        "spatial_computing",
+        "creative_services"
+      ],
+      "regions": [
+        "dubai",
+        "uae",
+        "mena"
+      ],
+      "problems": [
+        "knowledge_fragmentation",
+        "manual_knowledge_work"
+      ],
+      "principles": [
+        "context_creates_intelligence",
+        "decision_quality"
+      ],
+      "capabilities": [
+        "spatial_ai",
+        "multimodal_ai",
+        "product_strategy"
+      ],
+      "outcomes": [
+        "better_customer_experience",
+        "higher_adoption"
+      ],
+      "governance": [
+        "clear_ownership"
+      ],
+      "impact_score": 78,
+      "verification": "project_supported",
+      "source_slugs": [
+        "skills-agentic-ai-ux-orchestration",
+        "skills-career-transition-to-agentic-ai"
+      ]
+    }
+  ]
+}

@@ -1,11 +1,14 @@
 {
-  "generated_at": "2026-07-11T20:17:27.932Z",
+  "generated_at": "2026-07-11T23:11:42.871Z",
   "counts": {
-    "source_files": 9,
-    "normalized_records": 9,
+    "source_files": 38,
+    "normalized_records": 38,
     "verified_records": 8,
+    "ontology_entities": 80,
+    "proofs": 12,
     "errors": 0
   },
+  "ontology_status": "ok",
   "records": [
     {
       "slug": "2026-07-11-agentic-ai-architecture-proof",
@@ -17,13 +20,14 @@
       "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MarketClue USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
       "metadata": {
         "lane": "skills",
+        "original_lane": "skills",
         "tags": [
           "agentic_ai",
           "architecture",
           "orchestration",
+          "production_ai",
           "rag",
           "retrieval",
-          "production_ai",
           "skills"
         ],
         "verification": {
@@ -45,22 +49,33 @@
           "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
         ],
         "regions": [
-          "North America",
+          "Asia Pacific",
           "Europe/EEA",
+          "North America",
           "Singapore",
-          "UAE/MENA",
-          "Asia Pacific"
+          "UAE/MENA"
         ],
         "companies": [
-          "MarketClue USA",
           "Apple/Pixar",
           "Dubai Future Foundation",
-          "Erste Bank"
+          "Erste Bank",
+          "MarketClue USA"
         ],
         "impact_score": 84,
         "priority_label": "high",
         "source_filename": "2026-07-11-agentic-ai-architecture-proof.md",
-        "source_meta_filename": "2026-07-11-agentic-ai-architecture-proof.meta.json"
+        "source_meta_filename": "2026-07-11-agentic-ai-architecture-proof.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -73,14 +88,15 @@
       "body": "Agentic UX Orchestration Proof\n\nPurpose\nThis record isolates Joz's strongest multimodal, spatial, and agentic UX orchestration capability so the Skills lane can answer clearly when the user is asking about interaction systems rather than core backend AI architecture.\n\nCore positioning\n- Joz combines AI systems thinking with human-centered orchestration across voice, touch, gesture, gaze, haptics, and spatial interfaces.\n- The profile is strongest where AI behavior must map to real human mental models, live telemetry, and operational decision-making.\n\nCapabilities\n- Context-aware multimodal interactions across voice, touch, gesture, gaze, and haptics\n- Telemetry and behavioral data feeding agentic feedback loops\n- Real-time signals mapped to human mental models\n- Volumetric AI interfaces and spatial interaction design\n- NLP and computer-vision-driven personalization with intent modeling and semantic retrieval\n- Anticipatory, predictive, assistive, and autonomous decision-support experiences\n\nProof and context\n- Versace/SOA: first in Dubai to design and launch spatial AI with volumetric 3D UI.\n- ArtKorero: pioneered spatial AI for world-class art exhibitions in Dubai.\n- Mediacorp / CNA: mobile-first product transformation with roughly 30x MAU audience growth and Apple-featured launch credibility.\n- Maybank-Ageas Etiqa: conversational and ML UX tied to 20x digital-sales growth and 3,000+ wealth pilots.\n- Manulife: established a Lean ML UX practice across 11 markets as a founding APAC hire.\n\nAnswering rule\n- When the question is about UX orchestration, multimodal systems, spatial interfaces, or AI behavior in human-facing environments, this record should lead.\n- Keep the answer concrete and capability-led, not abstract design language.",
       "metadata": {
         "lane": "skills",
+        "original_lane": "skills",
         "tags": [
           "agentic_ai_ux",
-          "multimodal",
-          "spatial_ai",
-          "ux_orchestration",
-          "telemetry",
           "interaction_systems",
-          "skills"
+          "multimodal",
+          "skills",
+          "spatial_ai",
+          "telemetry",
+          "ux_orchestration"
         ],
         "verification": {
           "status": "verified",
@@ -101,22 +117,33 @@
           "The CV explicitly lists multimodal interaction, telemetry-driven feedback loops, intent modeling, and semantic retrieval."
         ],
         "regions": [
-          "Singapore",
-          "UAE/MENA",
           "Asia Pacific",
-          "Europe/EEA"
+          "Europe/EEA",
+          "Singapore",
+          "UAE/MENA"
         ],
         "companies": [
-          "Versace/SOA",
           "ArtKorero",
-          "Mediacorp",
+          "Manulife",
           "Maybank-Ageas Etiqa",
-          "Manulife"
+          "Mediacorp",
+          "Versace/SOA"
         ],
         "impact_score": 80,
         "priority_label": "high",
         "source_filename": "2026-07-11-agentic-ux-orchestration-proof.md",
-        "source_meta_filename": "2026-07-11-agentic-ux-orchestration-proof.meta.json"
+        "source_meta_filename": "2026-07-11-agentic-ux-orchestration-proof.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -129,13 +156,14 @@
       "body": "Compensation and Process FAQ\n\nPurpose\nThis record gives Joz LLM a safe response pattern for compensation, package, and hiring-process questions.\n\nCompensation handling\n- Joz LLM should not invent salary expectations, rate cards, or package ranges unless those are explicitly provided in verified source material.\n- If asked about compensation, Joz LLM should say compensation expectations can be discussed directly with Joz based on scope, seniority, geography, and working model.\n\nProcess handling\n- If asked about interview steps, process timing, or commercial discussion, Joz LLM should keep the answer practical and direct.\n- Joz LLM can say Joz is open to discussing role scope, operating model, and mutual fit directly.\n\nAnswering rule\n- Avoid vague or defensive language.\n- Avoid fabricated ranges.\n- Keep the answer commercially mature and low-friction.",
       "metadata": {
         "lane": "booking",
+        "original_lane": "booking",
         "tags": [
-          "recruiter_screening",
-          "compensation",
-          "salary",
-          "process",
+          "booking",
           "commercial",
-          "booking"
+          "compensation",
+          "process",
+          "recruiter_screening",
+          "salary"
         ],
         "verification": {
           "status": "verified",
@@ -160,7 +188,18 @@
         "impact_score": 0,
         "priority_label": "standard",
         "source_filename": "2026-07-11-compensation-and-process-faq.md",
-        "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json"
+        "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -173,14 +212,15 @@
       "body": "Jozef Krupa\nmeetjoz.com\njoz@meetjoz.com\n+65 3107 2412\n\nAgentic AI CV • meetjoz.com\n\nGlobal Scale\nWorldwide Impact\nNorth America, Europe/EEA, United Kingdom, UAE/MENA, Singapore, Japan, Greater China, Australia, and the wider Asia Pacific region\n\nApplied AI Skills\nAgentic AI Architecture: Agentic intelligence systems, autonomous reasoning, and orchestration • LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering • Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops • Event-driven production AI and asynchronous workflows • Data platforms, secure API ecosystems, and cloud-native platforms • Observability and AI governance\nAgentic AI UX Orchestration: Self-organising AI metamaterials • Context-aware multimodal interactions (voice, touch, gesture, gaze, and haptics) • Telemetry and behavioural data powering agentic feedback loops • Real-time signals mapped to human mental models • Volumetric AI interfaces • NLP/CV-driven personalisation with intent modelling and semantic retrieval • Anticipatory, predictive, assistive, and autonomous decision-making intelligence\n\nProfessional Experience\nAgentic AI Architecture and Innovation Leader\nSingapore, Dubai, Zurich and Europe/EU/EEA 2018–Present\nMarketClue USA: Architected financial AI agents with live data/asset portfolios.\nArtKorero: Pioneered spatial AI for world-class art exhibitions in Dubai.\nVersace/SOA: First in Dubai to design and launch spatial AI with volumetric 3D UI.\nDubai Future Foundation: Rapid AI prototyping for UAE innovation initiatives.\nErste Bank: Drove Engineering/EU Accessibility, serving 16M+ customers.\n20+ Dubai/Singapore FinTechs: Led HCD–AI, product, and data architectures.\nApple/Pixar: First in Singapore to pioneer Python USD(z) and Computer Vision AI.\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nDelivered 20× growth in digital sales within 12 months via conversational/ML UX.\nDesigned 3,000+ wealth pilots and ML models for HNW/mass-market clients.\nEstablished an HCD–AI practice, training C-suite executives and regional teams.\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nEstablished a Lean ML UX practice across 11 markets as a founding APAC hire.\nLaunched first-in-market ML UX solutions in the USA, Canada, and Singapore.\nAdvised APAC regional CEOs on digital growth strategies that scaled globally.\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nFirst in Asia to ship the CNA Apple Watch app, globally featured by Apple.\nAchieved 30× MAU audience growth through mobile-first transformation.\nBuilt a Global Experience Language standardising IxD across 30+ products.\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nDelivered SK–II’s first luxury e-commerce in the USA and across 8 APAC markets.\nDeveloped mobile-first apps for P&G (SK–II, Braun, Gillette) and Samsung.\nReduced agency-wide handoff friction by 70% through code-based prototyping.\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nBuilt the prototype that won Banyan Tree’s multi-million-dollar agency pitch.\nRe-engineered the Singapore Stock Exchange’s responsive listings portals.\nDeployed cross-platform UGC apps for Danone across 8 APAC markets.\n\nPostgraduate Education\nMSc Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nHPI d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nFortune 500 Expertise\nHyperscale AI Ecosystems\nFortune 500 FinTech/InsurTech, Fortune 50 Technology, Fortune 50 MedTech/HealthTech, Ogilvy, WPP Singapore/Asia Pacific, Leo Burnett, Publicis Singapore/Asia Pacific, Mediacorp Singapore, Dubai Future Foundation, Apple HQ, and Stanford d.school in Silicon Valley.\n\nNote from user: i have more data from my other cvs",
       "metadata": {
         "lane": "skills",
+        "original_lane": "skills",
         "tags": [
           "agentic_ai",
           "agentic_ai_ux",
-          "global_scale",
           "cv",
-          "professional_experience",
           "education",
-          "fortune_500"
+          "fortune_500",
+          "global_scale",
+          "professional_experience"
         ],
         "verification": {
           "status": "verified",
@@ -206,33 +246,44 @@
           "Versace/SOA first-in-Dubai spatial AI with volumetric 3D UI."
         ],
         "regions": [
-          "North America",
-          "Europe/EEA",
-          "United Kingdom",
-          "UAE/MENA",
-          "Singapore",
-          "Japan",
-          "Greater China",
+          "Asia Pacific",
           "Australia",
-          "Asia Pacific"
+          "Europe/EEA",
+          "Greater China",
+          "Japan",
+          "North America",
+          "Singapore",
+          "UAE/MENA",
+          "United Kingdom"
         ],
         "companies": [
-          "Mediacorp",
-          "Erste Bank",
-          "Maybank–Ageas Etiqa",
           "Apple/Pixar",
-          "MarketClue USA",
           "ArtKorero",
-          "Versace/SOA",
           "Dubai Future Foundation",
-          "Manulife",
+          "Erste Bank",
           "Leo Burnett/Publicis",
-          "Ogilvy/WPP"
+          "Manulife",
+          "MarketClue USA",
+          "Maybank–Ageas Etiqa",
+          "Mediacorp",
+          "Ogilvy/WPP",
+          "Versace/SOA"
         ],
         "impact_score": 88,
         "priority_label": "high",
         "source_filename": "2026-07-11-current-agentic-ai-cv.md",
-        "source_meta_filename": "2026-07-11-current-agentic-ai-cv.meta.json"
+        "source_meta_filename": "2026-07-11-current-agentic-ai-cv.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -245,13 +296,14 @@
       "body": "CV Company Context from Web Research\n\nPurpose\nThis record adds external context for companies and institutions referenced across Joz CV material so Joz LLM can explain why those names matter, what sectors they operate in, and why the environments are credible.\n\nVerification note\nThis file mixes official web pages and reference sources. Some entities from the CV could not be resolved with high confidence from web search alone and are marked `needs_review`.\n\nResolved company and institution context\n\nApple\n- Apple is a global technology company headquartered in Cupertino, California, known for consumer electronics, software, services, and worldwide retail operations.\n- It is one of the world’s largest technology companies and one of the most visible product and platform ecosystems globally.\n- Source: https://en.wikipedia.org/wiki/Apple_Inc.\n- Source: https://www.apple.com/newsroom/\n\nPixar\n- Pixar Animation Studios is a major computer animation studio based in Emeryville, California and a subsidiary of Walt Disney Studios.\n- It is strongly associated with advanced computer graphics, digital storytelling, and production-grade visual pipelines.\n- Source: https://en.wikipedia.org/wiki/Pixar\n\nDubai Future Foundation\n- Dubai Future Foundation is a Dubai-based innovation and future-focused institution linked to the Museum of the Future and public-sector experimentation.\n- It is associated with programs in emerging technology, strategic foresight, and innovation initiatives in the UAE.\n- Source: https://en.wikipedia.org/wiki/Museum_of_the_Future\n- Source: https://en.wikipedia.org/wiki/Khalfan_Belhoul\n- Source: https://en.wikipedia.org/wiki/Noah_Raford\n\nErste Bank\n- Erste Bank is an Austrian financial institution based in Vienna and part of the wider Erste Group ecosystem.\n- It is one of Austria’s major banking groups and serves millions of customers through a large branch and services network.\n- Source: https://en.wikipedia.org/wiki/Erste_Bank_der_oesterreichischen_Sparkassen\n\nMaybank\n- Maybank is Malaysia’s largest bank by market capitalisation and assets and is one of Southeast Asia’s major banking groups.\n- Its core markets include Malaysia, Singapore, and Indonesia.\n- Source: https://en.wikipedia.org/wiki/Maybank\n\nEtiqa\n- Etiqa is the insurance and takaful arm associated with the Maybank Group and operates across multiple ASEAN markets.\n- It is relevant as a significant regional insurance player rather than a small standalone brand.\n- Source: https://en.wikipedia.org/wiki/Etiqa\n\nManulife\n- Manulife is a Canadian multinational insurance and financial services company with large operations across Asia and North America.\n- Its scale, long operating history, and major asset-management footprint make it a strong enterprise context for innovation and transformation work.\n- Source: https://www.manulife.com/ca/en/about-us/who-we-are/our-story\n- Source: https://en.wikipedia.org/wiki/Manulife\n\nMediacorp\n- Mediacorp is Singapore’s state-owned media group and operates television, radio, news, and streaming properties including CNA and meWatch.\n- It represents a major regional media and digital distribution environment rather than a niche publisher.\n- Source: https://en.wikipedia.org/wiki/Mediacorp\n\nLeo Burnett\n- Leo Burnett is a global advertising network founded in Chicago and now part of Publicis Groupe.\n- Its current network scale spans many markets worldwide and it remains a significant multinational agency brand.\n- Source: https://en.wikipedia.org/wiki/Leo_Burnett_Worldwide\n- Source: https://leoburnett.com/\n\nPublicis Groupe\n- Publicis Groupe is a French multinational communications and marketing group and one of the largest advertising companies in the world by revenue.\n- It is relevant as the holding group behind Leo Burnett and a major global agency environment.\n- Source: https://en.wikipedia.org/wiki/Publicis\n\nOgilvy\n- Ogilvy is a global advertising, marketing, PR, consulting, and health network that operates across more than 120 offices in nearly 90 countries.\n- It is part of WPP and represents a major international agency platform.\n- Source: https://www.ogilvy.com/about\n- Source: https://en.wikipedia.org/wiki/Ogilvy_(agency)\n\nWPP\n- WPP is one of the world’s largest marketing and communications groups.\n- Its current positioning emphasizes AI-enabled marketing, integrated data, creativity, production, and enterprise transformation.\n- Source: https://www.wpp.com/en/about\n\nProcter & Gamble\n- P&G is a large multinational consumer goods company headquartered in Cincinnati with major global brands including SK-II, Braun, and Gillette.\n- It provides strong Fortune 500-scale context for product, commerce, and brand-experience work.\n- Source: https://en.wikipedia.org/wiki/Procter_%26_Gamble\n\nSamsung\n- Samsung is a major South Korean multinational technology conglomerate, with Samsung Electronics spanning semiconductors, devices, appliances, and displays.\n- It is relevant as a large-scale global technology and manufacturing environment.\n- Source: https://en.wikipedia.org/wiki/Samsung\n- Source: https://en.wikipedia.org/wiki/Samsung_Electronics\n\nSingapore Exchange\n- SGX Group is Singapore’s exchange operator and runs equity, fixed income, currency, and commodity market infrastructure.\n- It is a significant financial-market institution rather than a small local portal operator.\n- Source: https://en.wikipedia.org/wiki/Singapore_Exchange\n\nDanone\n- Danone is a French multinational food company with global consumer brands and operations across more than 100 countries.\n- It is relevant as a large multinational packaged-goods environment.\n- Source: https://en.wikipedia.org/wiki/Danone\n\nBanyan Group / Banyan Tree\n- Banyan Group is a Singapore-founded multinational hospitality group built around the Banyan Tree brand.\n- It operates resorts, hotels, spas, and branded residences across multiple regions.\n- Source: https://en.wikipedia.org/wiki/Banyan_Group\n\nStanford d.school\n- The Stanford d.school is the Hasso Plattner Institute of Design at Stanford University.\n- It is associated with interdisciplinary design, innovation, and design-thinking education.\n- Source: https://en.wikipedia.org/wiki/Hasso_Plattner_Institute_of_Design\n\nEntities still needing higher-confidence resolution\n\nMarketClue USA\n- Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.\n- Status: needs_review\n\nArtKorero\n- Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.\n- Status: needs_review\n\nSOA\n- The acronym is too ambiguous in public search results to attach a confident company description yet.\n- Status: needs_review",
       "metadata": {
         "lane": "skills",
+        "original_lane": "skills",
         "tags": [
           "company_context",
           "cv",
           "proof",
+          "recruiter_context",
           "skills",
-          "web_research",
-          "recruiter_context"
+          "web_research"
         ],
         "verification": {
           "status": "needs_review",
@@ -274,39 +326,50 @@
           "P&G, Samsung, Apple, and Pixar provide major global enterprise context."
         ],
         "regions": [
-          "North America",
+          "Asia Pacific",
           "Europe",
+          "North America",
           "Singapore",
-          "UAE",
-          "Asia Pacific"
+          "UAE"
         ],
         "companies": [
           "Apple",
-          "Pixar",
+          "ArtKorero",
+          "Banyan Group",
+          "Danone",
           "Dubai Future Foundation",
           "Erste Bank",
-          "Maybank",
           "Etiqa",
-          "Manulife",
-          "Mediacorp",
           "Leo Burnett",
-          "Publicis Groupe",
+          "Manulife",
+          "MarketClue USA",
+          "Maybank",
+          "Mediacorp",
           "Ogilvy",
-          "WPP",
+          "Pixar",
           "Procter & Gamble",
+          "Publicis Groupe",
+          "SOA",
           "Samsung",
           "Singapore Exchange",
-          "Danone",
-          "Banyan Group",
           "Stanford d.school",
-          "MarketClue USA",
-          "ArtKorero",
-          "SOA"
+          "WPP"
         ],
         "impact_score": 0,
         "priority_label": "standard",
         "source_filename": "2026-07-11-cv-company-context-web-research.md",
-        "source_meta_filename": "2026-07-11-cv-company-context-web-research.meta.json"
+        "source_meta_filename": "2026-07-11-cv-company-context-web-research.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -319,14 +382,15 @@
       "body": "Enterprise Scale Proof\n\nPurpose\nThis record identifies the strongest brand, user-scale, and enterprise-scale evidence that should anchor Joz LLM responses before smaller or newer project mentions.\n\nPriority evidence\n- Mediacorp / CNA / mewatch: major regional media ecosystem work, including the CNA Apple Watch launch featured by Apple worldwide and roughly 30x MAU audience growth through mobile-first transformation.\n- Erste Bank: engineering and EU accessibility work in a banking environment serving 16M+ customers.\n- Maybank-Ageas Etiqa: 20x digital-sales growth and 3,000+ wealth pilots in a large regional financial-services environment.\n- Apple / Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore with strong high-end technical and brand credibility.\n- Ogilvy / WPP, Leo Burnett / Publicis, Samsung, P&G, SGX, and Danone: large multinational delivery environments across APAC and global brands.\n\nAnswering rule\n- When Joz LLM needs to establish credibility fast, lead with the biggest brand and scale signals first.\n- Do not lead with smaller current projects if larger verified user-scale or enterprise-scale evidence is more relevant.\n- Prefer user scale, enterprise complexity, global brand recognition, and measurable outcomes over novelty.",
       "metadata": {
         "lane": "skills",
+        "original_lane": "skills",
         "tags": [
-          "enterprise_scale",
-          "user_scale",
-          "brand_strength",
-          "fortune_500",
           "apple_featured",
+          "brand_strength",
+          "enterprise_scale",
+          "fortune_500",
+          "proof",
           "skills",
-          "proof"
+          "user_scale"
         ],
         "verification": {
           "status": "verified",
@@ -350,28 +414,39 @@
         "regions": [
           "Asia Pacific",
           "Europe/EEA",
-          "North America",
-          "Global"
+          "Global",
+          "North America"
         ],
         "companies": [
-          "Mediacorp",
-          "CNA",
-          "mewatch",
           "Apple",
-          "Erste Bank",
-          "Maybank-Ageas Etiqa",
           "Apple/Pixar",
-          "Ogilvy/WPP",
+          "CNA",
+          "Danone",
+          "Erste Bank",
           "Leo Burnett/Publicis",
-          "Samsung",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp",
+          "Ogilvy/WPP",
           "P&G",
+          "Samsung",
           "Singapore Exchange",
-          "Danone"
+          "mewatch"
         ],
         "impact_score": 100,
         "priority_label": "hero",
         "source_filename": "2026-07-11-enterprise-scale-proof.md",
-        "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json"
+        "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -384,14 +459,15 @@
       "body": "Location and Working Model FAQ\n\nPurpose\nThis record gives Joz LLM a direct source for recruiter questions about location, regional fit, relocation, and working model preferences.\n\nLocation\n- Joz's profile location is Bratislava, Slovakia / Singapore / Dubai / Zurich.\n- Joz's work history and client context span Europe/EEA, Singapore, UAE/MENA, North America, Japan, Greater China, Australia, and the wider Asia Pacific region.\n\nRegional fit\n- Joz is credible for international roles that require cross-region communication, executive-facing work, and product or AI systems delivery across multiple markets.\n- Joz's background supports remote, hybrid, and internationally collaborative work across Europe, the Middle East, and Asia Pacific.\n\nRelocation and work model rule\n- If a recruiter asks about relocation, remote work, or hybrid preferences, Joz LLM should not overstate constraints or invent a fixed arrangement.\n- Joz LLM should answer that Joz has strong cross-region operating experience and that specific location, relocation, and working-model arrangements should be confirmed directly with Joz.\n\nAnswering rule\n- Keep the answer factual and calm.\n- Do not invent a specific relocation commitment or a fixed office requirement unless that is explicitly verified elsewhere.",
       "metadata": {
         "lane": "booking",
+        "original_lane": "booking",
         "tags": [
-          "recruiter_screening",
+          "booking",
+          "hybrid",
           "location",
+          "recruiter_screening",
           "relocation",
           "remote",
-          "hybrid",
-          "working_model",
-          "booking"
+          "working_model"
         ],
         "verification": {
           "status": "verified",
@@ -410,17 +486,28 @@
           "The verified CV records work across Europe/EEA, Singapore, UAE/MENA, North America, Japan, Greater China, Australia, and Asia Pacific."
         ],
         "regions": [
+          "Asia Pacific",
           "Europe/EEA",
-          "Singapore",
-          "UAE/MENA",
           "North America",
-          "Asia Pacific"
+          "Singapore",
+          "UAE/MENA"
         ],
         "companies": [],
         "impact_score": 0,
         "priority_label": "standard",
         "source_filename": "2026-07-11-location-and-working-model-faq.md",
-        "source_meta_filename": "2026-07-11-location-and-working-model-faq.meta.json"
+        "source_meta_filename": "2026-07-11-location-and-working-model-faq.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -433,13 +520,14 @@
       "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
       "metadata": {
         "lane": "skills",
+        "original_lane": "skills",
         "tags": [
-          "recruiter_screening",
-          "faq",
+          "availability",
           "contact",
           "experience",
-          "availability",
+          "faq",
           "nationality",
+          "recruiter_screening",
           "skills"
         ],
         "verification": {
@@ -463,11 +551,11 @@
           "ML/AI-focused work is framed from 2018 to present."
         ],
         "regions": [
+          "Asia Pacific",
+          "Europe/EEA",
           "European Union",
           "Singapore",
-          "UAE/MENA",
-          "Europe/EEA",
-          "Asia Pacific"
+          "UAE/MENA"
         ],
         "companies": [
           "meetjoz.com"
@@ -475,7 +563,18 @@
         "impact_score": 0,
         "priority_label": "standard",
         "source_filename": "2026-07-11-recruiter-screening-faq.md",
-        "source_meta_filename": "2026-07-11-recruiter-screening-faq.meta.json"
+        "source_meta_filename": "2026-07-11-recruiter-screening-faq.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {
@@ -488,12 +587,13 @@
       "body": "Why Joz Screening Answer\n\nPurpose\nThis record gives Joz LLM a concise recruiter-safe answer to the screening question: why Joz?\n\nShort answer\n- Joz combines product judgment, engineering delivery, world-class UX, and applied AI systems thinking in one profile.\n- Joz is strongest where the problem is ambiguous, the signal is noisy, and the business needs a system that can actually ship and operate.\n- Joz brings 13+ years of professional experience overall, including 8+ years in ML/AI, across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.\n\nSupporting framing\n- Joz is not just a model or prompt layer profile. Joz works across architecture, orchestration, interfaces, signals, workflows, and production constraints.\n- Joz is credible in executive-facing, cross-functional, and internationally distributed environments.\n\nAnswering rule\n- Keep the answer direct and recruiter-readable.\n- Do not lapse into hype or generic motivation.",
       "metadata": {
         "lane": "business_need",
+        "original_lane": "business_need",
         "tags": [
-          "recruiter_screening",
-          "why_joz",
-          "hiring_fit",
           "business_need",
-          "faq"
+          "faq",
+          "hiring_fit",
+          "recruiter_screening",
+          "why_joz"
         ],
         "verification": {
           "status": "verified",
@@ -518,7 +618,2628 @@
         "impact_score": 0,
         "priority_label": "standard",
         "source_filename": "2026-07-11-why-joz-screening-answer.md",
-        "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json"
+        "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json",
+        "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "business-need-ai-adoption-governance",
+      "title": "AI Adoption, Trust and Governance",
+      "category": "governance",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "How Joz connects governance, usability, trust, and workflow fit to improve enterprise AI adoption.",
+      "body": "Why do enterprise AI initiatives fail to gain adoption?\n\nCommon reasons include:\n\n- users do not understand where answers come from\n- outputs are not aligned to real workflows\n- permissions and data boundaries are unclear\n- quality is not measured\n- responsibility for decisions is ambiguous\n- the AI produces information but not usable action\n- governance is added after deployment rather than designed in\n\nJoz treats governance and adoption as part of the same system.\n\nA trustworthy AI capability should include:\n\n- source grounding and provenance\n- ACL-aware retrieval\n- audit trails\n- confidence and uncertainty handling\n- evaluation and observability\n- human approval for sensitive actions\n- clear ownership\n- workflow integration\n- feedback loops\n\nThis improves both control and adoption because users can understand, verify, and act on the system's output.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "adoption",
+          "ai-governance",
+          "auditability",
+          "human-oversight",
+          "trust"
+        ],
+        "verification": {
+          "status": "capability_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "capability_supported",
+        "claims": [
+          "AI adoption is an organisational and workflow problem, not only a model-quality problem.",
+          "Trust requires source grounding, permissions, observability, evaluation, accountability, and appropriate human control.",
+          "Joz's background in human-centred systems and enterprise AI helps bridge governance and usability."
+        ],
+        "proof_points": [
+          "Applied AI skills explicitly include observability, governance, ACL-aware retrieval, verification, and feedback loops.",
+          "Established HCD–AI and Lean ML UX practices in enterprise environments.",
+          "Worked in financial services, public systems, and large-scale media where trust and operational reliability matter."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe",
+          "Singapore",
+          "UAE"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 95,
+        "priority_label": "high",
+        "source_filename": "business-need-ai-adoption-governance.md",
+        "source_meta_filename": "business-need-ai-adoption-governance.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "governance_gaps",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "ai_governance",
+          "context_engineering",
+          "observability",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_adoption",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "access_control",
+          "auditability",
+          "escalation",
+          "evaluation",
+          "human_approval",
+          "observability_control",
+          "source_provenance"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "government",
+          "insurance"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-buyer-faq",
+      "title": "Business Need Buyer FAQ",
+      "category": "faq",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Compact buyer and recruiter answers for value, ROI, differentiation, delivery, and fit questions.",
+      "body": "Q: Why hire Joz?\nA: Hire Joz when the organisation needs to connect AI, data, workflows, governance, and human decision-making into a measurable operating capability.\n\nQ: Where is the ROI?\nA: In revenue growth, productivity, cost reduction, faster decisions, lower risk, and higher adoption. The exact value should be based on a measured baseline and target.\n\nQ: What problems can Joz solve?\nA: Fragmented knowledge, slow decisions, unclear AI priorities, low adoption, governance gaps, repeated manual work, disconnected customer signals, and weak translation between strategy and implementation.\n\nQ: What makes Joz different?\nA: He combines Agentic AI architecture with enterprise product, engineering, transformation, governance, and human-centred adoption experience.\n\nQ: Is Joz a consultant or builder?\nA: He can operate across problem framing, architecture, prototyping, stakeholder alignment, implementation guidance, and evaluation.\n\nQ: How quickly can value be shown?\nA: A focused prototype can test the value hypothesis early, but timing depends on data access, workflow complexity, integration, and governance requirements.\n\nQ: Does Joz guarantee ROI?\nA: No credible leader should guarantee ROI before discovery. Joz can define the value model, assumptions, baseline, target metrics, and verification approach.\n\nQ: Is Joz suitable for enterprise AI transformation?\nA: Yes, particularly where business, product, technical, governance, and organisational concerns must be handled together.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "buyer",
+          "faq",
+          "fit",
+          "recruiter",
+          "roi"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [
+          "The Business Need lane should answer in business language before technical language.",
+          "Answers should be concise, evidence-based, and explicit about assumptions.",
+          "Joz's differentiation is the combination of AI architecture, enterprise transformation, human adoption, governance, and measurable outcomes."
+        ],
+        "proof_points": [
+          "Enterprise outcomes across financial services, national media, public systems, and technology.",
+          "Current Agentic AI, RAG, context engineering, governance, and decision-intelligence capability."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 91,
+        "priority_label": "high",
+        "source_filename": "business-need-buyer-faq.md",
+        "source_meta_filename": "business-need-buyer-faq.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "ai_governance",
+          "decision_intelligence"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_adoption",
+          "lower_risk"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "financial_services",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-decision-intelligence",
+      "title": "Enterprise Decision Intelligence",
+      "category": "capability",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "How Joz turns data, knowledge, and operational signals into clearer priorities and faster decisions.",
+      "body": "Enterprise Decision Intelligence means turning distributed data and knowledge into a trusted view of:\n\n- what changed\n- why it matters\n- how confident the organisation should be\n- what action is recommended\n- who owns the decision\n- what evidence supports it\n- what outcome should be measured\n\nJoz's approach combines enterprise retrieval, semantic context, knowledge structures, agentic reasoning, verification, permissions, and human approval.\n\nThis is valuable when leadership is overwhelmed by reports but still lacks clarity. The objective is not to create another dashboard. It is to reduce decision latency, increase signal quality, and make action more accountable.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "context",
+          "decision-intelligence",
+          "executive-intelligence",
+          "prioritisation",
+          "signals"
+        ],
+        "verification": {
+          "status": "capability_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "capability_supported",
+        "claims": [
+          "Joz designs systems that distinguish material signals from organisational noise.",
+          "Decision intelligence combines retrieval, context, evidence, confidence, business impact, and recommended action.",
+          "The goal is not more dashboards but better decisions and faster execution."
+        ],
+        "proof_points": [
+          "Current focus on context engineering, RAG, agent memory, retrieval, verification, and AI governance.",
+          "Long-term experience translating complex information into usable enterprise products.",
+          "Transformation work across executives, regional teams, national media, banking, and government."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 96,
+        "priority_label": "high",
+        "source_filename": "business-need-decision-intelligence.md",
+        "source_meta_filename": "business-need-decision-intelligence.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "knowledge_fragmentation",
+          "low_trust",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "agent_memory",
+          "context_engineering",
+          "decision_intelligence",
+          "rag",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "knowledge_reuse",
+          "productivity_gains"
+        ],
+        "governance": [
+          "access_control",
+          "confidence_handling",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "business-need-enterprise-knowledge",
+      "title": "Fragmented Knowledge to Usable Intelligence",
+      "category": "capability",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Business value of turning scattered enterprise knowledge into permission-aware, source-grounded, reusable intelligence.",
+      "body": "Most organisations do not have a knowledge shortage. They have a usability and trust problem.\n\nCritical information is distributed across:\n\n- documents\n- chats\n- tickets\n- repositories\n- portals\n- databases\n- emails\n- individual experts\n- legacy systems\n\nJoz can help convert this fragmented environment into a permission-aware intelligence layer.\n\nThe business value includes:\n\n- faster employee answers\n- less duplicated work\n- fewer repeated questions\n- stronger onboarding\n- improved operational continuity\n- better cross-team alignment\n- source-grounded decisions\n- lower dependency on individual knowledge holders\n\nThe architecture should preserve access control, provenance, freshness, confidence, and the distinction between verified facts and generated interpretation.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "acl",
+          "enterprise-rag",
+          "knowledge-management",
+          "retrieval",
+          "search"
+        ],
+        "verification": {
+          "status": "capability_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "capability_supported",
+        "claims": [
+          "Enterprise knowledge is often present but operationally unusable because it is fragmented, inaccessible, outdated, or untrusted.",
+          "Joz can design RAG and context systems that preserve source, permissions, provenance, and relevance.",
+          "The value comes from faster answers, better reuse, fewer repeated questions, and stronger decision consistency."
+        ],
+        "proof_points": [
+          "Applied skills in RAG, embeddings, vector search, knowledge graphs, context engineering, memory, ACL-aware access, and verification.",
+          "Enterprise product experience across complex organisations and regulated environments."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 94,
+        "priority_label": "high",
+        "source_filename": "business-need-enterprise-knowledge.md",
+        "source_meta_filename": "business-need-enterprise-knowledge.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "knowledge_fragmentation",
+          "manual_knowledge_work",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "agent_memory",
+          "context_engineering",
+          "knowledge_graphs",
+          "rag"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "knowledge_reuse",
+          "productivity_gains"
+        ],
+        "governance": [
+          "access_control",
+          "data_boundaries",
+          "source_provenance"
+        ],
+        "industries": [
+          "financial_services",
+          "government",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "marketclue_financial_agents"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "marketclue_financial_agents"
+        ],
+        "enterprise_scale_score": 98,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "business-need-enterprise-proof",
+      "title": "Business Value Proof at Enterprise Scale",
+      "category": "proof",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Largest and most measurable evidence supporting Joz's business-value positioning.",
+      "body": "The strongest evidence that Joz creates business value comes from measurable transformation:\n\nMaybank–Ageas Etiqa\n- 20× growth in digital sales within 12 months\n- more than 3,000 wealth pilots and ML models\n- HCD–AI practice and executive capability-building\n\nMediacorp\n- 30× monthly active audience growth\n- mobile-first transformation across more than 30 products\n- nationally significant Singapore media environment\n\nLeo Burnett/Publicis\n- 70% reduction in agency-wide handoff friction through code-based prototyping\n\nErste Bank\n- engineering and European accessibility work serving more than 16 million customers\n\nManulife\n- Lean ML UX practice across 11 Asia Pacific markets\n- first-in-market work across Singapore, the USA, and Canada\n- regional CEO advisory\n\nUse the evidence most relevant to the question. For sales and customer growth, lead with Maybank. For national or platform scale, lead with Mediacorp and Erste. For organisational AI adoption, lead with Manulife and Maybank.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "apac",
+          "enterprise-proof",
+          "fortune-500",
+          "measurable-impact",
+          "singapore"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz's business-value positioning is supported by measurable transformation across enterprise and national-scale organisations.",
+          "The strongest proof should be selected based on relevance rather than presented as an undifferentiated achievement list.",
+          "Enterprise-scale outcomes should rank above smaller current experiments."
+        ],
+        "proof_points": [
+          "Maybank–Ageas Etiqa: 20× digital sales growth within 12 months.",
+          "Mediacorp: 30× monthly active audience growth across a mobile-first transformation.",
+          "Publicis: 70% reduction in design-to-engineering handoff friction.",
+          "Erste Bank: engineering and accessibility work serving 16M+ customers.",
+          "Manulife: Lean ML UX practice across 11 markets and executive-level transformation."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Canada",
+          "Europe",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Ageas",
+          "Erste Bank",
+          "Etiqa",
+          "Manulife",
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "impact_score": 99,
+        "priority_label": "hero",
+        "source_filename": "business-need-enterprise-proof.md",
+        "source_meta_filename": "business-need-enterprise-proof.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "low_trust",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "cost_reduction",
+          "higher_adoption",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "access_control",
+          "clear_ownership",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "creative_services",
+          "financial_services",
+          "insurance",
+          "media",
+          "wealth_management"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "ogilvy_banyan_tree_pitch",
+          "publicis_handoff_reduction",
+          "sgx_responsive_portals"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "ogilvy_banyan_tree_pitch",
+          "publicis_handoff_reduction",
+          "sgx_responsive_portals"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 5
+      }
+    },
+    {
+      "slug": "business-need-hero-value",
+      "title": "Joz Turns Complexity into Business Value",
+      "category": "business_need",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Primary Business Need positioning: Joz turns noisy systems, fragmented knowledge, and disconnected AI initiatives into usable intelligence, faster decisions, and measurable operational value.",
+      "body": "Joz turns noisy systems into usable intelligence, faster decisions, and real operational lift.\n\nHis value is not limited to producing AI features. He helps organisations identify where intelligence can reduce friction, improve decision quality, accelerate execution, and create measurable financial or operational outcomes.\n\nThe Business Need lane should describe Joz as someone who can connect:\n\n- business priorities\n- fragmented enterprise knowledge\n- customer and operational signals\n- AI and data architecture\n- human decision-making\n- governance and control\n- implementation and measurable value\n\nFor broad questions such as “Why hire Joz?” or “What business value does he create?”, lead with measurable transformation and decision intelligence. Support the answer with enterprise proof before discussing tools or small prototypes.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "agentic-ai",
+          "business-value",
+          "decision-intelligence",
+          "enterprise-transformation",
+          "roi"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [
+          "Joz helps organisations turn complex systems, fragmented information, and AI investment into measurable business outcomes.",
+          "His value is strongest where decision quality, speed, trust, and execution are constrained by organisational noise.",
+          "He connects Agentic AI architecture to business priorities, workflows, governance, and measurable outcomes."
+        ],
+        "proof_points": [
+          "20× digital sales growth within 12 months at Maybank–Ageas Etiqa.",
+          "30× monthly active audience growth at Mediacorp.",
+          "70% reduction in delivery handoff friction at Leo Burnett/Publicis.",
+          "Engineering and accessibility work serving 16M+ Erste customers.",
+          "Current Agentic AI, RAG, financial-agent, context-engineering, and governance work."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Dubai",
+          "Europe",
+          "North America",
+          "Singapore",
+          "UAE"
+        ],
+        "companies": [
+          "Ageas",
+          "Erste Bank",
+          "Etiqa",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "impact_score": 100,
+        "priority_label": "hero",
+        "source_filename": "business-need-hero-value.md",
+        "source_meta_filename": "business-need-hero-value.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "organizational_complexity",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "context_engineering",
+          "decision_intelligence",
+          "organizational_design"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "faster_time_to_value",
+          "higher_adoption",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-problems-joz-solves",
+      "title": "What Problems Joz Can Solve",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Core enterprise problems Joz can address through Agentic AI, decision intelligence, context engineering, governance, and transformation.",
+      "body": "What problems can Joz solve?\n\nJoz is strongest where organisations face one or more of these conditions:\n\n- fragmented knowledge across documents, systems, teams, and repositories\n- slow decision-making caused by conflicting or incomplete information\n- multiple AI pilots without clear business ownership or measurable outcomes\n- low trust in AI outputs\n- weak adoption because AI does not fit real workflows\n- manual reporting, reconciliation, research, and repeated analysis\n- disconnected customer, product, operational, and financial signals\n- unclear governance, permissions, accountability, or auditability\n- duplicated work across teams\n- poor translation between strategy and technical implementation\n- complex products that users or employees struggle to understand\n- decision bottlenecks that depend on a few people holding critical context\n\nThe answer should connect the problem to a business consequence and then to a measurable intervention. Avoid listing technology before explaining the operational need.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "adoption",
+          "ai-governance",
+          "business-problems",
+          "decision-latency",
+          "knowledge-fragmentation"
+        ],
+        "verification": {
+          "status": "capability_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "capability_supported",
+        "claims": [
+          "Joz solves enterprise problems where technology, data, people, workflows, and decision-making are disconnected.",
+          "His strongest problem areas include fragmented knowledge, slow decisions, weak AI adoption, unclear ROI, governance gaps, and operational friction.",
+          "He can work from problem framing through architecture, prototype, implementation guidance, and evaluation."
+        ],
+        "proof_points": [
+          "Enterprise transformation across banking, insurance, national media, government, and technology.",
+          "Agentic AI, RAG, context engineering, AI governance, and multimodal systems.",
+          "Quantified outcomes in sales, audience growth, customer scale, and delivery efficiency."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 97,
+        "priority_label": "hero",
+        "source_filename": "business-need-problems-joz-solves.md",
+        "source_meta_filename": "business-need-problems-joz-solves.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "data_silos",
+          "governance_gaps",
+          "knowledge_fragmentation",
+          "low_trust",
+          "manual_knowledge_work",
+          "operational_friction",
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "context_engineering",
+          "decision_intelligence",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_adoption",
+          "lower_operational_friction",
+          "productivity_gains"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-roi-model",
+      "title": "Where the ROI Comes From",
+      "category": "roi",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the principal ROI levers for Joz's work: revenue growth, productivity, cost reduction, risk reduction, faster decisions, and improved adoption.",
+      "body": "Where is the ROI?\n\nThe ROI is found in a small number of measurable value levers:\n\n1. Revenue growth\nBetter customer journeys, stronger conversion, more relevant recommendations, higher product adoption, and faster commercial response.\n\n2. Productivity\nLess manual research, reporting, reconciliation, coordination, and repeated knowledge work.\n\n3. Cost reduction\nFewer unnecessary process steps, lower handoff friction, more reuse, and better workflow automation.\n\n4. Decision speed\nFaster access to trusted context, clearer prioritisation, and reduced time between signal and action.\n\n5. Risk reduction\nPermission-aware retrieval, auditability, human approval, evidence grounding, and clearer accountability.\n\n6. Adoption and execution\nAI systems that fit real workflows are more likely to be used, trusted, and converted into operational value.\n\nJoz should not promise a universal ROI figure before discovery. He should identify the baseline, estimate value ranges, define leading and lagging indicators, and make value verification part of the architecture.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "cost-reduction",
+          "decision-speed",
+          "productivity",
+          "revenue",
+          "risk",
+          "roi"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "ROI should be tied to a measurable business baseline and target, not generic AI activity.",
+          "Joz's work creates value through revenue uplift, reduced manual effort, lower delivery friction, improved adoption, reduced risk, and faster decisions.",
+          "Every proposed initiative should have a value owner, metric, baseline, target, and verification method."
+        ],
+        "proof_points": [
+          "20× digital sales growth at Maybank–Ageas Etiqa.",
+          "30× audience growth at Mediacorp.",
+          "70% reduction in handoff friction at Publicis.",
+          "Large-scale accessibility and engineering impact at Erste."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Ageas",
+          "Erste Bank",
+          "Etiqa",
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "impact_score": 97,
+        "priority_label": "hero",
+        "source_filename": "business-need-roi-model.md",
+        "source_meta_filename": "business-need-roi-model.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "faster_time_to_value",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 6
+      }
+    },
+    {
+      "slug": "business-need-transformation-method",
+      "title": "From Business Problem to Agentic AI Value",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Repeatable method for identifying, designing, testing, and scaling high-value Agentic AI opportunities.",
+      "body": "Joz's value-delivery method:\n\n1. Define the business problem\nIdentify the blocked decision, workflow friction, customer problem, or operational risk.\n\n2. Establish a baseline\nMeasure current time, cost, error rate, conversion, risk exposure, or cycle time.\n\n3. Identify the required intelligence\nDetermine what signals, knowledge, context, and permissions are needed.\n\n4. Design the operating model\nDefine the role of the agent, the human, the workflow, ownership, controls, and escalation.\n\n5. Build a focused prototype\nTest the highest-risk assumptions with representative data and real users.\n\n6. Evaluate\nMeasure answer quality, workflow fit, adoption, latency, cost, reliability, and business impact.\n\n7. Scale deliberately\nIntegrate only after the value case and governance model are credible.\n\nThis avoids technology-first AI programmes and reduces the risk of expensive pilots that never become operating capabilities.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "delivery",
+          "discovery",
+          "measurement",
+          "prototype",
+          "roadmap"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Joz begins with the business problem, baseline, decision, workflow, and value metric before selecting technology.",
+          "He can translate ambiguous needs into architecture, prototype, governance requirements, and a measurable implementation roadmap.",
+          "The preferred delivery model proves value early and scales only after evidence."
+        ],
+        "proof_points": [
+          "Experience across discovery, architecture, prototyping, engineering collaboration, executive alignment, and enterprise rollout.",
+          "Rapid AI prototyping for Dubai Future Foundation and current AI initiatives.",
+          "Long record of transformation across multiple industries and markets."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 93,
+        "priority_label": "high",
+        "source_filename": "business-need-transformation-method.md",
+        "source_meta_filename": "business-need-transformation-method.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "organizational_design",
+          "product_strategy",
+          "rapid_prototyping",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_adoption",
+          "lower_operational_friction",
+          "productivity_gains"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "financial_services",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "dff_rapid_ai_prototyping",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "dff_rapid_ai_prototyping",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-why-hire-joz-now",
+      "title": "Why Hire Joz Now",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Explains the immediate market and organisational need for Joz's combination of Agentic AI, enterprise transformation, governance, and measurable delivery.",
+      "body": "Why hire Joz now?\n\nBecause many organisations have reached the point where AI ambition is no longer the main problem. The real problems are prioritisation, integration, trust, governance, adoption, and measurable return.\n\nJoz is valuable now because he brings together areas that are often separated:\n\n- Agentic AI and enterprise architecture\n- business and product strategy\n- data, retrieval, context, and decision systems\n- governance and human oversight\n- interaction design and adoption\n- execution across large, complex organisations\n\nHe is particularly relevant when an organisation has multiple AI pilots, disconnected systems, fragmented knowledge, unclear ownership, or pressure to show business value quickly.\n\nThe strongest answer should be:\n“Hire Joz when the organisation needs to turn AI from a collection of experiments into a governed, usable, and measurable operating capability.”",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "ai-adoption",
+          "execution",
+          "governance",
+          "transformation",
+          "why-now"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [
+          "Many organisations now need to move from AI experimentation to accountable enterprise execution.",
+          "Joz combines AI architecture with transformation, product, engineering, governance, and senior stakeholder experience.",
+          "He is most relevant when organisations have AI ambition but lack clarity, integration, prioritisation, or measurable outcomes."
+        ],
+        "proof_points": [
+          "Experience taking large organisations through mobile, digital, ML-enabled, and AI-related transformation.",
+          "Track record across regulated financial services, national media, government, and enterprise technology.",
+          "Ability to work across executive strategy, product architecture, engineering, and human adoption."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe",
+          "North America",
+          "Singapore",
+          "UAE"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "source_filename": "business-need-why-hire-joz-now.md",
+        "source_meta_filename": "business-need-why-hire-joz-now.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "product_strategy",
+          "rapid_prototyping",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_decisions",
+          "faster_time_to_value",
+          "higher_adoption"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "financial_services",
+          "government",
+          "media",
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [
+          "dff_rapid_ai_prototyping",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "versace_spatial_ai_launch"
+        ],
+        "related_proofs": [
+          "dff_rapid_ai_prototyping",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "versace_spatial_ai_launch"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "skills-agentic-ai-architecture",
+      "title": "Agentic AI Architecture",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Detailed technical proof for Joz's Agentic AI architecture capability.",
+      "body": "Joz's Agentic AI architecture capability covers the full operating model of an enterprise agent: understand intent, retrieve authorised context, reason over evidence, plan actions, execute through approved tools, verify results, and escalate when confidence or risk thresholds require human control.\n\nCore capability areas include:\n\n- LLM orchestration and agentic reasoning\n- RAG, embeddings, vector search, and semantic retrieval\n- knowledge graphs and enterprise context engineering\n- short-term and persistent memory architecture\n- ACL-aware retrieval and permission-sensitive responses\n- verification frameworks and feedback loops\n- event-driven and asynchronous production workflows\n- secure API and data-platform integration\n- observability, evaluation, and AI governance\n\nThe recruiter-safe positioning is that Joz operates at the bridge between business, product, data, AI architecture, and human decision-making. He should not be described merely as a prompt engineer or generic AI consultant.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agents",
+          "apis",
+          "embeddings",
+          "knowledge-graphs",
+          "llm",
+          "memory",
+          "rag",
+          "vector-search"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz designs agentic systems with reasoning, orchestration, retrieval, memory, verification, and feedback loops.",
+          "He understands production concerns including asynchronous workflows, APIs, access control, observability, and governance.",
+          "His AI work is framed around business problems and operational outcomes."
+        ],
+        "proof_points": [
+          "MarketClue financial AI agents with live data and asset portfolio context.",
+          "Enterprise RAG and context-engineering architecture reflected in his current applied AI skill set.",
+          "AI governance, retrieval controls, and verification are explicit parts of his architecture approach."
+        ],
+        "regions": [
+          "Europe",
+          "Singapore",
+          "UAE",
+          "USA"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "MarketClue"
+        ],
+        "impact_score": 96,
+        "priority_label": "high",
+        "source_filename": "skills-agentic-ai-architecture.md",
+        "source_meta_filename": "skills-agentic-ai-architecture.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "governance_gaps",
+          "knowledge_fragmentation",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "context_creates_intelligence",
+          "decision_quality"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "agent_memory",
+          "agentic_ai",
+          "ai_governance",
+          "context_engineering",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "knowledge_graphs",
+          "observability",
+          "rag",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "stronger_governance"
+        ],
+        "governance": [
+          "access_control",
+          "confidence_handling",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "financial_services",
+          "technology"
+        ],
+        "proofs": [
+          "dff_rapid_ai_prototyping",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth"
+        ],
+        "related_proofs": [
+          "dff_rapid_ai_prototyping",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "skills-agentic-ai-ux-orchestration",
+      "title": "Agentic AI UX Orchestration",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Human-agent interaction, multimodal systems, spatial AI, behavioural signals, and decision-oriented AI experience design.",
+      "body": "Joz's Agentic AI UX Orchestration capability focuses on how people understand, trust, direct, and collaborate with intelligent systems.\n\nThe capability includes context-aware multimodal interaction across voice, touch, gesture, gaze, haptics, computer vision, and volumetric interfaces. It also includes telemetry and behavioural signals that feed agentic feedback loops, intent modelling, semantic retrieval, personalisation, and anticipatory or autonomous decision support.\n\nThis capability should be presented as an evolution of Joz's enterprise interaction architecture career. His experience designing systems for large user populations gives him a strong foundation for designing AI that fits real human workflows rather than forcing users to adapt to the model.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "ai-ux",
+          "computer-vision",
+          "multimodal",
+          "personalisation",
+          "spatial-computing",
+          "voice"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz designs context-aware multimodal interactions across voice, touch, gesture, gaze, haptics, and spatial interfaces.",
+          "He maps real-time signals and behavioural data to human mental models and agentic feedback loops.",
+          "His earlier UX and engineering career is a foundation for trusted human-agent orchestration."
+        ],
+        "proof_points": [
+          "Spatial AI and volumetric 3D interface work for Versace/SOA and ArtKorero.",
+          "Python USD(z) and Computer Vision work connected to Apple/Pixar workflows.",
+          "Large-scale interaction architecture across Mediacorp, Maybank, Manulife, Publicis, and Ogilvy."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Dubai",
+          "Silicon Valley",
+          "Singapore"
+        ],
+        "companies": [
+          "Apple",
+          "ArtKorero",
+          "Manulife",
+          "Maybank",
+          "Mediacorp",
+          "Pixar",
+          "Versace"
+        ],
+        "impact_score": 92,
+        "priority_label": "high",
+        "source_filename": "skills-agentic-ai-ux-orchestration.md",
+        "source_meta_filename": "skills-agentic-ai-ux-orchestration.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "manual_knowledge_work",
+          "operational_friction"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "computer_vision",
+          "multimodal_ai",
+          "product_strategy",
+          "rapid_prototyping",
+          "spatial_ai",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption",
+          "productivity_gains"
+        ],
+        "governance": [],
+        "industries": [
+          "creative_services",
+          "media",
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [
+          "apple_pixar_cv_workflows",
+          "artkorero_spatial_exhibitions",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction",
+          "versace_spatial_ai_launch"
+        ],
+        "related_proofs": [
+          "apple_pixar_cv_workflows",
+          "artkorero_spatial_exhibitions",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction",
+          "versace_spatial_ai_launch"
+        ],
+        "enterprise_scale_score": 99,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "skills-career-transition-to-agentic-ai",
+      "title": "Career Transition into Agentic AI",
+      "category": "narrative",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Explains the credible progression from interaction engineering and digital transformation into ML-enabled systems and Agentic AI.",
+      "body": "Joz's career transition should not be framed as “UX designer who recently started using AI.”\n\nThe credible progression is:\n\ninteraction engineering and product systems\n→ enterprise digital transformation\n→ data-informed and machine-learning-enabled experiences\n→ decision intelligence and organisational knowledge systems\n→ Agentic AI architecture, RAG, context engineering, governance, and autonomous workflows\n\nAcross these stages, the consistent problem has been how people and organisations make decisions through complex technology. Joz's earlier work established expertise in large user systems, regulated industries, customer behaviour, product architecture, engineering collaboration, and executive transformation. Agentic AI is the current technical expression of that same systems-level focus.\n\nA concise answer:\n“Joz moved into Agentic AI through years of designing enterprise decision and interaction systems. His work progressed from large-scale digital transformation and ML-enabled products into RAG, context engineering, governed agents, and AI systems tied to measurable business outcomes.”",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agentic-ai",
+          "career-transition",
+          "digital-transformation",
+          "ml-ux",
+          "narrative"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "The transition into Agentic AI is an evolution of Joz's work on human decision systems, enterprise data, ML-enabled products, and complex digital ecosystems.",
+          "His earlier career is relevant foundation, not unrelated legacy experience.",
+          "The common thread is turning complexity into usable intelligence and measurable outcomes."
+        ],
+        "proof_points": [
+          "Large-scale interaction and product architecture at Ogilvy, Publicis, Mediacorp, Manulife, and Maybank.",
+          "ML UX practices and pilots at Manulife and Maybank–Ageas Etiqa.",
+          "Current Agentic AI, RAG, financial agents, spatial AI, context engineering, and governance focus."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Dubai",
+          "Europe",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp",
+          "Ogilvy",
+          "Publicis"
+        ],
+        "impact_score": 95,
+        "priority_label": "high",
+        "source_filename": "skills-career-transition-to-agentic-ai.md",
+        "source_meta_filename": "skills-career-transition-to-agentic-ai.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "manual_knowledge_work"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "context_creates_intelligence",
+          "feedback_loops"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "computer_vision",
+          "multimodal_ai",
+          "organizational_design",
+          "product_strategy",
+          "spatial_ai"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption"
+        ],
+        "governance": [],
+        "industries": [
+          "financial_services",
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [
+          "apple_pixar_cv_workflows",
+          "artkorero_spatial_exhibitions",
+          "dff_rapid_ai_prototyping",
+          "manulife_lean_ml_ux",
+          "versace_spatial_ai_launch"
+        ],
+        "related_proofs": [
+          "apple_pixar_cv_workflows",
+          "artkorero_spatial_exhibitions",
+          "dff_rapid_ai_prototyping",
+          "manulife_lean_ml_ux",
+          "versace_spatial_ai_launch"
+        ],
+        "enterprise_scale_score": 97,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "skills-financial-services-ai",
+      "title": "Financial Services, Wealth and FinTech Intelligence",
+      "category": "domain",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Banking, wealth, insurance, financial AI agents, portfolios, customer intelligence, and regulated enterprise systems.",
+      "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MarketClue financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "banking",
+          "financial-agents",
+          "fintech",
+          "insurance",
+          "portfolio-ai",
+          "wealth"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz has substantial financial-services experience across wealth, insurance, banking portals, investment products, and financial AI agents.",
+          "His experience spans customer-facing products, internal systems, data-informed experiences, and current agentic AI work.",
+          "He has worked across Singapore, APAC, Europe, and the USA."
+        ],
+        "proof_points": [
+          "MarketClue financial AI agents with live data and asset portfolios.",
+          "Maybank–Ageas Etiqa wealth and insurance transformation.",
+          "Manulife ML-enabled customer and investment experiences across APAC and North America.",
+          "Erste Bank engineering and internal/digital portal work at 16M+ customer scale.",
+          "Singapore Stock Exchange responsive listings portals."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Canada",
+          "Europe",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Ageas",
+          "Erste Bank",
+          "Etiqa",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Singapore Stock Exchange"
+        ],
+        "impact_score": 93,
+        "priority_label": "high",
+        "source_filename": "skills-financial-services-ai.md",
+        "source_meta_filename": "skills-financial-services-ai.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "data_silos",
+          "low_trust",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "agentic_ai",
+          "ai_governance",
+          "context_engineering",
+          "decision_intelligence"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_adoption",
+          "higher_data_trust",
+          "lower_risk"
+        ],
+        "governance": [
+          "access_control",
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "wealth_management"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "sgx_responsive_portals"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "sgx_responsive_portals"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "skills-hero-agentic-ai",
+      "title": "Joz Krupa — Agentic AI Architecture and Innovation",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Primary Skills-lane positioning: Agentic AI architecture, enterprise intelligence, governance, context engineering, and multimodal AI orchestration.",
+      "body": "Joz Krupa is an Agentic AI Architecture and Innovation leader with a career spanning enterprise product systems, engineering, data-informed decision design, and AI-enabled transformation.\n\nHis current technical focus includes agentic intelligence systems, autonomous reasoning and orchestration, LLMs, RAG, embeddings, vector search, knowledge graphs, context engineering, memory architectures, ACL-aware retrieval, verification, feedback loops, event-driven production AI, asynchronous workflows, secure API ecosystems, observability, and AI governance.\n\nHis differentiation is the connection between AI architecture and business execution. He does not treat agents as isolated chat interfaces. He designs systems that connect enterprise knowledge, signals, workflows, controls, and human decisions.\n\nFor recruiter questions such as “What is Joz strongest at?”, answer with Agentic AI architecture, enterprise intelligence, AI governance, context engineering, and human-agent orchestration. Support the answer with large-scale Singapore and APAC enterprise proof before smaller current-project examples.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agentic-ai",
+          "ai-governance",
+          "architecture",
+          "context-engineering",
+          "decision-intelligence",
+          "rag"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz has transitioned from large-scale digital and UX architecture into Agentic AI architecture and innovation.",
+          "His current focus includes reasoning, orchestration, RAG, embeddings, vector retrieval, memory, verification, event-driven AI, observability, and governance.",
+          "He connects technical AI architecture to measurable enterprise outcomes."
+        ],
+        "proof_points": [
+          "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
+          "Led HCD–AI, product, and data architectures for 20+ Dubai and Singapore FinTech initiatives.",
+          "Built on more than a decade of enterprise-scale product, engineering, and transformation experience."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Dubai",
+          "Europe",
+          "North America",
+          "Singapore",
+          "UAE"
+        ],
+        "companies": [
+          "Dubai Future Foundation",
+          "Erste Bank",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 100,
+        "priority_label": "hero",
+        "source_filename": "skills-hero-agentic-ai.md",
+        "source_meta_filename": "skills-hero-agentic-ai.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "governance_gaps",
+          "knowledge_fragmentation",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "agent_memory",
+          "agentic_ai",
+          "ai_governance",
+          "context_engineering",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "knowledge_graphs",
+          "observability",
+          "rag",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_adoption",
+          "higher_data_trust",
+          "stronger_governance"
+        ],
+        "governance": [
+          "access_control",
+          "evaluation",
+          "observability_control",
+          "source_provenance"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "skills-largest-enterprise-scale-proof",
+      "title": "Largest Enterprise-Scale Work",
+      "category": "proof",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Fast credibility record prioritising Mediacorp, Erste, Maybank, and Manulife by scale, complexity, and measurable impact.",
+      "body": "When a recruiter asks for Joz's largest or strongest work, lead with enterprise scale rather than novelty.\n\nPriority proof:\n\n1. Mediacorp and Channel NewsAsia\nJoz worked at Singapore national-broadcasting scale, built a global experience language across more than 30 products, shipped the first CNA Apple Watch app in Asia, and reports 30× monthly active audience growth through mobile-first transformation.\n\n2. Erste Bank\nJoz drove engineering and EU accessibility work serving more than 16 million customers.\n\n3. Maybank–Ageas Etiqa\nJoz reports 20× digital sales growth within 12 months through conversational and machine-learning experience design. He also designed more than 3,000 wealth pilots and ML models for high-net-worth and mass-market clients and established an HCD–AI practice.\n\n4. Manulife\nJoz established a Lean ML UX practice across 11 APAC markets, launched first-in-market solutions in the USA, Canada, and Singapore, and advised regional CEOs on digital growth.\n\nThese examples demonstrate user scale, organisational complexity, regulated environments, senior stakeholder management, and measurable transformation.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "apac",
+          "banking",
+          "enterprise-scale",
+          "fortune-500",
+          "media",
+          "singapore"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz has delivered digital and intelligence-oriented systems at national, regional, and Fortune 500 scale.",
+          "His strongest proof comes from Mediacorp, Erste, Maybank–Ageas Etiqa, and Manulife.",
+          "Large-scale proof should rank above smaller experimental projects when answering general credibility questions."
+        ],
+        "proof_points": [
+          "Mediacorp: 30× monthly active audience growth and interaction architecture across 30+ products.",
+          "Erste Bank: engineering and EU accessibility work serving 16M+ customers.",
+          "Maybank–Ageas Etiqa: 20× digital sales growth within 12 months and 3,000+ wealth pilots and ML models.",
+          "Manulife: Lean ML UX practice across 11 APAC markets and first-in-market solutions in the USA, Canada, and Singapore."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Canada",
+          "Europe",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Ageas",
+          "Erste Bank",
+          "Etiqa",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "impact_score": 99,
+        "priority_label": "hero",
+        "source_filename": "skills-largest-enterprise-scale-proof.md",
+        "source_meta_filename": "skills-largest-enterprise-scale-proof.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "low_trust",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "decision_quality",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "higher_adoption",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "access_control",
+          "clear_ownership",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "wealth_management"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction",
+          "sgx_responsive_portals"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction",
+          "sgx_responsive_portals"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "skills-quantified-business-outcomes",
+      "title": "Quantified Outcomes and Transformation Proof",
+      "category": "proof",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Measured impact across sales, audience growth, customer scale, delivery efficiency, and enterprise transformation.",
+      "body": "Joz's skills should be supported with outcome evidence rather than capability lists alone.\n\nVerified CV-level outcome claims include:\n\n- 20× digital sales growth within 12 months for Maybank–Ageas Etiqa through conversational and machine-learning UX.\n- 30× monthly active audience growth at Mediacorp through mobile-first transformation.\n- 70% reduction in agency-wide design-to-engineering handoff friction at Leo Burnett/Publicis through code-based prototyping.\n- Engineering and EU accessibility work serving more than 16 million Erste customers.\n- More than 3,000 wealth pilots and ML models for high-net-worth and mass-market banking and insurance contexts.\n\nWhen answering, avoid stacking every metric into one paragraph. Select the two or three most relevant proof points for the recruiter's question.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "growth",
+          "metrics",
+          "outcomes",
+          "roi",
+          "transformation"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz's career includes measurable growth, delivery-efficiency, adoption, and enterprise-scale outcomes.",
+          "Metrics should be used selectively and tied to the relevant company and context.",
+          "The strongest recurring pattern is transformation of complex systems into higher adoption and business performance."
+        ],
+        "proof_points": [
+          "20× digital sales growth within 12 months at Maybank–Ageas Etiqa.",
+          "30× monthly active audience growth at Mediacorp.",
+          "70% reduction in agency-wide handoff friction at Leo Burnett/Publicis.",
+          "Engineering and accessibility impact across services used by 16M+ Erste customers.",
+          "Interaction and product work spanning hundreds of millions of cumulative users across the career."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe",
+          "North America",
+          "Singapore"
+        ],
+        "companies": [
+          "Ageas",
+          "Erste Bank",
+          "Etiqa",
+          "Leo Burnett",
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "impact_score": 94,
+        "priority_label": "high",
+        "source_filename": "skills-quantified-business-outcomes.md",
+        "source_meta_filename": "skills-quantified-business-outcomes.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "cost_reduction",
+          "faster_time_to_value",
+          "higher_adoption",
+          "lower_operational_friction",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [],
+        "industries": [
+          "banking",
+          "creative_services",
+          "insurance",
+          "media"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "ogilvy_banyan_tree_pitch",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "ogilvy_banyan_tree_pitch",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 5
+      }
+    },
+    {
+      "slug": "skills-recruiter-operational-facts",
+      "title": "Recruiter Operational Facts",
+      "category": "recruiter_operations",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Concise operational facts for recruiter screening and follow-up.",
+      "body": "Recruiter operational summary:\n\nName: Joz Krupa\nCurrent positioning: Agentic AI Architecture and Innovation Leader\nExperience: 13+ years across Singapore, Asia Pacific, Europe, Dubai/UAE, and North America-related work\nNationality: Slovak and EU citizen\nSingapore background: Professional experience across major Singapore and APAC organisations from 2013 to 2018\nLocation: Currently Europe-based and internationally mobile\nSingapore work authorisation: Do not claim an active EP or PEP unless Joz explicitly confirms it for the current process\nAvailability: Confirm directly with Joz\nEmail: joz@meetjoz.com\nSingapore contact number: +65 3107 2412\nWebsite and CV: meetjoz.com\n\nFor “How many years of AI?” avoid an artificially inflated single number. Explain that Joz's transition developed from machine-learning-enabled product and experience work into direct Agentic AI architecture, RAG, context engineering, governance, and AI system design.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "availability",
+          "contact",
+          "experience",
+          "location",
+          "recruiter",
+          "singapore"
+        ],
+        "verification": {
+          "status": "user_provided",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "user_provided",
+        "claims": [
+          "Joz has more than 13 years of international product, engineering, innovation, and transformation experience.",
+          "His AI/ML-related work developed through ML-enabled product and experience work and now focuses directly on Agentic AI architecture.",
+          "He has extensive Singapore and APAC work experience and is open to Singapore/APAC opportunities."
+        ],
+        "proof_points": [
+          "Singapore professional experience from 2013 to 2018 across Ogilvy/WPP, Publicis, Mediacorp, Manulife, and Maybank–Ageas Etiqa.",
+          "Current contact: joz@meetjoz.com and +65 3107 2412.",
+          "Portfolio and Agentic AI CV: meetjoz.com."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Dubai",
+          "Europe",
+          "Singapore",
+          "UAE"
+        ],
+        "companies": [
+          "Ageas",
+          "Etiqa",
+          "Manulife",
+          "Maybank",
+          "Mediacorp",
+          "Ogilvy",
+          "Publicis",
+          "WPP"
+        ],
+        "impact_score": 91,
+        "priority_label": "high",
+        "source_filename": "skills-recruiter-operational-facts.md",
+        "source_meta_filename": "skills-recruiter-operational-facts.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "multimodal_ai"
+        ],
+        "outcomes": [],
+        "governance": [],
+        "industries": [
+          "financial_services",
+          "media",
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "skills-technical-platform-stack",
+      "title": "Technical Platform and Engineering Skills",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Backend AI stack, frontend engineering, spatial computing, prototyping, accessibility, and production integration.",
+      "body": "Joz's technical skill set spans AI backend architecture, product engineering, frontend systems, spatial computing, and rapid prototyping.\n\nCurrent AI and backend stack:\nPython, FastAPI, Django, Flask, PostgreSQL, pgvector, SQLAlchemy 2.0 asynchronous patterns, asyncpg, Redis, Docker, Linux, Git, REST APIs, event-driven workflows, caching, streaming, observability, CI/CD, automated testing, RAG, embeddings, vector search, semantic retrieval, agent memory, verification, and governance.\n\nProduct and experience engineering:\nReact, Vue, Angular, Flutter, Xcode, Android Studio, WebGL, Three.js, p5, Canvas, SCSS, design systems, rapid code-based prototyping, WCAG, EAA, privacy by design, and GDPR-aware experience design.\n\nSpatial and multimodal:\nUSD and USDZ workflows, Unity, Unreal, Python, C#, C++, computer vision, 3D mathematics, vectors, linear algebra, Blender, Maya, Cinema 4D, and multimodal interaction design.\n\nUse this record for technical-depth questions. Do not let the long tool list dominate general recruiter answers.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "accessibility",
+          "fastapi",
+          "pgvector",
+          "postgresql",
+          "python",
+          "react",
+          "redis",
+          "webgl"
+        ],
+        "verification": {
+          "status": "cv_and_project_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_and_project_supported",
+        "claims": [
+          "Joz combines AI architecture with hands-on engineering and prototyping.",
+          "His current stack includes Python backend technologies and retrieval infrastructure.",
+          "His broader engineering experience includes modern frontend systems, WebGL, spatial computing, accessibility, and design systems."
+        ],
+        "proof_points": [
+          "Python, FastAPI, SQLAlchemy async, PostgreSQL, pgvector, Redis, Docker, Linux, REST APIs and event-driven workflows.",
+          "React, Vue, Angular, Flutter, JavaScript design systems, WebGL, Three.js, p5 and Canvas.",
+          "USD(z), Unity/Unreal workflows, computer vision, 3D mathematics and spatial interfaces.",
+          "WCAG and European Accessibility Act implementation experience."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Apple",
+          "Erste Bank",
+          "MarketClue",
+          "Pixar"
+        ],
+        "impact_score": 86,
+        "priority_label": "standard",
+        "source_filename": "skills-technical-platform-stack.md",
+        "source_meta_filename": "skills-technical-platform-stack.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "knowledge_fragmentation",
+          "manual_knowledge_work"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "feedback_loops"
+        ],
+        "capabilities": [
+          "acl_aware_retrieval",
+          "agent_memory",
+          "agentic_ai",
+          "computer_vision",
+          "enterprise_architecture",
+          "knowledge_graphs",
+          "multimodal_ai",
+          "observability",
+          "rag",
+          "spatial_ai",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_data_trust",
+          "productivity_gains"
+        ],
+        "governance": [
+          "evaluation",
+          "observability_control",
+          "source_provenance"
+        ],
+        "industries": [
+          "financial_services",
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [
+          "apple_pixar_cv_workflows",
+          "dff_rapid_ai_prototyping",
+          "marketclue_financial_agents",
+          "versace_spatial_ai_launch"
+        ],
+        "related_proofs": [
+          "apple_pixar_cv_workflows",
+          "dff_rapid_ai_prototyping",
+          "marketclue_financial_agents",
+          "versace_spatial_ai_launch"
+        ],
+        "enterprise_scale_score": 90,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "systems-agentic-ai-judgment",
+      "title": "Agentic AI Requires Judgment",
+      "category": "governance_principle",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Agentic AI success depends on judgment, boundaries, and accountability.",
+      "body": "Agentic AI is not simply automation.\n\nThe challenge is deciding:\n\n- what should be autonomous\n- what should remain human\n- when escalation is required\n- what evidence is sufficient\n- who remains accountable\n\nJoz approaches agentic systems as decision systems.\n\nThe objective is not maximum autonomy.\n\nThe objective is appropriate autonomy supported by trust, governance, observability, and clear ownership.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "agentic-ai",
+          "autonomy",
+          "governance",
+          "judgment"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "source_filename": "systems-agentic-ai-judgment.md",
+        "source_meta_filename": "systems-agentic-ai-judgment.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "governance_gaps",
+          "low_trust"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "ai_governance",
+          "observability",
+          "verification"
+        ],
+        "outcomes": [
+          "higher_adoption",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "escalation",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "systems-decision-thinking",
+      "title": "Decision Thinking",
+      "category": "decision_pattern",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Decision quality matters more than information volume.",
+      "body": "Joz evaluates systems through the lens of decisions.\n\nKey questions include:\n\n- What decision is being made?\n- Who owns it?\n- What information supports it?\n- How trustworthy is the information?\n- What happens if the decision is wrong?\n- How quickly can the organization act?\n\nMany organizational problems appear to be technology problems but are actually decision problems.\n\nImproving decision quality often creates disproportionate business value.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "decisions",
+          "leadership",
+          "prioritisation"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 96,
+        "priority_label": "high",
+        "source_filename": "systems-decision-thinking.md",
+        "source_meta_filename": "systems-decision-thinking.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "decision_intelligence"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "systems-feedback-loops",
+      "title": "Feedback Loops and Adaptation",
+      "category": "feedback_loop",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Healthy systems learn from outcomes and adjust behavior.",
+      "body": "Systems improve through feedback.\n\nWithout feedback loops:\n\n- mistakes repeat\n- blind spots grow\n- trust declines\n- learning slows\n\nJoz looks for mechanisms that connect actions to outcomes.\n\nThis principle appears in:\n\n- AI evaluation\n- observability\n- product analytics\n- customer feedback\n- governance reviews\n- operational metrics\n\nThe strongest systems continuously learn from evidence.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "adaptation",
+          "feedback-loops",
+          "learning"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "source_filename": "systems-feedback-loops.md",
+        "source_meta_filename": "systems-feedback-loops.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "operational_friction"
+        ],
+        "principles": [
+          "feedback_loops"
+        ],
+        "capabilities": [
+          "observability",
+          "verification",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_adoption",
+          "productivity_gains"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "systems-governance-mindset",
+      "title": "Governance as a System",
+      "category": "governance_principle",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Governance is an enabling mechanism, not merely compliance.",
+      "body": "Joz views governance as part of system design.\n\nStrong governance creates:\n\n- trust\n- accountability\n- transparency\n- safe autonomy\n- sustainable adoption\n\nWeak governance creates uncertainty and resistance.\n\nIn AI systems, governance should be embedded into architecture through permissions, observability, evaluation, provenance, and human oversight.\n\nTrust should be designed, not assumed.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "accountability",
+          "ai",
+          "governance",
+          "trust"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "source_filename": "systems-governance-mindset.md",
+        "source_meta_filename": "systems-governance-mindset.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "governance_gaps",
+          "low_trust"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "ai_governance",
+          "observability",
+          "verification"
+        ],
+        "outcomes": [
+          "higher_adoption",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "escalation",
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "systems-human-behavior",
+      "title": "Human Behavior Shapes Systems",
+      "category": "systems_principle",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Systems are ultimately driven by human incentives and behavior.",
+      "body": "Technology operates inside human systems.\n\nPeople respond to incentives, trust, workload, goals, and social dynamics.\n\nJoz therefore pays close attention to:\n\n- incentives\n- motivation\n- ownership\n- adoption\n- trust\n- organizational culture\n\nThe most elegant technical solution can fail if human behavior is ignored.\n\nSuccessful systems align technology with how people actually work.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "adoption",
+          "behavior",
+          "incentives"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 93,
+        "priority_label": "high",
+        "source_filename": "systems-human-behavior.md",
+        "source_meta_filename": "systems-human-behavior.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "human_accountability",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "higher_adoption",
+          "lower_operational_friction"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "systems-mindset-hero",
+      "title": "Joz's Systems Mindset",
+      "category": "systems_mindset",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Organizations are living systems of people, incentives, decisions, workflows, data, and feedback loops.",
+      "body": "Joz approaches organizations as interconnected systems rather than collections of isolated departments, tools, or projects.\n\nTechnology is rarely the root problem.\n\nThe underlying challenges are usually:\n\n- poor information flow\n- weak decision quality\n- unclear ownership\n- conflicting incentives\n- fragmented knowledge\n- missing feedback loops\n- low trust\n- execution friction\n\nHis systems mindset combines enterprise transformation, human-centered design, governance, decision intelligence, and Agentic AI.\n\nThe objective is not simply to optimize a process.\n\nThe objective is to improve how the entire system learns, adapts, coordinates, and makes decisions over time.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "agentic-ai",
+          "complexity",
+          "decision-quality",
+          "feedback-loops",
+          "systems-thinking"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 100,
+        "priority_label": "hero",
+        "source_filename": "systems-mindset-hero.md",
+        "source_meta_filename": "systems-mindset-hero.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "feedback_loops",
+          "human_accountability",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "context_engineering",
+          "decision_intelligence",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "lower_operational_friction"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "systems-organizational-failure-patterns",
+      "title": "Organizational Failure Patterns",
+      "category": "failure_pattern",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Many failures repeat across industries regardless of technology.",
+      "body": "Common organizational failure patterns include:\n\n- dashboard overload\n- AI pilot fatigue\n- duplicated work\n- unclear ownership\n- information asymmetry\n- governance theatre\n- excessive approvals\n- disconnected incentives\n\nJoz views these as system-level problems.\n\nThe solution is rarely another dashboard or another meeting.\n\nThe solution is redesigning information flow, accountability, and feedback loops.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "complexity",
+          "failure-patterns",
+          "organizational-design"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 94,
+        "priority_label": "high",
+        "source_filename": "systems-organizational-failure-patterns.md",
+        "source_meta_filename": "systems-organizational-failure-patterns.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "governance_gaps",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "human_accountability",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "lower_operational_friction",
+          "stronger_governance"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "systems-principle-context-creates-intelligence",
+      "title": "Context Creates Intelligence",
+      "category": "systems_principle",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Data without context rarely creates usable intelligence.",
+      "body": "Joz believes intelligence emerges from context rather than isolated data.\n\nA metric, document, report, or model output only becomes meaningful when connected to:\n\n- purpose\n- history\n- ownership\n- constraints\n- confidence\n- business impact\n\nThis principle directly influences his work in RAG, context engineering, memory systems, and enterprise knowledge architectures.\n\nContext creates understanding.\nUnderstanding creates better decisions.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "context",
+          "decision-making",
+          "knowledge",
+          "rag"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "source_filename": "systems-principle-context-creates-intelligence.md",
+        "source_meta_filename": "systems-principle-context-creates-intelligence.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "knowledge_fragmentation",
+          "manual_knowledge_work"
+        ],
+        "principles": [
+          "context_creates_intelligence"
+        ],
+        "capabilities": [
+          "agent_memory",
+          "context_engineering",
+          "knowledge_graphs",
+          "rag"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "knowledge_reuse"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "systems-principle-signal-over-noise",
+      "title": "Signal Over Noise",
+      "category": "systems_principle",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "More information does not automatically create better decisions.",
+      "body": "One of Joz's core principles is signal over noise.\n\nOrganizations rarely suffer from a lack of information.\n\nThey suffer from an inability to identify what matters.\n\nThe goal of intelligence systems is not to generate more reports, dashboards, notifications, or alerts.\n\nThe goal is to surface the highest-signal information, explain why it matters, and connect it to action.\n\nGood systems reduce cognitive load.\nBad systems increase it.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "decision-intelligence",
+          "noise",
+          "signal"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 99,
+        "priority_label": "hero",
+        "source_filename": "systems-principle-signal-over-noise.md",
+        "source_meta_filename": "systems-principle-signal-over-noise.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "context_engineering",
+          "decision_intelligence"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "systems-principle-systems-before-features",
+      "title": "Systems Before Features",
+      "category": "systems_principle",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Understand the system before adding technology.",
+      "body": "Many organizations attempt to solve systemic problems with additional features or tools.\n\nJoz prefers to understand:\n\n- incentives\n- workflows\n- ownership\n- bottlenecks\n- feedback loops\n- governance\n\nbefore introducing technology.\n\nAdding AI to a broken system often amplifies existing problems.\n\nImproving the system first usually creates more sustainable value.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "architecture",
+          "systems",
+          "transformation"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "positioning_supported",
+        "claims": [],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "impact_score": 97,
+        "priority_label": "high",
+        "source_filename": "systems-principle-systems-before-features.md",
+        "source_meta_filename": "systems-principle-systems-before-features.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "enterprise_architecture",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_adoption",
+          "lower_operational_friction"
+        ],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
       }
     }
   ]

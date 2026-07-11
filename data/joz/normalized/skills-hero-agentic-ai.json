@@ -1,0 +1,117 @@
+{
+  "slug": "skills-hero-agentic-ai",
+  "title": "Joz Krupa — Agentic AI Architecture and Innovation",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Primary Skills-lane positioning: Agentic AI architecture, enterprise intelligence, governance, context engineering, and multimodal AI orchestration.",
+  "body": "Joz Krupa is an Agentic AI Architecture and Innovation leader with a career spanning enterprise product systems, engineering, data-informed decision design, and AI-enabled transformation.\n\nHis current technical focus includes agentic intelligence systems, autonomous reasoning and orchestration, LLMs, RAG, embeddings, vector search, knowledge graphs, context engineering, memory architectures, ACL-aware retrieval, verification, feedback loops, event-driven production AI, asynchronous workflows, secure API ecosystems, observability, and AI governance.\n\nHis differentiation is the connection between AI architecture and business execution. He does not treat agents as isolated chat interfaces. He designs systems that connect enterprise knowledge, signals, workflows, controls, and human decisions.\n\nFor recruiter questions such as “What is Joz strongest at?”, answer with Agentic AI architecture, enterprise intelligence, AI governance, context engineering, and human-agent orchestration. Support the answer with large-scale Singapore and APAC enterprise proof before smaller current-project examples.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic-ai",
+      "ai-governance",
+      "architecture",
+      "context-engineering",
+      "decision-intelligence",
+      "rag"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz has transitioned from large-scale digital and UX architecture into Agentic AI architecture and innovation.",
+      "His current focus includes reasoning, orchestration, RAG, embeddings, vector retrieval, memory, verification, event-driven AI, observability, and governance.",
+      "He connects technical AI architecture to measurable enterprise outcomes."
+    ],
+    "proof_points": [
+      "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
+      "Led HCD–AI, product, and data architectures for 20+ Dubai and Singapore FinTech initiatives.",
+      "Built on more than a decade of enterprise-scale product, engineering, and transformation experience."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Dubai",
+      "Europe",
+      "North America",
+      "Singapore",
+      "UAE"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "source_filename": "skills-hero-agentic-ai.md",
+    "source_meta_filename": "skills-hero-agentic-ai.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "governance_gaps",
+      "knowledge_fragmentation",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agent_memory",
+      "agentic_ai",
+      "ai_governance",
+      "context_engineering",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "observability",
+      "rag",
+      "verification"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_adoption",
+      "higher_data_trust",
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "evaluation",
+      "observability_control",
+      "source_provenance"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 2
+  }
+}

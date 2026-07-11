@@ -1,0 +1,108 @@
+{
+  "slug": "business-need-ai-adoption-governance",
+  "title": "AI Adoption, Trust and Governance",
+  "category": "governance",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "How Joz connects governance, usability, trust, and workflow fit to improve enterprise AI adoption.",
+  "body": "Why do enterprise AI initiatives fail to gain adoption?\n\nCommon reasons include:\n\n- users do not understand where answers come from\n- outputs are not aligned to real workflows\n- permissions and data boundaries are unclear\n- quality is not measured\n- responsibility for decisions is ambiguous\n- the AI produces information but not usable action\n- governance is added after deployment rather than designed in\n\nJoz treats governance and adoption as part of the same system.\n\nA trustworthy AI capability should include:\n\n- source grounding and provenance\n- ACL-aware retrieval\n- audit trails\n- confidence and uncertainty handling\n- evaluation and observability\n- human approval for sensitive actions\n- clear ownership\n- workflow integration\n- feedback loops\n\nThis improves both control and adoption because users can understand, verify, and act on the system's output.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "adoption",
+      "ai-governance",
+      "auditability",
+      "human-oversight",
+      "trust"
+    ],
+    "verification": {
+      "status": "capability_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "capability_supported",
+    "claims": [
+      "AI adoption is an organisational and workflow problem, not only a model-quality problem.",
+      "Trust requires source grounding, permissions, observability, evaluation, accountability, and appropriate human control.",
+      "Joz's background in human-centred systems and enterprise AI helps bridge governance and usability."
+    ],
+    "proof_points": [
+      "Applied AI skills explicitly include observability, governance, ACL-aware retrieval, verification, and feedback loops.",
+      "Established HCD–AI and Lean ML UX practices in enterprise environments.",
+      "Worked in financial services, public systems, and large-scale media where trust and operational reliability matter."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe",
+      "Singapore",
+      "UAE"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "impact_score": 95,
+    "priority_label": "high",
+    "source_filename": "business-need-ai-adoption-governance.md",
+    "source_meta_filename": "business-need-ai-adoption-governance.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "governance_gaps",
+      "low_trust",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "human_accountability",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "ai_governance",
+      "context_engineering",
+      "observability",
+      "verification"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "auditability",
+      "escalation",
+      "evaluation",
+      "human_approval",
+      "observability_control",
+      "source_provenance"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "government",
+      "insurance"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 3
+  }
+}

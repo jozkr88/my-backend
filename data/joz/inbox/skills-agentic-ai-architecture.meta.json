@@ -1,0 +1,85 @@
+{
+  "slug": "skills-agentic-ai-architecture",
+  "title": "Agentic AI Architecture",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Detailed technical proof for Joz's Agentic AI architecture capability.",
+  "tags": [
+    "agents",
+    "llm",
+    "rag",
+    "memory",
+    "embeddings",
+    "vector-search",
+    "knowledge-graphs",
+    "apis"
+  ],
+  "impact_score": 96,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz designs agentic systems with reasoning, orchestration, retrieval, memory, verification, and feedback loops.",
+    "He understands production concerns including asynchronous workflows, APIs, access control, observability, and governance.",
+    "His AI work is framed around business problems and operational outcomes."
+  ],
+  "proof_points": [
+    "MarketClue financial AI agents with live data and asset portfolio context.",
+    "Enterprise RAG and context-engineering architecture reflected in his current applied AI skill set.",
+    "AI governance, retrieval controls, and verification are explicit parts of his architecture approach."
+  ],
+  "regions": [
+    "Singapore",
+    "UAE",
+    "Europe",
+    "USA"
+  ],
+  "companies": [
+    "MarketClue",
+    "Dubai Future Foundation",
+    "Erste Bank"
+  ],
+  "problems": [
+    "data_silos",
+    "governance_gaps",
+    "knowledge_fragmentation",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "context_creates_intelligence",
+    "decision_quality"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "agent_memory",
+    "agentic_ai",
+    "ai_governance",
+    "context_engineering",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "knowledge_graphs",
+    "observability",
+    "rag",
+    "verification"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "stronger_governance"
+  ],
+  "governance": [
+    "access_control",
+    "confidence_handling",
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "financial_services",
+    "technology"
+  ],
+  "proofs": [
+    "dff_rapid_ai_prototyping",
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth"
+  ]
+}

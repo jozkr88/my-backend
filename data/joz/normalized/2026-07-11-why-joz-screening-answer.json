@@ -8,12 +8,13 @@
   "body": "Why Joz Screening Answer\n\nPurpose\nThis record gives Joz LLM a concise recruiter-safe answer to the screening question: why Joz?\n\nShort answer\n- Joz combines product judgment, engineering delivery, world-class UX, and applied AI systems thinking in one profile.\n- Joz is strongest where the problem is ambiguous, the signal is noisy, and the business needs a system that can actually ship and operate.\n- Joz brings 13+ years of professional experience overall, including 8+ years in ML/AI, across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.\n\nSupporting framing\n- Joz is not just a model or prompt layer profile. Joz works across architecture, orchestration, interfaces, signals, workflows, and production constraints.\n- Joz is credible in executive-facing, cross-functional, and internationally distributed environments.\n\nAnswering rule\n- Keep the answer direct and recruiter-readable.\n- Do not lapse into hype or generic motivation.",
   "metadata": {
     "lane": "business_need",
+    "original_lane": "business_need",
     "tags": [
-      "recruiter_screening",
-      "why_joz",
-      "hiring_fit",
       "business_need",
-      "faq"
+      "faq",
+      "hiring_fit",
+      "recruiter_screening",
+      "why_joz"
     ],
     "verification": {
       "status": "verified",
@@ -38,6 +39,17 @@
     "impact_score": 0,
     "priority_label": "standard",
     "source_filename": "2026-07-11-why-joz-screening-answer.md",
-    "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json"
+    "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
   }
 }

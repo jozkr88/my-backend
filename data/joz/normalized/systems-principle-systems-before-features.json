@@ -1,0 +1,58 @@
+{
+  "slug": "systems-principle-systems-before-features",
+  "title": "Systems Before Features",
+  "category": "systems_principle",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Understand the system before adding technology.",
+  "body": "Many organizations attempt to solve systemic problems with additional features or tools.\n\nJoz prefers to understand:\n\n- incentives\n- workflows\n- ownership\n- bottlenecks\n- feedback loops\n- governance\n\nbefore introducing technology.\n\nAdding AI to a broken system often amplifies existing problems.\n\nImproving the system first usually creates more sustainable value.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "architecture",
+      "systems",
+      "transformation"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "impact_score": 97,
+    "priority_label": "high",
+    "source_filename": "systems-principle-systems-before-features.md",
+    "source_meta_filename": "systems-principle-systems-before-features.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture",
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_operational_friction"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 2
+  }
+}

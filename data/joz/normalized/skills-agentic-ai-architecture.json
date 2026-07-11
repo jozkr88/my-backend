@@ -1,0 +1,107 @@
+{
+  "slug": "skills-agentic-ai-architecture",
+  "title": "Agentic AI Architecture",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Detailed technical proof for Joz's Agentic AI architecture capability.",
+  "body": "Joz's Agentic AI architecture capability covers the full operating model of an enterprise agent: understand intent, retrieve authorised context, reason over evidence, plan actions, execute through approved tools, verify results, and escalate when confidence or risk thresholds require human control.\n\nCore capability areas include:\n\n- LLM orchestration and agentic reasoning\n- RAG, embeddings, vector search, and semantic retrieval\n- knowledge graphs and enterprise context engineering\n- short-term and persistent memory architecture\n- ACL-aware retrieval and permission-sensitive responses\n- verification frameworks and feedback loops\n- event-driven and asynchronous production workflows\n- secure API and data-platform integration\n- observability, evaluation, and AI governance\n\nThe recruiter-safe positioning is that Joz operates at the bridge between business, product, data, AI architecture, and human decision-making. He should not be described merely as a prompt engineer or generic AI consultant.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agents",
+      "apis",
+      "embeddings",
+      "knowledge-graphs",
+      "llm",
+      "memory",
+      "rag",
+      "vector-search"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz designs agentic systems with reasoning, orchestration, retrieval, memory, verification, and feedback loops.",
+      "He understands production concerns including asynchronous workflows, APIs, access control, observability, and governance.",
+      "His AI work is framed around business problems and operational outcomes."
+    ],
+    "proof_points": [
+      "MarketClue financial AI agents with live data and asset portfolio context.",
+      "Enterprise RAG and context-engineering architecture reflected in his current applied AI skill set.",
+      "AI governance, retrieval controls, and verification are explicit parts of his architecture approach."
+    ],
+    "regions": [
+      "Europe",
+      "Singapore",
+      "UAE",
+      "USA"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "MarketClue"
+    ],
+    "impact_score": 96,
+    "priority_label": "high",
+    "source_filename": "skills-agentic-ai-architecture.md",
+    "source_meta_filename": "skills-agentic-ai-architecture.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "governance_gaps",
+      "knowledge_fragmentation",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "context_creates_intelligence",
+      "decision_quality"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agent_memory",
+      "agentic_ai",
+      "ai_governance",
+      "context_engineering",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "observability",
+      "rag",
+      "verification"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "confidence_handling",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "financial_services",
+      "technology"
+    ],
+    "proofs": [
+      "dff_rapid_ai_prototyping",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth"
+    ],
+    "related_proofs": [
+      "dff_rapid_ai_prototyping",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 1
+  }
+}

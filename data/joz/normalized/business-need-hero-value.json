@@ -1,0 +1,112 @@
+{
+  "slug": "business-need-hero-value",
+  "title": "Joz Turns Complexity into Business Value",
+  "category": "business_need",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Primary Business Need positioning: Joz turns noisy systems, fragmented knowledge, and disconnected AI initiatives into usable intelligence, faster decisions, and measurable operational value.",
+  "body": "Joz turns noisy systems into usable intelligence, faster decisions, and real operational lift.\n\nHis value is not limited to producing AI features. He helps organisations identify where intelligence can reduce friction, improve decision quality, accelerate execution, and create measurable financial or operational outcomes.\n\nThe Business Need lane should describe Joz as someone who can connect:\n\n- business priorities\n- fragmented enterprise knowledge\n- customer and operational signals\n- AI and data architecture\n- human decision-making\n- governance and control\n- implementation and measurable value\n\nFor broad questions such as “Why hire Joz?” or “What business value does he create?”, lead with measurable transformation and decision intelligence. Support the answer with enterprise proof before discussing tools or small prototypes.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "agentic-ai",
+      "business-value",
+      "decision-intelligence",
+      "enterprise-transformation",
+      "roi"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [
+      "Joz helps organisations turn complex systems, fragmented information, and AI investment into measurable business outcomes.",
+      "His value is strongest where decision quality, speed, trust, and execution are constrained by organisational noise.",
+      "He connects Agentic AI architecture to business priorities, workflows, governance, and measurable outcomes."
+    ],
+    "proof_points": [
+      "20× digital sales growth within 12 months at Maybank–Ageas Etiqa.",
+      "30× monthly active audience growth at Mediacorp.",
+      "70% reduction in delivery handoff friction at Leo Burnett/Publicis.",
+      "Engineering and accessibility work serving 16M+ Erste customers.",
+      "Current Agentic AI, RAG, financial-agent, context-engineering, and governance work."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Dubai",
+      "Europe",
+      "North America",
+      "Singapore",
+      "UAE"
+    ],
+    "companies": [
+      "Ageas",
+      "Erste Bank",
+      "Etiqa",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "source_filename": "business-need-hero-value.md",
+    "source_meta_filename": "business-need-hero-value.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "knowledge_fragmentation",
+      "organizational_complexity",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "context_engineering",
+      "decision_intelligence",
+      "organizational_design"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "faster_time_to_value",
+      "higher_adoption",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 4
+  }
+}

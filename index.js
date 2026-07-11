@@ -55,6 +55,95 @@ const isEphemeralFilesystem =
   Boolean(process.env.RENDER) ||
   process.env.DISABLE_FILE_MEMORY === "1";
 const canPersistToLocalDisk = !isEphemeralFilesystem;
+const JOZ_CHAT_SESSION_WINDOW_MS = 30_000;
+const JOZ_CHAT_SESSION_MAX_REQUESTS = 5;
+const JOZ_CHAT_IP_WINDOW_MS = 5 * 60_000;
+const JOZ_CHAT_IP_MAX_REQUESTS = 20;
+const JOZ_CHAT_DUPLICATE_WINDOW_MS = 10_000;
+const jozChatSessionLog = new Map();
+const jozChatIpLog = new Map();
+const jozChatDuplicateLog = new Map();
+
+function normalizeJozChatMessage(text = "") {
+  return String(text || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
+
+function pruneRecentTimestamps(timestamps = [], windowMs, now) {
+  return timestamps.filter((timestamp) => now - timestamp < windowMs);
+}
+
+function trackJozChatWindow(store, key, windowMs, now) {
+  const recent = pruneRecentTimestamps(store.get(key) || [], windowMs, now);
+  recent.push(now);
+  store.set(key, recent);
+  return recent;
+}
+
+function getClientIp(req) {
+  const forwarded = String(req.headers["x-forwarded-for"] || "").trim();
+  if (forwarded) {
+    return forwarded.split(",")[0].trim();
+  }
+
+  return (
+    String(req.ip || "").trim() ||
+    String(req.socket?.remoteAddress || "").trim() ||
+    "unknown"
+  );
+}
+
+function enforceJozChatRateLimit(req, sessionKey, latestUserMessage) {
+  const now = Date.now();
+  const ip = getClientIp(req);
+  const normalizedMessage = normalizeJozChatMessage(latestUserMessage);
+  const sessionIdentifier = sessionKey || `ip:${ip}`;
+
+  const sessionEvents = trackJozChatWindow(
+    jozChatSessionLog,
+    sessionIdentifier,
+    JOZ_CHAT_SESSION_WINDOW_MS,
+    now
+  );
+  if (sessionEvents.length > JOZ_CHAT_SESSION_MAX_REQUESTS) {
+    return {
+      status: 429,
+      error: "Too many messages in this session. Please wait a moment.",
+      retryAfterMs: JOZ_CHAT_SESSION_WINDOW_MS,
+    };
+  }
+
+  const ipEvents = trackJozChatWindow(
+    jozChatIpLog,
+    ip,
+    JOZ_CHAT_IP_WINDOW_MS,
+    now
+  );
+  if (ipEvents.length > JOZ_CHAT_IP_MAX_REQUESTS) {
+    return {
+      status: 429,
+      error: "Too many requests from this IP. Please wait a moment.",
+      retryAfterMs: JOZ_CHAT_IP_WINDOW_MS,
+    };
+  }
+
+  if (normalizedMessage) {
+    const duplicateKey = `${sessionIdentifier}:${normalizedMessage}`;
+    const lastDuplicateTimestamp = jozChatDuplicateLog.get(duplicateKey) || 0;
+    if (now - lastDuplicateTimestamp < JOZ_CHAT_DUPLICATE_WINDOW_MS) {
+      return {
+        status: 429,
+        error: "Duplicate message sent too quickly. Please wait before retrying.",
+        retryAfterMs: JOZ_CHAT_DUPLICATE_WINDOW_MS,
+      };
+    }
+    jozChatDuplicateLog.set(duplicateKey, now);
+  }
+
+  return null;
+}
 
 function isJozEducationQuestion(message = "") {
   const clean = String(message || "").trim().toLowerCase();
@@ -334,11 +423,20 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(400).json({ error: "Missing user message" });
     }
 
+    const rateLimitResult = enforceJozChatRateLimit(
+      req,
+      sessionKey,
+      latestUserMessage
+    );
+    if (rateLimitResult) {
+      return res.status(rateLimitResult.status).json(rateLimitResult);
+    }
+
     const intentMode =
       String(context?.intentMode || "").trim().toLowerCase() ||
       inferJozIntentMode(latestUserMessage);
     const profile = await getPrimaryJozProfile();
-    const retrievedDocuments = await getJozDocumentsByIntent(intentMode, 8);
+    const retrievedDocuments = await getJozDocumentsByIntent(intentMode, 8, latestUserMessage);
     const retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
       category: doc.category,

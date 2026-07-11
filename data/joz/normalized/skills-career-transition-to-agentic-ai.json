@@ -1,0 +1,102 @@
+{
+  "slug": "skills-career-transition-to-agentic-ai",
+  "title": "Career Transition into Agentic AI",
+  "category": "narrative",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Explains the credible progression from interaction engineering and digital transformation into ML-enabled systems and Agentic AI.",
+  "body": "Joz's career transition should not be framed as “UX designer who recently started using AI.”\n\nThe credible progression is:\n\ninteraction engineering and product systems\n→ enterprise digital transformation\n→ data-informed and machine-learning-enabled experiences\n→ decision intelligence and organisational knowledge systems\n→ Agentic AI architecture, RAG, context engineering, governance, and autonomous workflows\n\nAcross these stages, the consistent problem has been how people and organisations make decisions through complex technology. Joz's earlier work established expertise in large user systems, regulated industries, customer behaviour, product architecture, engineering collaboration, and executive transformation. Agentic AI is the current technical expression of that same systems-level focus.\n\nA concise answer:\n“Joz moved into Agentic AI through years of designing enterprise decision and interaction systems. His work progressed from large-scale digital transformation and ML-enabled products into RAG, context engineering, governed agents, and AI systems tied to measurable business outcomes.”",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic-ai",
+      "career-transition",
+      "digital-transformation",
+      "ml-ux",
+      "narrative"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "The transition into Agentic AI is an evolution of Joz's work on human decision systems, enterprise data, ML-enabled products, and complex digital ecosystems.",
+      "His earlier career is relevant foundation, not unrelated legacy experience.",
+      "The common thread is turning complexity into usable intelligence and measurable outcomes."
+    ],
+    "proof_points": [
+      "Large-scale interaction and product architecture at Ogilvy, Publicis, Mediacorp, Manulife, and Maybank.",
+      "ML UX practices and pilots at Manulife and Maybank–Ageas Etiqa.",
+      "Current Agentic AI, RAG, financial agents, spatial AI, context engineering, and governance focus."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Dubai",
+      "Europe",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp",
+      "Ogilvy",
+      "Publicis"
+    ],
+    "impact_score": 95,
+    "priority_label": "high",
+    "source_filename": "skills-career-transition-to-agentic-ai.md",
+    "source_meta_filename": "skills-career-transition-to-agentic-ai.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "knowledge_fragmentation",
+      "manual_knowledge_work"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "context_creates_intelligence",
+      "feedback_loops"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "computer_vision",
+      "multimodal_ai",
+      "organizational_design",
+      "product_strategy",
+      "spatial_ai"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption"
+    ],
+    "governance": [],
+    "industries": [
+      "financial_services",
+      "spatial_computing",
+      "technology"
+    ],
+    "proofs": [
+      "apple_pixar_cv_workflows",
+      "artkorero_spatial_exhibitions",
+      "dff_rapid_ai_prototyping",
+      "manulife_lean_ml_ux",
+      "versace_spatial_ai_launch"
+    ],
+    "related_proofs": [
+      "apple_pixar_cv_workflows",
+      "artkorero_spatial_exhibitions",
+      "dff_rapid_ai_prototyping",
+      "manulife_lean_ml_ux",
+      "versace_spatial_ai_launch"
+    ],
+    "enterprise_scale_score": 97,
+    "measurable_outcome_count": 2
+  }
+}

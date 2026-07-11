@@ -26,6 +26,8 @@ The goal is to keep raw source material separate from normalized, verified, mode
   Raw pasted text or markdown files go here first.
 - `templates/`
   Templates for source metadata.
+- `ontology/`
+  Shared entities and proof objects used to connect the three lanes.
 - `normalized/`
   Generated structured records per source item.
 - `published/`
@@ -58,6 +60,7 @@ npm run build:joz-knowledge
 
 - `data/joz/normalized/*.json`
 - `data/joz/published/joz-documents.generated.json`
+- `data/joz/published/joz-ontology.generated.json`
 - `data/joz/published/joz-knowledge-report.json`
 
 ## Verification rule

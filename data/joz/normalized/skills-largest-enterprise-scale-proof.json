@@ -1,0 +1,114 @@
+{
+  "slug": "skills-largest-enterprise-scale-proof",
+  "title": "Largest Enterprise-Scale Work",
+  "category": "proof",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Fast credibility record prioritising Mediacorp, Erste, Maybank, and Manulife by scale, complexity, and measurable impact.",
+  "body": "When a recruiter asks for Joz's largest or strongest work, lead with enterprise scale rather than novelty.\n\nPriority proof:\n\n1. Mediacorp and Channel NewsAsia\nJoz worked at Singapore national-broadcasting scale, built a global experience language across more than 30 products, shipped the first CNA Apple Watch app in Asia, and reports 30× monthly active audience growth through mobile-first transformation.\n\n2. Erste Bank\nJoz drove engineering and EU accessibility work serving more than 16 million customers.\n\n3. Maybank–Ageas Etiqa\nJoz reports 20× digital sales growth within 12 months through conversational and machine-learning experience design. He also designed more than 3,000 wealth pilots and ML models for high-net-worth and mass-market clients and established an HCD–AI practice.\n\n4. Manulife\nJoz established a Lean ML UX practice across 11 APAC markets, launched first-in-market solutions in the USA, Canada, and Singapore, and advised regional CEOs on digital growth.\n\nThese examples demonstrate user scale, organisational complexity, regulated environments, senior stakeholder management, and measurable transformation.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "apac",
+      "banking",
+      "enterprise-scale",
+      "fortune-500",
+      "media",
+      "singapore"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz has delivered digital and intelligence-oriented systems at national, regional, and Fortune 500 scale.",
+      "His strongest proof comes from Mediacorp, Erste, Maybank–Ageas Etiqa, and Manulife.",
+      "Large-scale proof should rank above smaller experimental projects when answering general credibility questions."
+    ],
+    "proof_points": [
+      "Mediacorp: 30× monthly active audience growth and interaction architecture across 30+ products.",
+      "Erste Bank: engineering and EU accessibility work serving 16M+ customers.",
+      "Maybank–Ageas Etiqa: 20× digital sales growth within 12 months and 3,000+ wealth pilots and ML models.",
+      "Manulife: Lean ML UX practice across 11 APAC markets and first-in-market solutions in the USA, Canada, and Singapore."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Canada",
+      "Europe",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Ageas",
+      "Erste Bank",
+      "Etiqa",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "impact_score": 99,
+    "priority_label": "hero",
+    "source_filename": "skills-largest-enterprise-scale-proof.md",
+    "source_meta_filename": "skills-largest-enterprise-scale-proof.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "low_trust",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "decision_quality",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "enterprise_architecture",
+      "organizational_design",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "higher_adoption",
+      "lower_risk",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "access_control",
+      "clear_ownership",
+      "human_approval"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "wealth_management"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction",
+      "sgx_responsive_portals"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction",
+      "sgx_responsive_portals"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 4
+  }
+}

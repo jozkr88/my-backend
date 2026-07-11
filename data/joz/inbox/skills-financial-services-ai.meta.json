@@ -1,0 +1,89 @@
+{
+  "slug": "skills-financial-services-ai",
+  "title": "Financial Services, Wealth and FinTech Intelligence",
+  "category": "domain",
+  "lane": "skills",
+  "summary": "Banking, wealth, insurance, financial AI agents, portfolios, customer intelligence, and regulated enterprise systems.",
+  "tags": [
+    "fintech",
+    "wealth",
+    "banking",
+    "insurance",
+    "portfolio-ai",
+    "financial-agents"
+  ],
+  "impact_score": 93,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz has substantial financial-services experience across wealth, insurance, banking portals, investment products, and financial AI agents.",
+    "His experience spans customer-facing products, internal systems, data-informed experiences, and current agentic AI work.",
+    "He has worked across Singapore, APAC, Europe, and the USA."
+  ],
+  "proof_points": [
+    "MarketClue financial AI agents with live data and asset portfolios.",
+    "Maybank–Ageas Etiqa wealth and insurance transformation.",
+    "Manulife ML-enabled customer and investment experiences across APAC and North America.",
+    "Erste Bank engineering and internal/digital portal work at 16M+ customer scale.",
+    "Singapore Stock Exchange responsive listings portals."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Europe",
+    "USA",
+    "Canada"
+  ],
+  "companies": [
+    "MarketClue",
+    "Maybank",
+    "Ageas",
+    "Etiqa",
+    "Manulife",
+    "Erste Bank",
+    "Singapore Stock Exchange"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "data_silos",
+    "low_trust",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "agentic_ai",
+    "ai_governance",
+    "context_engineering",
+    "decision_intelligence"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_adoption",
+    "higher_data_trust",
+    "lower_risk"
+  ],
+  "governance": [
+    "access_control",
+    "evaluation",
+    "human_approval",
+    "source_provenance"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "wealth_management"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth",
+    "sgx_responsive_portals"
+  ]
+}

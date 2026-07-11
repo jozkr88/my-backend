@@ -1,0 +1,73 @@
+{
+  "slug": "business-need-enterprise-knowledge",
+  "title": "Fragmented Knowledge to Usable Intelligence",
+  "category": "capability",
+  "lane": "business_need",
+  "summary": "Business value of turning scattered enterprise knowledge into permission-aware, source-grounded, reusable intelligence.",
+  "tags": [
+    "enterprise-rag",
+    "knowledge-management",
+    "search",
+    "acl",
+    "retrieval"
+  ],
+  "impact_score": 94,
+  "priority_label": "high",
+  "verification": "capability_supported",
+  "claims": [
+    "Enterprise knowledge is often present but operationally unusable because it is fragmented, inaccessible, outdated, or untrusted.",
+    "Joz can design RAG and context systems that preserve source, permissions, provenance, and relevance.",
+    "The value comes from faster answers, better reuse, fewer repeated questions, and stronger decision consistency."
+  ],
+  "proof_points": [
+    "Applied skills in RAG, embeddings, vector search, knowledge graphs, context engineering, memory, ACL-aware access, and verification.",
+    "Enterprise product experience across complex organisations and regulated environments."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Erste Bank",
+    "Maybank",
+    "Manulife",
+    "Mediacorp"
+  ],
+  "problems": [
+    "data_silos",
+    "knowledge_fragmentation",
+    "manual_knowledge_work",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "signal_over_noise",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "agent_memory",
+    "context_engineering",
+    "knowledge_graphs",
+    "rag"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "knowledge_reuse",
+    "productivity_gains"
+  ],
+  "governance": [
+    "access_control",
+    "data_boundaries",
+    "source_provenance"
+  ],
+  "industries": [
+    "financial_services",
+    "government",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "marketclue_financial_agents"
+  ]
+}

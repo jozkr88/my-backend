@@ -1,10 +1,22 @@
 {
-  "generated_at": "2026-07-11T20:17:27.932Z",
+  "generated_at": "2026-07-11T23:11:42.871Z",
   "counts": {
-    "source_files": 9,
-    "normalized_records": 9,
+    "source_files": 38,
+    "normalized_records": 38,
     "verified_records": 8,
+    "ontology_entities": 80,
+    "proofs": 12,
     "errors": 0
   },
+  "ontology_counts": {
+    "problems": 10,
+    "principles": 8,
+    "capabilities": 18,
+    "outcomes": 12,
+    "governance": 10,
+    "industries": 10,
+    "proofs": 12
+  },
+  "ontology_status": "ok",
   "errors": []
 }

@@ -1,5 +1,6 @@
 import pg from "pg";
 import { getJozLaneConfig, normalizeJozLaneIntent } from "./shared/jozLlmLanes.js";
+import { rankJozDocumentsForQuery } from "./shared/jozOntology.js";
 
 const { Pool } = pg;
 
@@ -377,30 +378,47 @@ export async function getPrimaryJozProfile() {
   return result.rows[0] || null;
 }
 
-export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8) {
+export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, query = "") {
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
   const categories = lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"];
+  const laneAliases = [...new Set([primaryCategory, primaryCategory === "systems_mindset" ? "mindset" : null].filter(Boolean))];
   const result = await runQuery(
     `SELECT title, category, summary, body, metadata
      FROM joz_documents
      WHERE category = ANY($1::text[])
+        OR COALESCE(metadata->>'lane', '') = ANY($2::text[])
      ORDER BY
        CASE
-         WHEN category = $2 THEN 0
-         WHEN COALESCE(metadata->>'lane', '') = $2 THEN 1
+         WHEN COALESCE(metadata->>'lane', '') = ANY($2::text[]) THEN 0
+         WHEN category = $3 THEN 1
          WHEN category = 'proof' THEN 2
          WHEN category = 'bio' THEN 3
          WHEN category = 'faq' THEN 4
          ELSE 5
        END,
+       CASE
+         WHEN LOWER(COALESCE(metadata->>'verification_status', metadata->'verification'->>'status', '')) IN ('verified', 'cv_supported') THEN 0
+         WHEN LOWER(COALESCE(metadata->>'verification_status', metadata->'verification'->>'status', '')) IN ('project_supported', 'capability_supported') THEN 1
+         ELSE 2
+       END,
        COALESCE((metadata->>'impact_score')::int, 0) DESC,
+       CASE LOWER(COALESCE(metadata->>'priority_label', 'standard'))
+         WHEN 'hero' THEN 0
+         WHEN 'high' THEN 1
+         WHEN 'standard' THEN 2
+         ELSE 3
+       END,
        updated_at DESC,
        id ASC
-     LIMIT $3`,
-    [categories, primaryCategory, limit]
+     LIMIT $4`,
+    [categories, laneAliases, primaryCategory, Math.max(limit * 5, 20)]
   );
-  return result.rows;
+  return rankJozDocumentsForQuery(result.rows, {
+    intentMode: primaryCategory,
+    query,
+    limit,
+  }).map(({ _ranking, ...doc }) => doc);
 }
 
 export async function createJozConversation({

@@ -1,0 +1,57 @@
+{
+  "slug": "systems-human-behavior",
+  "title": "Human Behavior Shapes Systems",
+  "category": "systems_principle",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Systems are ultimately driven by human incentives and behavior.",
+  "body": "Technology operates inside human systems.\n\nPeople respond to incentives, trust, workload, goals, and social dynamics.\n\nJoz therefore pays close attention to:\n\n- incentives\n- motivation\n- ownership\n- adoption\n- trust\n- organizational culture\n\nThe most elegant technical solution can fail if human behavior is ignored.\n\nSuccessful systems align technology with how people actually work.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "adoption",
+      "behavior",
+      "incentives"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "impact_score": 93,
+    "priority_label": "high",
+    "source_filename": "systems-human-behavior.md",
+    "source_meta_filename": "systems-human-behavior.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "low_trust",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "human_accountability",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "higher_adoption",
+      "lower_operational_friction"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1
+  }
+}

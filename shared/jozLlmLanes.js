@@ -10,7 +10,7 @@ export const JOZ_LLM_LANES = {
       "Strong signal and decision thinking",
       "Clarity in noisy environments",
     ],
-    retrievalCategories: ["business_need", "case_study", "proof", "bio", "faq"],
+    retrievalCategories: ["business_need", "governance", "case_study", "proof", "bio", "faq"],
     actions: [
       {
         label: "Why hire Joz now?",
@@ -26,8 +26,8 @@ export const JOZ_LLM_LANES = {
       },
     ],
   },
-  mindset: {
-    intentMode: "mindset",
+  systems_mindset: {
+    intentMode: "systems_mindset",
     label: "Systems Mindset",
     title: "Systems Mindset",
     summary:
@@ -37,7 +37,7 @@ export const JOZ_LLM_LANES = {
       "Operational truth over theory",
       "Clarity, trust, and action",
     ],
-    retrievalCategories: ["mindset", "case_study", "proof", "bio", "faq"],
+    retrievalCategories: ["systems_mindset", "mindset", "governance_principle", "case_study", "proof", "bio", "faq"],
     actions: [
       {
         label: "How does Joz think?",
@@ -52,6 +52,9 @@ export const JOZ_LLM_LANES = {
         prompt: "What is Joz's operating mindset when building AI systems?",
       },
     ],
+  },
+  mindset: {
+    aliasFor: "systems_mindset",
   },
   skills: {
     intentMode: "skills",
@@ -68,7 +71,7 @@ export const JOZ_LLM_LANES = {
     actions: [
       {
         label: "View CV",
-        href: "/documents/joz-agentic-ai-skills.pdf",
+        href: "/documents/Joz_Krupa_CV.pdf",
       },
       {
         label: "Show AI strengths",
@@ -97,7 +100,8 @@ export const JOZ_LLM_LANES = {
 
 export function normalizeJozLaneIntent(intentMode = "skills") {
   const normalized = String(intentMode || "skills").trim().toLowerCase();
-  return JOZ_LLM_LANES[normalized] ? normalized : "skills";
+  if (normalized === "mindset") return "systems_mindset";
+  return JOZ_LLM_LANES[normalized]?.aliasFor || (JOZ_LLM_LANES[normalized] ? normalized : "skills");
 }
 
 export function getJozLaneConfig(intentMode = "skills") {

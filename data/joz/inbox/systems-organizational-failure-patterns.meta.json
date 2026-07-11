@@ -1,0 +1,34 @@
+{
+  "slug": "systems-organizational-failure-patterns",
+  "title": "Organizational Failure Patterns",
+  "category": "failure_pattern",
+  "lane": "systems_mindset",
+  "summary": "Many failures repeat across industries regardless of technology.",
+  "tags": [
+    "failure-patterns",
+    "organizational-design",
+    "complexity"
+  ],
+  "impact_score": 94,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "problems": [
+    "data_silos",
+    "governance_gaps",
+    "operational_friction",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "human_accountability",
+    "signal_over_noise",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "organizational_design",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "lower_operational_friction",
+    "stronger_governance"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "systems-decision-thinking",
+  "title": "Decision Thinking",
+  "category": "decision_pattern",
+  "lane": "systems_mindset",
+  "summary": "Decision quality matters more than information volume.",
+  "tags": [
+    "decisions",
+    "leadership",
+    "prioritisation"
+  ],
+  "impact_score": 96,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "problems": [
+    "organizational_complexity",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "signal_over_noise"
+  ],
+  "capabilities": [
+    "decision_intelligence"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "slug": "skills-recruiter-operational-facts",
+  "title": "Recruiter Operational Facts",
+  "category": "recruiter_operations",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Concise operational facts for recruiter screening and follow-up.",
+  "body": "Recruiter operational summary:\n\nName: Joz Krupa\nCurrent positioning: Agentic AI Architecture and Innovation Leader\nExperience: 13+ years across Singapore, Asia Pacific, Europe, Dubai/UAE, and North America-related work\nNationality: Slovak and EU citizen\nSingapore background: Professional experience across major Singapore and APAC organisations from 2013 to 2018\nLocation: Currently Europe-based and internationally mobile\nSingapore work authorisation: Do not claim an active EP or PEP unless Joz explicitly confirms it for the current process\nAvailability: Confirm directly with Joz\nEmail: joz@meetjoz.com\nSingapore contact number: +65 3107 2412\nWebsite and CV: meetjoz.com\n\nFor “How many years of AI?” avoid an artificially inflated single number. Explain that Joz's transition developed from machine-learning-enabled product and experience work into direct Agentic AI architecture, RAG, context engineering, governance, and AI system design.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "availability",
+      "contact",
+      "experience",
+      "location",
+      "recruiter",
+      "singapore"
+    ],
+    "verification": {
+      "status": "user_provided",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "user_provided",
+    "claims": [
+      "Joz has more than 13 years of international product, engineering, innovation, and transformation experience.",
+      "His AI/ML-related work developed through ML-enabled product and experience work and now focuses directly on Agentic AI architecture.",
+      "He has extensive Singapore and APAC work experience and is open to Singapore/APAC opportunities."
+    ],
+    "proof_points": [
+      "Singapore professional experience from 2013 to 2018 across Ogilvy/WPP, Publicis, Mediacorp, Manulife, and Maybank–Ageas Etiqa.",
+      "Current contact: joz@meetjoz.com and +65 3107 2412.",
+      "Portfolio and Agentic AI CV: meetjoz.com."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Dubai",
+      "Europe",
+      "Singapore",
+      "UAE"
+    ],
+    "companies": [
+      "Ageas",
+      "Etiqa",
+      "Manulife",
+      "Maybank",
+      "Mediacorp",
+      "Ogilvy",
+      "Publicis",
+      "WPP"
+    ],
+    "impact_score": 91,
+    "priority_label": "high",
+    "source_filename": "skills-recruiter-operational-facts.md",
+    "source_meta_filename": "skills-recruiter-operational-facts.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "multimodal_ai"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [
+      "financial_services",
+      "media",
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}

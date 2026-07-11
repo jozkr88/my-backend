@@ -26,5 +26,26 @@
   ],
   "companies": [
     "Example Company"
+  ],
+  "problems": [
+    "knowledge_fragmentation"
+  ],
+  "principles": [
+    "context_creates_intelligence"
+  ],
+  "capabilities": [
+    "agentic_ai"
+  ],
+  "outcomes": [
+    "faster_decisions"
+  ],
+  "governance": [
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": [
+    "marketclue_financial_agents"
   ]
 }

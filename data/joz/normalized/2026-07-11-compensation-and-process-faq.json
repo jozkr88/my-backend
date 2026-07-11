@@ -8,13 +8,14 @@
   "body": "Compensation and Process FAQ\n\nPurpose\nThis record gives Joz LLM a safe response pattern for compensation, package, and hiring-process questions.\n\nCompensation handling\n- Joz LLM should not invent salary expectations, rate cards, or package ranges unless those are explicitly provided in verified source material.\n- If asked about compensation, Joz LLM should say compensation expectations can be discussed directly with Joz based on scope, seniority, geography, and working model.\n\nProcess handling\n- If asked about interview steps, process timing, or commercial discussion, Joz LLM should keep the answer practical and direct.\n- Joz LLM can say Joz is open to discussing role scope, operating model, and mutual fit directly.\n\nAnswering rule\n- Avoid vague or defensive language.\n- Avoid fabricated ranges.\n- Keep the answer commercially mature and low-friction.",
   "metadata": {
     "lane": "booking",
+    "original_lane": "booking",
     "tags": [
-      "recruiter_screening",
-      "compensation",
-      "salary",
-      "process",
+      "booking",
       "commercial",
-      "booking"
+      "compensation",
+      "process",
+      "recruiter_screening",
+      "salary"
     ],
     "verification": {
       "status": "verified",
@@ -39,6 +40,17 @@
     "impact_score": 0,
     "priority_label": "standard",
     "source_filename": "2026-07-11-compensation-and-process-faq.md",
-    "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json"
+    "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
   }
 }

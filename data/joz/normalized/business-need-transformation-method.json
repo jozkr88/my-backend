@@ -1,0 +1,100 @@
+{
+  "slug": "business-need-transformation-method",
+  "title": "From Business Problem to Agentic AI Value",
+  "category": "delivery",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Repeatable method for identifying, designing, testing, and scaling high-value Agentic AI opportunities.",
+  "body": "Joz's value-delivery method:\n\n1. Define the business problem\nIdentify the blocked decision, workflow friction, customer problem, or operational risk.\n\n2. Establish a baseline\nMeasure current time, cost, error rate, conversion, risk exposure, or cycle time.\n\n3. Identify the required intelligence\nDetermine what signals, knowledge, context, and permissions are needed.\n\n4. Design the operating model\nDefine the role of the agent, the human, the workflow, ownership, controls, and escalation.\n\n5. Build a focused prototype\nTest the highest-risk assumptions with representative data and real users.\n\n6. Evaluate\nMeasure answer quality, workflow fit, adoption, latency, cost, reliability, and business impact.\n\n7. Scale deliberately\nIntegrate only after the value case and governance model are credible.\n\nThis avoids technology-first AI programmes and reduces the risk of expensive pilots that never become operating capabilities.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "delivery",
+      "discovery",
+      "measurement",
+      "prototype",
+      "roadmap"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Joz begins with the business problem, baseline, decision, workflow, and value metric before selecting technology.",
+      "He can translate ambiguous needs into architecture, prototype, governance requirements, and a measurable implementation roadmap.",
+      "The preferred delivery model proves value early and scales only after evidence."
+    ],
+    "proof_points": [
+      "Experience across discovery, architecture, prototyping, engineering collaboration, executive alignment, and enterprise rollout.",
+      "Rapid AI prototyping for Dubai Future Foundation and current AI initiatives.",
+      "Long record of transformation across multiple industries and markets."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "impact_score": 93,
+    "priority_label": "high",
+    "source_filename": "business-need-transformation-method.md",
+    "source_meta_filename": "business-need-transformation-method.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "knowledge_fragmentation",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "organizational_design",
+      "product_strategy",
+      "rapid_prototyping",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_operational_friction",
+      "productivity_gains"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [
+      "financial_services",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "dff_rapid_ai_prototyping",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "dff_rapid_ai_prototyping",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 3
+  }
+}

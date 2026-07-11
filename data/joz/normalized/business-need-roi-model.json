@@ -1,0 +1,106 @@
+{
+  "slug": "business-need-roi-model",
+  "title": "Where the ROI Comes From",
+  "category": "roi",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Defines the principal ROI levers for Joz's work: revenue growth, productivity, cost reduction, risk reduction, faster decisions, and improved adoption.",
+  "body": "Where is the ROI?\n\nThe ROI is found in a small number of measurable value levers:\n\n1. Revenue growth\nBetter customer journeys, stronger conversion, more relevant recommendations, higher product adoption, and faster commercial response.\n\n2. Productivity\nLess manual research, reporting, reconciliation, coordination, and repeated knowledge work.\n\n3. Cost reduction\nFewer unnecessary process steps, lower handoff friction, more reuse, and better workflow automation.\n\n4. Decision speed\nFaster access to trusted context, clearer prioritisation, and reduced time between signal and action.\n\n5. Risk reduction\nPermission-aware retrieval, auditability, human approval, evidence grounding, and clearer accountability.\n\n6. Adoption and execution\nAI systems that fit real workflows are more likely to be used, trusted, and converted into operational value.\n\nJoz should not promise a universal ROI figure before discovery. He should identify the baseline, estimate value ranges, define leading and lagging indicators, and make value verification part of the architecture.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "cost-reduction",
+      "decision-speed",
+      "productivity",
+      "revenue",
+      "risk",
+      "roi"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "ROI should be tied to a measurable business baseline and target, not generic AI activity.",
+      "Joz's work creates value through revenue uplift, reduced manual effort, lower delivery friction, improved adoption, reduced risk, and faster decisions.",
+      "Every proposed initiative should have a value owner, metric, baseline, target, and verification method."
+    ],
+    "proof_points": [
+      "20× digital sales growth at Maybank–Ageas Etiqa.",
+      "30× audience growth at Mediacorp.",
+      "70% reduction in handoff friction at Publicis.",
+      "Large-scale accessibility and engineering impact at Erste."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Ageas",
+      "Erste Bank",
+      "Etiqa",
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "impact_score": 97,
+    "priority_label": "hero",
+    "source_filename": "business-need-roi-model.md",
+    "source_meta_filename": "business-need-roi-model.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "manual_knowledge_work",
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "faster_time_to_value",
+      "lower_risk",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 6
+  }
+}

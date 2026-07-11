@@ -1,0 +1,111 @@
+{
+  "slug": "business-need-problems-joz-solves",
+  "title": "What Problems Joz Can Solve",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Core enterprise problems Joz can address through Agentic AI, decision intelligence, context engineering, governance, and transformation.",
+  "body": "What problems can Joz solve?\n\nJoz is strongest where organisations face one or more of these conditions:\n\n- fragmented knowledge across documents, systems, teams, and repositories\n- slow decision-making caused by conflicting or incomplete information\n- multiple AI pilots without clear business ownership or measurable outcomes\n- low trust in AI outputs\n- weak adoption because AI does not fit real workflows\n- manual reporting, reconciliation, research, and repeated analysis\n- disconnected customer, product, operational, and financial signals\n- unclear governance, permissions, accountability, or auditability\n- duplicated work across teams\n- poor translation between strategy and technical implementation\n- complex products that users or employees struggle to understand\n- decision bottlenecks that depend on a few people holding critical context\n\nThe answer should connect the problem to a business consequence and then to a measurable intervention. Avoid listing technology before explaining the operational need.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "adoption",
+      "ai-governance",
+      "business-problems",
+      "decision-latency",
+      "knowledge-fragmentation"
+    ],
+    "verification": {
+      "status": "capability_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "capability_supported",
+    "claims": [
+      "Joz solves enterprise problems where technology, data, people, workflows, and decision-making are disconnected.",
+      "His strongest problem areas include fragmented knowledge, slow decisions, weak AI adoption, unclear ROI, governance gaps, and operational friction.",
+      "He can work from problem framing through architecture, prototype, implementation guidance, and evaluation."
+    ],
+    "proof_points": [
+      "Enterprise transformation across banking, insurance, national media, government, and technology.",
+      "Agentic AI, RAG, context engineering, AI governance, and multimodal systems.",
+      "Quantified outcomes in sales, audience growth, customer scale, and delivery efficiency."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "impact_score": 97,
+    "priority_label": "hero",
+    "source_filename": "business-need-problems-joz-solves.md",
+    "source_meta_filename": "business-need-problems-joz-solves.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "data_silos",
+      "governance_gaps",
+      "knowledge_fragmentation",
+      "low_trust",
+      "manual_knowledge_work",
+      "operational_friction",
+      "organizational_complexity",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "context_engineering",
+      "decision_intelligence",
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_adoption",
+      "lower_operational_friction",
+      "productivity_gains"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 3
+  }
+}
