@@ -3,13 +3,13 @@ export const JOZ_LLM_IDENTITY = {
   label: "Joz LLM",
   website: "https://meetjoz.com",
   email: "joz@meetjoz.com",
-  phone: "+421 952 538 970",
+  phone: "+65 3107 2412",
   location: "Bratislava, Slovakia / Singapore / Dubai / Zurich",
   recruiterProfile: {
     nationality: "Slovak / European Union",
     singaporeStatus: "Singapore EP/PEP",
     contactEmail: "joz@meetjoz.com",
-    contactPhone: "+421 952 538 970",
+    contactPhone: "+65 3107 2412",
     availabilityNote:
       "Current availability and start date should be confirmed directly with Joz.",
   },
@@ -17,9 +17,9 @@ export const JOZ_LLM_IDENTITY = {
     nationality:
       "Joz is Slovak and an EU national. Joz's Singapore status is EP/PEP.",
     contact:
-      "Joz can be reached at joz@meetjoz.com and +421 952 538 970.",
+      "Joz can be reached at joz@meetjoz.com and +65 3107 2412.",
     availability:
-      "Joz's current availability and start date should be confirmed directly with Joz at joz@meetjoz.com or +421 952 538 970.",
+      "Joz's current availability and start date should be confirmed directly with Joz at joz@meetjoz.com or +65 3107 2412.",
     experience:
       "Joz has 13+ years of professional experience overall, including 8+ years in ML/AI. That is based on the dated CV timeline from 2013 to present, with ML/AI-focused work from 2018 onward.",
     education:

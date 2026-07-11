@@ -1,12 +1,124 @@
 {
-  "generated_at": "2026-07-11T19:27:12.156Z",
+  "generated_at": "2026-07-11T20:17:27.932Z",
   "counts": {
-    "source_files": 7,
-    "normalized_records": 7,
-    "verified_records": 6,
+    "source_files": 9,
+    "normalized_records": 9,
+    "verified_records": 8,
     "errors": 0
   },
   "records": [
+    {
+      "slug": "2026-07-11-agentic-ai-architecture-proof",
+      "title": "Agentic AI Architecture Proof",
+      "category": "skills",
+      "source_type": "derived",
+      "source_uri": null,
+      "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
+      "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MarketClue USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
+      "metadata": {
+        "lane": "skills",
+        "tags": [
+          "agentic_ai",
+          "architecture",
+          "orchestration",
+          "rag",
+          "retrieval",
+          "production_ai",
+          "skills"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-11",
+          "notes": "Derived from the verified current CV and aligned to the existing recruiter-screening and enterprise-scale records."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.",
+          "Joz's AI systems capability includes LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering.",
+          "Joz's delivery profile combines system design, memory patterns, observability, and business-facing execution."
+        ],
+        "proof_points": [
+          "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+          "Apple/Pixar-adjacent work is framed as early Python USD(z) and computer-vision AI work in Singapore.",
+          "Dubai Future Foundation and Erste Bank add public-sector and enterprise-scale delivery context.",
+          "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
+        ],
+        "regions": [
+          "North America",
+          "Europe/EEA",
+          "Singapore",
+          "UAE/MENA",
+          "Asia Pacific"
+        ],
+        "companies": [
+          "MarketClue USA",
+          "Apple/Pixar",
+          "Dubai Future Foundation",
+          "Erste Bank"
+        ],
+        "impact_score": 84,
+        "priority_label": "high",
+        "source_filename": "2026-07-11-agentic-ai-architecture-proof.md",
+        "source_meta_filename": "2026-07-11-agentic-ai-architecture-proof.meta.json"
+      }
+    },
+    {
+      "slug": "2026-07-11-agentic-ux-orchestration-proof",
+      "title": "Agentic UX Orchestration Proof",
+      "category": "skills",
+      "source_type": "derived",
+      "source_uri": null,
+      "summary": "Focused proof of Joz's multimodal, spatial, and agentic UX orchestration capability in enterprise and high-visibility delivery contexts.",
+      "body": "Agentic UX Orchestration Proof\n\nPurpose\nThis record isolates Joz's strongest multimodal, spatial, and agentic UX orchestration capability so the Skills lane can answer clearly when the user is asking about interaction systems rather than core backend AI architecture.\n\nCore positioning\n- Joz combines AI systems thinking with human-centered orchestration across voice, touch, gesture, gaze, haptics, and spatial interfaces.\n- The profile is strongest where AI behavior must map to real human mental models, live telemetry, and operational decision-making.\n\nCapabilities\n- Context-aware multimodal interactions across voice, touch, gesture, gaze, and haptics\n- Telemetry and behavioral data feeding agentic feedback loops\n- Real-time signals mapped to human mental models\n- Volumetric AI interfaces and spatial interaction design\n- NLP and computer-vision-driven personalization with intent modeling and semantic retrieval\n- Anticipatory, predictive, assistive, and autonomous decision-support experiences\n\nProof and context\n- Versace/SOA: first in Dubai to design and launch spatial AI with volumetric 3D UI.\n- ArtKorero: pioneered spatial AI for world-class art exhibitions in Dubai.\n- Mediacorp / CNA: mobile-first product transformation with roughly 30x MAU audience growth and Apple-featured launch credibility.\n- Maybank-Ageas Etiqa: conversational and ML UX tied to 20x digital-sales growth and 3,000+ wealth pilots.\n- Manulife: established a Lean ML UX practice across 11 markets as a founding APAC hire.\n\nAnswering rule\n- When the question is about UX orchestration, multimodal systems, spatial interfaces, or AI behavior in human-facing environments, this record should lead.\n- Keep the answer concrete and capability-led, not abstract design language.",
+      "metadata": {
+        "lane": "skills",
+        "tags": [
+          "agentic_ai_ux",
+          "multimodal",
+          "spatial_ai",
+          "ux_orchestration",
+          "telemetry",
+          "interaction_systems",
+          "skills"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-11",
+          "notes": "Derived from the verified current CV and aligned to the enterprise-scale and recruiter-screening records."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz combines AI systems thinking with multimodal and human-centered orchestration across voice, touch, gesture, gaze, haptics, and spatial interfaces.",
+          "Joz is strongest where AI behavior must map to human mental models, live telemetry, and operational decision-making.",
+          "Joz's UX orchestration work spans conversational, spatial, predictive, and assistive interaction systems."
+        ],
+        "proof_points": [
+          "Versace/SOA is framed as first-in-Dubai spatial AI with volumetric 3D UI.",
+          "ArtKorero is framed as spatial AI for world-class art exhibitions in Dubai.",
+          "Mediacorp/CNA and Maybank-Ageas Etiqa add measurable high-scale transformation outcomes.",
+          "The CV explicitly lists multimodal interaction, telemetry-driven feedback loops, intent modeling, and semantic retrieval."
+        ],
+        "regions": [
+          "Singapore",
+          "UAE/MENA",
+          "Asia Pacific",
+          "Europe/EEA"
+        ],
+        "companies": [
+          "Versace/SOA",
+          "ArtKorero",
+          "Mediacorp",
+          "Maybank-Ageas Etiqa",
+          "Manulife"
+        ],
+        "impact_score": 80,
+        "priority_label": "high",
+        "source_filename": "2026-07-11-agentic-ux-orchestration-proof.md",
+        "source_meta_filename": "2026-07-11-agentic-ux-orchestration-proof.meta.json"
+      }
+    },
     {
       "slug": "2026-07-11-compensation-and-process-faq",
       "title": "Compensation and Process FAQ",
@@ -58,7 +170,7 @@
       "source_type": "paste",
       "source_uri": "/Users/jozzox/.codex/attachments/69e30d33-e4b2-4b33-9201-770660b6679b/pasted-text.txt",
       "summary": "Current user-provided CV covering Joz global scale, agentic AI architecture, agentic AI UX orchestration, professional experience, postgraduate education, and Fortune 500 expertise.",
-      "body": "Jozef Krupa\nmeetjoz.com\njoz@meetjoz.com\n+421 952 538 970\n\nAgentic AI CV • meetjoz.com\n\nGlobal Scale\nWorldwide Impact\nNorth America, Europe/EEA, United Kingdom, UAE/MENA, Singapore, Japan, Greater China, Australia, and the wider Asia Pacific region\n\nApplied AI Skills\nAgentic AI Architecture: Agentic intelligence systems, autonomous reasoning, and orchestration • LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering • Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops • Event-driven production AI and asynchronous workflows • Data platforms, secure API ecosystems, and cloud-native platforms • Observability and AI governance\nAgentic AI UX Orchestration: Self-organising AI metamaterials • Context-aware multimodal interactions (voice, touch, gesture, gaze, and haptics) • Telemetry and behavioural data powering agentic feedback loops • Real-time signals mapped to human mental models • Volumetric AI interfaces • NLP/CV-driven personalisation with intent modelling and semantic retrieval • Anticipatory, predictive, assistive, and autonomous decision-making intelligence\n\nProfessional Experience\nAgentic AI Architecture and Innovation Leader\nSingapore, Dubai, Zurich and Europe/EU/EEA 2018–Present\nMarketClue USA: Architected financial AI agents with live data/asset portfolios.\nArtKorero: Pioneered spatial AI for world-class art exhibitions in Dubai.\nVersace/SOA: First in Dubai to design and launch spatial AI with volumetric 3D UI.\nDubai Future Foundation: Rapid AI prototyping for UAE innovation initiatives.\nErste Bank: Drove Engineering/EU Accessibility, serving 16M+ customers.\n20+ Dubai/Singapore FinTechs: Led HCD–AI, product, and data architectures.\nApple/Pixar: First in Singapore to pioneer Python USD(z) and Computer Vision AI.\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nDelivered 20× growth in digital sales within 12 months via conversational/ML UX.\nDesigned 3,000+ wealth pilots and ML models for HNW/mass-market clients.\nEstablished an HCD–AI practice, training C-suite executives and regional teams.\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nEstablished a Lean ML UX practice across 11 markets as a founding APAC hire.\nLaunched first-in-market ML UX solutions in the USA, Canada, and Singapore.\nAdvised APAC regional CEOs on digital growth strategies that scaled globally.\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nFirst in Asia to ship the CNA Apple Watch app, globally featured by Apple.\nAchieved 30× MAU audience growth through mobile-first transformation.\nBuilt a Global Experience Language standardising IxD across 30+ products.\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nDelivered SK–II’s first luxury e-commerce in the USA and across 8 APAC markets.\nDeveloped mobile-first apps for P&G (SK–II, Braun, Gillette) and Samsung.\nReduced agency-wide handoff friction by 70% through code-based prototyping.\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nBuilt the prototype that won Banyan Tree’s multi-million-dollar agency pitch.\nRe-engineered the Singapore Stock Exchange’s responsive listings portals.\nDeployed cross-platform UGC apps for Danone across 8 APAC markets.\n\nPostgraduate Education\nMSc Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nHPI d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nFortune 500 Expertise\nHyperscale AI Ecosystems\nFortune 500 FinTech/InsurTech, Fortune 50 Technology, Fortune 50 MedTech/HealthTech, Ogilvy, WPP Singapore/Asia Pacific, Leo Burnett, Publicis Singapore/Asia Pacific, Mediacorp Singapore, Dubai Future Foundation, Apple HQ, and Stanford d.school in Silicon Valley.\n\nNote from user: i have more data from my other cvs",
+      "body": "Jozef Krupa\nmeetjoz.com\njoz@meetjoz.com\n+65 3107 2412\n\nAgentic AI CV • meetjoz.com\n\nGlobal Scale\nWorldwide Impact\nNorth America, Europe/EEA, United Kingdom, UAE/MENA, Singapore, Japan, Greater China, Australia, and the wider Asia Pacific region\n\nApplied AI Skills\nAgentic AI Architecture: Agentic intelligence systems, autonomous reasoning, and orchestration • LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering • Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops • Event-driven production AI and asynchronous workflows • Data platforms, secure API ecosystems, and cloud-native platforms • Observability and AI governance\nAgentic AI UX Orchestration: Self-organising AI metamaterials • Context-aware multimodal interactions (voice, touch, gesture, gaze, and haptics) • Telemetry and behavioural data powering agentic feedback loops • Real-time signals mapped to human mental models • Volumetric AI interfaces • NLP/CV-driven personalisation with intent modelling and semantic retrieval • Anticipatory, predictive, assistive, and autonomous decision-making intelligence\n\nProfessional Experience\nAgentic AI Architecture and Innovation Leader\nSingapore, Dubai, Zurich and Europe/EU/EEA 2018–Present\nMarketClue USA: Architected financial AI agents with live data/asset portfolios.\nArtKorero: Pioneered spatial AI for world-class art exhibitions in Dubai.\nVersace/SOA: First in Dubai to design and launch spatial AI with volumetric 3D UI.\nDubai Future Foundation: Rapid AI prototyping for UAE innovation initiatives.\nErste Bank: Drove Engineering/EU Accessibility, serving 16M+ customers.\n20+ Dubai/Singapore FinTechs: Led HCD–AI, product, and data architectures.\nApple/Pixar: First in Singapore to pioneer Python USD(z) and Computer Vision AI.\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nDelivered 20× growth in digital sales within 12 months via conversational/ML UX.\nDesigned 3,000+ wealth pilots and ML models for HNW/mass-market clients.\nEstablished an HCD–AI practice, training C-suite executives and regional teams.\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nEstablished a Lean ML UX practice across 11 markets as a founding APAC hire.\nLaunched first-in-market ML UX solutions in the USA, Canada, and Singapore.\nAdvised APAC regional CEOs on digital growth strategies that scaled globally.\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nFirst in Asia to ship the CNA Apple Watch app, globally featured by Apple.\nAchieved 30× MAU audience growth through mobile-first transformation.\nBuilt a Global Experience Language standardising IxD across 30+ products.\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nDelivered SK–II’s first luxury e-commerce in the USA and across 8 APAC markets.\nDeveloped mobile-first apps for P&G (SK–II, Braun, Gillette) and Samsung.\nReduced agency-wide handoff friction by 70% through code-based prototyping.\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nBuilt the prototype that won Banyan Tree’s multi-million-dollar agency pitch.\nRe-engineered the Singapore Stock Exchange’s responsive listings portals.\nDeployed cross-platform UGC apps for Danone across 8 APAC markets.\n\nPostgraduate Education\nMSc Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nHPI d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nFortune 500 Expertise\nHyperscale AI Ecosystems\nFortune 500 FinTech/InsurTech, Fortune 50 Technology, Fortune 50 MedTech/HealthTech, Ogilvy, WPP Singapore/Asia Pacific, Leo Burnett, Publicis Singapore/Asia Pacific, Mediacorp Singapore, Dubai Future Foundation, Apple HQ, and Stanford d.school in Silicon Valley.\n\nNote from user: i have more data from my other cvs",
       "metadata": {
         "lane": "skills",
         "tags": [
@@ -318,7 +430,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
-      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +421 952 538 970\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
+      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
       "metadata": {
         "lane": "skills",
         "tags": [
@@ -340,7 +452,7 @@
         "claims": [
           "Joz is Slovak and an EU national.",
           "Joz's Singapore status is EP/PEP.",
-          "Joz's direct contact details are joz@meetjoz.com and +421 952 538 970.",
+          "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
           "Joz has 13+ years of professional experience overall and 8+ years in ML/AI.",
           "Availability and start date should be confirmed directly with Joz unless explicitly verified elsewhere."
         ],

@@ -1,7 +1,7 @@
 Jozef Krupa
 meetjoz.com
 joz@meetjoz.com
-+421 952 538 970
++65 3107 2412
 
 Agentic AI CV • meetjoz.com
 

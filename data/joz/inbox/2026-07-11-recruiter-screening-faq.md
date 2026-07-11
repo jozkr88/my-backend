@@ -11,7 +11,7 @@ Nationality and work status
 
 Primary contact details
 - Email: joz@meetjoz.com
-- Phone: +421 952 538 970
+- Phone: +65 3107 2412
 - Website: https://meetjoz.com
 
 Availability

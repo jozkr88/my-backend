@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const repoRoot = path.resolve(__dirname, "..", "..");
+const repoRoot = path.resolve(__dirname, "..");
 
 const dataRoot = path.join(repoRoot, "data", "joz");
 const inboxDir = path.join(dataRoot, "inbox");

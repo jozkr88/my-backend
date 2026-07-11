@@ -270,7 +270,7 @@ VALUES (
   'Primary profile backing the Joz LLM agent, including skills, case studies, mindset, and business-fit knowledge.',
   'https://meetjoz.com',
   'joz@meetjoz.com',
-  '+421 952 538 970',
+  '+65 3107 2412',
   'Bratislava, Slovakia / Singapore / Dubai / Zurich',
   TRUE
 )

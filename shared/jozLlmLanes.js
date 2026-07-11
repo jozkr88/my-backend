@@ -67,7 +67,7 @@ export const JOZ_LLM_LANES = {
     retrievalCategories: ["skills", "case_study", "proof", "bio", "faq"],
     actions: [
       {
-        label: "Open Skills PDF",
+        label: "View CV",
         href: "/documents/joz-agentic-ai-skills.pdf",
       },
       {
