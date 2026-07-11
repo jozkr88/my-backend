@@ -26,7 +26,8 @@ CROSS JOIN (
     ('button_lane', 'mindset', 'Mindset', 'Explains how Joz thinks about systems, product, intelligence, and execution quality.', 20),
     ('button_lane', 'skills', 'Skills', 'Surfaces technical, strategic, and applied AI capabilities with evidence.', 30),
     ('button_lane', 'booking', 'Book Joz', 'Converts interest into a clear next engagement step.', 40),
-    ('core_skill', 'agentic_ai', 'Agentic AI', 'Designs context-aware systems that reason, retrieve, route, and act.', 100),
+    ('core_skill', 'agentic_ai', 'Agentic AI', 'Joz core skill now: context-aware systems that reason, retrieve, route, and act.', 100),
+    ('core_skill', 'agentic_ai_ux', 'Agentic AI UX Orchestration', 'Designs multimodal, telemetry-driven, human-centered orchestration around intelligent systems.', 105),
     ('core_skill', 'computer_vision', 'Computer Vision', 'Applies vision-led thinking to multimodal interfaces and perception systems.', 110),
     ('core_skill', 'time_series', 'Time-series and anomaly reasoning', 'Frames noisy continuous signals into detectable patterns, alerts, and decisions.', 120),
     ('core_skill', 'ml_systems', 'Production AI systems', 'Moves AI from concept into deployed workflows, observability, and measurable value.', 130)
@@ -101,9 +102,17 @@ CROSS JOIN (
       'skills-applied-ai',
       'Applied AI Skills',
       'skills',
-      'The core applied AI, orchestration, and systems capabilities that make Joz commercially useful.',
-      'Joz is strongest in agentic AI, retrieval systems, orchestration, context engineering, and production-minded intelligence workflows. His edge is not isolated model work. It is connecting models, signals, interfaces, and decisions into one usable system.\n\nThat matters because most businesses do not need another demo. They need intelligence that can be shaped, shipped, trusted, and extended.\n\nThis lane should surface hard capability with decision-maker relevance.',
-      '{"lane":"skills","tags":["agentic_ai","rag","orchestration","systems"]}'
+      'The core applied AI, agentic architecture, and production systems capabilities that make Joz commercially useful.',
+      'Agentic AI is Joz''s core skill now. Joz designs agentic intelligence systems with autonomous reasoning and orchestration across LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering.\n\nJoz works across memory architectures, retrieval systems, ACL-aware access, verification and feedback loops, event-driven production AI, asynchronous workflows, secure API ecosystems, cloud-native platforms, observability, and AI governance.\n\nJoz''s edge is not isolated model work. Joz connects models, signals, interfaces, and decisions into one usable production system that can be shaped, shipped, trusted, and extended.',
+      '{"lane":"skills","tags":["agentic_ai","rag","orchestration","systems","knowledge_graphs","observability"]}'
+    ),
+    (
+      'skills-agentic-ai-ux-orchestration',
+      'Agentic AI UX Orchestration',
+      'skills',
+      'How Joz combines agentic AI with world-class UX, multimodal orchestration, and intelligent interface design.',
+      'Joz brings world-class UX, interaction design, and systems thinking into agentic AI UX orchestration. That includes self-organising AI metamaterials, context-aware multimodal interactions across voice, touch, gesture, gaze, and haptics, telemetry and behavioral data powering agentic feedback loops, and real-time signals mapped to human mental models.\n\nJoz also works across volumetric AI interfaces, NLP and computer-vision-driven personalization, intent modeling, semantic retrieval, and anticipatory, predictive, assistive, and autonomous decision-making intelligence.\n\nThis lane should make clear that Joz does not treat UX as decoration around AI. Joz designs the orchestration layer that makes intelligence legible, trusted, and usable.',
+      '{"lane":"skills","tags":["agentic_ai_ux","multimodal","volumetric_ai","telemetry","intent_modeling"]}'
     ),
     (
       'skills-data-science',
@@ -278,8 +287,8 @@ CROSS JOIN (
       'Skills Hiring Summary',
       'skills',
       'A concise explanation of where Joz is strongest and why that matters in hiring terms.',
-      'Joz is strongest in roles that sit between data science, applied AI architecture, signal reasoning, and execution. He is especially valuable when the problem is messy, the stakes are high, and the system has to become real rather than remain conceptual.\n\nThat makes him compelling for recruiters, hiring managers, and founders who need one person who can create both technical depth and operating leverage.\n\nThis lane should answer fit in a way that closes interest rather than merely informs it.',
-      '{"lane":"skills","tags":["hiring_fit","role_fit","applied_ai"]}'
+      'Joz is strongest in roles that sit between agentic AI architecture, agentic AI UX orchestration, signal reasoning, and execution. Joz brings 15+ years of world-class UX, product, and systems experience, with agentic AI as Joz''s core skill now.\n\nThat makes Joz compelling for recruiters, hiring managers, and founders who need one person who can create technical depth, orchestration quality, and operating leverage in the same role.\n\nThis lane should answer fit in a way that closes interest rather than merely informs it.',
+      '{"lane":"skills","tags":["hiring_fit","role_fit","applied_ai","agentic_ai_ux"]}'
     ),
     (
       'case-business-signal-to-system',
@@ -318,8 +327,8 @@ CROSS JOIN (
       'Joz Global Profile',
       'bio',
       'A concise high-level profile of Joz, his regions, and his applied AI positioning.',
-      'Jozef Krupa is an agentic AI architect and applied AI product leader with experience across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.\n\nHis work spans North America, Europe, the United Kingdom, UAE/MENA, Singapore, Japan, Greater China, Australia, and the wider Asia Pacific region.\n\nJoz LLM should use this profile as the stable identity layer behind every response.',
-      '{"supporting":true,"tags":["identity","global","profile"]}'
+      'Jozef Krupa is an agentic AI architect and applied AI product leader with 15+ years of world-class UX, product, and systems experience across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.\n\nAgentic AI is Joz''s core skill now, with agentic AI UX orchestration as a differentiated strength built on years of world-class interaction design and production delivery.\n\nJoz''s work spans North America, Europe, the United Kingdom, UAE/MENA, Singapore, Japan, Greater China, Australia, and the wider Asia Pacific region. Joz LLM should use this profile as the stable identity layer behind every response.',
+      '{"supporting":true,"tags":["identity","global","profile","agentic_ai","ux"]}'
     ),
     (
       'bio-education-and-courses',
@@ -334,8 +343,8 @@ CROSS JOIN (
       'Selected Evidence',
       'proof',
       'Proof points and examples that support Joz credibility across product, AI, and engineering.',
-      'Selected proof points include Mediacorp, Channel NewsAsia, mewatch, and Channel 8, where Joz worked across products serving a combined ecosystem in the roughly 100M monthly-user range. Within that environment, Joz shipped the CNA Apple Watch app, featured by Apple worldwide, and helped drive 30x MAU audience growth through mobile-first transformation.\n\nAdditional proof points include 20x digital-sales growth in Singapore financial services, 16M+ customer-scale engineering work at Erste Bank, 3,000+ HNW wealth pilots, and rapid AI prototyping for Dubai Future Foundation.\n\nThese proof points should be used as evidence anchors whenever Joz LLM needs hard credibility quickly.',
-      '{"supporting":true,"tags":["proof","case_evidence","credibility"]}'
+      'Selected proof points include MarketClue USA financial AI agents with live data and asset portfolios, ArtKorero spatial AI for world-class art exhibitions in Dubai, and first-in-Dubai volumetric spatial AI work for Versace/SOA. Additional evidence includes rapid AI prototyping for Dubai Future Foundation, 16M+ customer-scale engineering work at Erste Bank, 20x digital-sales growth in Singapore financial services, and 3,000+ HNW wealth pilots.\n\nEarlier proof points include the Apple-featured CNA Apple Watch launch, 30x MAU audience growth through mobile-first transformation, interaction standards across 30+ products, SK-II luxury e-commerce in the USA and 8 APAC markets, Banyan Tree pitch-winning prototyping, Singapore Stock Exchange portal re-engineering, and 70% handoff-friction reduction through code-based prototyping.\n\nThese proof points should be used as evidence anchors whenever Joz LLM needs hard credibility quickly.',
+      '{"supporting":true,"tags":["proof","case_evidence","credibility","spatial_ai","ux","agentic_ai"]}'
     ),
     (
       'proof-business-impact-patterns',
