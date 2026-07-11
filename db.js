@@ -394,6 +394,7 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8) 
          WHEN category = 'faq' THEN 4
          ELSE 5
        END,
+       COALESCE((metadata->>'impact_score')::int, 0) DESC,
        updated_at DESC,
        id ASC
      LIMIT $3`,

@@ -1,0 +1,30 @@
+{
+  "slug": "2026-07-11-example-source",
+  "title": "Example Source Record",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Short model-ready summary of what this source proves.",
+  "tags": ["agentic_ai", "orchestration"],
+  "impact_score": 50,
+  "priority_label": "standard",
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "draft",
+    "reviewed_by": "",
+    "reviewed_at": "",
+    "notes": ""
+  },
+  "claims": [
+    "Claim one stated cleanly."
+  ],
+  "proof_points": [
+    "Concrete evidence or measurable result."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Example Company"
+  ]
+}

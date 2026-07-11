@@ -121,6 +121,10 @@ function buildNormalizedRecord(baseName, sourceFilename) {
       proof_points: Array.isArray(meta.proof_points) ? meta.proof_points : [],
       regions: Array.isArray(meta.regions) ? meta.regions : [],
       companies: Array.isArray(meta.companies) ? meta.companies : [],
+      impact_score: Number.isFinite(Number(meta.impact_score))
+        ? Number(meta.impact_score)
+        : 0,
+      priority_label: String(meta.priority_label || "").trim() || "standard",
       source_filename: sourceFilename,
       source_meta_filename: `${baseName}.meta.json`,
     },
@@ -182,4 +186,3 @@ function main() {
 }
 
 main();
-

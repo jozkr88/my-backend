@@ -32,12 +32,13 @@
       "Joz has postgraduate education in Strategy and Innovation and human-centered design training."
     ],
     "proof_points": [
-      "MarketClue USA financial AI agents with live data and asset portfolios.",
-      "ArtKorero spatial AI for world-class art exhibitions in Dubai.",
-      "Versace/SOA first-in-Dubai spatial AI with volumetric 3D UI.",
+      "Mediacorp CNA Apple Watch launch and 30x MAU audience growth across a major regional media ecosystem.",
       "Erste Bank engineering and EU accessibility serving 16M+ customers.",
       "Maybank–Ageas Etiqa 20x digital sales growth and 3,000+ wealth pilots.",
-      "Mediacorp CNA Apple Watch launch and 30x MAU audience growth."
+      "Apple/Pixar-adjacent Python USD(z) and computer vision AI work in Singapore.",
+      "MarketClue USA financial AI agents with live data and asset portfolios.",
+      "ArtKorero spatial AI for world-class art exhibitions in Dubai.",
+      "Versace/SOA first-in-Dubai spatial AI with volumetric 3D UI."
     ],
     "regions": [
       "North America",
@@ -51,18 +52,20 @@
       "Asia Pacific"
     ],
     "companies": [
+      "Mediacorp",
+      "Erste Bank",
+      "Maybank–Ageas Etiqa",
+      "Apple/Pixar",
       "MarketClue USA",
       "ArtKorero",
       "Versace/SOA",
       "Dubai Future Foundation",
-      "Erste Bank",
-      "Maybank–Ageas Etiqa",
       "Manulife",
-      "Mediacorp",
       "Leo Burnett/Publicis",
-      "Ogilvy/WPP",
-      "Apple/Pixar"
+      "Ogilvy/WPP"
     ],
+    "impact_score": 88,
+    "priority_label": "high",
     "source_filename": "2026-07-11-current-agentic-ai-cv.md",
     "source_meta_filename": "2026-07-11-current-agentic-ai-cv.meta.json"
   }

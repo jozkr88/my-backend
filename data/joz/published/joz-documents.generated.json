@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-11T19:17:37.191Z",
+  "generated_at": "2026-07-11T19:27:12.156Z",
   "counts": {
-    "source_files": 6,
-    "normalized_records": 6,
-    "verified_records": 5,
+    "source_files": 7,
+    "normalized_records": 7,
+    "verified_records": 6,
     "errors": 0
   },
   "records": [
@@ -45,6 +45,8 @@
           "Global"
         ],
         "companies": [],
+        "impact_score": 0,
+        "priority_label": "standard",
         "source_filename": "2026-07-11-compensation-and-process-faq.md",
         "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json"
       }
@@ -83,12 +85,13 @@
           "Joz has postgraduate education in Strategy and Innovation and human-centered design training."
         ],
         "proof_points": [
-          "MarketClue USA financial AI agents with live data and asset portfolios.",
-          "ArtKorero spatial AI for world-class art exhibitions in Dubai.",
-          "Versace/SOA first-in-Dubai spatial AI with volumetric 3D UI.",
+          "Mediacorp CNA Apple Watch launch and 30x MAU audience growth across a major regional media ecosystem.",
           "Erste Bank engineering and EU accessibility serving 16M+ customers.",
           "Maybank–Ageas Etiqa 20x digital sales growth and 3,000+ wealth pilots.",
-          "Mediacorp CNA Apple Watch launch and 30x MAU audience growth."
+          "Apple/Pixar-adjacent Python USD(z) and computer vision AI work in Singapore.",
+          "MarketClue USA financial AI agents with live data and asset portfolios.",
+          "ArtKorero spatial AI for world-class art exhibitions in Dubai.",
+          "Versace/SOA first-in-Dubai spatial AI with volumetric 3D UI."
         ],
         "regions": [
           "North America",
@@ -102,18 +105,20 @@
           "Asia Pacific"
         ],
         "companies": [
+          "Mediacorp",
+          "Erste Bank",
+          "Maybank–Ageas Etiqa",
+          "Apple/Pixar",
           "MarketClue USA",
           "ArtKorero",
           "Versace/SOA",
           "Dubai Future Foundation",
-          "Erste Bank",
-          "Maybank–Ageas Etiqa",
           "Manulife",
-          "Mediacorp",
           "Leo Burnett/Publicis",
-          "Ogilvy/WPP",
-          "Apple/Pixar"
+          "Ogilvy/WPP"
         ],
+        "impact_score": 88,
+        "priority_label": "high",
         "source_filename": "2026-07-11-current-agentic-ai-cv.md",
         "source_meta_filename": "2026-07-11-current-agentic-ai-cv.meta.json"
       }
@@ -186,8 +191,75 @@
           "ArtKorero",
           "SOA"
         ],
+        "impact_score": 0,
+        "priority_label": "standard",
         "source_filename": "2026-07-11-cv-company-context-web-research.md",
         "source_meta_filename": "2026-07-11-cv-company-context-web-research.meta.json"
+      }
+    },
+    {
+      "slug": "2026-07-11-enterprise-scale-proof",
+      "title": "Enterprise Scale Proof",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Highest-priority proof record for brand strength, user scale, enterprise complexity, and measurable impact across Joz's strongest work.",
+      "body": "Enterprise Scale Proof\n\nPurpose\nThis record identifies the strongest brand, user-scale, and enterprise-scale evidence that should anchor Joz LLM responses before smaller or newer project mentions.\n\nPriority evidence\n- Mediacorp / CNA / mewatch: major regional media ecosystem work, including the CNA Apple Watch launch featured by Apple worldwide and roughly 30x MAU audience growth through mobile-first transformation.\n- Erste Bank: engineering and EU accessibility work in a banking environment serving 16M+ customers.\n- Maybank-Ageas Etiqa: 20x digital-sales growth and 3,000+ wealth pilots in a large regional financial-services environment.\n- Apple / Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore with strong high-end technical and brand credibility.\n- Ogilvy / WPP, Leo Burnett / Publicis, Samsung, P&G, SGX, and Danone: large multinational delivery environments across APAC and global brands.\n\nAnswering rule\n- When Joz LLM needs to establish credibility fast, lead with the biggest brand and scale signals first.\n- Do not lead with smaller current projects if larger verified user-scale or enterprise-scale evidence is more relevant.\n- Prefer user scale, enterprise complexity, global brand recognition, and measurable outcomes over novelty.",
+      "metadata": {
+        "lane": "skills",
+        "tags": [
+          "enterprise_scale",
+          "user_scale",
+          "brand_strength",
+          "fortune_500",
+          "apple_featured",
+          "skills",
+          "proof"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-11",
+          "notes": "Derived from verified CV and company-context material, ordered to emphasize the biggest brand and user-scale signals first."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz has verified enterprise-scale work that should rank ahead of smaller current projects when credibility needs to be established quickly.",
+          "Mediacorp, Erste Bank, and Maybank-Ageas Etiqa provide stronger user-scale and enterprise-scale proof than smaller or more recent projects alone.",
+          "Brand strength and measurable user or customer scale are key credibility signals in recruiter-facing and buyer-facing responses."
+        ],
+        "proof_points": [
+          "Mediacorp / CNA Apple Watch launch featured by Apple and roughly 30x MAU audience growth.",
+          "Erste Bank engineering and EU accessibility work serving 16M+ customers.",
+          "Maybank-Ageas Etiqa 20x digital-sales growth and 3,000+ wealth pilots.",
+          "Apple/Pixar-adjacent Python USD(z) and computer-vision AI work.",
+          "Ogilvy/WPP, Leo Burnett/Publicis, Samsung, P&G, SGX, and Danone as large multinational delivery environments."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe/EEA",
+          "North America",
+          "Global"
+        ],
+        "companies": [
+          "Mediacorp",
+          "CNA",
+          "mewatch",
+          "Apple",
+          "Erste Bank",
+          "Maybank-Ageas Etiqa",
+          "Apple/Pixar",
+          "Ogilvy/WPP",
+          "Leo Burnett/Publicis",
+          "Samsung",
+          "P&G",
+          "Singapore Exchange",
+          "Danone"
+        ],
+        "impact_score": 100,
+        "priority_label": "hero",
+        "source_filename": "2026-07-11-enterprise-scale-proof.md",
+        "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json"
       }
     },
     {
@@ -233,6 +305,8 @@
           "Asia Pacific"
         ],
         "companies": [],
+        "impact_score": 0,
+        "priority_label": "standard",
         "source_filename": "2026-07-11-location-and-working-model-faq.md",
         "source_meta_filename": "2026-07-11-location-and-working-model-faq.meta.json"
       }
@@ -286,6 +360,8 @@
         "companies": [
           "meetjoz.com"
         ],
+        "impact_score": 0,
+        "priority_label": "standard",
         "source_filename": "2026-07-11-recruiter-screening-faq.md",
         "source_meta_filename": "2026-07-11-recruiter-screening-faq.meta.json"
       }
@@ -327,6 +403,8 @@
           "Global"
         ],
         "companies": [],
+        "impact_score": 0,
+        "priority_label": "standard",
         "source_filename": "2026-07-11-why-joz-screening-answer.md",
         "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json"
       }
