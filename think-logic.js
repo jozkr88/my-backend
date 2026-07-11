@@ -16,12 +16,12 @@ import {
   SURPRISE_ME_PHRASES,
   hasPhrase as sharedHasPhrase,
   normalizeVoiceTranscript,
-} from "../src/shared/voiceCanonical.js";
+} from "./src/shared/voiceCanonical.js";
 import {
   isMeetJozActionAllowed,
-} from "../src/shared/appWorld.js";
-import { resolveMeetJozSemanticCommand } from "../src/shared/meetJozSemantics.js";
-import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "../src/shared/voiceActions.js";
+} from "./src/shared/appWorld.js";
+import { resolveMeetJozSemanticCommand } from "./src/shared/meetJozSemantics.js";
+import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "./src/shared/voiceActions.js";
 
 export const SITE_TARGETS = {
   maxx: "/neo/maxx",

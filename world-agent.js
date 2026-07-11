@@ -6,7 +6,7 @@ import {
   normalizeMeshName,
   safeTarget,
 } from "./think-logic.js";
-import { getAllowedActionsForPortalState } from "../src/shared/appWorld.js";
+import { getAllowedActionsForPortalState } from "./src/shared/appWorld.js";
 
 const BASE_ALIASES = {
   brain: [

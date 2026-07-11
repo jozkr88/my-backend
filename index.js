@@ -41,7 +41,7 @@ import {
   enforceJozLlmReplyLimit,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
-} from "../src/shared/jozLlmProfile.js";
+} from "./src/shared/jozLlmProfile.js";
 
 
 dotenv.config();
