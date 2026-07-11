@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-11T18:49:15.995Z",
+  "generated_at": "2026-07-11T19:17:37.191Z",
   "counts": {
-    "source_files": 2,
-    "normalized_records": 2,
-    "verified_records": 1,
+    "source_files": 6,
+    "normalized_records": 6,
+    "verified_records": 5,
     "errors": 0
   },
   "errors": []

@@ -5,11 +5,39 @@ export const JOZ_LLM_IDENTITY = {
   email: "joz@meetjoz.com",
   phone: "+421 952 538 970",
   location: "Bratislava, Slovakia / Singapore / Dubai / Zurich",
+  recruiterProfile: {
+    nationality: "Slovak / European Union",
+    singaporeStatus: "Singapore EP/PEP",
+    contactEmail: "joz@meetjoz.com",
+    contactPhone: "+421 952 538 970",
+    availabilityNote:
+      "Current availability and start date should be confirmed directly with Joz.",
+  },
+  recruiterAnswers: {
+    nationality:
+      "Joz is Slovak and an EU national. Joz's Singapore status is EP/PEP.",
+    contact:
+      "Joz can be reached at joz@meetjoz.com and +421 952 538 970.",
+    availability:
+      "Joz's current availability and start date should be confirmed directly with Joz at joz@meetjoz.com or +421 952 538 970.",
+    experience:
+      "Joz has 13+ years of professional experience overall, including 8+ years in ML/AI. That is based on the dated CV timeline from 2013 to present, with ML/AI-focused work from 2018 onward.",
+    education:
+      "Joz holds an MSc in Strategy and Innovation from the University of Lancashire and held an Innovation Strategist university appointment there. Joz also completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC programs focused on AI and spatial computing.",
+    skills:
+      "Joz is strongest in agentic AI architecture, orchestration, signal reasoning, multimodal UX, Python and SQL delivery, retrieval systems, and production-grade intelligence workflows.",
+  },
 };
 
 export const JOZ_LLM_CV = {
   headline:
-    "Agentic AI architect and applied AI product leader with 15+ years of world-class UX, product, and systems experience across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.",
+    "Agentic AI architect and applied AI product leader with 13+ years of experience overall, including 8+ years in ML/AI, across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.",
+  experienceSummary: {
+    overallYears: "13+",
+    mlAiYears: "8+",
+    overallBasis: "Professional timeline runs from 2013 to present.",
+    mlAiBasis: "ML/AI-focused work is positioned from 2018 to present.",
+  },
   globalScale: [
     "North America",
     "Europe/EEA",
@@ -183,6 +211,127 @@ const JOZ_REFERENCE_REWRITES = [
   [/\bhis\b/gi, "Joz's"],
 ];
 
+const RECRUITER_SCREEN_PATTERNS = [
+  {
+    key: "nationality",
+    patterns: [
+      "nationality",
+      "citizen",
+      "citizenship",
+      "passport",
+      "eu",
+      "european union",
+      "slovak",
+      "work authorization",
+      "work authorisation",
+      "visa",
+      "ep",
+      "pep",
+      "singapore status",
+    ],
+  },
+  {
+    key: "contact",
+    patterns: [
+      "email",
+      "e-mail",
+      "phone",
+      "number",
+      "mobile",
+      "contact",
+      "reach him",
+      "reach joz",
+      "contact details",
+    ],
+  },
+  {
+    key: "availability",
+    patterns: [
+      "availability",
+      "available",
+      "start date",
+      "notice period",
+      "when can",
+      "when could",
+      "when is he available",
+      "when is joz available",
+      "join date",
+      "joining date",
+      "can start",
+    ],
+  },
+  {
+    key: "experience",
+    patterns: [
+      "years of experience",
+      "how many years",
+      "how much experience",
+      "yoe",
+      "years in ai",
+      "years in ml",
+      "ml/ai",
+      "overall experience",
+      "professional experience",
+    ],
+  },
+  {
+    key: "education",
+    patterns: [
+      "course",
+      "courses",
+      "certification",
+      "certifications",
+      "education",
+      "study",
+      "studies",
+      "studied",
+      "school",
+      "schools",
+      "academic",
+      "academics",
+      "qualification",
+      "qualifications",
+      "degree",
+      "degrees",
+      "master",
+      "university",
+      "mit",
+      "ideo",
+      "hpi",
+      "wwdc",
+      "apple design labs",
+    ],
+  },
+  {
+    key: "skills",
+    patterns: [
+      "skill",
+      "skills",
+      "strength",
+      "strengths",
+      "capabilities",
+      "stack",
+      "specialis",
+      "specializ",
+      "what does he do",
+      "what does joz do",
+    ],
+  },
+];
+
+function findRecruiterScreenAnswer(message = "") {
+  const clean = String(message || "").trim().toLowerCase();
+  if (!clean) return "";
+
+  for (const entry of RECRUITER_SCREEN_PATTERNS) {
+    if (entry.patterns.some((pattern) => clean.includes(pattern))) {
+      return JOZ_LLM_IDENTITY.recruiterAnswers?.[entry.key] || "";
+    }
+  }
+
+  return "";
+}
+
 export function buildJozLlmSystemPrompt() {
   return [
     "You are Joz LLM, an elite role-aware hiring agent representing Jozef Krupa.",
@@ -198,6 +347,9 @@ export function buildJozLlmSystemPrompt() {
     "Lead with the answer, not setup or framing.",
     "The embedded profile and CV context are authoritative for Joz identity, education, geography, and experience.",
     "If the user asks about education, qualifications, regions, or career background, answer directly from the provided profile instead of saying the information is unavailable.",
+    "If the user asks about years of experience, answer with 13+ years overall and 8+ years in ML/AI, based on the dated CV timeline from 2013 to present and ML/AI-focused work from 2018 to present.",
+    "If the user asks about nationality, work authorization, Singapore status, email, phone, or contact details, answer directly from the recruiter profile.",
+    "If the user asks about availability or start date, do not invent one. Say current availability should be confirmed directly with Joz and provide the contact details when useful.",
     "Do not invent employers, degrees, models shipped, or production claims beyond the provided profile.",
     "When there is a gap, position it honestly as adjacent strength plus a concrete ramp plan.",
     "Bias toward agentic AI, applied AI architecture, orchestration, multimodal intelligence, production engineering, observability, and measurable impact.",
@@ -231,33 +383,10 @@ export function buildJozLlmContext() {
 
 export function buildJozLlmFallbackReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
+  const recruiterAnswer = findRecruiterScreenAnswer(clean);
 
-  if (
-    clean.includes("course") ||
-    clean.includes("courses") ||
-    clean.includes("certification") ||
-    clean.includes("certifications") ||
-    clean.includes("education") ||
-    clean.includes("study") ||
-    clean.includes("studies") ||
-    clean.includes("studied") ||
-    clean.includes("school") ||
-    clean.includes("schools") ||
-    clean.includes("academic") ||
-    clean.includes("academics") ||
-    clean.includes("qualification") ||
-    clean.includes("qualifications") ||
-    clean.includes("degree") ||
-    clean.includes("degrees") ||
-    clean.includes("master") ||
-    clean.includes("university") ||
-    clean.includes("mit") ||
-    clean.includes("ideo") ||
-    clean.includes("hpi") ||
-    clean.includes("wwdc") ||
-    clean.includes("apple design labs")
-  ) {
-    return "Joz holds an MSc in Strategy and Innovation from the University of Lancashire and held an Innovation Strategist university appointment there. Joz also completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC programs focused on AI and spatial computing.";
+  if (recruiterAnswer) {
+    return recruiterAnswer;
   }
 
   if (
