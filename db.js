@@ -1,4 +1,5 @@
 import pg from "pg";
+import { getJozLaneConfig, normalizeJozLaneIntent } from "./shared/jozLlmLanes.js";
 
 const { Pool } = pg;
 
@@ -377,16 +378,9 @@ export async function getPrimaryJozProfile() {
 }
 
 export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8) {
-  const primaryCategory = String(intentMode || "skills").trim().toLowerCase();
-  const categoriesByIntent = {
-    business_need: ["business_need", "case_study", "proof", "bio", "faq"],
-    mindset: ["mindset", "case_study", "proof", "bio", "faq"],
-    skills: ["skills", "case_study", "proof", "bio", "faq"],
-    booking: ["booking", "proof", "bio", "faq"],
-  };
-  const categories =
-    categoriesByIntent[primaryCategory] ||
-    [primaryCategory, "case_study", "proof", "bio", "faq"];
+  const primaryCategory = normalizeJozLaneIntent(intentMode);
+  const lane = getJozLaneConfig(primaryCategory);
+  const categories = lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"];
   const result = await runQuery(
     `SELECT title, category, summary, body, metadata
      FROM joz_documents
