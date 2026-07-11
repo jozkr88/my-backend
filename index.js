@@ -38,6 +38,7 @@ import { approveAgentProposal, buildAgentSnapshot, buildFallbackAgentReply } fro
 import { buildReasoningLayers } from "./reasoning-layers.js";
 import {
   buildJozLlmContext,
+  enforceJozLlmReplyLimit,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
 } from "../src/shared/jozLlmProfile.js";
@@ -54,6 +55,49 @@ const isEphemeralFilesystem =
   Boolean(process.env.RENDER) ||
   process.env.DISABLE_FILE_MEMORY === "1";
 const canPersistToLocalDisk = !isEphemeralFilesystem;
+
+function isJozEducationQuestion(message = "") {
+  const clean = String(message || "").trim().toLowerCase();
+  return [
+    "course",
+    "courses",
+    "certification",
+    "certifications",
+    "education",
+    "study",
+    "studies",
+    "studied",
+    "school",
+    "schools",
+    "academic",
+    "academics",
+    "qualification",
+    "qualifications",
+    "degree",
+    "degrees",
+    "master",
+    "university",
+    "mit",
+    "ideo",
+    "hpi",
+    "wwdc",
+    "apple design labs",
+  ].some((term) => clean.includes(term));
+}
+
+function isWeakEducationReply(reply = "") {
+  const clean = String(reply || "").trim().toLowerCase();
+  return [
+    "does not specify",
+    "not specify",
+    "not specified",
+    "not available",
+    "information is unavailable",
+    "recommend reaching out directly",
+    "contact him directly",
+    "contact joz directly",
+  ].some((term) => clean.includes(term));
+}
 
 // ✅ Universal CORS setup — works for DreamHost frontend + Vercel backend
 app.use((req, res, next) => {
@@ -333,7 +377,7 @@ app.post("/api/joz-llm", async (req, res) => {
         const response = await openai.chat.completions.create({
           model: "gpt-4o-mini",
           temperature: 0.35,
-          max_tokens: 140,
+          max_tokens: 90,
           messages: [
             {
               role: "system",
@@ -359,6 +403,12 @@ app.post("/api/joz-llm", async (req, res) => {
     if (!reply) {
       reply = buildJozLlmFallbackReply(latestUserMessage);
     }
+
+    if (isJozEducationQuestion(latestUserMessage) && isWeakEducationReply(reply)) {
+      reply = buildJozLlmFallbackReply(latestUserMessage);
+    }
+
+    reply = enforceJozLlmReplyLimit(reply, 55);
 
     if (conversationId) {
       await appendJozMessage({
@@ -387,6 +437,68 @@ app.post("/api/joz-llm", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/joz-llm/landing", async (req, res) => {
+  try {
+    const label = String(req.body?.label || "").trim();
+    const assistantContent = String(req.body?.assistantContent || "").trim();
+    const intentMode = String(req.body?.intentMode || "").trim().toLowerCase() || null;
+    const sessionKey = String(req.body?.conversationId || req.body?.sessionKey || "").trim() || null;
+    const metadata = req.body?.metadata && typeof req.body.metadata === "object"
+      ? req.body.metadata
+      : {};
+
+    if (!label || !assistantContent) {
+      return res.status(400).json({ error: "Missing landing payload" });
+    }
+
+    const profile = await getPrimaryJozProfile();
+    const conversationId = await createJozConversation({
+      profileId: profile?.id,
+      sessionKey,
+      intentMode,
+      context: {
+        currentPortal: req.body?.context?.currentPortal || "root",
+        currentMesh: req.body?.context?.currentMesh || null,
+        currentMeshStage: req.body?.context?.currentMeshStage || null,
+      },
+    });
+
+    if (conversationId) {
+      await appendJozMessage({
+        conversationId,
+        role: "user",
+        content: label,
+        messageKind: "landing_selection",
+        metadata: {
+          intentMode,
+          source: "landing_button",
+          ...metadata,
+        },
+      });
+      await appendJozMessage({
+        conversationId,
+        role: "assistant",
+        content: assistantContent,
+        messageKind: "landing_panel",
+        metadata: {
+          intentMode,
+          source: "landing_button",
+          ...metadata,
+        },
+      });
+    }
+
+    return res.json({
+      ok: true,
+      conversationId,
+      intentMode,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/landing failed:", error);
     return res.status(500).json({ error: error.message });
   }
 });

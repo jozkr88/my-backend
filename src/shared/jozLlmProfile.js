@@ -102,6 +102,7 @@ export const JOZ_LLM_CV = {
     "Innovation Strategist (University Appointment), University of Lancashire",
     "MIT/IDEO Design Thinking",
     "HPI d.school prototyping labs",
+    "Apple Design Labs and WWDC participation focused on AI and spatial computing",
   ],
 };
 
@@ -142,14 +143,27 @@ export function buildJozLlmSystemPrompt() {
     "Your job is to translate Joz's real background into precise, evidence-based answers for an advanced data-science role focused on operational data, anomaly detection, predictive monitoring, and digital twins.",
     "Write in first person when speaking about Joz's work, but stay factual and specific.",
     "Keep responses short and punchy by default.",
-    "Prefer one tight paragraph or at most 3 concise bullets unless more depth is explicitly asked for.",
-    "Default to 2 to 4 short sentences total.",
+    "Prefer one tight paragraph or at most 2 concise bullets unless more depth is explicitly asked for.",
+    "Default to 2 to 3 short sentences total.",
+    "Stay at or under roughly 55 words unless the user explicitly asks for detail.",
     "Lead with the answer, not setup or framing.",
+    "The embedded profile and CV context are authoritative for Joz identity, education, geography, and experience.",
+    "If the user asks about education, qualifications, regions, or career background, answer directly from the provided profile instead of saying the information is unavailable.",
     "Do not invent employers, degrees, models shipped, or production claims beyond the provided profile.",
     "When there is a gap, position it honestly as adjacent strength plus a concrete ramp plan.",
     "Bias toward applied AI, data science, time-series, anomaly detection, MLOps, production engineering, and measurable impact.",
     "Avoid generic motivational language and avoid sounding like a chatbot.",
   ].join(" ");
+}
+
+export function enforceJozLlmReplyLimit(text = "", maxWords = 55) {
+  const normalized = String(text || "").replace(/\s+/g, " ").trim();
+  if (!normalized) return "";
+
+  const words = normalized.split(" ");
+  if (words.length <= maxWords) return normalized;
+
+  return `${words.slice(0, maxWords).join(" ")}…`;
 }
 
 export function buildJozLlmContext() {
@@ -164,15 +178,39 @@ export function buildJozLlmFallbackReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
 
   if (
+    clean.includes("course") ||
+    clean.includes("courses") ||
+    clean.includes("certification") ||
+    clean.includes("certifications") ||
+    clean.includes("education") ||
+    clean.includes("study") ||
+    clean.includes("studies") ||
+    clean.includes("studied") ||
+    clean.includes("school") ||
+    clean.includes("schools") ||
+    clean.includes("academic") ||
+    clean.includes("academics") ||
+    clean.includes("qualification") ||
+    clean.includes("qualifications") ||
+    clean.includes("degree") ||
+    clean.includes("degrees") ||
+    clean.includes("master") ||
+    clean.includes("university") ||
+    clean.includes("mit") ||
+    clean.includes("ideo") ||
+    clean.includes("hpi") ||
+    clean.includes("wwdc") ||
+    clean.includes("apple design labs")
+  ) {
+    return "Joz holds an MSc in Strategy and Innovation from the University of Lancashire and held an Innovation Strategist university appointment there. Joz also completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC programs focused on AI and spatial computing.";
+  }
+
+  if (
     clean.includes("fit") ||
     clean.includes("match") ||
     clean.includes("why")
   ) {
-    return [
-      "Joz is a strong fit for applied AI that has to work in real environments.",
-      "His edge is agentic systems, anomaly thinking, signal interpretation, Python-led delivery, and production-minded AI architecture.",
-      "He is strongest where ambiguity is high and the system still needs to ship.",
-    ].join("\n\n");
+    return "Joz is strongest where AI has to work under real constraints. His edge is agentic systems, anomaly thinking, signal interpretation, Python-led delivery, and production-minded architecture.";
   }
 
   if (
@@ -181,11 +219,7 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("signal") ||
     clean.includes("anomaly")
   ) {
-    return [
-      "Joz is strongest in structured intelligence over continuous signals, not generic chat AI.",
-      "That maps well to time-series reasoning, anomaly detection, and process-state interpretation.",
-      "The practical pipeline is normalization, drift-aware baselines, anomaly scoring, explainability, and retraining loops.",
-    ].join("\n\n");
+    return "Joz is strongest in structured intelligence over continuous signals. That maps well to time-series reasoning, anomaly detection, process-state interpretation, and monitored retraining loops.";
   }
 
   if (
@@ -193,11 +227,7 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("first 90") ||
     clean.includes("ramp")
   ) {
-    return [
-      "First 30 days: map data, stakeholders, bottlenecks, and the stack.",
-      "By day 60: define one anomaly or predictive-monitoring use case with metrics.",
-      "By day 90: ship one monitored pilot with a retraining path.",
-    ].join("\n\n");
+    return "First 30 days: map data, stakeholders, bottlenecks, and the stack. By day 60: define one anomaly-monitoring use case with metrics. By day 90: ship one monitored pilot with a retraining path.";
   }
 
   if (
@@ -205,15 +235,8 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("industrial") ||
     clean.includes("process")
   ) {
-    return [
-      "A digital twin should be a decision layer, not just a visual layer.",
-      "It should combine process state, anomaly signals, forecasts, and model confidence.",
-      "The value is faster diagnosis and clearer action.",
-    ].join("\n\n");
+    return "A digital twin should be a decision layer, not just a visual one. It should combine process state, anomaly signals, forecasts, and model confidence to drive faster diagnosis and clearer action.";
   }
 
-  return [
-    "I can explain Joz's fit, show AI evidence, and outline how he would approach anomaly detection, time-series monitoring, and digital twins.",
-    "Try: Why is Joz a fit? Show time-series evidence. What would he do in the first 90 days?",
-  ].join("\n\n");
+  return "I can explain Joz's fit, show AI evidence, and outline how Joz would approach anomaly detection, time-series monitoring, and digital twins.";
 }
