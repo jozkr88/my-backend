@@ -347,6 +347,9 @@ export function buildJozLlmSystemPrompt() {
     "Lead with the answer, not setup or framing.",
     "When the question is strategic or evaluative, prefer a connected answer flow of Problem, Principle, Capability, Proof, and Outcome.",
     "Do not force that five-part structure for simple factual questions such as contact details, years of experience, or availability.",
+    "For broad credibility questions such as what Joz is strongest at, why to hire Joz, biggest achievement, what makes Joz different, or why Joz is relevant now, prefer this order: Proof, then Business Value, then Capability.",
+    "For those broad credibility questions, lead with enterprise proof and measurable outcomes such as Maybank, Mediacorp, Erste Bank, and Manulife before listing technical capabilities.",
+    "Do not open broad credibility answers with a capability list unless the user explicitly asked for technical depth.",
     "When discussing AI autonomy or governance, bias toward trust before autonomy, human accountability, verification, source provenance, and clear escalation paths.",
     "The embedded profile and CV context are authoritative for Joz identity, education, geography, and experience.",
     "If the user asks about education, qualifications, regions, or career background, answer directly from the provided profile instead of saying the information is unavailable.",
@@ -397,7 +400,16 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("match") ||
     clean.includes("why")
   ) {
-    return "Joz is strongest where AI has to work under real constraints. Joz's edge is agentic systems, signal interpretation, orchestration quality, Python-led delivery, and production-minded architecture.";
+    return "Joz stands out because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, 16M+ customer-scale systems at Erste Bank, and Lean ML transformation across 11 APAC markets at Manulife. Under that proof layer, Joz's capability edge is agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
+  }
+
+  if (
+    clean.includes("strongest at") ||
+    clean.includes("biggest achievement") ||
+    clean.includes("makes joz different") ||
+    clean.includes("relevant now")
+  ) {
+    return "Joz is strongest at turning complex organizations, knowledge, and AI initiatives into measurable outcomes. The strongest proof is Maybank, Mediacorp, Erste Bank, and Manulife; the technical layer underneath is agentic AI architecture, decision intelligence, context engineering, enterprise retrieval, and AI governance.";
   }
 
   if (

@@ -148,6 +148,44 @@ const FIELD_KEYWORDS = {
   },
 };
 
+const BROAD_CREDIBILITY_PATTERNS = [
+  "what is joz strongest at",
+  "what is joz's biggest achievement",
+  "what is jozs biggest achievement",
+  "what makes joz different",
+  "why should we hire joz",
+  "why hire joz",
+  "why is joz relevant now",
+  "why is joz relevant",
+  "why joz now",
+  "biggest achievement",
+  "strongest at",
+  "makes joz different",
+];
+
+const TECHNICAL_DEPTH_PATTERNS = [
+  "rag",
+  "agentic ai",
+  "context engineering",
+  "ai governance",
+  "architecture",
+  "retrieval",
+  "embeddings",
+  "knowledge graph",
+  "knowledge graphs",
+  "acl",
+  "observability",
+];
+
+const BROAD_CREDIBILITY_SLUG_BOOSTS = {
+  "business-need-enterprise-proof": 40,
+  "skills-largest-enterprise-scale-proof": 38,
+  "skills-quantified-business-outcomes": 34,
+  "business-need-hero-value": 28,
+  "business-need-why-hire-joz-now": 28,
+  "skills-hero-agentic-ai": 12,
+};
+
 let ontologyCache = null;
 
 function normalizeArray(value) {
@@ -234,6 +272,61 @@ function scoreQueryRelevance(doc, query = "") {
   return score;
 }
 
+function isBroadCredibilityQuery(query = "") {
+  const clean = String(query || "").trim().toLowerCase();
+  if (!clean) return false;
+  return BROAD_CREDIBILITY_PATTERNS.some((pattern) => clean.includes(pattern));
+}
+
+function isTechnicalDepthQuery(query = "") {
+  const clean = String(query || "").trim().toLowerCase();
+  if (!clean) return false;
+  return TECHNICAL_DEPTH_PATTERNS.some((pattern) => clean.includes(pattern));
+}
+
+function scoreBroadCredibility(doc, metadata, query = "") {
+  if (!isBroadCredibilityQuery(query)) return 0;
+
+  const slug = String(doc?.slug || "").trim();
+  const relatedProofs = metadata.related_proofs.length ? metadata.related_proofs : metadata.proofs;
+  let score = 0;
+
+  score += BROAD_CREDIBILITY_SLUG_BOOSTS[slug] || 0;
+
+  if (metadata.normalized_lane === "business_need") score += 10;
+  if (slug === "business-need-enterprise-proof" || slug === "skills-largest-enterprise-scale-proof") score += 18;
+  if (metadata.measurable_outcome_count >= 3) score += 12;
+  if (Number(metadata.enterprise_scale_score || 0) >= 95) score += 16;
+  if (relatedProofs.some((proofId) => [
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+  ].includes(proofId))) {
+    score += 15;
+  }
+
+  if (
+    metadata.capabilities.length >= 5 &&
+    metadata.proofs.length <= 1 &&
+    metadata.measurable_outcome_count <= 1
+  ) {
+    score -= 18;
+  }
+
+  return score;
+}
+
+function scoreTechnicalDepth(doc, metadata, query = "") {
+  if (!isTechnicalDepthQuery(query) || isBroadCredibilityQuery(query)) return 0;
+
+  let score = 0;
+  if (metadata.normalized_lane === "skills") score += 8;
+  if (metadata.capabilities.length >= 4) score += 12;
+  if (metadata.problems.length === 0 && metadata.capabilities.length >= 5) score += 4;
+  return score;
+}
+
 export function loadPublishedJozOntology() {
   if (ontologyCache) return ontologyCache;
   if (!fs.existsSync(publishedOntologyPath)) {
@@ -314,6 +407,8 @@ export function computeJozDocumentRankingData(doc, { intentMode = "skills", quer
           ? 1
           : 2,
     queryRelevanceScore: scoreQueryRelevance({ ...doc, metadata }, query),
+    broadCredibilityScore: scoreBroadCredibility(doc, metadata, query),
+    technicalDepthScore: scoreTechnicalDepth(doc, metadata, query),
     verificationScore: VERIFICATION_WEIGHTS[metadata.verification_status] ?? 0,
     impactScore: metadata.impact_score,
     priorityScore: PRIORITY_WEIGHTS[metadata.priority_label] ?? 0,
@@ -329,7 +424,9 @@ export function computeJozDocumentRankingData(doc, { intentMode = "skills", quer
 export function compareJozDocumentRanking(a, b) {
   return (
     a.laneRank - b.laneRank ||
+    b.broadCredibilityScore - a.broadCredibilityScore ||
     b.queryRelevanceScore - a.queryRelevanceScore ||
+    b.technicalDepthScore - a.technicalDepthScore ||
     b.verificationScore - a.verificationScore ||
     b.impactScore - a.impactScore ||
     b.priorityScore - a.priorityScore ||

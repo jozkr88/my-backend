@@ -39,8 +39,10 @@ function rankedSlugs(query, intentMode, limit = 5) {
 
 test("business value query prioritizes why-hire record and enterprise proof", () => {
   const slugs = rankedSlugs("Why should we hire Joz now?", "business_need", 10);
-  assert.equal(slugs[0], "business-need-why-hire-joz-now");
+  assert.equal(slugs[0], "business-need-enterprise-proof");
+  assert.equal(slugs[1], "business-need-why-hire-joz-now");
   assert.ok(slugs.includes("business-need-enterprise-proof"));
+  assert.ok(slugs.includes("business-need-why-hire-joz-now"));
 });
 
 test("roi query surfaces roi model without inventing a proof-only ranking", () => {
@@ -65,14 +67,27 @@ test("autonomy query surfaces judgment and governance principles", () => {
 
 test("skills query favors enterprise scale before smaller current projects", () => {
   const slugs = rankedSlugs("What is Joz strongest at?", "skills", 12);
-  assert.equal(slugs[0], "skills-hero-agentic-ai");
-  assert.ok(slugs.includes("skills-largest-enterprise-scale-proof"));
+  assert.equal(slugs[0], "skills-largest-enterprise-scale-proof");
+  assert.ok(slugs.indexOf("skills-largest-enterprise-scale-proof") < slugs.indexOf("skills-agentic-ai-architecture"));
+  assert.ok(slugs.indexOf("skills-quantified-business-outcomes") < slugs.indexOf("skills-agentic-ai-architecture"));
 });
 
 test("biggest enterprise achievement does not rank MarketClue first", () => {
   const slugs = rankedSlugs("What is Joz's biggest enterprise achievement?", "skills");
   assert.notEqual(slugs[0], "skills-agentic-ai-architecture");
   assert.equal(slugs[0], "skills-largest-enterprise-scale-proof");
+});
+
+test("broad credibility query favors business outcomes and proof before capability-first records", () => {
+  const slugs = rankedSlugs("What makes Joz different?", "skills", 12);
+  assert.ok(slugs.indexOf("business-need-enterprise-proof") < slugs.indexOf("skills-agentic-ai-architecture"));
+  assert.ok(slugs.indexOf("skills-quantified-business-outcomes") < slugs.indexOf("skills-agentic-ai-architecture"));
+});
+
+test("relevance-now query keeps enterprise proof ahead of capability-first ranking", () => {
+  const slugs = rankedSlugs("Why is Joz relevant now?", "business_need", 12);
+  assert.equal(slugs[0], "business-need-enterprise-proof");
+  assert.equal(slugs[1], "business-need-why-hire-joz-now");
 });
 
 test("cross-lane ai adoption query connects business need, mindset, and skills evidence", () => {
