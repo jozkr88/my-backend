@@ -137,11 +137,34 @@ export const JOZ_LLM_SUGGESTIONS = [
   "What would Joz do in the first 90 days?",
 ];
 
+const JOZ_REFERENCE_REWRITES = [
+  [/\bI am\b/gi, "Joz is"],
+  [/\bI'm\b/gi, "Joz is"],
+  [/\bI’ve\b/gi, "Joz has"],
+  [/\bI've\b/gi, "Joz has"],
+  [/\bI’d\b/gi, "Joz would"],
+  [/\bI'd\b/gi, "Joz would"],
+  [/\bI’ll\b/gi, "Joz will"],
+  [/\bI'll\b/gi, "Joz will"],
+  [/\bmy\b/gi, "Joz's"],
+  [/\bmine\b/gi, "Joz's"],
+  [/\bme\b/gi, "Joz"],
+  [/\bI\b/gi, "Joz"],
+  [/\bhe is\b/gi, "Joz is"],
+  [/\bhe's\b/gi, "Joz is"],
+  [/\bhe\b/gi, "Joz"],
+  [/\bhim\b/gi, "Joz"],
+  [/\bhis\b/gi, "Joz's"],
+];
+
 export function buildJozLlmSystemPrompt() {
   return [
     "You are Joz LLM, an elite role-aware hiring agent representing Jozef Krupa.",
     "Your job is to translate Joz's real background into precise, evidence-based answers for an advanced data-science role focused on operational data, anomaly detection, predictive monitoring, and digital twins.",
-    "Write in first person when speaking about Joz's work, but stay factual and specific.",
+    "Always refer to the subject as Joz.",
+    "Never use first-person language such as I, me, my, or mine.",
+    "Never use third-person pronouns such as he, him, his, or he's.",
+    "Use Joz or Joz's instead, while staying factual and specific.",
     "Keep responses short and punchy by default.",
     "Prefer one tight paragraph or at most 2 concise bullets unless more depth is explicitly asked for.",
     "Default to 2 to 3 short sentences total.",
@@ -157,8 +180,14 @@ export function buildJozLlmSystemPrompt() {
 }
 
 export function enforceJozLlmReplyLimit(text = "", maxWords = 55) {
-  const normalized = String(text || "").replace(/\s+/g, " ").trim();
+  let normalized = String(text || "").replace(/\s+/g, " ").trim();
   if (!normalized) return "";
+
+  for (const [pattern, replacement] of JOZ_REFERENCE_REWRITES) {
+    normalized = normalized.replace(pattern, replacement);
+  }
+
+  normalized = normalized.replace(/\s+/g, " ").trim();
 
   const words = normalized.split(" ");
   if (words.length <= maxWords) return normalized;
@@ -210,7 +239,7 @@ export function buildJozLlmFallbackReply(message = "") {
     clean.includes("match") ||
     clean.includes("why")
   ) {
-    return "Joz is strongest where AI has to work under real constraints. His edge is agentic systems, anomaly thinking, signal interpretation, Python-led delivery, and production-minded architecture.";
+    return "Joz is strongest where AI has to work under real constraints. Joz's edge is agentic systems, anomaly thinking, signal interpretation, Python-led delivery, and production-minded architecture.";
   }
 
   if (
@@ -238,5 +267,5 @@ export function buildJozLlmFallbackReply(message = "") {
     return "A digital twin should be a decision layer, not just a visual one. It should combine process state, anomaly signals, forecasts, and model confidence to drive faster diagnosis and clearer action.";
   }
 
-  return "I can explain Joz's fit, show AI evidence, and outline how Joz would approach anomaly detection, time-series monitoring, and digital twins.";
+  return "Joz LLM can explain Joz's fit, show AI evidence, and outline how Joz would approach anomaly detection, time-series monitoring, and digital twins.";
 }
