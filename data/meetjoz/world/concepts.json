@@ -1,0 +1,34 @@
+[
+  {
+    "id": "neo_maxx",
+    "title": "NEO/MAXX",
+    "definition": "NEO/MAXX is Joz Krupa's concept for creating novel, high-quality products, services, and experiences by combining human judgment with AI-powered design, engineering, code, and computation."
+  },
+  {
+    "id": "gold_pill",
+    "title": "Gold Pill",
+    "definition": "The Gold Pill represents the combination of skills, capabilities, competences, judgment, creativity, technical ability, design, engineering, and execution required to create high-quality innovation with AI.",
+    "represents": [
+      "technical skill",
+      "design capability",
+      "engineering competence",
+      "AI literacy",
+      "systems thinking",
+      "judgment",
+      "taste",
+      "execution",
+      "learning",
+      "innovation",
+      "competitive advantage"
+    ],
+    "does_not_represent": [
+      "fatalism",
+      "political ideology",
+      "social hierarchy",
+      "identity-based superiority",
+      "appearance ranking",
+      "deterministic black-pill thinking"
+    ],
+    "distinction": "Other pill metaphors claim to explain reality. The Gold Pill represents the capability to create new reality through innovation."
+  }
+]

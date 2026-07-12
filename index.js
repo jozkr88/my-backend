@@ -294,6 +294,7 @@ app.post("/api/agentic", async (req, res) => {
   try {
     const input = String(req.body?.input || req.body?.transcript || "").trim();
     const context = req.body?.context || {};
+    const appContext = req.body?.app_context || context?.app_context || {};
     const currentPortal = context?.currentPortal || context?.portal || "root";
     const structuredPortalKey = currentPortal === "maxx" ? "the-vibe-energy" : currentPortal;
     const currentStateKey = inferStructuredStateKey(currentPortal, context?.currentMesh || context?.mesh || null);
@@ -305,6 +306,7 @@ app.post("/api/agentic", async (req, res) => {
 
     const enrichedContext = {
       ...context,
+      app_context: appContext,
       structuredState,
       structuredAvailableActions: structuredState?.availableActions || [],
       allowedActions: context?.allowedActions || structuredState?.availableActions || [],
@@ -674,7 +676,7 @@ app.post("/api/think", async (req, res) => {
   };
 
   try {
-    const { transcript, currentPortal = "root", currentMesh = null, agentContext = null } = req.body;
+    const { transcript, currentPortal = "root", currentMesh = null, agentContext = null, app_context: appContext = null } = req.body;
     currentPortalForResponse = currentPortal;
     currentMeshForResponse = currentMesh;
     if (!transcript) return res.status(400).json({ error: "Missing transcript" });
@@ -689,6 +691,7 @@ app.post("/api/think", async (req, res) => {
     const structuredState = currentStateKey ? await getStructuredWorldState(structuredPortalKey, currentStateKey) : null;
     const enrichedAgentContext = {
       ...(agentContext || {}),
+      app_context: appContext || agentContext?.app_context || {},
       structuredState,
       structuredAvailableActions: structuredState?.availableActions || [],
       allowedActions: agentContext?.allowedActions || structuredState?.availableActions || [],

@@ -6,6 +6,12 @@ import {
   normalizeTranscript,
   safeTarget,
 } from "./think-logic.js";
+import {
+  buildMeetJozWorldAnswerContext,
+  buildMeetJozWorldAwarenessReply,
+  resolveMeetJozWorldState,
+  validateAppContext,
+} from "./shared/meetJozWorld.js";
 import { resolveAgenticAction } from "./world-agent.js";
 
 function toArray(value) {
@@ -34,6 +40,11 @@ function summarizeWorldMemory(worldMemory, knownMeshes = []) {
 export function buildAgentSnapshot({ input, context, worldMap, worldMemory }) {
   const currentPortal = context?.currentPortal || context?.portal || "root";
   const currentMesh = normalizeMeshName(context?.currentMesh || context?.mesh || "");
+  const appContextValidation = validateAppContext(context?.app_context || {}, context || {});
+  const worldState = resolveMeetJozWorldState({
+    appContext: appContextValidation.value,
+    legacyContext: context || {},
+  });
 
   return {
     input: String(input || "").trim(),
@@ -45,6 +56,14 @@ export function buildAgentSnapshot({ input, context, worldMap, worldMemory }) {
     currentPath: context?.currentPath || "/",
     allowedActions: toArray(context?.allowedActions),
     structuredState: context?.structuredState || null,
+    validatedAppContext: appContextValidation.value,
+    worldAwareness: worldState,
+    contentAwareness: worldState,
+    intentRouting: buildMeetJozWorldAnswerContext({
+      input,
+      appContext: appContextValidation.value,
+      legacyContext: context || {},
+    }),
     knownInteractiveMeshes: toArray(context?.knownInteractiveMeshes),
     uiState: context?.uiState || {},
     voiceState: context?.voiceState || {},
@@ -117,6 +136,13 @@ export function approveAgentProposal({ clean, context, worldMap, worldMemory, pr
 
 export function buildFallbackAgentReply({ approved, snapshot }) {
   if (approved?.awareness) return approved.awareness;
+
+  const awarenessReply = buildMeetJozWorldAwarenessReply({
+    input: snapshot.input,
+    appContext: snapshot.validatedAppContext,
+    legacyContext: snapshot,
+  });
+  if (awarenessReply) return awarenessReply;
 
   if (approved?.action || approved?.target) {
     return `I understood that in ${snapshot.currentPortal}.`;

@@ -1,0 +1,241 @@
+[
+  {
+    "id": "root_gold_pill",
+    "portal_id": "root",
+    "asset": "ball.glb",
+    "mesh_aliases": ["ball", "gold pill", "gold_pill", "pill"],
+    "role": "portal trigger into meet_joz",
+    "meaning": "The Gold Pill represents skills, capabilities, competences, judgment, identity, proof, and the ability to create new innovation through AI.",
+    "target_portal_id": "meet_joz",
+    "interactive": true,
+    "concept_ids": ["gold_pill"]
+  },
+  {
+    "id": "root_brain",
+    "portal_id": "root",
+    "asset": "bx.glb",
+    "mesh_aliases": ["brain", "bx"],
+    "role": "conceptual cognitive anchor",
+    "meaning": "Cognition, signal, intelligence, internal reasoning, and the conceptual MAXX route.",
+    "target_portal_id": "maxx",
+    "interactive": true
+  },
+  {
+    "id": "root_enter",
+    "portal_id": "root",
+    "asset": "enter.glb",
+    "mesh_aliases": ["enter", "enter_portal"],
+    "role": "explicit transition trigger into MAXX",
+    "meaning": "Explicit invitation to enter the conceptual intelligence route.",
+    "target_portal_id": "maxx",
+    "interactive": true
+  },
+  {
+    "id": "root_moon_environment",
+    "portal_id": "root",
+    "asset": null,
+    "mesh_aliases": ["moon", "moon environment", "lunar_environment"],
+    "role": "atmospheric context",
+    "meaning": "Arrival into a staged spatial system.",
+    "interactive": false
+  },
+  {
+    "id": "maxx_neurons",
+    "portal_id": "maxx",
+    "asset": "n2x.glb",
+    "mesh_aliases": ["n2x", "neurons", "neurotransmitters", "human neuron", "ai neuron", "synapse"],
+    "role": "primary neuron sequence",
+    "meaning": "Human and AI intelligence connect, exchange signals, create new experience, and scale new pathways through a biological and neural visual metaphor.",
+    "interactive": true
+  },
+  {
+    "id": "maxx_receptors",
+    "portal_id": "maxx",
+    "asset": "n3.glb",
+    "mesh_aliases": ["n3", "receptors", "transmitters"],
+    "role": "receptor and signal-transfer visualization",
+    "meaning": "Receptors, transmitters, interpretation, and movement between synapses.",
+    "interactive": false
+  },
+  {
+    "id": "maxx_neurodesign",
+    "portal_id": "maxx",
+    "asset": "neurodesign.glb",
+    "mesh_aliases": ["neurodesign", "elite beauty", "ascension", "frame mogg"],
+    "role": "Gold-Pill explainer and perception-design layer",
+    "meaning": "The Elite Beauty extends the neural metaphor into perception engineering, intentional aesthetics, designed intelligence, quality, and precision.",
+    "interactive": false
+  },
+  {
+    "id": "maxx_internal_brain_environment",
+    "portal_id": "maxx",
+    "asset": null,
+    "mesh_aliases": ["inside_the_brain", "internal brain", "nebula", "brain environment"],
+    "role": "internal-brain environment",
+    "meaning": "Nebula-like symbolic model of thought, perception, adaptation, and signal.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_sequence_object",
+    "portal_id": "meet_joz",
+    "asset": "model1.glb",
+    "mesh_aliases": ["model1", "model1_sequence", "controlledglb"],
+    "role": "ControlledGLB temporal sequence",
+    "meaning": "Primary temporal identity and capability sequence running Flex, Ascend, Mogg, and the later Skills layer.",
+    "interactive": true
+  },
+  {
+    "id": "meet_joz_flex",
+    "portal_id": "meet_joz",
+    "asset": "model1.glb",
+    "mesh_aliases": ["flex", "vibe"],
+    "role": "sequence stage",
+    "meaning": "Entry, presence, atmosphere, tone, arrival, and making the world inhabitable.",
+    "interactive": true
+  },
+  {
+    "id": "meet_joz_ascend",
+    "portal_id": "meet_joz",
+    "asset": "model1.glb",
+    "mesh_aliases": ["ascend", "discover"],
+    "role": "sequence stage",
+    "meaning": "Prestige, aura, scale, recognition, rank, pull, transformation, and visible proof.",
+    "interactive": true
+  },
+  {
+    "id": "meet_joz_mogg",
+    "portal_id": "meet_joz",
+    "asset": "model1.glb",
+    "mesh_aliases": ["mogg", "skills", "skills_stop"],
+    "role": "digital twin stage",
+    "meaning": "Joz's digital twin and conceptual identity layer. Mogg is not the same as workf.glb.",
+    "interactive": true
+  },
+  {
+    "id": "meet_joz_skills",
+    "portal_id": "meet_joz",
+    "asset": "workf.glb",
+    "mesh_aliases": ["workf", "skills layer", "workf_layer"],
+    "role": "deep skills layer",
+    "meaning": "Deep work, capabilities, skills, execution, and operational competence.",
+    "interactive": true
+  },
+  {
+    "id": "meet_joz_skills_panel",
+    "portal_id": "meet_joz",
+    "asset": "jkx-d.glb",
+    "mesh_aliases": ["jkx-d", "jkxd", "jkx", "skills panel", "skills_text_panel"],
+    "role": "skills text panel",
+    "meaning": "Deeper reading layer and digital-twin-style capability presentation revealed from workf.glb.",
+    "interactive": true
+  },
+  {
+    "id": "meet_joz_semantic_city",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["worldx", "worldx_desktop", "golden_environment_mobile", "semantic city"],
+    "role": "360 semantic environment",
+    "meaning": "Abstract gold city surrounding the ControlledGLB sequence.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_heart",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["heart"],
+    "role": "semantic landmark",
+    "meaning": "Central emotional and prestige anchor of Ascend.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_scale_maxx",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["scale_maxx", "scale"],
+    "role": "semantic landmark",
+    "meaning": "Scale, reach, and magnitude.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_clout_maxx",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["clout_maxx", "clout"],
+    "role": "semantic landmark",
+    "meaning": "Recognition, influence, and signal.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_world_class",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["world_class", "world class", "singapore"],
+    "role": "semantic landmark",
+    "meaning": "International proof, Singapore framing, and global scale.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_alpha_psl",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["alpha_psl", "alpha psl", "dubai"],
+    "role": "semantic landmark",
+    "meaning": "Dubai prestige and regional proof.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_atmos_maxx",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["atmos_maxx", "atmos"],
+    "role": "semantic landmark",
+    "meaning": "Atmosphere as a deliberate design variable.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_cross_sensory_aura_engineering",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["cross_sensory_aura_engineering", "cross sensory aura engineering", "aura engineering"],
+    "role": "semantic landmark",
+    "meaning": "Intentional construction of aura through sensory composition.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_maximize_beauty_change_reality",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["maximize_beauty_change_reality", "maximize beauty change reality", "beauty change reality"],
+    "role": "semantic landmark",
+    "meaning": "Beauty as an operational force that changes energy, experience, and perceived reality.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_ai_synthesis",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["ai_synthesis", "ai synthesis"],
+    "role": "semantic landmark",
+    "meaning": "Connection-making, integration, and generative synthesis.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_ai_analysis",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["ai_analysis", "ai analysis"],
+    "role": "semantic landmark",
+    "meaning": "Structured analysis and intelligence.",
+    "interactive": false
+  },
+  {
+    "id": "meet_joz_capsule",
+    "portal_id": "meet_joz",
+    "asset": "worldx.glb",
+    "mesh_aliases": ["capsule", "pill"],
+    "role": "central symbolic object",
+    "meaning": "Central symbolic pill object and choice metaphor.",
+    "interactive": false,
+    "concept_ids": ["gold_pill"]
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "root",
+    "title": "Root",
+    "role": "decision portal",
+    "canonical_question": "Which route do you want to enter?",
+    "path_aliases": ["/", "root"],
+    "environment_object_id": "root_moon_environment",
+    "default_focused_object_id": "root_gold_pill"
+  },
+  {
+    "id": "maxx",
+    "title": "MAXX",
+    "role": "conceptual intelligence portal",
+    "canonical_question": "How does this system think?",
+    "path_aliases": ["/neo/maxx", "maxx", "the-vibe-energy"],
+    "environment_object_id": "maxx_internal_brain_environment",
+    "default_sequence_id": "maxx_neuron_sequence",
+    "default_focused_object_id": "maxx_neurons"
+  },
+  {
+    "id": "meet_joz",
+    "title": "Meet Joz",
+    "role": "human proof and capability portal",
+    "canonical_question": "Who is Joz, what is his world, and why does it matter?",
+    "path_aliases": ["/neo/meet-joz", "meet-joz", "meet_joz"],
+    "environment_object_id": "meet_joz_semantic_city",
+    "default_sequence_id": "meet_joz_sequence",
+    "default_focused_object_id": "meet_joz_flex"
+  }
+]
