@@ -46,6 +46,25 @@ function isGoldPillQuery(input = "") {
   return ["pill", "capsule"].some((term) => clean === term || clean.includes(` ${term}`) || clean.startsWith(`${term} `));
 }
 
+function isNeoMaxxQuery(input = "") {
+  const clean = normalizeToken(input);
+  if (!clean) return false;
+
+  const phrases = [
+    "neomaxxing",
+    "neo maxx",
+    "neo/maxx",
+    "what is neomaxxing",
+    "what is neo maxx",
+    "what is neo/maxx",
+    "what is maxx",
+    "tell me about neomaxxing",
+    "tell me about neo maxx",
+  ];
+
+  return phrases.some((phrase) => clean.includes(phrase));
+}
+
 function normalizePortalId(value) {
   const normalized = normalizeToken(value);
   if (!normalized || normalized === "/" || normalized === "root") return "root";
@@ -416,6 +435,17 @@ export function resolveMeetJozWorldEntity({ input = "", appContext = {}, legacyC
   const state = resolveMeetJozWorldState({ appContext, legacyContext });
   const clean = normalizeToken(input);
 
+  if (isNeoMaxxQuery(clean)) {
+    return {
+      entity: "neo_maxx",
+      conceptId: "neo_maxx",
+      objectId: state.focusedObject?.id || null,
+      worldRecord: "neo_maxx concept",
+      source: "neo_maxx concept",
+      state,
+    };
+  }
+
   if (isGoldPillQuery(clean)) {
     return {
       entity: "gold_pill",
@@ -452,10 +482,10 @@ export function resolveMeetJozWorldEntity({ input = "", appContext = {}, legacyC
 export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, legacyContext = {} } = {}) {
   const manifest = getMeetJozWorldManifest();
   const route = routeMeetJozWorldIntent(input);
-  if (route === "joz_knowledge") return null;
+  const clean = normalizeToken(input);
+  if (route === "joz_knowledge" && !isNeoMaxxQuery(clean)) return null;
 
   const state = resolveMeetJozWorldState({ appContext, legacyContext });
-  const clean = normalizeToken(input);
   const portalName = state.portal?.title || "the experience";
   const focusedObject = state.focusedObject;
   const stage = state.stage;
@@ -464,6 +494,20 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
   const nextActionText = availableLabels.length
     ? `Available next actions here are ${availableLabels.join(", ")}.`
     : "";
+
+  if (isNeoMaxxQuery(clean)) {
+    const inMaxxPortal = state.portal?.id === "maxx";
+    const maxxPortalLine = inMaxxPortal
+      ? "In the MAXX portal, that idea is shown through the neuron metaphor: human judgment and AI connecting through signals, computation, and new pathways."
+      : "The MAXX portal expresses it through a neuron metaphor for human judgment and AI working together.";
+
+    return [
+      "Neomaxxing is a concept created by Joz Krupa.",
+      "NEO is the drive to create something new. MAXX is the disciplined expansion of that idea through human judgment, AI, design, engineering, computation, and execution.",
+      "Together they describe innovation built by combining human judgment with AI into real products, services, and experiences.",
+      maxxPortalLine,
+    ].join(" ");
+  }
 
   if (isGoldPillQuery(clean)) {
     const goldPill = toArray(manifest.concepts).find((concept) => concept.id === "gold_pill");

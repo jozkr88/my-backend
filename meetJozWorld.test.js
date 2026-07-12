@@ -183,3 +183,32 @@ test("gold pill reply explains MAXX role when current portal is maxx", () => {
   assert.match(reply, /transforms human and AI potential into innovation/i);
   assert.doesNotMatch(reply, /^The gold pill typically refers to/i);
 });
+
+test("neomaxxing reply uses short deterministic composition", () => {
+  const reply = buildMeetJozWorldAwarenessReply({
+    input: "What is Neomaxxing?",
+    appContext: {
+      current_portal: "root",
+      focused_object: "root_brain",
+      available_actions: ["go_meet_joz", "go_maxx_via_brain"],
+      device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+    },
+  });
+
+  assert.ok(reply.startsWith("Neomaxxing is a concept created by Joz Krupa."));
+  assert.match(reply, /\bNEO\b/);
+  assert.match(reply, /\bMAXX\b/);
+  assert.match(reply, /human judgment/i);
+  assert.match(reply, /\bAI\b/i);
+  assert.match(reply, /innovation/i);
+  assert.match(reply, /design/i);
+  assert.match(reply, /engineering/i);
+  assert.match(reply, /computation/i);
+  assert.match(reply, /execution/i);
+  assert.match(reply, /MAXX portal/i);
+  assert.match(reply, /neuron metaphor/i);
+  assert.doesNotMatch(reply, /transformative approach/i);
+  assert.doesNotMatch(reply, /various domains/i);
+  assert.doesNotMatch(reply, /impactful outcomes/i);
+  assert.doesNotMatch(reply, /leverage technology/i);
+});

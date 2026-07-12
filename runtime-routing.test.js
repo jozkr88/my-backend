@@ -83,3 +83,36 @@ test("POST /api/agentic preserves canonical world awareness in the live response
   assertCanonicalGoldPillReply(String(payload.response || ""));
   assertCanonicalGoldPillReply(String(payload.params?.awareness || ""));
 });
+
+test("POST /api/joz-llm composes Neomaxxing with deterministic world-aware wording", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-neomaxxing",
+    messages: [{ role: "user", content: "What is Neomaxxing?" }],
+    context: {
+      currentPortal: "maxx",
+      currentMesh: "brain",
+      currentMeshStage: "signal_flow",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "world_awareness");
+  assert.equal(payload.trace?.detectedConcept, "neo_maxx");
+  assert.equal(payload.trace?.selectedWorldRecord, "neo_maxx concept");
+  assert.ok(reply.startsWith("Neomaxxing is a concept created by Joz Krupa."));
+  assert.match(reply, /\bNEO\b/);
+  assert.match(reply, /\bMAXX\b/);
+  assert.match(reply, /human judgment/i);
+  assert.match(reply, /\bAI\b/i);
+  assert.match(reply, /design/i);
+  assert.match(reply, /engineering/i);
+  assert.match(reply, /computation/i);
+  assert.match(reply, /execution/i);
+  assert.match(reply, /MAXX portal/i);
+  assert.match(reply, /neuron metaphor/i);
+  assert.doesNotMatch(reply, /transformative approach/i);
+  assert.doesNotMatch(reply, /various domains/i);
+  assert.doesNotMatch(reply, /impactful outcomes/i);
+  assert.doesNotMatch(reply, /leverage technology/i);
+});
