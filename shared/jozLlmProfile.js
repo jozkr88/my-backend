@@ -7,7 +7,7 @@ export const JOZ_LLM_IDENTITY = {
   location: "Bratislava, Slovakia / Singapore / Dubai / Zurich",
   recruiterProfile: {
     nationality: "Slovak / European Union",
-    singaporeStatus: "Singapore EP/PEP",
+    singaporeStatus: "Confirm directly with Joz; do not claim an active EP or PEP without confirmation.",
     contactEmail: "joz@meetjoz.com",
     contactPhone: "+65 3107 2412",
     availabilityNote:
@@ -15,7 +15,7 @@ export const JOZ_LLM_IDENTITY = {
   },
   recruiterAnswers: {
     nationality:
-      "Joz is Slovak and an EU national. Joz's Singapore status is EP/PEP.",
+      "Joz is Slovak and an EU national. Singapore work authorization or pass status should be confirmed directly with Joz rather than assumed.",
     contact:
       "Joz can be reached at joz@meetjoz.com and +65 3107 2412.",
     availability:

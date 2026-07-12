@@ -87,6 +87,36 @@ test("POST /api/agentic preserves canonical world awareness in the live response
   assertCanonicalGoldPillReply(String(payload.params?.awareness || ""));
 });
 
+test("POST /api/joz-llm/callback-request stores callback requests and returns delivery status", async () => {
+  const { status, payload } = await postJson("/api/joz-llm/callback-request", {
+    sessionKey: "runtime-callback-request",
+    name: "Casey Example",
+    phone: "+1 415 555 0100",
+    time: "Tomorrow 3pm",
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: "skills_stop",
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.ok, true);
+  assert.match(String(payload.delivery?.status || ""), /^(delivered|stored_only|delivery_failed)$/);
+  assert.ok(Array.isArray(payload.delivery?.channels));
+  assert.match(String(payload.persistedTo || ""), /^(database|memory)$/);
+});
+
+test("POST /api/joz-llm/callback-request validates required fields", async () => {
+  const { status, payload } = await postJson("/api/joz-llm/callback-request", {
+    name: "Casey Example",
+    time: "Tomorrow 3pm",
+  });
+
+  assert.equal(status, 400);
+  assert.match(String(payload.error || ""), /missing callback name, phone, or time/i);
+});
+
 const JOZ_ROUTER_GATE_CASES = [
   {
     name: "identity_profile",

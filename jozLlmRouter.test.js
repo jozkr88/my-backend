@@ -75,3 +75,30 @@ test("routes Gold Pill queries to canonical world concept before world awareness
   assert.equal(route.selectedRoute, "canonical_world_concept");
   assert.equal(route.detectedConcept, "gold_pill");
 });
+
+test("routes deep skills queries to skills and returns technical depth reply", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQuery({
+    input: "What are deep skills of Joz?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "What are deep skills of Joz?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Agentic AI|agentic AI/i);
+  assert.match(resolution.reply, /RAG/i);
+  assert.match(resolution.reply, /context engineering/i);
+  assert.match(resolution.reply, /decision intelligence/i);
+  assert.match(resolution.reply, /AI governance/i);
+  assert.match(resolution.reply, /Python|FastAPI/i);
+  assert.match(resolution.reply, /enterprise architecture|enterprise/i);
+  assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
+});

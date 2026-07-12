@@ -164,6 +164,19 @@ const BROAD_CREDIBILITY_PATTERNS = [
 ];
 
 const TECHNICAL_DEPTH_PATTERNS = [
+  "deep skills",
+  "deepest skills",
+  "strongest skills",
+  "strongest technical skills",
+  "technical depth",
+  "core capabilities",
+  "technical skills",
+  "ai skills",
+  "engineering skills",
+  "how technical is joz",
+  "what can joz build",
+  "ai stack",
+  "technical stack",
   "rag",
   "agentic ai",
   "context engineering",
@@ -185,6 +198,38 @@ const BROAD_CREDIBILITY_SLUG_BOOSTS = {
   "business-need-why-hire-joz-now": 28,
   "skills-hero-agentic-ai": 12,
 };
+
+const RECRUITER_OPERATIONS_SLUG = "skills-recruiter-operational-facts";
+const TECHNICAL_SKILL_SLUG_BOOSTS = {
+  "skills-agentic-ai-architecture": 28,
+  "skills-technical-platform-stack": 24,
+  "skills-agentic-ai-ux-orchestration": 20,
+  "skills-hero-agentic-ai": 16,
+};
+
+const RECRUITER_QUERY_PATTERNS = [
+  "nationality",
+  "eu status",
+  "eu national",
+  "citizenship",
+  "work authorization",
+  "work authorisation",
+  "singapore status",
+  /\bep\b/,
+  /\bpep\b/,
+  "location",
+  "based",
+  "availability",
+  "start date",
+  "notice period",
+  "contact",
+  "email",
+  "phone",
+  "reach joz",
+  "years of experience",
+  "how many years",
+  "years in ai",
+];
 
 let ontologyCache = null;
 
@@ -284,6 +329,14 @@ function isTechnicalDepthQuery(query = "") {
   return TECHNICAL_DEPTH_PATTERNS.some((pattern) => clean.includes(pattern));
 }
 
+function isRecruiterOperationalQuery(query = "") {
+  const clean = String(query || "").trim().toLowerCase();
+  if (!clean) return false;
+  return RECRUITER_QUERY_PATTERNS.some((pattern) =>
+    pattern instanceof RegExp ? pattern.test(clean) : clean.includes(pattern)
+  );
+}
+
 function scoreBroadCredibility(doc, metadata, query = "") {
   if (!isBroadCredibilityQuery(query)) return 0;
 
@@ -320,11 +373,31 @@ function scoreBroadCredibility(doc, metadata, query = "") {
 function scoreTechnicalDepth(doc, metadata, query = "") {
   if (!isTechnicalDepthQuery(query) || isBroadCredibilityQuery(query)) return 0;
 
+  const slug = String(doc?.slug || "").trim();
   let score = 0;
   if (metadata.normalized_lane === "skills") score += 8;
   if (metadata.capabilities.length >= 4) score += 12;
   if (metadata.problems.length === 0 && metadata.capabilities.length >= 5) score += 4;
+  score += TECHNICAL_SKILL_SLUG_BOOSTS[slug] || 0;
   return score;
+}
+
+function scoreCapabilityEligibility(doc, metadata, query = "") {
+  const slug = String(doc?.slug || "").trim();
+  const category = String(doc?.category || "").trim().toLowerCase();
+
+  if (isTechnicalDepthQuery(query) && !isRecruiterOperationalQuery(query)) {
+    if (slug === RECRUITER_OPERATIONS_SLUG) return -140;
+    if (category === "recruiter_operations") return -120;
+    if (TECHNICAL_SKILL_SLUG_BOOSTS[slug]) return TECHNICAL_SKILL_SLUG_BOOSTS[slug];
+    if (metadata.normalized_lane === "skills" && metadata.capabilities.length >= 4) return 12;
+  }
+
+  if (isRecruiterOperationalQuery(query) && slug === RECRUITER_OPERATIONS_SLUG) {
+    return 40;
+  }
+
+  return 0;
 }
 
 export function loadPublishedJozOntology() {
@@ -409,6 +482,7 @@ export function computeJozDocumentRankingData(doc, { intentMode = "skills", quer
     queryRelevanceScore: scoreQueryRelevance({ ...doc, metadata }, query),
     broadCredibilityScore: scoreBroadCredibility(doc, metadata, query),
     technicalDepthScore: scoreTechnicalDepth(doc, metadata, query),
+    capabilityEligibilityScore: scoreCapabilityEligibility(doc, metadata, query),
     verificationScore: VERIFICATION_WEIGHTS[metadata.verification_status] ?? 0,
     impactScore: metadata.impact_score,
     priorityScore: PRIORITY_WEIGHTS[metadata.priority_label] ?? 0,
@@ -425,6 +499,7 @@ export function compareJozDocumentRanking(a, b) {
   return (
     a.laneRank - b.laneRank ||
     b.broadCredibilityScore - a.broadCredibilityScore ||
+    b.capabilityEligibilityScore - a.capabilityEligibilityScore ||
     b.queryRelevanceScore - a.queryRelevanceScore ||
     b.technicalDepthScore - a.technicalDepthScore ||
     b.verificationScore - a.verificationScore ||

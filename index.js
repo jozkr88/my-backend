@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import {
   appendJozMessage,
+  createJozCallbackRequest,
   createJozConversation,
   getPortalTransition,
   getPrimaryJozProfile,
@@ -75,6 +76,7 @@ const JOZ_CHAT_DUPLICATE_WINDOW_MS = 10_000;
 const jozChatSessionLog = new Map();
 const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
+const jozCallbackFallbackStore = [];
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
@@ -389,6 +391,134 @@ function logWorldAwarenessTrace(label, trace) {
   console.log(`🧭 ${label} trace`, trace);
 }
 
+function normalizeCallbackField(value = "", maxLength = 160) {
+  return String(value || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .slice(0, maxLength);
+}
+
+function buildCallbackNotificationText(record) {
+  return [
+    "New Get Called request",
+    `Name: ${record.name}`,
+    `Phone: ${record.phone}`,
+    `Best time: ${record.time}`,
+    `Email: ${record.email || "Not provided"}`,
+    `Source: ${record.source}`,
+    `Conversation ID: ${record.conversationId || "Not available"}`,
+  ].join("\n");
+}
+
+function getConfiguredCallbackChannels() {
+  return {
+    sms:
+      Boolean(process.env.TWILIO_ACCOUNT_SID) &&
+      Boolean(process.env.TWILIO_AUTH_TOKEN) &&
+      Boolean(process.env.TWILIO_FROM_NUMBER) &&
+      Boolean(process.env.TWILIO_TO_NUMBER),
+    email:
+      Boolean(process.env.RESEND_API_KEY) &&
+      Boolean(process.env.CALLBACK_EMAIL_TO) &&
+      Boolean(process.env.CALLBACK_EMAIL_FROM),
+  };
+}
+
+async function sendCallbackSms(record) {
+  const accountSid = String(process.env.TWILIO_ACCOUNT_SID || "").trim();
+  const authToken = String(process.env.TWILIO_AUTH_TOKEN || "").trim();
+  const from = String(process.env.TWILIO_FROM_NUMBER || "").trim();
+  const to = String(process.env.TWILIO_TO_NUMBER || "").trim();
+
+  const response = await fetch(
+    `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        To: to,
+        From: from,
+        Body: buildCallbackNotificationText(record),
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Twilio SMS failed with ${response.status}`);
+  }
+
+  return response.json();
+}
+
+async function sendCallbackEmail(record) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${String(process.env.RESEND_API_KEY || "").trim()}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: String(process.env.CALLBACK_EMAIL_FROM || "").trim(),
+      to: [String(process.env.CALLBACK_EMAIL_TO || "").trim()],
+      subject: `Get Called request from ${record.name}`,
+      text: buildCallbackNotificationText(record),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Resend email failed with ${response.status}`);
+  }
+
+  return response.json();
+}
+
+async function deliverCallbackRequest(record) {
+  const configured = getConfiguredCallbackChannels();
+  const channels = [];
+  const errors = [];
+
+  if (configured.sms) {
+    try {
+      await sendCallbackSms(record);
+      channels.push("sms");
+    } catch (error) {
+      errors.push(`sms:${error?.message || error}`);
+    }
+  }
+
+  if (configured.email) {
+    try {
+      await sendCallbackEmail(record);
+      channels.push("email");
+    } catch (error) {
+      errors.push(`email:${error?.message || error}`);
+    }
+  }
+
+  const anyChannelConfigured = configured.sms || configured.email;
+  const status = channels.length
+    ? "delivered"
+    : anyChannelConfigured
+      ? "delivery_failed"
+      : "stored_only";
+
+  return {
+    status,
+    channels,
+    errors,
+  };
+}
+
+function rememberCallbackRequest(record) {
+  jozCallbackFallbackStore.push({
+    ...record,
+    storedAt: new Date().toISOString(),
+  });
+}
+
 app.post("/api/joz-llm", async (req, res) => {
   try {
     const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
@@ -584,6 +714,114 @@ app.post("/api/joz-llm/landing", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ /api/joz-llm/landing failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/joz-llm/callback-request", async (req, res) => {
+  try {
+    const name = normalizeCallbackField(req.body?.name, 120);
+    const phone = normalizeCallbackField(req.body?.phone, 80);
+    const time = normalizeCallbackField(req.body?.time, 160);
+    const email = normalizeCallbackField(req.body?.email, 160);
+    const source = normalizeCallbackField(req.body?.source, 80) || "joz_llm";
+    const sessionKey =
+      normalizeCallbackField(req.body?.conversationId || req.body?.sessionKey, 120) || null;
+    const context = {
+      currentPortal: req.body?.context?.currentPortal || "root",
+      currentMesh: req.body?.context?.currentMesh || null,
+      currentMeshStage: req.body?.context?.currentMeshStage || null,
+    };
+
+    if (!name || !phone || !time) {
+      return res.status(400).json({ error: "Missing callback name, phone, or time" });
+    }
+
+    const profile = await getPrimaryJozProfile();
+    let conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+
+    if (!conversationId && profile?.id) {
+      conversationId = await createJozConversation({
+        profileId: profile.id,
+        sessionKey,
+        intentMode: "booking",
+        context,
+      });
+    }
+
+    const record = {
+      name,
+      phone,
+      time,
+      email,
+      source,
+      conversationId,
+    };
+    const delivery = await deliverCallbackRequest(record);
+
+    if (conversationId) {
+      await appendJozMessage({
+        conversationId,
+        role: "user",
+        content: `Get Called request: ${name}, ${phone}, ${time}${email ? `, ${email}` : ""}`,
+        messageKind: "callback_request",
+        metadata: {
+          source,
+          deliveryStatus: delivery.status,
+          notifiedChannels: delivery.channels,
+        },
+      });
+      await appendJozMessage({
+        conversationId,
+        role: "assistant",
+        content:
+          delivery.status === "delivered"
+            ? "Callback request saved and delivered to Joz."
+            : delivery.status === "delivery_failed"
+              ? "Callback request saved, but direct delivery failed."
+              : "Callback request saved for follow-up.",
+        messageKind: "callback_status",
+        metadata: {
+          source,
+          deliveryStatus: delivery.status,
+          notifiedChannels: delivery.channels,
+          deliveryErrors: delivery.errors,
+        },
+      });
+    }
+
+    const callbackRequestId = await createJozCallbackRequest({
+      conversationId,
+      profileId: profile?.id || null,
+      requestedName: name,
+      requestedPhone: phone,
+      requestedTime: time,
+      requestedEmail: email || null,
+      source,
+      payload: { context },
+      deliveryStatus: delivery.status,
+      deliveryChannels: delivery.channels,
+      deliveryErrors: delivery.errors,
+    });
+
+    if (!callbackRequestId) {
+      rememberCallbackRequest({
+        ...record,
+        deliveryStatus: delivery.status,
+        notifiedChannels: delivery.channels,
+        deliveryErrors: delivery.errors,
+      });
+    }
+
+    return res.json({
+      ok: true,
+      conversationId,
+      callbackRequestId,
+      delivery,
+      persistedTo: callbackRequestId ? "database" : "memory",
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/callback-request failed:", error);
     return res.status(500).json({ error: error.message });
   }
 });

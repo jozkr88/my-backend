@@ -96,3 +96,25 @@ test("cross-lane ai adoption query connects business need, mindset, and skills e
   assert.ok(slugs.includes("skills-hero-agentic-ai"));
   assert.ok(slugs.includes("business-need-enterprise-proof"));
 });
+
+test("deep skills query ranks technical capability records above recruiter operations", () => {
+  const slugs = rankedSlugs("What are Joz's deep skills?", "skills", 10);
+  assert.equal(slugs[0], "skills-agentic-ai-architecture");
+  assert.equal(slugs[1], "skills-technical-platform-stack");
+  assert.ok(slugs.includes("skills-agentic-ai-ux-orchestration"));
+  assert.ok(!slugs.slice(0, 4).includes("skills-recruiter-operational-facts"));
+});
+
+test("technical depth variants down-rank recruiter operations", () => {
+  for (const query of [
+    "What are Joz's strongest technical skills?",
+    "How technical is Joz?",
+    "What can Joz build?",
+    "What is Joz's AI stack?",
+  ]) {
+    const slugs = rankedSlugs(query, "skills", 8);
+    assert.ok(slugs.includes("skills-agentic-ai-architecture"));
+    assert.ok(slugs.includes("skills-technical-platform-stack"));
+    assert.ok(!slugs.slice(0, 3).includes("skills-recruiter-operational-facts"));
+  }
+});

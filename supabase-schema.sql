@@ -250,6 +250,22 @@ CREATE TABLE IF NOT EXISTS joz_booking_requests (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS joz_callback_requests (
+  id BIGSERIAL PRIMARY KEY,
+  conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+  profile_id BIGINT REFERENCES joz_profiles(id) ON DELETE SET NULL,
+  requested_name TEXT NOT NULL,
+  requested_phone TEXT NOT NULL,
+  requested_time TEXT NOT NULL,
+  requested_email TEXT,
+  source TEXT NOT NULL DEFAULT 'joz_llm',
+  payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+  delivery_status TEXT NOT NULL DEFAULT 'stored_only',
+  delivery_channels JSONB NOT NULL DEFAULT '[]'::jsonb,
+  delivery_errors JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 INSERT INTO joz_profiles (
   slug,
   display_name,

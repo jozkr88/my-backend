@@ -458,6 +458,52 @@ export async function appendJozMessage({
   );
 }
 
+export async function createJozCallbackRequest({
+  conversationId = null,
+  profileId = null,
+  requestedName,
+  requestedPhone,
+  requestedTime,
+  requestedEmail = null,
+  source = "joz_llm",
+  payload = {},
+  deliveryStatus = "stored_only",
+  deliveryChannels = [],
+  deliveryErrors = [],
+}) {
+  const result = await runQuery(
+    `INSERT INTO joz_callback_requests (
+       conversation_id,
+       profile_id,
+       requested_name,
+       requested_phone,
+       requested_time,
+       requested_email,
+       source,
+       payload,
+       delivery_status,
+       delivery_channels,
+       delivery_errors
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, $10::jsonb, $11::jsonb)
+     RETURNING id`,
+    [
+      conversationId,
+      profileId,
+      requestedName,
+      requestedPhone,
+      requestedTime,
+      requestedEmail,
+      source,
+      JSON.stringify(payload || {}),
+      deliveryStatus,
+      JSON.stringify(deliveryChannels || []),
+      JSON.stringify(deliveryErrors || []),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
 async function seedWorldModel(db) {
   for (const [portalKey, name, route, summary] of WORLD_MODEL_SEED.portals) {
     await db.query(
@@ -697,6 +743,33 @@ export async function initDatabase() {
         PRIMARY KEY (state_key, action_key, phrase)
       )
     `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_callback_requests (
+        id BIGSERIAL PRIMARY KEY,
+        conversation_id UUID,
+        profile_id BIGINT,
+        requested_name TEXT NOT NULL,
+        requested_phone TEXT NOT NULL,
+        requested_time TEXT NOT NULL,
+        requested_email TEXT,
+        source TEXT NOT NULL DEFAULT 'joz_llm',
+        payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+        delivery_status TEXT NOT NULL DEFAULT 'stored_only',
+        delivery_channels JSONB NOT NULL DEFAULT '[]'::jsonb,
+        delivery_errors JSONB NOT NULL DEFAULT '[]'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_callback_requests
+      ALTER COLUMN conversation_id TYPE UUID
+      USING CASE
+        WHEN conversation_id IS NULL THEN NULL
+        ELSE conversation_id::text::uuid
+      END
+    `).catch(() => {});
 
     for (const [portalKey, currentState, commandKey, action, target, awareness = null] of TRANSITION_SEED) {
       await db.query(

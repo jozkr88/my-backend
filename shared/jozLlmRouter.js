@@ -90,7 +90,7 @@ function composeSystemsMindsetReply() {
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
   if (subIntent === "capabilities_overview") {
-    return "Joz is strongest in agentic AI architecture, orchestration, retrieval-backed intelligence, signal reasoning, multimodal UX, and production-grade decision systems. The proof spans Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and Apple/Pixar-adjacent spatial computing work.";
+    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, enterprise retrieval, AI governance, and multimodal intelligence. Technically, that includes LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, event-driven workflows, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. Joz's differentiator is combining that technical depth with enterprise architecture, transformation, product strategy, human adoption, and measurable business outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and Apple/Pixar-adjacent work.";
   }
 
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";
@@ -210,7 +210,16 @@ function detectFactualProfile(clean) {
     return { detectedSubIntent: "contact", detectedConcept: "contact" };
   }
 
-  if (includesAny(clean, ["nationality", "citizenship", "work authorization", "singapore status", "pep", "ep"])) {
+  if (
+    includesAny(clean, [
+      "nationality",
+      "citizenship",
+      "work authorization",
+      "singapore status",
+      /\bpep\b/,
+      /\bep\b/,
+    ])
+  ) {
     return { detectedSubIntent: "nationality", detectedConcept: "nationality" };
   }
 
@@ -269,9 +278,21 @@ function detectSystemsMindset(clean) {
 function detectSkills(clean) {
   if (
     includesAny(clean, [
+      "deep skills",
+      "deepest skills",
       "what can joz do",
+      "what can joz build",
+      "what is joz's ai stack",
+      "what is jozs ai stack",
+      "how technical is joz",
       "joz's skills",
       "strongest skills",
+      "strongest technical skills",
+      "technical depth",
+      "core capabilities",
+      "technical skills",
+      "ai skills",
+      "engineering skills",
       "capabilities",
       "what does joz do",
       "architecture",
