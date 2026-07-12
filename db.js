@@ -411,6 +411,71 @@ export async function getPrimaryJozProfile() {
   return result.rows[0] || null;
 }
 
+export async function cleanupExpiredJozData({
+  conversationRetentionDays = 30,
+  callbackRetentionDays = 30,
+  privacyRequestRetentionDays = 365,
+} = {}) {
+  const db = getPool();
+  if (!db) {
+    return {
+      deletedConversations: 0,
+      deletedCallbackRequests: 0,
+      deletedPrivacyRequests: 0,
+    };
+  }
+
+  const normalizedConversationDays = Math.max(1, Number(conversationRetentionDays) || 30);
+  const normalizedCallbackDays = Math.max(1, Number(callbackRetentionDays) || 30);
+  const normalizedPrivacyDays = Math.max(1, Number(privacyRequestRetentionDays) || 365);
+
+  let deletedConversations = 0;
+  let deletedCallbackRequests = 0;
+  let deletedPrivacyRequests = 0;
+
+  try {
+    const callbackDeleteResult = await runQuery(
+      `DELETE FROM joz_callback_requests
+       WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
+       RETURNING id`,
+      [normalizedCallbackDays],
+    );
+    deletedCallbackRequests = callbackDeleteResult.rows?.length || 0;
+  } catch (error) {
+    console.warn("⚠️ Skipping callback retention cleanup:", error.message);
+  }
+
+  try {
+    const conversationDeleteResult = await runQuery(
+      `DELETE FROM joz_conversations
+       WHERE COALESCE(last_message_at, updated_at, created_at) < NOW() - ($1 * INTERVAL '1 day')
+       RETURNING id`,
+      [normalizedConversationDays],
+    );
+    deletedConversations = conversationDeleteResult.rows?.length || 0;
+  } catch (error) {
+    console.warn("⚠️ Skipping conversation retention cleanup:", error.message);
+  }
+
+  try {
+    const privacyRequestDeleteResult = await runQuery(
+      `DELETE FROM joz_privacy_requests
+       WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
+       RETURNING id`,
+      [normalizedPrivacyDays],
+    );
+    deletedPrivacyRequests = privacyRequestDeleteResult.rows?.length || 0;
+  } catch (error) {
+    console.warn("⚠️ Skipping privacy-request retention cleanup:", error.message);
+  }
+
+  return {
+    deletedConversations,
+    deletedCallbackRequests,
+    deletedPrivacyRequests,
+  };
+}
+
 export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, query = "") {
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
@@ -562,6 +627,227 @@ export async function createJozCallbackRequest({
     ]
   );
   return result.rows[0]?.id || null;
+}
+
+export async function createJozPrivacyRequest({
+  requestType,
+  requestStatus = "received",
+  email = null,
+  phone = null,
+  conversationId = null,
+  callbackRequestId = null,
+  sessionKey = null,
+  source = "web",
+  payload = {},
+}) {
+  const result = await runQuery(
+    `INSERT INTO joz_privacy_requests (
+       request_type,
+       request_status,
+       email,
+       phone,
+       conversation_id,
+       callback_request_id,
+       session_key,
+       source,
+       payload
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::jsonb)
+     RETURNING id`,
+    [
+      requestType,
+      requestStatus,
+      email,
+      phone,
+      conversationId,
+      callbackRequestId,
+      sessionKey,
+      source,
+      JSON.stringify(payload || {}),
+    ],
+  );
+  return result.rows[0]?.id || null;
+}
+
+async function resolvePrivacyTargets({
+  conversationId = null,
+  sessionKey = null,
+  callbackRequestId = null,
+  email = null,
+  phone = null,
+} = {}) {
+  const normalizedEmail = normalizePrivacyEmail(email);
+  const normalizedPhone = normalizePrivacyPhone(phone);
+  const conversationIds = new Set();
+  const callbackById = new Map();
+
+  if (conversationId && sessionKey) {
+    const conversationResult = await runQuery(
+      `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context, last_message_at, created_at, updated_at
+       FROM joz_conversations
+       WHERE id = $1
+         AND session_key = $2
+       LIMIT 1`,
+      [conversationId, sessionKey],
+    );
+    for (const row of conversationResult.rows || []) {
+      conversationIds.add(row.id);
+    }
+  } else if (sessionKey) {
+    const conversationResult = await runQuery(
+      `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context, last_message_at, created_at, updated_at
+       FROM joz_conversations
+       WHERE session_key = $1`,
+      [sessionKey],
+    );
+    for (const row of conversationResult.rows || []) {
+      conversationIds.add(row.id);
+    }
+  }
+
+  const callbackClauses = [];
+  const callbackParams = [];
+
+  if (callbackRequestId) {
+    callbackParams.push(callbackRequestId);
+    callbackClauses.push(`id = $${callbackParams.length}`);
+  }
+
+  if (normalizedEmail) {
+    callbackParams.push(normalizedEmail);
+    callbackClauses.push(`LOWER(COALESCE(requested_email, '')) = $${callbackParams.length}`);
+  }
+
+  if (normalizedPhone) {
+    callbackParams.push(normalizedPhone);
+    callbackClauses.push(
+      `regexp_replace(COALESCE(requested_phone, ''), '\\D', '', 'g') = $${callbackParams.length}`,
+    );
+  }
+
+  if (callbackClauses.length) {
+    const callbackResult = await runQuery(
+      `SELECT id, conversation_id, profile_id, requested_name, requested_phone, requested_time,
+              requested_email, source, payload, delivery_status, delivery_channels,
+              delivery_errors, created_at
+       FROM joz_callback_requests
+       WHERE ${callbackClauses.join(" OR ")}`,
+      callbackParams,
+    );
+
+    for (const row of callbackResult.rows || []) {
+      const emailMatches =
+        !normalizedEmail ||
+        normalizePrivacyEmail(row.requested_email) === normalizedEmail;
+      const phoneMatches =
+        !normalizedPhone ||
+        normalizePrivacyPhone(row.requested_phone) === normalizedPhone;
+      const callbackIdMatches =
+        !callbackRequestId || String(row.id) === String(callbackRequestId);
+
+      if (!emailMatches || !phoneMatches || !callbackIdMatches) continue;
+
+      callbackById.set(String(row.id), row);
+      if (row.conversation_id) {
+        conversationIds.add(row.conversation_id);
+      }
+    }
+  }
+
+  let conversations = [];
+  let messages = [];
+
+  if (conversationIds.size) {
+    const ids = [...conversationIds];
+    const conversationResult = await runQuery(
+      `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context,
+              last_message_at, created_at, updated_at
+       FROM joz_conversations
+       WHERE id = ANY($1::uuid[])
+       ORDER BY created_at ASC`,
+      [ids],
+    );
+    conversations = conversationResult.rows || [];
+
+    const messageResult = await runQuery(
+      `SELECT id, conversation_id, role, message_kind, content, tool_name, citations, metadata, created_at
+       FROM joz_messages
+       WHERE conversation_id = ANY($1::uuid[])
+       ORDER BY created_at ASC`,
+      [ids],
+    );
+    messages = messageResult.rows || [];
+  }
+
+  return {
+    conversations,
+    messages,
+    callbackRequests: [...callbackById.values()].sort(
+      (left, right) => new Date(left.created_at).getTime() - new Date(right.created_at).getTime(),
+    ),
+  };
+}
+
+export async function exportJozPrivacyBundle(filters = {}) {
+  const { conversations, messages, callbackRequests } = await resolvePrivacyTargets(filters);
+
+  return {
+    exportedAt: new Date().toISOString(),
+    filters: {
+      conversationId: filters.conversationId || null,
+      sessionKey: filters.sessionKey || null,
+      callbackRequestId: filters.callbackRequestId || null,
+      email: filters.email || null,
+      phone: filters.phone || null,
+    },
+    conversations,
+    messages,
+    callbackRequests,
+  };
+}
+
+export async function deleteJozPrivacyBundle(filters = {}) {
+  const { conversations, callbackRequests } = await resolvePrivacyTargets(filters);
+  const conversationIds = [...new Set((conversations || []).map((row) => row.id).filter(Boolean))];
+  const callbackRequestIds = [...new Set((callbackRequests || []).map((row) => row.id).filter(Boolean))];
+
+  let deletedCallbackRequests = 0;
+  let deletedConversations = 0;
+  let deletedMessages = 0;
+
+  if (callbackRequestIds.length) {
+    const callbackDeleteResult = await runQuery(
+      `DELETE FROM joz_callback_requests
+       WHERE id = ANY($1::bigint[])
+       RETURNING id`,
+      [callbackRequestIds],
+    );
+    deletedCallbackRequests = callbackDeleteResult.rows?.length || 0;
+  }
+
+  if (conversationIds.length) {
+    const messageCountResult = await runQuery(
+      `SELECT COUNT(*)::int AS count
+       FROM joz_messages
+       WHERE conversation_id = ANY($1::uuid[])`,
+      [conversationIds],
+    );
+    deletedMessages = messageCountResult.rows[0]?.count || 0;
+
+    const conversationDeleteResult = await runQuery(
+      `DELETE FROM joz_conversations
+       WHERE id = ANY($1::uuid[])
+       RETURNING id`,
+      [conversationIds],
+    );
+    deletedConversations = conversationDeleteResult.rows?.length || 0;
+  }
+
+  return {
+    deletedConversations,
+    deletedMessages,
+    deletedCallbackRequests,
+  };
 }
 
 async function seedWorldModel(db) {
@@ -819,6 +1105,23 @@ export async function initDatabase() {
         delivery_channels JSONB NOT NULL DEFAULT '[]'::jsonb,
         delivery_errors JSONB NOT NULL DEFAULT '[]'::jsonb,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_privacy_requests (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        request_type TEXT NOT NULL,
+        request_status TEXT NOT NULL DEFAULT 'received',
+        email TEXT,
+        phone TEXT,
+        conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+        callback_request_id BIGINT REFERENCES joz_callback_requests(id) ON DELETE SET NULL,
+        session_key TEXT,
+        source TEXT NOT NULL DEFAULT 'web',
+        payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `);
 
