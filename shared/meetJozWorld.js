@@ -81,8 +81,8 @@ const OWNED_CONCEPT_VALIDATION = {
     forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
   },
   mogg: {
-    requiredAny: ["digital twin", "meet joz", "ascend", "workf"],
-    forbidden: [...FORBIDDEN_OWNED_CONCEPT_PHRASES, "skills layer"],
+    requiredAny: ["digital twin", "identity layer", "presence", "embodiment"],
+    forbidden: [...FORBIDDEN_OWNED_CONCEPT_PHRASES, "skills layer", ".glb", "stage id", "object id"],
   },
   workf: {
     requiredAny: ["skills", "deep work", "execution", "technical depth"],
@@ -145,6 +145,21 @@ function isConceptExplainerQuery(input = "") {
   return /^(what is|what's|explain|define|tell me about|who is)\b/.test(clean);
 }
 
+function isTechnicalConceptQuery(input = "") {
+  const clean = normalizeToken(input);
+  if (!clean) return false;
+  return [
+    "architecture",
+    "3d model",
+    "3d",
+    "glb",
+    "scene structure",
+    "world model",
+    "implementation",
+    "renderer",
+  ].some((term) => clean.includes(term));
+}
+
 function classifyWorldResponseMode({ input = "", route = "", ownedConceptId = null, isGoldPill = false } = {}) {
   const clean = normalizeToken(input);
   if ((ownedConceptId || isGoldPill) && isConceptExplainerQuery(clean)) {
@@ -175,36 +190,54 @@ function validateOwnedConceptAnswer(conceptId, reply = "") {
   return hasRequired && !hasForbidden;
 }
 
-function composeFlexAnswer() {
-  return "Flex is the arrival and presence layer of Meet Joz. It defines the first signal of vibe, atmosphere, tone, and identity in the sequence, setting the emotional entry point before the experience advances into Ascend for proof and then Mogg and Workf for identity and deep capability.";
+function composeFlexAnswer({ technical = false } = {}) {
+  const base =
+    "Flex is the arrival and presence layer of Meet Joz. It establishes vibe, atmosphere, tone, and identity as the first felt signal of Joz.";
+  if (!technical) return base;
+  return `${base} In implementation terms, Flex is also represented as one of the conceptual layers inside the Meet Joz world model.`;
 }
 
-function composeAscendAnswer() {
-  return "Ascend is the discovery and progression layer of Meet Joz. It means visible proof, recognition, transformation, and scale in the sequence, sitting after Flex and before Mogg and Workf as the stage where Joz's signal becomes externally legible.";
+function composeAscendAnswer({ technical = false } = {}) {
+  const base =
+    "Ascend is the discovery and progression layer of Meet Joz. It represents visible proof, recognition, transformation, and scale as Joz's signal becomes externally legible.";
+  if (!technical) return base;
+  return `${base} In implementation terms, Ascend is one of the conceptual states the world model can focus and route through.`;
 }
 
-function composeMoggAnswer() {
-  return "Mogg is Joz's digital twin inside the Meet Joz sequence. It means the conceptual identity layer between Ascend and Workf, translating visible proof into a more embodied presence before the experience moves into deeper work, skills, and execution.";
+function composeMoggAnswer({ technical = false } = {}) {
+  const base =
+    "Mogg is Joz's digital twin and identity layer. It represents a concentrated, high-signal presence that transforms proof, achievement, and capability into a living digital embodiment of Joz.";
+  if (!technical) return base;
+  return `${base} In implementation terms, Mogg is also represented as a distinct concept and focused object inside the Meet Joz world model.`;
 }
 
-function composeWorkfAnswer() {
-  return "Workf is the deep work and skills layer of Meet Joz. It means execution, technical depth, enterprise capability, and measurable outcomes in the sequence, following Mogg so the experience moves from identity and presence into concrete skill, systems, and delivery proof.";
+function composeWorkfAnswer({ technical = false } = {}) {
+  const base =
+    "Workf is the deep work and skills layer of Meet Joz. It represents execution, technical depth, enterprise capability, and measurable outcomes made concrete through delivery.";
+  if (!technical) return base;
+  return `${base} In implementation terms, Workf maps to the deeper capability layer that the world model can expose for technical and skills-focused interactions.`;
 }
 
 function composeWorldxAnswer() {
   return "Worldx is the abstract gold semantic city surrounding the Meet Joz sequence. It means the broader environment of proof, aura, and capability around Flex, Ascend, Mogg, and Workf, serving as the 360 semantic context rather than the main trigger object itself.";
 }
 
-function composeAuraAnswer() {
-  return "Aura is the emotional and perceptual field created by the experience. It is the atmosphere, presence, and feeling perceived before conscious analysis begins.";
+function composeAuraAnswer({ technical = false } = {}) {
+  const base =
+    "Aura is the emotional and perceptual field created by the experience. It is the atmosphere, presence, and feeling perceived before conscious analysis begins.";
+  if (!technical) return base;
+  return `${base} In implementation terms, Aura is treated as a conceptual layer rather than a standalone navigation primitive.`;
 }
 
 function composeFrameAnswer() {
   return "Frame is the underlying structure that shapes perception. Strong framing creates coherence, proportion, clarity, and presence.";
 }
 
-function composeAscensionAnswer() {
-  return "Ascension is the disciplined process of refinement through consistency, precision, conditioning, and sustained iteration.";
+function composeAscensionAnswer({ technical = false } = {}) {
+  const base =
+    "Ascension is the disciplined process of refinement through consistency, precision, conditioning, and sustained iteration.";
+  if (!technical) return base;
+  return `${base} In implementation terms, Ascension is modeled as a concept within the broader neoMAXX ontology.`;
 }
 
 function composeDominanceAnswer() {
@@ -219,7 +252,7 @@ function composeEliteBeautyAnswer() {
   return "The Elite Beauty is the Neurodesign layer inside neoMAXX. It combines Ascension, 10/10 Frame Mogg, aura, and perception design into a deliberate system of refinement, structure, and signal.";
 }
 
-function composeOwnedConceptAnswer(conceptId) {
+function composeOwnedConceptAnswer(conceptId, { technical = false } = {}) {
   const composers = {
     flex: composeFlexAnswer,
     ascend: composeAscendAnswer,
@@ -234,10 +267,10 @@ function composeOwnedConceptAnswer(conceptId) {
     elite_beauty: composeEliteBeautyAnswer,
   };
 
-  const reply = composers[conceptId]?.() || "";
+  const reply = composers[conceptId]?.({ technical }) || "";
   return validateOwnedConceptAnswer(conceptId, reply)
     ? { reply, validationPassed: true }
-    : { reply: composers[conceptId]?.() || "", validationPassed: true };
+    : { reply: composers[conceptId]?.({ technical }) || "", validationPassed: true };
 }
 
 function isGoldPillQuery(input = "") {
@@ -728,7 +761,9 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
 
   if (ownedConceptId) {
     const concept = toArray(manifest.concepts).find((entry) => entry.id === ownedConceptId) || null;
-    const resolution = composeOwnedConceptAnswer(ownedConceptId);
+    const resolution = composeOwnedConceptAnswer(ownedConceptId, {
+      technical: isTechnicalConceptQuery(input),
+    });
     const selectedWorldRecord =
       ownedConceptId === "mogg"
         ? concept?.source_object_ids?.[0] || "meet_joz_mogg"

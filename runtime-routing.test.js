@@ -426,8 +426,8 @@ const OWNED_CONCEPT_ENDPOINT_CASES = [
     query: "What is Mogging?",
     selectedWorldRecord: "meet_joz_mogg",
     composer: "composeMoggAnswer",
-    text: [/digital twin/i, /Meet Joz/i, /Ascend/i, /Workf/i],
-    forbidden: [/root_gold_pill/i, /Gold Pill/i, /online communities/i, /slang/i],
+    text: [/digital twin/i, /identity layer/i, /presence/i, /embodiment/i],
+    forbidden: [/root_gold_pill/i, /Gold Pill/i, /online communities/i, /slang/i, /\.glb/i, /stage id/i, /object id/i],
   },
   {
     name: "workf",
@@ -436,6 +436,22 @@ const OWNED_CONCEPT_ENDPOINT_CASES = [
     composer: "composeWorkfAnswer",
     text: [/skills/i, /deep work/i, /execution/i, /technical depth/i],
     forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    name: "aura",
+    query: "What is Aura?",
+    selectedWorldRecord: "aura",
+    composer: "composeAuraAnswer",
+    text: [/emotional/i, /perceptual/i, /presence/i, /atmosphere/i],
+    forbidden: [/\.glb/i, /stage id/i, /object id/i, /renderer/i],
+  },
+  {
+    name: "ascension",
+    query: "What is Ascension?",
+    selectedWorldRecord: "ascension",
+    composer: "composeAscensionAnswer",
+    text: [/consistency/i, /precision/i, /conditioning|refinement/i, /iteration/i],
+    forbidden: [/\.glb/i, /stage id/i, /object id/i, /renderer/i],
   },
   {
     name: "worldx",
@@ -514,14 +530,15 @@ for (const query of [
     assert.equal(payload.trace?.responseMode, "concept_explainer");
     assert.equal(payload.trace?.fallbackUsed, false);
     assert.match(String(payload.reply || ""), /digital twin/i);
-    assert.match(String(payload.reply || ""), /Meet Joz/i);
-    assert.match(String(payload.reply || ""), /Ascend/i);
-    assert.match(String(payload.reply || ""), /Workf/i);
+    assert.match(String(payload.reply || ""), /identity layer/i);
+    assert.match(String(payload.reply || ""), /presence/i);
+    assert.match(String(payload.reply || ""), /embodiment/i);
     assert.doesNotMatch(String(payload.reply || ""), /root_gold_pill/i);
     assert.doesNotMatch(String(payload.reply || ""), /Gold Pill/i);
     assert.doesNotMatch(String(payload.reply || ""), /You are inside/i);
     assert.doesNotMatch(String(payload.reply || ""), /You are focused on/i);
     assert.doesNotMatch(String(payload.reply || ""), /Available actions/i);
+    assert.doesNotMatch(String(payload.reply || ""), /\.glb|stage id|object id|renderer/i);
   });
 }
 
@@ -532,15 +549,29 @@ for (const query of [
   "What is Neomaxxing?",
 ]) {
   test(`POST /api/joz-llm canonical neoMAXX branding holds: ${query}`, async () => {
-    const { status, payload } = await postJson("/api/joz-llm", {
-      sessionKey: `runtime-neomaxx-${query}`,
-      messages: [{ role: "user", content: query }],
-      context: {
-        currentPortal: "root",
-        currentMesh: "brain",
-        currentMeshStage: null,
+    const neoMaxxCaseIndex = [
+      "What is neoMAXX?",
+      "What is neo/maxx?",
+      "What is NEO/MAXX?",
+      "What is Neomaxxing?",
+    ].indexOf(query);
+    const { status, payload } = await postJson(
+      "/api/joz-llm",
+      {
+        sessionKey: `runtime-neomaxx-${query}`,
+        messages: [{ role: "user", content: query }],
+        context: {
+          currentPortal: "root",
+          currentMesh: "brain",
+          currentMeshStage: null,
+        },
       },
-    });
+      {
+        headers: {
+          "x-forwarded-for": `198.51.100.${110 + neoMaxxCaseIndex}`,
+        },
+      }
+    );
 
     assert.equal(status, 200);
     assert.equal(payload.mode, "canonical_world_concept");

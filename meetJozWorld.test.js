@@ -201,8 +201,8 @@ const OWNED_CONCEPT_CASES = [
   {
     input: "What is Mogg?",
     concept: "mogg",
-    terms: [/digital twin/i, /meet joz/i, /ascend/i, /workf/i],
-    forbidden: [/root/i, /gold pill/i, /online communities/i, /slang/i],
+    terms: [/digital twin/i, /identity layer/i, /presence/i, /embodiment/i],
+    forbidden: [/root/i, /gold pill/i, /online communities/i, /slang/i, /\.glb/i, /stage id/i, /object id/i],
   },
   {
     input: "What is Workf?",
@@ -314,14 +314,15 @@ for (const input of MOGG_EXPLICIT_QUERY_CASES) {
     assert.equal(resolution.answerSource, "canonical_concept");
     assert.equal(resolution.responseMode, "concept_explainer");
     assert.match(String(resolution.reply || ""), /digital twin/i);
-    assert.match(String(resolution.reply || ""), /Meet Joz/i);
-    assert.match(String(resolution.reply || ""), /Ascend/i);
-    assert.match(String(resolution.reply || ""), /Workf/i);
+    assert.match(String(resolution.reply || ""), /identity layer/i);
+    assert.match(String(resolution.reply || ""), /presence/i);
+    assert.match(String(resolution.reply || ""), /embodiment/i);
     assert.doesNotMatch(String(resolution.reply || ""), /root_gold_pill/i);
     assert.doesNotMatch(String(resolution.reply || ""), /Gold Pill/i);
     assert.doesNotMatch(String(resolution.reply || ""), /You are inside/i);
     assert.doesNotMatch(String(resolution.reply || ""), /You are focused on/i);
     assert.doesNotMatch(String(resolution.reply || ""), /Available actions/i);
+    assert.doesNotMatch(String(resolution.reply || ""), /\.glb|stage id|object id|renderer/i);
   });
 }
 
@@ -329,22 +330,22 @@ const CONCEPT_EXPLAINER_CASES = [
   {
     input: "What is Flex?",
     concept: "flex",
-    terms: [/arrival/i, /presence/i, /Ascend/i, /Mogg|Workf/i],
+    terms: [/arrival/i, /presence/i, /vibe/i, /identity/i],
   },
   {
     input: "What is Ascend?",
     concept: "ascend",
-    terms: [/discovery/i, /progression/i, /Flex/i, /Mogg|Workf/i],
+    terms: [/discovery/i, /progression/i, /proof|recognition/i, /scale/i],
   },
   {
     input: "What is Mogging?",
     concept: "mogg",
-    terms: [/digital twin/i, /Ascend/i, /Workf/i],
+    terms: [/digital twin/i, /identity layer/i, /presence/i, /embodiment/i],
   },
   {
     input: "What is Workf?",
     concept: "workf",
-    terms: [/deep work/i, /skills/i, /Mogg/i],
+    terms: [/deep work/i, /skills/i, /execution/i, /technical depth/i],
   },
 ];
 
@@ -371,5 +372,6 @@ for (const testCase of CONCEPT_EXPLAINER_CASES) {
     assert.doesNotMatch(reply, /You are inside/i);
     assert.doesNotMatch(reply, /You are focused on/i);
     assert.doesNotMatch(reply, /Available actions/i);
+    assert.doesNotMatch(reply, /\.glb|stage id|object id|renderer/i);
   });
 }
