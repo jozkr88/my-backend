@@ -7,6 +7,7 @@ import {
 import {
   buildMeetJozWorldAnswerContext,
   buildMeetJozWorldAwarenessReply,
+  buildMeetJozWorldAwarenessResolution,
   resolveMeetJozWorldEntity,
 } from "./meetJozWorld.js";
 
@@ -27,8 +28,9 @@ function buildCanonicalWorldConceptReply({ concept, appContext, legacyContext, i
 
   if (concept === "neo_maxx") {
     return [
-      "NEO/MAXX is Joz Krupa's concept for combining human judgment, AI capability, design, engineering, and execution into a higher-order innovation system.",
-      "It is the conceptual layer behind the spatial experience: MAXX frames the intelligence world, while MeetJoz shows the applied human proof, business value, systems mindset, and deeper skills.",
+      "neoMAXX is a concept created by Joz Krupa.",
+      "It combines human judgment, AI capability, design, engineering, and execution into a higher-order innovation system.",
+      "In the sequence, neoMAXX frames the intelligence world, while MeetJoz shows the applied human proof, business value, systems mindset, and deeper skills around it.",
     ].join(" ");
   }
 
@@ -40,7 +42,7 @@ function composeIdentityProfileReply() {
     "Joz Krupa is an Agentic AI Architecture and Innovation Leader with experience across Singapore, Dubai, Europe, and global markets.",
     "Joz combines AI architecture, systems thinking, product strategy, design, engineering, and enterprise transformation to turn complexity into measurable business outcomes.",
     "Joz's work includes Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, Apple/Pixar-related spatial computing work, and current Agentic AI initiatives.",
-    "MeetJoz is Joz's interactive spatial experience for exploring Business Value, Systems Mindset, Skills, and NEO/MAXX concepts.",
+    "MeetJoz is Joz's interactive spatial experience for exploring Business Value, Systems Mindset, Skills, and neoMAXX concepts.",
   ].join(" ");
 }
 
@@ -152,8 +154,18 @@ function detectCanonicalWorldConcept(clean) {
     clean === "pill" ||
     clean === "capsule" ||
     clean === "neomaxxing" ||
+    clean === "neomaxx" ||
+    clean === "neomaxx." ||
     clean === "neo maxx" ||
-    clean === "neo/maxx";
+    clean === "neo/maxx" ||
+    clean === "neo maxx." ||
+    clean === "neo/maxx." ||
+    clean === "neomaxx?" ||
+    clean === "neo maxx?" ||
+    clean === "neo/maxx?" ||
+    clean === "neo maxx" ||
+    clean === "neo/maxx" ||
+    clean === "maxx";
 
   if (
     isDefinitionPrompt &&
@@ -164,7 +176,7 @@ function detectCanonicalWorldConcept(clean) {
 
   if (
     isDefinitionPrompt &&
-    includesAny(clean, ["neomaxxing", "neo/maxx", "neo maxx", "maxx concept"])
+    includesAny(clean, ["neomaxxing", "neomaxx", "neo/maxx", "neo maxx", "neomaxx concept", "maxx concept", "what is maxx", "define maxx", "tell me about maxx", "explain maxx"])
   ) {
     return { detectedSubIntent: "neo_maxx", detectedConcept: "neo_maxx" };
   }
@@ -488,11 +500,18 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "world_awareness") {
+    const worldResolution = buildMeetJozWorldAwarenessResolution({
+      input,
+      appContext,
+      legacyContext,
+    });
     return {
-      reply: buildMeetJozWorldAwarenessReply({ input, appContext, legacyContext }) || "",
-      answerSource: route.selectedWorldRecord || "world_awareness",
-      composer: "buildMeetJozWorldAwarenessReply",
-      fallbackUsed: false,
+      reply: worldResolution.reply || buildMeetJozWorldAwarenessReply({ input, appContext, legacyContext }) || "",
+      answerSource: worldResolution.answerSource || route.selectedWorldRecord || "world_awareness",
+      composer: worldResolution.composer || "buildMeetJozWorldAwarenessReply",
+      fallbackUsed: Boolean(worldResolution.fallbackUsed),
+      validationPassed: worldResolution.validationPassed !== false,
+      responseMode: worldResolution.responseMode || null,
       intentMode: "skills",
       retrievedCategories: [],
     };
@@ -661,8 +680,10 @@ export function buildJozRouteTrace(route, resolution) {
     selectedRoute: route?.selectedRoute || "unknown_fallback",
     selectedWorldRecord: route?.selectedWorldRecord || null,
     answerSource: resolution?.answerSource || null,
+    responseMode: resolution?.responseMode || null,
     composer: resolution?.composer || null,
     fallbackUsed: Boolean(resolution?.fallbackUsed),
+    validationPassed: resolution?.validationPassed !== false,
   };
 }
 

@@ -50,7 +50,8 @@ const OWNED_CONCEPT_PATTERNS = [
   { conceptId: "ascension", patterns: [/^(what is|what's|define|tell me about)\s+ascension\b/, /what does ascension mean/, /^ascension$/] },
   { conceptId: "aura", patterns: [/^(what is|what's|define|tell me about)\s+aura\b/, /what does aura mean( here)?/, /^aura$/] },
   { conceptId: "workf", patterns: [/^(what is|what's|define|tell me about)\s+workf\b/, /what does workf mean/, /^workf$/] },
-  { conceptId: "mogg", patterns: [/^(what is|what's|define|tell me about)\s+mogg\b/, /what does mogg mean/, /^mogg$/] },
+  { conceptId: "worldx", patterns: [/^(what is|what's|define|tell me about)\s+worldx\b/, /what does worldx mean/, /^worldx$/] },
+  { conceptId: "mogg", patterns: [/^(what is|what's|define|tell me about)\s+mogg(ing)?\b/, /what does mogg(ing)? mean/, /^mogg(ing)?$/] },
   { conceptId: "ascend", patterns: [/^(what is|what's|define|tell me about)\s+ascend\b/, /^(what is|what's|define|tell me about)\s+discover\b/, /what does ascend mean/, /^ascend$/, /^discover$/] },
   { conceptId: "flex", patterns: [/^(what is|what's|define|tell me about)\s+flex\b/, /^(what is|what's|define|tell me about)\s+vibe\b/, /what does flex mean/, /^flex$/, /^vibe$/] },
   { conceptId: "frame", patterns: [/^(what is|what's|define|tell me about)\s+frame\b/, /what does frame mean( here)?/, /^frame$/] },
@@ -63,7 +64,8 @@ const OWNED_CONCEPT_ALIASES = {
   ascension: ["ascension"],
   aura: ["aura"],
   workf: ["workf"],
-  mogg: ["mogg"],
+  worldx: ["worldx", "meet joz environment", "semantic city"],
+  mogg: ["mogg", "mogging"],
   ascend: ["ascend", "discover"],
   flex: ["flex", "vibe"],
   frame: ["frame"],
@@ -84,6 +86,10 @@ const OWNED_CONCEPT_VALIDATION = {
   },
   workf: {
     requiredAny: ["skills", "deep work", "execution", "technical depth"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  worldx: {
+    requiredAny: ["semantic city", "meet joz", "environment", "sequence"],
     forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
   },
   aura: {
@@ -133,6 +139,31 @@ function detectOwnedConceptQuery(input = "") {
   return null;
 }
 
+function isConceptExplainerQuery(input = "") {
+  const clean = normalizeToken(input);
+  if (!clean) return false;
+  return /^(what is|what's|explain|define|tell me about|who is)\b/.test(clean);
+}
+
+function classifyWorldResponseMode({ input = "", route = "", ownedConceptId = null, isGoldPill = false } = {}) {
+  const clean = normalizeToken(input);
+  if ((ownedConceptId || isGoldPill) && isConceptExplainerQuery(clean)) {
+    return "concept_explainer";
+  }
+  if (clean.includes("click") || clean.includes("tap") || clean.includes("press")) {
+    return "interaction";
+  }
+  if (
+    clean.includes("what is this place") ||
+    clean.includes("what are my choices") ||
+    clean.includes("what am i looking at") ||
+    route === "mixed"
+  ) {
+    return "overview";
+  }
+  return "navigation";
+}
+
 function validateOwnedConceptAnswer(conceptId, reply = "") {
   const rule = OWNED_CONCEPT_VALIDATION[conceptId];
   const clean = normalizeToken(reply);
@@ -145,19 +176,23 @@ function validateOwnedConceptAnswer(conceptId, reply = "") {
 }
 
 function composeFlexAnswer() {
-  return "Flex is the arrival and presence layer of Meet Joz. It establishes vibe, atmosphere, tone, and identity before the experience moves into deeper discovery and proof.";
+  return "Flex is the arrival and presence layer of Meet Joz. It defines the first signal of vibe, atmosphere, tone, and identity in the sequence, setting the emotional entry point before the experience advances into Ascend for proof and then Mogg and Workf for identity and deep capability.";
 }
 
 function composeAscendAnswer() {
-  return "Ascend is the discovery and progression layer of Meet Joz. It reveals scale, recognition, transformation, and visible proof.";
+  return "Ascend is the discovery and progression layer of Meet Joz. It means visible proof, recognition, transformation, and scale in the sequence, sitting after Flex and before Mogg and Workf as the stage where Joz's signal becomes externally legible.";
 }
 
 function composeMoggAnswer() {
-  return "Mogg is Joz's digital twin inside the Meet Joz sequence. It sits between Ascend and Workf, acting as the identity and presence layer before the experience moves from visible proof into deeper work, skills, and execution.";
+  return "Mogg is Joz's digital twin inside the Meet Joz sequence. It means the conceptual identity layer between Ascend and Workf, translating visible proof into a more embodied presence before the experience moves into deeper work, skills, and execution.";
 }
 
 function composeWorkfAnswer() {
-  return "Workf is the deep work and skills layer of Meet Joz. It reveals Joz's capabilities, technical depth, enterprise experience, execution strength, and ability to turn ideas into measurable outcomes.";
+  return "Workf is the deep work and skills layer of Meet Joz. It means execution, technical depth, enterprise capability, and measurable outcomes in the sequence, following Mogg so the experience moves from identity and presence into concrete skill, systems, and delivery proof.";
+}
+
+function composeWorldxAnswer() {
+  return "Worldx is the abstract gold semantic city surrounding the Meet Joz sequence. It means the broader environment of proof, aura, and capability around Flex, Ascend, Mogg, and Workf, serving as the 360 semantic context rather than the main trigger object itself.";
 }
 
 function composeAuraAnswer() {
@@ -181,7 +216,7 @@ function composeFrameMoggAnswer() {
 }
 
 function composeEliteBeautyAnswer() {
-  return "The Elite Beauty is the Neurodesign layer inside MAXX. It combines Ascension, 10/10 Frame Mogg, aura, and perception design into a deliberate system of refinement, structure, and signal.";
+  return "The Elite Beauty is the Neurodesign layer inside neoMAXX. It combines Ascension, 10/10 Frame Mogg, aura, and perception design into a deliberate system of refinement, structure, and signal.";
 }
 
 function composeOwnedConceptAnswer(conceptId) {
@@ -190,6 +225,7 @@ function composeOwnedConceptAnswer(conceptId) {
     ascend: composeAscendAnswer,
     mogg: composeMoggAnswer,
     workf: composeWorkfAnswer,
+    worldx: composeWorldxAnswer,
     aura: composeAuraAnswer,
     frame: composeFrameAnswer,
     ascension: composeAscensionAnswer,
@@ -674,6 +710,13 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
   const state = resolveMeetJozWorldState({ appContext, legacyContext });
   const clean = normalizeToken(input);
   const ownedConceptId = detectOwnedConceptQuery(clean);
+  const goldPillQuery = isGoldPillQuery(clean);
+  const responseMode = classifyWorldResponseMode({
+    input,
+    route,
+    ownedConceptId,
+    isGoldPill: goldPillQuery,
+  });
   const portalName = state.portal?.title || "the experience";
   const focusedObject = state.focusedObject;
   const stage = state.stage;
@@ -695,6 +738,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
       answerSource: "canonical_concept",
       fallbackUsed: false,
       validationPassed: resolution.validationPassed,
+      responseMode,
       composer: `compose${String(ownedConceptId)
         .split("_")
         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
@@ -704,34 +748,43 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
     };
   }
 
-  if (isGoldPillQuery(clean)) {
+  if (goldPillQuery) {
     const goldPill = toArray(manifest.concepts).find((concept) => concept.id === "gold_pill");
     const neoMaxx = toArray(manifest.concepts).find((concept) => concept.id === "neo_maxx");
-    const definition = "The Gold Pill is a core concept within MeetJoz and NEO/MAXX.";
+    const definition = "The Gold Pill is a core concept within MeetJoz and neoMAXX.";
     const meaning =
       "It represents the combination of skills, capabilities, competences, judgment, creativity, engineering, design, and execution required to create high-quality innovation with AI and competitive advantage.";
     const distinction =
       goldPill?.distinction ||
       "It is a capability metaphor for creating new reality through innovation, not a borrowed internet identity trope.";
 
-    let portalRole = "";
-    if (state.portal?.id === "root") {
-      portalRole = "In Root, the Gold Pill is the route into Meet Joz.";
-    } else if (state.portal?.id === "maxx") {
-      portalRole = "In MAXX, the Gold Pill is the capability layer that transforms human and AI potential into innovation.";
-    } else if (state.portal?.id === "meet_joz") {
-      portalRole = "In Meet Joz, it connects capability, proof, and identity to the deeper skills world.";
-    }
-
     const whyItMatters = neoMaxx?.definition
-      ? `It matters because ${neoMaxx.definition.replace(/^NEO\/MAXX is Joz Krupa's concept for /, "NEO/MAXX uses it for ")}`
+      ? `It matters because ${neoMaxx.definition.replace(/^neoMAXX is a concept created by Joz Krupa\.\s*/i, "neoMAXX uses human judgment, AI-powered design, engineering, code, and computation for ").replace(/^NEO\/MAXX is Joz Krupa's concept for /, "neoMAXX uses ") }`
       : "It matters because it concentrates skills, capabilities, competences, innovation, AI, and competitive advantage into one capability metaphor.";
 
+    let sequenceRole =
+      "Within the sequence, it acts as the capability trigger that connects Root, Meet Joz, and neoMAXX rather than behaving like a portal-state description.";
+    if (state.portal?.id === "root") {
+      sequenceRole =
+        "Within the sequence, it is the route into Meet Joz and the capability trigger that opens the wider world of proof and innovation.";
+    } else if (state.portal?.id === "maxx") {
+      sequenceRole =
+        "Within neoMAXX, it is the capability layer that transforms human and AI potential into innovation rather than acting like a navigation-only object.";
+    } else if (state.portal?.id === "meet_joz") {
+      sequenceRole =
+        "Within Meet Joz, it connects capability, proof, and identity before the experience moves deeper into skills and execution.";
+    }
+    const adjacentConcepts = "Its adjacent concepts are Meet Joz, neoMAXX, capability, innovation, and transformation.";
+
     return {
-      reply: `${definition} ${meaning} ${distinction} ${portalRole} ${whyItMatters} ${nextActionText}`.trim(),
+      reply:
+        responseMode === "concept_explainer"
+          ? `${definition} ${meaning} ${distinction} ${sequenceRole} ${adjacentConcepts} ${whyItMatters}`.trim()
+          : `${definition} ${meaning} ${distinction} ${whyItMatters} ${nextActionText}`.trim(),
       answerSource: "root_gold_pill / gold_pill concept",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeGoldPillAnswer",
       selectedWorldRecord: "root_gold_pill / gold_pill concept",
       detectedConcept: "gold_pill",
@@ -744,6 +797,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composePortalAwarenessAnswer",
       selectedWorldRecord: state.portal?.id || null,
       detectedConcept: null,
@@ -752,10 +806,11 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
 
   if (clean.includes("what are my choices") && state.portal?.id === "root") {
     return {
-      reply: `You are at Root, the decision portal. The Gold Pill opens Meet Joz for human proof and capability, while the Brain and Enter route open MAXX for conceptual intelligence. ${nextActionText}`.trim(),
+      reply: `You are at Root, the decision portal. The Gold Pill opens Meet Joz for human proof and capability, while the Brain and Enter route open neoMAXX for conceptual intelligence. ${nextActionText}`.trim(),
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeRootChoicesAnswer",
       selectedWorldRecord: "root",
       detectedConcept: null,
@@ -764,10 +819,11 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
 
   if (clean.includes("what am i looking at") && state.portal?.id === "maxx") {
     return {
-      reply: `You are inside MAXX, focused on the Human Neuron and AI Neuron exchanging signals through a synapse. This is a biological and neural visual metaphor for human judgment and AI capability connecting to create new experience and new pathways. ${nextActionText}`.trim(),
+      reply: `You are inside neoMAXX, focused on the Human Neuron and AI Neuron exchanging signals through a synapse. This is a biological and neural visual metaphor for human judgment and AI capability connecting to create new experience and new pathways. ${nextActionText}`.trim(),
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeMaxxNeuronAnswer",
       selectedWorldRecord: state.focusedObject?.id || "maxx_neurons",
       detectedConcept: null,
@@ -783,6 +839,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
         answerSource: "world_awareness",
         fallbackUsed: false,
         validationPassed: true,
+        responseMode,
         composer: "composeNeuronClickAnswer",
         selectedWorldRecord: "maxx_neurons",
         detectedConcept: null,
@@ -794,6 +851,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
         answerSource: "world_awareness",
         fallbackUsed: false,
         validationPassed: true,
+        responseMode,
         composer: "composeNeuronClickAnswer",
         selectedWorldRecord: "maxx_neurons",
         detectedConcept: null,
@@ -808,6 +866,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
         answerSource: "world_awareness",
         fallbackUsed: false,
         validationPassed: true,
+        responseMode,
         composer: "composeStageAwarenessAnswer",
         selectedWorldRecord: "meet_joz_mogg_stage",
         detectedConcept: "mogg",
@@ -819,6 +878,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
         answerSource: "world_awareness",
         fallbackUsed: false,
         validationPassed: true,
+        responseMode,
         composer: "composeStageAwarenessAnswer",
         selectedWorldRecord: stage.id,
         detectedConcept: null,
@@ -832,6 +892,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeSkillsLocationAnswer",
       selectedWorldRecord: "meet_joz_skills",
       detectedConcept: "workf",
@@ -844,6 +905,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeWorldxAnswer",
       selectedWorldRecord: "meet_joz_semantic_city",
       detectedConcept: null,
@@ -856,6 +918,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeMixedWorldAnswer",
       selectedWorldRecord: focusedObject?.id || stage?.id || state.portal?.id || null,
       detectedConcept: null,
@@ -868,6 +931,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
       answerSource: "world_awareness",
       fallbackUsed: false,
       validationPassed: true,
+      responseMode,
       composer: "composeFocusedObjectAnswer",
       selectedWorldRecord: focusedObject?.id || stage?.id || null,
       detectedConcept: null,
@@ -879,6 +943,7 @@ export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = 
     answerSource: null,
     fallbackUsed: false,
     validationPassed: true,
+    responseMode,
     composer: null,
     selectedWorldRecord: null,
     detectedConcept: null,

@@ -152,7 +152,7 @@ test("gold pill reply uses canonical world definition instead of generic interne
     },
   });
 
-  assert.ok(reply.startsWith("The Gold Pill is a core concept within MeetJoz and NEO/MAXX."));
+  assert.ok(reply.startsWith("The Gold Pill is a core concept within MeetJoz and neoMAXX."));
   assert.match(reply, /skills/i);
   assert.match(reply, /capabilities/i);
   assert.match(reply, /competences/i);
@@ -180,7 +180,7 @@ test("gold pill reply explains MAXX role when current portal is maxx", () => {
     },
   });
 
-  assert.match(reply, /MAXX/i);
+  assert.match(reply, /neoMAXX/i);
   assert.match(reply, /transforms human and AI potential into innovation/i);
   assert.doesNotMatch(reply, /^The gold pill typically refers to/i);
 });
@@ -209,6 +209,12 @@ const OWNED_CONCEPT_CASES = [
     concept: "workf",
     terms: [/skills/i, /deep work/i, /execution/i, /technical depth/i],
     forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Worldx?",
+    concept: "worldx",
+    terms: [/semantic city/i, /Meet Joz/i, /environment/i, /sequence/i],
+    forbidden: [/online communities/i, /slang/i],
   },
   {
     input: "What is Aura?",
@@ -269,6 +275,7 @@ for (const testCase of OWNED_CONCEPT_CASES) {
     assert.equal(resolution.detectedConcept, testCase.concept);
     assert.equal(resolution.fallbackUsed, false);
     assert.equal(resolution.validationPassed, true);
+    assert.equal(resolution.responseMode, "concept_explainer");
 
     const reply = String(resolution.reply || "");
     for (const matcher of testCase.terms) {
@@ -282,6 +289,7 @@ for (const testCase of OWNED_CONCEPT_CASES) {
 
 const MOGG_EXPLICIT_QUERY_CASES = [
   "What is Mogg?",
+  "What is Mogging?",
   "Tell me about Mogg.",
   "Who is Mogg?",
   "Explain Mogg.",
@@ -304,11 +312,64 @@ for (const input of MOGG_EXPLICIT_QUERY_CASES) {
     assert.equal(resolution.selectedWorldRecord, "meet_joz_mogg");
     assert.equal(resolution.fallbackUsed, false);
     assert.equal(resolution.answerSource, "canonical_concept");
+    assert.equal(resolution.responseMode, "concept_explainer");
     assert.match(String(resolution.reply || ""), /digital twin/i);
     assert.match(String(resolution.reply || ""), /Meet Joz/i);
     assert.match(String(resolution.reply || ""), /Ascend/i);
     assert.match(String(resolution.reply || ""), /Workf/i);
     assert.doesNotMatch(String(resolution.reply || ""), /root_gold_pill/i);
     assert.doesNotMatch(String(resolution.reply || ""), /Gold Pill/i);
+    assert.doesNotMatch(String(resolution.reply || ""), /You are inside/i);
+    assert.doesNotMatch(String(resolution.reply || ""), /You are focused on/i);
+    assert.doesNotMatch(String(resolution.reply || ""), /Available actions/i);
+  });
+}
+
+const CONCEPT_EXPLAINER_CASES = [
+  {
+    input: "What is Flex?",
+    concept: "flex",
+    terms: [/arrival/i, /presence/i, /Ascend/i, /Mogg|Workf/i],
+  },
+  {
+    input: "What is Ascend?",
+    concept: "ascend",
+    terms: [/discovery/i, /progression/i, /Flex/i, /Mogg|Workf/i],
+  },
+  {
+    input: "What is Mogging?",
+    concept: "mogg",
+    terms: [/digital twin/i, /Ascend/i, /Workf/i],
+  },
+  {
+    input: "What is Workf?",
+    concept: "workf",
+    terms: [/deep work/i, /skills/i, /Mogg/i],
+  },
+];
+
+for (const testCase of CONCEPT_EXPLAINER_CASES) {
+  test(`explicit concept query uses concept explainer mode: ${testCase.input}`, () => {
+    const resolution = buildMeetJozWorldAwarenessResolution({
+      input: testCase.input,
+      appContext: {
+        current_portal: "meet_joz",
+        focused_object: "meet_joz_semantic_city",
+        current_stage: null,
+        available_actions: ["show_flex", "show_ascend", "show_mogg"],
+        device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+      },
+    });
+
+    assert.equal(resolution.detectedConcept, testCase.concept);
+    assert.equal(resolution.responseMode, "concept_explainer");
+    assert.equal(resolution.fallbackUsed, false);
+    const reply = String(resolution.reply || "");
+    for (const matcher of testCase.terms) {
+      assert.match(reply, matcher);
+    }
+    assert.doesNotMatch(reply, /You are inside/i);
+    assert.doesNotMatch(reply, /You are focused on/i);
+    assert.doesNotMatch(reply, /Available actions/i);
   });
 }

@@ -31,9 +31,25 @@ async function postJson(pathname, body) {
   }
 }
 
+async function getJson(pathname) {
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((resolve) => server.once("listening", resolve));
+
+  try {
+    const { port } = server.address();
+    const response = await fetch(`http://127.0.0.1:${port}${pathname}`);
+    const payload = await response.json();
+    return { status: response.status, payload };
+  } finally {
+    await new Promise((resolve, reject) => {
+      server.close((error) => (error ? reject(error) : resolve()));
+    });
+  }
+}
+
 function assertCanonicalGoldPillReply(reply) {
   assert.ok(
-    reply.startsWith("The Gold Pill is a core concept within MeetJoz and NEO/MAXX."),
+    reply.startsWith("The Gold Pill is a core concept within MeetJoz and neoMAXX."),
     `Expected canonical opening, received: ${reply}`
   );
 
@@ -115,6 +131,92 @@ test("POST /api/joz-llm/callback-request validates required fields", async () =>
 
   assert.equal(status, 400);
   assert.match(String(payload.error || ""), /missing callback name, phone, or time/i);
+});
+
+test("GET /api/privacy/meta exposes retention defaults and processors", async () => {
+  const { status, payload } = await getJson("/api/privacy/meta");
+
+  assert.equal(status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.retentionDays?.conversations, 30);
+  assert.equal(payload.retentionDays?.callbackRequests, 30);
+  assert.equal(payload.retentionDays?.privacyRequests, 365);
+  assert.ok(Array.isArray(payload.processors));
+  assert.ok(payload.processors.includes("Supabase"));
+  assert.ok(payload.processors.includes("OpenAI"));
+  assert.ok(payload.processors.includes("Twilio"));
+  assert.ok(payload.processors.includes("Resend"));
+});
+
+test("POST /api/privacy/export returns matching fallback callback request data", async () => {
+  const seed = await postJson("/api/joz-llm/callback-request", {
+    sessionKey: "privacy-export-seed",
+    name: "Casey Example",
+    phone: "+41 76 497 38 94",
+    email: "casey@example.com",
+    time: "Monday 10:00",
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: "skills_stop",
+    },
+  });
+
+  assert.equal(seed.status, 200);
+
+  const { status, payload } = await postJson("/api/privacy/export", {
+    email: "casey@example.com",
+    phone: "+41 76 497 38 94",
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.data?.callbackRequests?.length, 1);
+  assert.equal(payload.data?.callbackRequests?.[0]?.name, "Casey Example");
+  assert.equal(payload.data?.callbackRequests?.[0]?.email, "casey@example.com");
+  assert.equal(payload.data?.conversations?.length, 0);
+  assert.equal(payload.data?.messages?.length, 0);
+});
+
+test("POST /api/privacy/delete removes matching fallback callback request data", async () => {
+  const seed = await postJson("/api/joz-llm/callback-request", {
+    sessionKey: "privacy-delete-seed",
+    name: "Jordan Example",
+    phone: "+1 415 555 0199",
+    email: "jordan@example.com",
+    time: "Friday 16:00",
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "discover",
+      currentMeshStage: "discover_stop",
+    },
+  });
+
+  assert.equal(seed.status, 200);
+
+  const deletion = await postJson("/api/privacy/delete", {
+    email: "jordan@example.com",
+    phone: "+1 415 555 0199",
+  });
+
+  assert.equal(deletion.status, 200);
+  assert.equal(deletion.payload.ok, true);
+  assert.equal(deletion.payload.deletion?.deletedCallbackRequests, 1);
+
+  const exportedAfterDelete = await postJson("/api/privacy/export", {
+    email: "jordan@example.com",
+    phone: "+1 415 555 0199",
+  });
+
+  assert.equal(exportedAfterDelete.status, 200);
+  assert.equal(exportedAfterDelete.payload.data?.callbackRequests?.length, 0);
+});
+
+test("POST /api/privacy/export validates lookup requirements", async () => {
+  const { status, payload } = await postJson("/api/privacy/export", {});
+
+  assert.equal(status, 400);
+  assert.match(String(payload.error || ""), /provide conversationid and sessionkey/i);
 });
 
 const JOZ_ROUTER_GATE_CASES = [
@@ -248,7 +350,7 @@ const JOZ_ROUTER_GATE_CASES = [
       composer: "composeCanonicalWorldConceptReply",
       fallbackUsed: false,
     },
-    text: [/The Gold Pill is a core concept within MeetJoz and NEO\/MAXX\./i],
+    text: [/The Gold Pill is a core concept within MeetJoz and neoMAXX\./i],
   },
 ];
 
@@ -292,7 +394,7 @@ const OWNED_CONCEPT_ENDPOINT_CASES = [
   },
   {
     name: "mogg",
-    query: "What is Mogg?",
+    query: "What is Mogging?",
     selectedWorldRecord: "meet_joz_mogg",
     composer: "composeMoggAnswer",
     text: [/digital twin/i, /Meet Joz/i, /Ascend/i, /Workf/i],
@@ -305,6 +407,14 @@ const OWNED_CONCEPT_ENDPOINT_CASES = [
     composer: "composeWorkfAnswer",
     text: [/skills/i, /deep work/i, /execution/i, /technical depth/i],
     forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    name: "worldx",
+    query: "What is Worldx?",
+    selectedWorldRecord: "worldx",
+    composer: "composeWorldxAnswer",
+    text: [/semantic city/i, /Meet Joz/i, /environment/i, /sequence/i],
+    forbidden: [/online communities/i, /slang/i],
   },
 ];
 
@@ -326,6 +436,7 @@ for (const testCase of OWNED_CONCEPT_ENDPOINT_CASES) {
     assert.equal(payload.trace?.selectedRoute, "world_awareness");
     assert.equal(payload.trace?.selectedWorldRecord, testCase.selectedWorldRecord);
     assert.equal(payload.trace?.answerSource, "canonical_concept");
+    assert.equal(payload.trace?.responseMode, "concept_explainer");
     assert.equal(payload.trace?.composer, testCase.composer);
     assert.equal(payload.trace?.fallbackUsed, false);
     assert.equal(payload.trace?.validationPassed, true);
@@ -337,10 +448,14 @@ for (const testCase of OWNED_CONCEPT_ENDPOINT_CASES) {
     for (const matcher of testCase.forbidden) {
       assert.doesNotMatch(reply, matcher);
     }
+    assert.doesNotMatch(reply, /You are inside/i);
+    assert.doesNotMatch(reply, /You are focused on/i);
+    assert.doesNotMatch(reply, /Available actions/i);
   });
 }
 
 for (const query of [
+  "What is Mogg?",
   "Tell me about Mogg.",
   "Who is Mogg?",
   "Explain Mogg.",
@@ -367,6 +482,7 @@ for (const query of [
     assert.equal(payload.trace?.detectedConcept, "mogg");
     assert.equal(payload.trace?.selectedRoute, "world_awareness");
     assert.equal(payload.trace?.selectedWorldRecord, "meet_joz_mogg");
+    assert.equal(payload.trace?.responseMode, "concept_explainer");
     assert.equal(payload.trace?.fallbackUsed, false);
     assert.match(String(payload.reply || ""), /digital twin/i);
     assert.match(String(payload.reply || ""), /Meet Joz/i);
@@ -374,5 +490,34 @@ for (const query of [
     assert.match(String(payload.reply || ""), /Workf/i);
     assert.doesNotMatch(String(payload.reply || ""), /root_gold_pill/i);
     assert.doesNotMatch(String(payload.reply || ""), /Gold Pill/i);
+    assert.doesNotMatch(String(payload.reply || ""), /You are inside/i);
+    assert.doesNotMatch(String(payload.reply || ""), /You are focused on/i);
+    assert.doesNotMatch(String(payload.reply || ""), /Available actions/i);
+  });
+}
+
+for (const query of [
+  "What is neoMAXX?",
+  "What is neo/maxx?",
+  "What is NEO/MAXX?",
+  "What is Neomaxxing?",
+]) {
+  test(`POST /api/joz-llm canonical neoMAXX branding holds: ${query}`, async () => {
+    const { status, payload } = await postJson("/api/joz-llm", {
+      sessionKey: `runtime-neomaxx-${query}`,
+      messages: [{ role: "user", content: query }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "brain",
+        currentMeshStage: null,
+      },
+    });
+
+    assert.equal(status, 200);
+    assert.equal(payload.mode, "canonical_world_concept");
+    assert.equal(payload.trace?.detectedConcept, "neo_maxx");
+    assert.equal(payload.trace?.selectedRoute, "canonical_world_concept");
+    assert.equal(payload.trace?.fallbackUsed, false);
+    assert.match(String(payload.reply || ""), /^neoMAXX is a concept created by Joz Krupa\./);
   });
 }

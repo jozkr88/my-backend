@@ -7,8 +7,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import {
   appendJozMessage,
+  cleanupExpiredJozData,
+  createJozPrivacyRequest,
   createJozCallbackRequest,
   createJozConversation,
+  deleteJozPrivacyBundle,
+  exportJozPrivacyBundle,
   getPortalTransition,
   getPrimaryJozProfile,
   getJozDocumentsByIntent,
@@ -40,6 +44,7 @@ import { buildReasoningLayers } from "./reasoning-layers.js";
 import {
   buildMeetJozWorldAnswerContext,
   buildMeetJozWorldAwarenessReply,
+  buildMeetJozWorldAwarenessResolution,
   resolveMeetJozWorldEntity,
   validateAppContext,
 } from "./shared/meetJozWorld.js";
@@ -73,10 +78,31 @@ const JOZ_CHAT_SESSION_MAX_REQUESTS = 5;
 const JOZ_CHAT_IP_WINDOW_MS = 5 * 60_000;
 const JOZ_CHAT_IP_MAX_REQUESTS = 20;
 const JOZ_CHAT_DUPLICATE_WINDOW_MS = 10_000;
+const DEFAULT_JOZ_CONVERSATION_RETENTION_DAYS = 30;
+const DEFAULT_JOZ_CALLBACK_RETENTION_DAYS = 30;
+const DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS = 365;
 const jozChatSessionLog = new Map();
 const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
 const jozCallbackFallbackStore = [];
+
+function parseRetentionDays(value, fallbackDays) {
+  const parsed = Number.parseInt(String(value || ""), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallbackDays;
+}
+
+const JOZ_CONVERSATION_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_CONVERSATION_RETENTION_DAYS,
+  DEFAULT_JOZ_CONVERSATION_RETENTION_DAYS
+);
+const JOZ_CALLBACK_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_CALLBACK_RETENTION_DAYS,
+  DEFAULT_JOZ_CALLBACK_RETENTION_DAYS
+);
+const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+  DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS
+);
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
@@ -378,12 +404,17 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
   const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const entity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  const resolution = buildMeetJozWorldAwarenessResolution({ input, appContext, legacyContext });
   return {
     detectedIntent: answerContext.route,
-    detectedConcept: entity.entity || null,
+    detectedConcept: resolution.detectedConcept || entity.entity || null,
     selectedRoute: answerContext.route,
-    selectedWorldRecord: entity.worldRecord || null,
-    answerSource,
+    selectedWorldRecord: resolution.selectedWorldRecord || entity.worldRecord || null,
+    answerSource: resolution.answerSource || answerSource,
+    responseMode: resolution.responseMode || null,
+    composer: resolution.composer || null,
+    fallbackUsed: Boolean(resolution.fallbackUsed),
+    validationPassed: resolution.validationPassed !== false,
   };
 }
 
@@ -396,6 +427,43 @@ function normalizeCallbackField(value = "", maxLength = 160) {
     .trim()
     .replace(/\s+/g, " ")
     .slice(0, maxLength);
+}
+
+function normalizePrivacyEmail(value = "") {
+  return normalizeCallbackField(value, 160).toLowerCase();
+}
+
+function normalizePrivacyPhone(value = "") {
+  return String(value || "").replace(/\D+/g, "").slice(0, 32);
+}
+
+function normalizePrivacyRequestType(value = "") {
+  const normalized = normalizeCallbackField(value, 32).toLowerCase();
+  return normalized === "delete" ? "delete" : normalized === "export" ? "export" : "";
+}
+
+function hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone }) {
+  return Boolean(
+    (conversationId && sessionKey) ||
+      (callbackRequestId && (email || phone)) ||
+      email ||
+      phone
+  );
+}
+
+function getPrivacyRuntimeInfo() {
+  return {
+    retentionDays: {
+      conversations: JOZ_CONVERSATION_RETENTION_DAYS,
+      callbackRequests: JOZ_CALLBACK_RETENTION_DAYS,
+      privacyRequests: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+    },
+    processors: [
+      "Supabase",
+      "OpenAI",
+      "Resend",
+    ],
+  };
 }
 
 function buildCallbackNotificationText(record) {
@@ -412,45 +480,11 @@ function buildCallbackNotificationText(record) {
 
 function getConfiguredCallbackChannels() {
   return {
-    sms:
-      Boolean(process.env.TWILIO_ACCOUNT_SID) &&
-      Boolean(process.env.TWILIO_AUTH_TOKEN) &&
-      Boolean(process.env.TWILIO_FROM_NUMBER) &&
-      Boolean(process.env.TWILIO_TO_NUMBER),
     email:
       Boolean(process.env.RESEND_API_KEY) &&
       Boolean(process.env.CALLBACK_EMAIL_TO) &&
       Boolean(process.env.CALLBACK_EMAIL_FROM),
   };
-}
-
-async function sendCallbackSms(record) {
-  const accountSid = String(process.env.TWILIO_ACCOUNT_SID || "").trim();
-  const authToken = String(process.env.TWILIO_AUTH_TOKEN || "").trim();
-  const from = String(process.env.TWILIO_FROM_NUMBER || "").trim();
-  const to = String(process.env.TWILIO_TO_NUMBER || "").trim();
-
-  const response = await fetch(
-    `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        To: to,
-        From: from,
-        Body: buildCallbackNotificationText(record),
-      }),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`Twilio SMS failed with ${response.status}`);
-  }
-
-  return response.json();
 }
 
 async function sendCallbackEmail(record) {
@@ -479,15 +513,6 @@ async function deliverCallbackRequest(record) {
   const configured = getConfiguredCallbackChannels();
   const channels = [];
   const errors = [];
-
-  if (configured.sms) {
-    try {
-      await sendCallbackSms(record);
-      channels.push("sms");
-    } catch (error) {
-      errors.push(`sms:${error?.message || error}`);
-    }
-  }
 
   if (configured.email) {
     try {
@@ -518,6 +543,284 @@ function rememberCallbackRequest(record) {
     storedAt: new Date().toISOString(),
   });
 }
+
+function pruneFallbackCallbackStore() {
+  const cutoffTime =
+    Date.now() - JOZ_CALLBACK_RETENTION_DAYS * 24 * 60 * 60 * 1000;
+  let removed = 0;
+
+  for (let index = jozCallbackFallbackStore.length - 1; index >= 0; index -= 1) {
+    const storedAt = new Date(jozCallbackFallbackStore[index]?.storedAt || 0).getTime();
+    if (Number.isFinite(storedAt) && storedAt < cutoffTime) {
+      jozCallbackFallbackStore.splice(index, 1);
+      removed += 1;
+    }
+  }
+
+  return removed;
+}
+
+async function applyPrivacyRetentionPolicy() {
+  const summary = await cleanupExpiredJozData({
+    conversationRetentionDays: JOZ_CONVERSATION_RETENTION_DAYS,
+    callbackRetentionDays: JOZ_CALLBACK_RETENTION_DAYS,
+    privacyRequestRetentionDays: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+  });
+  const removedFallbackCallbacks = pruneFallbackCallbackStore();
+
+  if (
+    summary.deletedConversations ||
+    summary.deletedCallbackRequests ||
+    summary.deletedPrivacyRequests ||
+    removedFallbackCallbacks
+  ) {
+    console.log("🧹 Privacy retention cleanup", {
+      ...summary,
+      deletedFallbackCallbackRequests: removedFallbackCallbacks,
+    });
+  }
+}
+
+await applyPrivacyRetentionPolicy();
+
+async function exportFallbackPrivacyBundle({ callbackRequestId, email, phone }) {
+  const normalizedEmail = normalizePrivacyEmail(email);
+  const normalizedPhone = normalizePrivacyPhone(phone);
+  const callbackRequestIdText = callbackRequestId ? String(callbackRequestId) : "";
+  const callbackRequests = jozCallbackFallbackStore.filter((record) => {
+    const emailMatches =
+      !normalizedEmail ||
+      normalizePrivacyEmail(record.email || record.requestedEmail || "") === normalizedEmail;
+    const phoneMatches =
+      !normalizedPhone ||
+      normalizePrivacyPhone(record.phone || record.requestedPhone || "") === normalizedPhone;
+    const callbackIdMatches =
+      !callbackRequestIdText ||
+      String(record.callbackRequestId || record.id || "") === callbackRequestIdText;
+    return emailMatches && phoneMatches && callbackIdMatches;
+  });
+
+  return {
+    exportedAt: new Date().toISOString(),
+    filters: {
+      conversationId: null,
+      sessionKey: null,
+      callbackRequestId: callbackRequestId || null,
+      email: email || null,
+      phone: phone || null,
+    },
+    conversations: [],
+    messages: [],
+    callbackRequests,
+  };
+}
+
+function deleteFallbackPrivacyBundle({ callbackRequestId, email, phone }) {
+  const normalizedEmail = normalizePrivacyEmail(email);
+  const normalizedPhone = normalizePrivacyPhone(phone);
+  const callbackRequestIdText = callbackRequestId ? String(callbackRequestId) : "";
+  let deletedCallbackRequests = 0;
+
+  for (let index = jozCallbackFallbackStore.length - 1; index >= 0; index -= 1) {
+    const record = jozCallbackFallbackStore[index];
+    const emailMatches =
+      !normalizedEmail ||
+      normalizePrivacyEmail(record.email || record.requestedEmail || "") === normalizedEmail;
+    const phoneMatches =
+      !normalizedPhone ||
+      normalizePrivacyPhone(record.phone || record.requestedPhone || "") === normalizedPhone;
+    const callbackIdMatches =
+      !callbackRequestIdText ||
+      String(record.callbackRequestId || record.id || "") === callbackRequestIdText;
+
+    if (emailMatches && phoneMatches && callbackIdMatches) {
+      jozCallbackFallbackStore.splice(index, 1);
+      deletedCallbackRequests += 1;
+    }
+  }
+
+  return {
+    deletedConversations: 0,
+    deletedMessages: 0,
+    deletedCallbackRequests,
+  };
+}
+
+app.get("/api/privacy/meta", (req, res) => {
+  res.json({
+    ok: true,
+    ...getPrivacyRuntimeInfo(),
+  });
+});
+
+app.post("/api/privacy/export", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+    const sessionKey = normalizeCallbackField(req.body?.sessionKey, 120) || null;
+    const callbackRequestId = normalizeCallbackField(req.body?.callbackRequestId, 80) || null;
+    const email = normalizePrivacyEmail(req.body?.email);
+    const phone = normalizePrivacyPhone(req.body?.phone);
+
+    if (!hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone })) {
+      return res.status(400).json({
+        error:
+          "Provide conversationId and sessionKey, or callbackRequestId plus email/phone, or a matching email/phone.",
+      });
+    }
+
+    const payload = isDatabaseEnabled()
+      ? await exportJozPrivacyBundle({
+          conversationId,
+          sessionKey,
+          callbackRequestId,
+          email,
+          phone,
+        })
+      : await exportFallbackPrivacyBundle({ callbackRequestId, email, phone });
+
+    const privacyRequestId = await createJozPrivacyRequest({
+      requestType: "export",
+      requestStatus:
+        payload.conversations.length || payload.messages.length || payload.callbackRequests.length
+          ? "completed"
+          : "no_match",
+      email: email || null,
+      phone: phone || null,
+      conversationId,
+      callbackRequestId: callbackRequestId ? Number(callbackRequestId) || null : null,
+      sessionKey,
+      source: "api_privacy_export",
+      payload: {
+        matchCounts: {
+          conversations: payload.conversations.length,
+          messages: payload.messages.length,
+          callbackRequests: payload.callbackRequests.length,
+        },
+      },
+    });
+
+    return res.json({
+      ok: true,
+      privacyRequestId,
+      ...getPrivacyRuntimeInfo(),
+      data: payload,
+    });
+  } catch (error) {
+    console.error("❌ /api/privacy/export failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/privacy/delete", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+    const sessionKey = normalizeCallbackField(req.body?.sessionKey, 120) || null;
+    const callbackRequestId = normalizeCallbackField(req.body?.callbackRequestId, 80) || null;
+    const email = normalizePrivacyEmail(req.body?.email);
+    const phone = normalizePrivacyPhone(req.body?.phone);
+
+    if (!hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone })) {
+      return res.status(400).json({
+        error:
+          "Provide conversationId and sessionKey, or callbackRequestId plus email/phone, or a matching email/phone.",
+      });
+    }
+
+    const deletion = isDatabaseEnabled()
+      ? await deleteJozPrivacyBundle({
+          conversationId,
+          sessionKey,
+          callbackRequestId,
+          email,
+          phone,
+        })
+      : deleteFallbackPrivacyBundle({ callbackRequestId, email, phone });
+
+    const privacyRequestId = await createJozPrivacyRequest({
+      requestType: "delete",
+      requestStatus:
+        deletion.deletedConversations ||
+        deletion.deletedMessages ||
+        deletion.deletedCallbackRequests
+          ? "completed"
+          : "no_match",
+      email: email || null,
+      phone: phone || null,
+      conversationId,
+      callbackRequestId: callbackRequestId ? Number(callbackRequestId) || null : null,
+      sessionKey,
+      source: "api_privacy_delete",
+      payload: deletion,
+    });
+
+    return res.json({
+      ok: true,
+      privacyRequestId,
+      ...getPrivacyRuntimeInfo(),
+      deletion,
+    });
+  } catch (error) {
+    console.error("❌ /api/privacy/delete failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/privacy/request", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const requestType = normalizePrivacyRequestType(req.body?.requestType);
+    const conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+    const sessionKey = normalizeCallbackField(req.body?.sessionKey, 120) || null;
+    const callbackRequestId = normalizeCallbackField(req.body?.callbackRequestId, 80) || null;
+    const email = normalizePrivacyEmail(req.body?.email);
+    const phone = normalizePrivacyPhone(req.body?.phone);
+    const details = normalizeCallbackField(req.body?.details, 800);
+
+    if (!requestType) {
+      return res.status(400).json({ error: "requestType must be export or delete" });
+    }
+
+    const privacyRequestId = await createJozPrivacyRequest({
+      requestType,
+      requestStatus: hasVerifiedPrivacyLookup({
+        conversationId,
+        sessionKey,
+        callbackRequestId,
+        email,
+        phone,
+      })
+        ? "received"
+        : "needs_manual_review",
+      email: email || null,
+      phone: phone || null,
+      conversationId,
+      callbackRequestId: callbackRequestId ? Number(callbackRequestId) || null : null,
+      sessionKey,
+      source: "api_privacy_request",
+      payload: {
+        details,
+        userAgent: String(req.headers["user-agent"] || "").slice(0, 500),
+        ip: getClientIp(req),
+      },
+    });
+
+    return res.json({
+      ok: true,
+      privacyRequestId,
+      message:
+        "Privacy request recorded. If verification is insufficient for automatic handling, manual review is required.",
+      ...getPrivacyRuntimeInfo(),
+    });
+  } catch (error) {
+    console.error("❌ /api/privacy/request failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 app.post("/api/joz-llm", async (req, res) => {
   try {
@@ -720,6 +1023,8 @@ app.post("/api/joz-llm/landing", async (req, res) => {
 
 app.post("/api/joz-llm/callback-request", async (req, res) => {
   try {
+    await applyPrivacyRetentionPolicy();
+
     const name = normalizeCallbackField(req.body?.name, 120);
     const phone = normalizeCallbackField(req.body?.phone, 80);
     const time = normalizeCallbackField(req.body?.time, 160);
@@ -732,9 +1037,22 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
       currentMesh: req.body?.context?.currentMesh || null,
       currentMeshStage: req.body?.context?.currentMeshStage || null,
     };
+    const consent = {
+      submitted: req.body?.privacyConsent === false ? false : true,
+      policyVersion:
+        normalizeCallbackField(req.body?.privacyPolicyVersion, 64) || "2026-07-12",
+      capturedAt: new Date().toISOString(),
+      method:
+        normalizeCallbackField(req.body?.privacyConsentMethod, 80) ||
+        "callback_request_submission",
+    };
 
     if (!name || !phone || !time) {
       return res.status(400).json({ error: "Missing callback name, phone, or time" });
+    }
+
+    if (!consent.submitted) {
+      return res.status(400).json({ error: "Privacy consent is required for callback requests" });
     }
 
     const profile = await getPrimaryJozProfile();
@@ -798,7 +1116,7 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
       requestedTime: time,
       requestedEmail: email || null,
       source,
-      payload: { context },
+      payload: { context, consent },
       deliveryStatus: delivery.status,
       deliveryChannels: delivery.channels,
       deliveryErrors: delivery.errors,
@@ -807,9 +1125,11 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
     if (!callbackRequestId) {
       rememberCallbackRequest({
         ...record,
+        callbackRequestId: null,
         deliveryStatus: delivery.status,
         notifiedChannels: delivery.channels,
         deliveryErrors: delivery.errors,
+        consent,
       });
     }
 
