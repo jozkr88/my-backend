@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-12T16:08:28.914Z",
+  "generated_at": "2026-07-12T20:43:34.961Z",
   "counts": {
-    "source_files": 38,
-    "normalized_records": 38,
+    "source_files": 47,
+    "normalized_records": 47,
     "verified_records": 8,
-    "ontology_entities": 80,
+    "ontology_entities": 81,
     "proofs": 12,
     "errors": 0
   },
@@ -61,8 +61,14 @@
           "Erste Bank",
           "MarketClue USA"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 84,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-agentic-ai-architecture-proof.md",
         "source_meta_filename": "2026-07-11-agentic-ai-architecture-proof.meta.json",
         "reviewed_at": "2026-07-11",
@@ -129,8 +135,14 @@
           "Mediacorp",
           "Versace/SOA"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 80,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-agentic-ux-orchestration-proof.md",
         "source_meta_filename": "2026-07-11-agentic-ux-orchestration-proof.meta.json",
         "reviewed_at": "2026-07-11",
@@ -185,8 +197,14 @@
           "Global"
         ],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 0,
         "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-compensation-and-process-faq.md",
         "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json",
         "reviewed_at": "2026-07-11",
@@ -269,8 +287,14 @@
           "Ogilvy/WPP",
           "Versace/SOA"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 88,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-current-agentic-ai-cv.md",
         "source_meta_filename": "2026-07-11-current-agentic-ai-cv.meta.json",
         "reviewed_at": "2026-07-11",
@@ -355,8 +379,14 @@
           "Stanford d.school",
           "WPP"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 0,
         "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-cv-company-context-web-research.md",
         "source_meta_filename": "2026-07-11-cv-company-context-web-research.meta.json",
         "reviewed_at": "2026-07-11",
@@ -432,8 +462,14 @@
           "Singapore Exchange",
           "mewatch"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 100,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-enterprise-scale-proof.md",
         "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json",
         "reviewed_at": "2026-07-11",
@@ -493,8 +529,14 @@
           "UAE/MENA"
         ],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 0,
         "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-location-and-working-model-faq.md",
         "source_meta_filename": "2026-07-11-location-and-working-model-faq.meta.json",
         "reviewed_at": "2026-07-11",
@@ -560,8 +602,14 @@
         "companies": [
           "meetjoz.com"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 0,
         "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-recruiter-screening-faq.md",
         "source_meta_filename": "2026-07-11-recruiter-screening-faq.meta.json",
         "reviewed_at": "2026-07-11",
@@ -615,8 +663,14 @@
           "Global"
         ],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 0,
         "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "2026-07-11-why-joz-screening-answer.md",
         "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json",
         "reviewed_at": "2026-07-11",
@@ -680,8 +734,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 95,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-ai-adoption-governance.md",
         "source_meta_filename": "business-need-ai-adoption-governance.meta.json",
         "reviewed_at": "",
@@ -785,8 +845,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 91,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-buyer-faq.md",
         "source_meta_filename": "business-need-buyer-faq.meta.json",
         "reviewed_at": "",
@@ -880,8 +946,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 96,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-decision-intelligence.md",
         "source_meta_filename": "business-need-decision-intelligence.meta.json",
         "reviewed_at": "",
@@ -978,8 +1050,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 94,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-enterprise-knowledge.md",
         "source_meta_filename": "business-need-enterprise-knowledge.meta.json",
         "reviewed_at": "",
@@ -1082,8 +1160,14 @@
           "Mediacorp",
           "Publicis"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 99,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-enterprise-proof.md",
         "source_meta_filename": "business-need-enterprise-proof.meta.json",
         "reviewed_at": "",
@@ -1204,8 +1288,14 @@
           "Mediacorp",
           "Publicis"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 100,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-hero-value.md",
         "source_meta_filename": "business-need-hero-value.meta.json",
         "reviewed_at": "",
@@ -1308,8 +1398,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 97,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-problems-joz-solves.md",
         "source_meta_filename": "business-need-problems-joz-solves.meta.json",
         "reviewed_at": "",
@@ -1421,8 +1517,14 @@
           "Mediacorp",
           "Publicis"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 97,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-roi-model.md",
         "source_meta_filename": "business-need-roi-model.meta.json",
         "reviewed_at": "",
@@ -1524,8 +1626,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 93,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-transformation-method.md",
         "source_meta_filename": "business-need-transformation-method.meta.json",
         "reviewed_at": "",
@@ -1629,8 +1737,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 98,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "business-need-why-hire-joz-now.md",
         "source_meta_filename": "business-need-why-hire-joz-now.meta.json",
         "reviewed_at": "",
@@ -1690,6 +1804,770 @@
       }
     },
     {
+      "slug": "dubai-future-foundation-inclusive-design",
+      "title": "Designing Inclusive Dubai — Dubai Future Foundation",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Inclusive public-service and innovation experience work for Dubai Future Foundation, connecting human-centred design, accessibility, government transformation, and rapid innovation.",
+      "body": "Designing Inclusive Dubai for Dubai Future Foundation sits at the intersection of inclusive public-service design, rapid innovation, and transformation in a government context.\n\nIncluded projects\n- Designing Inclusive Dubai\n\nStrategic and technical themes\n- Human-centred design for public-service and civic experience.\n- Inclusive design and accessibility thinking in a government and innovation setting.\n- Rapid prototyping to make future-oriented concepts tangible early.\n- Transformation framing that connects design decisions to adoption, usability, and service quality.\n\nProof connection\n- This programme should be read alongside the existing Dubai Future Foundation rapid-prototyping proof where relevant.\n- It should not introduce new metrics or imply quantified impact beyond what the current proof objects already support.\n\nRetrieval guidance\n- Use this record when the question is specifically about Dubai Future Foundation, inclusive public-service design, or government innovation work in Dubai/UAE.\n- Keep the answer recruiter-readable and concrete rather than abstract.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "dubai-future-foundation",
+          "government-innovation",
+          "inclusive-design",
+          "public-service",
+          "rapid-prototyping"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked on inclusive public-service and innovation experience design for Dubai Future Foundation.",
+          "The work connected accessibility, government transformation, and rapid prototyping in a Dubai/UAE innovation context."
+        ],
+        "proof_points": [
+          "Dubai Future Foundation appears in the current CV and proof corpus as part of UAE innovation and rapid prototyping work.",
+          "This programme record focuses the retrieval unit on inclusive design rather than broad AI positioning."
+        ],
+        "regions": [
+          "Dubai",
+          "UAE"
+        ],
+        "companies": [
+          "Dubai Future Foundation"
+        ],
+        "projects": [
+          "Designing Inclusive Dubai"
+        ],
+        "intent_families": [
+          "business_need",
+          "skills"
+        ],
+        "sub_intents": [
+          "business_need.problems_solved",
+          "skills.enterprise_proof"
+        ],
+        "impact_score": 85,
+        "priority_label": "standard",
+        "valid_from": "2018",
+        "valid_to": null,
+        "source_notes": "Grouped programme record created from existing CV/project history. No unsupported metrics added.",
+        "source_filename": "dubai-future-foundation-inclusive-design.md",
+        "source_meta_filename": "dubai-future-foundation-inclusive-design.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "organizational_design",
+          "product_strategy",
+          "rapid_prototyping",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption"
+        ],
+        "governance": [],
+        "industries": [
+          "government",
+          "technology"
+        ],
+        "proofs": [
+          "dff_rapid_ai_prototyping"
+        ],
+        "related_proofs": [
+          "dff_rapid_ai_prototyping"
+        ],
+        "enterprise_scale_score": 81,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "erste-accessibility-aem",
+      "title": "Accessibility and Adobe Experience Manager UX — Erste Bank, Vienna",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Enterprise accessibility guidance and Adobe Experience Manager experience work for Erste Bank in Vienna.",
+      "body": "Accessibility and Adobe Experience Manager UX for Erste Bank in Vienna represents enterprise experience work inside a regulated banking environment.\n\nIncluded projects\n- Accessibility UX Guidelines\n- Adobe Experience Manager UX\n\nStrategic and technical themes\n- Accessibility guidance in a large regulated banking context.\n- Experience design and workflow thinking around Adobe Experience Manager.\n- Enterprise architecture and delivery discipline in systems that require trust, clarity, and governance.\n- Banking transformation work where usability and risk reduction both matter.\n\nProof connection\n- This record can connect to the existing Erste 16M+ customer-scale proof when the question is about enterprise credibility.\n- It must not imply that each listed sub-project independently served the full 16M+ customer base.\n\nRetrieval guidance\n- Use this record for employer-specific Erste Bank questions, accessibility work, AEM work, or regulated banking UX.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "accessibility",
+          "aem",
+          "enterprise-ux",
+          "erste-bank",
+          "regulated-banking"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked on accessibility guidance and AEM-related experience work for Erste Bank in Vienna.",
+          "The work sat inside a regulated banking context where usability, governance, and risk reduction mattered."
+        ],
+        "proof_points": [
+          "Erste Bank already exists in the proof layer as engineering and accessibility work at 16M+ customer scale.",
+          "This record narrows retrieval to the accessibility and AEM programme rather than the broader hero proof."
+        ],
+        "regions": [
+          "Austria",
+          "Europe",
+          "Vienna"
+        ],
+        "companies": [
+          "Erste Bank"
+        ],
+        "projects": [
+          "Accessibility UX Guidelines",
+          "Adobe Experience Manager UX"
+        ],
+        "intent_families": [
+          "business_need",
+          "factual_profile",
+          "skills"
+        ],
+        "sub_intents": [
+          "business_need.outcomes",
+          "factual_profile.companies",
+          "skills.enterprise_proof"
+        ],
+        "impact_score": 88,
+        "priority_label": "high",
+        "valid_from": "2018",
+        "valid_to": null,
+        "source_notes": "Grouped programme record. 16M+ scale may be referenced only through the existing Erste proof object.",
+        "source_filename": "erste-accessibility-aem.md",
+        "source_meta_filename": "erste-accessibility-aem.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "enterprise_architecture",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "higher_adoption",
+          "lower_risk"
+        ],
+        "governance": [],
+        "industries": [
+          "banking",
+          "financial_services"
+        ],
+        "proofs": [
+          "erste_customer_scale"
+        ],
+        "related_proofs": [
+          "erste_customer_scale"
+        ],
+        "enterprise_scale_score": 98,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "hub71-tokenised-knowledge",
+      "title": "Tokenised Knowledge UX Strategy — Hub71, Abu Dhabi",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "UX and product strategy for tokenised knowledge concepts in the Abu Dhabi innovation ecosystem.",
+      "body": "Tokenised Knowledge UX Strategy for Hub71 focuses on product and experience strategy for knowledge systems in the Abu Dhabi innovation ecosystem.\n\nIncluded projects\n- Tokenised Knowledge UX Strategy\n\nStrategic and technical themes\n- Product strategy for making knowledge structures more reusable and actionable.\n- UX thinking around tokenised knowledge concepts without overclaiming blockchain delivery.\n- Context and information design in an innovation-ecosystem setting.\n- Enterprise-architecture thinking applied to knowledge flow, trust, and reuse.\n\nProof connection\n- This record is intentionally scoped as strategy and UX work.\n- It should not introduce unsupported financial, tokenisation, or blockchain implementation claims.\n\nRetrieval guidance\n- Use this record for questions specifically about Hub71, Abu Dhabi innovation work, or tokenised knowledge strategy.\n- Keep the answer focused on product, UX, and knowledge experience strategy.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "abu-dhabi",
+          "hub71",
+          "knowledge-strategy",
+          "tokenised-knowledge",
+          "ux-strategy"
+        ],
+        "verification": {
+          "status": "project_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "project_supported",
+        "claims": [
+          "Joz worked on tokenised knowledge UX and product strategy in the Hub71 innovation ecosystem.",
+          "The work focused on knowledge experience and product framing rather than unsupported infrastructure claims."
+        ],
+        "proof_points": [
+          "This programme record is positioned as product and UX strategy for knowledge systems.",
+          "It connects to Joz's broader context-engineering and enterprise-architecture capabilities."
+        ],
+        "regions": [
+          "Abu Dhabi",
+          "UAE"
+        ],
+        "companies": [
+          "Hub71"
+        ],
+        "projects": [
+          "Tokenised Knowledge UX Strategy"
+        ],
+        "intent_families": [
+          "skills",
+          "systems_mindset"
+        ],
+        "sub_intents": [
+          "skills.capabilities_overview",
+          "systems_mindset.context"
+        ],
+        "impact_score": 81,
+        "priority_label": "standard",
+        "valid_from": "2018",
+        "valid_to": null,
+        "source_notes": "Grouped programme record. No unsupported blockchain or financial claims added.",
+        "source_filename": "hub71-tokenised-knowledge.md",
+        "source_meta_filename": "hub71-tokenised-knowledge.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "context_engineering",
+          "enterprise_architecture",
+          "knowledge_graphs",
+          "product_strategy"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_data_trust",
+          "knowledge_reuse"
+        ],
+        "governance": [],
+        "industries": [
+          "financial_services",
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "leo-burnett-commerce-platforms",
+      "title": "Luxury Commerce and Consumer Platforms — Leo Burnett/Publicis, Singapore",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Luxury e-commerce, consumer-platform, CMS, and activation work across the USA and Asia Pacific.",
+      "body": "Luxury commerce and consumer-platform work at Leo Burnett/Publicis covers SK-II, Samsung, and Skyscanner across the USA and Asia Pacific.\n\nIncluded projects\n- SK-II USA e-commerce CMS\n- SK-II Asia Pacific CMS\n- Samsung Digital Appliances CMS\n- Skyscanner Activation\n\nStrategic and technical themes\n- Luxury and consumer commerce experience design.\n- CMS and platform work across regional and multi-market delivery contexts.\n- Agency-side product and workflow collaboration for faster delivery.\n- Activation and campaign work that still required platform thinking, not only surface design.\n\nProof connection\n- This programme can reference the existing 70% handoff-friction reduction proof from Leo Burnett/Publicis.\n- It must not attribute that metric to every listed client project.\n\nRetrieval guidance\n- Use this record for Leo Burnett, Publicis, SK-II, Samsung, Skyscanner, luxury-commerce, or commerce-platform questions.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "commerce-platforms",
+          "leo-burnett",
+          "publicis",
+          "samsung",
+          "sk-ii",
+          "skyscanner"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked on luxury commerce, CMS, and consumer-platform initiatives at Leo Burnett/Publicis.",
+          "The programme included SK-II in the USA and APAC, Samsung digital-appliances CMS work, and Skyscanner activation."
+        ],
+        "proof_points": [
+          "The broader Leo Burnett/Publicis proof includes a 70% reduction in handoff friction through code-based prototyping.",
+          "This record narrows retrieval to the grouped commerce and consumer platform programme."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Leo Burnett",
+          "P&G",
+          "Publicis",
+          "Samsung",
+          "Skyscanner"
+        ],
+        "projects": [
+          "SK-II Asia Pacific CMS",
+          "SK-II USA e-commerce CMS",
+          "Samsung Digital Appliances CMS",
+          "Skyscanner Activation"
+        ],
+        "intent_families": [
+          "business_need",
+          "factual_profile",
+          "skills"
+        ],
+        "sub_intents": [
+          "business_need.outcomes",
+          "factual_profile.companies",
+          "skills.enterprise_proof"
+        ],
+        "impact_score": 85,
+        "priority_label": "standard",
+        "valid_from": "2014",
+        "valid_to": "2014",
+        "source_notes": "Grouped programme record. The 70% handoff-friction metric belongs to the broader Publicis delivery environment, not every individual client project.",
+        "source_filename": "leo-burnett-commerce-platforms.md",
+        "source_meta_filename": "leo-burnett-commerce-platforms.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "enterprise_architecture",
+          "product_strategy",
+          "rapid_prototyping",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "lower_operational_friction"
+        ],
+        "governance": [],
+        "industries": [
+          "creative_services",
+          "retail",
+          "technology"
+        ],
+        "proofs": [
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 96,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "manulife-innovation-labs",
+      "title": "Innovation Labs, ML and Digital Investment UX — Manulife, Singapore",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Innovation-lab, machine-learning, investment, field-research, internal-platform, and 3D experience work across Singapore and Asia Pacific.",
+      "body": "Innovation Labs, ML, and digital-investment UX at Manulife combines internal innovation infrastructure, machine-learning-enabled experience design, and field research across Singapore and Asia Pacific.\n\nIncluded projects\n- 3D VR Innovation Space\n- Internal Innovation Portal\n- Lean AI UX Field Research in Cambodia\n- ML/AI/Data UX and Interaction Design\n- Digital Fund Purchase\n\nStrategic and technical themes\n- Innovation-lab environments that make new ideas testable and legible inside the organisation.\n- ML, AI, and data-informed UX for investment and customer journeys.\n- Field research to understand adoption and operational reality in-market.\n- Internal portals and knowledge-sharing structures that help scale innovation programs.\n\nProof connection\n- This record can connect to the existing Manulife Lean ML UX proof across 11 markets.\n- It should not collapse all projects into a single unsupported outcome claim.\n\nRetrieval guidance\n- Use this record for Manulife-specific questions, innovation labs, digital fund purchase, Cambodia field research, or 3D/VR innovation work.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "3d-vr",
+          "digital-investment",
+          "field-research",
+          "innovation-labs",
+          "manulife",
+          "ml-ux"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked on innovation-lab, ML/AI/data UX, internal platform, investment, field-research, and 3D experience initiatives at Manulife.",
+          "The programme spanned both customer-facing and internal innovation contexts across Singapore and Asia Pacific."
+        ],
+        "proof_points": [
+          "The broader Manulife proof already covers Lean ML UX across 11 markets.",
+          "This grouped programme record preserves the individual project names for employer-specific retrieval."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Cambodia",
+          "Canada",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Manulife"
+        ],
+        "projects": [
+          "3D VR Innovation Space",
+          "Digital Fund Purchase",
+          "Internal Innovation Portal",
+          "Lean AI UX Field Research in Cambodia",
+          "ML/AI/Data UX and Interaction Design"
+        ],
+        "intent_families": [
+          "business_need",
+          "skills",
+          "systems_mindset"
+        ],
+        "sub_intents": [
+          "business_need.ai_adoption",
+          "skills.financial_services",
+          "skills.multimodal",
+          "systems_mindset.feedback_loops"
+        ],
+        "impact_score": 92,
+        "priority_label": "high",
+        "valid_from": "2015",
+        "valid_to": "2016",
+        "source_notes": "Grouped programme record. No single unsupported metric is attributed across all included projects.",
+        "source_filename": "manulife-innovation-labs.md",
+        "source_meta_filename": "manulife-innovation-labs.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "decision_intelligence",
+          "multimodal_ai",
+          "organizational_design",
+          "product_strategy",
+          "rapid_prototyping",
+          "spatial_ai"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption",
+          "knowledge_reuse"
+        ],
+        "governance": [],
+        "industries": [
+          "financial_services",
+          "insurance",
+          "technology",
+          "wealth_management"
+        ],
+        "proofs": [
+          "manulife_lean_ml_ux"
+        ],
+        "related_proofs": [
+          "manulife_lean_ml_ux"
+        ],
+        "enterprise_scale_score": 97,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "maybank-private-banking-digital",
+      "title": "Private Banking, Wealth and Conversational AI — Maybank–Ageas, Singapore",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Private banking, wealth, HNW, design-system, CMS, and conversational-AI work across Singapore and Asia Pacific.",
+      "body": "Private banking, wealth, and conversational-AI work for Maybank–Ageas Etiqa spans design systems, CMS, high-net-worth journeys, and machine-learning-enabled customer experience in Singapore and Asia Pacific.\n\nIncluded projects\n- Design Systems\n- Wealth/HNW CMS UX\n- ML/Conversational AI UX\n- Private Banking CMS\n\nStrategic and technical themes\n- Private banking and wealth experience design in a regulated financial-services context.\n- Design-system and CMS work to support scalable delivery and consistency.\n- ML and conversational UX applied to customer and advisor journeys.\n- Enterprise transformation where wealth journeys, operations, and growth signals intersect.\n\nProof connection\n- This programme can reference the existing Maybank 20× digital-sales proof and the broader wealth-transformation evidence.\n- It must not imply that every listed sub-project independently produced the 20× outcome.\n\nRetrieval guidance\n- Use this record when the question is specifically about Maybank private banking, wealth/HNW, CMS, design systems, or conversational AI.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "cms",
+          "conversational-ai",
+          "hnw",
+          "maybank",
+          "private-banking",
+          "wealth"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked across private banking, wealth/HNW, design systems, CMS, and conversational-AI related experience work for Maybank–Ageas Etiqa.",
+          "The programme connected enterprise delivery, wealth journeys, and ML-enabled customer experience."
+        ],
+        "proof_points": [
+          "The broader Maybank proof includes 20× digital sales growth within 12 months.",
+          "The broader programme also includes 3,000+ wealth pilots and ML models for HNW and mass-market contexts."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Singapore"
+        ],
+        "companies": [
+          "Ageas",
+          "Etiqa",
+          "Maybank"
+        ],
+        "projects": [
+          "Design Systems",
+          "ML/Conversational AI UX",
+          "Private Banking CMS",
+          "Wealth/HNW CMS UX"
+        ],
+        "intent_families": [
+          "business_need",
+          "factual_profile",
+          "skills"
+        ],
+        "sub_intents": [
+          "business_need.outcomes",
+          "business_need.roi",
+          "factual_profile.companies",
+          "skills.financial_services"
+        ],
+        "impact_score": 93,
+        "priority_label": "high",
+        "valid_from": "2016",
+        "valid_to": "2018",
+        "source_notes": "Grouped programme record. Quantified Maybank growth is referenced only through existing proof objects.",
+        "source_filename": "maybank-private-banking-digital.md",
+        "source_meta_filename": "maybank-private-banking-digital.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "higher_adoption",
+          "lower_operational_friction",
+          "revenue_growth"
+        ],
+        "governance": [],
+        "industries": [
+          "banking",
+          "insurance",
+          "wealth_management"
+        ],
+        "proofs": [
+          "maybank_digital_sales_growth"
+        ],
+        "related_proofs": [
+          "maybank_digital_sales_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "mediacorp-digital-platforms",
+      "title": "National Media Platforms and Mobile Transformation — Mediacorp, Singapore",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "National-scale media, election, news, streaming, CMS, mobile, Apple Watch, and corporate experience architecture across Mediacorp.",
+      "body": "National media platform and mobile-transformation work at Mediacorp spans news, elections, streaming, CMS ecosystems, mobile apps, Apple Watch, and corporate UX guidelines in Singapore.\n\nIncluded projects\n- Singapore National Elections\n- Channel NewsAsia web CMS\n- Channel NewsAsia iOS and Android apps\n- Apple Watch app UX for Channel NewsAsia\n- Toggle/mewatch VoD\n- Toggle/mewatch CMS\n- ELLE Singapore CMS\n- Corporate-wide UX Guidelines\n- Corporate site CMS\n- Channel 8 News CMS\n- Today Online News web CMS\n- Today Online News apps CMS\n\nStrategic and technical themes\n- National-scale broadcasting and digital-platform architecture.\n- CMS ecosystem design across editorial, streaming, corporate, and news products.\n- Mobile-first product transformation across apps and connected-device surfaces.\n- Experience standards and UX guidelines that improve coherence across many products and teams.\n\nProof connection\n- This programme may reference the existing Mediacorp 30× monthly-active-audience proof where relevant.\n- It must not imply that every listed project independently generated that growth.\n\nRetrieval guidance\n- Use this record for Mediacorp, Channel NewsAsia, elections, Apple Watch, VoD, CMS, or corporate UX-guidelines questions.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "apple-watch",
+          "cms",
+          "cna",
+          "mediacorp",
+          "mobile-apps",
+          "vod"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked across national-scale media, news, streaming, mobile, and CMS platforms at Mediacorp.",
+          "The programme included Channel NewsAsia, elections-related work, Apple Watch UX, and corporate UX guidelines."
+        ],
+        "proof_points": [
+          "The broader Mediacorp proof already covers 30× monthly active audience growth and mobile-first transformation.",
+          "This grouped programme record exists to answer employer-specific questions with more concrete project detail."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Channel NewsAsia",
+          "Mediacorp"
+        ],
+        "projects": [
+          "Apple Watch app UX for Channel NewsAsia",
+          "Channel 8 News CMS",
+          "Channel NewsAsia iOS and Android apps",
+          "Channel NewsAsia web CMS",
+          "Corporate site CMS",
+          "Corporate-wide UX Guidelines",
+          "ELLE Singapore CMS",
+          "Singapore National Elections",
+          "Today Online News apps CMS",
+          "Today Online News web CMS",
+          "Toggle/mewatch CMS",
+          "Toggle/mewatch VoD"
+        ],
+        "intent_families": [
+          "business_need",
+          "factual_profile",
+          "skills"
+        ],
+        "sub_intents": [
+          "business_need.outcomes",
+          "factual_profile.companies",
+          "skills.enterprise_proof"
+        ],
+        "impact_score": 92,
+        "priority_label": "high",
+        "valid_from": "2014",
+        "valid_to": "2015",
+        "source_notes": "Grouped programme record. The 30× MAU proof belongs to the broader Mediacorp transformation context, not each individual sub-project.",
+        "source_filename": "mediacorp-digital-platforms.md",
+        "source_meta_filename": "mediacorp-digital-platforms.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "enterprise_architecture",
+          "multimodal_ai",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption",
+          "lower_operational_friction"
+        ],
+        "governance": [],
+        "industries": [
+          "media"
+        ],
+        "proofs": [
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 99,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "ogilvy-enterprise-platforms",
+      "title": "Enterprise, Exchange and Commerce Platforms — Ogilvy/WPP, Singapore",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Exchange, hospitality, e-commerce, CMS, and recurring UX campaign work across Singapore, Asia Pacific, and global markets.",
+      "body": "Enterprise, exchange, hospitality, and commerce platform work at Ogilvy/WPP spans Singapore Stock Exchange, Banyan Tree, Danone, and recurring campaign delivery across Singapore and Asia Pacific.\n\nIncluded projects\n- Singapore Stock Exchange CMS\n- Banyan Tree Worldwide CMS\n- Danone e-commerce CMS\n- Annual Ogilvy UX Campaigns\n\nStrategic and technical themes\n- Enterprise and platform design in agency environments serving large organisations.\n- CMS and experience architecture across exchange, hospitality, and commerce settings.\n- Repeated campaign delivery that still required workflow discipline and reusable system thinking.\n- Product strategy and prototyping used to move quickly without losing structure.\n\nProof connection\n- This record can connect to the existing Singapore Stock Exchange and Banyan Tree proof objects where relevant.\n- It should not invent campaign metrics that do not already exist in the proof layer.\n\nRetrieval guidance\n- Use this record for Ogilvy, WPP, SGX, Banyan Tree, Danone, or CMS-project questions.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "banyan-tree",
+          "cms",
+          "danone",
+          "ogilvy",
+          "sgx",
+          "wpp"
+        ],
+        "verification": {
+          "status": "cv_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_supported",
+        "claims": [
+          "Joz worked on enterprise and commerce platform programmes at Ogilvy/WPP across exchange, hospitality, and consumer contexts.",
+          "The programme included SGX, Banyan Tree, Danone, and recurring UX campaign work."
+        ],
+        "proof_points": [
+          "Existing proof objects already cover SGX responsive portal re-engineering and the Banyan Tree pitch-winning prototype.",
+          "This record groups the broader Ogilvy platform programme for employer-specific retrieval."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Global",
+          "Singapore"
+        ],
+        "companies": [
+          "Banyan Tree",
+          "Danone",
+          "Ogilvy",
+          "Singapore Stock Exchange",
+          "WPP"
+        ],
+        "projects": [
+          "Annual Ogilvy UX Campaigns",
+          "Banyan Tree Worldwide CMS",
+          "Danone e-commerce CMS",
+          "Singapore Stock Exchange CMS"
+        ],
+        "intent_families": [
+          "factual_profile",
+          "skills"
+        ],
+        "sub_intents": [
+          "factual_profile.companies",
+          "skills.enterprise_proof"
+        ],
+        "impact_score": 84,
+        "priority_label": "standard",
+        "valid_from": "2013",
+        "valid_to": "2014",
+        "source_notes": "Grouped programme record. No unsupported campaign metrics added.",
+        "source_filename": "ogilvy-enterprise-platforms.md",
+        "source_meta_filename": "ogilvy-enterprise-platforms.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "enterprise_architecture",
+          "product_strategy",
+          "rapid_prototyping",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption"
+        ],
+        "governance": [],
+        "industries": [
+          "creative_services",
+          "financial_services",
+          "retail",
+          "technology"
+        ],
+        "proofs": [
+          "ogilvy_banyan_tree_pitch",
+          "sgx_responsive_portals"
+        ],
+        "related_proofs": [
+          "ogilvy_banyan_tree_pitch",
+          "sgx_responsive_portals"
+        ],
+        "enterprise_scale_score": 83,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
       "slug": "skills-agentic-ai-architecture",
       "title": "Agentic AI Architecture",
       "category": "skills",
@@ -1738,8 +2616,14 @@
           "Erste Bank",
           "MarketClue"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 96,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-agentic-ai-architecture.md",
         "source_meta_filename": "skills-agentic-ai-architecture.meta.json",
         "reviewed_at": "",
@@ -1847,8 +2731,14 @@
           "Pixar",
           "Versace"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 92,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-agentic-ai-ux-orchestration.md",
         "source_meta_filename": "skills-agentic-ai-ux-orchestration.meta.json",
         "reviewed_at": "",
@@ -1951,8 +2841,14 @@
           "Ogilvy",
           "Publicis"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 95,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-career-transition-to-agentic-ai.md",
         "source_meta_filename": "skills-career-transition-to-agentic-ai.meta.json",
         "reviewed_at": "",
@@ -2057,8 +2953,14 @@
           "Maybank",
           "Singapore Stock Exchange"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 93,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-financial-services-ai.md",
         "source_meta_filename": "skills-financial-services-ai.meta.json",
         "reviewed_at": "",
@@ -2168,8 +3070,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 100,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-hero-agentic-ai.md",
         "source_meta_filename": "skills-hero-agentic-ai.meta.json",
         "reviewed_at": "",
@@ -2285,8 +3193,14 @@
           "Maybank",
           "Mediacorp"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 99,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-largest-enterprise-scale-proof.md",
         "source_meta_filename": "skills-largest-enterprise-scale-proof.meta.json",
         "reviewed_at": "",
@@ -2399,8 +3313,14 @@
           "Mediacorp",
           "Publicis"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 94,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-quantified-business-outcomes.md",
         "source_meta_filename": "skills-quantified-business-outcomes.meta.json",
         "reviewed_at": "",
@@ -2508,8 +3428,14 @@
           "Publicis",
           "WPP"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 91,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-recruiter-operational-facts.md",
         "source_meta_filename": "skills-recruiter-operational-facts.meta.json",
         "reviewed_at": "",
@@ -2582,8 +3508,14 @@
           "MarketClue",
           "Pixar"
         ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 86,
         "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "skills-technical-platform-stack.md",
         "source_meta_filename": "skills-technical-platform-stack.meta.json",
         "reviewed_at": "",
@@ -2668,8 +3600,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 98,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-agentic-ai-judgment.md",
         "source_meta_filename": "systems-agentic-ai-judgment.meta.json",
         "reviewed_at": "",
@@ -2734,8 +3672,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 96,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-decision-thinking.md",
         "source_meta_filename": "systems-decision-thinking.meta.json",
         "reviewed_at": "",
@@ -2790,8 +3734,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 95,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-feedback-loops.md",
         "source_meta_filename": "systems-feedback-loops.meta.json",
         "reviewed_at": "",
@@ -2848,8 +3798,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 95,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-governance-mindset.md",
         "source_meta_filename": "systems-governance-mindset.meta.json",
         "reviewed_at": "",
@@ -2914,8 +3870,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 93,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-human-behavior.md",
         "source_meta_filename": "systems-human-behavior.meta.json",
         "reviewed_at": "",
@@ -2973,8 +3935,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 100,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-mindset-hero.md",
         "source_meta_filename": "systems-mindset-hero.meta.json",
         "reviewed_at": "",
@@ -3037,8 +4005,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 94,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-organizational-failure-patterns.md",
         "source_meta_filename": "systems-organizational-failure-patterns.meta.json",
         "reviewed_at": "",
@@ -3097,8 +4071,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 98,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-principle-context-creates-intelligence.md",
         "source_meta_filename": "systems-principle-context-creates-intelligence.meta.json",
         "reviewed_at": "",
@@ -3156,8 +4136,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 99,
         "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-principle-signal-over-noise.md",
         "source_meta_filename": "systems-principle-signal-over-noise.meta.json",
         "reviewed_at": "",
@@ -3211,8 +4197,14 @@
         "proof_points": [],
         "regions": [],
         "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
         "impact_score": 97,
         "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
         "source_filename": "systems-principle-systems-before-features.md",
         "source_meta_filename": "systems-principle-systems-before-features.meta.json",
         "reviewed_at": "",
@@ -3236,6 +4228,93 @@
         ],
         "governance": [],
         "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "uk-healthcare-digital-platforms",
+      "title": "Healthcare and Mobile-first Platforms — United Kingdom",
+      "category": "project",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Healthcare communications, portal, CMS, webcast, and mobile-first platform work in the United Kingdom.",
+      "body": "Healthcare communications and portal work in the United Kingdom covers Roche, Pfizer, and Vantas across webcast, CMS, and mobile-first platform delivery.\n\nIncluded projects\n- Digital Video Webcasts — Roche\n- Pfizer Health Portal CMS\n- Mobile-first Web Portals — Vantas\n\nStrategic and technical themes\n- Digital-platform and communications design in healthcare and medtech-adjacent settings.\n- CMS and portal architecture where clarity, trust, and usability matter.\n- Mobile-first experience thinking for practical adoption across constrained user contexts.\n- Delivery focused on platform and communication outcomes rather than unsupported clinical claims.\n\nProof connection\n- This record is intentionally descriptive and does not introduce unsupported medical, clinical, or quantified outcome claims.\n\nRetrieval guidance\n- Use this record for UK healthcare-platform questions, Roche, Pfizer, Vantas, webcasts, health portals, or mobile-first portal work.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "healthcare",
+          "mobile-first-portals",
+          "pfizer",
+          "roche",
+          "uk",
+          "vantas"
+        ],
+        "verification": {
+          "status": "project_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "project_supported",
+        "claims": [
+          "Joz worked on healthcare communications and digital platforms in the United Kingdom for Roche, Pfizer, and Vantas.",
+          "The programme covered webcasts, portal CMS work, and mobile-first platforms without implying clinical ownership."
+        ],
+        "proof_points": [
+          "This record is scoped to platform and communication delivery rather than medical or clinical claims.",
+          "A dedicated healthcare industry tag is used because the existing ontology previously lacked one."
+        ],
+        "regions": [
+          "Europe",
+          "United Kingdom"
+        ],
+        "companies": [
+          "Pfizer",
+          "Roche",
+          "Vantas"
+        ],
+        "projects": [
+          "Digital Video Webcasts — Roche",
+          "Mobile-first Web Portals — Vantas",
+          "Pfizer Health Portal CMS"
+        ],
+        "intent_families": [
+          "factual_profile",
+          "skills"
+        ],
+        "sub_intents": [
+          "factual_profile.companies",
+          "skills.enterprise_proof"
+        ],
+        "impact_score": 77,
+        "priority_label": "standard",
+        "valid_from": "2013",
+        "valid_to": "2014",
+        "source_notes": "Grouped programme record. Healthcare industry ID added because the controlled ontology previously lacked a safe healthcare bucket.",
+        "source_filename": "uk-healthcare-digital-platforms.md",
+        "source_meta_filename": "uk-healthcare-digital-platforms.meta.json",
+        "reviewed_at": "",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "enterprise_architecture",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption"
+        ],
+        "governance": [],
+        "industries": [
+          "healthcare",
+          "technology"
+        ],
         "proofs": [],
         "related_proofs": [],
         "enterprise_scale_score": 0,

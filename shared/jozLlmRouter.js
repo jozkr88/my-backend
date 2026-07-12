@@ -102,6 +102,41 @@ function composeMixedReply({ worldReply }) {
   return [worldReply || "", suffix].filter(Boolean).join(" ");
 }
 
+function detectProgrammeQuery(clean = "") {
+  if (!clean) return false;
+  return [
+    "what did joz do at",
+    "what did joz do for",
+    "what projects did joz do at",
+    "what private banking work did joz do at",
+    "what cms projects did joz do at",
+    "what healthcare platforms did joz work on",
+  ].some((pattern) => clean.includes(pattern));
+}
+
+function normalizeList(value) {
+  return Array.isArray(value)
+    ? value.map((item) => String(item || "").trim()).filter(Boolean)
+    : [];
+}
+
+function buildProgrammeRecordReply(record = {}) {
+  const metadata = record?.metadata || {};
+  const companies = normalizeList(metadata.companies);
+  const projects = normalizeList(metadata.projects);
+  const summary = String(record.summary || "").trim();
+  const body = String(record.body || "").trim();
+  const firstParagraph = body.split(/\n\s*\n/).map((part) => part.trim()).filter(Boolean)[0] || "";
+
+  const companyText = companies.length ? ` for ${companies.join(", ")}` : "";
+  const projectText = projects.length
+    ? ` Included projects: ${projects.join("; ")}.`
+    : "";
+  const summaryText = summary || firstParagraph || "This programme record captures the main work, themes, and delivery context.";
+
+  return `${summaryText}${projectText} This is the grouped programme record${companyText}, so it should be read as one retrieval unit rather than a claim that every sub-project produced the same outcome.`.trim();
+}
+
 function mapRouteToIntentMode(route) {
   if (route === "business_need") return "business_need";
   if (route === "systems_mindset") return "systems_mindset";
@@ -543,6 +578,23 @@ export async function resolveUnknownJozReply({
   openai = null,
   roleAwareContext = {},
 } = {}) {
+  const clean = normalizeText(input);
+  const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
+    ? roleAwareContext.retrievedDocuments
+    : [];
+  const topProgrammeRecord = retrievedDocuments.find((doc) => doc?.category === "project");
+
+  if (detectProgrammeQuery(clean) && topProgrammeRecord) {
+    return {
+      reply: buildProgrammeRecordReply(topProgrammeRecord),
+      answerSource: topProgrammeRecord.title || topProgrammeRecord.metadata?.source_filename || "retrieved_programme_record",
+      composer: "buildProgrammeRecordReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("skills"),
+      retrievedCategories: ["skills", "proof"],
+    };
+  }
+
   let reply = "";
   let answerSource = "llm_fallback";
   let composer = "buildJozLlmFallbackReply";

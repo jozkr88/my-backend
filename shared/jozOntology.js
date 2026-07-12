@@ -137,6 +137,7 @@ const FIELD_KEYWORDS = {
     creative_services: ["creative", "agency"],
     retail: ["retail", "e-commerce", "ecommerce"],
     spatial_computing: ["spatial computing", "spatial"],
+    healthcare: ["healthcare", "health", "medtech", "medical", "pharma", "pharmaceutical"],
   },
   proofs: {
     maybank_digital_sales_growth: ["maybank", "etiqa"],
@@ -269,11 +270,22 @@ function normalizeMetadata(metadata = {}) {
     industries: normalizeArray(metadata.industries),
     proofs: normalizeArray(metadata.proofs),
     related_proofs: normalizeArray(metadata.related_proofs),
+    projects: normalizeArray(metadata.projects),
+    intent_families: normalizeArray(metadata.intent_families),
+    sub_intents: normalizeArray(metadata.sub_intents),
   };
 }
 
 function queryHasAny(clean, terms = []) {
   return terms.some((term) => clean.includes(term));
+}
+
+function scoreExactMetadataPhraseMatches(clean = "", values = [], weight = 0) {
+  return values.reduce((score, value) => {
+    const phrase = String(value || "").trim().toLowerCase();
+    if (!phrase) return score;
+    return clean.includes(phrase) ? score + weight : score;
+  }, 0);
 }
 
 function scoreQueryRelevance(doc, query = "") {
@@ -286,6 +298,13 @@ function scoreQueryRelevance(doc, query = "") {
   const summary = String(doc?.summary || "").toLowerCase();
   const category = String(doc?.category || "").toLowerCase();
   const tags = (doc?.metadata?.tags || []).join(" ").toLowerCase();
+  const companiesList = Array.isArray(doc?.metadata?.companies) ? doc.metadata.companies : [];
+  const projectsList = Array.isArray(doc?.metadata?.projects) ? doc.metadata.projects : [];
+  const companies = (doc?.metadata?.companies || []).join(" ").toLowerCase();
+  const projects = (doc?.metadata?.projects || []).join(" ").toLowerCase();
+  const subIntents = (doc?.metadata?.sub_intents || []).join(" ").toLowerCase();
+  const intentFamilies = (doc?.metadata?.intent_families || []).join(" ").toLowerCase();
+  const body = String(doc?.body || "").toLowerCase();
 
   let score = 0;
 
@@ -295,7 +314,17 @@ function scoreQueryRelevance(doc, query = "") {
     if (summary.includes(token)) score += 2;
     if (category.includes(token)) score += 1;
     if (tags.includes(token)) score += 1;
+    if (companies.includes(token)) score += 6;
+    if (projects.includes(token)) score += 7;
+    if (subIntents.includes(token)) score += 2;
+    if (intentFamilies.includes(token)) score += 1;
+    if (body.includes(token)) score += 1;
   }
+
+  if (companies && tokens.some((token) => companies.includes(token))) score += 10;
+  if (projects && tokens.some((token) => projects.includes(token))) score += 12;
+  score += scoreExactMetadataPhraseMatches(clean, companiesList, 22);
+  score += scoreExactMetadataPhraseMatches(clean, projectsList, 18);
 
   if (clean.includes("why should we hire") || clean.includes("why hire")) {
     if (title.includes("hire")) score += 8;
@@ -312,6 +341,23 @@ function scoreQueryRelevance(doc, query = "") {
   }
   if (clean.includes("autonomy") && (title.includes("judgment") || summary.includes("autonomy"))) {
     score += 8;
+  }
+  if (clean.includes("what did joz do at") || clean.includes("what projects did joz do at")) {
+    if (companies && tokens.some((token) => companies.includes(token))) score += 18;
+    if (projects && tokens.some((token) => projects.includes(token))) score += 10;
+    score += scoreExactMetadataPhraseMatches(clean, companiesList, 26);
+  }
+  if (clean.includes("private banking") && (summary.includes("private banking") || projects.includes("private banking") || body.includes("private banking"))) {
+    score += 14;
+  }
+  if (clean.includes("cms") && (projects.includes("cms") || body.includes("cms"))) {
+    score += 8;
+  }
+  if (clean.includes("apple watch") && (projects.includes("apple watch") || body.includes("apple watch"))) {
+    score += 10;
+  }
+  if (clean.includes("healthcare") && (summary.includes("healthcare") || (doc?.metadata?.industries || []).includes("healthcare"))) {
+    score += 14;
   }
 
   return score;
@@ -385,6 +431,7 @@ function scoreTechnicalDepth(doc, metadata, query = "") {
 function scoreCapabilityEligibility(doc, metadata, query = "") {
   const slug = String(doc?.slug || "").trim();
   const category = String(doc?.category || "").trim().toLowerCase();
+  const clean = String(query || "").trim().toLowerCase();
 
   if (isTechnicalDepthQuery(query) && !isRecruiterOperationalQuery(query)) {
     if (slug === RECRUITER_OPERATIONS_SLUG) return -140;
@@ -395,6 +442,10 @@ function scoreCapabilityEligibility(doc, metadata, query = "") {
 
   if (isRecruiterOperationalQuery(query) && slug === RECRUITER_OPERATIONS_SLUG) {
     return 40;
+  }
+
+  if (clean.includes("ai adoption") && slug === "skills-hero-agentic-ai") {
+    return 28;
   }
 
   return 0;

@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   buildJozRouteTrace,
   composeJozLlmRouteReply,
+  resolveUnknownJozReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { validateAppContext } from "./shared/meetJozWorld.js";
@@ -101,4 +102,38 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /Python|FastAPI/i);
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
   assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
+});
+
+test("programme employer queries can resolve from retrieved programme records without model fallback", async () => {
+  const resolution = await resolveUnknownJozReply({
+    input: "What did Joz do at Mediacorp?",
+    messages: [{ role: "user", content: "What did Joz do at Mediacorp?" }],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: [
+        {
+          title: "National Media Platforms and Mobile Transformation — Mediacorp, Singapore",
+          category: "project",
+          summary:
+            "National-scale media, election, news, streaming, CMS, mobile, Apple Watch, and corporate experience architecture across Mediacorp.",
+          metadata: {
+            companies: ["Mediacorp", "Channel NewsAsia"],
+            projects: [
+              "Channel NewsAsia iOS and Android apps",
+              "Apple Watch app UX for Channel NewsAsia",
+              "Toggle/mewatch VoD",
+              "Corporate-wide UX Guidelines",
+            ],
+          },
+        },
+      ],
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.composer, "buildProgrammeRecordReply");
+  assert.match(resolution.reply, /Mediacorp/i);
+  assert.match(resolution.reply, /Apple Watch/i);
+  assert.match(resolution.reply, /VoD/i);
+  assert.match(resolution.reply, /Corporate-wide UX Guidelines/i);
 });

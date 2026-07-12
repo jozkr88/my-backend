@@ -63,6 +63,7 @@ const allowedCategories = new Set([
   "governance",
   "governance_principle",
   "capability",
+  "project",
   "business_answer",
   "roi",
   "delivery",
@@ -104,6 +105,11 @@ function normalizeStringArray(value) {
   return Array.isArray(value)
     ? [...new Set(value.map((item) => String(item || "").trim()).filter(Boolean))].sort()
     : [];
+}
+
+function normalizeScalar(value) {
+  const text = String(value || "").trim();
+  return text || null;
 }
 
 function normalizeVerification(value) {
@@ -220,6 +226,9 @@ function validateMeta(meta, body, sourceName, ontologyIndexes) {
   if (!Array.isArray(meta.tags)) errors.push("`tags` must be an array.");
   if (!Array.isArray(meta.claims || [])) errors.push("`claims` must be an array.");
   if (!Array.isArray(meta.proof_points || [])) errors.push("`proof_points` must be an array.");
+  if (!Array.isArray(meta.projects || [])) errors.push("`projects` must be an array.");
+  if (!Array.isArray(meta.intent_families || [])) errors.push("`intent_families` must be an array.");
+  if (!Array.isArray(meta.sub_intents || [])) errors.push("`sub_intents` must be an array.");
 
   if (!String(verification.status || "").trim()) {
     errors.push("Missing `verification.status`.");
@@ -280,10 +289,16 @@ function buildNormalizedRecord(baseName, sourceFilename, ontologyIndexes, proofs
       proof_points: Array.isArray(meta.proof_points) ? meta.proof_points : [],
       regions: normalizeStringArray(meta.regions),
       companies: normalizeStringArray(meta.companies),
+      projects: normalizeStringArray(meta.projects),
+      intent_families: normalizeStringArray(meta.intent_families),
+      sub_intents: normalizeStringArray(meta.sub_intents),
       impact_score: Number.isFinite(Number(meta.impact_score))
         ? Number(meta.impact_score)
         : 0,
       priority_label: String(meta.priority_label || "").trim() || "standard",
+      valid_from: normalizeScalar(meta.valid_from),
+      valid_to: normalizeScalar(meta.valid_to),
+      source_notes: normalizeScalar(meta.source_notes),
       source_filename: sourceFilename,
       source_meta_filename: `${baseName}.meta.json`,
       reviewed_at: verification.reviewed_at || "",

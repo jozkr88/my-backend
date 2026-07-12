@@ -118,3 +118,43 @@ test("technical depth variants down-rank recruiter operations", () => {
     assert.ok(!slugs.slice(0, 3).includes("skills-recruiter-operational-facts"));
   }
 });
+
+test("Mediacorp employer query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What did Joz do at Mediacorp?", "skills", 8);
+  assert.equal(slugs[0], "mediacorp-digital-platforms");
+});
+
+test("Maybank private banking query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What private banking work did Joz do at Maybank?", "skills", 8);
+  assert.equal(slugs[0], "maybank-private-banking-digital");
+});
+
+test("Manulife projects query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What projects did Joz do at Manulife?", "skills", 8);
+  assert.equal(slugs[0], "manulife-innovation-labs");
+});
+
+test("Erste employer query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What did Joz do at Erste Bank?", "skills", 8);
+  assert.equal(slugs[0], "erste-accessibility-aem");
+});
+
+test("Ogilvy CMS query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What CMS projects did Joz do at Ogilvy?", "skills", 8);
+  assert.equal(slugs[0], "ogilvy-enterprise-platforms");
+});
+
+test("UK healthcare query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What healthcare platforms did Joz work on in the UK?", "skills", 8);
+  assert.equal(slugs[0], "uk-healthcare-digital-platforms");
+});
+
+test("Dubai Future Foundation employer query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What did Joz do for Dubai Future Foundation?", "skills", 8);
+  assert.equal(slugs[0], "dubai-future-foundation-inclusive-design");
+});
+
+test("Hub71 employer query surfaces the grouped programme record", () => {
+  const slugs = rankedSlugs("What did Joz do at Hub71?", "skills", 8);
+  assert.equal(slugs[0], "hub71-tokenised-knowledge");
+});

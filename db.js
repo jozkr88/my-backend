@@ -1,10 +1,43 @@
 import pg from "pg";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import { getJozLaneConfig, normalizeJozLaneIntent } from "./shared/jozLlmLanes.js";
 import { rankJozDocumentsForQuery } from "./shared/jozOntology.js";
 
 const { Pool } = pg;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let pool = null;
+let publishedJozDocsCache = null;
+
+function resolvePublishedJozDocsPath() {
+  const candidates = [
+    path.join(process.cwd(), "data", "joz", "published", "joz-documents.generated.json"),
+    path.join(__dirname, "..", "data", "joz", "published", "joz-documents.generated.json"),
+    path.join(__dirname, "data", "joz", "published", "joz-documents.generated.json"),
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
+  return candidates[0];
+}
+
+function loadPublishedJozDocuments() {
+  if (publishedJozDocsCache) return publishedJozDocsCache;
+  const docsPath = resolvePublishedJozDocsPath();
+  if (!fs.existsSync(docsPath)) {
+    publishedJozDocsCache = [];
+    return publishedJozDocsCache;
+  }
+
+  const published = JSON.parse(fs.readFileSync(docsPath, "utf8"));
+  publishedJozDocsCache = Array.isArray(published?.records) ? published.records : [];
+  return publishedJozDocsCache;
+}
 
 function getDatabaseUrl() {
   return process.env.SUPABASE_DB_URL || process.env.DATABASE_URL || "";
@@ -414,7 +447,34 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
      LIMIT $4`,
     [categories, laneAliases, primaryCategory, Math.max(limit * 5, 20)]
   );
-  return rankJozDocumentsForQuery(result.rows, {
+  const merged = new Map();
+
+  for (const doc of result.rows || []) {
+    const key = String(doc?.metadata?.slug || `${doc?.title || ""}::${doc?.category || ""}`).trim();
+    if (key) merged.set(key, doc);
+  }
+
+  for (const doc of loadPublishedJozDocuments()) {
+    const docLane = String(doc?.metadata?.lane || "").trim();
+    const docCategory = String(doc?.category || "").trim();
+    const laneMatch = laneAliases.includes(docLane);
+    const categoryMatch = categories.includes(docCategory);
+    if (!laneMatch && !categoryMatch) continue;
+
+    const key = String(doc?.slug || doc?.metadata?.slug || `${doc?.title || ""}::${docCategory}`).trim();
+    if (key) merged.set(key, {
+      title: doc.title,
+      category: doc.category,
+      summary: doc.summary,
+      body: doc.body,
+      metadata: {
+        ...(doc.metadata || {}),
+        slug: doc.slug || doc.metadata?.slug || null,
+      },
+    });
+  }
+
+  return rankJozDocumentsForQuery([...merged.values()], {
     intentMode: primaryCategory,
     query,
     limit,
