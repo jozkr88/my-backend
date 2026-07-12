@@ -101,6 +101,10 @@ test("intent routing distinguishes knowledge, awareness, and mixed", () => {
   assert.equal(routeMeetJozWorldIntent("What is Joz strongest at?"), "joz_knowledge");
   assert.equal(routeMeetJozWorldIntent("What am I looking at?"), "world_awareness");
   assert.equal(routeMeetJozWorldIntent("Where are Joz's skills?"), "mixed");
+  assert.equal(routeMeetJozWorldIntent("What is the Gold Pill?"), "world_awareness");
+  assert.equal(routeMeetJozWorldIntent("Gold Pill"), "world_awareness");
+  assert.equal(routeMeetJozWorldIntent("pill"), "world_awareness");
+  assert.equal(routeMeetJozWorldIntent("capsule"), "world_awareness");
 });
 
 test("world-aware answer context summarizes portal, object, and actions", () => {
@@ -134,4 +138,41 @@ test("world-aware replies explain stage meaning and next action", () => {
   assert.match(reply, /Mogg/);
   assert.match(reply, /digital twin/);
   assert.match(reply, /Open Skills Layer|Return to root/);
+});
+
+test("gold pill reply uses canonical world definition instead of generic internet fallback", () => {
+  const reply = buildMeetJozWorldAwarenessReply({
+    input: "What is the Gold Pill?",
+    appContext: {
+      current_portal: "root",
+      focused_object: "root_gold_pill",
+      available_actions: ["go_meet_joz", "go_maxx_via_enter"],
+      device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+    },
+  });
+
+  assert.match(reply, /skills/i);
+  assert.match(reply, /capabilities/i);
+  assert.match(reply, /competences/i);
+  assert.match(reply, /innovation/i);
+  assert.match(reply, /\bAI\b/i);
+  assert.match(reply, /competitive advantage/i);
+  assert.match(reply, /route into Meet Joz/i);
+  assert.doesNotMatch(reply, /^The gold pill typically refers to/i);
+});
+
+test("gold pill reply explains MAXX role when current portal is maxx", () => {
+  const reply = buildMeetJozWorldAwarenessReply({
+    input: "Tell me about the Gold Pill",
+    appContext: {
+      current_portal: "maxx",
+      focused_object: "maxx_neurons",
+      available_actions: ["pause_neurons", "resume_neurons"],
+      device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+    },
+  });
+
+  assert.match(reply, /MAXX/i);
+  assert.match(reply, /transforms human and AI potential into innovation/i);
+  assert.doesNotMatch(reply, /^The gold pill typically refers to/i);
 });

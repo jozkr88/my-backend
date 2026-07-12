@@ -27,6 +27,25 @@ function normalizeToken(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function isGoldPillQuery(input = "") {
+  const clean = normalizeToken(input);
+  if (!clean) return false;
+
+  const exactOrLongPhrases = [
+    "gold pill",
+    "what is the gold pill",
+    "tell me about the gold pill",
+    "why is the gold pill important",
+    "what does the gold pill represent",
+  ];
+
+  if (exactOrLongPhrases.some((phrase) => clean.includes(phrase))) {
+    return true;
+  }
+
+  return ["pill", "capsule"].some((term) => clean === term || clean.includes(` ${term}`) || clean.startsWith(`${term} `));
+}
+
 function normalizePortalId(value) {
   const normalized = normalizeToken(value);
   if (!normalized || normalized === "/" || normalized === "root") return "root";
@@ -304,6 +323,7 @@ function collectVisibleObjectDetails(manifest, objectIds) {
 
 export function routeMeetJozWorldIntent(input = "") {
   const clean = normalizeToken(input);
+  if (isGoldPillQuery(clean)) return "world_awareness";
   if (clean.includes("where are joz's skills")) return "mixed";
   if (clean.includes("why does this experience matter")) return "mixed";
 
@@ -315,7 +335,6 @@ export function routeMeetJozWorldIntent(input = "") {
     "what happens when i click",
     "where are joz's skills",
     "what is worldx",
-    "what is the gold pill",
     "portal",
     "object",
     "stage",
@@ -406,17 +425,40 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
     ? `Available next actions here are ${availableLabels.join(", ")}.`
     : "";
 
+  if (isGoldPillQuery(clean)) {
+    const goldPill = toArray(manifest.concepts).find((concept) => concept.id === "gold_pill");
+    const neoMaxx = toArray(manifest.concepts).find((concept) => concept.id === "neo_maxx");
+    const definition =
+      goldPill?.definition ||
+      "The Gold Pill is a core concept within MeetJoz and NEO/MAXX.";
+    const meaning =
+      "It represents the combination of skills, capabilities, competences, judgment, creativity, engineering, design, and execution required to create high-quality innovation with AI and competitive advantage.";
+    const distinction =
+      goldPill?.distinction ||
+      "Unlike other internet pill metaphors that attempt to explain reality, the Gold Pill represents the capability to create new reality through innovation.";
+
+    let portalRole = "";
+    if (state.portal?.id === "root") {
+      portalRole = "In Root, the Gold Pill is the route into Meet Joz.";
+    } else if (state.portal?.id === "maxx") {
+      portalRole = "In MAXX, the Gold Pill is the capability layer that transforms human and AI potential into innovation.";
+    } else if (state.portal?.id === "meet_joz") {
+      portalRole = "In Meet Joz, it connects capability, proof, and identity to the deeper skills world.";
+    }
+
+    const whyItMatters = neoMaxx?.definition
+      ? `It matters because ${neoMaxx.definition.replace(/^NEO\/MAXX is Joz Krupa's concept for /, "NEO/MAXX uses it for ")}`
+      : "It matters because it concentrates skills, capabilities, competences, innovation, AI, and competitive advantage into one capability metaphor.";
+
+    return `${definition} ${meaning} ${distinction} ${portalRole} ${whyItMatters} ${nextActionText}`.trim();
+  }
+
   if (clean.includes("what is this place")) {
     return `${portalName} is the ${state.portal?.role}. ${state.portal?.canonical_question} ${nextActionText}`.trim();
   }
 
   if (clean.includes("what are my choices") && state.portal?.id === "root") {
     return `You are at Root, the decision portal. The Gold Pill opens Meet Joz for human proof and capability, while the Brain and Enter route open MAXX for conceptual intelligence. ${nextActionText}`.trim();
-  }
-
-  if (clean.includes("gold pill")) {
-    const goldPill = toArray(manifest.concepts).find((concept) => concept.id === "gold_pill");
-    return `The Gold Pill represents skills, capabilities, competences, judgment, and the ability to create high-quality innovation with AI. It stands for technical skill, design and engineering competence, systems thinking, execution, and competitive advantage. ${nextActionText}`.trim();
   }
 
   if (clean.includes("what am i looking at") && state.portal?.id === "maxx") {
