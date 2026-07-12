@@ -6,6 +6,7 @@ function parseArgs(argv) {
   const options = {
     baseUrl: process.env.JOZ_LLM_BASE_URL || "",
     timeoutMs: Number(process.env.JOZ_LLM_TIMEOUT_MS || DEFAULT_TIMEOUT_MS),
+    selfHosted: false,
   };
 
   for (let index = 2; index < argv.length; index += 1) {
@@ -23,6 +24,9 @@ function parseArgs(argv) {
     if (arg === "--help" || arg === "-h") {
       options.help = true;
     }
+    if (arg === "--self-hosted") {
+      options.selfHosted = true;
+    }
   }
 
   return options;
@@ -32,6 +36,7 @@ function printHelp() {
   console.log(
     [
       "Usage: node scripts/check-joz-llm-responses.js --base-url https://your-render-url",
+      "   or: node scripts/check-joz-llm-responses.js --self-hosted",
       "",
       "This suite checks route, concept, fallback usage, context trace,",
       "required facts, and forbidden content for canonical MeetJoz terms.",
@@ -109,9 +114,11 @@ function assertTraceShape(payload, label) {
   const trace = payload?.trace || {};
   const fields = [
     "detectedIntent",
+    "detectedSubIntent",
     "detectedConcept",
     "selectedRoute",
     "selectedWorldRecord",
+    "selectedRecordIds",
     "answerSource",
     "fallbackUsed",
     "currentPortal",
@@ -219,7 +226,7 @@ function getCases() {
         context: { currentPortal: "root", currentMesh: "ball" },
       },
       expected: {
-        route: "world_awareness",
+        route: "canonical_world_concept",
         concept: "gold_pill",
         fallbackUsed: false,
         context: { currentPortal: "root" },
@@ -236,7 +243,7 @@ function getCases() {
         context: { currentPortal: "maxx", currentMesh: "brain", currentMeshStage: "signal_flow" },
       },
       expected: {
-        route: "world_awareness",
+        route: "canonical_world_concept",
         concept: "gold_pill",
         fallbackUsed: false,
         context: { currentPortal: "maxx" },
@@ -252,7 +259,7 @@ function getCases() {
         context: { currentPortal: "maxx", currentMesh: "brain", currentMeshStage: "signal_flow" },
       },
       expected: {
-        route: "world_awareness",
+        route: "canonical_world_concept",
         concept: "neo_maxx",
         fallbackUsed: false,
         context: { currentPortal: "maxx" },
@@ -512,16 +519,34 @@ async function run() {
     return;
   }
 
-  const baseUrl = normalizeBaseUrl(options.baseUrl);
+  let server = null;
+  let baseUrl = normalizeBaseUrl(options.baseUrl);
+
+  if (options.selfHosted) {
+    const { default: app } = await import("../index.js");
+    server = app.listen(0);
+    await new Promise((resolve) => server.once("listening", resolve));
+    const { port } = server.address();
+    baseUrl = `http://127.0.0.1:${port}`;
+  }
+
   if (!baseUrl) {
-    throw new Error("Missing --base-url or JOZ_LLM_BASE_URL");
+    throw new Error("Missing --base-url or JOZ_LLM_BASE_URL, or use --self-hosted");
   }
 
   console.log(`Checking Joz LLM canonical responses against ${baseUrl}`);
   const cases = getCases();
 
-  for (const testCase of cases) {
-    await runCase(baseUrl, testCase, options.timeoutMs);
+  try {
+    for (const testCase of cases) {
+      await runCase(baseUrl, testCase, options.timeoutMs);
+    }
+  } finally {
+    if (server) {
+      await new Promise((resolve, reject) => {
+        server.close((error) => (error ? reject(error) : resolve()));
+      });
+    }
   }
 
   console.log(`All ${cases.length} canonical checks passed.`);

@@ -63,9 +63,9 @@ test("POST /api/joz-llm routes gold pill queries through canonical world awarene
 
   assert.equal(status, 200);
   assert.equal(payload.mode, "world_awareness");
-  assert.equal(payload.trace?.detectedIntent, "world_awareness");
+  assert.equal(payload.trace?.detectedIntent, "canonical_world_concept");
   assert.equal(payload.trace?.detectedConcept, "gold_pill");
-  assert.equal(payload.trace?.selectedRoute, "world_awareness");
+  assert.equal(payload.trace?.selectedRoute, "canonical_world_concept");
   assert.equal(payload.trace?.selectedWorldRecord, "root_gold_pill / gold_pill concept");
   assert.equal(payload.trace?.answerSource, "root_gold_pill / gold_pill concept");
   assertCanonicalGoldPillReply(String(payload.reply || ""));
@@ -106,6 +106,7 @@ test("POST /api/joz-llm composes Neomaxxing with deterministic world-aware wordi
   const reply = String(payload.reply || "");
   assert.equal(status, 200);
   assert.equal(payload.mode, "world_awareness");
+  assert.equal(payload.trace?.selectedRoute, "canonical_world_concept");
   assert.equal(payload.trace?.detectedConcept, "neo_maxx");
   assert.equal(payload.trace?.selectedWorldRecord, "neo_maxx concept");
   assert.ok(reply.startsWith("Neomaxxing is a concept created by Joz Krupa."));
@@ -141,6 +142,7 @@ test("POST /api/joz-llm composes business value through the live deterministic l
   assert.equal(status, 200);
   assert.equal(payload.mode, "deterministic");
   assert.equal(payload.source, "deterministic_composer");
+  assert.equal(payload.trace?.selectedRoute, "business_need");
   assert.match(reply, /Maybank/i);
   assert.match(reply, /Mediacorp/i);
   assert.match(reply, /Erste Bank/i);
@@ -167,6 +169,7 @@ test("POST /api/joz-llm composes systems mindset through the live deterministic 
   assert.equal(status, 200);
   assert.equal(payload.mode, "deterministic");
   assert.equal(payload.source, "deterministic_composer");
+  assert.equal(payload.trace?.selectedRoute, "systems_mindset");
   assert.match(reply, /systems/i);
   assert.match(reply, /signal/i);
   assert.match(reply, /human judgment/i);
@@ -191,6 +194,7 @@ test("POST /api/joz-llm composes skills through the live deterministic lane", as
   assert.equal(status, 200);
   assert.equal(payload.mode, "deterministic");
   assert.equal(payload.source, "deterministic_composer");
+  assert.equal(payload.trace?.selectedRoute, "skills");
   assert.match(reply, /agentic AI architecture/i);
   assert.match(reply, /orchestration/i);
   assert.match(reply, /retrieval/i);
@@ -254,4 +258,28 @@ test("POST /api/joz-llm explains Mogg from the live world-aware meet-joz path", 
   assert.match(reply, /Mogg/i);
   assert.match(reply, /digital twin/i);
   assert.match(reply, /conceptual identity/i);
+});
+
+test("POST /api/joz-llm routes education questions through factual_profile without skills overwrite", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-education",
+    messages: [{ role: "user", content: "Where did Joz study?" }],
+    context: {
+      currentPortal: "root",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "deterministic");
+  assert.equal(payload.source, "factual_profile_composer");
+  assert.equal(payload.trace?.detectedIntent, "factual_profile");
+  assert.equal(payload.trace?.detectedSubIntent, "education");
+  assert.equal(payload.trace?.selectedRoute, "factual_profile");
+  assert.ok(reply.toLowerCase().includes("msc in strategy and innovation"));
+  assert.ok(reply.toLowerCase().includes("university of lancashire"));
+  assert.ok(reply.toLowerCase().includes("united kingdom"));
+  assert.ok(reply.includes("2008"));
+  assert.doesNotMatch(reply, /strongest skills/i);
+  assert.doesNotMatch(reply, /Maybank/i);
 });

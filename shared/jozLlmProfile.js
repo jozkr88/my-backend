@@ -393,7 +393,7 @@ function normalizeDeterministicIntent(intentMode = "") {
   return normalized || "skills";
 }
 
-function buildBusinessNeedReply(message = "") {
+export function buildBusinessNeedReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
 
   if (
@@ -417,7 +417,7 @@ function buildBusinessNeedReply(message = "") {
   return "Joz is strongest where agentic AI architecture, decision intelligence, and context engineering need to reach production fast. The proof is 20x digital sales at Maybank, 30x audience growth at Mediacorp, 16M+ customer-scale systems at Erste Bank, and Lean ML across 11 APAC Manulife markets.";
 }
 
-function buildSystemsMindsetReply(message = "") {
+export function buildSystemsMindsetReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
 
   if (
@@ -444,7 +444,7 @@ function buildSystemsMindsetReply(message = "") {
   return "Joz thinks in systems: find signal, make decisions legible, and keep human judgment inside the loop. The standard is clarity, verification, and action, so intelligence is trusted before it is automated.";
 }
 
-function buildSkillsReply(message = "") {
+export function buildSkillsReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
 
   if (
@@ -487,6 +487,35 @@ export function buildJozLlmDeterministicReply({ message = "", intentMode = "" } 
   }
 
   return "";
+}
+
+export function buildFactualProfileReply(subIntent = "") {
+  switch (String(subIntent || "").trim().toLowerCase()) {
+    case "education":
+      return "Joz completed an MSc in Strategy and Innovation in 2008 at the University of Lancashire in the United Kingdom. Joz also held an Innovation Strategist university appointment there from 2008 to 2012.";
+    case "certifications":
+      return "Joz completed MIT/IDEO Design Thinking certifications in 2017 to 2018. Joz also participated in Apple Design Labs and Engineering Labs focused on AI and spatial computing, plus HPI d.school prototyping programs in Silicon Valley.";
+    case "contact":
+      return "Joz can be reached at joz@meetjoz.com or +65 3107 2412. The interactive CV and experience are available at meetjoz.com.";
+    case "location":
+      return "Joz is Europe-based and internationally mobile. Joz has extensive experience across Singapore and Asia Pacific, plus Dubai, Europe, and global markets.";
+    case "nationality":
+      return "Joz is Slovak and an EU national. Current jurisdiction-specific work authorization details should be confirmed directly in the hiring process.";
+    case "experience_years":
+      return "Joz has 13+ years of professional experience overall and 8+ years in ML/AI. That timeline runs from 2013 to present, with ML/AI-focused work from 2018 onward.";
+    case "career_chronology":
+      return "Joz's career runs from Ogilvy/WPP and Leo Burnett/Publicis, to Mediacorp, Manulife, and Maybank-Ageas Etiqa, then into agentic AI architecture and innovation work across Singapore, Dubai, Zurich, Europe, and the USA.";
+    case "companies":
+      return "Joz's experience includes Ogilvy/WPP, Leo Burnett/Publicis, Mediacorp, Manulife, Maybank-Ageas Etiqa, Erste Bank, Dubai Future Foundation, and current agentic AI work across global projects.";
+    case "roles":
+      return "Key roles include Senior Interaction Engineer, Senior Engineer, Global Engineering Architect, Engineering Innovation Fellow, Private Banking Experience Architecture Manager, and Agentic AI Architecture and Innovation Leader.";
+    case "availability":
+      return "Joz's current availability and start date should be confirmed directly with Joz at joz@meetjoz.com or +65 3107 2412.";
+    case "work_authorization":
+      return "Joz is a Slovak and EU national. Current Singapore work-pass or jurisdiction-specific authorization status should be confirmed directly during the hiring process.";
+    default:
+      return "";
+  }
 }
 
 export function buildJozLlmFallbackReply(message = "") {

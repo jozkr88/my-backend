@@ -45,10 +45,12 @@ import {
 import {
   buildJozLlmContext,
   buildJozLlmDeterministicReply,
+  buildFactualProfileReply,
   enforceJozLlmReplyLimit,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
 } from "./shared/jozLlmProfile.js";
+import { resolveJozLlmRoute } from "./shared/jozLlmRouting.js";
 
 
 dotenv.config();
@@ -363,10 +365,17 @@ app.post("/api/agentic", async (req, res) => {
       approved?.awareness ||
       proposal?.response ||
       buildFallbackAgentReply({ approved, snapshot });
-    const trace = buildWorldAwarenessTrace({
+    const trace = buildJozLlmTrace({
       input,
       appContext: snapshot.validatedAppContext,
       legacyContext: snapshot,
+      routing: {
+        detectedIntent: "world_awareness",
+        detectedSubIntent: null,
+        detectedConcept: null,
+        selectedRoute: "world_awareness",
+        selectedRecordIds: [],
+      },
       answerSource: canonicalWorldReply
         ? "root_gold_pill / gold_pill concept"
         : approved?.awareness
@@ -413,55 +422,18 @@ const openai = process.env.OPENAI_API_KEY
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
   : null;
 
-function inferJozIntentMode(message = "") {
-  const clean = String(message || "").trim().toLowerCase();
-  if (
-    clean.includes("book") ||
-    clean.includes("call") ||
-    clean.includes("email") ||
-    clean.includes("contact")
-  ) {
-    return "booking";
-  }
-  if (
-    clean.includes("mindset") ||
-    clean.includes("philosophy") ||
-    clean.includes("how do you think") ||
-    clean.includes("systems thinking")
-  ) {
-    return "mindset";
-  }
-  if (
-    clean.includes("business need") ||
-    clean.includes("what i want to build") ||
-    clean.includes("problem") ||
-    clean.includes("opportunity")
-  ) {
-    return "business_need";
-  }
-  if (
-    clean.includes("skills") ||
-    clean.includes("fit") ||
-    clean.includes("time-series") ||
-    clean.includes("timeseries") ||
-    clean.includes("signal") ||
-    clean.includes("anomaly") ||
-    clean.includes("digital twin")
-  ) {
-    return "skills";
-  }
-  return "skills";
-}
-
-function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
+function buildJozLlmTrace({ input, appContext = {}, legacyContext = {}, routing, answerSource, selectedRecordIds = [] }) {
   const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const entity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
   const state = entity.state || {};
+  const worldRouted = ["canonical_world_concept", "world_awareness", "mixed"].includes(routing?.selectedRoute);
   return {
-    detectedIntent: answerContext.route,
-    detectedConcept: entity.entity || null,
-    selectedRoute: answerContext.route,
-    selectedWorldRecord: entity.worldRecord || null,
+    detectedIntent: routing?.detectedIntent || answerContext.route,
+    detectedSubIntent: routing?.detectedSubIntent || null,
+    detectedConcept: routing?.detectedConcept || (worldRouted ? entity.entity || null : null),
+    selectedRoute: routing?.selectedRoute || answerContext.route,
+    selectedWorldRecord: worldRouted ? entity.worldRecord || null : null,
+    selectedRecordIds: selectedRecordIds.length ? selectedRecordIds : routing?.selectedRecordIds || [],
     answerSource: answerSource || entity.source || entity.worldRecord || null,
     fallbackUsed: (answerSource || entity.source || entity.worldRecord || null) === "llm_fallback",
     currentPortal: state.portal?.id || null,
@@ -496,18 +468,6 @@ app.post("/api/joz-llm", async (req, res) => {
       context?.app_context || {},
       legacyRuntimeContext
     ).value;
-    const worldAwarenessReply = buildMeetJozWorldAwarenessReply({
-      input: latestUserMessage,
-      appContext: validatedAppContext,
-      legacyContext: legacyRuntimeContext,
-    });
-    const worldAwarenessTrace = buildWorldAwarenessTrace({
-      input: latestUserMessage,
-      appContext: validatedAppContext,
-      legacyContext: legacyRuntimeContext,
-      answerSource: worldAwarenessReply ? undefined : "llm_fallback",
-    });
-
     const rateLimitResult = enforceJozChatRateLimit(
       req,
       sessionKey,
@@ -517,18 +477,37 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
 
+    const routing = resolveJozLlmRoute({
+      message: latestUserMessage,
+      legacyContext: legacyRuntimeContext,
+    });
     const intentMode =
+      routing.intentMode ||
       String(context?.intentMode || "").trim().toLowerCase() ||
-      inferJozIntentMode(latestUserMessage);
+      null;
     const profile = await getPrimaryJozProfile();
     const conversationId = await createJozConversation({
       profileId: profile?.id,
       sessionKey,
-      intentMode,
+      intentMode: intentMode || routing.detectedIntent,
       context: legacyRuntimeContext,
     });
 
-    if (worldAwarenessReply) {
+    if (["canonical_world_concept", "world_awareness", "mixed"].includes(routing.selectedRoute)) {
+      const worldAwarenessReply = buildMeetJozWorldAwarenessReply({
+        input: latestUserMessage,
+        appContext: validatedAppContext,
+        legacyContext: legacyRuntimeContext,
+      });
+      const worldAwarenessTrace = buildJozLlmTrace({
+        input: latestUserMessage,
+        appContext: validatedAppContext,
+        legacyContext: legacyRuntimeContext,
+        routing,
+        answerSource: worldAwarenessReply ? undefined : "llm_fallback",
+      });
+
+      if (worldAwarenessReply) {
       logWorldAwarenessTrace("/api/joz-llm", worldAwarenessTrace);
 
       if (conversationId) {
@@ -536,14 +515,14 @@ app.post("/api/joz-llm", async (req, res) => {
           conversationId,
           role: "user",
           content: latestUserMessage,
-          metadata: { intentMode, source: "world_awareness" },
+          metadata: { intentMode: routing.selectedRoute, source: "world_awareness" },
         });
         await appendJozMessage({
           conversationId,
           role: "assistant",
           content: worldAwarenessReply,
           metadata: {
-            intentMode,
+            intentMode: routing.selectedRoute,
             source: "world_awareness",
             trace: worldAwarenessTrace,
           },
@@ -553,14 +532,19 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.json({
         reply: worldAwarenessReply,
         conversationId,
-        intentMode,
+        intentMode: routing.selectedRoute,
         retrievedCategories: [],
         mode: "world_awareness",
         trace: worldAwarenessTrace,
       });
+      }
     }
 
-    const retrievedDocuments = await getJozDocumentsByIntent(intentMode, 8, latestUserMessage);
+    const retrievalIntent = intentMode || "skills";
+    const shouldRetrieve = ["business_need", "systems_mindset", "skills"].includes(routing.selectedRoute);
+    const retrievedDocuments = shouldRetrieve
+      ? await getJozDocumentsByIntent(retrievalIntent, 8, latestUserMessage)
+      : [];
     const retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
       category: doc.category,
@@ -576,7 +560,7 @@ app.post("/api/joz-llm", async (req, res) => {
         currentMesh: context?.currentMesh || null,
         currentMeshStage: context?.currentMeshStage || null,
         targetRole: context?.targetRole || "Advanced Data Scientist",
-        intentMode,
+        intentMode: retrievalIntent,
       },
       profile,
       retrievedDocuments: retrievalContext,
@@ -584,15 +568,29 @@ app.post("/api/joz-llm", async (req, res) => {
 
     let reply = "";
     let replySource = "";
+    let selectedRecordIds = routing.selectedRecordIds || [];
 
-    const deterministicReply = buildJozLlmDeterministicReply({
-      message: latestUserMessage,
-      intentMode,
-    });
+    if (routing.selectedRoute === "factual_profile") {
+      reply = buildFactualProfileReply(routing.detectedSubIntent);
+      replySource = "factual_profile_composer";
+    }
+
+    const deterministicReply =
+      !reply && ["business_need", "systems_mindset", "skills"].includes(routing.selectedRoute)
+        ? buildJozLlmDeterministicReply({
+            message: latestUserMessage,
+            intentMode: routing.selectedRoute,
+          })
+        : "";
 
     if (deterministicReply) {
       reply = deterministicReply;
       replySource = "deterministic_composer";
+    }
+
+    if (!reply && routing.selectedRoute === "unknown_fallback") {
+      reply = buildJozLlmFallbackReply(latestUserMessage);
+      replySource = "llm_fallback";
     }
 
     if (!reply && process.env.OPENAI_API_KEY) {
@@ -620,15 +618,11 @@ app.post("/api/joz-llm", async (req, res) => {
         reply = String(response.choices?.[0]?.message?.content || "").trim();
         if (reply) {
           replySource = "llm_model";
+          selectedRecordIds = [];
         }
       } catch (error) {
         console.error("⚠️ /api/joz-llm model call failed:", error?.message || error);
       }
-    }
-
-    if (!reply) {
-      reply = buildJozLlmFallbackReply(latestUserMessage);
-      replySource = "llm_fallback";
     }
 
     if (isJozEducationQuestion(latestUserMessage) && isWeakEducationReply(reply)) {
@@ -636,12 +630,22 @@ app.post("/api/joz-llm", async (req, res) => {
       replySource = "llm_fallback";
     }
 
+    if (!reply) {
+      reply = buildJozLlmFallbackReply(latestUserMessage);
+      replySource = "llm_fallback";
+    }
+
     reply = enforceJozLlmReplyLimit(reply, 55);
-    const responseTrace = buildWorldAwarenessTrace({
+    const responseTrace = buildJozLlmTrace({
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
+      routing,
       answerSource: replySource || "llm_fallback",
+      selectedRecordIds:
+        selectedRecordIds.length
+          ? selectedRecordIds
+          : retrievedDocuments.map((doc) => String(doc.metadata?.source_id || doc.title || doc.category || "")).filter(Boolean),
     });
     logWorldAwarenessTrace("/api/joz-llm", responseTrace);
 
@@ -650,14 +654,15 @@ app.post("/api/joz-llm", async (req, res) => {
         conversationId,
         role: "user",
         content: latestUserMessage,
-        metadata: { intentMode },
+        metadata: { intentMode: routing.selectedRoute, subIntent: routing.detectedSubIntent || null },
       });
       await appendJozMessage({
         conversationId,
         role: "assistant",
         content: reply,
         metadata: {
-          intentMode,
+          intentMode: routing.selectedRoute,
+          subIntent: routing.detectedSubIntent || null,
           source: replySource,
           retrievedCategories: retrievedDocuments.map((doc) => doc.category),
         },
@@ -667,10 +672,10 @@ app.post("/api/joz-llm", async (req, res) => {
     return res.json({
       reply,
       conversationId,
-      intentMode,
+      intentMode: routing.selectedRoute,
       retrievedCategories: retrievedDocuments.map((doc) => doc.category),
       mode:
-        replySource === "deterministic_composer"
+        replySource === "deterministic_composer" || replySource === "factual_profile_composer"
           ? "deterministic"
           : process.env.OPENAI_API_KEY
             ? "model_or_fallback"
