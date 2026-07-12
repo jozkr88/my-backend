@@ -44,6 +44,7 @@ import {
 } from "./shared/meetJozWorld.js";
 import {
   buildJozLlmContext,
+  buildJozLlmDeterministicReply,
   enforceJozLlmReplyLimit,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
@@ -460,7 +461,7 @@ function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, 
     detectedConcept: entity.entity || null,
     selectedRoute: answerContext.route,
     selectedWorldRecord: entity.worldRecord || null,
-    answerSource,
+    answerSource: answerSource || entity.source || entity.worldRecord || null,
   };
 }
 
@@ -498,9 +499,7 @@ app.post("/api/joz-llm", async (req, res) => {
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
-      answerSource: worldAwarenessReply
-        ? "root_gold_pill / gold_pill concept"
-        : "llm_fallback",
+      answerSource: worldAwarenessReply ? undefined : "llm_fallback",
     });
 
     const rateLimitResult = enforceJozChatRateLimit(
@@ -578,8 +577,19 @@ app.post("/api/joz-llm", async (req, res) => {
     };
 
     let reply = "";
+    let replySource = "";
 
-    if (process.env.OPENAI_API_KEY) {
+    const deterministicReply = buildJozLlmDeterministicReply({
+      message: latestUserMessage,
+      intentMode,
+    });
+
+    if (deterministicReply) {
+      reply = deterministicReply;
+      replySource = "deterministic_composer";
+    }
+
+    if (!reply && process.env.OPENAI_API_KEY) {
       try {
         const response = await openai.chat.completions.create({
           model: "gpt-4o-mini",
@@ -602,6 +612,9 @@ app.post("/api/joz-llm", async (req, res) => {
         });
 
         reply = String(response.choices?.[0]?.message?.content || "").trim();
+        if (reply) {
+          replySource = "llm_model";
+        }
       } catch (error) {
         console.error("⚠️ /api/joz-llm model call failed:", error?.message || error);
       }
@@ -609,10 +622,12 @@ app.post("/api/joz-llm", async (req, res) => {
 
     if (!reply) {
       reply = buildJozLlmFallbackReply(latestUserMessage);
+      replySource = "llm_fallback";
     }
 
     if (isJozEducationQuestion(latestUserMessage) && isWeakEducationReply(reply)) {
       reply = buildJozLlmFallbackReply(latestUserMessage);
+      replySource = "llm_fallback";
     }
 
     reply = enforceJozLlmReplyLimit(reply, 55);
@@ -622,7 +637,7 @@ app.post("/api/joz-llm", async (req, res) => {
         input: latestUserMessage,
         appContext: validatedAppContext,
         legacyContext: legacyRuntimeContext,
-        answerSource: process.env.OPENAI_API_KEY && reply ? "llm_model_or_fallback" : "llm_fallback",
+        answerSource: replySource || "llm_fallback",
       })
     );
 
@@ -639,6 +654,7 @@ app.post("/api/joz-llm", async (req, res) => {
         content: reply,
         metadata: {
           intentMode,
+          source: replySource,
           retrievedCategories: retrievedDocuments.map((doc) => doc.category),
         },
       });
@@ -649,7 +665,13 @@ app.post("/api/joz-llm", async (req, res) => {
       conversationId,
       intentMode,
       retrievedCategories: retrievedDocuments.map((doc) => doc.category),
-      mode: process.env.OPENAI_API_KEY ? "model_or_fallback" : "fallback",
+      mode:
+        replySource === "deterministic_composer"
+          ? "deterministic"
+          : process.env.OPENAI_API_KEY
+            ? "model_or_fallback"
+            : "fallback",
+      source: replySource || "llm_fallback",
     });
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);

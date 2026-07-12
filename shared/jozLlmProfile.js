@@ -387,6 +387,72 @@ export function buildJozLlmContext() {
   };
 }
 
+function normalizeDeterministicIntent(intentMode = "") {
+  const normalized = String(intentMode || "").trim().toLowerCase();
+  if (normalized === "mindset") return "systems_mindset";
+  return normalized || "skills";
+}
+
+function buildBusinessNeedReply(message = "") {
+  const clean = String(message || "").trim().toLowerCase();
+
+  if (clean.includes("roi") || clean.includes("business value")) {
+    return "Joz creates the most ROI where agentic AI architecture, decision intelligence, and context engineering improve speed and operating clarity. That means faster decisions, stronger governance, cleaner execution, and less waste across complex workflows.";
+  }
+
+  if (clean.includes("problem") || clean.includes("solve")) {
+    return "Joz is strongest when a company has fragmented knowledge, slow decisions, weak AI adoption, or complex workflows that need governed execution. The job is to turn noise into usable intelligence, then connect it to action.";
+  }
+
+  return "Joz is strongest where agentic AI architecture, decision intelligence, and context engineering need to reach production fast. The proof is 20x digital sales at Maybank, 30x audience growth at Mediacorp, 16M+ customer-scale systems at Erste Bank, and Lean ML across 11 APAC Manulife markets.";
+}
+
+function buildSystemsMindsetReply(message = "") {
+  const clean = String(message || "").trim().toLowerCase();
+
+  if (clean.includes("reduce complexity")) {
+    return "Joz reduces complexity by modeling the system, not decorating symptoms. Joz compresses noise into signal, keeps verification in the loop, and only automates what can be explained and acted on.";
+  }
+
+  if (clean.includes("operating mindset")) {
+    return "Joz's operating mindset is systems first, signal over noise, and action over theater. Human judgment sets direction; AI handles computation, retrieval, and repetition under verification.";
+  }
+
+  return "Joz thinks in systems: find signal, make decisions legible, and keep human judgment inside the loop. The standard is clarity, verification, and action, so intelligence is trusted before it is automated.";
+}
+
+function buildSkillsReply(message = "") {
+  const clean = String(message || "").trim().toLowerCase();
+
+  if (
+    clean.includes("ux") ||
+    clean.includes("multimodal") ||
+    clean.includes("spatial")
+  ) {
+    return "Joz combines agentic UX orchestration with multimodal systems across voice, touch, gaze, and spatial interfaces. The proof includes enterprise delivery and production-grade interaction systems, not demo-only concepts.";
+  }
+
+  return "Joz's strongest skills are agentic AI architecture, orchestration, retrieval, and production observability. That spans enterprise-scale delivery at Maybank, Mediacorp, Erste Bank, and Manulife, with signal reasoning, Python/SQL execution, and workflow-aware intelligence systems.";
+}
+
+export function buildJozLlmDeterministicReply({ message = "", intentMode = "" } = {}) {
+  const normalizedIntent = normalizeDeterministicIntent(intentMode);
+
+  if (normalizedIntent === "business_need") {
+    return buildBusinessNeedReply(message);
+  }
+
+  if (normalizedIntent === "systems_mindset") {
+    return buildSystemsMindsetReply(message);
+  }
+
+  if (normalizedIntent === "skills") {
+    return buildSkillsReply(message);
+  }
+
+  return "";
+}
+
 export function buildJozLlmFallbackReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
   const recruiterAnswer = findRecruiterScreenAnswer(clean);

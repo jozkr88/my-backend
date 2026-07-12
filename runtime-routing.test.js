@@ -42,6 +42,14 @@ function assertCanonicalGoldPillReply(reply) {
   }
 }
 
+function assertShortReply(reply, maxWords = 55) {
+  const words = String(reply || "").trim().split(/\s+/).filter(Boolean);
+  assert.ok(
+    words.length <= maxWords,
+    `Expected reply to stay under ${maxWords} words, received ${words.length}: ${reply}`
+  );
+}
+
 test("POST /api/joz-llm routes gold pill queries through canonical world awareness", async () => {
   const { status, payload } = await postJson("/api/joz-llm", {
     sessionKey: "runtime-joz-llm-gold-pill",
@@ -115,4 +123,135 @@ test("POST /api/joz-llm composes Neomaxxing with deterministic world-aware wordi
   assert.doesNotMatch(reply, /various domains/i);
   assert.doesNotMatch(reply, /impactful outcomes/i);
   assert.doesNotMatch(reply, /leverage technology/i);
+});
+
+test("POST /api/joz-llm composes business value through the live deterministic lane", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-business",
+    messages: [{ role: "user", content: "Why should a company hire Joz right now for an agentic AI and AI systems role?" }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "ball",
+      currentMeshStage: null,
+      intentMode: "business_need",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "deterministic");
+  assert.equal(payload.source, "deterministic_composer");
+  assert.match(reply, /Maybank/i);
+  assert.match(reply, /Mediacorp/i);
+  assert.match(reply, /Erste Bank/i);
+  assert.match(reply, /Manulife/i);
+  assert.match(reply, /agentic AI architecture/i);
+  assert.match(reply, /decision intelligence/i);
+  assert.match(reply, /context engineering/i);
+  assertShortReply(reply);
+});
+
+test("POST /api/joz-llm composes systems mindset through the live deterministic lane", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-mindset",
+    messages: [{ role: "user", content: "Explain how Joz thinks about intelligence, systems, and decision-making." }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "brain",
+      currentMeshStage: null,
+      intentMode: "systems_mindset",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "deterministic");
+  assert.equal(payload.source, "deterministic_composer");
+  assert.match(reply, /systems/i);
+  assert.match(reply, /signal/i);
+  assert.match(reply, /human judgment/i);
+  assert.match(reply, /clarity/i);
+  assert.match(reply, /verification/i);
+  assertShortReply(reply);
+});
+
+test("POST /api/joz-llm composes skills through the live deterministic lane", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-skills",
+    messages: [{ role: "user", content: "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context." }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: "skills_stop",
+      intentMode: "skills",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "deterministic");
+  assert.equal(payload.source, "deterministic_composer");
+  assert.match(reply, /agentic AI architecture/i);
+  assert.match(reply, /orchestration/i);
+  assert.match(reply, /retrieval/i);
+  assert.match(reply, /production observability/i);
+  assert.match(reply, /Maybank|Mediacorp|Erste Bank|Manulife/i);
+  assertShortReply(reply);
+});
+
+test("POST /api/joz-llm explains Flex from the live world-aware meet-joz path", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-flex",
+    messages: [{ role: "user", content: "What stage am I in?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "flex",
+      currentMeshStage: "meet_joz_flex_stage",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "world_awareness");
+  assert.match(reply, /Flex/i);
+  assert.match(reply, /Vibe/i);
+  assert.match(reply, /presence|atmosphere|arrival/i);
+});
+
+test("POST /api/joz-llm explains Ascend from the live world-aware meet-joz path", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-ascend",
+    messages: [{ role: "user", content: "What stage am I in?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "ascend",
+      currentMeshStage: "meet_joz_ascend_stage",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "world_awareness");
+  assert.match(reply, /Ascend/i);
+  assert.match(reply, /Discover/i);
+  assert.match(reply, /prestige|recognition|visible proof/i);
+});
+
+test("POST /api/joz-llm explains Mogg from the live world-aware meet-joz path", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-llm-mogg",
+    messages: [{ role: "user", content: "What stage am I in?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "mogg",
+      currentMeshStage: "meet_joz_mogg_stage",
+    },
+  });
+
+  const reply = String(payload.reply || "");
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "world_awareness");
+  assert.match(reply, /Mogg/i);
+  assert.match(reply, /digital twin/i);
+  assert.match(reply, /conceptual identity/i);
 });
