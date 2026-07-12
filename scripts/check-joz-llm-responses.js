@@ -33,13 +33,8 @@ function printHelp() {
     [
       "Usage: node scripts/check-joz-llm-responses.js --base-url https://your-render-url",
       "",
-      "Options:",
-      "  --base-url     Backend base URL, for example https://your-service.onrender.com",
-      "  --timeout-ms   Request timeout in milliseconds (default 20000)",
-      "",
-      "Environment variables:",
-      "  JOZ_LLM_BASE_URL",
-      "  JOZ_LLM_TIMEOUT_MS",
+      "This suite checks route, concept, fallback usage, context trace,",
+      "required facts, and forbidden content for canonical MeetJoz terms.",
     ].join("\n")
   );
 }
@@ -48,14 +43,14 @@ function normalizeBaseUrl(baseUrl) {
   return String(baseUrl || "").trim().replace(/\/+$/, "");
 }
 
-async function postJson(url, body, timeoutMs) {
+async function postJson(url, body, timeoutMs, headers = {}) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...headers },
       body: JSON.stringify(body),
       signal: controller.signal,
     });
@@ -78,161 +73,436 @@ async function postJson(url, body, timeoutMs) {
   }
 }
 
-function assert(condition, message) {
-  if (!condition) {
-    throw new Error(message);
+function fail(message) {
+  throw new Error(message);
+}
+
+function includesAny(text, terms = []) {
+  const lower = String(text || "").toLowerCase();
+  return terms.some((term) => lower.includes(String(term).toLowerCase()));
+}
+
+function includesAll(text, terms = []) {
+  const lower = String(text || "").toLowerCase();
+  return terms.every((term) => lower.includes(String(term).toLowerCase()));
+}
+
+function wordCount(text) {
+  return String(text || "").trim().split(/\s+/).filter(Boolean).length;
+}
+
+function classifyFailure({ payload, expected, reply }) {
+  const trace = payload?.trace || {};
+  if (expected.route && trace.selectedRoute !== expected.route) return "route";
+  if (expected.concept && trace.detectedConcept !== expected.concept) return "resolver";
+  if (expected.fallbackUsed !== undefined && trace.fallbackUsed !== expected.fallbackUsed) return "composition";
+  if (expected.requiredTerms?.length && !includesAll(reply, expected.requiredTerms)) return payload?.mode === "world_awareness" ? "composition" : "retrieval";
+  if (expected.forbiddenTerms?.length && includesAny(reply, expected.forbiddenTerms)) return "composition";
+  if (expected.context?.currentPortal && trace.currentPortal !== expected.context.currentPortal) return "context";
+  if (expected.context?.currentStage && trace.currentStage !== expected.context.currentStage) return "context";
+  if (expected.context?.focusedObject && trace.focusedObject !== expected.context.focusedObject) return "context";
+  if (expected.context?.deviceClass && trace.deviceClass !== expected.context.deviceClass) return "context";
+  return "frontend_rendering";
+}
+
+function assertTraceShape(payload, label) {
+  const trace = payload?.trace || {};
+  const fields = [
+    "detectedIntent",
+    "detectedConcept",
+    "selectedRoute",
+    "selectedWorldRecord",
+    "answerSource",
+    "fallbackUsed",
+    "currentPortal",
+    "currentStage",
+    "focusedObject",
+    "deviceClass",
+  ];
+
+  for (const field of fields) {
+    if (!(field in trace)) {
+      fail(`${label}: trace missing "${field}"`);
+    }
   }
 }
 
-function assertIncludes(text, needle, label) {
-  assert(text.toLowerCase().includes(needle.toLowerCase()), `${label}: missing "${needle}"`);
-}
-
-function assertExcludes(text, needle, label) {
-  assert(!text.toLowerCase().includes(needle.toLowerCase()), `${label}: must not include "${needle}"`);
-}
-
-function assertAnyIncludes(text, needles, label) {
-  const match = needles.some((needle) => text.toLowerCase().includes(String(needle).toLowerCase()));
-  assert(match, `${label}: missing any of [${needles.join(", ")}]`);
-}
-
-function assertMaxWords(text, maxWords, label) {
-  const words = String(text || "").trim().split(/\s+/).filter(Boolean);
-  assert(words.length <= maxWords, `${label}: expected at most ${maxWords} words, received ${words.length}`);
-}
-
-function checkGoldPill(payload) {
+function assertExpected(payload, spec) {
   const reply = String(payload?.reply || "");
   const trace = payload?.trace || {};
+  const { name, expected } = spec;
 
-  assert(reply.startsWith("The Gold Pill is a core concept within MeetJoz and NEO/MAXX."), "Gold Pill reply must start with the canonical sentence");
-  assert(payload?.mode === "world_awareness", "Gold Pill mode must be world_awareness");
-  assert(trace.detectedIntent === "world_awareness", "Gold Pill trace.detectedIntent must be world_awareness");
-  assert(trace.detectedConcept === "gold_pill", "Gold Pill trace.detectedConcept must be gold_pill");
-  assert(trace.selectedRoute === "world_awareness", "Gold Pill trace.selectedRoute must be world_awareness");
-  assert(trace.selectedWorldRecord === "root_gold_pill / gold_pill concept", "Gold Pill trace.selectedWorldRecord must be root_gold_pill / gold_pill concept");
+  assertTraceShape(payload, name);
 
-  [
-    "online communities",
-    "blue pill",
-    "red pill",
-    "awareness of harsh realities",
-    "personal fulfillment",
-    "non-traditional methods",
-  ].forEach((term) => assertExcludes(reply, term, "Gold Pill reply"));
+  if (expected.route && trace.selectedRoute !== expected.route) {
+    fail(`${name}: expected route=${expected.route}, received ${trace.selectedRoute}`);
+  }
+  if (expected.concept && trace.detectedConcept !== expected.concept) {
+    fail(`${name}: expected concept=${expected.concept}, received ${trace.detectedConcept}`);
+  }
+  if (expected.fallbackUsed !== undefined && trace.fallbackUsed !== expected.fallbackUsed) {
+    fail(`${name}: expected fallbackUsed=${expected.fallbackUsed}, received ${trace.fallbackUsed}`);
+  }
+  if (expected.context?.currentPortal && trace.currentPortal !== expected.context.currentPortal) {
+    fail(`${name}: expected currentPortal=${expected.context.currentPortal}, received ${trace.currentPortal}`);
+  }
+  if (expected.context?.currentStage && trace.currentStage !== expected.context.currentStage) {
+    fail(`${name}: expected currentStage=${expected.context.currentStage}, received ${trace.currentStage}`);
+  }
+  if (expected.context?.focusedObject && trace.focusedObject !== expected.context.focusedObject) {
+    fail(`${name}: expected focusedObject=${expected.context.focusedObject}, received ${trace.focusedObject}`);
+  }
+  if (expected.context?.deviceClass && trace.deviceClass !== expected.context.deviceClass) {
+    fail(`${name}: expected deviceClass=${expected.context.deviceClass}, received ${trace.deviceClass}`);
+  }
+  if (expected.requiredTerms?.length && !includesAll(reply, expected.requiredTerms)) {
+    fail(`${name}: missing required terms ${expected.requiredTerms.join(", ")}`);
+  }
+  if (expected.requiredAny?.length && !includesAny(reply, expected.requiredAny)) {
+    fail(`${name}: missing any required term from ${expected.requiredAny.join(", ")}`);
+  }
+  if (expected.forbiddenTerms?.length && includesAny(reply, expected.forbiddenTerms)) {
+    fail(`${name}: contains forbidden terms ${expected.forbiddenTerms.join(", ")}`);
+  }
+  if (expected.maxWords && wordCount(reply) > expected.maxWords) {
+    fail(`${name}: expected at most ${expected.maxWords} words, received ${wordCount(reply)}`);
+  }
+  if (expected.mode && payload?.mode !== expected.mode) {
+    fail(`${name}: expected mode=${expected.mode}, received ${payload?.mode}`);
+  }
+  if (expected.source && payload?.source !== expected.source) {
+    fail(`${name}: expected source=${expected.source}, received ${payload?.source}`);
+  }
 }
 
-function checkNeoMaxx(payload) {
-  const reply = String(payload?.reply || "");
-
-  assert(reply.startsWith("Neomaxxing is a concept created by Joz Krupa."), "Neomaxxing reply must start with the canonical sentence");
-  assert(payload?.mode === "world_awareness", "Neomaxxing mode must be world_awareness");
-  assert(payload?.trace?.detectedConcept === "neo_maxx", "Neomaxxing trace.detectedConcept must be neo_maxx");
-
-  [
-    "NEO",
-    "MAXX",
-    "human judgment",
-    "AI",
-    "innovation",
-    "design",
-    "engineering",
-    "computation",
-    "execution",
-    "MAXX portal",
-    "neuron metaphor",
-  ].forEach((term) => assertIncludes(reply, term, "Neomaxxing reply"));
-
-  [
-    "transformative approach",
-    "various domains",
-    "impactful outcomes",
-    "leverage technology",
-  ].forEach((term) => assertExcludes(reply, term, "Neomaxxing reply"));
-}
-
-function checkBusinessValue(payload) {
-  const reply = String(payload?.reply || "");
-
-  assert(payload?.mode === "deterministic", "Business Value mode must be deterministic");
-  assert(payload?.source === "deterministic_composer", "Business Value source must be deterministic_composer");
-  assertAnyIncludes(reply, ["Maybank", "Mediacorp", "Erste Bank", "Manulife"], "Business Value reply");
-  assertAnyIncludes(reply, ["agentic AI architecture", "decision intelligence", "context engineering"], "Business Value reply");
-  assertAnyIncludes(reply, ["20x", "30x", "16M", "11 APAC"], "Business Value reply");
-  assertMaxWords(reply, 55, "Business Value reply");
-}
-
-function checkMindset(payload) {
-  const reply = String(payload?.reply || "");
-
-  assert(payload?.mode === "deterministic", "Mindset mode must be deterministic");
-  assert(payload?.source === "deterministic_composer", "Mindset source must be deterministic_composer");
-  assertAnyIncludes(reply, ["systems", "signal", "decision"], "Mindset reply");
-  assertAnyIncludes(reply, ["human judgment", "clarity", "verification", "action"], "Mindset reply");
-  assertMaxWords(reply, 55, "Mindset reply");
-}
-
-function checkSkills(payload) {
-  const reply = String(payload?.reply || "");
-
-  assert(payload?.mode === "deterministic", "Skills mode must be deterministic");
-  assert(payload?.source === "deterministic_composer", "Skills source must be deterministic_composer");
-  assertAnyIncludes(reply, ["agentic AI architecture", "orchestration", "retrieval", "production observability"], "Skills reply");
-  assertAnyIncludes(reply, ["Maybank", "Mediacorp", "Erste Bank", "Manulife"], "Skills reply");
-  assertAnyIncludes(reply, ["signal reasoning", "Python/SQL", "workflow-aware"], "Skills reply");
-  assertMaxWords(reply, 55, "Skills reply");
-}
-
-function checkRootChoices(payload) {
-  const reply = String(payload?.reply || "");
-  assert(payload?.mode === "world_awareness", "Root choices mode must be world_awareness");
-  assertIncludes(reply, "Root", "Root choices reply");
-  assertIncludes(reply, "Gold Pill", "Root choices reply");
-  assertAnyIncludes(reply, ["Brain", "Enter"], "Root choices reply");
-  assertIncludes(reply, "MAXX", "Root choices reply");
-}
-
-function checkMaxxScene(payload) {
-  const reply = String(payload?.reply || "");
-  assert(payload?.mode === "world_awareness", "MAXX scene mode must be world_awareness");
-  assertIncludes(reply, "MAXX", "MAXX scene reply");
-  assertAnyIncludes(reply, ["Human Neuron", "AI Neuron", "neural visual metaphor"], "MAXX scene reply");
-  assertAnyIncludes(reply, ["judgment", "AI capability", "new pathways"], "MAXX scene reply");
-}
-
-function checkWhereSkills(payload) {
-  const reply = String(payload?.reply || "");
-  assert(payload?.mode === "world_awareness", "Where skills mode must be world_awareness");
-  assertIncludes(reply, "workf.glb", "Where skills reply");
-  assertAnyIncludes(reply, ["after Mogg", "skills panel", "desktop"], "Where skills reply");
-}
-
-function checkFlex(payload) {
-  const reply = String(payload?.reply || "");
-  assert(payload?.mode === "world_awareness", "Flex mode must be world_awareness");
-  assertAnyIncludes(reply, ["Flex", "Vibe"], "Flex reply");
-  assertAnyIncludes(reply, ["presence", "atmosphere", "arrival"], "Flex reply");
-}
-
-function checkAscend(payload) {
-  const reply = String(payload?.reply || "");
-  assert(payload?.mode === "world_awareness", "Ascend mode must be world_awareness");
-  assertAnyIncludes(reply, ["Ascend", "Discover"], "Ascend reply");
-  assertAnyIncludes(reply, ["prestige", "recognition", "visible proof"], "Ascend reply");
-}
-
-function checkMogg(payload) {
-  const reply = String(payload?.reply || "");
-  assert(payload?.mode === "world_awareness", "Mogg mode must be world_awareness");
-  assertIncludes(reply, "Mogg", "Mogg reply");
-  assertAnyIncludes(reply, ["digital twin", "conceptual identity"], "Mogg reply");
+function getCases() {
+  return [
+    {
+      name: "Root Place",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is this place?" }],
+        context: { currentPortal: "root" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "root" },
+        requiredAny: ["orientation", "decision", "meet joz", "maxx"],
+        forbiddenTerms: ["homepage", "button"],
+      },
+    },
+    {
+      name: "Root Choices",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What are my choices here?" }],
+        context: {
+          currentPortal: "root",
+          app_context: {
+            available_actions: ["enter_meet_joz", "enter_maxx"],
+          },
+        },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "root" },
+        requiredTerms: ["gold pill", "meet joz", "brain", "maxx"],
+      },
+    },
+    {
+      name: "Gold Pill",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is the Gold Pill?" }],
+        context: { currentPortal: "root", currentMesh: "ball" },
+      },
+      expected: {
+        route: "world_awareness",
+        concept: "gold_pill",
+        fallbackUsed: false,
+        context: { currentPortal: "root" },
+        requiredTerms: ["meetjoz", "neo/maxx", "skills", "capabilities", "competences", "judgment", "innovation", "ai"],
+        requiredAny: ["design", "engineering"],
+        forbiddenTerms: ["online communities", "blue pill", "red pill", "harsh realities", "personal fulfilment", "wealth mindset", "social hierarchy", "looksmaxxing advice"],
+      },
+    },
+    {
+      name: "Gold Pill In MAXX",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What does the Gold Pill mean in MAXX?" }],
+        context: { currentPortal: "maxx", currentMesh: "brain", currentMeshStage: "signal_flow" },
+      },
+      expected: {
+        route: "world_awareness",
+        concept: "gold_pill",
+        fallbackUsed: false,
+        context: { currentPortal: "maxx" },
+        requiredTerms: ["human judgment", "ai"],
+        requiredAny: ["design", "engineering", "execution", "competitive advantage"],
+      },
+    },
+    {
+      name: "Neomaxxing",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is Neomaxxing?" }],
+        context: { currentPortal: "maxx", currentMesh: "brain", currentMeshStage: "signal_flow" },
+      },
+      expected: {
+        route: "world_awareness",
+        concept: "neo_maxx",
+        fallbackUsed: false,
+        context: { currentPortal: "maxx" },
+        requiredTerms: ["joz krupa", "neo", "maxx", "ai", "human judgment", "innovation"],
+        requiredAny: ["design", "engineering", "computation", "code", "competitive advantage", "neuron metaphor"],
+        forbiddenTerms: ["online communities", "lifestyle", "social status", "idealized self", "self-improvement subculture", "physical fitness", "fashion advice"],
+      },
+    },
+    {
+      name: "MAXX Scene",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What am I looking at?" }],
+        context: { currentPortal: "maxx", currentMesh: "brain", currentMeshStage: "signals_transmitting" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "maxx" },
+        requiredTerms: ["human neuron", "ai neuron", "synapse", "signals"],
+        requiredAny: ["new experience", "new pathways"],
+      },
+    },
+    {
+      name: "Neuron Click Desktop",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What happens if I click the neuron?" }],
+        context: {
+          currentPortal: "maxx",
+          app_context: {
+            current_portal: "maxx",
+            focused_object: "maxx_neurons",
+            device: { class: "desktop", ar_available: false },
+            available_actions: ["pause_sequence", "reveal_neurodesign"],
+          },
+        },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "maxx", focusedObject: "maxx_neurons", deviceClass: "desktop" },
+        requiredTerms: ["desktop", "pauses", "elite beauty"],
+        forbiddenTerms: ["camera", "ar"],
+      },
+    },
+    {
+      name: "Neuron Click Mobile AR",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What happens if I click the neuron?" }],
+        context: {
+          currentPortal: "maxx",
+          app_context: {
+            current_portal: "maxx",
+            focused_object: "maxx_neurons",
+            device: { class: "mobile", ar_available: true },
+            available_actions: ["open_ar"],
+          },
+        },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "maxx", focusedObject: "maxx_neurons", deviceClass: "mobile" },
+        requiredTerms: ["mobile", "ar"],
+        requiredAny: ["camera", "n2x.glb", "placed in reality"],
+        forbiddenTerms: ["elite beauty", "pause"],
+      },
+    },
+    {
+      name: "Meet Joz",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is Meet Joz?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "flex", currentMeshStage: "meet_joz_flex_stage" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "meet_joz" },
+        requiredAny: ["human proof", "capability", "flex", "ascend", "mogg", "skills"],
+      },
+    },
+    {
+      name: "Flex",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is Flex?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "flex", currentMeshStage: "meet_joz_flex_stage" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "meet_joz", currentStage: "meet_joz_flex_stage", focusedObject: "meet_joz_flex" },
+        requiredTerms: ["presence", "atmosphere"],
+        requiredAny: ["vibe", "arrival", "tone"],
+        forbiddenTerms: ["roi", "digital twin", "technical skills"],
+      },
+    },
+    {
+      name: "Ascend",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is Ascend?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "ascend", currentMeshStage: "meet_joz_ascend_stage" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "meet_joz", currentStage: "meet_joz_ascend_stage", focusedObject: "meet_joz_ascend" },
+        requiredTerms: ["prestige", "recognition"],
+        requiredAny: ["visible proof", "scale", "aura"],
+      },
+    },
+    {
+      name: "Mogg",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is Mogg?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "mogg", currentMeshStage: "meet_joz_mogg_stage" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "meet_joz", currentStage: "meet_joz_mogg_stage", focusedObject: "meet_joz_mogg" },
+        requiredTerms: ["digital twin", "identity"],
+        forbiddenTerms: ["skills panel", "same as workf"],
+      },
+    },
+    {
+      name: "Where Skills",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "Where can I see Joz's skills?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "skills", currentMeshStage: "skills_stop" },
+      },
+      expected: {
+        fallbackUsed: false,
+        context: { currentPortal: "meet_joz", focusedObject: "meet_joz_mogg" },
+        requiredTerms: ["workf"],
+        requiredAny: ["skills panel", "jkx-d", "desktop"],
+      },
+    },
+    {
+      name: "Worldx",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is worldx?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "flex", currentMeshStage: "meet_joz_flex_stage" },
+      },
+      expected: {
+        route: "world_awareness",
+        fallbackUsed: false,
+        context: { currentPortal: "meet_joz" },
+        requiredTerms: ["abstract gold", "city"],
+        requiredAny: ["semantic environment", "proof", "capability", "prestige"],
+      },
+    },
+    {
+      name: "Business Value",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "Why should we hire Joz?" }],
+        context: { currentPortal: "root", currentMesh: "ball", intentMode: "business_need" },
+      },
+      expected: {
+        mode: "deterministic",
+        source: "deterministic_composer",
+        fallbackUsed: false,
+        requiredTerms: ["agentic ai architecture", "decision intelligence"],
+        requiredAny: ["maybank", "mediacorp", "erste", "manulife"],
+        maxWords: 55,
+      },
+    },
+    {
+      name: "Systems Mindset",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "How does Joz think?" }],
+        context: { currentPortal: "root", currentMesh: "brain", intentMode: "systems_mindset" },
+      },
+      expected: {
+        mode: "deterministic",
+        source: "deterministic_composer",
+        fallbackUsed: false,
+        requiredTerms: ["systems"],
+        requiredAny: ["signal", "decision", "verification", "action"],
+        maxWords: 55,
+      },
+    },
+    {
+      name: "Skills Lane",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is Joz strongest at?" }],
+        context: { currentPortal: "meet-joz", currentMesh: "skills", currentMeshStage: "skills_stop", intentMode: "skills" },
+      },
+      expected: {
+        mode: "deterministic",
+        source: "deterministic_composer",
+        fallbackUsed: false,
+        requiredTerms: ["agentic ai architecture"],
+        requiredAny: ["retrieval", "orchestration", "observability", "maybank", "mediacorp", "erste", "manulife"],
+        maxWords: 55,
+      },
+    },
+    {
+      name: "Unknown Term",
+      path: "/api/joz-llm",
+      body: {
+        messages: [{ role: "user", content: "What is quantum banana maxxing?" }],
+        context: { currentPortal: "root" },
+      },
+      expected: {
+        forbiddenTerms: ["this is a canonical", "gold pill is", "online communities"],
+        requiredAny: ["do not recognize", "don't recognize", "not a canonical", "neo/maxx"],
+      },
+    },
+  ];
 }
 
 async function runCase(baseUrl, testCase, timeoutMs) {
-  const payload = await postJson(`${baseUrl}${testCase.path}`, testCase.body, timeoutMs);
-  testCase.check(payload);
-  console.log(`PASS ${testCase.name}`);
+  const body = {
+    ...testCase.body,
+    sessionKey: `${testCase.name.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+  };
+  const syntheticIp = `198.51.100.${Math.floor(Math.random() * 200) + 1}`;
+  const payload = await postJson(
+    `${baseUrl}${testCase.path}`,
+    body,
+    timeoutMs,
+    { "x-forwarded-for": syntheticIp }
+  );
+  try {
+    assertExpected(payload, testCase);
+    console.log(`PASS ${testCase.name}`);
+  } catch (error) {
+    const reply = String(payload?.reply || "");
+    const issue = classifyFailure({ payload, expected: testCase.expected, reply });
+    const trace = payload?.trace || {};
+    throw new Error(
+      [
+        `${testCase.name}: ${error.message}`,
+        `issue=${issue}`,
+        `trace=${JSON.stringify(trace)}`,
+        `reply=${JSON.stringify(reply)}`,
+      ].join("\n")
+    );
+  }
 }
 
 async function run() {
@@ -247,162 +517,14 @@ async function run() {
     throw new Error("Missing --base-url or JOZ_LLM_BASE_URL");
   }
 
-  console.log(`Checking Joz LLM responses against ${baseUrl}`);
-
-  const cases = [
-    {
-      name: "Gold Pill",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What is the gold pill?" }],
-        context: {
-          currentPortal: "root",
-          currentMesh: "ball",
-          currentMeshStage: null,
-        },
-      },
-      check: checkGoldPill,
-    },
-    {
-      name: "Neomaxxing",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What is Neomaxxing?" }],
-        context: {
-          currentPortal: "maxx",
-          currentMesh: "brain",
-          currentMeshStage: "signal_flow",
-        },
-      },
-      check: checkNeoMaxx,
-    },
-    {
-      name: "Business Value",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "Why should a company hire Joz right now for an agentic AI and AI systems role?" }],
-        context: {
-          currentPortal: "root",
-          currentMesh: "ball",
-          currentMeshStage: null,
-          intentMode: "business_need",
-        },
-      },
-      check: checkBusinessValue,
-    },
-    {
-      name: "Systems Mindset",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "Explain how Joz thinks about intelligence, systems, and decision-making." }],
-        context: {
-          currentPortal: "root",
-          currentMesh: "brain",
-          currentMeshStage: null,
-          intentMode: "systems_mindset",
-        },
-      },
-      check: checkMindset,
-    },
-    {
-      name: "Joz Skills",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context." }],
-        context: {
-          currentPortal: "meet-joz",
-          currentMesh: "skills",
-          currentMeshStage: "skills_stop",
-          intentMode: "skills",
-        },
-      },
-      check: checkSkills,
-    },
-    {
-      name: "Root Choices",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What are my choices?" }],
-        context: {
-          currentPortal: "root",
-          currentMesh: "brain",
-          currentMeshStage: null,
-        },
-      },
-      check: checkRootChoices,
-    },
-    {
-      name: "MAXX Scene",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What am I looking at?" }],
-        context: {
-          currentPortal: "maxx",
-          currentMesh: "brain",
-          currentMeshStage: "signal_flow",
-        },
-      },
-      check: checkMaxxScene,
-    },
-    {
-      name: "Where Are Joz's Skills",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "Where are Joz's skills?" }],
-        context: {
-          currentPortal: "meet-joz",
-          currentMesh: "skills",
-          currentMeshStage: "skills_stop",
-        },
-      },
-      check: checkWhereSkills,
-    },
-    {
-      name: "Flex",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What stage am I in?" }],
-        context: {
-          currentPortal: "meet-joz",
-          currentMesh: "flex",
-          currentMeshStage: "meet_joz_flex_stage",
-        },
-      },
-      check: checkFlex,
-    },
-    {
-      name: "Ascend",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What stage am I in?" }],
-        context: {
-          currentPortal: "meet-joz",
-          currentMesh: "ascend",
-          currentMeshStage: "meet_joz_ascend_stage",
-        },
-      },
-      check: checkAscend,
-    },
-    {
-      name: "Mogg",
-      path: "/api/joz-llm",
-      body: {
-        messages: [{ role: "user", content: "What stage am I in?" }],
-        context: {
-          currentPortal: "meet-joz",
-          currentMesh: "mogg",
-          currentMeshStage: "meet_joz_mogg_stage",
-        },
-      },
-      check: checkMogg,
-    },
-  ];
+  console.log(`Checking Joz LLM canonical responses against ${baseUrl}`);
+  const cases = getCases();
 
   for (const testCase of cases) {
     await runCase(baseUrl, testCase, options.timeoutMs);
   }
 
-  console.log("All response checks passed.");
+  console.log(`All ${cases.length} canonical checks passed.`);
 }
 
 run().catch((error) => {

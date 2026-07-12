@@ -396,6 +396,16 @@ function normalizeDeterministicIntent(intentMode = "") {
 function buildBusinessNeedReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
 
+  if (
+    !clean.includes("hire") &&
+    !clean.includes("roi") &&
+    !clean.includes("business value") &&
+    !clean.includes("problem") &&
+    !clean.includes("solve")
+  ) {
+    return "";
+  }
+
   if (clean.includes("roi") || clean.includes("business value")) {
     return "Joz creates the most ROI where agentic AI architecture, decision intelligence, and context engineering improve speed and operating clarity. That means faster decisions, stronger governance, cleaner execution, and less waste across complex workflows.";
   }
@@ -410,6 +420,19 @@ function buildBusinessNeedReply(message = "") {
 function buildSystemsMindsetReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
 
+  if (
+    !clean.includes("how does joz think") &&
+    !clean.includes("systems") &&
+    !clean.includes("decision") &&
+    !clean.includes("signal over noise") &&
+    !clean.includes("context creates intelligence") &&
+    !clean.includes("trust before autonomy") &&
+    !clean.includes("operating mindset") &&
+    !clean.includes("reduce complexity")
+  ) {
+    return "";
+  }
+
   if (clean.includes("reduce complexity")) {
     return "Joz reduces complexity by modeling the system, not decorating symptoms. Joz compresses noise into signal, keeps verification in the loop, and only automates what can be explained and acted on.";
   }
@@ -423,6 +446,19 @@ function buildSystemsMindsetReply(message = "") {
 
 function buildSkillsReply(message = "") {
   const clean = String(message || "").trim().toLowerCase();
+
+  if (
+    !clean.includes("strongest") &&
+    !clean.includes("how technical") &&
+    !clean.includes("enterprise achievement") &&
+    !clean.includes("agentic ai") &&
+    !clean.includes("orchestration") &&
+    !clean.includes("multimodal") &&
+    !clean.includes("spatial") &&
+    !clean.includes("ux")
+  ) {
+    return "";
+  }
 
   if (
     clean.includes("ux") ||
@@ -459,6 +495,10 @@ export function buildJozLlmFallbackReply(message = "") {
 
   if (recruiterAnswer) {
     return recruiterAnswer;
+  }
+
+  if (clean.includes("maxxing") && !clean.includes("neomaxxing")) {
+    return "I do not recognize that as a canonical MeetJoz concept. NEO/MAXX is the MeetJoz concept focused on new innovation through human judgment and AI capability.";
   }
 
   if (

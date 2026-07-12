@@ -343,16 +343,24 @@ function collectVisibleObjectDetails(manifest, objectIds) {
 export function routeMeetJozWorldIntent(input = "") {
   const clean = normalizeToken(input);
   if (isGoldPillQuery(clean)) return "world_awareness";
-  if (clean.includes("where are joz's skills")) return "mixed";
+  if (isNeoMaxxQuery(clean)) return "world_awareness";
+  if (clean.includes("where are joz's skills") || clean.includes("where can i see joz's skills")) return "mixed";
   if (clean.includes("why does this experience matter")) return "mixed";
 
   const worldTerms = [
     "what is this place",
+    "what is meet joz",
+    "what is maxx",
+    "what is root",
+    "what is flex",
+    "what is ascend",
+    "what is mogg",
     "what are my choices",
     "what am i looking at",
     "what stage am i in",
     "what happens when i click",
     "where are joz's skills",
+    "where can i see joz's skills",
     "what is worldx",
     "portal",
     "object",
@@ -363,6 +371,8 @@ export function routeMeetJozWorldIntent(input = "") {
     "mogg",
     "ascend",
     "flex",
+    "meet joz",
+    "gold pill",
   ];
   const jozTerms = [
     "strongest",
@@ -539,6 +549,10 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
     return `${portalName} is the ${state.portal?.role}. ${state.portal?.canonical_question} ${nextActionText}`.trim();
   }
 
+  if (clean.includes("what is meet joz")) {
+    return "Meet Joz is the human proof and capability portal. It unfolds through a staged sequence of Flex, Ascend, Mogg, and Skills inside an abstract gold semantic city built from identity, proof, prestige, and capability.";
+  }
+
   if (clean.includes("what are my choices") && state.portal?.id === "root") {
     return `You are at Root, the decision portal. The Gold Pill opens Meet Joz for human proof and capability, while the Brain and Enter route open MAXX for conceptual intelligence. ${nextActionText}`.trim();
   }
@@ -551,10 +565,10 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
     const behavior = state.deviceBehaviors.find((entry) => entry.device_class === state.app_context.device.class)
       || state.deviceBehaviors.find((entry) => entry.device_class === (state.app_context.device.mobile ? "mobile" : "desktop"));
     if (behavior?.device_class === "desktop") {
-      return `On desktop, clicking the neuron pauses the sequence and reveals The Elite Beauty layer. ${nextActionText}`.trim();
+      return "On desktop, clicking the neuron pauses the sequence and reveals The Elite Beauty layer.";
     }
     if (behavior?.device_class === "mobile") {
-      return `On supported mobile devices, clicking the neuron opens the AR experience so n2x.glb can be placed in reality. ${nextActionText}`.trim();
+      return "On supported mobile devices, clicking the neuron opens the AR experience so n2x.glb can be placed in reality.";
     }
   }
 
@@ -567,12 +581,24 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
     }
   }
 
-  if (clean.includes("where are joz's skills")) {
+  if (clean.includes("what is flex")) {
+    return "Flex is the entry and vibe layer of Meet Joz. It establishes presence, atmosphere, tone, and the feeling of arriving inside Joz's designed world.";
+  }
+
+  if (clean.includes("what is ascend")) {
+    return "Ascend is the discovery, prestige, scale, and recognition layer of Meet Joz. It moves the experience from first impression into visible proof, transformation, aura, and world-class reach.";
+  }
+
+  if (clean.includes("what is mogg")) {
+    return "Mogg is Joz's digital twin and identity layer inside the Meet Joz sequence. It represents Joz as a distinct conceptual presence before the experience moves into the deeper Skills layer.";
+  }
+
+  if (clean.includes("where are joz's skills") || clean.includes("where can i see joz's skills")) {
     return `Joz's deeper skills appear later in Meet Joz at the workf.glb stage, after Mogg. On desktop that layer can reveal the skills panel, and on mobile or spatial devices it can be placed in reality. ${nextActionText}`.trim();
   }
 
   if (clean.includes("what is worldx")) {
-    return `worldx is the abstract gold semantic city surrounding the ControlledGLB sequence in Meet Joz. It contains semantic landmarks like heart, Scale MAXX, Clout MAXX, World-Class, Alpha PSL, AI Synthesis, and AI Analysis. ${nextActionText}`.trim();
+    return `worldx is the abstract gold semantic city surrounding the Meet Joz sequence. It is a semantic environment built from proof, prestige, capability, atmosphere, AI, and identity, with landmarks like heart, Scale MAXX, Clout MAXX, World-Class, Alpha PSL, AI Synthesis, and AI Analysis. ${nextActionText}`.trim();
   }
 
   if (route === "mixed") {

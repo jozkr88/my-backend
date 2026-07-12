@@ -456,12 +456,18 @@ function inferJozIntentMode(message = "") {
 function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
   const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const entity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  const state = entity.state || {};
   return {
     detectedIntent: answerContext.route,
     detectedConcept: entity.entity || null,
     selectedRoute: answerContext.route,
     selectedWorldRecord: entity.worldRecord || null,
     answerSource: answerSource || entity.source || entity.worldRecord || null,
+    fallbackUsed: (answerSource || entity.source || entity.worldRecord || null) === "llm_fallback",
+    currentPortal: state.portal?.id || null,
+    currentStage: state.stage?.id || null,
+    focusedObject: state.focusedObject?.id || null,
+    deviceClass: state.app_context?.device?.class || null,
   };
 }
 
@@ -631,15 +637,13 @@ app.post("/api/joz-llm", async (req, res) => {
     }
 
     reply = enforceJozLlmReplyLimit(reply, 55);
-    logWorldAwarenessTrace(
-      "/api/joz-llm",
-      buildWorldAwarenessTrace({
-        input: latestUserMessage,
-        appContext: validatedAppContext,
-        legacyContext: legacyRuntimeContext,
-        answerSource: replySource || "llm_fallback",
-      })
-    );
+    const responseTrace = buildWorldAwarenessTrace({
+      input: latestUserMessage,
+      appContext: validatedAppContext,
+      legacyContext: legacyRuntimeContext,
+      answerSource: replySource || "llm_fallback",
+    });
+    logWorldAwarenessTrace("/api/joz-llm", responseTrace);
 
     if (conversationId) {
       await appendJozMessage({
@@ -672,6 +676,7 @@ app.post("/api/joz-llm", async (req, res) => {
             ? "model_or_fallback"
             : "fallback",
       source: replySource || "llm_fallback",
+      trace: responseTrace,
     });
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);
