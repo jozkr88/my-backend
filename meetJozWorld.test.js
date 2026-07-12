@@ -151,6 +151,7 @@ test("gold pill reply uses canonical world definition instead of generic interne
     },
   });
 
+  assert.ok(reply.startsWith("The Gold Pill is a core concept within MeetJoz and NEO/MAXX."));
   assert.match(reply, /skills/i);
   assert.match(reply, /capabilities/i);
   assert.match(reply, /competences/i);
@@ -158,6 +159,12 @@ test("gold pill reply uses canonical world definition instead of generic interne
   assert.match(reply, /\bAI\b/i);
   assert.match(reply, /competitive advantage/i);
   assert.match(reply, /route into Meet Joz/i);
+  assert.doesNotMatch(reply, /online communities/i);
+  assert.doesNotMatch(reply, /blue pill/i);
+  assert.doesNotMatch(reply, /red pill/i);
+  assert.doesNotMatch(reply, /awareness of harsh realities/i);
+  assert.doesNotMatch(reply, /personal fulfillment/i);
+  assert.doesNotMatch(reply, /non-traditional methods/i);
   assert.doesNotMatch(reply, /^The gold pill typically refers to/i);
 });
 

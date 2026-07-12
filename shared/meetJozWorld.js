@@ -394,8 +394,11 @@ export function resolveMeetJozWorldState({ appContext = {}, legacyContext = {} }
 export function buildMeetJozWorldAnswerContext({ input = "", appContext = {}, legacyContext = {} } = {}) {
   const route = routeMeetJozWorldIntent(input);
   const state = resolveMeetJozWorldState({ appContext, legacyContext });
+  const entity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
   return {
     route,
+    entity: entity.entity,
+    entity_record: entity.worldRecord,
     portal: state.portal?.id || null,
     portal_title: state.portal?.title || null,
     portal_role: state.portal?.role || null,
@@ -406,6 +409,43 @@ export function buildMeetJozWorldAnswerContext({ input = "", appContext = {}, le
     visible_object_ids: state.visibleObjects.map((item) => item.id),
     available_action_ids: state.availableActions.map((item) => item.id),
     device_class: state.app_context.device.class,
+  };
+}
+
+export function resolveMeetJozWorldEntity({ input = "", appContext = {}, legacyContext = {} } = {}) {
+  const state = resolveMeetJozWorldState({ appContext, legacyContext });
+  const clean = normalizeToken(input);
+
+  if (isGoldPillQuery(clean)) {
+    return {
+      entity: "gold_pill",
+      conceptId: "gold_pill",
+      objectId: "root_gold_pill",
+      worldRecord: "root_gold_pill / gold_pill concept",
+      source: "root_gold_pill / gold_pill concept",
+      state,
+    };
+  }
+
+  if (state.focusedObject?.id) {
+    return {
+      entity: state.focusedObject.id,
+      conceptId: null,
+      objectId: state.focusedObject.id,
+      worldRecord: state.focusedObject.id,
+      source: state.focusedObject.id,
+      state,
+    };
+  }
+
+  const portalId = state.portal?.id || "root";
+  return {
+    entity: portalId,
+    conceptId: null,
+    objectId: null,
+    worldRecord: portalId,
+    source: portalId,
+    state,
   };
 }
 
@@ -428,14 +468,12 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
   if (isGoldPillQuery(clean)) {
     const goldPill = toArray(manifest.concepts).find((concept) => concept.id === "gold_pill");
     const neoMaxx = toArray(manifest.concepts).find((concept) => concept.id === "neo_maxx");
-    const definition =
-      goldPill?.definition ||
-      "The Gold Pill is a core concept within MeetJoz and NEO/MAXX.";
+    const definition = "The Gold Pill is a core concept within MeetJoz and NEO/MAXX.";
     const meaning =
       "It represents the combination of skills, capabilities, competences, judgment, creativity, engineering, design, and execution required to create high-quality innovation with AI and competitive advantage.";
     const distinction =
       goldPill?.distinction ||
-      "Unlike other internet pill metaphors that attempt to explain reality, the Gold Pill represents the capability to create new reality through innovation.";
+      "It is a capability metaphor for creating new reality through innovation, not a borrowed internet identity trope.";
 
     let portalRole = "";
     if (state.portal?.id === "root") {

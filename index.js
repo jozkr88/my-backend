@@ -37,6 +37,12 @@ import { resolveAgenticAction } from "./world-agent.js";
 import { approveAgentProposal, buildAgentSnapshot, buildFallbackAgentReply } from "./full-agent.js";
 import { buildReasoningLayers } from "./reasoning-layers.js";
 import {
+  buildMeetJozWorldAnswerContext,
+  buildMeetJozWorldAwarenessReply,
+  resolveMeetJozWorldEntity,
+  validateAppContext,
+} from "./shared/meetJozWorld.js";
+import {
   buildJozLlmContext,
   enforceJozLlmReplyLimit,
   buildJozLlmFallbackReply,
@@ -316,6 +322,11 @@ app.post("/api/agentic", async (req, res) => {
         [],
     };
     const snapshot = buildAgentSnapshot({ input, context: enrichedContext, worldMap, worldMemory });
+    const canonicalWorldReply = buildMeetJozWorldAwarenessReply({
+      input,
+      appContext: snapshot.validatedAppContext,
+      legacyContext: snapshot,
+    });
     let proposal = null;
 
     if (process.env.OPENAI_API_KEY) {
@@ -346,21 +357,47 @@ app.post("/api/agentic", async (req, res) => {
 
     const clean = snapshot.normalizedInput;
     const approved = approveAgentProposal({ clean, context: snapshot, worldMap, worldMemory, proposal });
-    const reply = proposal?.response || buildFallbackAgentReply({ approved, snapshot });
+    const reply =
+      canonicalWorldReply ||
+      approved?.awareness ||
+      proposal?.response ||
+      buildFallbackAgentReply({ approved, snapshot });
+    const trace = buildWorldAwarenessTrace({
+      input,
+      appContext: snapshot.validatedAppContext,
+      legacyContext: snapshot,
+      answerSource: canonicalWorldReply
+        ? "root_gold_pill / gold_pill concept"
+        : approved?.awareness
+          ? approved?.source || "deterministic"
+          : proposal?.response
+            ? "llm_proposal"
+            : "llm_fallback",
+    });
+    logWorldAwarenessTrace("/api/agentic", trace);
 
     return res.json({
-      intent: String(proposal?.intent || approved?.action || "").trim() || "noop",
+      intent:
+        String(
+          canonicalWorldReply
+            ? "world_awareness"
+            : proposal?.intent || approved?.action || ""
+        ).trim() || "noop",
       response: reply,
       params: {
         action: approved?.action || null,
         target: approved?.target || null,
-        awareness: approved?.awareness || null,
-        source: approved?.source || "agent_noop",
+        awareness: canonicalWorldReply || approved?.awareness || null,
+        source:
+          canonicalWorldReply
+            ? "world_awareness"
+            : approved?.source || "agent_noop",
       },
       approvedAction: approved?.action || null,
       approvedTarget: approved?.target || null,
-      approvedAwareness: approved?.awareness || null,
+      approvedAwareness: canonicalWorldReply || approved?.awareness || null,
       snapshot,
+      trace,
     });
   } catch (error) {
     console.error("❌ /api/agentic failed:", error);
@@ -371,7 +408,9 @@ app.post("/api/agentic", async (req, res) => {
 // ------------------------------------------------------------
 // 3️⃣ AI Reasoning Endpoint
 // ------------------------------------------------------------
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
 
 function inferJozIntentMode(message = "") {
   const clean = String(message || "").trim().toLowerCase();
@@ -413,6 +452,22 @@ function inferJozIntentMode(message = "") {
   return "skills";
 }
 
+function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
+  const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
+  const entity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  return {
+    detectedIntent: answerContext.route,
+    detectedConcept: entity.entity || null,
+    selectedRoute: answerContext.route,
+    selectedWorldRecord: entity.worldRecord || null,
+    answerSource,
+  };
+}
+
+function logWorldAwarenessTrace(label, trace) {
+  console.log(`🧭 ${label} trace`, trace);
+}
+
 app.post("/api/joz-llm", async (req, res) => {
   try {
     const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
@@ -420,10 +475,33 @@ app.post("/api/joz-llm", async (req, res) => {
     const sessionKey = String(req.body?.conversationId || req.body?.sessionKey || "").trim() || null;
     const latestUserMessage =
       [...messages].reverse().find((entry) => entry?.role === "user")?.content || "";
+    const legacyRuntimeContext = {
+      currentPortal: context?.currentPortal || "root",
+      currentMesh: context?.currentMesh || null,
+      currentMeshStage: context?.currentMeshStage || null,
+    };
 
     if (!String(latestUserMessage || "").trim()) {
       return res.status(400).json({ error: "Missing user message" });
     }
+
+    const validatedAppContext = validateAppContext(
+      context?.app_context || {},
+      legacyRuntimeContext
+    ).value;
+    const worldAwarenessReply = buildMeetJozWorldAwarenessReply({
+      input: latestUserMessage,
+      appContext: validatedAppContext,
+      legacyContext: legacyRuntimeContext,
+    });
+    const worldAwarenessTrace = buildWorldAwarenessTrace({
+      input: latestUserMessage,
+      appContext: validatedAppContext,
+      legacyContext: legacyRuntimeContext,
+      answerSource: worldAwarenessReply
+        ? "root_gold_pill / gold_pill concept"
+        : "llm_fallback",
+    });
 
     const rateLimitResult = enforceJozChatRateLimit(
       req,
@@ -438,6 +516,45 @@ app.post("/api/joz-llm", async (req, res) => {
       String(context?.intentMode || "").trim().toLowerCase() ||
       inferJozIntentMode(latestUserMessage);
     const profile = await getPrimaryJozProfile();
+    const conversationId = await createJozConversation({
+      profileId: profile?.id,
+      sessionKey,
+      intentMode,
+      context: legacyRuntimeContext,
+    });
+
+    if (worldAwarenessReply) {
+      logWorldAwarenessTrace("/api/joz-llm", worldAwarenessTrace);
+
+      if (conversationId) {
+        await appendJozMessage({
+          conversationId,
+          role: "user",
+          content: latestUserMessage,
+          metadata: { intentMode, source: "world_awareness" },
+        });
+        await appendJozMessage({
+          conversationId,
+          role: "assistant",
+          content: worldAwarenessReply,
+          metadata: {
+            intentMode,
+            source: "world_awareness",
+            trace: worldAwarenessTrace,
+          },
+        });
+      }
+
+      return res.json({
+        reply: worldAwarenessReply,
+        conversationId,
+        intentMode,
+        retrievedCategories: [],
+        mode: "world_awareness",
+        trace: worldAwarenessTrace,
+      });
+    }
+
     const retrievedDocuments = await getJozDocumentsByIntent(intentMode, 8, latestUserMessage);
     const retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
@@ -461,16 +578,6 @@ app.post("/api/joz-llm", async (req, res) => {
     };
 
     let reply = "";
-    const conversationId = await createJozConversation({
-      profileId: profile?.id,
-      sessionKey,
-      intentMode,
-      context: {
-        currentPortal: context?.currentPortal || "root",
-        currentMesh: context?.currentMesh || null,
-        currentMeshStage: context?.currentMeshStage || null,
-      },
-    });
 
     if (process.env.OPENAI_API_KEY) {
       try {
@@ -509,6 +616,15 @@ app.post("/api/joz-llm", async (req, res) => {
     }
 
     reply = enforceJozLlmReplyLimit(reply, 55);
+    logWorldAwarenessTrace(
+      "/api/joz-llm",
+      buildWorldAwarenessTrace({
+        input: latestUserMessage,
+        appContext: validatedAppContext,
+        legacyContext: legacyRuntimeContext,
+        answerSource: process.env.OPENAI_API_KEY && reply ? "llm_model_or_fallback" : "llm_fallback",
+      })
+    );
 
     if (conversationId) {
       await appendJozMessage({
