@@ -7,6 +7,7 @@ import {
 import {
   buildMeetJozWorldAnswerContext,
   buildMeetJozWorldAwarenessReply,
+  buildMeetJozWorldAwarenessResolution,
   resolveMeetJozWorldState,
   routeMeetJozWorldIntent,
   validateAppContext,
@@ -183,3 +184,131 @@ test("gold pill reply explains MAXX role when current portal is maxx", () => {
   assert.match(reply, /transforms human and AI potential into innovation/i);
   assert.doesNotMatch(reply, /^The gold pill typically refers to/i);
 });
+
+const OWNED_CONCEPT_CASES = [
+  {
+    input: "What is Flex?",
+    concept: "flex",
+    terms: [/arrival/i, /presence/i, /vibe/i, /atmosphere/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Ascend?",
+    concept: "ascend",
+    terms: [/discovery/i, /progression/i, /scale/i, /recognition|proof/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Mogg?",
+    concept: "mogg",
+    terms: [/digital twin/i, /meet joz/i, /ascend/i, /workf/i],
+    forbidden: [/root/i, /gold pill/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Workf?",
+    concept: "workf",
+    terms: [/skills/i, /deep work/i, /execution/i, /technical depth/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Aura?",
+    concept: "aura",
+    terms: [/emotional/i, /perceptual/i, /presence/i, /atmosphere/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Frame?",
+    concept: "frame",
+    terms: [/structure/i, /proportion/i, /coherence/i, /perception/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is Ascension?",
+    concept: "ascension",
+    terms: [/consistency/i, /precision/i, /discipline/i, /conditioning|refinement/i],
+    forbidden: [/fitness advice/i, /online culture/i, /looksmaxxing/i],
+  },
+  {
+    input: "What is Dominance?",
+    concept: "dominance",
+    terms: [/signal/i, /presence/i, /impact/i, /clarity/i],
+    forbidden: [/aggression/i, /social superiority/i, /hierarchy/i],
+  },
+  {
+    input: "What is 10/10 Frame Mogg?",
+    concept: "frame_mogg",
+    terms: [/structure/i, /proportion/i, /symmetry/i, /style/i, /aura/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    input: "What is The Elite Beauty?",
+    concept: "elite_beauty",
+    terms: [/Neurodesign layer/i, /Ascension/i, /Frame Mogg/i, /perception design/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+];
+
+for (const testCase of OWNED_CONCEPT_CASES) {
+  test(`owned concept replies stay canonical: ${testCase.concept}`, () => {
+    const resolution = buildMeetJozWorldAwarenessResolution({
+      input: testCase.input,
+      appContext: {
+        current_portal: "meet_joz",
+        focused_object: "meet_joz_mogg",
+        current_stage: "meet_joz_mogg_stage",
+        device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+      },
+    });
+
+    assert.equal(routeMeetJozWorldIntent(testCase.input), "world_awareness");
+    assert.equal(resolution.answerSource, "canonical_concept");
+    assert.equal(
+      resolution.selectedWorldRecord,
+      testCase.concept === "mogg" ? "meet_joz_mogg" : testCase.concept
+    );
+    assert.equal(resolution.detectedConcept, testCase.concept);
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.validationPassed, true);
+
+    const reply = String(resolution.reply || "");
+    for (const matcher of testCase.terms) {
+      assert.match(reply, matcher);
+    }
+    for (const matcher of testCase.forbidden) {
+      assert.doesNotMatch(reply, matcher);
+    }
+  });
+}
+
+const MOGG_EXPLICIT_QUERY_CASES = [
+  "What is Mogg?",
+  "Tell me about Mogg.",
+  "Who is Mogg?",
+  "Explain Mogg.",
+];
+
+for (const input of MOGG_EXPLICIT_QUERY_CASES) {
+  test(`explicit Mogg query beats focused root object: ${input}`, () => {
+    const resolution = buildMeetJozWorldAwarenessResolution({
+      input,
+      appContext: {
+        current_portal: "root",
+        focused_object: "root_gold_pill",
+        current_stage: null,
+        available_actions: ["go_meet_joz", "go_maxx_via_enter"],
+        device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+      },
+    });
+
+    assert.equal(resolution.detectedConcept, "mogg");
+    assert.equal(resolution.selectedWorldRecord, "meet_joz_mogg");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.answerSource, "canonical_concept");
+    assert.match(String(resolution.reply || ""), /digital twin/i);
+    assert.match(String(resolution.reply || ""), /Meet Joz/i);
+    assert.match(String(resolution.reply || ""), /Ascend/i);
+    assert.match(String(resolution.reply || ""), /Workf/i);
+    assert.doesNotMatch(String(resolution.reply || ""), /root_gold_pill/i);
+    assert.doesNotMatch(String(resolution.reply || ""), /Gold Pill/i);
+  });
+}

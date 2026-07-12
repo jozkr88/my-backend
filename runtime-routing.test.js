@@ -272,3 +272,107 @@ for (const testCase of JOZ_ROUTER_GATE_CASES) {
     assert.doesNotMatch(String(payload.reply || ""), /Joz LLM can explain Joz's fit/i);
   });
 }
+
+const OWNED_CONCEPT_ENDPOINT_CASES = [
+  {
+    name: "flex",
+    query: "What is Flex?",
+    selectedWorldRecord: "flex",
+    composer: "composeFlexAnswer",
+    text: [/arrival/i, /presence/i, /vibe/i, /atmosphere/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    name: "ascend",
+    query: "What is Ascend?",
+    selectedWorldRecord: "ascend",
+    composer: "composeAscendAnswer",
+    text: [/discovery/i, /progression/i, /scale/i, /recognition|proof/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+  {
+    name: "mogg",
+    query: "What is Mogg?",
+    selectedWorldRecord: "meet_joz_mogg",
+    composer: "composeMoggAnswer",
+    text: [/digital twin/i, /Meet Joz/i, /Ascend/i, /Workf/i],
+    forbidden: [/root_gold_pill/i, /Gold Pill/i, /online communities/i, /slang/i],
+  },
+  {
+    name: "workf",
+    query: "What is Workf?",
+    selectedWorldRecord: "workf",
+    composer: "composeWorkfAnswer",
+    text: [/skills/i, /deep work/i, /execution/i, /technical depth/i],
+    forbidden: [/looksmaxxing/i, /online communities/i, /slang/i],
+  },
+];
+
+for (const testCase of OWNED_CONCEPT_ENDPOINT_CASES) {
+  test(`POST /api/joz-llm routes owned concept canonically: ${testCase.name}`, async () => {
+    const { status, payload } = await postJson("/api/joz-llm", {
+      sessionKey: `runtime-owned-concept-${testCase.name}`,
+      messages: [{ role: "user", content: testCase.query }],
+      context: {
+        currentPortal: "meet-joz",
+        currentMesh: "mogg",
+        currentMeshStage: "skills_stop",
+      },
+    });
+
+    assert.equal(status, 200);
+    assert.equal(payload.mode, "world_awareness");
+    assert.equal(payload.trace?.detectedIntent, "world_awareness");
+    assert.equal(payload.trace?.selectedRoute, "world_awareness");
+    assert.equal(payload.trace?.selectedWorldRecord, testCase.selectedWorldRecord);
+    assert.equal(payload.trace?.answerSource, "canonical_concept");
+    assert.equal(payload.trace?.composer, testCase.composer);
+    assert.equal(payload.trace?.fallbackUsed, false);
+    assert.equal(payload.trace?.validationPassed, true);
+
+    const reply = String(payload.reply || "");
+    for (const matcher of testCase.text) {
+      assert.match(reply, matcher);
+    }
+    for (const matcher of testCase.forbidden) {
+      assert.doesNotMatch(reply, matcher);
+    }
+  });
+}
+
+for (const query of [
+  "Tell me about Mogg.",
+  "Who is Mogg?",
+  "Explain Mogg.",
+]) {
+  test(`POST /api/joz-llm explicit Mogg query wins over root focus: ${query}`, async () => {
+    const { status, payload } = await postJson("/api/joz-llm", {
+      sessionKey: `runtime-mogg-${query}`,
+      messages: [{ role: "user", content: query }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+        app_context: {
+          current_portal: "root",
+          focused_object: "root_gold_pill",
+          device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+        },
+      },
+    });
+
+    assert.equal(status, 200);
+    assert.equal(payload.mode, "world_awareness");
+    assert.equal(payload.trace?.detectedIntent, "world_awareness");
+    assert.equal(payload.trace?.detectedConcept, "mogg");
+    assert.equal(payload.trace?.selectedRoute, "world_awareness");
+    assert.equal(payload.trace?.selectedWorldRecord, "meet_joz_mogg");
+    assert.equal(payload.trace?.fallbackUsed, false);
+    assert.match(String(payload.reply || ""), /digital twin/i);
+    assert.match(String(payload.reply || ""), /Meet Joz/i);
+    assert.match(String(payload.reply || ""), /Ascend/i);
+    assert.match(String(payload.reply || ""), /Workf/i);
+    assert.doesNotMatch(String(payload.reply || ""), /root_gold_pill/i);
+    assert.doesNotMatch(String(payload.reply || ""), /Gold Pill/i);
+  });
+}

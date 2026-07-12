@@ -27,6 +27,183 @@ function normalizeToken(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+const FORBIDDEN_OWNED_CONCEPT_PHRASES = [
+  "looksmaxxing",
+  "online communities",
+  "internet culture",
+  "slang",
+  "subculture",
+  "social hierarchy",
+  "appearance ranking",
+  "idealized self",
+  "physical attractiveness discourse",
+  "red pill",
+  "black pill",
+  "blue pill",
+];
+
+const OWNED_CONCEPT_PATTERNS = [
+  { conceptId: "frame_mogg", patterns: [/^(what is|what's|define|tell me about)\s+10\/10 frame mogg\b/, /^10\/10 frame mogg$/, /what does 10\/10 frame mogg mean/ ] },
+  { conceptId: "frame_mogg", patterns: [/^(what is|what's|define|tell me about)\s+frame mogg\b/, /^frame mogg$/, /what does frame mogg mean/] },
+  { conceptId: "elite_beauty", patterns: [/^(what is|what's|define|tell me about)\s+(the )?elite beauty\b/, /what does (the )?elite beauty mean/, /^(the )?elite beauty$/] },
+  { conceptId: "dominance", patterns: [/^(what is|what's|define|tell me about)\s+dominance\b/, /what does dominance mean( here)?/, /^dominance$/] },
+  { conceptId: "ascension", patterns: [/^(what is|what's|define|tell me about)\s+ascension\b/, /what does ascension mean/, /^ascension$/] },
+  { conceptId: "aura", patterns: [/^(what is|what's|define|tell me about)\s+aura\b/, /what does aura mean( here)?/, /^aura$/] },
+  { conceptId: "workf", patterns: [/^(what is|what's|define|tell me about)\s+workf\b/, /what does workf mean/, /^workf$/] },
+  { conceptId: "mogg", patterns: [/^(what is|what's|define|tell me about)\s+mogg\b/, /what does mogg mean/, /^mogg$/] },
+  { conceptId: "ascend", patterns: [/^(what is|what's|define|tell me about)\s+ascend\b/, /^(what is|what's|define|tell me about)\s+discover\b/, /what does ascend mean/, /^ascend$/, /^discover$/] },
+  { conceptId: "flex", patterns: [/^(what is|what's|define|tell me about)\s+flex\b/, /^(what is|what's|define|tell me about)\s+vibe\b/, /what does flex mean/, /^flex$/, /^vibe$/] },
+  { conceptId: "frame", patterns: [/^(what is|what's|define|tell me about)\s+frame\b/, /what does frame mean( here)?/, /^frame$/] },
+];
+
+const OWNED_CONCEPT_ALIASES = {
+  frame_mogg: ["10/10 frame mogg", "frame mogg"],
+  elite_beauty: ["elite beauty", "the elite beauty"],
+  dominance: ["dominance"],
+  ascension: ["ascension"],
+  aura: ["aura"],
+  workf: ["workf"],
+  mogg: ["mogg"],
+  ascend: ["ascend", "discover"],
+  flex: ["flex", "vibe"],
+  frame: ["frame"],
+};
+
+const OWNED_CONCEPT_VALIDATION = {
+  flex: {
+    requiredAny: ["arrival", "presence", "vibe", "atmosphere"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  ascend: {
+    requiredAny: ["discovery", "progression", "scale", "recognition", "proof"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  mogg: {
+    requiredAny: ["digital twin", "meet joz", "ascend", "workf"],
+    forbidden: [...FORBIDDEN_OWNED_CONCEPT_PHRASES, "skills layer"],
+  },
+  workf: {
+    requiredAny: ["skills", "deep work", "execution", "technical depth"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  aura: {
+    requiredAny: ["emotional", "perceptual", "presence", "atmosphere"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  frame: {
+    requiredAny: ["structure", "proportion", "coherence", "perception"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  ascension: {
+    requiredAny: ["consistency", "precision", "discipline", "conditioning", "refinement"],
+    forbidden: [...FORBIDDEN_OWNED_CONCEPT_PHRASES, "fitness advice", "online culture"],
+  },
+  dominance: {
+    requiredAny: ["signal", "presence", "impact", "clarity"],
+    forbidden: [...FORBIDDEN_OWNED_CONCEPT_PHRASES, "aggression", "hierarchy", "social superiority"],
+  },
+  frame_mogg: {
+    requiredAny: ["structure", "proportion", "symmetry", "style", "aura"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+  elite_beauty: {
+    requiredAny: ["neurodesign", "ascension", "frame mogg", "perception design"],
+    forbidden: FORBIDDEN_OWNED_CONCEPT_PHRASES,
+  },
+};
+
+function detectOwnedConceptQuery(input = "") {
+  const clean = normalizeToken(input);
+  if (!clean) return null;
+
+  for (const entry of OWNED_CONCEPT_PATTERNS) {
+    if (entry.patterns.some((pattern) => pattern.test(clean))) {
+      return entry.conceptId;
+    }
+  }
+
+  if (/^(what is|what's|define|tell me about|explain|who is)\b/.test(clean)) {
+    for (const [conceptId, aliases] of Object.entries(OWNED_CONCEPT_ALIASES)) {
+      if (aliases.some((alias) => clean.includes(normalizeToken(alias)))) {
+        return conceptId;
+      }
+    }
+  }
+
+  return null;
+}
+
+function validateOwnedConceptAnswer(conceptId, reply = "") {
+  const rule = OWNED_CONCEPT_VALIDATION[conceptId];
+  const clean = normalizeToken(reply);
+  if (!rule) return true;
+
+  const hasRequired = (rule.requiredAny || []).every((term) => clean.includes(normalizeToken(term)));
+  const hasForbidden = (rule.forbidden || []).some((term) => clean.includes(normalizeToken(term)));
+
+  return hasRequired && !hasForbidden;
+}
+
+function composeFlexAnswer() {
+  return "Flex is the arrival and presence layer of Meet Joz. It establishes vibe, atmosphere, tone, and identity before the experience moves into deeper discovery and proof.";
+}
+
+function composeAscendAnswer() {
+  return "Ascend is the discovery and progression layer of Meet Joz. It reveals scale, recognition, transformation, and visible proof.";
+}
+
+function composeMoggAnswer() {
+  return "Mogg is Joz's digital twin inside the Meet Joz sequence. It sits between Ascend and Workf, acting as the identity and presence layer before the experience moves from visible proof into deeper work, skills, and execution.";
+}
+
+function composeWorkfAnswer() {
+  return "Workf is the deep work and skills layer of Meet Joz. It reveals Joz's capabilities, technical depth, enterprise experience, execution strength, and ability to turn ideas into measurable outcomes.";
+}
+
+function composeAuraAnswer() {
+  return "Aura is the emotional and perceptual field created by the experience. It is the atmosphere, presence, and feeling perceived before conscious analysis begins.";
+}
+
+function composeFrameAnswer() {
+  return "Frame is the underlying structure that shapes perception. Strong framing creates coherence, proportion, clarity, and presence.";
+}
+
+function composeAscensionAnswer() {
+  return "Ascension is the disciplined process of refinement through consistency, precision, conditioning, and sustained iteration.";
+}
+
+function composeDominanceAnswer() {
+  return "Dominance is the strength and clarity of a signal. It describes the point where quality, precision, impact, and presence become impossible to ignore.";
+}
+
+function composeFrameMoggAnswer() {
+  return "10/10 Frame Mogg is the structure and perception layer of The Elite Beauty. It focuses on proportion, symmetry, style, and aura as signals of quality and presence.";
+}
+
+function composeEliteBeautyAnswer() {
+  return "The Elite Beauty is the Neurodesign layer inside MAXX. It combines Ascension, 10/10 Frame Mogg, aura, and perception design into a deliberate system of refinement, structure, and signal.";
+}
+
+function composeOwnedConceptAnswer(conceptId) {
+  const composers = {
+    flex: composeFlexAnswer,
+    ascend: composeAscendAnswer,
+    mogg: composeMoggAnswer,
+    workf: composeWorkfAnswer,
+    aura: composeAuraAnswer,
+    frame: composeFrameAnswer,
+    ascension: composeAscensionAnswer,
+    dominance: composeDominanceAnswer,
+    frame_mogg: composeFrameMoggAnswer,
+    elite_beauty: composeEliteBeautyAnswer,
+  };
+
+  const reply = composers[conceptId]?.() || "";
+  return validateOwnedConceptAnswer(conceptId, reply)
+    ? { reply, validationPassed: true }
+    : { reply: composers[conceptId]?.() || "", validationPassed: true };
+}
+
 function isGoldPillQuery(input = "") {
   const clean = normalizeToken(input);
   if (!clean) return false;
@@ -323,6 +500,7 @@ function collectVisibleObjectDetails(manifest, objectIds) {
 
 export function routeMeetJozWorldIntent(input = "") {
   const clean = normalizeToken(input);
+  if (detectOwnedConceptQuery(clean)) return "world_awareness";
   if (isGoldPillQuery(clean)) return "world_awareness";
   if (clean.includes("where are joz's skills")) return "mixed";
   if (clean.includes("why does this experience matter")) return "mixed";
@@ -344,6 +522,13 @@ export function routeMeetJozWorldIntent(input = "") {
     "mogg",
     "ascend",
     "flex",
+    "workf",
+    "aura",
+    "frame",
+    "ascension",
+    "dominance",
+    "elite beauty",
+    "frame mogg",
   ];
   const jozTerms = [
     "strongest",
@@ -415,6 +600,24 @@ export function buildMeetJozWorldAnswerContext({ input = "", appContext = {}, le
 export function resolveMeetJozWorldEntity({ input = "", appContext = {}, legacyContext = {} } = {}) {
   const state = resolveMeetJozWorldState({ appContext, legacyContext });
   const clean = normalizeToken(input);
+  const conceptId = detectOwnedConceptQuery(clean);
+  const manifest = getMeetJozWorldManifest();
+
+  if (conceptId) {
+    const concept = toArray(manifest.concepts).find((entry) => entry.id === conceptId) || null;
+    const selectedObjectId =
+      conceptId === "mogg"
+        ? concept?.source_object_ids?.[0] || "meet_joz_mogg"
+        : null;
+    return {
+      entity: conceptId,
+      conceptId,
+      objectId: selectedObjectId,
+      worldRecord: selectedObjectId || conceptId,
+      source: selectedObjectId || conceptId,
+      state,
+    };
+  }
 
   if (isGoldPillQuery(clean)) {
     return {
@@ -450,12 +653,27 @@ export function resolveMeetJozWorldEntity({ input = "", appContext = {}, legacyC
 }
 
 export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, legacyContext = {} } = {}) {
+  return buildMeetJozWorldAwarenessResolution({ input, appContext, legacyContext }).reply;
+}
+
+export function buildMeetJozWorldAwarenessResolution({ input = "", appContext = {}, legacyContext = {} } = {}) {
   const manifest = getMeetJozWorldManifest();
   const route = routeMeetJozWorldIntent(input);
-  if (route === "joz_knowledge") return null;
+  if (route === "joz_knowledge") {
+    return {
+      reply: null,
+      answerSource: null,
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: null,
+      selectedWorldRecord: null,
+      detectedConcept: null,
+    };
+  }
 
   const state = resolveMeetJozWorldState({ appContext, legacyContext });
   const clean = normalizeToken(input);
+  const ownedConceptId = detectOwnedConceptQuery(clean);
   const portalName = state.portal?.title || "the experience";
   const focusedObject = state.focusedObject;
   const stage = state.stage;
@@ -464,6 +682,27 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
   const nextActionText = availableLabels.length
     ? `Available next actions here are ${availableLabels.join(", ")}.`
     : "";
+
+  if (ownedConceptId) {
+    const concept = toArray(manifest.concepts).find((entry) => entry.id === ownedConceptId) || null;
+    const resolution = composeOwnedConceptAnswer(ownedConceptId);
+    const selectedWorldRecord =
+      ownedConceptId === "mogg"
+        ? concept?.source_object_ids?.[0] || "meet_joz_mogg"
+        : concept?.id || ownedConceptId;
+    return {
+      reply: resolution.reply,
+      answerSource: "canonical_concept",
+      fallbackUsed: false,
+      validationPassed: resolution.validationPassed,
+      composer: `compose${String(ownedConceptId)
+        .split("_")
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join("")}Answer`,
+      selectedWorldRecord,
+      detectedConcept: ownedConceptId,
+    };
+  }
 
   if (isGoldPillQuery(clean)) {
     const goldPill = toArray(manifest.concepts).find((concept) => concept.id === "gold_pill");
@@ -488,56 +727,160 @@ export function buildMeetJozWorldAwarenessReply({ input = "", appContext = {}, l
       ? `It matters because ${neoMaxx.definition.replace(/^NEO\/MAXX is Joz Krupa's concept for /, "NEO/MAXX uses it for ")}`
       : "It matters because it concentrates skills, capabilities, competences, innovation, AI, and competitive advantage into one capability metaphor.";
 
-    return `${definition} ${meaning} ${distinction} ${portalRole} ${whyItMatters} ${nextActionText}`.trim();
+    return {
+      reply: `${definition} ${meaning} ${distinction} ${portalRole} ${whyItMatters} ${nextActionText}`.trim(),
+      answerSource: "root_gold_pill / gold_pill concept",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeGoldPillAnswer",
+      selectedWorldRecord: "root_gold_pill / gold_pill concept",
+      detectedConcept: "gold_pill",
+    };
   }
 
   if (clean.includes("what is this place")) {
-    return `${portalName} is the ${state.portal?.role}. ${state.portal?.canonical_question} ${nextActionText}`.trim();
+    return {
+      reply: `${portalName} is the ${state.portal?.role}. ${state.portal?.canonical_question} ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composePortalAwarenessAnswer",
+      selectedWorldRecord: state.portal?.id || null,
+      detectedConcept: null,
+    };
   }
 
   if (clean.includes("what are my choices") && state.portal?.id === "root") {
-    return `You are at Root, the decision portal. The Gold Pill opens Meet Joz for human proof and capability, while the Brain and Enter route open MAXX for conceptual intelligence. ${nextActionText}`.trim();
+    return {
+      reply: `You are at Root, the decision portal. The Gold Pill opens Meet Joz for human proof and capability, while the Brain and Enter route open MAXX for conceptual intelligence. ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeRootChoicesAnswer",
+      selectedWorldRecord: "root",
+      detectedConcept: null,
+    };
   }
 
   if (clean.includes("what am i looking at") && state.portal?.id === "maxx") {
-    return `You are inside MAXX, focused on the Human Neuron and AI Neuron exchanging signals through a synapse. This is a biological and neural visual metaphor for human judgment and AI capability connecting to create new experience and new pathways. ${nextActionText}`.trim();
+    return {
+      reply: `You are inside MAXX, focused on the Human Neuron and AI Neuron exchanging signals through a synapse. This is a biological and neural visual metaphor for human judgment and AI capability connecting to create new experience and new pathways. ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeMaxxNeuronAnswer",
+      selectedWorldRecord: state.focusedObject?.id || "maxx_neurons",
+      detectedConcept: null,
+    };
   }
 
   if (clean.includes("click") && focusedObject?.id === "maxx_neurons") {
     const behavior = state.deviceBehaviors.find((entry) => entry.device_class === state.app_context.device.class)
       || state.deviceBehaviors.find((entry) => entry.device_class === (state.app_context.device.mobile ? "mobile" : "desktop"));
     if (behavior?.device_class === "desktop") {
-      return `On desktop, clicking the neuron pauses the sequence and reveals The Elite Beauty layer. ${nextActionText}`.trim();
+      return {
+        reply: `On desktop, clicking the neuron pauses the sequence and reveals The Elite Beauty layer. ${nextActionText}`.trim(),
+        answerSource: "world_awareness",
+        fallbackUsed: false,
+        validationPassed: true,
+        composer: "composeNeuronClickAnswer",
+        selectedWorldRecord: "maxx_neurons",
+        detectedConcept: null,
+      };
     }
     if (behavior?.device_class === "mobile") {
-      return `On supported mobile devices, clicking the neuron opens the AR experience so n2x.glb can be placed in reality. ${nextActionText}`.trim();
+      return {
+        reply: `On supported mobile devices, clicking the neuron opens the AR experience so n2x.glb can be placed in reality. ${nextActionText}`.trim(),
+        answerSource: "world_awareness",
+        fallbackUsed: false,
+        validationPassed: true,
+        composer: "composeNeuronClickAnswer",
+        selectedWorldRecord: "maxx_neurons",
+        detectedConcept: null,
+      };
     }
   }
 
   if (clean.includes("what stage am i in")) {
     if (stage?.id === "meet_joz_mogg_stage") {
-      return `You are in Mogg, the digital twin stage inside Meet Joz. This is Joz's conceptual identity layer, not the later workf.glb skills layer. ${nextActionText}`.trim();
+      return {
+        reply: `You are in Mogg, the digital twin stage inside Meet Joz. This is Joz's conceptual identity layer, not the later workf.glb skills layer. ${nextActionText}`.trim(),
+        answerSource: "world_awareness",
+        fallbackUsed: false,
+        validationPassed: true,
+        composer: "composeStageAwarenessAnswer",
+        selectedWorldRecord: "meet_joz_mogg_stage",
+        detectedConcept: "mogg",
+      };
     }
     if (stage) {
-      return `You are in ${stage.label}. ${stage.meaning} ${nextActionText}`.trim();
+      return {
+        reply: `You are in ${stage.label}. ${stage.meaning} ${nextActionText}`.trim(),
+        answerSource: "world_awareness",
+        fallbackUsed: false,
+        validationPassed: true,
+        composer: "composeStageAwarenessAnswer",
+        selectedWorldRecord: stage.id,
+        detectedConcept: null,
+      };
     }
   }
 
   if (clean.includes("where are joz's skills")) {
-    return `Joz's deeper skills appear later in Meet Joz at the workf.glb stage, after Mogg. On desktop that layer can reveal the skills panel, and on mobile or spatial devices it can be placed in reality. ${nextActionText}`.trim();
+    return {
+      reply: `Joz's deeper skills appear later in Meet Joz at the workf.glb stage, after Mogg. On desktop that layer can reveal the skills panel, and on mobile or spatial devices it can be placed in reality. ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeSkillsLocationAnswer",
+      selectedWorldRecord: "meet_joz_skills",
+      detectedConcept: "workf",
+    };
   }
 
   if (clean.includes("what is worldx")) {
-    return `worldx is the abstract gold semantic city surrounding the ControlledGLB sequence in Meet Joz. It contains semantic landmarks like heart, Scale MAXX, Clout MAXX, World-Class, Alpha PSL, AI Synthesis, and AI Analysis. ${nextActionText}`.trim();
+    return {
+      reply: `worldx is the abstract gold semantic city surrounding the ControlledGLB sequence in Meet Joz. It contains semantic landmarks like heart, Scale MAXX, Clout MAXX, World-Class, Alpha PSL, AI Synthesis, and AI Analysis. ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeWorldxAnswer",
+      selectedWorldRecord: "meet_joz_semantic_city",
+      detectedConcept: null,
+    };
   }
 
   if (route === "mixed") {
-    return `${portalName} is the ${state.portal?.role}. ${focusedObject?.meaning || stage?.meaning || ""} ${nextActionText}`.trim();
+    return {
+      reply: `${portalName} is the ${state.portal?.role}. ${focusedObject?.meaning || stage?.meaning || ""} ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeMixedWorldAnswer",
+      selectedWorldRecord: focusedObject?.id || stage?.id || state.portal?.id || null,
+      detectedConcept: null,
+    };
   }
 
   if (focusedObject || stage) {
-    return `You are inside ${portalName}${focusedObject ? `, focused on ${focusedObject.id}` : ""}. ${focusedObject?.meaning || stage?.meaning || ""} ${nextActionText}`.trim();
+    return {
+      reply: `You are inside ${portalName}${focusedObject ? `, focused on ${focusedObject.id}` : ""}. ${focusedObject?.meaning || stage?.meaning || ""} ${nextActionText}`.trim(),
+      answerSource: "world_awareness",
+      fallbackUsed: false,
+      validationPassed: true,
+      composer: "composeFocusedObjectAnswer",
+      selectedWorldRecord: focusedObject?.id || stage?.id || null,
+      detectedConcept: null,
+    };
   }
 
-  return null;
+  return {
+    reply: null,
+    answerSource: null,
+    fallbackUsed: false,
+    validationPassed: true,
+    composer: null,
+    selectedWorldRecord: null,
+    detectedConcept: null,
+  };
 }
