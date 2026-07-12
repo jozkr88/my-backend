@@ -1,0 +1,99 @@
+{
+  "slug": "maybank-private-banking-digital",
+  "title": "Private Banking, Wealth and Conversational AI — Maybank–Ageas, Singapore",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Private banking, wealth, HNW, design-system, CMS, and conversational-AI work across Singapore and Asia Pacific.",
+  "body": "Private banking, wealth, and conversational-AI work for Maybank–Ageas Etiqa spans design systems, CMS, high-net-worth journeys, and machine-learning-enabled customer experience in Singapore and Asia Pacific.\n\nIncluded projects\n- Design Systems\n- Wealth/HNW CMS UX\n- ML/Conversational AI UX\n- Private Banking CMS\n\nStrategic and technical themes\n- Private banking and wealth experience design in a regulated financial-services context.\n- Design-system and CMS work to support scalable delivery and consistency.\n- ML and conversational UX applied to customer and advisor journeys.\n- Enterprise transformation where wealth journeys, operations, and growth signals intersect.\n\nProof connection\n- This programme can reference the existing Maybank 20× digital-sales proof and the broader wealth-transformation evidence.\n- It must not imply that every listed sub-project independently produced the 20× outcome.\n\nRetrieval guidance\n- Use this record when the question is specifically about Maybank private banking, wealth/HNW, CMS, design systems, or conversational AI.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "cms",
+      "conversational-ai",
+      "hnw",
+      "maybank",
+      "private-banking",
+      "wealth"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz worked across private banking, wealth/HNW, design systems, CMS, and conversational-AI related experience work for Maybank–Ageas Etiqa.",
+      "The programme connected enterprise delivery, wealth journeys, and ML-enabled customer experience."
+    ],
+    "proof_points": [
+      "The broader Maybank proof includes 20× digital sales growth within 12 months.",
+      "The broader programme also includes 3,000+ wealth pilots and ML models for HNW and mass-market contexts."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Singapore"
+    ],
+    "companies": [
+      "Ageas",
+      "Etiqa",
+      "Maybank"
+    ],
+    "projects": [
+      "Design Systems",
+      "ML/Conversational AI UX",
+      "Private Banking CMS",
+      "Wealth/HNW CMS UX"
+    ],
+    "intent_families": [
+      "business_need",
+      "factual_profile",
+      "skills"
+    ],
+    "sub_intents": [
+      "business_need.outcomes",
+      "business_need.roi",
+      "factual_profile.companies",
+      "skills.financial_services"
+    ],
+    "impact_score": 93,
+    "priority_label": "high",
+    "valid_from": "2016",
+    "valid_to": "2018",
+    "source_notes": "Grouped programme record. Quantified Maybank growth is referenced only through existing proof objects.",
+    "source_filename": "maybank-private-banking-digital.md",
+    "source_meta_filename": "maybank-private-banking-digital.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "decision_intelligence",
+      "enterprise_architecture",
+      "organizational_design",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "higher_adoption",
+      "lower_operational_friction",
+      "revenue_growth"
+    ],
+    "governance": [],
+    "industries": [
+      "banking",
+      "insurance",
+      "wealth_management"
+    ],
+    "proofs": [
+      "maybank_digital_sales_growth"
+    ],
+    "related_proofs": [
+      "maybank_digital_sales_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 2
+  }
+}

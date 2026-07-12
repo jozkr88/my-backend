@@ -289,6 +289,10 @@
       "name": "Technology"
     },
     {
+      "id": "healthcare",
+      "name": "Healthcare and MedTech"
+    },
+    {
       "id": "creative_services",
       "name": "Creative and Agency Services"
     },

@@ -1,0 +1,99 @@
+{
+  "slug": "leo-burnett-commerce-platforms",
+  "title": "Luxury Commerce and Consumer Platforms — Leo Burnett/Publicis, Singapore",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Luxury e-commerce, consumer-platform, CMS, and activation work across the USA and Asia Pacific.",
+  "body": "Luxury commerce and consumer-platform work at Leo Burnett/Publicis covers SK-II, Samsung, and Skyscanner across the USA and Asia Pacific.\n\nIncluded projects\n- SK-II USA e-commerce CMS\n- SK-II Asia Pacific CMS\n- Samsung Digital Appliances CMS\n- Skyscanner Activation\n\nStrategic and technical themes\n- Luxury and consumer commerce experience design.\n- CMS and platform work across regional and multi-market delivery contexts.\n- Agency-side product and workflow collaboration for faster delivery.\n- Activation and campaign work that still required platform thinking, not only surface design.\n\nProof connection\n- This programme can reference the existing 70% handoff-friction reduction proof from Leo Burnett/Publicis.\n- It must not attribute that metric to every listed client project.\n\nRetrieval guidance\n- Use this record for Leo Burnett, Publicis, SK-II, Samsung, Skyscanner, luxury-commerce, or commerce-platform questions.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "commerce-platforms",
+      "leo-burnett",
+      "publicis",
+      "samsung",
+      "sk-ii",
+      "skyscanner"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz worked on luxury commerce, CMS, and consumer-platform initiatives at Leo Burnett/Publicis.",
+      "The programme included SK-II in the USA and APAC, Samsung digital-appliances CMS work, and Skyscanner activation."
+    ],
+    "proof_points": [
+      "The broader Leo Burnett/Publicis proof includes a 70% reduction in handoff friction through code-based prototyping.",
+      "This record narrows retrieval to the grouped commerce and consumer platform programme."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Leo Burnett",
+      "P&G",
+      "Publicis",
+      "Samsung",
+      "Skyscanner"
+    ],
+    "projects": [
+      "SK-II Asia Pacific CMS",
+      "SK-II USA e-commerce CMS",
+      "Samsung Digital Appliances CMS",
+      "Skyscanner Activation"
+    ],
+    "intent_families": [
+      "business_need",
+      "factual_profile",
+      "skills"
+    ],
+    "sub_intents": [
+      "business_need.outcomes",
+      "factual_profile.companies",
+      "skills.enterprise_proof"
+    ],
+    "impact_score": 85,
+    "priority_label": "standard",
+    "valid_from": "2014",
+    "valid_to": "2014",
+    "source_notes": "Grouped programme record. The 70% handoff-friction metric belongs to the broader Publicis delivery environment, not every individual client project.",
+    "source_filename": "leo-burnett-commerce-platforms.md",
+    "source_meta_filename": "leo-burnett-commerce-platforms.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "product_strategy",
+      "rapid_prototyping",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "lower_operational_friction"
+    ],
+    "governance": [],
+    "industries": [
+      "creative_services",
+      "retail",
+      "technology"
+    ],
+    "proofs": [
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 96,
+    "measurable_outcome_count": 1
+  }
+}

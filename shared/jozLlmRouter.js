@@ -21,6 +21,133 @@ function includesAny(text, patterns = []) {
   );
 }
 
+const JOZ_OPERATIONAL_ACTIONS = [
+  {
+    id: "call_joz",
+    label: "Call Joz",
+    type: "tel",
+    href: "tel:+6531072412",
+  },
+  {
+    id: "email_joz",
+    label: "Email Joz",
+    type: "mailto",
+    href: "mailto:joz@meetjoz.com",
+  },
+];
+
+function buildOperationalActions() {
+  return JOZ_OPERATIONAL_ACTIONS.map((action) => ({ ...action }));
+}
+
+function validateOperationalReply(intent, reply = "", actions = []) {
+  const cleanReply = normalizeText(reply);
+  const actionIds = actions.map((action) => action.id);
+  const hasRequiredActions =
+    actionIds.includes("call_joz") && actionIds.includes("email_joz");
+
+  if (!hasRequiredActions) return false;
+
+  if (intent === "recruiter_location") {
+    return ["dubai", "singapore", "zurich", "europe", "global markets"].every((term) =>
+      cleanReply.includes(term)
+    );
+  }
+
+  if (intent === "recruiter_compensation") {
+    return !/\b(?:usd|sgd|eur|gbp|aed|chf|\$|€|£)\s*\d/i.test(reply);
+  }
+
+  if (intent === "recruiter_work_authorization") {
+    return !/\bcurrent(?:ly)?\b.*\b(ep|pep|work pass|work authorization)\b/i.test(reply);
+  }
+
+  return true;
+}
+
+function composeLocationAnswer(subIntent = "positioning") {
+  if (subIntent === "residence") {
+    return "Joz's current residence or legal address should be confirmed directly for the specific hiring process.";
+  }
+  return "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.";
+}
+
+function composeAvailabilityAnswer() {
+  return "Joz is open to discussing suitable opportunities. Availability depends on the role, location, scope, and start-date requirements.";
+}
+
+function composeCompensationAnswer() {
+  return "Compensation depends on the role scope, location, seniority, responsibilities, and overall package. The best next step is a direct conversation with Joz.";
+}
+
+function composeHiringAnswer() {
+  return "Joz is open to discussing suitable international opportunities across Singapore, Dubai, Zurich, Europe, and global markets.";
+}
+
+function composeRelocationAnswer() {
+  return "Joz is open to discussing suitable international opportunities across Singapore, Dubai, Zurich, Europe, and global markets.";
+}
+
+function composeWorkAuthorizationAnswer() {
+  return "Joz's current work-authorization status should be confirmed directly for the specific hiring process.";
+}
+
+function composeContactAnswer() {
+  return "You can contact Joz by phone at +65 3107 2412 or by email at joz@meetjoz.com.";
+}
+
+function buildRecruiterOperationalResolution(route = {}) {
+  const actions = buildOperationalActions();
+  let reply = "";
+  let selectedOperationalComposer = "";
+
+  switch (route?.detectedIntent) {
+    case "recruiter_location":
+      reply = composeLocationAnswer(route.detectedSubIntent);
+      selectedOperationalComposer = "composeLocationAnswer";
+      break;
+    case "recruiter_availability":
+      reply = composeAvailabilityAnswer();
+      selectedOperationalComposer = "composeAvailabilityAnswer";
+      break;
+    case "recruiter_compensation":
+      reply = composeCompensationAnswer();
+      selectedOperationalComposer = "composeCompensationAnswer";
+      break;
+    case "recruiter_hiring":
+      reply = composeHiringAnswer();
+      selectedOperationalComposer = "composeHiringAnswer";
+      break;
+    case "recruiter_relocation":
+      reply = composeRelocationAnswer();
+      selectedOperationalComposer = "composeRelocationAnswer";
+      break;
+    case "recruiter_work_authorization":
+      reply = composeWorkAuthorizationAnswer();
+      selectedOperationalComposer = "composeWorkAuthorizationAnswer";
+      break;
+    case "recruiter_contact":
+      reply = composeContactAnswer();
+      selectedOperationalComposer = "composeContactAnswer";
+      break;
+    default:
+      return null;
+  }
+
+  return {
+    reply,
+    answerSource: "deterministic_recruiter_operational",
+    composer: selectedOperationalComposer,
+    selectedOperationalComposer,
+    actions,
+    recommendedActionIds: actions.map((action) => action.id),
+    validationPassed: validateOperationalReply(route.detectedIntent, reply, actions),
+    fallbackUsed: false,
+    intentMode: "booking",
+    retrievedCategories: [],
+  };
+}
+
 function buildCanonicalWorldConceptReply({ concept, appContext, legacyContext, input }) {
   if (concept === "gold_pill") {
     return buildMeetJozWorldAwarenessReply({ input, appContext, legacyContext });
@@ -281,6 +408,170 @@ function detectFactualProfile(clean) {
   return null;
 }
 
+function detectRecruiterOperational(clean) {
+  const explicitResidence = includesAny(clean, [
+    "where does joz currently live",
+    "what is joz's current residence",
+    "what is jozs current residence",
+    "what is joz's legal address",
+    "what is jozs legal address",
+  ]);
+  if (explicitResidence) {
+    return {
+      detectedIntent: "recruiter_location",
+      detectedSubIntent: "residence",
+      detectedConcept: "recruiter_location",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "does joz have an ep",
+      "does joz have a pep",
+      "does joz have a singapore work pass",
+      "can joz legally work in singapore",
+      "what is joz's visa status",
+      "what is jozs visa status",
+      "does joz have a singapore ep",
+      "visa",
+      "work pass",
+      "authorization",
+      "eligible to work",
+      /\bep\b/,
+      /\bpep\b/,
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_work_authorization",
+      detectedSubIntent: "work_authorization",
+      detectedConcept: "recruiter_work_authorization",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "how can i contact joz",
+      "call joz",
+      "email joz",
+      "what is joz's phone number",
+      "what is jozs phone number",
+      "what is joz's email",
+      "what is jozs email",
+      "contact",
+      "phone",
+      "email",
+      "reach joz",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_contact",
+      detectedSubIntent: "contact",
+      detectedConcept: "recruiter_contact",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "what salary does joz want",
+      "what are joz's salary expectations",
+      "what are jozs salary expectations",
+      "what compensation is joz looking for",
+      "what package does joz expect",
+      "what is joz's rate",
+      "what is jozs rate",
+      "how much does joz charge",
+      "salary",
+      "compensation",
+      "package",
+      "rate",
+      "pay",
+      "expectations",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_compensation",
+      detectedSubIntent: "compensation",
+      detectedConcept: "recruiter_compensation",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "is joz available",
+      "what is joz's availability",
+      "what is jozs availability",
+      "can joz start soon",
+      "is joz open to opportunities",
+      "when can joz start",
+      "available",
+      "availability",
+      "open to opportunities",
+      "start soon",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_availability",
+      detectedSubIntent: "availability",
+      detectedConcept: "recruiter_availability",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "is joz open to relocation",
+      "is joz available for singapore",
+      "is joz open to dubai",
+      "is joz interested in zurich",
+      "relocate",
+      "relocation",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_relocation",
+      detectedSubIntent: "relocation",
+      detectedConcept: "recruiter_relocation",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "can we hire joz",
+      "how do we discuss a role with joz",
+      "hiring",
+      "opportunity",
+      "discuss a role",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_hiring",
+      detectedSubIntent: "hiring",
+      detectedConcept: "recruiter_hiring",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "where is joz located",
+      "where is joz based",
+      "where does joz operate",
+      "what markets does joz work across",
+      "located",
+      "based",
+      "operates",
+      "markets",
+      "regions",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_location",
+      detectedSubIntent: "positioning",
+      detectedConcept: "recruiter_location",
+    };
+  }
+
+  return null;
+}
+
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
@@ -399,6 +690,19 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     };
   }
 
+  const recruiterOperational = detectRecruiterOperational(clean);
+  if (recruiterOperational) {
+    return {
+      detectedIntent: recruiterOperational.detectedIntent,
+      detectedSubIntent: recruiterOperational.detectedSubIntent,
+      detectedConcept: recruiterOperational.detectedConcept,
+      selectedRoute: "joz_knowledge",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
   const factual = detectFactualProfile(clean);
   if (factual) {
     return {
@@ -480,6 +784,11 @@ export function composeJozLlmRouteReply({
   appContext = {},
   legacyContext = {},
 } = {}) {
+  const recruiterOperationalResolution = buildRecruiterOperationalResolution(route);
+  if (recruiterOperationalResolution) {
+    return recruiterOperationalResolution;
+  }
+
   if (route?.selectedRoute === "canonical_world_concept") {
     return {
       reply: buildCanonicalWorldConceptReply({
@@ -682,6 +991,8 @@ export function buildJozRouteTrace(route, resolution) {
     answerSource: resolution?.answerSource || null,
     responseMode: resolution?.responseMode || null,
     composer: resolution?.composer || null,
+    selectedOperationalComposer: resolution?.selectedOperationalComposer || null,
+    recommendedActionIds: resolution?.recommendedActionIds || [],
     fallbackUsed: Boolean(resolution?.fallbackUsed),
     validationPassed: resolution?.validationPassed !== false,
   };

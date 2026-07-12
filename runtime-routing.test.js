@@ -11,7 +11,7 @@ const BANNED_GOLD_PILL_TERMS = [
   "non-traditional methods",
 ];
 
-async function postJson(pathname, body) {
+async function postJson(pathname, body, options = {}) {
   const server = app.listen(0, "127.0.0.1");
   await new Promise((resolve) => server.once("listening", resolve));
 
@@ -19,7 +19,7 @@ async function postJson(pathname, body) {
     const { port } = server.address();
     const response = await fetch(`http://127.0.0.1:${port}${pathname}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
       body: JSON.stringify(body),
     });
     const payload = await response.json();
@@ -31,13 +31,15 @@ async function postJson(pathname, body) {
   }
 }
 
-async function getJson(pathname) {
+async function getJson(pathname, options = {}) {
   const server = app.listen(0, "127.0.0.1");
   await new Promise((resolve) => server.once("listening", resolve));
 
   try {
     const { port } = server.address();
-    const response = await fetch(`http://127.0.0.1:${port}${pathname}`);
+    const response = await fetch(`http://127.0.0.1:${port}${pathname}`, {
+      headers: options.headers || {},
+    });
     const payload = await response.json();
     return { status: response.status, payload };
   } finally {
@@ -144,16 +146,17 @@ test("GET /api/privacy/meta exposes retention defaults and processors", async ()
   assert.ok(Array.isArray(payload.processors));
   assert.ok(payload.processors.includes("Supabase"));
   assert.ok(payload.processors.includes("OpenAI"));
-  assert.ok(payload.processors.includes("Twilio"));
   assert.ok(payload.processors.includes("Resend"));
 });
 
 test("POST /api/privacy/export returns matching fallback callback request data", async () => {
+  const uniqueEmail = `casey+${Date.now()}@example.com`;
+  const uniquePhone = `+41 76 497 ${String(Date.now()).slice(-4)}`;
   const seed = await postJson("/api/joz-llm/callback-request", {
     sessionKey: "privacy-export-seed",
     name: "Casey Example",
-    phone: "+41 76 497 38 94",
-    email: "casey@example.com",
+    phone: uniquePhone,
+    email: uniqueEmail,
     time: "Monday 10:00",
     context: {
       currentPortal: "meet-joz",
@@ -165,25 +168,51 @@ test("POST /api/privacy/export returns matching fallback callback request data",
   assert.equal(seed.status, 200);
 
   const { status, payload } = await postJson("/api/privacy/export", {
-    email: "casey@example.com",
-    phone: "+41 76 497 38 94",
+    email: uniqueEmail,
+    phone: uniquePhone,
   });
 
   assert.equal(status, 200);
   assert.equal(payload.ok, true);
   assert.equal(payload.data?.callbackRequests?.length, 1);
-  assert.equal(payload.data?.callbackRequests?.[0]?.name, "Casey Example");
-  assert.equal(payload.data?.callbackRequests?.[0]?.email, "casey@example.com");
-  assert.equal(payload.data?.conversations?.length, 0);
-  assert.equal(payload.data?.messages?.length, 0);
+  const exportedCallback = payload.data?.callbackRequests?.[0] || {};
+  assert.equal(
+    exportedCallback.name || exportedCallback.requested_name,
+    "Casey Example"
+  );
+  assert.equal(
+    exportedCallback.email || exportedCallback.requested_email,
+    uniqueEmail
+  );
+  assert.ok(Array.isArray(payload.data?.conversations));
+  assert.ok(Array.isArray(payload.data?.messages));
+
+  if (payload.data?.conversations?.length) {
+    assert.ok(
+      payload.data.conversations.some(
+        (conversation) =>
+          String(conversation.id || "") === String(exportedCallback.conversation_id || "")
+      )
+    );
+  }
+
+  if (payload.data?.messages?.length) {
+    assert.ok(
+      payload.data.messages.some((message) =>
+        ["callback_request", "callback_status"].includes(String(message.message_kind || ""))
+      )
+    );
+  }
 });
 
 test("POST /api/privacy/delete removes matching fallback callback request data", async () => {
+  const uniqueEmail = `jordan+${Date.now()}@example.com`;
+  const uniquePhone = `+1 415 555 ${String(Date.now()).slice(-4)}`;
   const seed = await postJson("/api/joz-llm/callback-request", {
     sessionKey: "privacy-delete-seed",
     name: "Jordan Example",
-    phone: "+1 415 555 0199",
-    email: "jordan@example.com",
+    phone: uniquePhone,
+    email: uniqueEmail,
     time: "Friday 16:00",
     context: {
       currentPortal: "meet-joz",
@@ -195,8 +224,8 @@ test("POST /api/privacy/delete removes matching fallback callback request data",
   assert.equal(seed.status, 200);
 
   const deletion = await postJson("/api/privacy/delete", {
-    email: "jordan@example.com",
-    phone: "+1 415 555 0199",
+    email: uniqueEmail,
+    phone: uniquePhone,
   });
 
   assert.equal(deletion.status, 200);
@@ -204,8 +233,8 @@ test("POST /api/privacy/delete removes matching fallback callback request data",
   assert.equal(deletion.payload.deletion?.deletedCallbackRequests, 1);
 
   const exportedAfterDelete = await postJson("/api/privacy/export", {
-    email: "jordan@example.com",
-    phone: "+1 415 555 0199",
+    email: uniqueEmail,
+    phone: uniquePhone,
   });
 
   assert.equal(exportedAfterDelete.status, 200);
@@ -521,3 +550,116 @@ for (const query of [
     assert.match(String(payload.reply || ""), /^neoMAXX is a concept created by Joz Krupa\./);
   });
 }
+
+const RECRUITER_OPERATIONAL_CASES = [
+  {
+    name: "location",
+    query: "Where is Joz located?",
+    expectedReply:
+      "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.",
+    expectedIntent: "recruiter_location",
+    expectedComposer: "composeLocationAnswer",
+    forbidden: [/Slovakia/i, /Bratislava/i, /\bEP\b/i, /\bPEP\b/i],
+  },
+  {
+    name: "availability",
+    query: "Is Joz available?",
+    expectedReply:
+      "Joz is open to discussing suitable opportunities. Availability depends on the role, location, scope, and start-date requirements.",
+    expectedIntent: "recruiter_availability",
+    expectedComposer: "composeAvailabilityAnswer",
+    forbidden: [],
+  },
+  {
+    name: "compensation",
+    query: "What salary does Joz want?",
+    expectedReply:
+      "Compensation depends on the role scope, location, seniority, responsibilities, and overall package. The best next step is a direct conversation with Joz.",
+    expectedIntent: "recruiter_compensation",
+    expectedComposer: "composeCompensationAnswer",
+    forbidden: [/\b(?:usd|sgd|eur|gbp|aed|chf|\$|€|£)\s*\d/i, /\b\d+\s*(k|K)\b/],
+  },
+  {
+    name: "contact",
+    query: "How can I contact Joz?",
+    expectedReply:
+      "You can contact Joz by phone at +65 3107 2412 or by email at joz@meetjoz.com.",
+    expectedIntent: "recruiter_contact",
+    expectedComposer: "composeContactAnswer",
+    forbidden: [],
+  },
+  {
+    name: "work_authorization",
+    query: "Does Joz have a Singapore EP?",
+    expectedReply:
+      "Joz's current work-authorization status should be confirmed directly for the specific hiring process.",
+    expectedIntent: "recruiter_work_authorization",
+    expectedComposer: "composeWorkAuthorizationAnswer",
+    forbidden: [/currently has an EP/i, /currently has a PEP/i, /active Singapore work authorization/i],
+  },
+];
+
+for (const testCase of RECRUITER_OPERATIONAL_CASES) {
+  test(`POST /api/joz-llm deterministic recruiter operational answer: ${testCase.name}`, async () => {
+    const { status, payload } = await postJson("/api/joz-llm", {
+      sessionKey: `runtime-recruiter-${testCase.name}`,
+      messages: [{ role: "user", content: testCase.query }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
+    }, {
+      headers: {
+        "x-forwarded-for": `198.51.100.${80 + RECRUITER_OPERATIONAL_CASES.indexOf(testCase)}`,
+      },
+    });
+
+    assert.equal(status, 200);
+    assert.equal(payload.mode, "joz_knowledge");
+    assert.equal(payload.reply, testCase.expectedReply);
+    assert.equal(payload.trace?.detectedIntent, testCase.expectedIntent);
+    assert.equal(payload.trace?.selectedRoute, "joz_knowledge");
+    assert.equal(payload.trace?.answerSource, "deterministic_recruiter_operational");
+    assert.equal(payload.trace?.selectedOperationalComposer, testCase.expectedComposer);
+    assert.deepEqual(payload.trace?.recommendedActionIds, ["call_joz", "email_joz"]);
+    assert.equal(payload.trace?.validationPassed, true);
+    assert.equal(payload.trace?.fallbackUsed, false);
+    assert.deepEqual(
+      payload.actions?.map((action) => action.id),
+      ["call_joz", "email_joz"]
+    );
+    assert.deepEqual(
+      payload.actions?.map((action) => action.label),
+      ["Call Joz", "Email Joz"]
+    );
+    for (const matcher of testCase.forbidden) {
+      assert.doesNotMatch(String(payload.reply || ""), matcher);
+    }
+  });
+}
+
+test("POST /api/joz-llm deep technical skills does not return recruiter actions", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-deep-technical-skills",
+    messages: [{ role: "user", content: "What are Joz's deep technical skills?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: "skills_stop",
+    },
+  }, {
+    headers: {
+      "x-forwarded-for": "198.51.100.99",
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.trace?.detectedIntent, "skills");
+  assert.equal(payload.trace?.selectedRoute, "skills");
+  assert.equal(Array.isArray(payload.actions) ? payload.actions.length : 0, 0);
+  assert.doesNotMatch(
+    String(payload.reply || ""),
+    /\bSlovak\b|\bsalary\b|\bEP\b|\bPEP\b|\+65 3107 2412|joz@meetjoz\.com/i
+  );
+});

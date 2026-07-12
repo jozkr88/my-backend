@@ -25,7 +25,7 @@ Years of experience
 - The ML/AI-focused timeline is based on work from 2018 to present.
 
 Education
-- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.
+- Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire.
 - Joz also held an Innovation Strategist university appointment there.
 - Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.
 

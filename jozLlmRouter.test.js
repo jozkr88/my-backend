@@ -102,6 +102,36 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /Python|FastAPI/i);
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
   assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
+  assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
+});
+
+test("routes recruiter location queries to deterministic operational answer with actions", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "Where is Joz located?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "Where is Joz located?",
+    appContext,
+    legacyContext,
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+
+  assert.equal(route.detectedIntent, "recruiter_location");
+  assert.equal(route.selectedRoute, "joz_knowledge");
+  assert.equal(resolution.reply, "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.");
+  assert.equal(resolution.selectedOperationalComposer, "composeLocationAnswer");
+  assert.deepEqual(
+    resolution.actions.map((action) => action.id),
+    ["call_joz", "email_joz"]
+  );
+  assert.equal(trace.selectedOperationalComposer, "composeLocationAnswer");
+  assert.deepEqual(trace.recommendedActionIds, ["call_joz", "email_joz"]);
+  assert.equal(trace.validationPassed, true);
+  assert.equal(trace.fallbackUsed, false);
 });
 
 test("programme employer queries can resolve from retrieved programme records without model fallback", async () => {

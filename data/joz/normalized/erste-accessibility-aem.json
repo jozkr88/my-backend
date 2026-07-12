@@ -1,0 +1,90 @@
+{
+  "slug": "erste-accessibility-aem",
+  "title": "Accessibility and Adobe Experience Manager UX — Erste Bank, Vienna",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Enterprise accessibility guidance and Adobe Experience Manager experience work for Erste Bank in Vienna.",
+  "body": "Accessibility and Adobe Experience Manager UX for Erste Bank in Vienna represents enterprise experience work inside a regulated banking environment.\n\nIncluded projects\n- Accessibility UX Guidelines\n- Adobe Experience Manager UX\n\nStrategic and technical themes\n- Accessibility guidance in a large regulated banking context.\n- Experience design and workflow thinking around Adobe Experience Manager.\n- Enterprise architecture and delivery discipline in systems that require trust, clarity, and governance.\n- Banking transformation work where usability and risk reduction both matter.\n\nProof connection\n- This record can connect to the existing Erste 16M+ customer-scale proof when the question is about enterprise credibility.\n- It must not imply that each listed sub-project independently served the full 16M+ customer base.\n\nRetrieval guidance\n- Use this record for employer-specific Erste Bank questions, accessibility work, AEM work, or regulated banking UX.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "accessibility",
+      "aem",
+      "enterprise-ux",
+      "erste-bank",
+      "regulated-banking"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz worked on accessibility guidance and AEM-related experience work for Erste Bank in Vienna.",
+      "The work sat inside a regulated banking context where usability, governance, and risk reduction mattered."
+    ],
+    "proof_points": [
+      "Erste Bank already exists in the proof layer as engineering and accessibility work at 16M+ customer scale.",
+      "This record narrows retrieval to the accessibility and AEM programme rather than the broader hero proof."
+    ],
+    "regions": [
+      "Austria",
+      "Europe",
+      "Vienna"
+    ],
+    "companies": [
+      "Erste Bank"
+    ],
+    "projects": [
+      "Accessibility UX Guidelines",
+      "Adobe Experience Manager UX"
+    ],
+    "intent_families": [
+      "business_need",
+      "factual_profile",
+      "skills"
+    ],
+    "sub_intents": [
+      "business_need.outcomes",
+      "factual_profile.companies",
+      "skills.enterprise_proof"
+    ],
+    "impact_score": 88,
+    "priority_label": "high",
+    "valid_from": "2018",
+    "valid_to": null,
+    "source_notes": "Grouped programme record. 16M+ scale may be referenced only through the existing Erste proof object.",
+    "source_filename": "erste-accessibility-aem.md",
+    "source_meta_filename": "erste-accessibility-aem.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "higher_adoption",
+      "lower_risk"
+    ],
+    "governance": [],
+    "industries": [
+      "banking",
+      "financial_services"
+    ],
+    "proofs": [
+      "erste_customer_scale"
+    ],
+    "related_proofs": [
+      "erste_customer_scale"
+    ],
+    "enterprise_scale_score": 98,
+    "measurable_outcome_count": 2
+  }
+}

@@ -523,7 +523,7 @@ async function deliverCallbackRequest(record) {
     }
   }
 
-  const anyChannelConfigured = configured.sms || configured.email;
+  const anyChannelConfigured = configured.email;
   const status = channels.length
     ? "delivered"
     : anyChannelConfigured
@@ -946,6 +946,7 @@ app.post("/api/joz-llm", async (req, res) => {
       reply,
       conversationId,
       intentMode,
+      actions: Array.isArray(resolution?.actions) ? resolution.actions : [],
       retrievedCategories:
         resolution?.retrievedCategories?.length
           ? resolution.retrievedCategories

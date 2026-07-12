@@ -1,0 +1,103 @@
+{
+  "slug": "manulife-innovation-labs",
+  "title": "Innovation Labs, ML and Digital Investment UX — Manulife, Singapore",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Innovation-lab, machine-learning, investment, field-research, internal-platform, and 3D experience work across Singapore and Asia Pacific.",
+  "body": "Innovation Labs, ML, and digital-investment UX at Manulife combines internal innovation infrastructure, machine-learning-enabled experience design, and field research across Singapore and Asia Pacific.\n\nIncluded projects\n- 3D VR Innovation Space\n- Internal Innovation Portal\n- Lean AI UX Field Research in Cambodia\n- ML/AI/Data UX and Interaction Design\n- Digital Fund Purchase\n\nStrategic and technical themes\n- Innovation-lab environments that make new ideas testable and legible inside the organisation.\n- ML, AI, and data-informed UX for investment and customer journeys.\n- Field research to understand adoption and operational reality in-market.\n- Internal portals and knowledge-sharing structures that help scale innovation programs.\n\nProof connection\n- This record can connect to the existing Manulife Lean ML UX proof across 11 markets.\n- It should not collapse all projects into a single unsupported outcome claim.\n\nRetrieval guidance\n- Use this record for Manulife-specific questions, innovation labs, digital fund purchase, Cambodia field research, or 3D/VR innovation work.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "3d-vr",
+      "digital-investment",
+      "field-research",
+      "innovation-labs",
+      "manulife",
+      "ml-ux"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz worked on innovation-lab, ML/AI/data UX, internal platform, investment, field-research, and 3D experience initiatives at Manulife.",
+      "The programme spanned both customer-facing and internal innovation contexts across Singapore and Asia Pacific."
+    ],
+    "proof_points": [
+      "The broader Manulife proof already covers Lean ML UX across 11 markets.",
+      "This grouped programme record preserves the individual project names for employer-specific retrieval."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Cambodia",
+      "Canada",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Manulife"
+    ],
+    "projects": [
+      "3D VR Innovation Space",
+      "Digital Fund Purchase",
+      "Internal Innovation Portal",
+      "Lean AI UX Field Research in Cambodia",
+      "ML/AI/Data UX and Interaction Design"
+    ],
+    "intent_families": [
+      "business_need",
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "business_need.ai_adoption",
+      "skills.financial_services",
+      "skills.multimodal",
+      "systems_mindset.feedback_loops"
+    ],
+    "impact_score": 92,
+    "priority_label": "high",
+    "valid_from": "2015",
+    "valid_to": "2016",
+    "source_notes": "Grouped programme record. No single unsupported metric is attributed across all included projects.",
+    "source_filename": "manulife-innovation-labs.md",
+    "source_meta_filename": "manulife-innovation-labs.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "decision_intelligence",
+      "multimodal_ai",
+      "organizational_design",
+      "product_strategy",
+      "rapid_prototyping",
+      "spatial_ai"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption",
+      "knowledge_reuse"
+    ],
+    "governance": [],
+    "industries": [
+      "financial_services",
+      "insurance",
+      "technology",
+      "wealth_management"
+    ],
+    "proofs": [
+      "manulife_lean_ml_ux"
+    ],
+    "related_proofs": [
+      "manulife_lean_ml_ux"
+    ],
+    "enterprise_scale_score": 97,
+    "measurable_outcome_count": 2
+  }
+}
