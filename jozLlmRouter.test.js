@@ -58,7 +58,7 @@ test("routes education queries to factual profile education", () => {
 
   assert.equal(route.selectedRoute, "factual_profile");
   assert.equal(route.detectedSubIntent, "education");
-  assert.match(resolution.reply, /University of Lancashire/i);
+  assert.match(resolution.reply, /University of Central Lancashire/i);
 });
 
 test("routes Gold Pill queries to canonical world concept before world awareness", () => {

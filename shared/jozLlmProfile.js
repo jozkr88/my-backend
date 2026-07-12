@@ -23,7 +23,7 @@ export const JOZ_LLM_IDENTITY = {
     experience:
       "Joz has 13+ years of professional experience overall, including 8+ years in ML/AI. That is based on the dated CV timeline from 2013 to present, with ML/AI-focused work from 2018 onward.",
     education:
-      "Joz holds an MSc in Strategy and Innovation from the University of Lancashire and held an Innovation Strategist university appointment there. Joz also completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC programs focused on AI and spatial computing.",
+      "Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire and held an Innovation Strategist university appointment there. Joz also completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC programs focused on AI and spatial computing.",
     skills:
       "Joz is strongest in agentic AI architecture, orchestration, signal reasoning, multimodal UX, Python and SQL delivery, retrieval systems, and production-grade intelligence workflows.",
   },
@@ -152,8 +152,8 @@ export const JOZ_LLM_CV = {
     },
   ],
   education: [
-    "MSc Strategy and Innovation, University of Lancashire, United Kingdom",
-    "Innovation Strategist (University Appointment), University of Lancashire, United Kingdom",
+    "MSc Strategy and Innovation, University of Central Lancashire, United Kingdom",
+    "Innovation Strategist (University Appointment), University of Central Lancashire, United Kingdom",
     "MIT/IDEO Design Thinking and human-centered design certifications",
     "Apple Design Labs and Apple Engineering Labs participation focused on AI and spatial computing",
     "HPI d.school prototyping labs and human-centered design training",
@@ -437,5 +437,5 @@ export function buildJozLlmFallbackReply(message = "") {
     return "A digital twin should be a decision layer, not just a visual one. It should combine process state, anomaly signals, forecasts, and model confidence to drive faster diagnosis and clearer action.";
   }
 
-  return "Joz LLM can explain Joz's fit, show agentic AI evidence, and outline how Joz would approach signal-rich systems, orchestration, and operational intelligence.";
+  return "Ask about Joz's background, business value, systems mindset, skills, contact details, or the Gold Pill.";
 }

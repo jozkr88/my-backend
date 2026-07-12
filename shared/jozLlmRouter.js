@@ -46,11 +46,11 @@ function composeIdentityProfileReply() {
 
 function composeFactualProfileReply(subIntent) {
   if (subIntent === "education") {
-    return "Joz holds an MSc in Strategy and Innovation from the University of Lancashire in the United Kingdom and also held an Innovation Strategist university appointment there.";
+    return "Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire in the United Kingdom and also held an Innovation Strategist university appointment there.";
   }
 
   if (subIntent === "degree") {
-    return "Joz's degree is an MSc in Strategy and Innovation from the University of Lancashire in the United Kingdom.";
+    return "Joz's degree is an MSc in Strategy and Innovation from the University of Central Lancashire in the United Kingdom.";
   }
 
   if (subIntent === "certifications") {

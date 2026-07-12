@@ -130,7 +130,7 @@ const JOZ_ROUTER_GATE_CASES = [
       composer: "composeFactualProfileReply",
       fallbackUsed: false,
     },
-    text: [/University of Lancashire/i],
+    text: [/University of Central Lancashire/i],
   },
   {
     name: "skills.capabilities_overview",
