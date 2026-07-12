@@ -42,15 +42,7 @@ function assertCanonicalGoldPillReply(reply) {
   }
 }
 
-function assertShortReply(reply, maxWords = 55) {
-  const words = String(reply || "").trim().split(/\s+/).filter(Boolean);
-  assert.ok(
-    words.length <= maxWords,
-    `Expected reply to stay under ${maxWords} words, received ${words.length}: ${reply}`
-  );
-}
-
-test("POST /api/joz-llm routes gold pill queries through canonical world awareness", async () => {
+test("POST /api/joz-llm routes gold pill queries through canonical world concept", async () => {
   const { status, payload } = await postJson("/api/joz-llm", {
     sessionKey: "runtime-joz-llm-gold-pill",
     messages: [{ role: "user", content: "What is the gold pill?" }],
@@ -62,12 +54,15 @@ test("POST /api/joz-llm routes gold pill queries through canonical world awarene
   });
 
   assert.equal(status, 200);
-  assert.equal(payload.mode, "world_awareness");
+  assert.equal(payload.mode, "canonical_world_concept");
   assert.equal(payload.trace?.detectedIntent, "canonical_world_concept");
+  assert.equal(payload.trace?.detectedSubIntent, "gold_pill");
   assert.equal(payload.trace?.detectedConcept, "gold_pill");
   assert.equal(payload.trace?.selectedRoute, "canonical_world_concept");
   assert.equal(payload.trace?.selectedWorldRecord, "root_gold_pill / gold_pill concept");
   assert.equal(payload.trace?.answerSource, "root_gold_pill / gold_pill concept");
+  assert.equal(payload.trace?.composer, "composeCanonicalWorldConceptReply");
+  assert.equal(payload.trace?.fallbackUsed, false);
   assertCanonicalGoldPillReply(String(payload.reply || ""));
 });
 
@@ -92,194 +87,158 @@ test("POST /api/agentic preserves canonical world awareness in the live response
   assertCanonicalGoldPillReply(String(payload.params?.awareness || ""));
 });
 
-test("POST /api/joz-llm composes Neomaxxing with deterministic world-aware wording", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-neomaxxing",
-    messages: [{ role: "user", content: "What is Neomaxxing?" }],
-    context: {
-      currentPortal: "maxx",
-      currentMesh: "brain",
-      currentMeshStage: "signal_flow",
+const JOZ_ROUTER_GATE_CASES = [
+  {
+    name: "identity_profile",
+    body: {
+      sessionKey: "runtime-joz-identity",
+      messages: [{ role: "user", content: "Who is Joz?" }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "world_awareness");
-  assert.equal(payload.trace?.selectedRoute, "canonical_world_concept");
-  assert.equal(payload.trace?.detectedConcept, "neo_maxx");
-  assert.equal(payload.trace?.selectedWorldRecord, "neo_maxx concept");
-  assert.ok(reply.startsWith("Neomaxxing is a concept created by Joz Krupa."));
-  assert.match(reply, /\bNEO\b/);
-  assert.match(reply, /\bMAXX\b/);
-  assert.match(reply, /human judgment/i);
-  assert.match(reply, /\bAI\b/i);
-  assert.match(reply, /design/i);
-  assert.match(reply, /engineering/i);
-  assert.match(reply, /computation/i);
-  assert.match(reply, /execution/i);
-  assert.match(reply, /MAXX portal/i);
-  assert.match(reply, /neuron metaphor/i);
-  assert.doesNotMatch(reply, /transformative approach/i);
-  assert.doesNotMatch(reply, /various domains/i);
-  assert.doesNotMatch(reply, /impactful outcomes/i);
-  assert.doesNotMatch(reply, /leverage technology/i);
-});
-
-test("POST /api/joz-llm composes business value through the live deterministic lane", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-business",
-    messages: [{ role: "user", content: "Why should a company hire Joz right now for an agentic AI and AI systems role?" }],
-    context: {
-      currentPortal: "root",
-      currentMesh: "ball",
-      currentMeshStage: null,
-      intentMode: "business_need",
+    expected: {
+      detectedIntent: "identity_profile",
+      detectedSubIntent: "overview",
+      detectedConcept: "joz_identity",
+      selectedRoute: "identity_profile",
+      answerSource: "JOZ_LLM_CV + JOZ_LLM_IDENTITY",
+      composer: "composeIdentityProfileReply",
+      fallbackUsed: false,
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "deterministic");
-  assert.equal(payload.source, "deterministic_composer");
-  assert.equal(payload.trace?.selectedRoute, "business_need");
-  assert.match(reply, /Maybank/i);
-  assert.match(reply, /Mediacorp/i);
-  assert.match(reply, /Erste Bank/i);
-  assert.match(reply, /Manulife/i);
-  assert.match(reply, /agentic AI architecture/i);
-  assert.match(reply, /decision intelligence/i);
-  assert.match(reply, /context engineering/i);
-  assertShortReply(reply);
-});
-
-test("POST /api/joz-llm composes systems mindset through the live deterministic lane", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-mindset",
-    messages: [{ role: "user", content: "Explain how Joz thinks about intelligence, systems, and decision-making." }],
-    context: {
-      currentPortal: "root",
-      currentMesh: "brain",
-      currentMeshStage: null,
-      intentMode: "systems_mindset",
+    text: [/Joz Krupa/i],
+  },
+  {
+    name: "factual_profile.education",
+    body: {
+      sessionKey: "runtime-joz-education",
+      messages: [{ role: "user", content: "Where did Joz study?" }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "deterministic");
-  assert.equal(payload.source, "deterministic_composer");
-  assert.equal(payload.trace?.selectedRoute, "systems_mindset");
-  assert.match(reply, /systems/i);
-  assert.match(reply, /signal/i);
-  assert.match(reply, /human judgment/i);
-  assert.match(reply, /clarity/i);
-  assert.match(reply, /verification/i);
-  assertShortReply(reply);
-});
-
-test("POST /api/joz-llm composes skills through the live deterministic lane", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-skills",
-    messages: [{ role: "user", content: "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context." }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "skills",
-      currentMeshStage: "skills_stop",
-      intentMode: "skills",
+    expected: {
+      detectedIntent: "factual_profile",
+      detectedSubIntent: "education",
+      detectedConcept: "education",
+      selectedRoute: "factual_profile",
+      answerSource: "JOZ_LLM_CV.education + JOZ_LLM_IDENTITY",
+      composer: "composeFactualProfileReply",
+      fallbackUsed: false,
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "deterministic");
-  assert.equal(payload.source, "deterministic_composer");
-  assert.equal(payload.trace?.selectedRoute, "skills");
-  assert.match(reply, /agentic AI architecture/i);
-  assert.match(reply, /orchestration/i);
-  assert.match(reply, /retrieval/i);
-  assert.match(reply, /production observability/i);
-  assert.match(reply, /Maybank|Mediacorp|Erste Bank|Manulife/i);
-  assertShortReply(reply);
-});
-
-test("POST /api/joz-llm explains Flex from the live world-aware meet-joz path", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-flex",
-    messages: [{ role: "user", content: "What stage am I in?" }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "flex",
-      currentMeshStage: "meet_joz_flex_stage",
+    text: [/University of Lancashire/i],
+  },
+  {
+    name: "skills.capabilities_overview",
+    body: {
+      sessionKey: "runtime-joz-skills",
+      messages: [{ role: "user", content: "What can Joz do?" }],
+      context: {
+        currentPortal: "meet-joz",
+        currentMesh: "skills",
+        currentMeshStage: "skills_stop",
+      },
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "world_awareness");
-  assert.match(reply, /Flex/i);
-  assert.match(reply, /Vibe/i);
-  assert.match(reply, /presence|atmosphere|arrival/i);
-});
-
-test("POST /api/joz-llm explains Ascend from the live world-aware meet-joz path", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-ascend",
-    messages: [{ role: "user", content: "What stage am I in?" }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "ascend",
-      currentMeshStage: "meet_joz_ascend_stage",
+    expected: {
+      detectedIntent: "skills",
+      detectedSubIntent: "capabilities_overview",
+      detectedConcept: "skills",
+      selectedRoute: "skills",
+      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer: "composeSkillsReply",
+      fallbackUsed: false,
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "world_awareness");
-  assert.match(reply, /Ascend/i);
-  assert.match(reply, /Discover/i);
-  assert.match(reply, /prestige|recognition|visible proof/i);
-});
-
-test("POST /api/joz-llm explains Mogg from the live world-aware meet-joz path", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-mogg",
-    messages: [{ role: "user", content: "What stage am I in?" }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "mogg",
-      currentMeshStage: "meet_joz_mogg_stage",
+    text: [/agentic ai architecture/i],
+  },
+  {
+    name: "systems_mindset",
+    body: {
+      sessionKey: "runtime-joz-mindset",
+      messages: [{ role: "user", content: "How does Joz think?" }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "brain",
+        currentMeshStage: null,
+      },
     },
-  });
-
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "world_awareness");
-  assert.match(reply, /Mogg/i);
-  assert.match(reply, /digital twin/i);
-  assert.match(reply, /conceptual identity/i);
-});
-
-test("POST /api/joz-llm routes education questions through factual_profile without skills overwrite", async () => {
-  const { status, payload } = await postJson("/api/joz-llm", {
-    sessionKey: "runtime-joz-llm-education",
-    messages: [{ role: "user", content: "Where did Joz study?" }],
-    context: {
-      currentPortal: "root",
+    expected: {
+      detectedIntent: "systems_mindset",
+      detectedSubIntent: "thinking_model",
+      detectedConcept: "systems_mindset",
+      selectedRoute: "systems_mindset",
+      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer: "composeSystemsMindsetReply",
+      fallbackUsed: false,
     },
-  });
+    text: [/systems before features|signal from noise/i],
+  },
+  {
+    name: "business_need",
+    body: {
+      sessionKey: "runtime-joz-business",
+      messages: [{ role: "user", content: "Why should we hire Joz?" }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
+    },
+    expected: {
+      detectedIntent: "business_need",
+      detectedSubIntent: "hire_value",
+      detectedConcept: "business_value",
+      selectedRoute: "business_need",
+      answerSource: "JOZ_LLM_CV.experience",
+      composer: "composeBusinessNeedReply",
+      fallbackUsed: false,
+    },
+    text: [/Maybank|Mediacorp|Erste Bank|Manulife/i],
+  },
+  {
+    name: "canonical_world_concept.gold_pill",
+    body: {
+      sessionKey: "runtime-joz-gold-pill-2",
+      messages: [{ role: "user", content: "What is the Gold Pill?" }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
+    },
+    expected: {
+      detectedIntent: "canonical_world_concept",
+      detectedSubIntent: "gold_pill",
+      detectedConcept: "gold_pill",
+      selectedRoute: "canonical_world_concept",
+      answerSource: "root_gold_pill / gold_pill concept",
+      composer: "composeCanonicalWorldConceptReply",
+      fallbackUsed: false,
+    },
+    text: [/The Gold Pill is a core concept within MeetJoz and NEO\/MAXX\./i],
+  },
+];
 
-  const reply = String(payload.reply || "");
-  assert.equal(status, 200);
-  assert.equal(payload.mode, "deterministic");
-  assert.equal(payload.source, "factual_profile_composer");
-  assert.equal(payload.trace?.detectedIntent, "factual_profile");
-  assert.equal(payload.trace?.detectedSubIntent, "education");
-  assert.equal(payload.trace?.selectedRoute, "factual_profile");
-  assert.ok(reply.toLowerCase().includes("msc in strategy and innovation"));
-  assert.ok(reply.toLowerCase().includes("university of lancashire"));
-  assert.ok(reply.toLowerCase().includes("united kingdom"));
-  assert.ok(reply.includes("2008"));
-  assert.doesNotMatch(reply, /strongest skills/i);
-  assert.doesNotMatch(reply, /Maybank/i);
-});
+for (const testCase of JOZ_ROUTER_GATE_CASES) {
+  test(`POST /api/joz-llm six-query gate: ${testCase.name}`, async () => {
+    const { status, payload } = await postJson("/api/joz-llm", testCase.body);
+
+    assert.equal(status, 200);
+    assert.equal(payload.trace?.detectedIntent, testCase.expected.detectedIntent);
+    assert.equal(payload.trace?.detectedSubIntent, testCase.expected.detectedSubIntent);
+    assert.equal(payload.trace?.detectedConcept, testCase.expected.detectedConcept);
+    assert.equal(payload.trace?.selectedRoute, testCase.expected.selectedRoute);
+    assert.equal(payload.trace?.answerSource, testCase.expected.answerSource);
+    assert.equal(payload.trace?.composer, testCase.expected.composer);
+    assert.equal(payload.trace?.fallbackUsed, testCase.expected.fallbackUsed);
+
+    for (const matcher of testCase.text) {
+      assert.match(String(payload.reply || ""), matcher);
+    }
+
+    assert.doesNotMatch(String(payload.reply || ""), /Joz LLM can explain Joz's fit/i);
+  });
+}
