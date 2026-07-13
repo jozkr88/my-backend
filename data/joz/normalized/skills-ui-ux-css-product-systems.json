@@ -1,0 +1,125 @@
+{
+  "slug": "skills-ui-ux-css-product-systems",
+  "title": "UI, UX, CSS, and Product Interface Systems",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Comprehensive proof for Joz's interface capability across UI, UX, CSS, design systems, accessibility, motion, voice UX, and production-grade frontend experience design.",
+  "body": "Joz's UI and UX capability is not just surface styling. It is the ability to turn complex systems into interfaces people can understand, trust, and use under real constraints.\n\nThis includes information architecture, interaction design, design systems, responsive frontend implementation, CSS and component styling, animation and motion as guidance, accessibility, conversational UX, voice UX, and product flows that connect design intent to production engineering. Joz can work from concept, through prototype, into shipped interface behavior.\n\nIn practice this is strongest when framed as product-level interface judgment: simplifying complexity, shaping user trust, and translating abstract AI or platform capability into legible user experience.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "accessibility",
+      "css",
+      "design-systems",
+      "frontend",
+      "motion-design",
+      "responsive-design",
+      "styled-components",
+      "ui",
+      "ux",
+      "voice-ux"
+    ],
+    "verification": {
+      "status": "cv_and_project_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_and_project_supported",
+    "claims": [
+      "Joz can design and implement product interfaces that connect complex workflows, user trust, and production-grade frontend behavior.",
+      "His UI/UX capability spans information architecture, design systems, responsive implementation, accessibility, motion, conversational UX, and multimodal interaction.",
+      "He is strongest when translating abstract technical capability into a clear, legible, high-trust user experience."
+    ],
+    "proof_points": [
+      "Delivered 20x digital sales growth at Maybank through conversational and ML-led UX.",
+      "Established a Lean ML UX practice across 11 Manulife markets.",
+      "Built a global interaction language at Mediacorp across 30+ products.",
+      "Reduced handoff friction by 70% at Leo Burnett/Publicis through code-based prototyping.",
+      "The current app includes custom voice UX, AI shell UX, styled component systems, motion-driven interface behavior, responsive 3D overlays, and privacy/accessibility-aware interaction design."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe",
+      "Global",
+      "Singapore"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Leo Burnett",
+      "Manulife",
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 94,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-ui-ux-css-product-systems.md",
+    "source_meta_filename": "skills-ui-ux-css-product-systems.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "low_trust",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "multimodal_ai",
+      "organizational_design",
+      "product_strategy",
+      "rapid_prototyping",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "higher_adoption",
+      "lower_operational_friction",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "human_approval",
+      "observability_control"
+    ],
+    "industries": [
+      "banking",
+      "creative_services",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 3
+  }
+}

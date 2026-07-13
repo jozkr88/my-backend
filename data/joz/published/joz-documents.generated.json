@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-12T20:43:34.961Z",
+  "generated_at": "2026-07-13T20:36:26.382Z",
   "counts": {
-    "source_files": 47,
-    "normalized_records": 47,
-    "verified_records": 8,
+    "source_files": 51,
+    "normalized_records": 51,
+    "verified_records": 9,
     "ontology_entities": 81,
     "proofs": 12,
     "errors": 0
@@ -2064,6 +2064,88 @@
       }
     },
     {
+      "slug": "joz-identity-background",
+      "title": "Joz Identity Background",
+      "category": "bio",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
+      "body": "Joz Krupa is Slovak and has British heritage.\n\nHe completed postgraduate education in the United Kingdom, including an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.\n\nHis international career spans Singapore, Dubai, Europe, and global markets.\n\nImportant distinction\n- Slovak nationality is the direct nationality answer.\n- British heritage must remain separate from nationality or citizenship.\n- Do not claim British citizenship or British nationality unless explicitly confirmed.\n\nRetrieval guidance\n- Use this record for identity background, nationality, British heritage, and education-origin questions.\n- Keep the answer concise, factual, and separate heritage from nationality and work authorization.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "background",
+          "education",
+          "heritage",
+          "identity",
+          "nationality",
+          "united_kingdom"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "user",
+          "reviewed_at": "2026-07-12",
+          "notes": "User confirmed canonical identity distinctions: Slovak nationality, British heritage, UK postgraduate education, and international career span."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz Krupa is Slovak.",
+          "Joz has British heritage.",
+          "Joz completed postgraduate education in the United Kingdom.",
+          "Joz completed an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.",
+          "Joz's international career spans Singapore, Dubai, Europe, and global markets.",
+          "British heritage must remain separate from nationality, citizenship, and work authorization."
+        ],
+        "proof_points": [
+          "Nationality answer must remain Slovak and must not be replaced by British nationality.",
+          "British heritage is explicitly allowed only as heritage language, not citizenship language.",
+          "The academic record anchors to the University of Central Lancashire MSc in 2008.",
+          "Regional career references align with the broader CV and profile footprint."
+        ],
+        "regions": [
+          "Dubai",
+          "Europe",
+          "Global",
+          "Singapore",
+          "Slovakia",
+          "United Kingdom"
+        ],
+        "companies": [
+          "MeetJoz",
+          "University of Central Lancashire"
+        ],
+        "projects": [],
+        "intent_families": [
+          "factual_profile",
+          "identity_profile"
+        ],
+        "sub_intents": [
+          "background",
+          "education",
+          "nationality"
+        ],
+        "impact_score": 86,
+        "priority_label": "high",
+        "valid_from": "2008",
+        "valid_to": null,
+        "source_notes": "Canonical identity-background record. Heritage must not be upgraded into nationality or citizenship.",
+        "source_filename": "joz-identity-background.md",
+        "source_meta_filename": "joz-identity-background.meta.json",
+        "reviewed_at": "2026-07-12",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
       "slug": "leo-burnett-commerce-platforms",
       "title": "Luxury Commerce and Consumer Platforms — Leo Burnett/Publicis, Singapore",
       "category": "project",
@@ -3019,6 +3101,135 @@
       }
     },
     {
+      "slug": "skills-full-app-product-engineering",
+      "title": "Full App, Platform, and Intelligent Product Engineering",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Comprehensive proof for Joz's ability to integrate frontend, backend, AI, voice, retrieval, world modeling, testing, and product architecture into one coherent shipped application.",
+      "body": "Joz's full app product engineering capability is the integration layer across frontend, backend, AI, APIs, voice, multimodal interaction, 3D web, and delivery architecture.\n\nThis means he can move beyond isolated specialisms and build coherent systems: React frontend architecture, component styling, API contracts, Express-style backend services, AI and agent orchestration, world-state logic, retrieval and ontology layers, testing, and release-minded engineering. It also includes the product judgment to keep the interface, reasoning model, and system behavior aligned.\n\nThis is especially important for hiring conversations because it explains why Joz can own an end-to-end intelligent product surface rather than only one narrow layer.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agentic-ai",
+          "api-design",
+          "express",
+          "full-stack",
+          "openai",
+          "platform",
+          "product-engineering",
+          "react",
+          "testing",
+          "voice-ui"
+        ],
+        "verification": {
+          "status": "project_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "project_supported",
+        "claims": [
+          "Joz can own the integration layer across frontend product engineering, backend services, AI orchestration, and experience architecture.",
+          "He can build applications where interface state, reasoning systems, retrieval logic, and multimodal interaction all need to work together coherently.",
+          "His value is especially high in products that combine technical depth with strong user-facing judgment."
+        ],
+        "proof_points": [
+          "Architected financial AI agents with live market and portfolio context for MarketClue.",
+          "Led product, HCD-AI, and data architecture work across large fintech and enterprise environments.",
+          "The current app combines React, 3D rendering, voice interaction, world-aware agent routing, OpenAI-backed reasoning, Express APIs, structured knowledge retrieval, and automated scenario testing."
+        ],
+        "regions": [
+          "Dubai",
+          "Europe",
+          "Global",
+          "Singapore",
+          "USA"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "MarketClue",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 96,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-full-app-product-engineering.md",
+        "source_meta_filename": "skills-full-app-product-engineering.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "knowledge_fragmentation",
+          "operational_friction",
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agent_memory",
+          "agentic_ai",
+          "context_engineering",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "knowledge_graphs",
+          "multimodal_ai",
+          "observability",
+          "product_strategy",
+          "rag",
+          "rapid_prototyping",
+          "verification",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_decisions",
+          "faster_time_to_value",
+          "higher_adoption",
+          "knowledge_reuse",
+          "productivity_gains"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "observability_control",
+          "source_provenance"
+        ],
+        "industries": [
+          "financial_services",
+          "media",
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "marketclue_financial_agents",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
       "slug": "skills-hero-agentic-ai",
       "title": "Joz Krupa — Agentic AI Architecture and Innovation",
       "category": "skills",
@@ -3461,6 +3672,121 @@
       }
     },
     {
+      "slug": "skills-spatial-3d-xr-ar-platforms",
+      "title": "Spatial Computing, 3D, XR, and AR Product Delivery",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Comprehensive proof for Joz's spatial computing capability across 3D web, XR/AR, volumetric UI, asset workflows, and immersive product delivery.",
+      "body": "Joz's spatial computing capability spans concept design, interaction design, technical prototyping, 3D implementation, and launch-oriented delivery across web, mobile, and spatial surfaces.\n\nThis capability includes Three.js and React Three Fiber style 3D web experiences, GLB and USD(z) asset workflows, spatial interface composition, volumetric UI, motion and environment design, multimodal interaction design, computer vision adjacency, and the practical constraints of launching immersive experiences that still need to work as products. It also includes the judgment to translate abstract spatial ideas into usable flows, not just visual demos.\n\nThe strongest positioning is not \"3D graphics specialist\" in isolation. It is that Joz can connect spatial design, engineering, AI, interface behavior, and business storytelling into one coherent delivery stack.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "3d",
+          "ar",
+          "glb",
+          "react-three-fiber",
+          "spatial-computing",
+          "threejs",
+          "usdz",
+          "volumetric-ui",
+          "webgl",
+          "xr"
+        ],
+        "verification": {
+          "status": "cv_and_project_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_and_project_supported",
+        "claims": [
+          "Joz can design and build spatial products that combine immersive interaction, technical implementation, and narrative/product intent.",
+          "His spatial capability spans 3D web interfaces, XR/AR launch flows, volumetric UI, asset pipeline judgment, and multimodal interaction design.",
+          "He can position spatial computing as a usable business and product surface rather than only as visual experimentation."
+        ],
+        "proof_points": [
+          "Designed and launched spatial AI with volumetric 3D UI for Versace/SOA in Dubai.",
+          "Pioneered spatial AI for world-class art exhibitions through ArtKorero.",
+          "Built Python USD(z) and computer-vision-adjacent workflows tied to Apple/Pixar-style pipelines.",
+          "The current app itself uses a portal-based 3D architecture with GLB assets, AR launch flows, spatial placement logic, semantic world modeling, and device-specific immersive behavior."
+        ],
+        "regions": [
+          "Dubai",
+          "Europe",
+          "Global",
+          "Singapore"
+        ],
+        "companies": [
+          "Apple",
+          "ArtKorero",
+          "Pixar",
+          "SOA",
+          "Versace"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-spatial-3d-xr-ar-platforms.md",
+        "source_meta_filename": "skills-spatial-3d-xr-ar-platforms.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "manual_knowledge_work",
+          "operational_friction",
+          "unclear_roi"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "context_creates_intelligence",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "computer_vision",
+          "multimodal_ai",
+          "product_strategy",
+          "rapid_prototyping",
+          "spatial_ai",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_time_to_value",
+          "higher_adoption",
+          "productivity_gains"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "creative_services",
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [
+          "apple_pixar_cv_workflows",
+          "artkorero_spatial_exhibitions",
+          "versace_spatial_ai_launch"
+        ],
+        "related_proofs": [
+          "apple_pixar_cv_workflows",
+          "artkorero_spatial_exhibitions",
+          "versace_spatial_ai_launch"
+        ],
+        "enterprise_scale_score": 80,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
       "slug": "skills-technical-platform-stack",
       "title": "Technical Platform and Engineering Skills",
       "category": "skills",
@@ -3570,6 +3896,131 @@
         ],
         "enterprise_scale_score": 90,
         "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "skills-ui-ux-css-product-systems",
+      "title": "UI, UX, CSS, and Product Interface Systems",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Comprehensive proof for Joz's interface capability across UI, UX, CSS, design systems, accessibility, motion, voice UX, and production-grade frontend experience design.",
+      "body": "Joz's UI and UX capability is not just surface styling. It is the ability to turn complex systems into interfaces people can understand, trust, and use under real constraints.\n\nThis includes information architecture, interaction design, design systems, responsive frontend implementation, CSS and component styling, animation and motion as guidance, accessibility, conversational UX, voice UX, and product flows that connect design intent to production engineering. Joz can work from concept, through prototype, into shipped interface behavior.\n\nIn practice this is strongest when framed as product-level interface judgment: simplifying complexity, shaping user trust, and translating abstract AI or platform capability into legible user experience.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "accessibility",
+          "css",
+          "design-systems",
+          "frontend",
+          "motion-design",
+          "responsive-design",
+          "styled-components",
+          "ui",
+          "ux",
+          "voice-ux"
+        ],
+        "verification": {
+          "status": "cv_and_project_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "cv_and_project_supported",
+        "claims": [
+          "Joz can design and implement product interfaces that connect complex workflows, user trust, and production-grade frontend behavior.",
+          "His UI/UX capability spans information architecture, design systems, responsive implementation, accessibility, motion, conversational UX, and multimodal interaction.",
+          "He is strongest when translating abstract technical capability into a clear, legible, high-trust user experience."
+        ],
+        "proof_points": [
+          "Delivered 20x digital sales growth at Maybank through conversational and ML-led UX.",
+          "Established a Lean ML UX practice across 11 Manulife markets.",
+          "Built a global interaction language at Mediacorp across 30+ products.",
+          "Reduced handoff friction by 70% at Leo Burnett/Publicis through code-based prototyping.",
+          "The current app includes custom voice UX, AI shell UX, styled component systems, motion-driven interface behavior, responsive 3D overlays, and privacy/accessibility-aware interaction design."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe",
+          "Global",
+          "Singapore"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Leo Burnett",
+          "Manulife",
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 94,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-ui-ux-css-product-systems.md",
+        "source_meta_filename": "skills-ui-ux-css-product-systems.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "low_trust",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "multimodal_ai",
+          "organizational_design",
+          "product_strategy",
+          "rapid_prototyping",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "higher_adoption",
+          "lower_operational_friction",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "human_approval",
+          "observability_control"
+        ],
+        "industries": [
+          "banking",
+          "creative_services",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 3
       }
     },
     {
