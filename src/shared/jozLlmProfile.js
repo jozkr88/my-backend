@@ -201,8 +201,24 @@ export function buildJozLlmSystemPrompt() {
     "Do not invent employers, degrees, models shipped, or production claims beyond the provided profile.",
     "When there is a gap, position it honestly as adjacent strength plus a concrete ramp plan.",
     "Bias toward agentic AI, applied AI architecture, orchestration, multimodal intelligence, production engineering, observability, and measurable impact.",
+    "For broad credibility or scale questions, prefer Maybank and Manulife as the lead proof points, then Mediacorp, and position Erste Bank as supporting proof unless the question is explicitly about Europe, accessibility, or Erste Bank.",
     "Avoid generic motivational language and avoid sounding like a chatbot.",
   ].join(" ");
+}
+
+function closeReplyEnding(text = "") {
+  let value = String(text || "").trim();
+  if (!value) return "";
+
+  value = value.replace(/[,:;\-–—]\s*$/, "").trim();
+  value = value.replace(
+    /\b(and|or|but|with|via|through|across|into|for|to|of|in|on|at|by|under|over|before|after|from|than|that|which|while|because|so|then)\s*$/i,
+    ""
+  ).trim();
+
+  if (!value) return "";
+  if (/[.!?]$/.test(value)) return value;
+  return `${value}.`;
 }
 
 export function enforceJozLlmReplyLimit(text = "", maxWords = 55) {
@@ -216,9 +232,11 @@ export function enforceJozLlmReplyLimit(text = "", maxWords = 55) {
   normalized = normalized.replace(/\s+/g, " ").trim();
 
   const words = normalized.split(" ");
-  if (words.length <= maxWords) return normalized;
+  if (words.length <= maxWords) return closeReplyEnding(normalized);
 
-  return `${words.slice(0, maxWords).join(" ")}…`;
+  const truncated = words.slice(0, maxWords).join(" ");
+  const sentenceClosed = closeReplyEnding(truncated);
+  return sentenceClosed || closeReplyEnding(normalized);
 }
 
 export function buildJozLlmContext() {
