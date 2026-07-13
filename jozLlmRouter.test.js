@@ -131,6 +131,33 @@ test("routes proof-not-buzzwords skills queries to an evidence-first answer", ()
   assert.doesNotMatch(resolution.reply, /FastAPI|PostgreSQL|pgvector|Redis/i);
 });
 
+test("routes css design systems motion accessibility queries to dedicated interface proof answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "How strong is Joz in CSS, design systems, motion, and accessibility?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "How strong is Joz in CSS, design systems, motion, and accessibility?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "ui_ux_css_accessibility");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Mediacorp/i);
+  assert.match(resolution.reply, /30\+ products/i);
+  assert.match(resolution.reply, /Leo Burnett\/Publicis/i);
+  assert.match(resolution.reply, /70%/i);
+  assert.match(resolution.reply, /Maybank/i);
+  assert.match(resolution.reply, /20x digital sales growth/i);
+  assert.match(resolution.reply, /Erste Bank/i);
+  assert.match(resolution.reply, /16M\+ customer scale|16M\+ customer-scale/i);
+});
+
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({

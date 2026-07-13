@@ -218,6 +218,10 @@ function composeSystemsMindsetReply() {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "ui_ux_css_accessibility") {
+    return "Joz is strong in CSS, design systems, motion, and accessibility because the work shows both interface judgment and production execution. At Mediacorp, Joz built a global experience language across 30+ products, which is strong proof of design-systems thinking. At Leo Burnett/Publicis, Joz reduced handoff friction by 70% through code-based prototyping, which supports frontend and implementation depth. At Maybank, Joz helped drive 20x digital sales growth through conversational and ML-led UX, showing that interface quality translated into measurable business impact. At Erste Bank, Joz worked on engineering and accessibility at 16M+ customer scale, which is the clearest accessibility proof.";
+  }
+
   if (subIntent === "proof_backed_strengths") {
     return "Joz is strongest where AI, product, and execution have to work together under real constraints. The core strengths are agentic AI architecture, multimodal and spatial UX, and end-to-end product engineering. The proof is concrete: MarketClue financial AI agents with live portfolio context, 20x digital sales growth at Maybank, a Lean ML UX practice across 11 Manulife markets, 30x audience growth at Mediacorp, 16M+ customer-scale engineering at Erste Bank, and spatial AI work for Versace/SOA and ArtKorero in Dubai. The differentiator is not a long tool list. It is the ability to turn complex systems into working intelligent products people can trust, use, and scale.";
   }
@@ -622,6 +626,22 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "css",
+      "design systems",
+      "design system",
+      "motion",
+      "accessibility",
+      "frontend",
+      "front end",
+      "ui and ux",
+      "ui/ux",
+    ])
+  ) {
+    return { detectedSubIntent: "ui_ux_css_accessibility", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "proof, not buzzwords",
