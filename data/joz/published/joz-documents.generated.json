@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-13T23:07:40.719Z",
+  "generated_at": "2026-07-13T23:24:56.702Z",
   "counts": {
-    "source_files": 53,
-    "normalized_records": 53,
-    "verified_records": 11,
+    "source_files": 60,
+    "normalized_records": 60,
+    "verified_records": 18,
     "ontology_entities": 81,
     "proofs": 12,
     "errors": 0
@@ -2725,6 +2725,482 @@
         ],
         "enterprise_scale_score": 83,
         "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "recruiter-agentic-ai-depth-questions",
+      "title": "Recruiter Agentic AI Depth Questions",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Recruiter-oriented question set for testing Joz's technical depth in agentic AI architecture and production AI systems.",
+      "body": "Recruiter Agentic AI Depth Questions\n\nPurpose\nThis record covers recruiter questions that probe beyond generic \"AI\" language into actual architecture depth.\n\nQuestion set\n- How technical is Joz in AI?\n- What kind of AI systems does Joz build?\n- How strong is Joz in agentic AI architecture?\n- Does Joz understand RAG, orchestration, memory, or evaluation?\n- Is Joz hands-on or just high-level?\n- Can Joz work across product, architecture, and implementation?\n\nAnswer guidance\n- Describe the full agent operating model: intent, retrieval, authorised context, reasoning, planning, execution, verification, and human escalation.\n- Make it clear Joz is not just a prompt engineer or generic AI consultant.\n- Use enterprise retrieval, ACL-aware responses, observability, governance, and production workflow language when the recruiter asks for depth.\n- Keep the explanation accessible to non-technical recruiters while still sounding technically real.\n\nProof anchors\n- Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.\n- MarketClue and current AI initiatives as live-product proof.\n- Enterprise context engineering and governance framing from current Joz LLM architecture work.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agentic_ai",
+          "architecture",
+          "recruiter",
+          "technical_depth"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Aligned with the existing verified agentic AI architecture records and current router answers."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz can be positioned as hands-on in agentic AI architecture rather than only strategic.",
+          "The strongest technical framing is the full operating model of enterprise agents across retrieval, reasoning, execution, verification, and governance.",
+          "Recruiter answers should distinguish Joz from prompt-only AI profiles."
+        ],
+        "proof_points": [
+          "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
+          "Current Joz LLM and MarketClue work provide live-system relevance."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MarketClue"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-agentic-ai-depth-questions.md",
+        "source_meta_filename": "recruiter-agentic-ai-depth-questions.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "recruiter-compensation-process-questions",
+      "title": "Recruiter Compensation And Process Questions",
+      "category": "faq",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Recruiter-safe handling for compensation, package expectations, working model, relocation, and hiring-process questions.",
+      "body": "Recruiter Compensation And Process Questions\n\nPurpose\nThis record covers recruiter questions about compensation, working model, relocation, interview process, and close-stage logistics.\n\nQuestion set\n- What compensation is Joz looking for?\n- What salary range is Joz targeting?\n- What package does Joz expect?\n- Is Joz open to remote, hybrid, or on-site work?\n- Is Joz open to relocation?\n- How should we approach Joz about a role?\n- What is the best next step with Joz?\n\nAnswer guidance\n- Do not invent numbers, salary bands, currencies, day rates, or package specifics.\n- Explain that compensation depends on scope, seniority, location, responsibilities, and overall package.\n- Keep remote, hybrid, on-site, and relocation answers flexible and recruiter-safe.\n- When asked about process, route to direct contact with Joz by email or phone.\n- Keep this record generic by default. Country-specific compensation or visa questions should only become country-specific when the recruiter asks explicitly.\n\nProof anchors\n- Existing recruiter benchmark rules for compensation, working model, and relocation.\n- Existing operational contact details: joz@meetjoz.com and +65 3107 2412.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "compensation",
+          "process",
+          "recruiter",
+          "relocation",
+          "working_model"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Aligned with the existing recruiter benchmark record and deterministic operational answer patterns already implemented."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Compensation answers should avoid unverified numbers and depend on role, location, scope, seniority, responsibilities, and package.",
+          "Working-model and relocation answers should stay flexible and recruiter-safe.",
+          "Process answers should route recruiters to direct contact with Joz."
+        ],
+        "proof_points": [
+          "Recruiter benchmark rules define compensation, working-model, and relocation handling.",
+          "Existing operational facts provide the direct contact path."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "meetjoz.com"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-compensation-process-questions.md",
+        "source_meta_filename": "recruiter-compensation-process-questions.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "recruiter-core-screening-questions",
+      "title": "Recruiter Core Screening Questions",
+      "category": "faq",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "First-pass recruiter screening questions covering positioning, experience, nationality, location, contact, availability, and notice-period handling.",
+      "body": "Recruiter Core Screening Questions\n\nPurpose\nThis record covers the first-pass questions a recruiter is most likely to ask before deeper capability discussion.\n\nQuestion set\n- Who is Joz?\n- What is Joz's current role positioning?\n- How many years of experience does Joz have?\n- How many years in AI or ML does Joz have?\n- What is Joz's nationality?\n- Where is Joz based?\n- How can I contact Joz?\n- Is Joz open to opportunities?\n- What is Joz's availability?\n- What is Joz's notice period?\n- What is Joz's earliest start date?\n\nAnswer guidance\n- Keep answers short, factual, and recruiter-safe.\n- Use \"Agentic AI Architecture and Innovation Leader\" as the main current positioning.\n- Use 13+ years overall experience.\n- For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.\n- For nationality, use Slovak and EU national or citizen wording.\n- For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.\n- Do not invent dates, salary figures, visa status, or relocation specifics.\n\nProof anchors\n- Professional timeline from 2013 to present.\n- AI and ML work from 2018 to present.\n- Direct recruiter contact: joz@meetjoz.com and +65 3107 2412.\n- Cross-market work across Singapore, APAC, Europe, Dubai, and global delivery contexts.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "availability",
+          "contact",
+          "faq",
+          "recruiter",
+          "screening"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Derived from existing verified recruiter facts, CV timeline, and recruiter benchmark rules already approved in the dataset."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz should be positioned as an Agentic AI Architecture and Innovation Leader.",
+          "Joz has 13+ years of professional experience overall.",
+          "AI and ML experience should be framed as a progression rather than an inflated single number.",
+          "Unverified residence, notice period, and earliest start date should be confirmed directly with Joz."
+        ],
+        "proof_points": [
+          "Existing recruiter screening and CV records establish current positioning and timeline.",
+          "Existing operational recruiter records establish direct contact details.",
+          "Recruiter benchmark rules define how to handle unverified operational facts."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe/EEA",
+          "Global",
+          "UAE/MENA"
+        ],
+        "companies": [
+          "meetjoz.com"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-core-screening-questions.md",
+        "source_meta_filename": "recruiter-core-screening-questions.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "recruiter-leadership-stakeholder-questions",
+      "title": "Recruiter Leadership And Stakeholder Questions",
+      "category": "faq",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Recruiter-safe guidance for questions about leadership, stakeholder management, seniority, and enterprise transformation credibility.",
+      "body": "Recruiter Leadership And Stakeholder Questions\n\nPurpose\nThis record covers recruiter questions about leadership style, stakeholder management, transformation scope, and seniority.\n\nQuestion set\n- Is Joz a leader or an individual contributor?\n- Can Joz work with senior stakeholders?\n- Has Joz led transformation or just execution?\n- Can Joz bridge business and engineering?\n- What level should Joz be hired at?\n- Is Joz credible with enterprise or regulated environments?\n\nAnswer guidance\n- Position Joz as a bridge across strategy, product, design, data, engineering, and AI delivery.\n- Emphasize transformation leadership, practice building, decision framing, and enterprise communication rather than formal people-management claims unless explicitly verified.\n- Use regulated, enterprise, and cross-functional delivery examples.\n- Avoid inventing direct-report numbers, budget ownership, or titles not already verified.\n\nProof anchors\n- Manulife: established a Lean ML UX practice across 11 APAC markets.\n- Maybank and Singapore Exchange: regulated-market and financial-services transformation credibility.\n- Mediacorp: scaled a common experience language across 30+ products.\n- Erste Bank: customer-scale engineering inside a major enterprise context.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "enterprise",
+          "leadership",
+          "recruiter",
+          "seniority",
+          "stakeholders"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Derived from verified transformation, enterprise, and cross-functional delivery evidence already present in the Joz knowledge base."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz should be positioned as a bridge across business, product, design, engineering, and AI architecture.",
+          "Leadership answers should emphasize transformation leadership and senior stakeholder credibility without inventing unverified org-chart details.",
+          "Regulated and enterprise contexts strengthen recruiter confidence in seniority and stakeholder range."
+        ],
+        "proof_points": [
+          "Manulife: practice building across 11 APAC markets.",
+          "Maybank and Singapore Exchange: regulated-market transformation proof.",
+          "Mediacorp: shared language across 30+ products.",
+          "Erste Bank: enterprise-scale engineering context."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe/EEA"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp",
+          "Singapore Exchange"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-leadership-stakeholder-questions.md",
+        "source_meta_filename": "recruiter-leadership-stakeholder-questions.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "recruiter-product-ui-ux-accessibility-questions",
+      "title": "Recruiter Product UI UX Accessibility Questions",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Recruiter-oriented question set covering UI, UX, CSS, design systems, motion, frontend implementation, and accessibility proof.",
+      "body": "Recruiter Product UI UX Accessibility Questions\n\nPurpose\nThis record covers recruiter questions around product thinking, interface craft, CSS, design systems, motion, and accessibility.\n\nQuestion set\n- How strong is Joz in UI and UX?\n- Is Joz strong in CSS and frontend implementation?\n- Does Joz understand design systems?\n- How strong is Joz in motion and interaction design?\n- Does Joz have accessibility experience?\n- Can Joz translate complex AI or platform capability into good product UX?\n\nAnswer guidance\n- Frame this as product-level interface judgment, not just visual styling.\n- Cover information architecture, interaction design, design systems, responsive frontend implementation, CSS and component styling, motion as guidance, accessibility, conversational UX, voice UX, and trust-building flows.\n- Tie interface skill to measurable outcomes and production implementation, not just mockup quality.\n\nProof anchors\n- Mediacorp: global experience language across 30+ products.\n- Leo Burnett/Publicis: 70% reduction in handoff friction through code-based prototyping.\n- Maybank: 20x digital sales growth through conversational and ML-led UX.\n- Erste Bank: accessibility and engineering at 16M+ customer scale.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "accessibility",
+          "css",
+          "recruiter",
+          "ui",
+          "ux"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Built from existing UI/UX/CSS/accessibility records and router answers already validated in unit tests."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz's UI and UX strength should be framed as product-level interface judgment plus production execution.",
+          "CSS, design systems, motion, and accessibility are supported by measurable work rather than generic design claims.",
+          "Mediacorp, Leo Burnett/Publicis, Maybank, and Erste Bank provide the strongest evidence."
+        ],
+        "proof_points": [
+          "Mediacorp: experience language across 30+ products.",
+          "Leo Burnett/Publicis: 70% handoff-friction reduction through code-based prototyping.",
+          "Maybank: 20x digital sales growth through conversational and ML-led UX.",
+          "Erste Bank: accessibility at 16M+ customer scale."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe/EEA"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Leo Burnett/Publicis",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-product-ui-ux-accessibility-questions.md",
+        "source_meta_filename": "recruiter-product-ui-ux-accessibility-questions.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "recruiter-singapore-explicit-followups",
+      "title": "Recruiter Singapore Explicit Follow Ups",
+      "category": "faq",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Singapore-specific recruiter follow-up question set for market fit, proof, compensation context, work authorization handling, and relocation when Singapore is explicitly asked.",
+      "body": "Recruiter Singapore Explicit Follow Ups\n\nPurpose\nThis record covers the follow-up questions that should only use Singapore-specific framing when the recruiter explicitly asks for Singapore context.\n\nQuestion set\n- Why is Joz a fit for Singapore roles?\n- What is Joz's strongest Singapore proof?\n- How strong is Joz for Singapore recruiters?\n- What compensation context applies for Singapore?\n- Does Joz need Singapore sponsorship?\n- Does Joz have a Singapore work pass, EP, or PEP?\n- Is Joz open to relocating to Singapore?\n\nAnswer guidance\n- Only use this framing when Singapore is explicitly named in the prompt.\n- Use Singapore-relevant proof for capability and market-fit questions.\n- For work pass, EP, PEP, or sponsorship questions, use confirm-directly wording rather than assumed status.\n- For Singapore compensation questions, mention Singapore role context but still avoid hard numbers unless separately verified.\n- Keep the tone direct and operational, not promotional.\n\nProof anchors\n- Maybank-Ageas Etiqa: 20x digital sales growth in Singapore-context financial services.\n- Manulife: Lean ML UX practice across 11 APAC markets with Singapore-based operating context.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Exchange portals: regulated-market portal re-engineering.\n- Apple/Pixar-adjacent Python USD(z), computer vision, and spatial-computing workflows developed in Singapore.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "compensation",
+          "market_fit",
+          "recruiter",
+          "singapore",
+          "work_authorization"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Aligned with the user-approved Singapore-first benchmark: use Singapore proof internally, but only surface Singapore framing when explicitly asked."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Singapore-specific recruiter framing should only be used when Singapore is explicitly asked.",
+          "The strongest Singapore proof spans Maybank-Ageas Etiqa, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent work.",
+          "Singapore work-pass or sponsorship questions should use confirm-directly wording rather than assumed status."
+        ],
+        "proof_points": [
+          "Maybank-Ageas Etiqa: 20x digital sales growth.",
+          "Manulife: Lean ML UX practice across 11 APAC markets from Singapore.",
+          "Mediacorp: 30x audience growth and 30+ products.",
+          "Singapore Exchange: regulated portal re-engineering.",
+          "Apple/Pixar-adjacent work: Python USD(z), computer vision, and spatial workflows in Singapore."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Singapore"
+        ],
+        "companies": [
+          "Apple",
+          "Manulife",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp",
+          "Pixar",
+          "Singapore Exchange"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-singapore-explicit-followups.md",
+        "source_meta_filename": "recruiter-singapore-explicit-followups.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "recruiter-strengths-and-skills-questions",
+      "title": "Recruiter Strengths And Skills Questions",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Recruiter-safe framing for Joz's strongest skills, differentiators, and proof-backed strengths.",
+      "body": "Recruiter Strengths And Skills Questions\n\nPurpose\nThis record covers recruiter questions about Joz's strongest capabilities and how to explain them with evidence rather than buzzwords.\n\nQuestion set\n- What is Joz strongest at?\n- What are Joz's top skills?\n- What makes Joz different from other AI candidates?\n- Explain Joz's strengths with proof, not buzzwords.\n- Is Joz more strategy or technical?\n- Is Joz more product or engineering?\n\nAnswer guidance\n- Lead with the combination of agentic AI architecture, multimodal and spatial UX, enterprise product engineering, and measurable business execution.\n- Do not answer with a long tool dump unless the question asks for stack depth.\n- Frame the differentiator as the ability to connect business, product, design, engineering, and AI system delivery.\n- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI work rather than abstract claims.\n\nProof anchors\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Erste Bank: engineering and accessibility at 16M+ customer scale.\n- MarketClue: financial AI agents with live portfolio context.\n- Dubai and spatial work: Versace/SOA, ArtKorero, and other 3D or immersive system delivery.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "proof",
+          "recruiter",
+          "skills",
+          "strengths"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-14",
+          "notes": "Built from existing verified proof records and deployed recruiter-safe answer patterns already used in Joz LLM."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz's strongest positioning combines agentic AI architecture, multimodal and spatial UX, and enterprise product engineering.",
+          "Joz should be differentiated through measurable proof rather than buzzword-heavy capability lists.",
+          "Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI projects provide the strongest recruiter-safe evidence."
+        ],
+        "proof_points": [
+          "Maybank-Ageas Etiqa: 20x digital sales growth.",
+          "Manulife: Lean ML UX practice across 11 APAC markets.",
+          "Mediacorp: 30x audience growth across 30+ products.",
+          "Erste Bank: 16M+ customer scale engineering.",
+          "MarketClue and Dubai spatial work add current technical and multimodal proof."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe/EEA",
+          "Global",
+          "UAE/MENA"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "MarketClue",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "recruiter-strengths-and-skills-questions.md",
+        "source_meta_filename": "recruiter-strengths-and-skills-questions.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
       }
     },
     {

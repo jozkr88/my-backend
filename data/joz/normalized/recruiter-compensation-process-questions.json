@@ -1,0 +1,63 @@
+{
+  "slug": "recruiter-compensation-process-questions",
+  "title": "Recruiter Compensation And Process Questions",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Recruiter-safe handling for compensation, package expectations, working model, relocation, and hiring-process questions.",
+  "body": "Recruiter Compensation And Process Questions\n\nPurpose\nThis record covers recruiter questions about compensation, working model, relocation, interview process, and close-stage logistics.\n\nQuestion set\n- What compensation is Joz looking for?\n- What salary range is Joz targeting?\n- What package does Joz expect?\n- Is Joz open to remote, hybrid, or on-site work?\n- Is Joz open to relocation?\n- How should we approach Joz about a role?\n- What is the best next step with Joz?\n\nAnswer guidance\n- Do not invent numbers, salary bands, currencies, day rates, or package specifics.\n- Explain that compensation depends on scope, seniority, location, responsibilities, and overall package.\n- Keep remote, hybrid, on-site, and relocation answers flexible and recruiter-safe.\n- When asked about process, route to direct contact with Joz by email or phone.\n- Keep this record generic by default. Country-specific compensation or visa questions should only become country-specific when the recruiter asks explicitly.\n\nProof anchors\n- Existing recruiter benchmark rules for compensation, working model, and relocation.\n- Existing operational contact details: joz@meetjoz.com and +65 3107 2412.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "compensation",
+      "process",
+      "recruiter",
+      "relocation",
+      "working_model"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-14",
+      "notes": "Aligned with the existing recruiter benchmark record and deterministic operational answer patterns already implemented."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Compensation answers should avoid unverified numbers and depend on role, location, scope, seniority, responsibilities, and package.",
+      "Working-model and relocation answers should stay flexible and recruiter-safe.",
+      "Process answers should route recruiters to direct contact with Joz."
+    ],
+    "proof_points": [
+      "Recruiter benchmark rules define compensation, working-model, and relocation handling.",
+      "Existing operational facts provide the direct contact path."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "meetjoz.com"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "recruiter-compensation-process-questions.md",
+    "source_meta_filename": "recruiter-compensation-process-questions.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}

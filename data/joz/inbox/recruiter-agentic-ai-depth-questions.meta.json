@@ -1,0 +1,36 @@
+{
+  "slug": "recruiter-agentic-ai-depth-questions",
+  "title": "Recruiter Agentic AI Depth Questions",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Recruiter-oriented question set for testing Joz's technical depth in agentic AI architecture and production AI systems.",
+  "tags": [
+    "recruiter",
+    "agentic_ai",
+    "architecture",
+    "technical_depth"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Aligned with the existing verified agentic AI architecture records and current router answers."
+  },
+  "claims": [
+    "Joz can be positioned as hands-on in agentic AI architecture rather than only strategic.",
+    "The strongest technical framing is the full operating model of enterprise agents across retrieval, reasoning, execution, verification, and governance.",
+    "Recruiter answers should distinguish Joz from prompt-only AI profiles."
+  ],
+  "proof_points": [
+    "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
+    "Current Joz LLM and MarketClue work provide live-system relevance."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MarketClue"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "slug": "recruiter-core-screening-questions",
+  "title": "Recruiter Core Screening Questions",
+  "category": "faq",
+  "lane": "skills",
+  "summary": "First-pass recruiter screening questions covering positioning, experience, nationality, location, contact, availability, and notice-period handling.",
+  "tags": [
+    "recruiter",
+    "screening",
+    "faq",
+    "availability",
+    "contact"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Derived from existing verified recruiter facts, CV timeline, and recruiter benchmark rules already approved in the dataset."
+  },
+  "claims": [
+    "Joz should be positioned as an Agentic AI Architecture and Innovation Leader.",
+    "Joz has 13+ years of professional experience overall.",
+    "AI and ML experience should be framed as a progression rather than an inflated single number.",
+    "Unverified residence, notice period, and earliest start date should be confirmed directly with Joz."
+  ],
+  "proof_points": [
+    "Existing recruiter screening and CV records establish current positioning and timeline.",
+    "Existing operational recruiter records establish direct contact details.",
+    "Recruiter benchmark rules define how to handle unverified operational facts."
+  ],
+  "regions": [
+    "Europe/EEA",
+    "Asia Pacific",
+    "UAE/MENA",
+    "Global"
+  ],
+  "companies": [
+    "meetjoz.com"
+  ]
+}

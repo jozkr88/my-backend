@@ -1,0 +1,43 @@
+{
+  "slug": "recruiter-product-ui-ux-accessibility-questions",
+  "title": "Recruiter Product UI UX Accessibility Questions",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Recruiter-oriented question set covering UI, UX, CSS, design systems, motion, frontend implementation, and accessibility proof.",
+  "tags": [
+    "recruiter",
+    "ui",
+    "ux",
+    "css",
+    "accessibility"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Built from existing UI/UX/CSS/accessibility records and router answers already validated in unit tests."
+  },
+  "claims": [
+    "Joz's UI and UX strength should be framed as product-level interface judgment plus production execution.",
+    "CSS, design systems, motion, and accessibility are supported by measurable work rather than generic design claims.",
+    "Mediacorp, Leo Burnett/Publicis, Maybank, and Erste Bank provide the strongest evidence."
+  ],
+  "proof_points": [
+    "Mediacorp: experience language across 30+ products.",
+    "Leo Burnett/Publicis: 70% handoff-friction reduction through code-based prototyping.",
+    "Maybank: 20x digital sales growth through conversational and ML-led UX.",
+    "Erste Bank: accessibility at 16M+ customer scale."
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Europe/EEA"
+  ],
+  "companies": [
+    "Mediacorp",
+    "Leo Burnett/Publicis",
+    "Maybank-Ageas Etiqa",
+    "Erste Bank"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "slug": "recruiter-leadership-stakeholder-questions",
+  "title": "Recruiter Leadership And Stakeholder Questions",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Recruiter-safe guidance for questions about leadership, stakeholder management, seniority, and enterprise transformation credibility.",
+  "body": "Recruiter Leadership And Stakeholder Questions\n\nPurpose\nThis record covers recruiter questions about leadership style, stakeholder management, transformation scope, and seniority.\n\nQuestion set\n- Is Joz a leader or an individual contributor?\n- Can Joz work with senior stakeholders?\n- Has Joz led transformation or just execution?\n- Can Joz bridge business and engineering?\n- What level should Joz be hired at?\n- Is Joz credible with enterprise or regulated environments?\n\nAnswer guidance\n- Position Joz as a bridge across strategy, product, design, data, engineering, and AI delivery.\n- Emphasize transformation leadership, practice building, decision framing, and enterprise communication rather than formal people-management claims unless explicitly verified.\n- Use regulated, enterprise, and cross-functional delivery examples.\n- Avoid inventing direct-report numbers, budget ownership, or titles not already verified.\n\nProof anchors\n- Manulife: established a Lean ML UX practice across 11 APAC markets.\n- Maybank and Singapore Exchange: regulated-market and financial-services transformation credibility.\n- Mediacorp: scaled a common experience language across 30+ products.\n- Erste Bank: customer-scale engineering inside a major enterprise context.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "enterprise",
+      "leadership",
+      "recruiter",
+      "seniority",
+      "stakeholders"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-14",
+      "notes": "Derived from verified transformation, enterprise, and cross-functional delivery evidence already present in the Joz knowledge base."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz should be positioned as a bridge across business, product, design, engineering, and AI architecture.",
+      "Leadership answers should emphasize transformation leadership and senior stakeholder credibility without inventing unverified org-chart details.",
+      "Regulated and enterprise contexts strengthen recruiter confidence in seniority and stakeholder range."
+    ],
+    "proof_points": [
+      "Manulife: practice building across 11 APAC markets.",
+      "Maybank and Singapore Exchange: regulated-market transformation proof.",
+      "Mediacorp: shared language across 30+ products.",
+      "Erste Bank: enterprise-scale engineering context."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Manulife",
+      "Maybank-Ageas Etiqa",
+      "Mediacorp",
+      "Singapore Exchange"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "recruiter-leadership-stakeholder-questions.md",
+    "source_meta_filename": "recruiter-leadership-stakeholder-questions.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}

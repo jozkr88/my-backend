@@ -1,0 +1,68 @@
+{
+  "slug": "recruiter-core-screening-questions",
+  "title": "Recruiter Core Screening Questions",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "First-pass recruiter screening questions covering positioning, experience, nationality, location, contact, availability, and notice-period handling.",
+  "body": "Recruiter Core Screening Questions\n\nPurpose\nThis record covers the first-pass questions a recruiter is most likely to ask before deeper capability discussion.\n\nQuestion set\n- Who is Joz?\n- What is Joz's current role positioning?\n- How many years of experience does Joz have?\n- How many years in AI or ML does Joz have?\n- What is Joz's nationality?\n- Where is Joz based?\n- How can I contact Joz?\n- Is Joz open to opportunities?\n- What is Joz's availability?\n- What is Joz's notice period?\n- What is Joz's earliest start date?\n\nAnswer guidance\n- Keep answers short, factual, and recruiter-safe.\n- Use \"Agentic AI Architecture and Innovation Leader\" as the main current positioning.\n- Use 13+ years overall experience.\n- For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.\n- For nationality, use Slovak and EU national or citizen wording.\n- For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.\n- Do not invent dates, salary figures, visa status, or relocation specifics.\n\nProof anchors\n- Professional timeline from 2013 to present.\n- AI and ML work from 2018 to present.\n- Direct recruiter contact: joz@meetjoz.com and +65 3107 2412.\n- Cross-market work across Singapore, APAC, Europe, Dubai, and global delivery contexts.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "availability",
+      "contact",
+      "faq",
+      "recruiter",
+      "screening"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-14",
+      "notes": "Derived from existing verified recruiter facts, CV timeline, and recruiter benchmark rules already approved in the dataset."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz should be positioned as an Agentic AI Architecture and Innovation Leader.",
+      "Joz has 13+ years of professional experience overall.",
+      "AI and ML experience should be framed as a progression rather than an inflated single number.",
+      "Unverified residence, notice period, and earliest start date should be confirmed directly with Joz."
+    ],
+    "proof_points": [
+      "Existing recruiter screening and CV records establish current positioning and timeline.",
+      "Existing operational recruiter records establish direct contact details.",
+      "Recruiter benchmark rules define how to handle unverified operational facts."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA",
+      "Global",
+      "UAE/MENA"
+    ],
+    "companies": [
+      "meetjoz.com"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "recruiter-core-screening-questions.md",
+    "source_meta_filename": "recruiter-core-screening-questions.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}
