@@ -210,7 +210,7 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply() {
-  return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, 16M+ customer-scale engineering at Erste Bank, and Lean ML transformation across 11 APAC markets at Manulife. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
+  return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
 }
 
 function composeSystemsMindsetReply() {
@@ -218,8 +218,16 @@ function composeSystemsMindsetReply() {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "proof_backed_strengths") {
+    return "Joz is strongest where AI, product, and execution have to work together under real constraints. The core strengths are agentic AI architecture, multimodal and spatial UX, and end-to-end product engineering. The proof is concrete: MarketClue financial AI agents with live portfolio context, 20x digital sales growth at Maybank, a Lean ML UX practice across 11 Manulife markets, 30x audience growth at Mediacorp, 16M+ customer-scale engineering at Erste Bank, and spatial AI work for Versace/SOA and ArtKorero in Dubai. The differentiator is not a long tool list. It is the ability to turn complex systems into working intelligent products people can trust, use, and scale.";
+  }
+
+  if (subIntent === "technical_stack") {
+    return "Joz's core stack spans agentic AI architecture and product engineering: LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. That stack matters because it supports enterprise retrieval, multimodal interfaces, and measurable product delivery rather than existing as tooling in isolation.";
+  }
+
   if (subIntent === "capabilities_overview") {
-    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, enterprise retrieval, AI governance, and multimodal intelligence. Technically, that includes LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, event-driven workflows, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. Joz's differentiator is combining that technical depth with enterprise architecture, transformation, product strategy, human adoption, and measurable business outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and Apple/Pixar-adjacent work.";
+    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering. The technical layer includes retrieval, orchestration, memory, verification, observability, Python backend systems, and 3D or spatial interface delivery. The differentiator is combining that technical depth with enterprise architecture, human adoption, and measurable outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and MarketClue.";
   }
 
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";
@@ -616,16 +624,39 @@ function detectSystemsMindset(clean) {
 function detectSkills(clean) {
   if (
     includesAny(clean, [
+      "proof, not buzzwords",
+      "proof not buzzwords",
+      "with proof",
+      "not buzzwords",
+      "strongest skills",
+      "strongest technical skills",
+      "explain joz's strongest skills",
+      "explain jozs strongest skills",
+    ])
+  ) {
+    return { detectedSubIntent: "proof_backed_strengths", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "what is joz's ai stack",
+      "what is jozs ai stack",
+      "technical stack",
+      "ai stack",
+      "tool stack",
+    ])
+  ) {
+    return { detectedSubIntent: "technical_stack", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "deep skills",
       "deepest skills",
       "what can joz do",
       "what can joz build",
-      "what is joz's ai stack",
-      "what is jozs ai stack",
       "how technical is joz",
       "joz's skills",
-      "strongest skills",
-      "strongest technical skills",
       "technical depth",
       "core capabilities",
       "technical skills",
@@ -637,7 +668,6 @@ function detectSkills(clean) {
       "orchestration",
       "retrieval",
       "signal reasoning",
-      "technical stack",
     ])
   ) {
     return { detectedSubIntent: "capabilities_overview", detectedConcept: "skills" };

@@ -95,14 +95,40 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.equal(route.detectedSubIntent, "capabilities_overview");
   assert.equal(resolution.fallbackUsed, false);
   assert.match(resolution.reply, /Agentic AI|agentic AI/i);
-  assert.match(resolution.reply, /RAG/i);
   assert.match(resolution.reply, /context engineering/i);
   assert.match(resolution.reply, /decision intelligence/i);
-  assert.match(resolution.reply, /AI governance/i);
-  assert.match(resolution.reply, /Python|FastAPI/i);
+  assert.match(resolution.reply, /multimodal|spatial/i);
+  assert.match(resolution.reply, /retrieval|orchestration|memory|verification|observability/i);
+  assert.match(resolution.reply, /Python backend systems/i);
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
   assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
+});
+
+test("routes proof-not-buzzwords skills queries to an evidence-first answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQuery({
+    input: "Explain Joz's strongest skills with proof, not buzzwords.",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "Explain Joz's strongest skills with proof, not buzzwords.",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "proof_backed_strengths");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /MarketClue/i);
+  assert.match(resolution.reply, /20x digital sales growth at Maybank/i);
+  assert.match(resolution.reply, /11 Manulife markets/i);
+  assert.match(resolution.reply, /30x audience growth at Mediacorp/i);
+  assert.match(resolution.reply, /16M\+ customer-scale engineering at Erste Bank/i);
+  assert.match(resolution.reply, /Versace\/SOA|ArtKorero/i);
+  assert.doesNotMatch(resolution.reply, /FastAPI|PostgreSQL|pgvector|Redis/i);
 });
 
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
