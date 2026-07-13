@@ -158,6 +158,29 @@ test("routes css design systems motion accessibility queries to dedicated interf
   assert.match(resolution.reply, /16M\+ customer scale|16M\+ customer-scale/i);
 });
 
+test("routes singapore market fit skills queries to singapore-specific proof answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "Explain Joz's Singapore market fit.",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "Explain Joz's Singapore market fit.",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "singapore_market_fit");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Maybank-Ageas Etiqa/i);
+  assert.match(resolution.reply, /Manulife/i);
+  assert.match(resolution.reply, /Mediacorp/i);
+  assert.match(resolution.reply, /Singapore Stock Exchange/i);
+});
+
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({
@@ -185,6 +208,49 @@ test("routes recruiter location queries to deterministic operational answer with
   assert.deepEqual(trace.recommendedActionIds, ["call_joz", "email_joz"]);
   assert.equal(trace.validationPassed, true);
   assert.equal(trace.fallbackUsed, false);
+});
+
+test("routes recruiter notice period queries to deterministic operational answer with actions", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "What is Joz's notice period?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "What is Joz's notice period?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.detectedIntent, "recruiter_notice_period");
+  assert.equal(route.selectedRoute, "joz_knowledge");
+  assert.equal(
+    resolution.reply,
+    "Joz's current notice period and earliest start date should be confirmed directly for the specific hiring process."
+  );
+  assert.equal(resolution.selectedOperationalComposer, "composeNoticePeriodAnswer");
+});
+
+test("routes recruiter working model queries to deterministic operational answer with actions", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "Is Joz open to remote, hybrid, or onsite work?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "Is Joz open to remote, hybrid, or onsite work?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.detectedIntent, "recruiter_working_model");
+  assert.equal(route.selectedRoute, "joz_knowledge");
+  assert.match(resolution.reply, /remote, hybrid, or on-site/i);
+  assert.equal(resolution.selectedOperationalComposer, "composeWorkingModelAnswer");
 });
 
 test("programme employer queries can resolve from retrieved programme records without model fallback", async () => {

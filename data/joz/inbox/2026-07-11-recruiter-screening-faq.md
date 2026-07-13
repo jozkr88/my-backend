@@ -7,7 +7,7 @@ Screening Answers
 
 Nationality and work status
 - Joz is Slovak and an EU national.
-- Joz's Singapore status is EP/PEP.
+- Joz's current Singapore pass status, work authorization, or sponsorship requirement should be confirmed directly with Joz rather than assumed.
 
 Primary contact details
 - Email: joz@meetjoz.com

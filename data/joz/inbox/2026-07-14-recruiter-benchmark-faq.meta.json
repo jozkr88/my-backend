@@ -1,0 +1,52 @@
+{
+  "slug": "2026-07-14-recruiter-benchmark-faq",
+  "title": "Recruiter Benchmark FAQ",
+  "category": "faq",
+  "lane": "skills",
+  "summary": "Recruiter benchmark guidance for keeping answers generic by default while using Singapore-first proof and phrasing when Singapore is explicitly asked.",
+  "tags": [
+    "recruiter_benchmark",
+    "faq",
+    "singapore_first",
+    "recruiter_screening",
+    "positioning",
+    "skills"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "user",
+    "reviewed_at": "2026-07-14",
+    "notes": "User clarified the benchmark should be Singapore-first internally, but answers must not say Singapore unless the recruiter explicitly asks."
+  },
+  "claims": [
+    "Recruiter answers should stay generic unless Singapore is explicitly asked.",
+    "Country-specific work authorization or sponsorship should be confirmed directly rather than assumed.",
+    "Compensation answers should avoid unverified numbers or currency amounts.",
+    "Availability and notice period should be handled as separate recruiter answers.",
+    "Singapore-fit positioning can be supported with Maybank, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent proof."
+  ],
+  "proof_points": [
+    "User direction explicitly set the answer style to Singapore-first internally but generic outwardly unless asked.",
+    "Maybank-Ageas Etiqa provides 20x digital sales growth proof in Singapore.",
+    "Manulife provides Singapore-based APAC ML UX practice proof across 11 markets.",
+    "Mediacorp provides Singapore media and design-system scale proof across 30+ products.",
+    "Singapore Exchange and Apple/Pixar-adjacent work add local technical and spatial-computing credibility."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Europe/EEA",
+    "UAE/MENA",
+    "Global"
+  ],
+  "companies": [
+    "Maybank-Ageas Etiqa",
+    "Manulife",
+    "Mediacorp",
+    "Singapore Exchange",
+    "Apple",
+    "Pixar"
+  ]
+}

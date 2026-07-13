@@ -76,20 +76,39 @@ function composeAvailabilityAnswer() {
   return "Joz is open to discussing suitable opportunities. Availability depends on the role, location, scope, and start-date requirements.";
 }
 
+function composeNoticePeriodAnswer() {
+  return "Joz's current notice period and earliest start date should be confirmed directly for the specific hiring process.";
+}
+
 function composeCompensationAnswer() {
   return "Compensation depends on the role scope, location, seniority, responsibilities, and overall package. The best next step is a direct conversation with Joz.";
 }
 
+function composeSingaporeCompensationAnswer() {
+  return "Compensation for a Singapore role depends on scope, seniority, responsibilities, and the overall package. The best next step is a direct discussion with Joz using the specific Singapore role context.";
+}
+
+function composeWorkingModelAnswer() {
+  return "Joz is open to remote, hybrid, or on-site arrangements depending on the role, team, and location requirements. The specific working model should be confirmed directly with Joz.";
+}
+
 function composeHiringAnswer() {
-  return "Joz is open to discussing suitable international opportunities across Singapore, Dubai, Zurich, Europe, and global markets.";
+  return "Joz is open to discussing suitable international opportunities across regulated, enterprise, and product-led environments.";
 }
 
 function composeRelocationAnswer() {
-  return "Joz is open to discussing suitable international opportunities across Singapore, Dubai, Zurich, Europe, and global markets.";
+  return "Joz is open to discussing suitable international relocation where the role, location, and overall fit make sense.";
 }
 
-function composeWorkAuthorizationAnswer() {
-  return "Joz's current work-authorization status should be confirmed directly for the specific hiring process.";
+function composeWorkAuthorizationAnswer(subIntent = "generic") {
+  if (subIntent === "singapore_specific") {
+    return "Joz is Slovak and an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
+  }
+  return "Joz is Slovak and an EU national. Current work authorization, visa, or sponsorship requirements for any specific country should be confirmed directly for the hiring process.";
+}
+
+function composeSingaporeFitAnswer() {
+  return "Joz is a strong fit for Singapore recruiter conversations because the proof is already Singapore-relevant: 20x digital sales growth at Maybank-Ageas Etiqa, a Lean ML UX practice across 11 APAC markets at Manulife, 30x audience growth and a global experience language across 30+ products at Mediacorp, Singapore Stock Exchange portal re-engineering, and Apple/Pixar-adjacent Python USD(z) and computer-vision workflows in Singapore.";
 }
 
 function composeContactAnswer() {
@@ -110,9 +129,23 @@ function buildRecruiterOperationalResolution(route = {}) {
       reply = composeAvailabilityAnswer();
       selectedOperationalComposer = "composeAvailabilityAnswer";
       break;
+    case "recruiter_notice_period":
+      reply = composeNoticePeriodAnswer();
+      selectedOperationalComposer = "composeNoticePeriodAnswer";
+      break;
     case "recruiter_compensation":
-      reply = composeCompensationAnswer();
-      selectedOperationalComposer = "composeCompensationAnswer";
+      reply =
+        route.detectedSubIntent === "singapore_specific"
+          ? composeSingaporeCompensationAnswer()
+          : composeCompensationAnswer();
+      selectedOperationalComposer =
+        route.detectedSubIntent === "singapore_specific"
+          ? "composeSingaporeCompensationAnswer"
+          : "composeCompensationAnswer";
+      break;
+    case "recruiter_working_model":
+      reply = composeWorkingModelAnswer();
+      selectedOperationalComposer = "composeWorkingModelAnswer";
       break;
     case "recruiter_hiring":
       reply = composeHiringAnswer();
@@ -123,8 +156,12 @@ function buildRecruiterOperationalResolution(route = {}) {
       selectedOperationalComposer = "composeRelocationAnswer";
       break;
     case "recruiter_work_authorization":
-      reply = composeWorkAuthorizationAnswer();
+      reply = composeWorkAuthorizationAnswer(route.detectedSubIntent);
       selectedOperationalComposer = "composeWorkAuthorizationAnswer";
+      break;
+    case "recruiter_singapore_fit":
+      reply = composeSingaporeFitAnswer();
+      selectedOperationalComposer = "composeSingaporeFitAnswer";
       break;
     case "recruiter_contact":
       reply = composeContactAnswer();
@@ -218,6 +255,10 @@ function composeSystemsMindsetReply() {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "singapore_market_fit") {
+    return "Joz is strong for Singapore-market roles because the proof is already Singapore-specific and enterprise-scale. At Maybank-Ageas Etiqa, Joz helped drive 20x digital sales growth through conversational and ML-led UX. At Manulife, Joz established a Lean ML UX practice across 11 APAC markets and launched first-in-market ML UX solutions from Singapore. At Mediacorp, Joz contributed to 30x audience growth and built a global experience language across 30+ products. Joz also re-engineered Singapore Stock Exchange portals and developed Apple/Pixar-adjacent Python USD(z) and computer-vision workflows in Singapore.";
+  }
+
   if (subIntent === "ui_ux_css_accessibility") {
     return "Joz is strong in CSS, design systems, motion, and accessibility because the work shows both interface judgment and production execution. At Mediacorp, Joz built a global experience language across 30+ products, which is strong proof of design-systems thinking. At Leo Burnett/Publicis, Joz reduced handoff friction by 70% through code-based prototyping, which supports frontend and implementation depth. At Maybank, Joz helped drive 20x digital sales growth through conversational and ML-led UX, showing that interface quality translated into measurable business impact. At Erste Bank, Joz worked on engineering and accessibility at 16M+ customer scale, which is the clearest accessibility proof.";
   }
@@ -441,6 +482,7 @@ function detectRecruiterOperational(clean) {
       "does joz have an ep",
       "does joz have a pep",
       "does joz have a singapore work pass",
+      "does joz need singapore sponsorship",
       "can joz legally work in singapore",
       "what is joz's visa status",
       "what is jozs visa status",
@@ -455,8 +497,29 @@ function detectRecruiterOperational(clean) {
   ) {
     return {
       detectedIntent: "recruiter_work_authorization",
-      detectedSubIntent: "work_authorization",
+      detectedSubIntent: includesAny(clean, ["singapore", "work pass", /\bep\b/, /\bpep\b/])
+        ? "singapore_specific"
+        : "work_authorization",
       detectedConcept: "recruiter_work_authorization",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "what is joz's notice period",
+      "what is jozs notice period",
+      "what is joz's earliest start date",
+      "what is jozs earliest start date",
+      "notice period",
+      "earliest start date",
+      "joining date",
+      "when can joz join",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_notice_period",
+      detectedSubIntent: "notice_period",
+      detectedConcept: "recruiter_notice_period",
     };
   }
 
@@ -488,6 +551,11 @@ function detectRecruiterOperational(clean) {
       "what are joz's salary expectations",
       "what are jozs salary expectations",
       "what compensation is joz looking for",
+      "what salary range is joz targeting",
+      "what compensation range is joz targeting",
+      "salary in singapore",
+      "compensation in singapore",
+      "sgd",
       "what package does joz expect",
       "what is joz's rate",
       "what is jozs rate",
@@ -502,7 +570,7 @@ function detectRecruiterOperational(clean) {
   ) {
     return {
       detectedIntent: "recruiter_compensation",
-      detectedSubIntent: "compensation",
+      detectedSubIntent: includesAny(clean, ["singapore", "sgd"]) ? "singapore_specific" : "compensation",
       detectedConcept: "recruiter_compensation",
     };
   }
@@ -514,7 +582,6 @@ function detectRecruiterOperational(clean) {
       "what is jozs availability",
       "can joz start soon",
       "is joz open to opportunities",
-      "when can joz start",
       "available",
       "availability",
       "open to opportunities",
@@ -532,6 +599,8 @@ function detectRecruiterOperational(clean) {
     includesAny(clean, [
       "is joz open to relocation",
       "is joz available for singapore",
+      "is joz open to relocating to singapore",
+      "is joz open to singapore relocation",
       "is joz open to dubai",
       "is joz interested in zurich",
       "relocate",
@@ -542,6 +611,42 @@ function detectRecruiterOperational(clean) {
       detectedIntent: "recruiter_relocation",
       detectedSubIntent: "relocation",
       detectedConcept: "recruiter_relocation",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "remote or hybrid",
+      "remote, hybrid, or onsite",
+      "remote hybrid or onsite",
+      "working model",
+      "remote work",
+      "hybrid",
+      "on-site",
+      "onsite",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_working_model",
+      detectedSubIntent: "working_model",
+      detectedConcept: "recruiter_working_model",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "why is joz a fit for singapore",
+      "why is joz relevant for singapore",
+      "what is joz's strongest singapore proof",
+      "what is jozs strongest singapore proof",
+      "is joz a fit for singapore recruiters",
+      "singapore recruiter fit",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_singapore_fit",
+      detectedSubIntent: "singapore_fit",
+      detectedConcept: "recruiter_singapore_fit",
     };
   }
 
@@ -626,6 +731,20 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "singapore recruiter",
+      "singapore market fit",
+      "fit for singapore",
+      "strongest singapore proof",
+      "why is joz a fit for singapore",
+      "why is joz relevant for singapore",
+      "singapore roles",
+    ])
+  ) {
+    return { detectedSubIntent: "singapore_market_fit", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "css",

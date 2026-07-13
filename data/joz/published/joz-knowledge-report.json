@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-13T20:36:26.382Z",
+  "generated_at": "2026-07-13T23:07:40.719Z",
   "counts": {
-    "source_files": 51,
-    "normalized_records": 51,
-    "verified_records": 9,
+    "source_files": 53,
+    "normalized_records": 53,
+    "verified_records": 11,
     "ontology_entities": 81,
     "proofs": 12,
     "errors": 0

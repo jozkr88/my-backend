@@ -4,8 +4,8 @@
   "category": "faq",
   "source_type": "paste",
   "source_uri": null,
-  "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
-  "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
+  "summary": "Verified recruiter-screening answers covering nationality, Singapore work-authorization handling, contact details, availability handling, years of experience, education, and core skills.",
+  "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's current Singapore pass status, work authorization, or sponsorship requirement should be confirmed directly with Joz rather than assumed.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
   "metadata": {
     "lane": "skills",
     "original_lane": "skills",
@@ -22,18 +22,18 @@
       "status": "verified",
       "reviewed_by": "user",
       "reviewed_at": "2026-07-11",
-      "notes": "User confirmed recruiter-focused facts including Slovak/EU nationality, Singapore EP/PEP, contact details, and experience framing."
+      "notes": "User confirmed recruiter-focused facts including Slovak/EU nationality, contact details, experience framing, and the rule that Singapore pass status or sponsorship should be confirmed directly rather than assumed."
     },
     "verification_status": "verified",
     "claims": [
       "Joz is Slovak and an EU national.",
-      "Joz's Singapore status is EP/PEP.",
+      "Joz's current Singapore pass status, work authorization, or sponsorship requirement should be confirmed directly with Joz rather than assumed.",
       "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
       "Joz has 13+ years of professional experience overall and 8+ years in ML/AI.",
       "Availability and start date should be confirmed directly with Joz unless explicitly verified elsewhere."
     ],
     "proof_points": [
-      "Nationality and Singapore status were explicitly provided by the user for recruiter screening.",
+      "Nationality and recruiter-screening handling for Singapore work authorization were explicitly guided by the user.",
       "The CV source includes the same email, phone number, and website.",
       "The dated professional timeline runs from 2013 to present.",
       "ML/AI-focused work is framed from 2018 to present."

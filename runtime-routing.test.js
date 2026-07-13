@@ -611,6 +611,24 @@ const RECRUITER_OPERATIONAL_CASES = [
     forbidden: [/\b(?:usd|sgd|eur|gbp|aed|chf|\$|€|£)\s*\d/i, /\b\d+\s*(k|K)\b/],
   },
   {
+    name: "notice_period",
+    query: "What is Joz's notice period?",
+    expectedReply:
+      "Joz's current notice period and earliest start date should be confirmed directly for the specific hiring process.",
+    expectedIntent: "recruiter_notice_period",
+    expectedComposer: "composeNoticePeriodAnswer",
+    forbidden: [],
+  },
+  {
+    name: "working_model",
+    query: "Is Joz open to remote, hybrid, or onsite work?",
+    expectedReply:
+      "Joz is open to remote, hybrid, or on-site arrangements depending on the role, team, and location requirements. The specific working model should be confirmed directly with Joz.",
+    expectedIntent: "recruiter_working_model",
+    expectedComposer: "composeWorkingModelAnswer",
+    forbidden: [],
+  },
+  {
     name: "contact",
     query: "How can I contact Joz?",
     expectedReply:
@@ -623,10 +641,28 @@ const RECRUITER_OPERATIONAL_CASES = [
     name: "work_authorization",
     query: "Does Joz have a Singapore EP?",
     expectedReply:
-      "Joz's current work-authorization status should be confirmed directly for the specific hiring process.",
+      "Joz is Slovak and an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.",
     expectedIntent: "recruiter_work_authorization",
     expectedComposer: "composeWorkAuthorizationAnswer",
     forbidden: [/currently has an EP/i, /currently has a PEP/i, /active Singapore work authorization/i],
+  },
+  {
+    name: "singapore_compensation",
+    query: "What compensation range is Joz targeting in Singapore?",
+    expectedReply:
+      "Compensation for a Singapore role depends on scope, seniority, responsibilities, and the overall package. The best next step is a direct discussion with Joz using the specific Singapore role context.",
+    expectedIntent: "recruiter_compensation",
+    expectedComposer: "composeSingaporeCompensationAnswer",
+    forbidden: [/\bSGD\b\s*\d/i, /\$\s*\d/i],
+  },
+  {
+    name: "singapore_fit",
+    query: "Why is Joz a fit for Singapore recruiters?",
+    expectedReply:
+      "Joz is a strong fit for Singapore recruiter conversations because the proof is already Singapore-relevant: 20x digital sales growth at Maybank-Ageas Etiqa, a Lean ML UX practice across 11 APAC markets at Manulife, 30x audience growth and a global experience language across 30+ products at Mediacorp, Singapore Stock Exchange portal re-engineering, and Apple/Pixar-adjacent Python USD(z) and computer-vision workflows in Singapore.",
+    expectedIntent: "recruiter_singapore_fit",
+    expectedComposer: "composeSingaporeFitAnswer",
+    forbidden: [],
   },
 ];
 

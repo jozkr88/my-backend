@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-13T20:36:26.382Z",
+  "generated_at": "2026-07-13T23:07:40.719Z",
   "counts": {
-    "source_files": 51,
-    "normalized_records": 51,
-    "verified_records": 9,
+    "source_files": 53,
+    "normalized_records": 53,
+    "verified_records": 11,
     "ontology_entities": 81,
     "proofs": 12,
     "errors": 0
@@ -558,8 +558,8 @@
       "category": "faq",
       "source_type": "paste",
       "source_uri": null,
-      "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
-      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
+      "summary": "Verified recruiter-screening answers covering nationality, Singapore work-authorization handling, contact details, availability handling, years of experience, education, and core skills.",
+      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's current Singapore pass status, work authorization, or sponsorship requirement should be confirmed directly with Joz rather than assumed.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- Website: https://meetjoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 13+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI architecture and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -576,18 +576,18 @@
           "status": "verified",
           "reviewed_by": "user",
           "reviewed_at": "2026-07-11",
-          "notes": "User confirmed recruiter-focused facts including Slovak/EU nationality, Singapore EP/PEP, contact details, and experience framing."
+          "notes": "User confirmed recruiter-focused facts including Slovak/EU nationality, contact details, experience framing, and the rule that Singapore pass status or sponsorship should be confirmed directly rather than assumed."
         },
         "verification_status": "verified",
         "claims": [
           "Joz is Slovak and an EU national.",
-          "Joz's Singapore status is EP/PEP.",
+          "Joz's current Singapore pass status, work authorization, or sponsorship requirement should be confirmed directly with Joz rather than assumed.",
           "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
           "Joz has 13+ years of professional experience overall and 8+ years in ML/AI.",
           "Availability and start date should be confirmed directly with Joz unless explicitly verified elsewhere."
         ],
         "proof_points": [
-          "Nationality and Singapore status were explicitly provided by the user for recruiter screening.",
+          "Nationality and recruiter-screening handling for Singapore work authorization were explicitly guided by the user.",
           "The CV source includes the same email, phone number, and website.",
           "The dated professional timeline runs from 2013 to present.",
           "ML/AI-focused work is framed from 2018 to present."
@@ -674,6 +674,84 @@
         "source_filename": "2026-07-11-why-joz-screening-answer.md",
         "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json",
         "reviewed_at": "2026-07-11",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "2026-07-14-recruiter-benchmark-faq",
+      "title": "Recruiter Benchmark FAQ",
+      "category": "faq",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Recruiter benchmark guidance for keeping answers generic by default while using Singapore-first proof and phrasing when Singapore is explicitly asked.",
+      "body": "Recruiter Benchmark FAQ\n\nPurpose\nThis record benchmarks recruiter-style screening and positioning questions using a Singapore-first lens internally while keeping the answer style generic unless Singapore is explicitly asked.\n\nBenchmark rule\n- Do not volunteer \"Singapore\" unless the recruiter asks about Singapore specifically.\n- Default recruiter answers should stay internationally applicable.\n- When Singapore is explicitly asked, use Singapore-relevant proof where it exists.\n\nOperational answer rules\n\nWork authorization and sponsorship\n- Joz is Slovak and an EU national.\n- For any country-specific work authorization, visa, pass status, or sponsorship requirement, Joz LLM should say it must be confirmed directly for the specific hiring process rather than assumed.\n- If Singapore is explicitly asked, Joz LLM may mention EP, PEP, work pass, or sponsorship only in the context of \"confirm directly\" wording.\n\nCompensation and package\n- Joz LLM should not invent compensation numbers, salary bands, day rates, or currency amounts.\n- Generic answers should say compensation depends on role scope, seniority, location, responsibilities, and overall package.\n- Singapore-specific answers may mention Singapore role context but should still avoid hard numbers unless separately verified.\n\nAvailability and notice period\n- Joz LLM should keep \"availability\" and \"notice period / earliest start date\" as separate recruiter answers.\n- If no verified value exists, both should be framed as direct-confirmation items rather than guesses.\n\nWorking model and relocation\n- Joz is open to remote, hybrid, or on-site arrangements depending on role, team, and location requirements.\n- Joz is open to discussing suitable international relocation where role, location, and overall fit make sense.\n\nSingapore-fit proof\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets and first-in-market ML UX solutions launched from Singapore.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Stock Exchange portals were re-engineered.\n- Apple/Pixar-adjacent Python USD(z) and computer-vision workflows were developed in Singapore.\n\nAnswering rule\n- Recruiter answers should be direct, factual, and operational.\n- Proof-led positioning answers should use evidence, not buzzwords.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "faq",
+          "positioning",
+          "recruiter_benchmark",
+          "recruiter_screening",
+          "singapore_first",
+          "skills"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "user",
+          "reviewed_at": "2026-07-14",
+          "notes": "User clarified the benchmark should be Singapore-first internally, but answers must not say Singapore unless the recruiter explicitly asks."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Recruiter answers should stay generic unless Singapore is explicitly asked.",
+          "Country-specific work authorization or sponsorship should be confirmed directly rather than assumed.",
+          "Compensation answers should avoid unverified numbers or currency amounts.",
+          "Availability and notice period should be handled as separate recruiter answers.",
+          "Singapore-fit positioning can be supported with Maybank, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent proof."
+        ],
+        "proof_points": [
+          "User direction explicitly set the answer style to Singapore-first internally but generic outwardly unless asked.",
+          "Maybank-Ageas Etiqa provides 20x digital sales growth proof in Singapore.",
+          "Manulife provides Singapore-based APAC ML UX practice proof across 11 markets.",
+          "Mediacorp provides Singapore media and design-system scale proof across 30+ products.",
+          "Singapore Exchange and Apple/Pixar-adjacent work add local technical and spatial-computing credibility."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Europe/EEA",
+          "Global",
+          "Singapore",
+          "UAE/MENA"
+        ],
+        "companies": [
+          "Apple",
+          "Manulife",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp",
+          "Pixar",
+          "Singapore Exchange"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "2026-07-14-recruiter-benchmark-faq.md",
+        "source_meta_filename": "2026-07-14-recruiter-benchmark-faq.meta.json",
+        "reviewed_at": "2026-07-14",
         "problems": [],
         "principles": [],
         "capabilities": [],
@@ -3665,6 +3743,78 @@
           "media",
           "technology"
         ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0
+      }
+    },
+    {
+      "slug": "skills-singapore-market-proof",
+      "title": "Singapore Market Proof",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Evidence set for explaining why Joz is strong for Singapore-market roles across AI, UX systems, enterprise delivery, and spatial computing.",
+      "body": "Singapore Market Proof\n\nPurpose\nThis record gives Joz LLM a compact evidence set for skill and recruiter questions about why Joz is relevant for Singapore-market roles.\n\nProof set\n- Maybank-Ageas Etiqa: Joz helped drive 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Joz established a Lean ML UX practice across 11 APAC markets and launched first-in-market ML UX solutions from Singapore.\n- Mediacorp: Joz contributed to 30x audience growth and built a global experience language across 30+ products.\n- Singapore Stock Exchange: Joz re-engineered portal experiences in a regulated-market context.\n- Apple/Pixar-adjacent work in Singapore: Joz developed Python USD(z) and computer-vision workflows tied to spatial computing and 3D pipelines.\n\nSkill interpretation\n- These examples support AI architecture, ML product delivery, UX systems thinking, design-system execution, regulated-enterprise delivery, and spatial-computing credibility.\n- The value is not just \"worked in Singapore.\" The value is measurable outcome plus technical depth inside Singapore-relevant environments.\n\nAnswering rule\n- Use this proof set when asked why Joz is strong for Singapore roles or Singapore recruiters.\n- Do not inject Singapore into generic skills answers unless the prompt asks for it.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "market_fit",
+          "proof",
+          "recruiter",
+          "singapore",
+          "skills"
+        ],
+        "verification": {
+          "status": "verified",
+          "reviewed_by": "user",
+          "reviewed_at": "2026-07-14",
+          "notes": "Compiled from verified user-approved positioning and programme evidence already used in Joz LLM answers."
+        },
+        "verification_status": "verified",
+        "claims": [
+          "Joz has measurable Singapore-market proof across banking, insurance, media, exchange platforms, and spatial computing.",
+          "The strongest Singapore proof spans Maybank-Ageas Etiqa, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent work.",
+          "This proof supports both recruiter positioning and skill explanation for Singapore roles."
+        ],
+        "proof_points": [
+          "Maybank-Ageas Etiqa: 20x digital sales growth.",
+          "Manulife: Lean ML UX practice across 11 APAC markets from Singapore.",
+          "Mediacorp: 30x audience growth and a global experience language across 30+ products.",
+          "Singapore Exchange: regulated portal re-engineering.",
+          "Apple/Pixar-adjacent work: Python USD(z), computer vision, and spatial-computing workflows in Singapore."
+        ],
+        "regions": [
+          "Asia Pacific",
+          "Singapore"
+        ],
+        "companies": [
+          "Apple",
+          "Manulife",
+          "Maybank-Ageas Etiqa",
+          "Mediacorp",
+          "Pixar",
+          "Singapore Exchange"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 0,
+        "priority_label": "standard",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-singapore-market-proof.md",
+        "source_meta_filename": "skills-singapore-market-proof.meta.json",
+        "reviewed_at": "2026-07-14",
+        "problems": [],
+        "principles": [],
+        "capabilities": [],
+        "outcomes": [],
+        "governance": [],
+        "industries": [],
         "proofs": [],
         "related_proofs": [],
         "enterprise_scale_score": 0,
