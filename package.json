@@ -7,6 +7,7 @@
     "start": "node index.js",
     "dev": "HOST=127.0.0.1 PORT=3001 node index.js",
     "test": "node --test think-logic.test.js world-agent.test.js full-agent.test.js structured-world.test.js reasoning-layers.test.js jozOntologyRetrieval.test.js meetJozWorld.test.js jozLlmRouter.test.js runtime-routing.test.js",
+    "check:joz-llm": "node check-joz-llm-responses.js",
     "check:recruiter": "node check-recruiter-answers.js",
     "build:joz-knowledge": "node tools/build-joz-knowledge.js",
     "build:meetjoz-world": "node tools/build-meetjoz-world.js",
