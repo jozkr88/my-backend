@@ -181,6 +181,32 @@ test("routes singapore market fit skills queries to singapore-specific proof ans
   assert.match(resolution.reply, /Singapore Stock Exchange/i);
 });
 
+test("routes business value efficiency queries to an efficiency-first answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt =
+    "How does Joz create business value through efficiency, lower cost, faster execution, and stronger operational leverage?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "efficiency");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /lower cost/i);
+  assert.match(resolution.reply, /faster execution|research-to-decision/i);
+  assert.match(resolution.reply, /operational leverage/i);
+  assert.match(resolution.reply, /finance|ERP|accounting|HR|marketing|operations/i);
+  assert.doesNotMatch(resolution.reply, /20x digital sales growth at Maybank/i);
+});
+
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({

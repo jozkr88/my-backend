@@ -246,7 +246,35 @@ function composeFactualProfileReply(subIntent) {
   return "";
 }
 
-function composeBusinessNeedReply() {
+function composeBusinessNeedReply(subIntent = "hire_value") {
+  if (subIntent === "efficiency") {
+    return "Joz creates business value through efficiency by reducing repeated knowledge work, cutting manual handoffs, shortening research-to-decision cycles, and helping the same teams handle more complexity without linear headcount growth. The strongest gains usually show up in finance, ERP, accounting, HR, marketing, and operations where workflows are fragmented, reporting is slow, and execution depends on too much manual coordination. The goal is lower cost, faster execution, stronger operational leverage, and safer scaling with governance and human approval still in place.";
+  }
+
+  if (subIntent === "processes") {
+    return "Joz creates value through process redesign by turning broken or manual workflows into clearer AI-supported operating flows. That includes routing work, reducing exception handling friction, improving approvals, making knowledge reusable, and connecting data, decisions, and execution across ERP, finance, HR, marketing, and operations. The value is not generic automation. It is better workflow design with clearer ownership, faster throughput, and stronger control.";
+  }
+
+  if (subIntent === "growth") {
+    return "Joz supports growth by improving decision speed, commercial signal quality, and execution capacity without scaling overhead at the same rate as complexity. The value shows up in better prioritization, stronger conversion support, more reusable knowledge, faster go-to-market coordination, and AI systems that help teams scale output rather than just add tooling. This is growth through operating leverage, not growth through buzzwords.";
+  }
+
+  if (subIntent === "roi") {
+    return "The strongest ROI usually comes from a mix of cost reduction, faster decisions, productivity gains, lower operational friction, and revenue growth. Joz is strongest where AI can remove repeated manual work, improve workflow throughput, and give leadership clearer decision support across business functions. ROI should be framed with a baseline, target metrics, governance, and proof, not promised as a vague AI upside.";
+  }
+
+  if (subIntent === "functions") {
+    return "Joz creates business value across functions by mapping AI opportunities into real operating areas instead of abstract categories. In finance and accounting that means workflows like AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it means planning, exception handling, procurement, and coordination. In HR, marketing, sales, and leadership it means knowledge reuse, reporting clarity, workflow support, and better decision signal.";
+  }
+
+  if (subIntent === "operating_model") {
+    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale well without governance, ownership, and execution design. The value is stronger adoption, clearer accountability, and AI embedded into real business operations rather than floating beside them.";
+  }
+
+  if (subIntent === "decision_support") {
+    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams distinguish what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution.";
+  }
+
   return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
 }
 
@@ -692,6 +720,79 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
+      "efficiency",
+      "lower cost",
+      "cost reduction",
+      "faster execution",
+      "operational leverage",
+      "productivity gains",
+    ])
+  ) {
+    return { detectedSubIntent: "efficiency", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "processes",
+      "process redesign",
+      "workflow redesign",
+      "operating workflows",
+      "manual handoffs",
+    ])
+  ) {
+    return { detectedSubIntent: "processes", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "growth",
+      "scaling",
+      "scale the business",
+      "commercial performance",
+      "revenue growth",
+    ])
+  ) {
+    return { detectedSubIntent: "growth", detectedConcept: "business_value" };
+  }
+
+  if (includesAny(clean, ["where is the roi", "roi"])) {
+    return { detectedSubIntent: "roi", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "functions",
+      "finance",
+      "erp",
+      "accounting",
+      "hr",
+      "marketing",
+      "operations",
+      "sales",
+      "by function",
+    ])
+  ) {
+    return { detectedSubIntent: "functions", detectedConcept: "business_value" };
+  }
+
+  if (includesAny(clean, ["operating model", "ownership", "governance and execution"])) {
+    return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "decision support",
+      "better signal",
+      "prioritization",
+      "prioritisation",
+      "executive clarity",
+    ])
+  ) {
+    return { detectedSubIntent: "decision_support", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "why should we hire joz",
       "why hire joz",
       "business value",
@@ -1022,7 +1123,7 @@ export function composeJozLlmRouteReply({
 
   if (route?.selectedRoute === "business_need") {
     return {
-      reply: composeBusinessNeedReply(),
+      reply: composeBusinessNeedReply(route.detectedSubIntent),
       answerSource: "JOZ_LLM_CV.experience",
       composer: "composeBusinessNeedReply",
       fallbackUsed: false,
