@@ -248,7 +248,7 @@ function composeFactualProfileReply(subIntent) {
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
   if (subIntent === "efficiency") {
-    return "Joz creates business value through efficiency by reducing repeated knowledge work, cutting manual handoffs, shortening research-to-decision cycles, and helping the same teams handle more complexity without linear headcount growth. The strongest gains usually show up in finance, ERP, accounting, HR, marketing, and operations where workflows are fragmented, reporting is slow, and execution depends on too much manual coordination. The goal is lower cost, faster execution, stronger operational leverage, and safer scaling with governance and human approval still in place.";
+    return "Joz creates business value through efficiency by reducing repeated knowledge work, compressing slow decision cycles, removing manual handoffs, and helping teams handle more operational complexity without linear headcount growth. In practice, that means lower process cost, faster execution, better management leverage, and safer scaling across finance, ERP, accounting, HR, marketing, and operations. The proof is not theoretical: at Maybank-Ageas Etiqa, Joz helped drive 20x digital sales growth through conversational and ML-led UX; at Manulife, Joz established a Lean ML UX practice across 11 APAC markets; at Mediacorp, Joz contributed to 30x audience growth across 30+ products; and at Leo Burnett/Publicis, Joz reduced handoff friction by 70% through code-based prototyping. The underlying pattern is consistent: redesign the workflow, improve signal and throughput, keep human approval where it matters, and turn AI into measurable operational leverage rather than a generic automation story.";
   }
 
   if (subIntent === "processes") {
@@ -256,7 +256,7 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "growth") {
-    return "Joz supports growth by improving decision speed, commercial signal quality, and execution capacity without scaling overhead at the same rate as complexity. The value shows up in better prioritization, stronger conversion support, more reusable knowledge, faster go-to-market coordination, and AI systems that help teams scale output rather than just add tooling. This is growth through operating leverage, not growth through buzzwords.";
+    return "Joz supports growth by using AI systems to improve decision speed, raise commercial signal quality, and increase execution capacity without scaling overhead at the same rate as complexity. In practice, that means stronger conversion support, faster go-to-market coordination, better prioritization, more reusable institutional knowledge, and leadership teams that can make better decisions with less noise. The proof is concrete: at Maybank-Ageas Etiqa, Joz helped drive 20x digital sales growth through conversational and ML-led UX; at Mediacorp, Joz contributed to 30x audience growth across 30+ products; at Manulife, Joz established a Lean ML UX practice across 11 APAC markets to improve adoption and execution quality at regional scale. The pattern is growth through better intelligence and operating leverage: AI should help the business scale revenue, decisions, and execution quality together rather than just adding more tools.";
   }
 
   if (subIntent === "roi") {

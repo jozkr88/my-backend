@@ -200,11 +200,44 @@ test("routes business value efficiency queries to an efficiency-first answer", (
   assert.equal(route.selectedRoute, "business_need");
   assert.equal(route.detectedSubIntent, "efficiency");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /lower cost/i);
-  assert.match(resolution.reply, /faster execution|research-to-decision/i);
+  assert.match(resolution.reply, /lower (?:cost|process cost)/i);
+  assert.match(resolution.reply, /faster execution|decision cycles/i);
   assert.match(resolution.reply, /operational leverage/i);
   assert.match(resolution.reply, /finance|ERP|accounting|HR|marketing|operations/i);
-  assert.doesNotMatch(resolution.reply, /20x digital sales growth at Maybank/i);
+  assert.match(resolution.reply, /Maybank-Ageas Etiqa/i);
+  assert.match(resolution.reply, /Manulife/i);
+  assert.match(resolution.reply, /Mediacorp/i);
+  assert.match(resolution.reply, /70%/i);
+});
+
+test("routes business value growth queries to a growth-first answer with proof", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt =
+    "How does Joz use AI systems to support growth, scaling, better decisions, and stronger commercial performance?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "growth");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /growth|scale revenue/i);
+  assert.match(resolution.reply, /better decisions|decision speed/i);
+  assert.match(resolution.reply, /commercial signal|conversion/i);
+  assert.match(resolution.reply, /Maybank-Ageas Etiqa/i);
+  assert.match(resolution.reply, /20x digital sales growth/i);
+  assert.match(resolution.reply, /Mediacorp/i);
+  assert.match(resolution.reply, /30x audience growth/i);
+  assert.match(resolution.reply, /Manulife/i);
+  assert.match(resolution.reply, /11 APAC markets/i);
 });
 
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
