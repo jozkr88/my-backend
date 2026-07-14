@@ -247,6 +247,10 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
+  if (subIntent === "business_value_definition") {
+    return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means turning AI into lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not just shipping features or demos. The test is simple: what changes operationally, financially, or strategically because the system works better than before?";
+  }
+
   if (subIntent === "efficiency") {
     return "Joz creates business value through efficiency by cutting manual work, process cost, and cycle time across finance, ERP, accounting, HR, marketing, and operations. The lever is process redesign: use retrieval, summarization, classification, and workflow orchestration to remove friction while keeping human approval on critical decisions. That creates stronger operational leverage, backed by 70% lower handoff friction at Leo Burnett/Publicis and regional ML execution scale at Manulife.";
   }
@@ -718,6 +722,17 @@ function detectRecruiterOperational(clean) {
 }
 
 function detectBusinessNeed(clean) {
+  if (
+    includesAny(clean, [
+      "what is business value",
+      "define business value",
+      "what does business value mean",
+      "meaning of business value",
+    ])
+  ) {
+    return { detectedSubIntent: "business_value_definition", detectedConcept: "business_value" };
+  }
+
   if (
     includesAny(clean, [
       "efficiency",
