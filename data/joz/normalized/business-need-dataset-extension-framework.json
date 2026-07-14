@@ -1,0 +1,91 @@
+{
+  "slug": "business-need-dataset-extension-framework",
+  "title": "Dataset Extension Framework",
+  "category": "delivery",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Defines how to extend current datasets toward business value by adding context, outcomes, process visibility, cross-system linkage, and business meaning.",
+  "body": "The right way to extend the current dataset is not to make it simply larger, but more decision-useful.\n\nEach dataset should be extended in five directions:\n\n1. More context\nAdd business unit, customer segment, owner, region, cost center, lifecycle stage, and risk level.\n\n2. More outcomes\nCapture what happened: won or lost, retained or churned, approved or rejected, resolved or escalated, forecast versus actual.\n\n3. More process visibility\nAdd timestamps, cycle times, handoff counts, approval states, delays, escalations, and SLA status.\n\n4. More cross-system linkage\nConnect records across ERP, CRM, finance, HR, support, and marketing where shared IDs or mappings exist.\n\n5. More business meaning\nAdd derived fields such as margin band, exception rate, supplier reliability, churn risk, CAC efficiency, or forecast accuracy.\n\nThe practical audit questions are:\n\n- What do we already have?\n- What decisions should Joz support?\n- What fields are missing?\n- What outcomes are missing?\n- What linked systems are missing?\n- What business logic should be encoded?\n\nThe goal is to move from static record storage into datasets that support profit, efficiency, risk, and growth decisions.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "audit",
+      "business-value",
+      "dataset",
+      "decision-intelligence",
+      "extension"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Datasets should be extended to become more decision-useful rather than simply larger.",
+      "The five key extension directions are context, outcomes, process visibility, cross-system linkage, and business meaning.",
+      "The purpose of dataset extension is to support profit, efficiency, risk, and growth decisions."
+    ],
+    "proof_points": [
+      "Operational datasets without outcomes can describe but not optimize.",
+      "Cross-system linkage is required for strategic business reasoning rather than siloed reporting.",
+      "Derived business fields are necessary to move from raw data to actionable intelligence."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 93,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-dataset-extension-framework.md",
+    "source_meta_filename": "business-need-dataset-extension-framework.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "manual_knowledge_work",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "feedback_loops",
+      "signal_over_noise"
+    ],
+    "capabilities": [
+      "context_engineering",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "higher_data_trust",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 4
+  }
+}

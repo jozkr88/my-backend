@@ -1,0 +1,86 @@
+{
+  "slug": "business-need-current-data-architecture",
+  "title": "Current Joz Data Architecture",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Explains the current Joz data architecture as a governed knowledge pipeline with source, normalization, ontology, publish, and retrieval layers.",
+  "body": "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.\n\nIt has five clear layers:\n\n1. Source layer\nRaw source material lives in inbox files with sidecar metadata.\n\n2. Normalization layer\nEach source is converted into a structured JSON record with fields such as title, summary, lane, verification status, claims, proof points, capabilities, outcomes, governance, and proof links.\n\n3. Ontology layer\nShared taxonomy connects records through problems, principles, capabilities, outcomes, governance, industries, and proofs.\n\n4. Publish layer\nThe builder produces aggregate runtime artifacts, including the full corpus and a runtime-safe model-ready subset.\n\n5. Retrieval and routing layer\nThe backend ranks records by lane, relevance, credibility, verification, proof depth, enterprise scale, and measurable outcomes, then routes answers through the appropriate lane.\n\nThe important distinction is that this is not yet an ERP, CRM, or analytics warehouse. It is a curated knowledge architecture for proof-backed retrieval, positioning, reasoning, and answer quality.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "data-architecture",
+      "governance",
+      "knowledge-pipeline",
+      "retrieval",
+      "structure"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.",
+      "The architecture is organized into source, normalization, ontology, publish, and retrieval-routing layers.",
+      "Its current strength is proof-backed retrieval and structured answer quality rather than live operational analytics."
+    ],
+    "proof_points": [
+      "The workflow explicitly separates inbox, normalized, ontology, and published layers.",
+      "The build process validates metadata and ontology references before publishing records.",
+      "The runtime now distinguishes between the full corpus and a runtime-safe model-ready subset."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 88,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-current-data-architecture.md",
+    "source_meta_filename": "business-need-current-data-architecture.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "knowledge_fragmentation",
+      "low_trust",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "context_engineering",
+      "decision_intelligence",
+      "knowledge_graphs",
+      "verification"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "knowledge_reuse"
+    ],
+    "governance": [
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1
+  }
+}

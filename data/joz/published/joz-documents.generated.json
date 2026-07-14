@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-14T19:25:04.887Z",
+  "generated_at": "2026-07-14T19:53:35.523Z",
   "counts": {
-    "source_files": 60,
-    "normalized_records": 60,
-    "model_ready_records": 58,
+    "source_files": 72,
+    "normalized_records": 72,
+    "model_ready_records": 70,
     "verified_records": 18,
     "ontology_entities": 81,
     "proofs": 12,
@@ -880,6 +880,204 @@
       }
     },
     {
+      "slug": "business-need-ai-by-function",
+      "title": "AI Opportunities by Business Function",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Maps Joz business-value opportunities by function across finance, ERP, HR, marketing, sales, and leadership rather than abstract AI categories.",
+      "body": "The strongest way to extend Joz for business value is by mapping AI opportunities by business function rather than by generic AI category.\n\nCore function areas:\n\n1. Finance and accounting\n- invoice handling\n- AP and AR workflows\n- close support\n- spend visibility\n- forecasting support\n- anomaly detection\n\n2. ERP and operations\n- procurement\n- exception handling\n- inventory visibility\n- planning support\n- supplier coordination\n- fulfillment bottleneck analysis\n\n3. HR and workforce\n- recruiting support\n- onboarding\n- policy Q&A\n- manager support\n- internal service workflows\n- training and knowledge reuse\n\n4. Marketing\n- campaign planning\n- reporting synthesis\n- segmentation\n- content operations\n- attribution interpretation\n- CAC efficiency support\n\n5. Sales and revenue operations\n- lead qualification\n- proposal and follow-up support\n- CRM hygiene\n- forecasting assistance\n- churn and renewal signals\n- next-best action\n\n6. Leadership and transformation\n- cross-functional reporting\n- operating model redesign\n- KPI synthesis\n- scenario support\n- AI adoption governance\n\nThis is useful because leaders usually buy outcomes by function, not abstract agent categories.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "erp",
+          "finance",
+          "hr",
+          "marketing",
+          "sales"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The strongest business-value framing is to map AI opportunities by function rather than by generic AI category.",
+          "Finance, ERP, HR, marketing, sales, and leadership each have distinct AI opportunity patterns.",
+          "Function-specific framing makes Joz commercially clearer to decision-makers."
+        ],
+        "proof_points": [
+          "Joz already has financial-services, enterprise-transformation, and decision-intelligence proof across multiple regulated and scaled environments.",
+          "The current knowledge base already supports workflow redesign and business-value positioning.",
+          "Department-level framing is a natural extension of the existing business-need lane."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 96,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-ai-by-function.md",
+        "source_meta_filename": "business-need-ai-by-function.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "data_silos",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "knowledge_reuse",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-architecture-scalability",
+      "title": "How Scalable the Current Architecture Is",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Clarifies that the current architecture scales well for curated knowledge and retrieval, but not yet as a full enterprise operational intelligence platform.",
+      "body": "The current Joz architecture is scalable as a curated knowledge and retrieval system, but not yet as a large enterprise operational data platform.\n\nWhat scales well now:\n\n- adding more knowledge records\n- expanding proof-backed source material\n- growing ontology coverage\n- improving retrieval precision through metadata\n- publishing safer runtime subsets\n\nWhat does not scale well yet:\n\n- high-frequency live business data ingestion\n- large operational event streams\n- multi-tenant platform complexity\n- rich long-term agent state and memory across many users\n- deep cross-system analytics across ERP, CRM, HR, marketing, and finance\n\nThe next scaling constraints will come from content volume, verification workload, update frequency, and the mixing of curated knowledge with operational data.\n\nThe correct next architecture split is:\n\n- knowledge content layer\n- operational data layer\n- retrieval and indexing layer\n- agent memory and state layer\n- governance and evaluation layer\n\nSo the honest answer is that the current architecture is strong for curated knowledge scale, but it is still an early-phase architecture for enterprise operating intelligence.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "architecture",
+          "knowledge-system",
+          "operating-model",
+          "phase-2",
+          "scalability"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The current architecture is scalable as a curated knowledge and retrieval system.",
+          "It is not yet scalable as a full enterprise operational data and intelligence platform.",
+          "The next scaling step requires separating knowledge content, operational data, retrieval infrastructure, memory, and governance."
+        ],
+        "proof_points": [
+          "The current architecture is file-based and curation-heavy.",
+          "The publish process is batch-oriented rather than designed for rapid operational data ingestion.",
+          "The current runtime is strong at retrieval and routing but not yet built as a broad analytical platform."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 90,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-architecture-scalability.md",
+        "source_meta_filename": "business-need-architecture-scalability.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "operational_friction",
+          "organizational_complexity",
+          "unclear_roi"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "feedback_loops",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agent_memory",
+          "decision_intelligence",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "knowledge_reuse",
+          "productivity_gains",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
       "slug": "business-need-buyer-faq",
       "title": "Business Need Buyer FAQ",
       "category": "faq",
@@ -978,6 +1176,183 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-current-data-architecture",
+      "title": "Current Joz Data Architecture",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Explains the current Joz data architecture as a governed knowledge pipeline with source, normalization, ontology, publish, and retrieval layers.",
+      "body": "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.\n\nIt has five clear layers:\n\n1. Source layer\nRaw source material lives in inbox files with sidecar metadata.\n\n2. Normalization layer\nEach source is converted into a structured JSON record with fields such as title, summary, lane, verification status, claims, proof points, capabilities, outcomes, governance, and proof links.\n\n3. Ontology layer\nShared taxonomy connects records through problems, principles, capabilities, outcomes, governance, industries, and proofs.\n\n4. Publish layer\nThe builder produces aggregate runtime artifacts, including the full corpus and a runtime-safe model-ready subset.\n\n5. Retrieval and routing layer\nThe backend ranks records by lane, relevance, credibility, verification, proof depth, enterprise scale, and measurable outcomes, then routes answers through the appropriate lane.\n\nThe important distinction is that this is not yet an ERP, CRM, or analytics warehouse. It is a curated knowledge architecture for proof-backed retrieval, positioning, reasoning, and answer quality.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "data-architecture",
+          "governance",
+          "knowledge-pipeline",
+          "retrieval",
+          "structure"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.",
+          "The architecture is organized into source, normalization, ontology, publish, and retrieval-routing layers.",
+          "Its current strength is proof-backed retrieval and structured answer quality rather than live operational analytics."
+        ],
+        "proof_points": [
+          "The workflow explicitly separates inbox, normalized, ontology, and published layers.",
+          "The build process validates metadata and ontology references before publishing records.",
+          "The runtime now distinguishes between the full corpus and a runtime-safe model-ready subset."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 88,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-current-data-architecture.md",
+        "source_meta_filename": "business-need-current-data-architecture.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "context_engineering",
+          "decision_intelligence",
+          "knowledge_graphs",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "knowledge_reuse"
+        ],
+        "governance": [
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "business-need-dataset-extension-framework",
+      "title": "Dataset Extension Framework",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines how to extend current datasets toward business value by adding context, outcomes, process visibility, cross-system linkage, and business meaning.",
+      "body": "The right way to extend the current dataset is not to make it simply larger, but more decision-useful.\n\nEach dataset should be extended in five directions:\n\n1. More context\nAdd business unit, customer segment, owner, region, cost center, lifecycle stage, and risk level.\n\n2. More outcomes\nCapture what happened: won or lost, retained or churned, approved or rejected, resolved or escalated, forecast versus actual.\n\n3. More process visibility\nAdd timestamps, cycle times, handoff counts, approval states, delays, escalations, and SLA status.\n\n4. More cross-system linkage\nConnect records across ERP, CRM, finance, HR, support, and marketing where shared IDs or mappings exist.\n\n5. More business meaning\nAdd derived fields such as margin band, exception rate, supplier reliability, churn risk, CAC efficiency, or forecast accuracy.\n\nThe practical audit questions are:\n\n- What do we already have?\n- What decisions should Joz support?\n- What fields are missing?\n- What outcomes are missing?\n- What linked systems are missing?\n- What business logic should be encoded?\n\nThe goal is to move from static record storage into datasets that support profit, efficiency, risk, and growth decisions.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "audit",
+          "business-value",
+          "dataset",
+          "decision-intelligence",
+          "extension"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Datasets should be extended to become more decision-useful rather than simply larger.",
+          "The five key extension directions are context, outcomes, process visibility, cross-system linkage, and business meaning.",
+          "The purpose of dataset extension is to support profit, efficiency, risk, and growth decisions."
+        ],
+        "proof_points": [
+          "Operational datasets without outcomes can describe but not optimize.",
+          "Cross-system linkage is required for strategic business reasoning rather than siloed reporting.",
+          "Derived business fields are necessary to move from raw data to actionable intelligence."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 93,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-dataset-extension-framework.md",
+        "source_meta_filename": "business-need-dataset-extension-framework.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "manual_knowledge_work",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "feedback_loops",
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "context_engineering",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "higher_data_trust",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 4
       }
     },
     {
@@ -1084,6 +1459,213 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "business-need-department-profit-use-cases",
+      "title": "Department by Department Profit Use Cases",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Maps department-specific AI use cases to profit impact across finance, ERP, HR, marketing, sales, and leadership.",
+      "body": "Each department should be described in terms of profit impact, not just AI activity.\n\nFinance and accounting\n- reduce invoice processing cost\n- improve collections and cash timing\n- lower close-cycle effort\n- improve margin visibility\n- reduce spend leakage\n\nERP and operations\n- reduce exception handling cost\n- improve inventory and procurement decisions\n- lower workflow delay\n- reduce supplier friction\n- improve fulfillment visibility\n\nHR and workforce\n- reduce recruiting and onboarding overhead\n- improve manager support\n- reduce repetitive policy and service work\n- accelerate workforce capability ramp-up\n\nMarketing\n- improve CAC efficiency\n- reduce campaign operations cost\n- improve segmentation and reporting clarity\n- support conversion and retention performance\n\nSales and revenue operations\n- improve lead quality\n- accelerate proposals and follow-up\n- improve pipeline visibility\n- reduce churn risk\n- support expansion opportunities\n\nLeadership and management\n- improve cross-functional visibility\n- reduce decision latency\n- improve operating discipline\n- increase output per leader through better synthesis and follow-through\n\nThe value of this structure is that every use case ties back to:\n\n- cost\n- margin\n- revenue\n- speed\n- risk\n\nThat is the right commercial language.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "department",
+          "finance",
+          "operations",
+          "profit",
+          "use-cases"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Each department should be described in terms of profit impact, not just AI activity.",
+          "Finance, ERP, HR, marketing, sales, and leadership each have distinct cost, margin, revenue, speed, and risk levers.",
+          "This department-level framing is the right commercial language for AI value."
+        ],
+        "proof_points": [
+          "This structure is a direct extension of the profit-lever and function-opportunity records.",
+          "It turns business-value framing into department-specific operating relevance.",
+          "It aligns with enterprise stakeholder expectations for commercial clarity."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 97,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-department-profit-use-cases.md",
+        "source_meta_filename": "business-need-department-profit-use-cases.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "enterprise_architecture",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 5
+      }
+    },
+    {
+      "slug": "business-need-efficiency-vs-growth",
+      "title": "Efficiency Versus Growth",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Separates AI business value into efficiency effects and growth effects so the operating model and ROI case stay clear.",
+      "body": "AI value should be split into two different conversations:\n\n1. Efficiency\nUse AI to reduce cost, time, friction, rework, and manual effort.\n\nTypical efficiency effects:\n- lower process cost\n- faster cycle time\n- lower error rate\n- fewer handoffs\n- less repetitive knowledge work\n- more consistent execution\n\n2. Growth\nUse AI to increase output, decision speed, customer relevance, and scalability.\n\nTypical growth effects:\n- stronger conversion\n- faster market response\n- better customer journeys\n- more output per employee\n- faster onboarding of new talent\n- better reuse of institutional knowledge\n\nThis distinction matters because the operating model is different.\n\nEfficiency questions focus on:\n- what can be automated\n- what can be shortened\n- what can be standardized\n\nGrowth questions focus on:\n- what can scale\n- what can improve commercial performance\n- what can increase strategic capacity\n\nJoz should be able to speak to both, but keep them separate so the business case stays clear.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "efficiency",
+          "growth",
+          "operating-model",
+          "roi",
+          "scale"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "AI value should be separated into efficiency and growth conversations.",
+          "Efficiency focuses on cost, time, friction, and standardization.",
+          "Growth focuses on output, conversion, customer relevance, and scaling strategic capacity."
+        ],
+        "proof_points": [
+          "The existing Joz proof base already includes both growth outcomes and operational friction reduction.",
+          "Separating these frames helps avoid vague ROI language.",
+          "This distinction matches how leaders evaluate cost programs versus growth programs."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 94,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-efficiency-vs-growth.md",
+        "source_meta_filename": "business-need-efficiency-vs-growth.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
       }
     },
     {
@@ -1314,6 +1896,114 @@
       }
     },
     {
+      "slug": "business-need-erp-finance-hr-marketing-opportunity-map",
+      "title": "ERP Finance HR Marketing Opportunity Map",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Provides a cross-functional Business Value map across ERP, finance, HR, marketing, growth, and leadership so Joz can explain AI opportunities in operational terms.",
+      "body": "The most practical Business Value extension is a cross-functional opportunity map.\n\nERP and operations\n- automate exception handling\n- summarize demand and supply issues\n- improve procurement visibility\n- surface bottlenecks in fulfillment and planning\n- support vendor and supplier decision-making\n\nFinance and accounting\n- accelerate AP and AR workflows\n- classify and reconcile invoices\n- detect anomalies and leakage\n- improve spend visibility\n- support close, forecast, and margin review\n\nHR and workforce\n- improve recruiting triage\n- support onboarding and internal helpdesk workflows\n- make policy and process knowledge easier to use\n- accelerate training and knowledge reuse\n- support managers with better internal context\n\nMarketing\n- accelerate campaign planning and reporting\n- improve segmentation and content operations\n- turn noisy analytics into clearer decisions\n- support CAC efficiency and conversion analysis\n\nGrowth and leadership\n- improve cross-functional reporting\n- reduce decision latency\n- create better next-best-action logic\n- improve management leverage through trusted intelligence\n- support scalable adoption of AI into real workflows\n\nThis gives Joz a practical way to talk about business value in terms leaders and operators can act on immediately.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "erp",
+          "finance",
+          "hr",
+          "marketing",
+          "opportunity-map"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "A cross-functional opportunity map is the most practical way to extend Joz for Business Value.",
+          "ERP, finance, HR, marketing, and leadership each have distinct AI opportunity areas with direct operational relevance.",
+          "Joz should talk about AI opportunities in terms leaders and operators can act on immediately."
+        ],
+        "proof_points": [
+          "This structure is consistent with the existing business-need and decision-intelligence direction in the corpus.",
+          "The map converts abstract AI language into function-level business opportunities.",
+          "It aligns with Joz's workflow, operating-model, and enterprise-transformation positioning."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 97,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-erp-finance-hr-marketing-opportunity-map.md",
+        "source_meta_filename": "business-need-erp-finance-hr-marketing-opportunity-map.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "data_silos",
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "knowledge_reuse",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
       "slug": "business-need-hero-value",
       "title": "Joz Turns Complexity into Business Value",
       "category": "business_need",
@@ -1429,6 +2119,100 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-operating-model-blueprint",
+      "title": "Business Value Operating Model Blueprint",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the structure of a serious AI business value operating model, including profit levers, opportunities, process redesign, governance, KPIs, quick wins, and a scaling roadmap.",
+      "body": "The right end state is not a loose collection of AI ideas. It is a business value operating model.\n\nThat operating model should have eight parts:\n\n1. Executive summary\nWhat value is being created and why it matters now.\n\n2. Profit-lever model\nHow value connects to revenue, margin, cost, working capital, risk, and execution speed.\n\n3. Function-by-function opportunity view\nWhere finance, ERP, HR, marketing, sales, support, and leadership can use AI productively.\n\n4. Process redesign framework\nHow current workflows change, where humans stay in the loop, and where control points sit.\n\n5. Governance model\nHow approval, evidence, auditability, risk thresholds, and ownership are handled.\n\n6. KPI and ROI model\nHow baseline, target, value owner, and verification method are defined.\n\n7. 90-day quick wins\nWhat can be tested quickly with real workflow value.\n\n8. 12-month scaling roadmap\nWhat should be integrated, operationalized, and scaled only after value and controls are credible.\n\nThis is the serious way to talk about AI transformation.\n\nThe point is not “where can we use AI?”\nThe point is:\n\n- where does value exist\n- what should change\n- how should it be governed\n- how should it scale",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "blueprint",
+          "governance",
+          "operating-model",
+          "roadmap",
+          "roi"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The right end state is a business value operating model rather than a loose collection of AI ideas.",
+          "A serious AI transformation blueprint needs profit levers, function opportunities, process redesign, governance, KPI logic, quick wins, and a scaling roadmap.",
+          "The central question is where value exists, what should change, how it should be governed, and how it should scale."
+        ],
+        "proof_points": [
+          "This blueprint is consistent with the profit-lever, process-redesign, and function-opportunity records already added.",
+          "It matches the current Joz emphasis on systems, governance, evaluation, and real operating value.",
+          "The structure avoids technology-first AI programs with weak commercial accountability."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-operating-model-blueprint.md",
+        "source_meta_filename": "business-need-operating-model-blueprint.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "governance_gaps",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "faster_time_to_value",
+          "lower_risk",
+          "revenue_growth",
+          "stronger_governance"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 5
       }
     },
     {
@@ -1549,6 +2333,201 @@
       }
     },
     {
+      "slug": "business-need-process-redesign-framework",
+      "title": "Process Redesign Framework",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the practical framework for redesigning business processes around AI, with current process, friction, cost, intervention, human role, systems, KPIs, and controls.",
+      "body": "The serious AI opportunity is usually not just answering faster, but redesigning the process around better intelligence and clearer control.\n\nEach process redesign should be described in a practical structure:\n\n1. Current process\nWhat happens today and who does it.\n\n2. Current problem\nWhere time, errors, friction, delay, or poor visibility exist.\n\n3. Current cost or missed value\nLabor cost, missed revenue, delayed response, margin loss, or decision risk.\n\n4. AI intervention\nWhat AI actually changes: summarization, classification, retrieval, recommendation, exception handling, or workflow orchestration.\n\n5. Human role after AI\nWhat remains with the human: approval, escalation, exception handling, judgment, stakeholder communication.\n\n6. Systems involved\nERP, CRM, finance, HRIS, support, knowledge base, reporting layer, or workflow tools.\n\n7. KPI impact\nCycle time, error rate, cost per case, resolution speed, margin, conversion, adoption, or forecast accuracy.\n\n8. Control model\nConfidence thresholds, approval rules, audit logs, ownership, and verification.\n\nThis is how Joz should frame process redesign when the goal is real operating value rather than a shallow AI feature pitch.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "controls",
+          "kpi",
+          "process",
+          "redesign",
+          "workflow"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The serious AI opportunity is usually redesigning the process, not just answering faster.",
+          "A strong process redesign needs current-state, problem, value, intervention, human role, systems, KPI, and control definitions.",
+          "Joz should frame AI work as operating-model change rather than shallow feature insertion."
+        ],
+        "proof_points": [
+          "The current Joz business-need and systems records already support workflow-first thinking.",
+          "This framework is aligned with governance, evaluation, and decision-quality principles already present in the corpus.",
+          "Process redesign language is stronger for enterprise stakeholders than generic automation claims."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-process-redesign-framework.md",
+        "source_meta_filename": "business-need-process-redesign-framework.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "decision_quality",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "lower_operational_friction",
+          "productivity_gains",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-profit-levers",
+      "title": "AI Profit Levers",
+      "category": "roi",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the main profit levers through which AI creates commercial value: revenue, margin, cost, working capital, error reduction, and management leverage.",
+      "body": "The right way to explain AI business value is through profit levers, not through generic feature lists.\n\nThe main profit levers are:\n\n1. Revenue growth\nImprove conversion, customer relevance, proposal quality, response speed, retention, and cross-sell or upsell performance.\n\n2. Gross margin improvement\nReduce delivery waste, improve pricing support, optimize operational decisions, and lower avoidable service cost.\n\n3. SG&A reduction\nReduce manual reporting, coordination, reconciliation, support workload, and repeated knowledge work.\n\n4. Working capital improvement\nImprove collections, payment timing, exception resolution, invoice handling, and inventory or procurement visibility.\n\n5. Error and leakage reduction\nReduce compliance misses, duplicate work, processing errors, poor handoffs, and bad decisions made on incomplete context.\n\n6. Management leverage\nGive leaders clearer cross-functional visibility, better scenario synthesis, faster decision cycles, and better execution follow-through.\n\nThe important principle is that AI should be connected to measurable P&L impact:\n\n- revenue\n- margin\n- cost\n- working capital\n- risk\n- execution speed\n\nThis is how Joz should frame business value when the goal is commercial credibility rather than buzzwords.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "cost",
+          "margin",
+          "profit",
+          "roi",
+          "working-capital"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "AI business value should be explained through profit levers rather than generic feature lists.",
+          "The main commercial levers are revenue growth, gross margin improvement, SG&A reduction, working capital improvement, error reduction, and management leverage.",
+          "Joz should connect AI work to measurable P&L impact rather than abstract innovation language."
+        ],
+        "proof_points": [
+          "Revenue and growth proof already exists in Maybank and Mediacorp records.",
+          "Operational friction reduction is already supported by the Publicis handoff-reduction proof.",
+          "Decision quality and governance language are already consistent with the systems and business-need records."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-profit-levers.md",
+        "source_meta_filename": "business-need-profit-levers.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "organizational_design",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "faster_time_to_value",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 6
+      }
+    },
+    {
       "slug": "business-need-roi-model",
       "title": "Where the ROI Comes From",
       "category": "roi",
@@ -1658,6 +2637,92 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 6
+      }
+    },
+    {
+      "slug": "business-need-skills-mindset-agentic-architecture-infrastructure",
+      "title": "Skills Mindset Agentic Architecture Infrastructure",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Separates skills, mindset, agentic architecture, and infrastructure so Joz can explain the stack without conceptual muddle.",
+      "body": "The clean structure is to separate four things that are often confused:\n\n1. Skills\nWhat Joz can do.\n\nExamples:\n- finance analysis\n- ERP reasoning\n- margin diagnostics\n- AI architecture\n- workflow redesign\n- executive briefing support\n\n2. Mindset\nHow Joz thinks while doing it.\n\nExamples:\n- profit-oriented\n- operator-minded\n- efficiency-first\n- cross-functional\n- governance-aware\n- decision-focused\n\n3. Agentic architecture\nHow tasks are decomposed, routed, coordinated, and executed across agents and tools.\n\nExamples:\n- agent routing\n- planning\n- tool use\n- escalation paths\n- execution flow\n- memory and verification loops\n\n4. Infrastructure\nWhat controls, secures, observes, and scales the whole system.\n\nExamples:\n- permissions\n- model routing\n- observability\n- evaluation\n- audit logs\n- cost controls\n- reliability\n\nThe practical rule is:\n\n- Skills = business competencies\n- Mindset = reasoning posture\n- Agentic architecture = execution model\n- Infrastructure = platform foundation\n\nIf these are mixed together, the system becomes conceptually muddy and harder to scale.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "agentic-architecture",
+          "infrastructure",
+          "mindset",
+          "skills",
+          "structure"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Skills, mindset, agentic architecture, and infrastructure should be treated as distinct layers.",
+          "Skills are business competencies, mindset is reasoning posture, agentic architecture is the execution model, and infrastructure is the platform foundation.",
+          "Mixing these concepts together makes the system harder to explain and harder to scale."
+        ],
+        "proof_points": [
+          "This structure matches the current architecture and lane logic already emerging in the Joz knowledge base.",
+          "The distinction supports cleaner positioning and cleaner implementation decisions.",
+          "It aligns with the current direction of separating business-useful knowledge from runtime and control mechanics."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
+        "source_meta_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "organizational_complexity",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "knowledge_reuse",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
       }
     },
     {
@@ -1880,6 +2945,97 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-why-joz-is-irreplaceable",
+      "title": "Why Joz Is Irreplaceable",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Explains that Joz becomes hard to replace through context, workflows, decision logic, governance, and feedback loops rather than generic AI usage.",
+      "body": "Joz is not irreplaceable because he uses AI. That would be weak and replaceable positioning.\n\nJoz becomes hard to replace when the value sits in assets and operating intelligence that generic AI tools do not have.\n\nThe strongest irreplaceability factors are:\n\n1. Context integration\nJoz connects fragmented business knowledge, process logic, and decision context across systems and stakeholders.\n\n2. Workflow embeddedness\nThe value is not just in answering, but in becoming part of how work is routed, escalated, approved, and improved.\n\n3. Decision logic\nJoz should hold company-specific reasoning around profit, cost, risk, prioritization, governance, and operating tradeoffs.\n\n4. Proof-backed trust\nThe system should not rely on generic model fluency alone. It should rely on curated proof, clear provenance, verification, and measurable outcome framing.\n\n5. Feedback loops\nJoz should learn from outcomes, corrections, approvals, failures, and repeated business patterns.\n\n6. Human-plus-system judgment\nThe real moat is the combination of systems thinking, AI capability, business context, and operating-model judgment.\n\nThe practical moat is:\n\n- context\n- integrations\n- workflows\n- decision logic\n- governance\n- feedback loops\n\nThat is what makes Joz hard to swap out with a generic chatbot.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "context",
+          "governance",
+          "irreplaceable",
+          "moat",
+          "workflow"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Joz is not irreplaceable because he uses AI, but because the value sits in context, workflows, decision logic, governance, and feedback loops.",
+          "The strongest moat comes from workflow embeddedness and company-specific operating intelligence.",
+          "A generic chatbot is replaceable; a system with integrated context and decision logic is much harder to replace."
+        ],
+        "proof_points": [
+          "This framing is consistent with the current Joz architecture, systems-mindset, and decision-intelligence records.",
+          "The current corpus already emphasizes governance, verification, and context engineering rather than generic AI claims.",
+          "The architecture direction already supports retrieval, workflow logic, and curated trust rather than pure chat output."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 99,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-why-joz-is-irreplaceable.md",
+        "source_meta_filename": "business-need-why-joz-is-irreplaceable.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "feedback_loops",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agent_memory",
+          "context_engineering",
+          "decision_intelligence",
+          "verification",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "higher_adoption",
+          "higher_data_trust",
+          "knowledge_reuse",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
       }
     },
     {
@@ -6178,6 +7334,204 @@
       }
     },
     {
+      "slug": "business-need-ai-by-function",
+      "title": "AI Opportunities by Business Function",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Maps Joz business-value opportunities by function across finance, ERP, HR, marketing, sales, and leadership rather than abstract AI categories.",
+      "body": "The strongest way to extend Joz for business value is by mapping AI opportunities by business function rather than by generic AI category.\n\nCore function areas:\n\n1. Finance and accounting\n- invoice handling\n- AP and AR workflows\n- close support\n- spend visibility\n- forecasting support\n- anomaly detection\n\n2. ERP and operations\n- procurement\n- exception handling\n- inventory visibility\n- planning support\n- supplier coordination\n- fulfillment bottleneck analysis\n\n3. HR and workforce\n- recruiting support\n- onboarding\n- policy Q&A\n- manager support\n- internal service workflows\n- training and knowledge reuse\n\n4. Marketing\n- campaign planning\n- reporting synthesis\n- segmentation\n- content operations\n- attribution interpretation\n- CAC efficiency support\n\n5. Sales and revenue operations\n- lead qualification\n- proposal and follow-up support\n- CRM hygiene\n- forecasting assistance\n- churn and renewal signals\n- next-best action\n\n6. Leadership and transformation\n- cross-functional reporting\n- operating model redesign\n- KPI synthesis\n- scenario support\n- AI adoption governance\n\nThis is useful because leaders usually buy outcomes by function, not abstract agent categories.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "erp",
+          "finance",
+          "hr",
+          "marketing",
+          "sales"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The strongest business-value framing is to map AI opportunities by function rather than by generic AI category.",
+          "Finance, ERP, HR, marketing, sales, and leadership each have distinct AI opportunity patterns.",
+          "Function-specific framing makes Joz commercially clearer to decision-makers."
+        ],
+        "proof_points": [
+          "Joz already has financial-services, enterprise-transformation, and decision-intelligence proof across multiple regulated and scaled environments.",
+          "The current knowledge base already supports workflow redesign and business-value positioning.",
+          "Department-level framing is a natural extension of the existing business-need lane."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 96,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-ai-by-function.md",
+        "source_meta_filename": "business-need-ai-by-function.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "data_silos",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "knowledge_reuse",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-architecture-scalability",
+      "title": "How Scalable the Current Architecture Is",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Clarifies that the current architecture scales well for curated knowledge and retrieval, but not yet as a full enterprise operational intelligence platform.",
+      "body": "The current Joz architecture is scalable as a curated knowledge and retrieval system, but not yet as a large enterprise operational data platform.\n\nWhat scales well now:\n\n- adding more knowledge records\n- expanding proof-backed source material\n- growing ontology coverage\n- improving retrieval precision through metadata\n- publishing safer runtime subsets\n\nWhat does not scale well yet:\n\n- high-frequency live business data ingestion\n- large operational event streams\n- multi-tenant platform complexity\n- rich long-term agent state and memory across many users\n- deep cross-system analytics across ERP, CRM, HR, marketing, and finance\n\nThe next scaling constraints will come from content volume, verification workload, update frequency, and the mixing of curated knowledge with operational data.\n\nThe correct next architecture split is:\n\n- knowledge content layer\n- operational data layer\n- retrieval and indexing layer\n- agent memory and state layer\n- governance and evaluation layer\n\nSo the honest answer is that the current architecture is strong for curated knowledge scale, but it is still an early-phase architecture for enterprise operating intelligence.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "architecture",
+          "knowledge-system",
+          "operating-model",
+          "phase-2",
+          "scalability"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The current architecture is scalable as a curated knowledge and retrieval system.",
+          "It is not yet scalable as a full enterprise operational data and intelligence platform.",
+          "The next scaling step requires separating knowledge content, operational data, retrieval infrastructure, memory, and governance."
+        ],
+        "proof_points": [
+          "The current architecture is file-based and curation-heavy.",
+          "The publish process is batch-oriented rather than designed for rapid operational data ingestion.",
+          "The current runtime is strong at retrieval and routing but not yet built as a broad analytical platform."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 90,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-architecture-scalability.md",
+        "source_meta_filename": "business-need-architecture-scalability.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "operational_friction",
+          "organizational_complexity",
+          "unclear_roi"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "feedback_loops",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agent_memory",
+          "decision_intelligence",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "knowledge_reuse",
+          "productivity_gains",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
+      }
+    },
+    {
       "slug": "business-need-buyer-faq",
       "title": "Business Need Buyer FAQ",
       "category": "faq",
@@ -6276,6 +7630,183 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-current-data-architecture",
+      "title": "Current Joz Data Architecture",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Explains the current Joz data architecture as a governed knowledge pipeline with source, normalization, ontology, publish, and retrieval layers.",
+      "body": "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.\n\nIt has five clear layers:\n\n1. Source layer\nRaw source material lives in inbox files with sidecar metadata.\n\n2. Normalization layer\nEach source is converted into a structured JSON record with fields such as title, summary, lane, verification status, claims, proof points, capabilities, outcomes, governance, and proof links.\n\n3. Ontology layer\nShared taxonomy connects records through problems, principles, capabilities, outcomes, governance, industries, and proofs.\n\n4. Publish layer\nThe builder produces aggregate runtime artifacts, including the full corpus and a runtime-safe model-ready subset.\n\n5. Retrieval and routing layer\nThe backend ranks records by lane, relevance, credibility, verification, proof depth, enterprise scale, and measurable outcomes, then routes answers through the appropriate lane.\n\nThe important distinction is that this is not yet an ERP, CRM, or analytics warehouse. It is a curated knowledge architecture for proof-backed retrieval, positioning, reasoning, and answer quality.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "data-architecture",
+          "governance",
+          "knowledge-pipeline",
+          "retrieval",
+          "structure"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.",
+          "The architecture is organized into source, normalization, ontology, publish, and retrieval-routing layers.",
+          "Its current strength is proof-backed retrieval and structured answer quality rather than live operational analytics."
+        ],
+        "proof_points": [
+          "The workflow explicitly separates inbox, normalized, ontology, and published layers.",
+          "The build process validates metadata and ontology references before publishing records.",
+          "The runtime now distinguishes between the full corpus and a runtime-safe model-ready subset."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 88,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-current-data-architecture.md",
+        "source_meta_filename": "business-need-current-data-architecture.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "context_engineering",
+          "decision_intelligence",
+          "knowledge_graphs",
+          "verification"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "knowledge_reuse"
+        ],
+        "governance": [
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "business-need-dataset-extension-framework",
+      "title": "Dataset Extension Framework",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines how to extend current datasets toward business value by adding context, outcomes, process visibility, cross-system linkage, and business meaning.",
+      "body": "The right way to extend the current dataset is not to make it simply larger, but more decision-useful.\n\nEach dataset should be extended in five directions:\n\n1. More context\nAdd business unit, customer segment, owner, region, cost center, lifecycle stage, and risk level.\n\n2. More outcomes\nCapture what happened: won or lost, retained or churned, approved or rejected, resolved or escalated, forecast versus actual.\n\n3. More process visibility\nAdd timestamps, cycle times, handoff counts, approval states, delays, escalations, and SLA status.\n\n4. More cross-system linkage\nConnect records across ERP, CRM, finance, HR, support, and marketing where shared IDs or mappings exist.\n\n5. More business meaning\nAdd derived fields such as margin band, exception rate, supplier reliability, churn risk, CAC efficiency, or forecast accuracy.\n\nThe practical audit questions are:\n\n- What do we already have?\n- What decisions should Joz support?\n- What fields are missing?\n- What outcomes are missing?\n- What linked systems are missing?\n- What business logic should be encoded?\n\nThe goal is to move from static record storage into datasets that support profit, efficiency, risk, and growth decisions.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "audit",
+          "business-value",
+          "dataset",
+          "decision-intelligence",
+          "extension"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Datasets should be extended to become more decision-useful rather than simply larger.",
+          "The five key extension directions are context, outcomes, process visibility, cross-system linkage, and business meaning.",
+          "The purpose of dataset extension is to support profit, efficiency, risk, and growth decisions."
+        ],
+        "proof_points": [
+          "Operational datasets without outcomes can describe but not optimize.",
+          "Cross-system linkage is required for strategic business reasoning rather than siloed reporting.",
+          "Derived business fields are necessary to move from raw data to actionable intelligence."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 93,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-dataset-extension-framework.md",
+        "source_meta_filename": "business-need-dataset-extension-framework.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "data_silos",
+          "manual_knowledge_work",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "feedback_loops",
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "context_engineering",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "higher_data_trust",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 4
       }
     },
     {
@@ -6382,6 +7913,213 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 2
+      }
+    },
+    {
+      "slug": "business-need-department-profit-use-cases",
+      "title": "Department by Department Profit Use Cases",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Maps department-specific AI use cases to profit impact across finance, ERP, HR, marketing, sales, and leadership.",
+      "body": "Each department should be described in terms of profit impact, not just AI activity.\n\nFinance and accounting\n- reduce invoice processing cost\n- improve collections and cash timing\n- lower close-cycle effort\n- improve margin visibility\n- reduce spend leakage\n\nERP and operations\n- reduce exception handling cost\n- improve inventory and procurement decisions\n- lower workflow delay\n- reduce supplier friction\n- improve fulfillment visibility\n\nHR and workforce\n- reduce recruiting and onboarding overhead\n- improve manager support\n- reduce repetitive policy and service work\n- accelerate workforce capability ramp-up\n\nMarketing\n- improve CAC efficiency\n- reduce campaign operations cost\n- improve segmentation and reporting clarity\n- support conversion and retention performance\n\nSales and revenue operations\n- improve lead quality\n- accelerate proposals and follow-up\n- improve pipeline visibility\n- reduce churn risk\n- support expansion opportunities\n\nLeadership and management\n- improve cross-functional visibility\n- reduce decision latency\n- improve operating discipline\n- increase output per leader through better synthesis and follow-through\n\nThe value of this structure is that every use case ties back to:\n\n- cost\n- margin\n- revenue\n- speed\n- risk\n\nThat is the right commercial language.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "department",
+          "finance",
+          "operations",
+          "profit",
+          "use-cases"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Each department should be described in terms of profit impact, not just AI activity.",
+          "Finance, ERP, HR, marketing, sales, and leadership each have distinct cost, margin, revenue, speed, and risk levers.",
+          "This department-level framing is the right commercial language for AI value."
+        ],
+        "proof_points": [
+          "This structure is a direct extension of the profit-lever and function-opportunity records.",
+          "It turns business-value framing into department-specific operating relevance.",
+          "It aligns with enterprise stakeholder expectations for commercial clarity."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 97,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-department-profit-use-cases.md",
+        "source_meta_filename": "business-need-department-profit-use-cases.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "enterprise_architecture",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 5
+      }
+    },
+    {
+      "slug": "business-need-efficiency-vs-growth",
+      "title": "Efficiency Versus Growth",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Separates AI business value into efficiency effects and growth effects so the operating model and ROI case stay clear.",
+      "body": "AI value should be split into two different conversations:\n\n1. Efficiency\nUse AI to reduce cost, time, friction, rework, and manual effort.\n\nTypical efficiency effects:\n- lower process cost\n- faster cycle time\n- lower error rate\n- fewer handoffs\n- less repetitive knowledge work\n- more consistent execution\n\n2. Growth\nUse AI to increase output, decision speed, customer relevance, and scalability.\n\nTypical growth effects:\n- stronger conversion\n- faster market response\n- better customer journeys\n- more output per employee\n- faster onboarding of new talent\n- better reuse of institutional knowledge\n\nThis distinction matters because the operating model is different.\n\nEfficiency questions focus on:\n- what can be automated\n- what can be shortened\n- what can be standardized\n\nGrowth questions focus on:\n- what can scale\n- what can improve commercial performance\n- what can increase strategic capacity\n\nJoz should be able to speak to both, but keep them separate so the business case stays clear.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "efficiency",
+          "growth",
+          "operating-model",
+          "roi",
+          "scale"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "AI value should be separated into efficiency and growth conversations.",
+          "Efficiency focuses on cost, time, friction, and standardization.",
+          "Growth focuses on output, conversion, customer relevance, and scaling strategic capacity."
+        ],
+        "proof_points": [
+          "The existing Joz proof base already includes both growth outcomes and operational friction reduction.",
+          "Separating these frames helps avoid vague ROI language.",
+          "This distinction matches how leaders evaluate cost programs versus growth programs."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 94,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-efficiency-vs-growth.md",
+        "source_meta_filename": "business-need-efficiency-vs-growth.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
       }
     },
     {
@@ -6612,6 +8350,114 @@
       }
     },
     {
+      "slug": "business-need-erp-finance-hr-marketing-opportunity-map",
+      "title": "ERP Finance HR Marketing Opportunity Map",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Provides a cross-functional Business Value map across ERP, finance, HR, marketing, growth, and leadership so Joz can explain AI opportunities in operational terms.",
+      "body": "The most practical Business Value extension is a cross-functional opportunity map.\n\nERP and operations\n- automate exception handling\n- summarize demand and supply issues\n- improve procurement visibility\n- surface bottlenecks in fulfillment and planning\n- support vendor and supplier decision-making\n\nFinance and accounting\n- accelerate AP and AR workflows\n- classify and reconcile invoices\n- detect anomalies and leakage\n- improve spend visibility\n- support close, forecast, and margin review\n\nHR and workforce\n- improve recruiting triage\n- support onboarding and internal helpdesk workflows\n- make policy and process knowledge easier to use\n- accelerate training and knowledge reuse\n- support managers with better internal context\n\nMarketing\n- accelerate campaign planning and reporting\n- improve segmentation and content operations\n- turn noisy analytics into clearer decisions\n- support CAC efficiency and conversion analysis\n\nGrowth and leadership\n- improve cross-functional reporting\n- reduce decision latency\n- create better next-best-action logic\n- improve management leverage through trusted intelligence\n- support scalable adoption of AI into real workflows\n\nThis gives Joz a practical way to talk about business value in terms leaders and operators can act on immediately.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "erp",
+          "finance",
+          "hr",
+          "marketing",
+          "opportunity-map"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "A cross-functional opportunity map is the most practical way to extend Joz for Business Value.",
+          "ERP, finance, HR, marketing, and leadership each have distinct AI opportunity areas with direct operational relevance.",
+          "Joz should talk about AI opportunities in terms leaders and operators can act on immediately."
+        ],
+        "proof_points": [
+          "This structure is consistent with the existing business-need and decision-intelligence direction in the corpus.",
+          "The map converts abstract AI language into function-level business opportunities.",
+          "It aligns with Joz's workflow, operating-model, and enterprise-transformation positioning."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Erste Bank",
+          "Manulife",
+          "Maybank",
+          "Mediacorp"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 97,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-erp-finance-hr-marketing-opportunity-map.md",
+        "source_meta_filename": "business-need-erp-finance-hr-marketing-opportunity-map.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "data_silos",
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "knowledge_reuse",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "related_proofs": [
+          "erste_customer_scale",
+          "manulife_lean_ml_ux",
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 4
+      }
+    },
+    {
       "slug": "business-need-hero-value",
       "title": "Joz Turns Complexity into Business Value",
       "category": "business_need",
@@ -6727,6 +8573,100 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-operating-model-blueprint",
+      "title": "Business Value Operating Model Blueprint",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the structure of a serious AI business value operating model, including profit levers, opportunities, process redesign, governance, KPIs, quick wins, and a scaling roadmap.",
+      "body": "The right end state is not a loose collection of AI ideas. It is a business value operating model.\n\nThat operating model should have eight parts:\n\n1. Executive summary\nWhat value is being created and why it matters now.\n\n2. Profit-lever model\nHow value connects to revenue, margin, cost, working capital, risk, and execution speed.\n\n3. Function-by-function opportunity view\nWhere finance, ERP, HR, marketing, sales, support, and leadership can use AI productively.\n\n4. Process redesign framework\nHow current workflows change, where humans stay in the loop, and where control points sit.\n\n5. Governance model\nHow approval, evidence, auditability, risk thresholds, and ownership are handled.\n\n6. KPI and ROI model\nHow baseline, target, value owner, and verification method are defined.\n\n7. 90-day quick wins\nWhat can be tested quickly with real workflow value.\n\n8. 12-month scaling roadmap\nWhat should be integrated, operationalized, and scaled only after value and controls are credible.\n\nThis is the serious way to talk about AI transformation.\n\nThe point is not “where can we use AI?”\nThe point is:\n\n- where does value exist\n- what should change\n- how should it be governed\n- how should it scale",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "blueprint",
+          "governance",
+          "operating-model",
+          "roadmap",
+          "roi"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The right end state is a business value operating model rather than a loose collection of AI ideas.",
+          "A serious AI transformation blueprint needs profit levers, function opportunities, process redesign, governance, KPI logic, quick wins, and a scaling roadmap.",
+          "The central question is where value exists, what should change, how it should be governed, and how it should scale."
+        ],
+        "proof_points": [
+          "This blueprint is consistent with the profit-lever, process-redesign, and function-opportunity records already added.",
+          "It matches the current Joz emphasis on systems, governance, evaluation, and real operating value.",
+          "The structure avoids technology-first AI programs with weak commercial accountability."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-operating-model-blueprint.md",
+        "source_meta_filename": "business-need-operating-model-blueprint.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "governance_gaps",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "faster_time_to_value",
+          "lower_risk",
+          "revenue_growth",
+          "stronger_governance"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 5
       }
     },
     {
@@ -6847,6 +8787,201 @@
       }
     },
     {
+      "slug": "business-need-process-redesign-framework",
+      "title": "Process Redesign Framework",
+      "category": "delivery",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the practical framework for redesigning business processes around AI, with current process, friction, cost, intervention, human role, systems, KPIs, and controls.",
+      "body": "The serious AI opportunity is usually not just answering faster, but redesigning the process around better intelligence and clearer control.\n\nEach process redesign should be described in a practical structure:\n\n1. Current process\nWhat happens today and who does it.\n\n2. Current problem\nWhere time, errors, friction, delay, or poor visibility exist.\n\n3. Current cost or missed value\nLabor cost, missed revenue, delayed response, margin loss, or decision risk.\n\n4. AI intervention\nWhat AI actually changes: summarization, classification, retrieval, recommendation, exception handling, or workflow orchestration.\n\n5. Human role after AI\nWhat remains with the human: approval, escalation, exception handling, judgment, stakeholder communication.\n\n6. Systems involved\nERP, CRM, finance, HRIS, support, knowledge base, reporting layer, or workflow tools.\n\n7. KPI impact\nCycle time, error rate, cost per case, resolution speed, margin, conversion, adoption, or forecast accuracy.\n\n8. Control model\nConfidence thresholds, approval rules, audit logs, ownership, and verification.\n\nThis is how Joz should frame process redesign when the goal is real operating value rather than a shallow AI feature pitch.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "controls",
+          "kpi",
+          "process",
+          "redesign",
+          "workflow"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The serious AI opportunity is usually redesigning the process, not just answering faster.",
+          "A strong process redesign needs current-state, problem, value, intervention, human role, systems, KPI, and control definitions.",
+          "Joz should frame AI work as operating-model change rather than shallow feature insertion."
+        ],
+        "proof_points": [
+          "The current Joz business-need and systems records already support workflow-first thinking.",
+          "This framework is aligned with governance, evaluation, and decision-quality principles already present in the corpus.",
+          "Process redesign language is stronger for enterprise stakeholders than generic automation claims."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-process-redesign-framework.md",
+        "source_meta_filename": "business-need-process-redesign-framework.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "organizational_complexity",
+          "slow_decision_making"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "decision_quality",
+          "systems_before_features",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "organizational_design",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "lower_operational_friction",
+          "productivity_gains",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-profit-levers",
+      "title": "AI Profit Levers",
+      "category": "roi",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Defines the main profit levers through which AI creates commercial value: revenue, margin, cost, working capital, error reduction, and management leverage.",
+      "body": "The right way to explain AI business value is through profit levers, not through generic feature lists.\n\nThe main profit levers are:\n\n1. Revenue growth\nImprove conversion, customer relevance, proposal quality, response speed, retention, and cross-sell or upsell performance.\n\n2. Gross margin improvement\nReduce delivery waste, improve pricing support, optimize operational decisions, and lower avoidable service cost.\n\n3. SG&A reduction\nReduce manual reporting, coordination, reconciliation, support workload, and repeated knowledge work.\n\n4. Working capital improvement\nImprove collections, payment timing, exception resolution, invoice handling, and inventory or procurement visibility.\n\n5. Error and leakage reduction\nReduce compliance misses, duplicate work, processing errors, poor handoffs, and bad decisions made on incomplete context.\n\n6. Management leverage\nGive leaders clearer cross-functional visibility, better scenario synthesis, faster decision cycles, and better execution follow-through.\n\nThe important principle is that AI should be connected to measurable P&L impact:\n\n- revenue\n- margin\n- cost\n- working capital\n- risk\n- execution speed\n\nThis is how Joz should frame business value when the goal is commercial credibility rather than buzzwords.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "cost",
+          "margin",
+          "profit",
+          "roi",
+          "working-capital"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "AI business value should be explained through profit levers rather than generic feature lists.",
+          "The main commercial levers are revenue growth, gross margin improvement, SG&A reduction, working capital improvement, error reduction, and management leverage.",
+          "Joz should connect AI work to measurable P&L impact rather than abstract innovation language."
+        ],
+        "proof_points": [
+          "Revenue and growth proof already exists in Maybank and Mediacorp records.",
+          "Operational friction reduction is already supported by the Publicis handoff-reduction proof.",
+          "Decision quality and governance language are already consistent with the systems and business-need records."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "Maybank",
+          "Mediacorp",
+          "Publicis"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 98,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-profit-levers.md",
+        "source_meta_filename": "business-need-profit-levers.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "manual_knowledge_work",
+          "operational_friction",
+          "slow_decision_making",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "decision_intelligence",
+          "organizational_design",
+          "product_strategy",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "cost_reduction",
+          "faster_decisions",
+          "faster_time_to_value",
+          "lower_risk",
+          "productivity_gains",
+          "revenue_growth"
+        ],
+        "governance": [
+          "clear_ownership",
+          "evaluation"
+        ],
+        "industries": [
+          "banking",
+          "financial_services",
+          "insurance",
+          "media",
+          "technology"
+        ],
+        "proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "related_proofs": [
+          "maybank_digital_sales_growth",
+          "mediacorp_audience_growth",
+          "publicis_handoff_reduction"
+        ],
+        "enterprise_scale_score": 100,
+        "measurable_outcome_count": 6
+      }
+    },
+    {
       "slug": "business-need-roi-model",
       "title": "Where the ROI Comes From",
       "category": "roi",
@@ -6956,6 +9091,92 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 6
+      }
+    },
+    {
+      "slug": "business-need-skills-mindset-agentic-architecture-infrastructure",
+      "title": "Skills Mindset Agentic Architecture Infrastructure",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Separates skills, mindset, agentic architecture, and infrastructure so Joz can explain the stack without conceptual muddle.",
+      "body": "The clean structure is to separate four things that are often confused:\n\n1. Skills\nWhat Joz can do.\n\nExamples:\n- finance analysis\n- ERP reasoning\n- margin diagnostics\n- AI architecture\n- workflow redesign\n- executive briefing support\n\n2. Mindset\nHow Joz thinks while doing it.\n\nExamples:\n- profit-oriented\n- operator-minded\n- efficiency-first\n- cross-functional\n- governance-aware\n- decision-focused\n\n3. Agentic architecture\nHow tasks are decomposed, routed, coordinated, and executed across agents and tools.\n\nExamples:\n- agent routing\n- planning\n- tool use\n- escalation paths\n- execution flow\n- memory and verification loops\n\n4. Infrastructure\nWhat controls, secures, observes, and scales the whole system.\n\nExamples:\n- permissions\n- model routing\n- observability\n- evaluation\n- audit logs\n- cost controls\n- reliability\n\nThe practical rule is:\n\n- Skills = business competencies\n- Mindset = reasoning posture\n- Agentic architecture = execution model\n- Infrastructure = platform foundation\n\nIf these are mixed together, the system becomes conceptually muddy and harder to scale.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "agentic-architecture",
+          "infrastructure",
+          "mindset",
+          "skills",
+          "structure"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Skills, mindset, agentic architecture, and infrastructure should be treated as distinct layers.",
+          "Skills are business competencies, mindset is reasoning posture, agentic architecture is the execution model, and infrastructure is the platform foundation.",
+          "Mixing these concepts together makes the system harder to explain and harder to scale."
+        ],
+        "proof_points": [
+          "This structure matches the current architecture and lane logic already emerging in the Joz knowledge base.",
+          "The distinction supports cleaner positioning and cleaner implementation decisions.",
+          "It aligns with the current direction of separating business-useful knowledge from runtime and control mechanics."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 95,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
+        "source_meta_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "knowledge_fragmentation",
+          "organizational_complexity",
+          "unclear_roi"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "decision_quality",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "decision_intelligence",
+          "enterprise_architecture",
+          "organizational_design"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "knowledge_reuse",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
       }
     },
     {
@@ -7178,6 +9399,97 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "business-need-why-joz-is-irreplaceable",
+      "title": "Why Joz Is Irreplaceable",
+      "category": "business_answer",
+      "source_type": "paste",
+      "source_uri": null,
+      "summary": "Explains that Joz becomes hard to replace through context, workflows, decision logic, governance, and feedback loops rather than generic AI usage.",
+      "body": "Joz is not irreplaceable because he uses AI. That would be weak and replaceable positioning.\n\nJoz becomes hard to replace when the value sits in assets and operating intelligence that generic AI tools do not have.\n\nThe strongest irreplaceability factors are:\n\n1. Context integration\nJoz connects fragmented business knowledge, process logic, and decision context across systems and stakeholders.\n\n2. Workflow embeddedness\nThe value is not just in answering, but in becoming part of how work is routed, escalated, approved, and improved.\n\n3. Decision logic\nJoz should hold company-specific reasoning around profit, cost, risk, prioritization, governance, and operating tradeoffs.\n\n4. Proof-backed trust\nThe system should not rely on generic model fluency alone. It should rely on curated proof, clear provenance, verification, and measurable outcome framing.\n\n5. Feedback loops\nJoz should learn from outcomes, corrections, approvals, failures, and repeated business patterns.\n\n6. Human-plus-system judgment\nThe real moat is the combination of systems thinking, AI capability, business context, and operating-model judgment.\n\nThe practical moat is:\n\n- context\n- integrations\n- workflows\n- decision logic\n- governance\n- feedback loops\n\nThat is what makes Joz hard to swap out with a generic chatbot.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "context",
+          "governance",
+          "irreplaceable",
+          "moat",
+          "workflow"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "",
+          "reviewed_at": "",
+          "notes": ""
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Joz is not irreplaceable because he uses AI, but because the value sits in context, workflows, decision logic, governance, and feedback loops.",
+          "The strongest moat comes from workflow embeddedness and company-specific operating intelligence.",
+          "A generic chatbot is replaceable; a system with integrated context and decision logic is much harder to replace."
+        ],
+        "proof_points": [
+          "This framing is consistent with the current Joz architecture, systems-mindset, and decision-intelligence records.",
+          "The current corpus already emphasizes governance, verification, and context engineering rather than generic AI claims.",
+          "The architecture direction already supports retrieval, workflow logic, and curated trust rather than pure chat output."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [
+          "MeetJoz"
+        ],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 99,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-why-joz-is-irreplaceable.md",
+        "source_meta_filename": "business-need-why-joz-is-irreplaceable.meta.json",
+        "reviewed_at": "",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "feedback_loops",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "agent_memory",
+          "context_engineering",
+          "decision_intelligence",
+          "verification",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "higher_adoption",
+          "higher_data_trust",
+          "knowledge_reuse",
+          "stronger_governance"
+        ],
+        "governance": [
+          "evaluation",
+          "human_approval",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
       }
     },
     {

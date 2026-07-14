@@ -46,8 +46,9 @@ test("business value query prioritizes why-hire record and enterprise proof", ()
 });
 
 test("roi query surfaces roi model without inventing a proof-only ranking", () => {
-  const slugs = rankedSlugs("Where is the ROI?", "business_need");
+  const slugs = rankedSlugs("Where is the ROI?", "business_need", 10);
   assert.equal(slugs[0], "business-need-roi-model");
+  assert.ok(slugs.includes("business-need-profit-levers"));
   assert.ok(slugs.includes("business-need-hero-value"));
 });
 
@@ -93,8 +94,8 @@ test("relevance-now query keeps enterprise proof ahead of capability-first ranki
 test("cross-lane ai adoption query connects business need, mindset, and skills evidence", () => {
   const slugs = rankedSlugs("How can Joz improve AI adoption?", "business_need", 12);
   assert.ok(slugs.includes("business-need-ai-adoption-governance"));
-  assert.ok(slugs.includes("skills-hero-agentic-ai"));
-  assert.ok(slugs.includes("business-need-enterprise-proof"));
+  assert.ok(slugs.includes("business-need-skills-mindset-agentic-architecture-infrastructure"));
+  assert.ok(slugs.includes("business-need-why-joz-is-irreplaceable"));
 });
 
 test("deep skills query ranks technical capability records above recruiter operations", () => {

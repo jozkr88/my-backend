@@ -1,0 +1,62 @@
+{
+  "slug": "business-need-current-data-architecture",
+  "title": "Current Joz Data Architecture",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Explains the current Joz data architecture as a governed knowledge pipeline with source, normalization, ontology, publish, and retrieval layers.",
+  "tags": [
+    "data-architecture",
+    "knowledge-pipeline",
+    "retrieval",
+    "governance",
+    "structure"
+  ],
+  "impact_score": 88,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "The current Joz data architecture is a governed knowledge pipeline rather than a full enterprise operational data platform.",
+    "The architecture is organized into source, normalization, ontology, publish, and retrieval-routing layers.",
+    "Its current strength is proof-backed retrieval and structured answer quality rather than live operational analytics."
+  ],
+  "proof_points": [
+    "The workflow explicitly separates inbox, normalized, ontology, and published layers.",
+    "The build process validates metadata and ontology references before publishing records.",
+    "The runtime now distinguishes between the full corpus and a runtime-safe model-ready subset."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "knowledge_fragmentation",
+    "low_trust",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "context_engineering",
+    "decision_intelligence",
+    "knowledge_graphs",
+    "verification"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "knowledge_reuse"
+  ],
+  "governance": [
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

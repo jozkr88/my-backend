@@ -1,0 +1,76 @@
+{
+  "slug": "business-need-profit-levers",
+  "title": "AI Profit Levers",
+  "category": "roi",
+  "lane": "business_need",
+  "summary": "Defines the main profit levers through which AI creates commercial value: revenue, margin, cost, working capital, error reduction, and management leverage.",
+  "tags": [
+    "profit",
+    "roi",
+    "margin",
+    "cost",
+    "working-capital"
+  ],
+  "impact_score": 98,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "AI business value should be explained through profit levers rather than generic feature lists.",
+    "The main commercial levers are revenue growth, gross margin improvement, SG&A reduction, working capital improvement, error reduction, and management leverage.",
+    "Joz should connect AI work to measurable P&L impact rather than abstract innovation language."
+  ],
+  "proof_points": [
+    "Revenue and growth proof already exists in Maybank and Mediacorp records.",
+    "Operational friction reduction is already supported by the Publicis handoff-reduction proof.",
+    "Decision quality and governance language are already consistent with the systems and business-need records."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Maybank",
+    "Mediacorp",
+    "Publicis"
+  ],
+  "problems": [
+    "manual_knowledge_work",
+    "operational_friction",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "decision_quality",
+    "feedback_loops",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "organizational_design",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "faster_time_to_value",
+    "lower_risk",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "media",
+    "technology"
+  ],
+  "proofs": [
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "publicis_handoff_reduction"
+  ]
+}

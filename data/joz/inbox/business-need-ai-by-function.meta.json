@@ -1,0 +1,79 @@
+{
+  "slug": "business-need-ai-by-function",
+  "title": "AI Opportunities by Business Function",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Maps Joz business-value opportunities by function across finance, ERP, HR, marketing, sales, and leadership rather than abstract AI categories.",
+  "tags": [
+    "finance",
+    "erp",
+    "hr",
+    "marketing",
+    "sales"
+  ],
+  "impact_score": 96,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "The strongest business-value framing is to map AI opportunities by function rather than by generic AI category.",
+    "Finance, ERP, HR, marketing, sales, and leadership each have distinct AI opportunity patterns.",
+    "Function-specific framing makes Joz commercially clearer to decision-makers."
+  ],
+  "proof_points": [
+    "Joz already has financial-services, enterprise-transformation, and decision-intelligence proof across multiple regulated and scaled environments.",
+    "The current knowledge base already supports workflow redesign and business-value positioning.",
+    "Department-level framing is a natural extension of the existing business-need lane."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Erste Bank",
+    "Manulife",
+    "Maybank",
+    "Mediacorp"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "data_silos",
+    "operational_friction",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "knowledge_reuse",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "human_approval"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "media",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "slug": "business-need-skills-mindset-agentic-architecture-infrastructure",
+  "title": "Skills Mindset Agentic Architecture Infrastructure",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Separates skills, mindset, agentic architecture, and infrastructure so Joz can explain the stack without conceptual muddle.",
+  "tags": [
+    "skills",
+    "mindset",
+    "agentic-architecture",
+    "infrastructure",
+    "structure"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "Skills, mindset, agentic architecture, and infrastructure should be treated as distinct layers.",
+    "Skills are business competencies, mindset is reasoning posture, agentic architecture is the execution model, and infrastructure is the platform foundation.",
+    "Mixing these concepts together makes the system harder to explain and harder to scale."
+  ],
+  "proof_points": [
+    "This structure matches the current architecture and lane logic already emerging in the Joz knowledge base.",
+    "The distinction supports cleaner positioning and cleaner implementation decisions.",
+    "It aligns with the current direction of separating business-useful knowledge from runtime and control mechanics."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "knowledge_fragmentation",
+    "organizational_complexity",
+    "unclear_roi"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "organizational_design"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "knowledge_reuse",
+    "stronger_governance"
+  ],
+  "governance": [
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}
