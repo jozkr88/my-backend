@@ -98,6 +98,46 @@ test("cross-lane ai adoption query connects business need, mindset, and skills e
   assert.ok(slugs.includes("business-need-why-joz-is-irreplaceable"));
 });
 
+test("efficiency query prioritizes the efficiency-led business value record", () => {
+  const slugs = rankedSlugs(
+    "How does Joz create business value through efficiency, lower cost, faster execution, and stronger operational leverage?",
+    "business_need",
+    8
+  );
+  assert.equal(slugs[0], "business-need-efficiency-vs-growth");
+  assert.ok(slugs.includes("business-need-profit-levers"));
+});
+
+test("growth query prioritizes growth and profit-oriented business value records", () => {
+  const slugs = rankedSlugs(
+    "How does Joz use AI systems to support growth, scaling, better decisions, and stronger commercial performance?",
+    "business_need",
+    8
+  );
+  assert.equal(slugs[0], "business-need-efficiency-vs-growth");
+  assert.ok(slugs.includes("business-need-profit-levers"));
+});
+
+test("functions query prioritizes by-function business value framing", () => {
+  const slugs = rankedSlugs(
+    "How can Joz create business value across functions like finance, ERP, accounting, HR, marketing, and operations?",
+    "business_need",
+    8
+  );
+  assert.equal(slugs[0], "business-need-ai-by-function");
+  assert.ok(slugs.includes("business-need-erp-finance-hr-marketing-opportunity-map"));
+});
+
+test("decision support query prioritizes decision-intelligence records", () => {
+  const slugs = rankedSlugs(
+    "How does Joz improve decision support through better signal, prioritization, judgment, and clarity in noisy business environments?",
+    "business_need",
+    8
+  );
+  assert.equal(slugs[0], "business-need-decision-intelligence");
+  assert.ok(slugs.includes("business-need-hero-value"));
+});
+
 test("deep skills query ranks technical capability records above recruiter operations", () => {
   const slugs = rankedSlugs("What are Joz's deep skills?", "skills", 10);
   assert.equal(slugs[0], "skills-agentic-ai-architecture");

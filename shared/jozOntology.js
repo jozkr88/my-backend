@@ -232,6 +232,105 @@ const RECRUITER_QUERY_PATTERNS = [
   "years in ai",
 ];
 
+const BUSINESS_VALUE_QUERY_FAMILIES = {
+  efficiency: [
+    "efficiency",
+    "lower cost",
+    "cost reduction",
+    "faster execution",
+    "operational leverage",
+    "productivity gains",
+  ],
+  processes: [
+    "processes",
+    "process redesign",
+    "workflow redesign",
+    "process improvement",
+    "workflow",
+  ],
+  growth: [
+    "growth",
+    "scaling",
+    "scale",
+    "commercial performance",
+    "revenue growth",
+  ],
+  functions: [
+    "functions",
+    "finance",
+    "erp",
+    "accounting",
+    "hr",
+    "marketing",
+    "operations",
+  ],
+  operating_model: [
+    "operating model",
+    "ownership",
+    "governance",
+    "execution",
+  ],
+  decision_support: [
+    "decision support",
+    "better signal",
+    "prioritization",
+    "prioritisation",
+    "judgment",
+    "clarity",
+  ],
+};
+
+const BUSINESS_VALUE_FAMILY_PRIORITY = [
+  "decision_support",
+  "functions",
+  "operating_model",
+  "efficiency",
+  "growth",
+  "processes",
+];
+
+const BUSINESS_VALUE_SLUG_BOOSTS = {
+  efficiency: {
+    "business-need-efficiency-vs-growth": 42,
+    "business-need-profit-levers": 30,
+    "business-need-process-redesign-framework": 18,
+    "business-need-hero-value": 12,
+  },
+  processes: {
+    "business-need-process-redesign-framework": 42,
+    "business-need-erp-finance-hr-marketing-opportunity-map": 26,
+    "business-need-operating-model-blueprint": 18,
+  },
+  growth: {
+    "business-need-efficiency-vs-growth": 38,
+    "business-need-profit-levers": 24,
+    "business-need-department-profit-use-cases": 20,
+    "business-need-hero-value": 14,
+  },
+  functions: {
+    "business-need-ai-by-function": 42,
+    "business-need-erp-finance-hr-marketing-opportunity-map": 30,
+    "business-need-department-profit-use-cases": 20,
+  },
+  operating_model: {
+    "business-need-operating-model-blueprint": 44,
+    "business-need-ai-adoption-governance": 24,
+    "business-need-process-redesign-framework": 18,
+  },
+  decision_support: {
+    "business-need-decision-intelligence": 42,
+    "business-need-hero-value": 18,
+    "business-need-operating-model-blueprint": 14,
+  },
+};
+
+const BUSINESS_VALUE_DEMOTIONS = new Set([
+  "business-need-architecture-scalability",
+  "business-need-current-data-architecture",
+  "business-need-dataset-extension-framework",
+  "business-need-why-joz-is-irreplaceable",
+]);
+
 let ontologyCache = null;
 
 function normalizeArray(value) {
@@ -390,6 +489,29 @@ function isRecruiterOperationalQuery(query = "") {
   );
 }
 
+function detectBusinessValueQueryFamily(query = "") {
+  const clean = String(query || "").trim().toLowerCase();
+  if (!clean) return null;
+
+  const scores = BUSINESS_VALUE_FAMILY_PRIORITY.map((family) => {
+    const patterns = BUSINESS_VALUE_QUERY_FAMILIES[family] || [];
+    const matches = patterns.filter((pattern) => clean.includes(pattern)).length;
+    return { family, score: matches };
+  }).filter(({ score }) => score > 0);
+
+  if (!scores.length) return null;
+
+  scores.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return (
+      BUSINESS_VALUE_FAMILY_PRIORITY.indexOf(a.family) -
+      BUSINESS_VALUE_FAMILY_PRIORITY.indexOf(b.family)
+    );
+  });
+
+  return scores[0].family;
+}
+
 function scoreBroadCredibility(doc, metadata, query = "") {
   if (!isBroadCredibilityQuery(query)) return 0;
 
@@ -464,6 +586,19 @@ function scoreCapabilityEligibility(doc, metadata, query = "") {
 
   if (clean.includes("ai adoption") && slug === "skills-hero-agentic-ai") {
     return 28;
+  }
+
+  const businessValueFamily = detectBusinessValueQueryFamily(query);
+  if (businessValueFamily && metadata.normalized_lane === "business_need") {
+    let score = (BUSINESS_VALUE_SLUG_BOOSTS[businessValueFamily]?.[slug] || 0) * 2;
+
+    if (BUSINESS_VALUE_DEMOTIONS.has(slug)) score -= 18;
+    if (businessValueFamily === "functions" && slug === "business-need-enterprise-proof") score -= 16;
+    if (businessValueFamily === "growth" && slug === "business-need-why-joz-is-irreplaceable") score -= 10;
+    if (businessValueFamily === "functions" && slug === "business-need-process-redesign-framework") score -= 28;
+    if (businessValueFamily === "decision_support" && slug === "business-need-ai-by-function") score -= 34;
+    if (businessValueFamily === "decision_support" && slug === "business-need-erp-finance-hr-marketing-opportunity-map") score -= 18;
+    return score;
   }
 
   return 0;
