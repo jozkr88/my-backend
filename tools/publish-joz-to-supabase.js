@@ -144,6 +144,20 @@ async function publish() {
 
     await client.query(
       `
+        UPDATE joz_documents
+        SET is_runtime_active = FALSE,
+            updated_at = NOW()
+        WHERE profile_id IN (
+          SELECT id
+          FROM joz_profiles
+          WHERE is_primary = FALSE
+        )
+          AND is_runtime_active = TRUE
+      `
+    );
+
+    await client.query(
+      `
         INSERT INTO joz_publish_runs (
           profile_id,
           publish_version,
