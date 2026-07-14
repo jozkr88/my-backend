@@ -571,6 +571,71 @@ export async function appendJozMessage({
   );
 }
 
+export async function logJozLlmRequestEvent({
+  conversationId = null,
+  sessionKey = null,
+  route = null,
+  intentMode = null,
+  userMessage = "",
+  assistantReply = "",
+  requestContext = {},
+  trace = {},
+  verification = {},
+  retrievedCategories = [],
+  retrievedDocuments = [],
+  latencyMs = null,
+  responseStatus = "ok",
+} = {}) {
+  const result = await runQuery(
+    `INSERT INTO joz_llm_request_events (
+       conversation_id,
+       session_key,
+       route,
+       intent_mode,
+       user_message,
+       assistant_reply,
+       request_context,
+       trace,
+       verification,
+       retrieved_categories,
+       retrieved_documents,
+       latency_ms,
+       response_status
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12, $13)
+     RETURNING id`,
+    [
+      conversationId,
+      sessionKey,
+      route,
+      intentMode,
+      userMessage,
+      assistantReply,
+      JSON.stringify(requestContext || {}),
+      JSON.stringify(trace || {}),
+      JSON.stringify(verification || {}),
+      JSON.stringify(retrievedCategories || []),
+      JSON.stringify(retrievedDocuments || []),
+      latencyMs,
+      responseStatus,
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function listRecentJozLlmRequestEvents(limit = 20) {
+  const result = await runQuery(
+    `SELECT id, conversation_id, session_key, route, intent_mode, user_message, assistant_reply,
+            request_context, trace, verification, retrieved_categories, retrieved_documents,
+            latency_ms, response_status, created_at
+     FROM joz_llm_request_events
+     ORDER BY created_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(100, Number(limit) || 20))]
+  );
+  return result.rows || [];
+}
+
 export async function createJozCallbackRequest({
   conversationId = null,
   profileId = null,
@@ -1234,6 +1299,36 @@ export async function initDatabase() {
     await db.query(`
       CREATE INDEX IF NOT EXISTS joz_messages_conversation_idx
       ON joz_messages (conversation_id, created_at ASC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_llm_request_events (
+        id BIGSERIAL PRIMARY KEY,
+        conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+        session_key TEXT,
+        route TEXT,
+        intent_mode TEXT,
+        user_message TEXT NOT NULL,
+        assistant_reply TEXT NOT NULL,
+        request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
+        trace JSONB NOT NULL DEFAULT '{}'::jsonb,
+        verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+        retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
+        retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
+        latency_ms INTEGER,
+        response_status TEXT NOT NULL DEFAULT 'ok',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_request_events_created_idx
+      ON joz_llm_request_events (created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_request_events_route_idx
+      ON joz_llm_request_events (route, created_at DESC)
     `);
 
     await db.query(`

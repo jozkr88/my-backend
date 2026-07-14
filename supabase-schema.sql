@@ -243,6 +243,30 @@ CREATE TABLE IF NOT EXISTS joz_messages (
 CREATE INDEX IF NOT EXISTS joz_messages_conversation_idx
   ON joz_messages (conversation_id, created_at ASC);
 
+CREATE TABLE IF NOT EXISTS joz_llm_request_events (
+  id BIGSERIAL PRIMARY KEY,
+  conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+  session_key TEXT,
+  route TEXT,
+  intent_mode TEXT,
+  user_message TEXT NOT NULL,
+  assistant_reply TEXT NOT NULL,
+  request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
+  trace JSONB NOT NULL DEFAULT '{}'::jsonb,
+  verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+  retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
+  retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
+  latency_ms INTEGER,
+  response_status TEXT NOT NULL DEFAULT 'ok',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS joz_llm_request_events_created_idx
+  ON joz_llm_request_events (created_at DESC);
+
+CREATE INDEX IF NOT EXISTS joz_llm_request_events_route_idx
+  ON joz_llm_request_events (route, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS joz_business_leads (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,

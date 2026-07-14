@@ -3,7 +3,6 @@ import {
   JOZ_LLM_IDENTITY,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
-  enforceJozLlmReplyLimit,
 } from "./jozLlmProfile.js";
 import {
   buildMeetJozWorldAnswerContext,
@@ -249,23 +248,7 @@ function composeFactualProfileReply(subIntent) {
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
   if (subIntent === "business_value_definition") {
-    return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means turning AI into lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not just shipping features or demos. The test is simple: what changes operationally, financially, or strategically because the system works better than before?";
-  }
-
-  if (subIntent === "irreplaceable") {
-    return "Joz is not hard to replace because he uses AI. The real moat is context, workflows, decision logic, governance, and feedback loops that generic tools do not hold. Joz becomes irreplaceable when the system is embedded into how work is routed, approved, improved, and measured, with proof-backed trust and human-plus-system judgment rather than model fluency alone.";
-  }
-
-  if (subIntent === "layering") {
-    return "Agentic architecture and infrastructure should not be merged into either skills or mindset. Skills describe what Joz can do, mindset describes how Joz reasons, agentic architecture defines how the system thinks and acts, and infrastructure is the platform foundation underneath it. If you must place them, architecture sits closest to skills, while mindset governs how both are designed and used.";
-  }
-
-  if (subIntent === "problems") {
-    return "Joz is strongest where organisations have fragmented knowledge, slow decisions, weak AI ownership, governance gaps, manual analysis, and poor translation between strategy and technical execution. The value is not another AI pilot. It is turning that mess into clearer workflows, stronger trust, better signal, and measurable operating improvement.";
-  }
-
-  if (subIntent === "differentiation") {
-    return "What makes Joz different is not generic AI consulting language. It is the combination of enterprise proof, agentic AI architecture, product judgment, systems thinking, and execution across Maybank, Manulife, Mediacorp, and Erste Bank. Joz sits at the bridge between business context, decision quality, and working intelligent systems rather than staying at the level of slides or prompts.";
+    return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not feature theater. The test is simple: what changed operationally, financially, or strategically because the system works better?";
   }
 
   if (subIntent === "efficiency") {
@@ -366,206 +349,6 @@ function buildProgrammeRecordReply(record = {}) {
   const summaryText = summary || firstParagraph || "This programme record captures the main work, themes, and delivery context.";
 
   return `${summaryText}${projectText} This is the grouped programme record${companyText}, so it should be read as one retrieval unit rather than a claim that every sub-project produced the same outcome.`.trim();
-}
-
-function extractFirstParagraph(text = "") {
-  return String(text || "")
-    .split(/\n\s*\n/)
-    .map((part) => part.trim())
-    .filter(Boolean)[0] || "";
-}
-
-function formatRetrievedEvidence(retrievedDocuments = [], limit = 4) {
-  return retrievedDocuments.slice(0, limit).map((doc, index) => ({
-    rank: index + 1,
-    title: doc?.title || "",
-    category: doc?.category || "",
-    summary: doc?.summary || "",
-    body_excerpt: extractFirstParagraph(doc?.body || "").slice(0, 500),
-    metadata: doc?.metadata || {},
-  }));
-}
-
-function buildLaneSpecificInstructions(route = {}) {
-  switch (route?.selectedRoute) {
-    case "business_need":
-      return [
-        "Answer as a business operator and AI systems architect, not as a recruiter.",
-        "Connect the problem to operating impact, commercial impact, or governance impact.",
-        "Prefer concrete business mechanisms over buzzwords.",
-      ].join(" ");
-    case "systems_mindset":
-      return [
-        "Answer as a systems thinker.",
-        "Emphasize signal, feedback loops, decision quality, governance, and clarity.",
-        "Avoid drifting into generic career-summary language.",
-      ].join(" ");
-    case "skills":
-      return [
-        "Answer as a capability explainer.",
-        "Tie technical depth to enterprise execution and proof.",
-        "Avoid vague lists of tools unless they matter to the question.",
-      ].join(" ");
-    default:
-      return "";
-  }
-}
-
-function validateAgenticLaneReply(reply = "", route = {}) {
-  const text = String(reply || "").trim();
-  if (!text) return false;
-
-  const words = text.split(/\s+/).filter(Boolean).length;
-  if (words < 35 || words > 85) return false;
-
-  const clean = normalizeText(text);
-  if (clean.includes("as an ai language model")) return false;
-  if (clean.includes("i do not have enough context")) return false;
-  if (clean.includes("based on the provided context")) return false;
-
-  if (route?.selectedRoute === "business_need") {
-    return includesAny(clean, [
-      "business",
-      "decision",
-      "workflow",
-      "cost",
-      "growth",
-      "governance",
-      "operations",
-      "value",
-    ]);
-  }
-
-  if (route?.selectedRoute === "systems_mindset") {
-    return includesAny(clean, ["systems", "signal", "feedback", "decision", "governance", "clarity"]);
-  }
-
-  if (route?.selectedRoute === "skills") {
-    return includesAny(clean, ["agentic", "architecture", "retrieval", "orchestration", "product", "enterprise"]);
-  }
-
-  return true;
-}
-
-function buildExtractiveLaneReply(route = {}, retrievedDocuments = []) {
-  const top = retrievedDocuments[0];
-  if (!top) return "";
-
-  const summary = String(top.summary || "").trim();
-  const paragraph = extractFirstParagraph(top.body || "");
-  const next = retrievedDocuments[1];
-  const proof =
-    next && next.category === "proof"
-      ? String(next.summary || extractFirstParagraph(next.body || "")).trim()
-      : "";
-
-  const combined = [summary, paragraph, proof]
-    .filter(Boolean)
-    .join(" ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  return enforceJozLlmReplyLimit(combined, 75);
-}
-
-async function synthesizeLaneReply({
-  route,
-  input = "",
-  messages = [],
-  openai = null,
-  roleAwareContext = {},
-  fallbackResolution = null,
-} = {}) {
-  const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
-    ? roleAwareContext.retrievedDocuments
-    : [];
-
-  if (!retrievedDocuments.length) {
-    return fallbackResolution;
-  }
-
-  if (!openai) {
-    const extractiveReply = buildExtractiveLaneReply(route, retrievedDocuments);
-    if (validateAgenticLaneReply(extractiveReply, route)) {
-      return {
-        reply: extractiveReply,
-        answerSource: "retrieved_documents_extractive",
-        composer: "buildExtractiveLaneReply",
-        fallbackUsed: false,
-        intentMode: mapRouteToIntentMode(route?.selectedRoute),
-        retrievedCategories: [...new Set(retrievedDocuments.map((doc) => doc.category).filter(Boolean))],
-      };
-    }
-    return fallbackResolution;
-  }
-
-  try {
-    const evidence = formatRetrievedEvidence(retrievedDocuments);
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      temperature: 0.25,
-      max_tokens: 140,
-      messages: [
-        {
-          role: "system",
-          content: [
-            "You answer questions about Joz using retrieved enterprise knowledge records.",
-            "Synthesize only from the supplied evidence.",
-            "Do not mention the retrieval process, context window, or provided documents.",
-            "Do not answer like a recruiter unless the question is operational hiring admin.",
-            "Use crisp executive language, not buzzwords.",
-            "Target 45 to 75 words.",
-            buildLaneSpecificInstructions(route),
-          ].join(" "),
-        },
-        {
-          role: "system",
-          content: JSON.stringify({
-            route: route?.selectedRoute || "unknown",
-            subIntent: route?.detectedSubIntent || null,
-            question: input,
-            evidence,
-          }),
-        },
-        ...messages.slice(-4).map((entry) => ({
-          role: entry.role === "assistant" ? "assistant" : "user",
-          content: String(entry.content || ""),
-        })),
-      ],
-    });
-
-    const reply = enforceJozLlmReplyLimit(
-      String(response.choices?.[0]?.message?.content || "").trim(),
-      75
-    );
-
-    if (validateAgenticLaneReply(reply, route)) {
-      return {
-        reply,
-        answerSource: "retrieved_documents_model_synthesis",
-        composer: "synthesizeLaneReply",
-        fallbackUsed: false,
-        intentMode: mapRouteToIntentMode(route?.selectedRoute),
-        retrievedCategories: [...new Set(retrievedDocuments.map((doc) => doc.category).filter(Boolean))],
-      };
-    }
-  } catch (error) {
-    console.error("⚠️ lane synthesis failed:", error?.message || error);
-  }
-
-  const extractiveReply = buildExtractiveLaneReply(route, retrievedDocuments);
-  if (validateAgenticLaneReply(extractiveReply, route)) {
-    return {
-      reply: extractiveReply,
-      answerSource: "retrieved_documents_extractive",
-      composer: "buildExtractiveLaneReply",
-      fallbackUsed: false,
-      intentMode: mapRouteToIntentMode(route?.selectedRoute),
-      retrievedCategories: [...new Set(retrievedDocuments.map((doc) => doc.category).filter(Boolean))],
-    };
-  }
-
-  return fallbackResolution;
 }
 
 function mapRouteToIntentMode(route) {
@@ -952,45 +735,6 @@ function detectBusinessNeed(clean) {
 
   if (
     includesAny(clean, [
-      "what business problems can joz solve",
-      "what problems can joz solve",
-      "business problems can joz solve",
-      "problems joz can solve",
-      "what operational problems can joz solve",
-    ])
-  ) {
-    return { detectedSubIntent: "problems", detectedConcept: "business_value" };
-  }
-
-  if (
-    includesAny(clean, [
-      "why is joz irreplaceable",
-      "what makes joz irreplaceable",
-      "what makes him irreplaceable",
-      "why is he irreplaceable",
-      "irreplaceable",
-    ])
-  ) {
-    return { detectedSubIntent: "irreplaceable", detectedConcept: "business_value" };
-  }
-
-  if (
-    includesAny(clean, [
-      "skills or mindset",
-      "skills vs mindset",
-      "agentic architecture and infrastructure",
-      "architecture and infrastructure",
-      "where should infrastructure sit",
-      "where should agentic architecture sit",
-      "sit under skills or mindset",
-      "where should agentic architecture",
-    ])
-  ) {
-    return { detectedSubIntent: "layering", detectedConcept: "business_value" };
-  }
-
-  if (
-    includesAny(clean, [
       "efficiency",
       "lower cost",
       "cost reduction",
@@ -1033,7 +777,6 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "decision support",
-      "decision quality",
       "better signal",
       "prioritization",
       "prioritisation",
@@ -1048,7 +791,6 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "functions",
-      "specifically",
       "finance",
       "erp",
       "accounting",
@@ -1070,29 +812,17 @@ function detectBusinessNeed(clean) {
     includesAny(clean, [
       "why should we hire joz",
       "why hire joz",
-      "hire joz now",
       "business value",
       "where is the roi",
-      "create roi from ai",
       "what problems can joz solve",
       "why is joz relevant now",
       "why now",
-      "what makes joz different from a generic ai consultant",
-      "generic ai consultant",
       "measurable outcomes",
       "business outcomes",
       "what value does joz bring",
     ])
   ) {
-    return {
-      detectedSubIntent: includesAny(clean, [
-        "what makes joz different from a generic ai consultant",
-        "generic ai consultant",
-      ])
-        ? "differentiation"
-        : "hire_value",
-      detectedConcept: "business_value",
-    };
+    return { detectedSubIntent: "hire_value", detectedConcept: "business_value" };
   }
 
   return null;
@@ -1455,40 +1185,6 @@ export function composeJozLlmRouteReply({
   }
 
   return null;
-}
-
-export async function resolveOwnedJozReply({
-  route,
-  input = "",
-  appContext = {},
-  legacyContext = {},
-  messages = [],
-  openai = null,
-  roleAwareContext = {},
-} = {}) {
-  const deterministicResolution = composeJozLlmRouteReply({
-    route,
-    input,
-    appContext,
-    legacyContext,
-  });
-
-  if (!route) return deterministicResolution;
-
-  if (["business_need", "systems_mindset", "skills"].includes(route.selectedRoute)) {
-    return (
-      (await synthesizeLaneReply({
-        route,
-        input,
-        messages,
-        openai,
-        roleAwareContext,
-        fallbackResolution: deterministicResolution,
-      })) || deterministicResolution
-    );
-  }
-
-  return deterministicResolution;
 }
 
 export async function resolveUnknownJozReply({

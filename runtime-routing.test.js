@@ -84,6 +84,25 @@ test("POST /api/joz-llm routes gold pill queries through canonical world concept
   assertCanonicalGoldPillReply(String(payload.reply || ""));
 });
 
+test("POST /api/joz-llm verifies business value definition replies deterministically", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-business-value-definition",
+    messages: [{ role: "user", content: "What is business value?" }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "ball",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "business_need");
+  assert.equal(payload.trace?.detectedSubIntent, "business_value_definition");
+  assert.equal(payload.verification?.status, "pass");
+  assert.equal(payload.verification?.metrics?.wordCount <= 55, true);
+  assert.match(String(payload.reply || ""), /business value is|measurable improvement/i);
+});
+
 test("POST /api/agentic preserves canonical world awareness in the live response contract", async () => {
   const { status, payload } = await postJson("/api/agentic", {
     input: "What is the gold pill?",
@@ -147,6 +166,35 @@ test("GET /api/privacy/meta exposes retention defaults and processors", async ()
   assert.ok(payload.processors.includes("Supabase"));
   assert.ok(payload.processors.includes("OpenAI"));
   assert.ok(payload.processors.includes("Resend"));
+});
+
+test("GET /api/joz-llm/observability returns recent request events", async () => {
+  const sessionKey = `runtime-observability-${Date.now()}`;
+  const seed = await postJson("/api/joz-llm", {
+    sessionKey,
+    messages: [{ role: "user", content: "How does Joz think?" }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "brain",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(seed.status, 200);
+
+  const { status, payload } = await getJson("/api/joz-llm/observability?limit=5");
+
+  assert.equal(status, 200);
+  assert.equal(payload.ok, true);
+  assert.ok(Array.isArray(payload.events));
+  assert.ok(payload.events.length >= 1);
+  assert.ok(
+    payload.events.some(
+      (event) =>
+        String(event.session_key || "") === sessionKey &&
+        String(event.route || "") === "systems_mindset"
+    )
+  );
 });
 
 test("POST /api/privacy/export returns matching fallback callback request data", async () => {

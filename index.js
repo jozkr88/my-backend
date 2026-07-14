@@ -19,7 +19,9 @@ import {
   getStructuredWorldState,
   initDatabase,
   isDatabaseEnabled,
+  listRecentJozLlmRequestEvents,
   logReasoningEvent,
+  logJozLlmRequestEvent,
 } from "./db.js";
 import {
   APP_CONTEXT,
@@ -57,10 +59,10 @@ import {
   buildJozRouteTrace,
   buildRoleAwareJozContext,
   composeJozLlmRouteReply,
-  resolveOwnedJozReply,
   resolveUnknownJozReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
+import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 
 
 dotenv.config();
@@ -86,6 +88,7 @@ const jozChatSessionLog = new Map();
 const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
 const jozCallbackFallbackStore = [];
+const jozObservabilityFallbackStore = [];
 
 function parseRetentionDays(value, fallbackDays) {
   const parsed = Number.parseInt(String(value || ""), 10);
@@ -421,6 +424,17 @@ function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, 
 
 function logWorldAwarenessTrace(label, trace) {
   console.log(`🧭 ${label} trace`, trace);
+}
+
+function rememberJozObservabilityEvent(event) {
+  jozObservabilityFallbackStore.unshift({
+    id: `memory-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    created_at: new Date().toISOString(),
+    ...event,
+  });
+  if (jozObservabilityFallbackStore.length > 100) {
+    jozObservabilityFallbackStore.length = 100;
+  }
 }
 
 function normalizeCallbackField(value = "", maxLength = 160) {
@@ -825,6 +839,7 @@ app.post("/api/privacy/request", async (req, res) => {
 
 app.post("/api/joz-llm", async (req, res) => {
   try {
+    const requestStartedAt = Date.now();
     const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
     const context = req.body?.context || {};
     const sessionKey = String(req.body?.conversationId || req.body?.sessionKey || "").trim() || null;
@@ -895,14 +910,11 @@ app.post("/api/joz-llm", async (req, res) => {
       intentMode: retrievalIntentMode,
       retrievedDocuments: retrievalContext,
     });
-    const ownedResolution = await resolveOwnedJozReply({
+    const ownedResolution = composeJozLlmRouteReply({
       route,
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
-      messages,
-      openai,
-      roleAwareContext,
     });
     const resolution =
       ownedResolution ||
@@ -921,6 +933,19 @@ app.post("/api/joz-llm", async (req, res) => {
     }
 
     const trace = buildJozRouteTrace(route, resolution);
+    const verification = buildJozResponseVerification({
+      input: latestUserMessage,
+      route,
+      resolution,
+      trace,
+      reply,
+      retrievedDocuments,
+      latencyMs: Date.now() - requestStartedAt,
+    });
+    const retrievedCategories =
+      resolution?.retrievedCategories?.length
+        ? resolution.retrievedCategories
+        : retrievedDocuments.map((doc) => doc.category);
     logWorldAwarenessTrace("/api/joz-llm", trace);
 
     if (conversationId) {
@@ -937,13 +962,41 @@ app.post("/api/joz-llm", async (req, res) => {
         metadata: {
           intentMode,
           route: route.selectedRoute,
-          retrievedCategories:
-            resolution?.retrievedCategories?.length
-              ? resolution.retrievedCategories
-              : retrievedDocuments.map((doc) => doc.category),
+          retrievedCategories,
           trace,
+          verification,
         },
       });
+    }
+
+    const observabilityEvent = {
+      conversationId,
+      sessionKey,
+      route: route.selectedRoute,
+      intentMode,
+      userMessage: latestUserMessage,
+      assistantReply: reply,
+      requestContext: legacyRuntimeContext,
+      trace,
+      verification,
+      retrievedCategories,
+      retrievedDocuments: retrievedDocuments.map((doc) => ({
+        title: doc.title,
+        category: doc.category,
+        slug: doc?.metadata?.slug || null,
+        verificationStatus:
+          doc?.metadata?.verification_status ||
+          doc?.metadata?.verification?.status ||
+          null,
+      })),
+      latencyMs: verification.metrics.latencyMs,
+      responseStatus: verification.status === "fail" ? "verification_failed" : "ok",
+    };
+
+    if (isDatabaseEnabled()) {
+      await logJozLlmRequestEvent(observabilityEvent);
+    } else {
+      rememberJozObservabilityEvent(observabilityEvent);
     }
 
     return res.json({
@@ -951,15 +1004,37 @@ app.post("/api/joz-llm", async (req, res) => {
       conversationId,
       intentMode,
       actions: Array.isArray(resolution?.actions) ? resolution.actions : [],
-      retrievedCategories:
-        resolution?.retrievedCategories?.length
-          ? resolution.retrievedCategories
-          : retrievedDocuments.map((doc) => doc.category),
+      retrievedCategories,
       mode: route.selectedRoute,
       trace,
+      verification,
+      observability: {
+        latencyMs: verification.metrics.latencyMs,
+        retrievedDocumentCount: verification.metrics.retrievedDocumentCount,
+        logged: true,
+      },
     });
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/observability", async (req, res) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 20));
+    const events = isDatabaseEnabled()
+      ? await listRecentJozLlmRequestEvents(limit)
+      : jozObservabilityFallbackStore.slice(0, limit);
+
+    return res.json({
+      ok: true,
+      count: events.length,
+      storage: isDatabaseEnabled() ? "database" : "memory",
+      events,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/observability failed:", error);
     return res.status(500).json({ error: error.message });
   }
 });
