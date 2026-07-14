@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   buildJozRouteTrace,
   composeJozLlmRouteReply,
+  resolveOwnedJozReply,
   resolveUnknownJozReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
@@ -235,6 +236,96 @@ test("routes why-is-joz-irreplaceable queries to a moat-based answer", () => {
   assert.match(resolution.reply, /context|workflows|decision logic|governance|feedback loops/i);
   assert.match(resolution.reply, /embedded into how work is routed|approved|improved|measured/i);
   assert.match(resolution.reply, /human-plus-system judgment|proof-backed trust/i);
+});
+
+test("resolveOwnedJozReply uses retrieved evidence synthesis for business lanes when model is available", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "What business problems can Joz solve?",
+    appContext,
+    legacyContext,
+  });
+
+  const resolution = await resolveOwnedJozReply({
+    route,
+    input: "What business problems can Joz solve?",
+    appContext,
+    legacyContext,
+    messages: [{ role: "user", content: "What business problems can Joz solve?" }],
+    openai: {
+      chat: {
+        completions: {
+          create: async () => ({
+            choices: [
+              {
+                message: {
+                  content:
+                    "Joz is strongest where fragmented knowledge, slow decisions, weak AI ownership, and governance gaps hurt execution. The value is turning that mess into usable context, clearer workflows, better trust, and measurable operating improvement rather than adding another disconnected AI pilot.",
+                },
+              },
+            ],
+          }),
+        },
+      },
+    },
+    roleAwareContext: {
+      retrievedDocuments: [
+        {
+          title: "Problems Joz Solves",
+          category: "business_need",
+          summary: "Joz is strongest where organisations face fragmented knowledge, slow decisions, weak adoption, and governance gaps.",
+          body: "What problems can Joz solve?\n\nJoz is strongest where organisations face fragmented knowledge, slow decision-making, low trust in AI outputs, and weak adoption because AI does not fit real workflows.",
+          metadata: { lane: "business_need" },
+        },
+      ],
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.answerSource, "retrieved_documents_model_synthesis");
+  assert.match(resolution.reply, /fragmented knowledge/i);
+  assert.match(resolution.reply, /governance|trust|workflows/i);
+});
+
+test("resolveOwnedJozReply falls back cleanly when synthesis reply is invalid", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "How does Joz create ROI from AI?",
+    appContext,
+    legacyContext,
+  });
+
+  const resolution = await resolveOwnedJozReply({
+    route,
+    input: "How does Joz create ROI from AI?",
+    appContext,
+    legacyContext,
+    messages: [{ role: "user", content: "How does Joz create ROI from AI?" }],
+    openai: {
+      chat: {
+        completions: {
+          create: async () => ({
+            choices: [{ message: { content: "Too vague." } }],
+          }),
+        },
+      },
+    },
+    roleAwareContext: {
+      retrievedDocuments: [
+        {
+          title: "ROI Model",
+          category: "business_need",
+          summary: "The strongest ROI comes from cost reduction, faster decisions, productivity gains, lower friction, and revenue growth.",
+          body: "ROI should be tied to baseline metrics, governance, and proof rather than vague upside.",
+          metadata: { lane: "business_need" },
+        },
+      ],
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.notEqual(resolution.answerSource, "retrieved_documents_model_synthesis");
+  assert.match(resolution.reply, /ROI|cost reduction|faster decisions|productivity gains/i);
 });
 
 test("routes skills-vs-mindset-vs-architecture questions to an explicit layering answer", () => {

@@ -57,6 +57,7 @@ import {
   buildJozRouteTrace,
   buildRoleAwareJozContext,
   composeJozLlmRouteReply,
+  resolveOwnedJozReply,
   resolveUnknownJozReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
@@ -894,11 +895,14 @@ app.post("/api/joz-llm", async (req, res) => {
       intentMode: retrievalIntentMode,
       retrievedDocuments: retrievalContext,
     });
-    const ownedResolution = composeJozLlmRouteReply({
+    const ownedResolution = await resolveOwnedJozReply({
       route,
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
+      messages,
+      openai,
+      roleAwareContext,
     });
     const resolution =
       ownedResolution ||
