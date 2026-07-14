@@ -251,6 +251,14 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
     return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means turning AI into lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not just shipping features or demos. The test is simple: what changes operationally, financially, or strategically because the system works better than before?";
   }
 
+  if (subIntent === "irreplaceable") {
+    return "Joz is not hard to replace because he uses AI. The real moat is context, workflows, decision logic, governance, and feedback loops that generic tools do not hold. Joz becomes irreplaceable when the system is embedded into how work is routed, approved, improved, and measured, with proof-backed trust and human-plus-system judgment rather than model fluency alone.";
+  }
+
+  if (subIntent === "layering") {
+    return "Agentic architecture and infrastructure should not be merged into either skills or mindset. Skills describe what Joz can do, mindset describes how Joz reasons, agentic architecture defines how the system thinks and acts, and infrastructure is the platform foundation underneath it. If you must place them, architecture sits closest to skills, while mindset governs how both are designed and used.";
+  }
+
   if (subIntent === "efficiency") {
     return "Joz creates business value through efficiency by cutting manual work, process cost, and cycle time across finance, ERP, accounting, HR, marketing, and operations. The lever is process redesign: use retrieval, summarization, classification, and workflow orchestration to remove friction while keeping human approval on critical decisions. That creates stronger operational leverage, backed by 70% lower handoff friction at Leo Burnett/Publicis and regional ML execution scale at Manulife.";
   }
@@ -731,6 +739,31 @@ function detectBusinessNeed(clean) {
     ])
   ) {
     return { detectedSubIntent: "business_value_definition", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "why is joz irreplaceable",
+      "what makes joz irreplaceable",
+      "what makes him irreplaceable",
+      "why is he irreplaceable",
+      "irreplaceable",
+    ])
+  ) {
+    return { detectedSubIntent: "irreplaceable", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "skills or mindset",
+      "skills vs mindset",
+      "agentic architecture and infrastructure",
+      "architecture and infrastructure",
+      "sit under skills or mindset",
+      "where should agentic architecture",
+    ])
+  ) {
+    return { detectedSubIntent: "layering", detectedConcept: "business_value" };
   }
 
   if (

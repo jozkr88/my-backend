@@ -213,6 +213,56 @@ test("routes business value efficiency queries to an efficiency-first answer", (
   assert.doesNotMatch(resolution.reply, /30x audience growth/i);
 });
 
+test("routes why-is-joz-irreplaceable queries to a moat-based answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt = "Why is Joz irreplaceable?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "irreplaceable");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /not hard to replace because he uses AI/i);
+  assert.match(resolution.reply, /context|workflows|decision logic|governance|feedback loops/i);
+  assert.match(resolution.reply, /embedded into how work is routed|approved|improved|measured/i);
+  assert.match(resolution.reply, /human-plus-system judgment|proof-backed trust/i);
+});
+
+test("routes skills-vs-mindset-vs-architecture questions to an explicit layering answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt = "Should agentic architecture and infrastructure sit under skills or mindset?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "layering");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /should not be merged into either skills or mindset/i);
+  assert.match(resolution.reply, /Skills describe what Joz can do/i);
+  assert.match(resolution.reply, /mindset describes how Joz reasons/i);
+  assert.match(resolution.reply, /agentic architecture defines how the system thinks and acts/i);
+  assert.match(resolution.reply, /infrastructure is the platform foundation/i);
+  assert.match(resolution.reply, /architecture sits closest to skills/i);
+});
+
 test("routes business value growth queries to a growth-first answer with proof", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const prompt =
