@@ -200,14 +200,17 @@ test("routes business value efficiency queries to an efficiency-first answer", (
   assert.equal(route.selectedRoute, "business_need");
   assert.equal(route.detectedSubIntent, "efficiency");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /lower (?:cost|process cost)/i);
-  assert.match(resolution.reply, /faster execution|decision cycles/i);
+  assert.match(resolution.reply, /process cost|lower cost|cost reduction/i);
+  assert.match(resolution.reply, /cycle time|faster execution/i);
   assert.match(resolution.reply, /operational leverage/i);
   assert.match(resolution.reply, /finance|ERP|accounting|HR|marketing|operations/i);
-  assert.match(resolution.reply, /Maybank-Ageas Etiqa/i);
-  assert.match(resolution.reply, /Manulife/i);
-  assert.match(resolution.reply, /Mediacorp/i);
+  assert.match(resolution.reply, /process redesign/i);
+  assert.match(resolution.reply, /retrieval|summarization|classification|recommendation|workflow orchestration/i);
+  assert.match(resolution.reply, /Leo Burnett\/Publicis/i);
   assert.match(resolution.reply, /70%/i);
+  assert.match(resolution.reply, /Manulife/i);
+  assert.doesNotMatch(resolution.reply, /20x digital sales growth/i);
+  assert.doesNotMatch(resolution.reply, /30x audience growth/i);
 });
 
 test("routes business value growth queries to a growth-first answer with proof", () => {
