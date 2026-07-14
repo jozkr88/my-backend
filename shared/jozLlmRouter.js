@@ -248,31 +248,31 @@ function composeFactualProfileReply(subIntent) {
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
   if (subIntent === "efficiency") {
-    return "Joz creates business value through efficiency by reducing manual work, process cost, and cycle time across finance, ERP, accounting, HR, marketing, and operations. The strongest pattern is process redesign: use retrieval, summarization, classification, and workflow orchestration to remove friction while keeping human approval on critical decisions. The result is stronger operational leverage, with proof including 70% lower handoff friction at Leo Burnett/Publicis and regional ML execution scale at Manulife.";
+    return "Joz creates business value through efficiency by cutting manual work, process cost, and cycle time across finance, ERP, accounting, HR, marketing, and operations. The lever is process redesign: use retrieval, summarization, classification, and workflow orchestration to remove friction while keeping human approval on critical decisions. That creates stronger operational leverage, backed by 70% lower handoff friction at Leo Burnett/Publicis and regional ML execution scale at Manulife.";
   }
 
   if (subIntent === "processes") {
-    return "Joz creates value through process redesign by turning fragmented workflows into clearer AI-supported operating flows. That means better routing, fewer exception-handling delays, faster approvals, and more reusable knowledge across ERP, finance, HR, marketing, and operations. The goal is not generic automation. It is clearer ownership, stronger control, faster throughput, and workflows redesigned around better intelligence with humans still accountable for key decisions.";
+    return "Joz creates value through process redesign by turning fragmented workflows into clearer AI-supported operating flows. That means better routing, fewer exception delays, faster approvals, and more reusable knowledge across ERP, finance, HR, marketing, and operations. The goal is not generic automation. It is clearer ownership, stronger control, faster throughput, and workflows redesigned around better intelligence with humans still accountable for the critical decisions.";
   }
 
   if (subIntent === "growth") {
-    return "Joz supports growth by improving decision speed, commercial signal quality, and execution capacity without scaling overhead at the same rate as complexity. That means stronger conversion support, faster go-to-market coordination, and better decisions with less noise. Proof includes 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, and Lean ML execution across 11 APAC markets at Manulife.";
+    return "Joz supports growth by improving decision speed, commercial signal quality, and execution capacity without scaling overhead at the same rate as complexity. That means stronger conversion support, faster go-to-market coordination, and better decisions with less noise. The proof is commercial and real: 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, and Lean ML execution across 11 APAC markets at Manulife.";
   }
 
   if (subIntent === "roi") {
-    return "The strongest ROI comes from cost reduction, faster decisions, productivity gains, lower friction, and revenue growth. Joz is strongest where AI removes repeated manual work, improves workflow throughput, and gives leadership clearer decision support across business functions. ROI should always be tied to a baseline, target metrics, governance, and proof, not framed as vague upside or generic innovation language.";
+    return "The strongest ROI comes from cost reduction, faster decisions, productivity gains, lower friction, and revenue growth. Joz is strongest where AI removes repeated manual work, improves workflow throughput, and gives leadership clearer decision support across business functions. ROI should be tied to a baseline, target metrics, governance, and proof, not sold as vague upside or generic innovation language.";
   }
 
   if (subIntent === "functions") {
-    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and better decision signal.";
+    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on.";
   }
 
   if (subIntent === "operating_model") {
-    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale well without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations.";
+    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them.";
   }
 
   if (subIntent === "decision_support") {
-    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams.";
+    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams when complexity is high.";
   }
 
   return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
@@ -761,11 +761,25 @@ function detectBusinessNeed(clean) {
 
   if (
     includesAny(clean, [
+      "decision support",
+      "better signal",
+      "prioritization",
+      "prioritisation",
+      "executive clarity",
+      "judgment",
+      "clarity",
+    ])
+  ) {
+    return { detectedSubIntent: "decision_support", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "functions",
       "finance",
       "erp",
       "accounting",
-      "hr",
+      /\bhr\b/,
       "marketing",
       "operations",
       "sales",
@@ -777,18 +791,6 @@ function detectBusinessNeed(clean) {
 
   if (includesAny(clean, ["operating model", "ownership", "governance and execution"])) {
     return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
-  }
-
-  if (
-    includesAny(clean, [
-      "decision support",
-      "better signal",
-      "prioritization",
-      "prioritisation",
-      "executive clarity",
-    ])
-  ) {
-    return { detectedSubIntent: "decision_support", detectedConcept: "business_value" };
   }
 
   if (

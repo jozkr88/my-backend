@@ -243,6 +243,30 @@ test("routes business value growth queries to a growth-first answer with proof",
   assert.match(resolution.reply, /11 APAC markets/i);
 });
 
+test("routes business value decision-support queries to an executive clarity answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt =
+    "How does Joz improve decision support through better signal, prioritization, judgment, and clarity in noisy business environments?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "decision_support");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /decision support|judgment|executive clarity/i);
+  assert.match(resolution.reply, /signal|prioritization|prioritisation/i);
+  assert.match(resolution.reply, /action|alignment|accountable execution/i);
+});
+
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({
