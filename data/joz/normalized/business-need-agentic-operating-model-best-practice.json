@@ -1,0 +1,92 @@
+{
+  "slug": "business-need-agentic-operating-model-best-practice",
+  "title": "Agentic Operating Model Best Practice",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Defines best-in-class agentic AI as a governed operating model with retrieval, planning, tools, verification, human control, and feedback loops.",
+  "body": "Best-in-class agentic AI is not just a model call with tools attached.\n\nIt is an operating model with clear layers, controls, and feedback paths.\n\nThe best-practice structure is:\n\n1. Intent and task framing\nThe system must classify what kind of problem is being solved: answer, recommend, decide, act, monitor, or escalate.\n\n2. Context retrieval\nThe system must retrieve the right enterprise context with permissions, provenance, freshness, and confidence intact.\n\n3. Reasoning and planning\nThe agent must break the task into steps, decide which tools are needed, and make the execution path explicit.\n\n4. Tool execution\nTools should be invoked only through allowed interfaces with input validation, logging, timeout handling, and safe failure behavior.\n\n5. Verification\nThe system must check whether the result is grounded, complete, policy-compliant, and commercially or operationally sensible.\n\n6. Human control\nApproval, escalation, override, and exception handling must be explicit rather than implied.\n\n7. Feedback loops\nCorrections, outcomes, failures, approvals, and repeated edge cases should improve the system over time.\n\n8. Evaluation and governance\nThe organisation must measure answer quality, workflow quality, risk, latency, cost, and business impact continuously.\n\nThe practical best-in-class rule is:\n\n- retrieval before fluency\n- verification before autonomy\n- workflow before feature\n- governance before scale\n\nThat is how agentic AI moves from demo behavior to enterprise operating value.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "agentic-ai",
+      "best-practice",
+      "governance",
+      "operating-model",
+      "tools"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Best-in-class agentic AI is an operating model, not just a model connected to tools.",
+      "The critical layers are intent framing, context retrieval, reasoning and planning, tool execution, verification, human control, and feedback loops.",
+      "Retrieval before fluency, verification before autonomy, workflow before feature, and governance before scale are the core operating rules."
+    ],
+    "proof_points": [
+      "This structure matches the retrieval-first, validation-aware direction already used in the Joz backend.",
+      "It aligns with Joz's broader principles of systems before features, decision quality, and appropriate autonomy.",
+      "It gives a business-safe explanation for how agentic AI becomes operationally credible."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 97,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-agentic-operating-model-best-practice.md",
+    "source_meta_filename": "business-need-agentic-operating-model-best-practice.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "governance_gaps",
+      "knowledge_fragmentation",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "decision_quality",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "ai_governance",
+      "decision_intelligence",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "clear_ownership",
+      "confidence_handling",
+      "evaluation",
+      "human_approval",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1
+  }
+}

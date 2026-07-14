@@ -1,0 +1,94 @@
+{
+  "slug": "skills-agentic-ai-infrastructure-best-practice",
+  "title": "Agentic AI Infrastructure Best Practice",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Explains best-in-class agentic AI infrastructure as the control plane for routing, retrieval, runtime safety, governance, and observability.",
+  "body": "Best-in-class agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.\n\nIt should cover five core layers:\n\n1. Model layer\n- model routing\n- fallback strategy\n- latency and cost policy\n- task-to-model fit\n\n2. Retrieval and data layer\n- vector or semantic retrieval\n- permission-aware document access\n- freshness handling\n- source provenance\n- structured and unstructured context support\n\n3. Runtime and workflow layer\n- queueing and async execution\n- event-driven task handling\n- retries, timeout policy, and idempotency\n- state and memory handling\n\n4. Trust and governance layer\n- access control\n- audit logs\n- evaluation\n- confidence handling\n- approval checkpoints\n- policy enforcement\n\n5. Observability and operations layer\n- traces\n- tool-call logs\n- quality metrics\n- drift monitoring\n- incident diagnosis\n- cost monitoring\n\nThe infrastructure should not be explained as a shopping list of cloud tools.\n\nThe business-relevant point is that infrastructure makes the system:\n\n- safer\n- more reliable\n- more explainable\n- easier to improve\n- cheaper to control at scale\n\nWithout this layer, agentic AI remains brittle, hard to trust, and difficult to operate in enterprise conditions.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic-ai",
+      "control-plane",
+      "infrastructure",
+      "observability",
+      "runtime"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.",
+      "The core layers are model routing, retrieval and data, runtime workflow, trust and governance, and observability and operations.",
+      "Without strong infrastructure, agentic AI remains brittle, hard to trust, and difficult to operate at enterprise scale."
+    ],
+    "proof_points": [
+      "The structure matches Joz's existing focus on ACL-aware retrieval, verification, observability, and governance.",
+      "It extends the current technical-stack record from tools into operating reliability and control.",
+      "It gives a recruiter-safe but technically credible explanation of infrastructure beyond buzzwords."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 95,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-agentic-ai-infrastructure-best-practice.md",
+    "source_meta_filename": "skills-agentic-ai-infrastructure-best-practice.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "governance_gaps",
+      "knowledge_fragmentation",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "context_creates_intelligence",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agent_memory",
+      "agentic_ai",
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "verification"
+    ],
+    "outcomes": [
+      "higher_data_trust",
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "auditability",
+      "confidence_handling",
+      "data_boundaries",
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1
+  }
+}
