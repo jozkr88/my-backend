@@ -73,7 +73,17 @@ Recommended statuses:
 - `needs_review`
 - `verified`
 
+Additional supported statuses may be used for retrieval support when they are grounded in stronger source material:
+
+- `cv_supported`
+- `project_supported`
+- `capability_supported`
+- `positioning_supported`
+- `framework_supported`
+- `cv_and_project_supported`
+
 Only `verified` records should be treated as strong publishable evidence.
+Supported statuses can be used as secondary retrieval context, but they should not be treated as the same quality tier as fully verified proof.
 
 ## Expected assistant behavior
 
@@ -83,3 +93,12 @@ When new text is pasted:
 2. normalize it into a structured record
 3. verify claims and proof points
 4. publish only the verified parts into Joz response logic
+
+## Published outputs
+
+- `published.records`
+  Full normalized corpus for auditability and inspection.
+- `published.model_ready_records`
+  Runtime-safe subset excluding `draft` and `needs_review` records.
+
+This keeps the full corpus available for review while preventing unresolved material from entering the default retrieval path.

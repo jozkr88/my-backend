@@ -84,6 +84,16 @@ const allowedLanes = new Set([
   "booking",
 ]);
 
+const MODEL_READY_STATUSES = new Set([
+  "verified",
+  "cv_supported",
+  "project_supported",
+  "capability_supported",
+  "positioning_supported",
+  "framework_supported",
+  "cv_and_project_supported",
+]);
+
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
 }
@@ -393,11 +403,15 @@ function main() {
   }
 
   const generatedAt = new Date().toISOString();
+  const modelReadyRecords = records.filter((record) =>
+    MODEL_READY_STATUSES.has(record.metadata.verification_status)
+  );
   const published = {
     generated_at: generatedAt,
     counts: {
       source_files: sourceFiles.length,
       normalized_records: records.length,
+      model_ready_records: modelReadyRecords.length,
       verified_records: records.filter(
         (record) => record.metadata.verification_status === "verified"
       ).length,
@@ -410,6 +424,7 @@ function main() {
     },
     ontology_status: errors.length ? "failed" : "ok",
     records,
+    model_ready_records: modelReadyRecords,
   };
 
   writeJson(path.join(publishedDir, "joz-documents.generated.json"), published);

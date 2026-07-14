@@ -339,6 +339,13 @@ function scoreQueryRelevance(doc, query = "") {
   if (clean.includes("biggest") && title.includes("largest")) {
     score += 8;
   }
+  if (
+    category === "bio" &&
+    (clean.includes("biggest") || clean.includes("achievement")) &&
+    (clean.includes("enterprise") || clean.includes("scale") || clean.includes("strongest"))
+  ) {
+    score -= 18;
+  }
   if (clean.includes("autonomy") && (title.includes("judgment") || summary.includes("autonomy"))) {
     score += 8;
   }
@@ -387,6 +394,8 @@ function scoreBroadCredibility(doc, metadata, query = "") {
   if (!isBroadCredibilityQuery(query)) return 0;
 
   const slug = String(doc?.slug || "").trim();
+  const category = String(doc?.category || "").trim().toLowerCase();
+  const clean = String(query || "").trim().toLowerCase();
   const relatedProofs = metadata.related_proofs.length ? metadata.related_proofs : metadata.proofs;
   let score = 0;
 
@@ -411,6 +420,15 @@ function scoreBroadCredibility(doc, metadata, query = "") {
     metadata.measurable_outcome_count <= 1
   ) {
     score -= 18;
+  }
+
+  // Keep identity/background records from outranking proof-led enterprise answers.
+  if (
+    category === "bio" &&
+    (clean.includes("biggest") || clean.includes("achievement")) &&
+    (clean.includes("enterprise") || clean.includes("scale") || clean.includes("strongest"))
+  ) {
+    score -= 24;
   }
 
   return score;

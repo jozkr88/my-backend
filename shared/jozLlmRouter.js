@@ -102,9 +102,9 @@ function composeRelocationAnswer() {
 
 function composeWorkAuthorizationAnswer(subIntent = "generic") {
   if (subIntent === "singapore_specific") {
-    return "Joz is Slovak and an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
+    return "Joz is Slovak and an EU national. Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
   }
-  return "Joz is Slovak and an EU national. Current work authorization, visa, or sponsorship requirements for any specific country should be confirmed directly for the hiring process.";
+  return "Joz is Slovak and an EU national. Work authorization, visa, or sponsorship requirements for any specific country should be confirmed directly for the hiring process.";
 }
 
 function composeSingaporeFitAnswer() {

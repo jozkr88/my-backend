@@ -12,6 +12,16 @@ const __dirname = path.dirname(__filename);
 let pool = null;
 let publishedJozDocsCache = null;
 
+const MODEL_READY_STATUSES = new Set([
+  "verified",
+  "cv_supported",
+  "project_supported",
+  "capability_supported",
+  "positioning_supported",
+  "framework_supported",
+  "cv_and_project_supported",
+]);
+
 function resolvePublishedJozDocsPath() {
   const candidates = [
     path.join(process.cwd(), "data", "joz", "published", "joz-documents.generated.json"),
@@ -35,12 +45,34 @@ function loadPublishedJozDocuments() {
   }
 
   const published = JSON.parse(fs.readFileSync(docsPath, "utf8"));
-  publishedJozDocsCache = Array.isArray(published?.records) ? published.records : [];
+  if (Array.isArray(published?.model_ready_records)) {
+    publishedJozDocsCache = published.model_ready_records;
+    return publishedJozDocsCache;
+  }
+
+  const records = Array.isArray(published?.records) ? published.records : [];
+  publishedJozDocsCache = records.filter((record) =>
+    MODEL_READY_STATUSES.has(
+      String(
+        record?.metadata?.verification_status ||
+          record?.metadata?.verification?.status ||
+          ""
+      ).trim().toLowerCase()
+    )
+  );
   return publishedJozDocsCache;
 }
 
 function getDatabaseUrl() {
   return process.env.SUPABASE_DB_URL || process.env.DATABASE_URL || "";
+}
+
+function normalizePrivacyEmail(value = "") {
+  return String(value || "").trim().toLowerCase();
+}
+
+function normalizePrivacyPhone(value = "") {
+  return String(value || "").replace(/\D+/g, "");
 }
 
 const TRANSITION_SEED = [
@@ -411,71 +443,6 @@ export async function getPrimaryJozProfile() {
   return result.rows[0] || null;
 }
 
-export async function cleanupExpiredJozData({
-  conversationRetentionDays = 30,
-  callbackRetentionDays = 30,
-  privacyRequestRetentionDays = 365,
-} = {}) {
-  const db = getPool();
-  if (!db) {
-    return {
-      deletedConversations: 0,
-      deletedCallbackRequests: 0,
-      deletedPrivacyRequests: 0,
-    };
-  }
-
-  const normalizedConversationDays = Math.max(1, Number(conversationRetentionDays) || 30);
-  const normalizedCallbackDays = Math.max(1, Number(callbackRetentionDays) || 30);
-  const normalizedPrivacyDays = Math.max(1, Number(privacyRequestRetentionDays) || 365);
-
-  let deletedConversations = 0;
-  let deletedCallbackRequests = 0;
-  let deletedPrivacyRequests = 0;
-
-  try {
-    const callbackDeleteResult = await runQuery(
-      `DELETE FROM joz_callback_requests
-       WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
-       RETURNING id`,
-      [normalizedCallbackDays],
-    );
-    deletedCallbackRequests = callbackDeleteResult.rows?.length || 0;
-  } catch (error) {
-    console.warn("⚠️ Skipping callback retention cleanup:", error.message);
-  }
-
-  try {
-    const conversationDeleteResult = await runQuery(
-      `DELETE FROM joz_conversations
-       WHERE COALESCE(last_message_at, updated_at, created_at) < NOW() - ($1 * INTERVAL '1 day')
-       RETURNING id`,
-      [normalizedConversationDays],
-    );
-    deletedConversations = conversationDeleteResult.rows?.length || 0;
-  } catch (error) {
-    console.warn("⚠️ Skipping conversation retention cleanup:", error.message);
-  }
-
-  try {
-    const privacyRequestDeleteResult = await runQuery(
-      `DELETE FROM joz_privacy_requests
-       WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
-       RETURNING id`,
-      [normalizedPrivacyDays],
-    );
-    deletedPrivacyRequests = privacyRequestDeleteResult.rows?.length || 0;
-  } catch (error) {
-    console.warn("⚠️ Skipping privacy-request retention cleanup:", error.message);
-  }
-
-  return {
-    deletedConversations,
-    deletedCallbackRequests,
-    deletedPrivacyRequests,
-  };
-}
-
 export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, query = "") {
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
@@ -664,7 +631,7 @@ export async function createJozPrivacyRequest({
       sessionKey,
       source,
       JSON.stringify(payload || {}),
-    ],
+    ]
   );
   return result.rows[0]?.id || null;
 }
@@ -688,7 +655,7 @@ async function resolvePrivacyTargets({
        WHERE id = $1
          AND session_key = $2
        LIMIT 1`,
-      [conversationId, sessionKey],
+      [conversationId, sessionKey]
     );
     for (const row of conversationResult.rows || []) {
       conversationIds.add(row.id);
@@ -698,7 +665,7 @@ async function resolvePrivacyTargets({
       `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context, last_message_at, created_at, updated_at
        FROM joz_conversations
        WHERE session_key = $1`,
-      [sessionKey],
+      [sessionKey]
     );
     for (const row of conversationResult.rows || []) {
       conversationIds.add(row.id);
@@ -721,7 +688,7 @@ async function resolvePrivacyTargets({
   if (normalizedPhone) {
     callbackParams.push(normalizedPhone);
     callbackClauses.push(
-      `regexp_replace(COALESCE(requested_phone, ''), '\\D', '', 'g') = $${callbackParams.length}`,
+      `regexp_replace(COALESCE(requested_phone, ''), '\\D', '', 'g') = $${callbackParams.length}`
     );
   }
 
@@ -732,7 +699,7 @@ async function resolvePrivacyTargets({
               delivery_errors, created_at
        FROM joz_callback_requests
        WHERE ${callbackClauses.join(" OR ")}`,
-      callbackParams,
+      callbackParams
     );
 
     for (const row of callbackResult.rows || []) {
@@ -765,7 +732,7 @@ async function resolvePrivacyTargets({
        FROM joz_conversations
        WHERE id = ANY($1::uuid[])
        ORDER BY created_at ASC`,
-      [ids],
+      [ids]
     );
     conversations = conversationResult.rows || [];
 
@@ -774,7 +741,7 @@ async function resolvePrivacyTargets({
        FROM joz_messages
        WHERE conversation_id = ANY($1::uuid[])
        ORDER BY created_at ASC`,
-      [ids],
+      [ids]
     );
     messages = messageResult.rows || [];
   }
@@ -783,7 +750,7 @@ async function resolvePrivacyTargets({
     conversations,
     messages,
     callbackRequests: [...callbackById.values()].sort(
-      (left, right) => new Date(left.created_at).getTime() - new Date(right.created_at).getTime(),
+      (left, right) => new Date(left.created_at).getTime() - new Date(right.created_at).getTime()
     ),
   };
 }
@@ -820,7 +787,7 @@ export async function deleteJozPrivacyBundle(filters = {}) {
       `DELETE FROM joz_callback_requests
        WHERE id = ANY($1::bigint[])
        RETURNING id`,
-      [callbackRequestIds],
+      [callbackRequestIds]
     );
     deletedCallbackRequests = callbackDeleteResult.rows?.length || 0;
   }
@@ -830,7 +797,7 @@ export async function deleteJozPrivacyBundle(filters = {}) {
       `SELECT COUNT(*)::int AS count
        FROM joz_messages
        WHERE conversation_id = ANY($1::uuid[])`,
-      [conversationIds],
+      [conversationIds]
     );
     deletedMessages = messageCountResult.rows[0]?.count || 0;
 
@@ -838,7 +805,7 @@ export async function deleteJozPrivacyBundle(filters = {}) {
       `DELETE FROM joz_conversations
        WHERE id = ANY($1::uuid[])
        RETURNING id`,
-      [conversationIds],
+      [conversationIds]
     );
     deletedConversations = conversationDeleteResult.rows?.length || 0;
   }
@@ -847,6 +814,52 @@ export async function deleteJozPrivacyBundle(filters = {}) {
     deletedConversations,
     deletedMessages,
     deletedCallbackRequests,
+  };
+}
+
+export async function cleanupExpiredJozData({
+  conversationRetentionDays = 30,
+  callbackRetentionDays = 30,
+  privacyRequestRetentionDays = 365,
+} = {}) {
+  const db = getPool();
+  if (!db) {
+    return {
+      deletedConversations: 0,
+      deletedCallbackRequests: 0,
+      deletedPrivacyRequests: 0,
+    };
+  }
+
+  const normalizedConversationDays = Math.max(1, Number(conversationRetentionDays) || 30);
+  const normalizedCallbackDays = Math.max(1, Number(callbackRetentionDays) || 30);
+  const normalizedPrivacyDays = Math.max(1, Number(privacyRequestRetentionDays) || 365);
+
+  const callbackDeleteResult = await runQuery(
+    `DELETE FROM joz_callback_requests
+     WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING id`,
+    [normalizedCallbackDays]
+  );
+
+  const conversationDeleteResult = await runQuery(
+    `DELETE FROM joz_conversations
+     WHERE COALESCE(last_message_at, updated_at, created_at) < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING id`,
+    [normalizedConversationDays]
+  );
+
+  const privacyRequestDeleteResult = await runQuery(
+    `DELETE FROM joz_privacy_requests
+     WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING id`,
+    [normalizedPrivacyDays]
+  );
+
+  return {
+    deletedConversations: conversationDeleteResult.rows?.length || 0,
+    deletedCallbackRequests: callbackDeleteResult.rows?.length || 0,
+    deletedPrivacyRequests: privacyRequestDeleteResult.rows?.length || 0,
   };
 }
 
