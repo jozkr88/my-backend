@@ -1,0 +1,100 @@
+{
+  "slug": "business-need-efficiency-vs-growth",
+  "title": "Efficiency Versus Growth",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Separates AI business value into efficiency effects and growth effects so the operating model and ROI case stay clear.",
+  "body": "AI value should be split into two different conversations:\n\n1. Efficiency\nUse AI to reduce cost, time, friction, rework, and manual effort.\n\nTypical efficiency effects:\n- lower process cost\n- faster cycle time\n- lower error rate\n- fewer handoffs\n- less repetitive knowledge work\n- more consistent execution\n\n2. Growth\nUse AI to increase output, decision speed, customer relevance, and scalability.\n\nTypical growth effects:\n- stronger conversion\n- faster market response\n- better customer journeys\n- more output per employee\n- faster onboarding of new talent\n- better reuse of institutional knowledge\n\nThis distinction matters because the operating model is different.\n\nEfficiency questions focus on:\n- what can be automated\n- what can be shortened\n- what can be standardized\n\nGrowth questions focus on:\n- what can scale\n- what can improve commercial performance\n- what can increase strategic capacity\n\nJoz should be able to speak to both, but keep them separate so the business case stays clear.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "efficiency",
+      "growth",
+      "operating-model",
+      "roi",
+      "scale"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "AI value should be separated into efficiency and growth conversations.",
+      "Efficiency focuses on cost, time, friction, and standardization.",
+      "Growth focuses on output, conversion, customer relevance, and scaling strategic capacity."
+    ],
+    "proof_points": [
+      "The existing Joz proof base already includes both growth outcomes and operational friction reduction.",
+      "Separating these frames helps avoid vague ROI language.",
+      "This distinction matches how leaders evaluate cost programs versus growth programs."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 94,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-efficiency-vs-growth.md",
+    "source_meta_filename": "business-need-efficiency-vs-growth.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 4
+  }
+}

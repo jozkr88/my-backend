@@ -1,0 +1,91 @@
+{
+  "slug": "business-need-process-redesign-framework",
+  "title": "Process Redesign Framework",
+  "category": "delivery",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Defines the practical framework for redesigning business processes around AI, with current process, friction, cost, intervention, human role, systems, KPIs, and controls.",
+  "body": "The serious AI opportunity is usually not just answering faster, but redesigning the process around better intelligence and clearer control.\n\nEach process redesign should be described in a practical structure:\n\n1. Current process\nWhat happens today and who does it.\n\n2. Current problem\nWhere time, errors, friction, delay, or poor visibility exist.\n\n3. Current cost or missed value\nLabor cost, missed revenue, delayed response, margin loss, or decision risk.\n\n4. AI intervention\nWhat AI actually changes: summarization, classification, retrieval, recommendation, exception handling, or workflow orchestration.\n\n5. Human role after AI\nWhat remains with the human: approval, escalation, exception handling, judgment, stakeholder communication.\n\n6. Systems involved\nERP, CRM, finance, HRIS, support, knowledge base, reporting layer, or workflow tools.\n\n7. KPI impact\nCycle time, error rate, cost per case, resolution speed, margin, conversion, adoption, or forecast accuracy.\n\n8. Control model\nConfidence thresholds, approval rules, audit logs, ownership, and verification.\n\nThis is how Joz should frame process redesign when the goal is real operating value rather than a shallow AI feature pitch.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "controls",
+      "kpi",
+      "process",
+      "redesign",
+      "workflow"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "The serious AI opportunity is usually redesigning the process, not just answering faster.",
+      "A strong process redesign needs current-state, problem, value, intervention, human role, systems, KPI, and control definitions.",
+      "Joz should frame AI work as operating-model change rather than shallow feature insertion."
+    ],
+    "proof_points": [
+      "The current Joz business-need and systems records already support workflow-first thinking.",
+      "This framework is aligned with governance, evaluation, and decision-quality principles already present in the corpus.",
+      "Process redesign language is stronger for enterprise stakeholders than generic automation claims."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 95,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-process-redesign-framework.md",
+    "source_meta_filename": "business-need-process-redesign-framework.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "manual_knowledge_work",
+      "operational_friction",
+      "organizational_complexity",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "decision_quality",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "lower_operational_friction",
+      "productivity_gains",
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "human_approval",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 3
+  }
+}
