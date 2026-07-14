@@ -67,6 +67,21 @@ function getDatabaseUrl() {
   return process.env.SUPABASE_DB_URL || process.env.DATABASE_URL || "";
 }
 
+function normalizeJozDocumentRow(row = {}) {
+  return {
+    title: row.title,
+    category: row.category,
+    summary: row.summary,
+    body: row.body,
+    metadata: {
+      ...(row.metadata || {}),
+      slug: row.slug || row?.metadata?.slug || null,
+      visibility: row.visibility || row?.metadata?.visibility || "public",
+      publish_version: row.publish_version || row?.metadata?.publish_version || null,
+    },
+  };
+}
+
 function normalizePrivacyEmail(value = "") {
   return String(value || "").trim().toLowerCase();
 }
@@ -451,8 +466,19 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
   const result = await runQuery(
     `SELECT title, category, summary, body, metadata
      FROM joz_documents
-     WHERE category = ANY($1::text[])
-        OR COALESCE(metadata->>'lane', '') = ANY($2::text[])
+     WHERE profile_id = (
+         SELECT id
+         FROM joz_profiles
+         WHERE is_primary = TRUE
+         ORDER BY updated_at DESC, id DESC
+         LIMIT 1
+       )
+       AND is_runtime_active = TRUE
+       AND visibility = 'public'
+       AND (
+         category = ANY($1::text[])
+         OR COALESCE(metadata->>'lane', '') = ANY($2::text[])
+       )
      ORDER BY
        CASE
          WHEN COALESCE(metadata->>'lane', '') = ANY($2::text[]) THEN 0
@@ -479,34 +505,29 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
      LIMIT $4`,
     [categories, laneAliases, primaryCategory, Math.max(limit * 5, 20)]
   );
-  const merged = new Map();
+  const dbDocuments = (result.rows || []).map(normalizeJozDocumentRow);
+  const sourceDocuments = dbDocuments.length
+    ? dbDocuments
+    : loadPublishedJozDocuments()
+        .filter((doc) => {
+          const docLane = String(doc?.metadata?.lane || "").trim();
+          const docCategory = String(doc?.category || "").trim();
+          return laneAliases.includes(docLane) || categories.includes(docCategory);
+        })
+        .map((doc) => ({
+          title: doc.title,
+          category: doc.category,
+          summary: doc.summary,
+          body: doc.body,
+          metadata: {
+            ...(doc.metadata || {}),
+            slug: doc.slug || doc.metadata?.slug || null,
+            visibility: "public",
+            publish_version: null,
+          },
+        }));
 
-  for (const doc of result.rows || []) {
-    const key = String(doc?.metadata?.slug || `${doc?.title || ""}::${doc?.category || ""}`).trim();
-    if (key) merged.set(key, doc);
-  }
-
-  for (const doc of loadPublishedJozDocuments()) {
-    const docLane = String(doc?.metadata?.lane || "").trim();
-    const docCategory = String(doc?.category || "").trim();
-    const laneMatch = laneAliases.includes(docLane);
-    const categoryMatch = categories.includes(docCategory);
-    if (!laneMatch && !categoryMatch) continue;
-
-    const key = String(doc?.slug || doc?.metadata?.slug || `${doc?.title || ""}::${docCategory}`).trim();
-    if (key) merged.set(key, {
-      title: doc.title,
-      category: doc.category,
-      summary: doc.summary,
-      body: doc.body,
-      metadata: {
-        ...(doc.metadata || {}),
-        slug: doc.slug || doc.metadata?.slug || null,
-      },
-    });
-  }
-
-  return rankJozDocumentsForQuery([...merged.values()], {
+  return rankJozDocumentsForQuery(sourceDocuments, {
     intentMode: primaryCategory,
     query,
     limit,
@@ -1101,6 +1122,140 @@ export async function initDatabase() {
         phrase TEXT NOT NULL,
         PRIMARY KEY (state_key, action_key, phrase)
       )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_profiles (
+        id BIGSERIAL PRIMARY KEY,
+        slug TEXT NOT NULL UNIQUE,
+        display_name TEXT NOT NULL,
+        label TEXT NOT NULL,
+        headline TEXT,
+        summary TEXT,
+        website_url TEXT,
+        email TEXT,
+        phone TEXT,
+        location TEXT,
+        is_primary BOOLEAN NOT NULL DEFAULT FALSE,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_documents (
+        id BIGSERIAL PRIMARY KEY,
+        profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+        slug TEXT NOT NULL,
+        title TEXT NOT NULL,
+        category TEXT NOT NULL,
+        source_type TEXT NOT NULL DEFAULT 'manual',
+        source_uri TEXT,
+        summary TEXT,
+        body TEXT NOT NULL,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        published_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (profile_id, slug)
+      )
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS visibility TEXT NOT NULL DEFAULT 'public'
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS is_runtime_active BOOLEAN NOT NULL DEFAULT TRUE
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS publish_version TEXT
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS source_checksum TEXT
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_documents_category_idx
+      ON joz_documents (profile_id, category)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_documents_runtime_idx
+      ON joz_documents (profile_id, is_runtime_active, visibility, published_at DESC)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_documents_lane_idx
+      ON joz_documents ((metadata->>'lane'))
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_conversations (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+        session_key TEXT,
+        visitor_label TEXT,
+        channel TEXT NOT NULL DEFAULT 'web',
+        intent_mode TEXT,
+        lead_status TEXT NOT NULL DEFAULT 'anonymous',
+        context JSONB NOT NULL DEFAULT '{}'::jsonb,
+        last_message_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_conversations_profile_idx
+      ON joz_conversations (profile_id, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_messages (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        conversation_id UUID NOT NULL REFERENCES joz_conversations(id) ON DELETE CASCADE,
+        role TEXT NOT NULL CHECK (role IN ('system', 'user', 'assistant', 'tool')),
+        message_kind TEXT NOT NULL DEFAULT 'chat',
+        content TEXT NOT NULL,
+        tool_name TEXT,
+        citations JSONB NOT NULL DEFAULT '[]'::jsonb,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_messages_conversation_idx
+      ON joz_messages (conversation_id, created_at ASC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_publish_runs (
+        id BIGSERIAL PRIMARY KEY,
+        profile_id BIGINT REFERENCES joz_profiles(id) ON DELETE SET NULL,
+        publish_version TEXT NOT NULL UNIQUE,
+        source_type TEXT NOT NULL DEFAULT 'joz_knowledge',
+        source_count INTEGER NOT NULL DEFAULT 0,
+        normalized_count INTEGER NOT NULL DEFAULT 0,
+        published_count INTEGER NOT NULL DEFAULT 0,
+        verification_summary JSONB NOT NULL DEFAULT '{}'::jsonb,
+        source_bundle_path TEXT,
+        notes TEXT,
+        status TEXT NOT NULL DEFAULT 'published',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_publish_runs_profile_idx
+      ON joz_publish_runs (profile_id, created_at DESC)
     `);
 
     await db.query(`

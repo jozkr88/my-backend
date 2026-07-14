@@ -158,6 +158,10 @@ CREATE TABLE IF NOT EXISTS joz_documents (
   summary TEXT,
   body TEXT NOT NULL,
   metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  visibility TEXT NOT NULL DEFAULT 'public',
+  is_runtime_active BOOLEAN NOT NULL DEFAULT TRUE,
+  publish_version TEXT,
+  source_checksum TEXT,
   published_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -180,8 +184,32 @@ CREATE TABLE IF NOT EXISTS joz_document_chunks (
 CREATE INDEX IF NOT EXISTS joz_documents_category_idx
   ON joz_documents (profile_id, category);
 
+CREATE INDEX IF NOT EXISTS joz_documents_runtime_idx
+  ON joz_documents (profile_id, is_runtime_active, visibility, published_at DESC);
+
+CREATE INDEX IF NOT EXISTS joz_documents_lane_idx
+  ON joz_documents ((metadata->>'lane'));
+
 CREATE INDEX IF NOT EXISTS joz_document_chunks_document_idx
   ON joz_document_chunks (document_id, chunk_index);
+
+CREATE TABLE IF NOT EXISTS joz_publish_runs (
+  id BIGSERIAL PRIMARY KEY,
+  profile_id BIGINT REFERENCES joz_profiles(id) ON DELETE SET NULL,
+  publish_version TEXT NOT NULL UNIQUE,
+  source_type TEXT NOT NULL DEFAULT 'joz_knowledge',
+  source_count INTEGER NOT NULL DEFAULT 0,
+  normalized_count INTEGER NOT NULL DEFAULT 0,
+  published_count INTEGER NOT NULL DEFAULT 0,
+  verification_summary JSONB NOT NULL DEFAULT '{}'::jsonb,
+  source_bundle_path TEXT,
+  notes TEXT,
+  status TEXT NOT NULL DEFAULT 'published',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS joz_publish_runs_profile_idx
+  ON joz_publish_runs (profile_id, created_at DESC);
 
 CREATE TABLE IF NOT EXISTS joz_conversations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -264,6 +292,21 @@ CREATE TABLE IF NOT EXISTS joz_callback_requests (
   delivery_channels JSONB NOT NULL DEFAULT '[]'::jsonb,
   delivery_errors JSONB NOT NULL DEFAULT '[]'::jsonb,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS joz_privacy_requests (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  request_type TEXT NOT NULL,
+  request_status TEXT NOT NULL DEFAULT 'received',
+  email TEXT,
+  phone TEXT,
+  conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+  callback_request_id BIGINT REFERENCES joz_callback_requests(id) ON DELETE SET NULL,
+  session_key TEXT,
+  source TEXT NOT NULL DEFAULT 'web',
+  payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 INSERT INTO joz_profiles (
