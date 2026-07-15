@@ -1369,8 +1369,6 @@ function detectBusinessNeed(clean) {
       "operating model",
       "ownership",
       "governance",
-      "execution",
-      "workflows",
       "workflow ownership",
       "governance and execution",
       "embed joz",
@@ -1752,7 +1750,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
 
   if (
     preWorldSkills &&
-    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs", "architecture_reasoning"].includes(
+    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs"].includes(
       preWorldSkills.detectedSubIntent
     )
   ) {

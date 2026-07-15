@@ -455,6 +455,30 @@ test("routes business value decision-support queries to an executive clarity ans
   assert.match(resolution.reply, /action|alignment|accountable execution/i);
 });
 
+test("routes operating-model business questions to business_need instead of architecture reasoning", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt =
+    "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "operating_model");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /operating-model level|where AI should sit|who owns what/i);
+  assert.match(resolution.reply, /human approval stays|workflows escalate|outcomes are measured/i);
+  assert.doesNotMatch(resolution.reply, /architecture problem, not a profile summary/i);
+});
+
 test("business value replies stay differentiated across efficiency, growth, roi, and decision support", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const prompts = {
