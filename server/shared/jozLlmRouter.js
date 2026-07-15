@@ -1431,6 +1431,19 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const clean = normalizeText(input);
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  const preWorldBusinessNeed = detectBusinessNeed(clean);
+
+  if (preWorldBusinessNeed?.detectedSubIntent === "operating_model") {
+    return {
+      detectedIntent: "business_need",
+      detectedSubIntent: preWorldBusinessNeed.detectedSubIntent,
+      detectedConcept: preWorldBusinessNeed.detectedConcept,
+      selectedRoute: "business_need",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   const canonical = detectCanonicalWorldConcept(clean);
   if (canonical) {
@@ -1497,7 +1510,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     };
   }
 
-  const businessNeed = detectBusinessNeed(clean);
+  const businessNeed = preWorldBusinessNeed || detectBusinessNeed(clean);
   if (businessNeed) {
     return {
       detectedIntent: "business_need",
