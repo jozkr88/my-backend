@@ -477,7 +477,11 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "processes") {
-    return "Joz creates value through process redesign by turning fragmented workflows into clearer AI-supported operating flows. That means better routing, fewer exception delays, faster approvals, and more reusable knowledge across ERP, finance, HR, marketing, and operations. The goal is not generic automation. It is clearer ownership, stronger control, faster throughput, and workflows redesigned around better intelligence with humans still accountable for the critical decisions.";
+    return "Joz creates value through process redesign by turning fragmented workflows into clearer AI-supported operating flows. That means better routing, fewer exception delays, faster approvals, and more reusable knowledge across ERP, finance, HR, marketing, and operations. The goal is not generic automation. It is clearer ownership, stronger control, faster throughput, and workflows redesigned around better intelligence with humans still accountable for the critical decisions. The operating proof behind that approach includes 70% lower handoff friction at Leo Burnett/Publicis and regional ML execution design at Manulife.";
+  }
+
+  if (subIntent === "function_processes") {
+    return "Joz redesigns business processes by starting at the operating work itself: map where ERP, accounting, HR, marketing, and operations lose time, create duplicate effort, or hide decisions, then insert AI only where it improves flow without removing control. That means clearer routing, approval checkpoints, exception handling, and auditability by function. The result is not one generic automation layer. It is function-specific workflow redesign with better signal, retained accountability, and less management fog. The proof is practical: handoff friction reduction at Leo Burnett/Publicis and ML-supported operating design at Manulife show the method works in real organizations.";
   }
 
   if (subIntent === "growth") {
@@ -489,15 +493,15 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "functions") {
-    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on.";
+    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on. The point is function-specific leverage, not one broad AI layer imposed on everyone the same way.";
   }
 
   if (subIntent === "operating_model") {
-    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them.";
+    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them. The pattern is to combine workflow design, approval checkpoints, role clarity, and measurable business outcomes before scaling autonomy.";
   }
 
   if (subIntent === "decision_support") {
-    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams when complexity is high.";
+    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams when complexity is high. The strongest proof is commercial and operational: 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, and Lean ML execution across 11 APAC markets at Manulife all depended on clearer signal and better decisions, not just more tooling.";
   }
 
   return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
@@ -635,6 +639,19 @@ function buildEvidenceBackedRouteReply({
   retrievedDocuments = [],
 } = {}) {
   if (!["business_need", "skills", "systems_mindset"].includes(route?.selectedRoute)) {
+    return null;
+  }
+
+  if (
+    route?.selectedRoute === "business_need" &&
+    [
+      "processes",
+      "function_processes",
+      "functions",
+      "operating_model",
+      "decision_support",
+    ].includes(route?.detectedSubIntent)
+  ) {
     return null;
   }
 
@@ -1125,6 +1142,25 @@ function detectBusinessNeed(clean) {
     ])
   ) {
     return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "process redesign",
+      "redesign business processes",
+      "redesign processes",
+      "business processes",
+    ]) &&
+    includesAny(clean, [
+      "finance",
+      "erp",
+      "accounting",
+      /\bhr\b/,
+      "marketing",
+      "operations",
+    ])
+  ) {
+    return { detectedSubIntent: "function_processes", detectedConcept: "business_value" };
   }
 
   if (
