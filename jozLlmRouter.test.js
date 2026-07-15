@@ -105,6 +105,33 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
 });
 
+test("routes single-agent versus multi-agent platform questions to the dedicated tradeoff answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "You need to build an autonomous trading platform. Would Joz use a single agent or multiple agents? Explain the tradeoffs, architecture, risks, failure modes, and when he would switch from one approach to the other.";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "single_agent_tradeoffs");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /start with one orchestrator agent/i);
+  assert.match(resolution.reply, /autonomous trading platform/i);
+  assert.match(resolution.reply, /research, portfolio reasoning, risk, compliance, execution, and verification/i);
+  assert.match(resolution.reply, /coordination overhead|state-sync risk|deadlocks|failure paths/i);
+  assert.match(resolution.reply, /typed shared state|policy|risk gates|verification/i);
+  assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
 test("routes proof-not-buzzwords skills queries to an evidence-first answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const route = routeJozLlmQuery({

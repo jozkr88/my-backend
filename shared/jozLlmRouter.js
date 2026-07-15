@@ -576,6 +576,10 @@ function composeSystemsMindsetReply() {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "single_agent_tradeoffs") {
+    return "Joz would start with one orchestrator agent, not many. For an autonomous trading platform, a single agent is easier to verify, cheaper to run, simpler to observe, and less likely to hide coordination failures. He would switch to multiple agents only when research, portfolio reasoning, risk, compliance, execution, and verification have clearly separate responsibilities, tools, latency needs, or approval boundaries. The tradeoff is specialization and isolation versus higher coordination overhead, more state-sync risk, duplicated reasoning, deadlocks, and more failure paths. In practice the safe pattern is supervisor plus typed shared state plus explicit policy, risk gates, and verification outside the agents themselves.";
+  }
+
   if (subIntent === "singapore_market_fit") {
     return "Joz is strong for Singapore-market roles because the proof is already Singapore-specific and enterprise-scale. At Maybank-Ageas Etiqa, Joz helped drive 20x digital sales growth through conversational and ML-led UX. At Manulife, Joz established a Lean ML UX practice across 11 APAC markets and launched first-in-market ML UX solutions from Singapore. At Mediacorp, Joz contributed to 30x audience growth and built a global experience language across 30+ products. Joz also re-engineered Singapore Stock Exchange portals and developed Apple/Pixar-adjacent Python USD(z) and computer-vision workflows in Singapore.";
   }
@@ -725,6 +729,10 @@ function buildEvidenceBackedRouteReply({
       "decision_support",
     ].includes(route?.detectedSubIntent)
   ) {
+    return null;
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "single_agent_tradeoffs") {
     return null;
   }
 
@@ -1390,6 +1398,34 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "single agent or multiple agents",
+      "single agent or multi agent",
+      "single-agent or multi-agent",
+      "single agent versus multiple agents",
+      "single agent vs multiple agents",
+      "single agent vs multi agent",
+      "single-agent vs multi-agent",
+      "multiple agents",
+      "multi-agent",
+    ]) &&
+    includesAny(clean, [
+      "tradeoffs",
+      "trade-offs",
+      "architecture",
+      "failure modes",
+      "risks",
+      "switch from one approach to the other",
+      "when he would switch",
+      "when would joz switch",
+      "autonomous trading platform",
+      "trading platform",
+    ])
+  ) {
+    return { detectedSubIntent: "single_agent_tradeoffs", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "what is an agent",
