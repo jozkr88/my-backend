@@ -38,8 +38,8 @@ function pickLeadingSentences(text = "", maxSentences = 2) {
   return splitIntoSentences(text).slice(0, maxSentences).join(" ").trim();
 }
 
-function extractDefinitionTerm(clean = "") {
-  const match = String(clean || "")
+function extractDefinitionTerm(text = "") {
+  const match = String(text || "")
     .trim()
     .match(/^(?:what is|what's|who is|define|explain)\s+(.+?)(?:\?|\.|!)?$/i);
   if (!match) return null;
@@ -1887,7 +1887,7 @@ export async function resolveUnknownJozReply({
     };
   }
 
-  const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(clean);
+  const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(input);
   if (unknownDefinitionGapReply) {
     return {
       reply: unknownDefinitionGapReply,

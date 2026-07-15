@@ -514,7 +514,12 @@ test("programme employer queries can resolve from retrieved programme records wi
 });
 
 test("unknown definition prompts return a knowledge-gap reply instead of the Joz bio fallback", async () => {
-  for (const prompt of ["What is Paradex?", "What is DIMA?"]) {
+  const expectedTerms = new Map([
+    ["What is Paradex?", "Paradex"],
+    ["What is DIMA?", "DIMA"],
+  ]);
+
+  for (const [prompt, expectedTerm] of expectedTerms.entries()) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],
@@ -527,7 +532,10 @@ test("unknown definition prompts return a knowledge-gap reply instead of the Joz
     assert.equal(resolution.fallbackUsed, false);
     assert.equal(resolution.composer, "buildUnknownDefinitionGapReply");
     assert.equal(resolution.answerSource, "knowledge_gap");
-    assert.match(resolution.reply, /not in the current Joz knowledge base/i);
+    assert.match(
+      resolution.reply,
+      new RegExp(`^${expectedTerm} is not in the current Joz knowledge base\\.`, "i")
+    );
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
 });
@@ -560,7 +568,12 @@ test("unknown definition prompts ignore unrelated retrieved docs and still retur
     },
   ];
 
-  for (const prompt of ["what is Dima", "what is X?"]) {
+  const expectedTerms = new Map([
+    ["what is Dima", "Dima"],
+    ["what is X?", "X"],
+  ]);
+
+  for (const [prompt, expectedTerm] of expectedTerms.entries()) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],
@@ -573,7 +586,10 @@ test("unknown definition prompts ignore unrelated retrieved docs and still retur
     assert.equal(resolution.fallbackUsed, false);
     assert.equal(resolution.composer, "buildUnknownDefinitionGapReply");
     assert.equal(resolution.answerSource, "knowledge_gap");
-    assert.match(resolution.reply, /not in the current Joz knowledge base/i);
+    assert.match(
+      resolution.reply,
+      new RegExp(`^${expectedTerm} is not in the current Joz knowledge base\\.`, "i")
+    );
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
 });
