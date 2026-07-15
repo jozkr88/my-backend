@@ -531,3 +531,49 @@ test("unknown definition prompts return a knowledge-gap reply instead of the Joz
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
 });
+
+test("unknown definition prompts ignore unrelated retrieved docs and still return a knowledge-gap reply", async () => {
+  const unrelatedRetrievedDocuments = [
+    {
+      title: "Joz Krupa — Agentic AI Architecture and Innovation",
+      category: "skills",
+      summary:
+        "Primary Skills-lane positioning: Agentic AI architecture, enterprise intelligence, governance, context engineering, and multimodal AI orchestration.",
+      body:
+        "Joz Krupa is an Agentic AI Architecture and Innovation leader with a career spanning enterprise product systems, engineering, data-informed decision design, and AI-enabled transformation.",
+      metadata: {
+        slug: "skills-hero-agentic-ai",
+        tags: ["agentic-ai", "architecture"],
+      },
+    },
+    {
+      title: "Designing Inclusive Dubai — Dubai Future Foundation",
+      category: "project",
+      summary:
+        "Inclusive public-service and innovation experience work for Dubai Future Foundation.",
+      body:
+        "Inclusive public-service and innovation experience work for Dubai Future Foundation.",
+      metadata: {
+        slug: "dubai-future-foundation-inclusive-design",
+        tags: ["government-innovation"],
+      },
+    },
+  ];
+
+  for (const prompt of ["what is Dima", "what is X?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: unrelatedRetrievedDocuments,
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildUnknownDefinitionGapReply");
+    assert.equal(resolution.answerSource, "knowledge_gap");
+    assert.match(resolution.reply, /not in the current Joz knowledge base/i);
+    assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
+  }
+});

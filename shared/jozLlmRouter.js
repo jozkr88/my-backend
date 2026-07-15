@@ -38,11 +38,48 @@ function pickLeadingSentences(text = "", maxSentences = 2) {
   return splitIntoSentences(text).slice(0, maxSentences).join(" ").trim();
 }
 
+function extractDefinitionTerm(clean = "") {
+  const match = String(clean || "")
+    .trim()
+    .match(/^(?:what is|what's|who is|define|explain)\s+(.+?)(?:\?|\.|!)?$/i);
+  if (!match) return null;
+
+  const term = String(match[1] || "")
+    .trim()
+    .replace(/^(?:a|an|the)\s+/i, "")
+    .trim();
+
+  return term || null;
+}
+
+function retrievedDocsMentionDefinitionTerm(term = "", docs = []) {
+  const normalizedTerm = normalizeText(term);
+  if (!normalizedTerm || normalizedTerm.length < 2) return false;
+
+  return docs.some((doc) => {
+    const haystack = normalizeText(
+      [
+        doc?.title,
+        doc?.summary,
+        doc?.body,
+        ...(Array.isArray(doc?.metadata?.tags) ? doc.metadata.tags : []),
+        ...(Array.isArray(doc?.metadata?.claims) ? doc.metadata.claims : []),
+        ...(Array.isArray(doc?.metadata?.proof_points) ? doc.metadata.proof_points : []),
+      ]
+        .filter(Boolean)
+        .join(" ")
+    );
+
+    return haystack.includes(normalizedTerm);
+  });
+}
+
 function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
   const docs = normalizeRetrievedDocuments(retrievedDocuments).slice(0, 3);
   if (!docs.length) return null;
 
   const clean = normalizeText(input);
+  const definitionTerm = extractDefinitionTerm(clean);
   if (clean.includes("permissions be enforced before retrieval") || clean.includes("permissions enforced before retrieval")) {
     return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
   }
@@ -221,6 +258,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
 
   if (clean.includes("what is joz's infrastructure philosophy") || clean.includes("what is jozs infrastructure philosophy")) {
     return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
+  }
+
+  if (definitionTerm && !retrievedDocsMentionDefinitionTerm(definitionTerm, docs)) {
+    return null;
   }
 
   const lead = docs[0];
@@ -557,22 +598,8 @@ function detectProgrammeQuery(clean = "") {
   ].some((pattern) => clean.includes(pattern));
 }
 
-function extractUnknownDefinitionTerm(clean = "") {
-  const match = String(clean || "")
-    .trim()
-    .match(/^(?:what is|what's|who is|define|explain)\s+(.+?)(?:\?|\.|!)?$/i);
-  if (!match) return null;
-
-  const term = String(match[1] || "")
-    .trim()
-    .replace(/^(?:a|an|the)\s+/i, "")
-    .trim();
-
-  return term || null;
-}
-
 function buildUnknownDefinitionGapReply(clean = "") {
-  const term = extractUnknownDefinitionTerm(clean);
+  const term = extractDefinitionTerm(clean);
   if (!term) return null;
   return `${term} is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
 }
