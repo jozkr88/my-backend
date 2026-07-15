@@ -512,3 +512,22 @@ test("programme employer queries can resolve from retrieved programme records wi
   assert.match(resolution.reply, /VoD/i);
   assert.match(resolution.reply, /Corporate-wide UX Guidelines/i);
 });
+
+test("unknown definition prompts return a knowledge-gap reply instead of the Joz bio fallback", async () => {
+  for (const prompt of ["What is Paradex?", "What is DIMA?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildUnknownDefinitionGapReply");
+    assert.equal(resolution.answerSource, "knowledge_gap");
+    assert.match(resolution.reply, /not in the current Joz knowledge base/i);
+    assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
+  }
+});

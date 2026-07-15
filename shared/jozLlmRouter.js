@@ -557,6 +557,26 @@ function detectProgrammeQuery(clean = "") {
   ].some((pattern) => clean.includes(pattern));
 }
 
+function extractUnknownDefinitionTerm(clean = "") {
+  const match = String(clean || "")
+    .trim()
+    .match(/^(?:what is|what's|who is|define|explain)\s+(.+?)(?:\?|\.|!)?$/i);
+  if (!match) return null;
+
+  const term = String(match[1] || "")
+    .trim()
+    .replace(/^(?:a|an|the)\s+/i, "")
+    .trim();
+
+  return term || null;
+}
+
+function buildUnknownDefinitionGapReply(clean = "") {
+  const term = extractUnknownDefinitionTerm(clean);
+  if (!term) return null;
+  return `${term} is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
+}
+
 function normalizeList(value) {
   return Array.isArray(value)
     ? value.map((item) => String(item || "").trim()).filter(Boolean)
@@ -1837,6 +1857,18 @@ export async function resolveUnknownJozReply({
         .slice(0, 3)
         .map((doc) => doc.category)
         .filter(Boolean),
+    };
+  }
+
+  const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(clean);
+  if (unknownDefinitionGapReply) {
+    return {
+      reply: unknownDefinitionGapReply,
+      answerSource: "knowledge_gap",
+      composer: "buildUnknownDefinitionGapReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
     };
   }
 
