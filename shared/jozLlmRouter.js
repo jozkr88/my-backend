@@ -71,6 +71,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
     return "Treat all external content as untrusted data. Separate system instructions from retrieved content. Security policy must be enforced outside the model so untrusted text cannot override permissions, approvals, or execution rules.";
   }
 
+  if (clean.includes("what is an agent")) {
+    return "An agent is an AI worker with a defined responsibility. In Joz's framing: Agent = LLM + instructions + tools + memory + reasoning loop. An agent interprets a goal, selects approved tools, reads relevant context, updates workflow state, and iterates until the task is complete or requires human input.";
+  }
+
   if (clean.includes("what is docker")) {
     return "Docker packages an application and its dependencies into a portable container image. It solves environment consistency so the same image can run locally, in testing, and in production.";
   }
