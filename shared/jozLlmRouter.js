@@ -580,6 +580,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "financial_intelligence_platform_architecture") {
+    return "Joz would design it as a layered financial intelligence platform: Client and External APIs -> API Gateway -> Stateless FastAPI Services -> Orchestrator Agent -> Specialist Agents -> Policy, Risk, and Verification Gates -> Execution and Data Services -> Event Streaming -> Durable Storage -> Observability and Security Controls. APIs are the controlled entry points for market data, portfolio data, user commands, admin workflows, and external integrations. Agents are separated by responsibility such as research, signal generation, portfolio reasoning, risk review, execution planning, and post-trade verification so each step has a clear boundary. Risk sits outside the agent as deterministic policy, exposure checks, limits, approvals, and circuit breakers before any high-impact action. Verification confirms that expected state changes actually happened by reconciling execution events, portfolio state, balances, and downstream records against the authoritative source of truth. Memory stores task state, prior decisions, retrieved research, and working context, but authoritative financial state stays in durable systems rather than agent memory. Databases should separate concerns: PostgreSQL for durable workflow and portfolio state, pgvector or search indexes for retrieval, Redis for cache and short-lived coordination, and object storage for documents and event archives. Event streaming carries market updates, portfolio changes, execution events, telemetry, and workflow notifications asynchronously so services stay decoupled and replay is possible. Infrastructure should start with containers, stateless services, worker pools, queues, and Kubernetes only when scaling and isolation justify it. Observability must cover traces, metrics, logs, workflow history, model calls, tool usage, cost, latency, and verification failures. Security must enforce least privilege, workload identity, secret isolation, signed actions, audit trails, human approval for high-risk operations, and strict separation between untrusted external content and system policy.";
+  }
+
   if (subIntent === "architecture_reasoning") {
     return "Joz would answer this as an architecture problem, not a profile summary. The first step is to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology. Then he would separate API, orchestration, execution, data, policy, and verification responsibilities so the design can scale, fail safely, and remain observable.";
   }
@@ -759,6 +763,7 @@ function buildEvidenceBackedRouteReply({
   if (
     route?.selectedRoute === "skills" &&
     [
+      "financial_intelligence_platform_architecture",
       "architecture_reasoning",
       "single_agent_tradeoffs",
       "verification_architecture",
@@ -1543,6 +1548,39 @@ function detectSkills(clean) {
     ])
   ) {
     return { detectedSubIntent: "single_agent_tradeoffs", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "design an ai-native financial intelligence platform from scratch",
+      "design a financial intelligence platform from scratch",
+      "financial intelligence platform from scratch",
+      "include: apis",
+      "include: agents",
+      "include: risk",
+      "include: verification",
+      "include: memory",
+      "include: databases",
+      "include: event streaming",
+      "include: infrastructure",
+      "include: observability",
+      "include: security",
+    ]) &&
+    includesAny(clean, [
+      "financial intelligence platform",
+      "from scratch",
+      "apis",
+      "agents",
+      "risk",
+      "verification",
+      "memory",
+      "databases",
+      "event streaming",
+      "observability",
+      "security",
+    ])
+  ) {
+    return { detectedSubIntent: "financial_intelligence_platform_architecture", detectedConcept: "skills" };
   }
 
   if (

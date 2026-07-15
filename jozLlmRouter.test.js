@@ -187,6 +187,35 @@ test("routes FastAPI scale-up questions to the dedicated scaling architecture an
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
 });
 
+test("routes full financial platform design prompts to the dedicated platform architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "Design an AI-native financial intelligence platform from scratch. Include APIs, agents, risk, verification, memory, databases, event streaming, infrastructure, observability, and security. Explain the role of each component.";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "financial_intelligence_platform_architecture");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /layered financial intelligence platform/i);
+  assert.match(resolution.reply, /API Gateway|Stateless FastAPI Services|Orchestrator Agent/i);
+  assert.match(resolution.reply, /research, signal generation, portfolio reasoning, risk review, execution planning, and post-trade verification/i);
+  assert.match(resolution.reply, /PostgreSQL|pgvector|Redis|object storage/i);
+  assert.match(resolution.reply, /Event streaming carries market updates, portfolio changes, execution events/i);
+  assert.match(resolution.reply, /Observability must cover traces, metrics, logs, workflow history, model calls, tool usage, cost, latency, and verification failures/i);
+  assert.match(resolution.reply, /least privilege|workload identity|secret isolation|human approval/i);
+  assert.doesNotMatch(resolution.reply, /architecture problem, not a profile summary/i);
+});
+
 test("routes prompt injection defense questions to the dedicated systems answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt =
