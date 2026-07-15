@@ -124,7 +124,7 @@ test("routes single-agent versus multi-agent platform questions to the dedicated
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "single_agent_tradeoffs");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /start with one orchestrator agent/i);
+  assert.match(resolution.reply, /start with one orchestrator agent|single agent/i);
   assert.match(resolution.reply, /autonomous trading platform/i);
   assert.match(resolution.reply, /research, portfolio reasoning, risk, compliance, execution, and verification/i);
   assert.match(resolution.reply, /coordination overhead|state-sync risk|deadlocks|failure paths/i);
@@ -178,7 +178,7 @@ test("routes FastAPI scale-up questions to the dedicated scaling architecture an
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "scale_fastapi_architecture");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /stateless FastAPI API layer/i);
+  assert.match(resolution.reply, /stateless FastAPI replicas|API layer should stay stateless/i);
   assert.match(resolution.reply, /load balancer/i);
   assert.match(resolution.reply, /Redis/i);
   assert.match(resolution.reply, /PostgreSQL/i);
@@ -206,8 +206,8 @@ test("routes prompt injection defense questions to the dedicated systems answer"
   assert.equal(route.selectedRoute, "systems_mindset");
   assert.equal(route.detectedSubIntent, "prompt_injection_defense");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /Telegram channel as untrusted input/i);
-  assert.match(resolution.reply, /never as executable instruction space/i);
+  assert.match(resolution.reply, /Telegram channel as external data|untrusted content/i);
+  assert.match(resolution.reply, /data, not instructions|separate from retrieved content/i);
   assert.match(resolution.reply, /system policy outside the model|block tool execution/i);
   assert.match(resolution.reply, /strict tool allowlists|ACL-aware retrieval|human approval/i);
   assert.doesNotMatch(resolution.reply, /Start with one orchestrator agent/i);
@@ -258,13 +258,39 @@ test("routes LangGraph plus Temporal questions to the dedicated architecture ans
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "langgraph_temporal_architecture");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /LangGraph and Temporal together/i);
-  assert.match(resolution.reply, /LangGraph is good for reasoning graphs|branching|tool choice/i);
-  assert.match(resolution.reply, /Temporal is good for durable execution|retries|crash recovery/i);
+  assert.match(resolution.reply, /LangGraph handles the reasoning graph/i);
+  assert.match(resolution.reply, /agent state|branches|loops|handoffs/i);
+  assert.match(resolution.reply, /Temporal handles durable workflow execution/i);
+  assert.match(resolution.reply, /retries|timers|approvals|crash recovery/i);
   assert.match(resolution.reply, /Using only LangGraph/i);
   assert.match(resolution.reply, /Using only Temporal/i);
   assert.match(resolution.reply, /LangGraph decides, Temporal persists and recovers/i);
   assert.doesNotMatch(resolution.reply, /Ogilvy\/WPP|Singapore Stock Exchange|Banyan Tree|Danone/i);
+});
+
+test("broad architecture questions do not fall back to capabilities_overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "How would Joz design a secure workflow architecture for agent execution with policy, verification, and risk controls?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "architecture_reasoning");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /architecture problem, not a profile summary/i);
+  assert.match(resolution.reply, /system boundary|authoritative state|control points|execution path|risk gates/i);
+  assert.match(resolution.reply, /API, orchestration, execution, data, policy, and verification/i);
+  assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
 });
 
 test("routes proof-not-buzzwords skills queries to an evidence-first answer", () => {

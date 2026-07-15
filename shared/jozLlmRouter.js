@@ -573,15 +573,19 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
 
 function composeSystemsMindsetReply(subIntent = "thinking_model") {
   if (subIntent === "prompt_injection_defense") {
-    return "Joz would treat the Telegram channel as untrusted input, never as executable instruction space. The agent should retrieve or read the content as data, keep system policy outside the model, block tool execution unless policy and permissions explicitly allow it, and require deterministic verification before any high-risk action. The safe pattern is sandboxed reading, strict tool allowlists, ACL-aware retrieval, prompt-content isolation, bounded actions, and human approval for anything with external side effects.";
+    return "Untrusted Content -> Sanitization and Classification -> Retrieval Boundary -> LLM -> Policy Gate -> Scoped Tools. Joz would treat the Telegram channel as external data, not instructions. System policy stays outside the model, system instructions stay separate from retrieved content, and the platform must block tool execution unless deterministic policy checks pass. Tool access must use least privilege and allowlisted interfaces, inputs must pass schema validation, the agent should stay sandboxed, secrets must never appear in the context window, and high-risk actions must stop for human approval.";
   }
 
   return "Joz thinks in systems before features: isolate signal from noise, map feedback loops, make decision paths explicit, and keep human accountability in the loop. In AI work, Joz biases toward trust, source provenance, verification, governance, and interfaces that turn ambiguity into clear action.";
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "architecture_reasoning") {
+    return "Joz would answer this as an architecture problem, not a profile summary. The first step is to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology. Then he would separate API, orchestration, execution, data, policy, and verification responsibilities so the design can scale, fail safely, and remain observable.";
+  }
+
   if (subIntent === "langgraph_temporal_architecture") {
-    return "Joz would use LangGraph and Temporal together because they solve different layers of the system. LangGraph is good for reasoning graphs, branching, tool choice, short-horizon state, and multi-step agent flow. Temporal is good for durable execution, retries, timeouts, approvals, crash recovery, and long-running workflows. Using only LangGraph makes durable recovery and operational guarantees weaker. Using only Temporal makes reasoning and agent state design clumsier. Together the pattern is: LangGraph decides, Temporal persists and recovers.";
+    return "LangGraph handles the reasoning graph: agent state, branches, loops, handoffs, and tool-selection flow. Temporal handles durable workflow execution: retries, timers, approvals, crash recovery, and long-running business actions. Joz would use both when agent reasoning triggers high-value actions that must survive failure and resume safely. Using only LangGraph is weaker for durable business execution, and using only Temporal does not provide agent reasoning semantics. The pattern is: LangGraph decides, Temporal persists and recovers.";
   }
 
   if (subIntent === "organizational_ownership_layer") {
@@ -589,11 +593,11 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "scale_fastapi_architecture") {
-    return "Joz would scale this by separating the stateless FastAPI API layer from background work, state, and coordination. The core moves are: run multiple FastAPI instances behind a load balancer, keep the API stateless, move sessions and transient coordination into Redis, keep durable state in PostgreSQL, push heavy or slow work into queues and workers, add caching where reads dominate, and instrument everything with traces, metrics, logs, latency budgets, and backpressure. At 100,000 users the risk is not just CPU. It is connection pressure, queue buildup, database bottlenecks, retry storms, and external dependency saturation, so autoscaling, rate limits, bounded concurrency, and database scaling need to be designed together.";
+    return "Load Balancer -> Stateless FastAPI Replicas -> Queue and Workers -> Redis -> PostgreSQL -> Observability. Joz would first identify the bottleneck before scaling, because at 100,000 users the constraint may be CPU, connection pressure, queue buildup, cache miss rate, or database contention. The API layer should stay stateless for horizontal scaling, reads that repeat should use caching, slow or bursty work should move to async workers and queues, Redis should handle short-lived coordination and cache, PostgreSQL should remain the durable source of truth with database scaling where needed, and rate limits plus backpressure should protect the system. Kubernetes and autoscaling help only after the service boundaries and bottleneck visibility are clear.";
   }
 
   if (subIntent === "verification_architecture") {
-    return "Joz would verify this through an execution-to-state reconciliation architecture, not by trusting the agent's claim. The flow is: proposed action, policy and risk checks, controlled execution service, broker or venue acknowledgement, fill events, then an independent re-read of positions, cash, fees, and margin from the authoritative portfolio source of truth. Verification passes only if the expected delta and actual post-trade state match within defined tolerances. The safeguards are idempotent order keys, immutable audit logs, bounded retries, mismatch alerts, and human escalation when execution receipts and resulting holdings diverge.";
+    return "Proposal -> Risk and Policy -> Execution -> Event Capture -> Verification -> Reconciliation. Joz would verify this through an execution-to-state reconciliation architecture, not by trusting the agent's claim. Define the expected state and expected delta first, send the trade through a controlled execution service with an execution ID and idempotent order keys, capture order and fill events, re-read the ledger or authoritative portfolio source of truth, then compare expected versus actual post-trade state across holdings, cash, fees, and margin. The design must handle partial fills, bounded retries, retry and reconciliation logic, immutable audit trails, and human escalation before treating the portfolio as verified.";
   }
 
   if (subIntent === "single_agent_tradeoffs") {
@@ -755,6 +759,7 @@ function buildEvidenceBackedRouteReply({
   if (
     route?.selectedRoute === "skills" &&
     [
+      "architecture_reasoning",
       "single_agent_tradeoffs",
       "verification_architecture",
       "scale_fastapi_architecture",
@@ -762,6 +767,10 @@ function buildEvidenceBackedRouteReply({
       "langgraph_temporal_architecture",
     ].includes(route?.detectedSubIntent)
   ) {
+    return null;
+  }
+
+  if (route?.selectedRoute === "systems_mindset" && route?.detectedSubIntent === "prompt_injection_defense") {
     return null;
   }
 
@@ -1644,6 +1653,34 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "how would joz",
+      "design",
+      "why would joz use",
+      "what happens if",
+      "how does joz prevent",
+      "how would joz scale",
+      "explain the tradeoffs",
+      "compare",
+    ]) &&
+    includesAny(clean, [
+      "architecture",
+      "system",
+      "workflow",
+      "scale",
+      "verification",
+      "security",
+      "agent",
+      "api",
+      "infrastructure",
+      "risk",
+      "execution",
+    ])
+  ) {
+    return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "proof, not buzzwords",
       "proof not buzzwords",
       "with proof",
@@ -1673,21 +1710,18 @@ function detectSkills(clean) {
     includesAny(clean, [
       "deep skills",
       "deepest skills",
-      "what can joz do",
-      "what can joz build",
-      "how technical is joz",
       "joz's skills",
+      "what are joz's skills",
+      "what is joz good at",
+      "what are his capabilities",
+      "what experience does he have",
       "technical depth",
       "core capabilities",
       "technical skills",
       "ai skills",
       "engineering skills",
-      "capabilities",
+      "what can joz do",
       "what does joz do",
-      "architecture",
-      "orchestration",
-      "retrieval",
-      "signal reasoning",
     ])
   ) {
     return { detectedSubIntent: "capabilities_overview", detectedConcept: "skills" };
@@ -1701,11 +1735,24 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
   const preWorldBusinessNeed = detectBusinessNeed(clean);
+  const preWorldSystemsMindset = detectSystemsMindset(clean);
   const preWorldSkills = detectSkills(clean);
+
+  if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
+    return {
+      detectedIntent: "systems_mindset",
+      detectedSubIntent: preWorldSystemsMindset.detectedSubIntent,
+      detectedConcept: preWorldSystemsMindset.detectedConcept,
+      selectedRoute: "systems_mindset",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   if (
     preWorldSkills &&
-    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs"].includes(
+    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs", "architecture_reasoning"].includes(
       preWorldSkills.detectedSubIntent
     )
   ) {
