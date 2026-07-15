@@ -267,6 +267,48 @@ test("routes business value decision-support queries to an executive clarity ans
   assert.match(resolution.reply, /action|alignment|accountable execution/i);
 });
 
+test("business value replies stay differentiated across efficiency, growth, roi, and decision support", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompts = {
+    efficiency:
+      "How does Joz create business value through efficiency, lower cost, faster execution, and stronger operational leverage?",
+    growth:
+      "How does Joz use AI systems to support growth, scaling, better decisions, and stronger commercial performance?",
+    roi: "Where does Joz create the most business value and ROI in AI systems?",
+    decisionSupport:
+      "How does Joz improve decision support through better signal, prioritization, judgment, and clarity in noisy business environments?",
+  };
+
+  const replies = Object.fromEntries(
+    Object.entries(prompts).map(([key, prompt]) => {
+      const route = routeJozLlmQuery({
+        input: prompt,
+        appContext,
+        legacyContext,
+      });
+      const resolution = composeJozLlmRouteReply({
+        route,
+        input: prompt,
+        appContext,
+        legacyContext,
+      });
+      return [key, String(resolution.reply || "")];
+    })
+  );
+
+  assert.notEqual(replies.efficiency, replies.growth);
+  assert.notEqual(replies.efficiency, replies.roi);
+  assert.notEqual(replies.efficiency, replies.decisionSupport);
+  assert.notEqual(replies.growth, replies.roi);
+  assert.notEqual(replies.growth, replies.decisionSupport);
+  assert.notEqual(replies.roi, replies.decisionSupport);
+
+  assert.match(replies.efficiency, /Leo Burnett\/Publicis|70%/i);
+  assert.match(replies.growth, /20x digital sales growth|30x audience growth/i);
+  assert.match(replies.roi, /baseline|target metrics|profit|roi/i);
+  assert.match(replies.decisionSupport, /signal|prioritization|judgment|executive clarity/i);
+});
+
 test("skills route upgrades to retrieved proof when ranked documents are provided", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const prompt = "What are Joz's strongest technical skills?";

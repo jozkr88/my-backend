@@ -645,6 +645,9 @@ function buildEvidenceBackedRouteReply({
   if (
     route?.selectedRoute === "business_need" &&
     [
+      "efficiency",
+      "growth",
+      "roi",
       "processes",
       "function_processes",
       "functions",
