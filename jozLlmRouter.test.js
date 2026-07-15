@@ -132,6 +132,141 @@ test("routes single-agent versus multi-agent platform questions to the dedicated
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
 });
 
+test("routes portfolio verification questions to the dedicated verification architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "An agent proposes selling 20% of a portfolio. Design a verification architecture that guarantees the portfolio actually changed as expected.";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /execution-to-state reconciliation architecture/i);
+  assert.match(resolution.reply, /controlled execution service|broker|venue acknowledgement/i);
+  assert.match(resolution.reply, /authoritative portfolio source of truth/i);
+  assert.match(resolution.reply, /expected delta|actual post-trade state/i);
+  assert.match(resolution.reply, /idempotent order keys|immutable audit logs|bounded retries|human escalation/i);
+  assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
+test("routes FastAPI scale-up questions to the dedicated scaling architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "A FastAPI service currently handles 100 users. It now needs to handle 100,000 users. How would Joz scale the architecture?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "scale_fastapi_architecture");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /stateless FastAPI API layer/i);
+  assert.match(resolution.reply, /load balancer/i);
+  assert.match(resolution.reply, /Redis/i);
+  assert.match(resolution.reply, /PostgreSQL/i);
+  assert.match(resolution.reply, /queues and workers|caching/i);
+  assert.match(resolution.reply, /autoscaling|rate limits|bounded concurrency|database scaling/i);
+  assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
+test("routes prompt injection defense questions to the dedicated systems answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "An agent reads a Telegram channel containing prompt injection attacks. How would Joz prevent the agent from executing malicious instructions?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "systems_mindset");
+  assert.equal(route.detectedSubIntent, "prompt_injection_defense");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Telegram channel as untrusted input/i);
+  assert.match(resolution.reply, /never as executable instruction space/i);
+  assert.match(resolution.reply, /system policy outside the model|block tool execution/i);
+  assert.match(resolution.reply, /strict tool allowlists|ACL-aware retrieval|human approval/i);
+  assert.doesNotMatch(resolution.reply, /Start with one orchestrator agent/i);
+});
+
+test("routes organisational ownership inference questions to the dedicated awareness-layer answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "Two teams disagree about system ownership. How would Joz design an organisational awareness layer to determine ownership automatically?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "organizational_ownership_layer");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /ownership-inference system/i);
+  assert.match(resolution.reply, /GitHub, Slack, tickets, docs, architecture records, and on-call data/i);
+  assert.match(resolution.reply, /competing ownership claims with confidence and provenance/i);
+  assert.match(resolution.reply, /ranked ownership candidates|evidence|confidence|freshness|escalation/i);
+  assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
+test("routes LangGraph plus Temporal questions to the dedicated architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "Why would Joz use LangGraph and Temporal together? Why not use only one?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "langgraph_temporal_architecture");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /LangGraph and Temporal together/i);
+  assert.match(resolution.reply, /LangGraph is good for reasoning graphs|branching|tool choice/i);
+  assert.match(resolution.reply, /Temporal is good for durable execution|retries|crash recovery/i);
+  assert.match(resolution.reply, /Using only LangGraph/i);
+  assert.match(resolution.reply, /Using only Temporal/i);
+  assert.match(resolution.reply, /LangGraph decides, Temporal persists and recovers/i);
+  assert.doesNotMatch(resolution.reply, /Ogilvy\/WPP|Singapore Stock Exchange|Banyan Tree|Danone/i);
+});
+
 test("routes proof-not-buzzwords skills queries to an evidence-first answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const route = routeJozLlmQuery({

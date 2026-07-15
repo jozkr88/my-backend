@@ -571,11 +571,31 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
 }
 
-function composeSystemsMindsetReply() {
+function composeSystemsMindsetReply(subIntent = "thinking_model") {
+  if (subIntent === "prompt_injection_defense") {
+    return "Joz would treat the Telegram channel as untrusted input, never as executable instruction space. The agent should retrieve or read the content as data, keep system policy outside the model, block tool execution unless policy and permissions explicitly allow it, and require deterministic verification before any high-risk action. The safe pattern is sandboxed reading, strict tool allowlists, ACL-aware retrieval, prompt-content isolation, bounded actions, and human approval for anything with external side effects.";
+  }
+
   return "Joz thinks in systems before features: isolate signal from noise, map feedback loops, make decision paths explicit, and keep human accountability in the loop. In AI work, Joz biases toward trust, source provenance, verification, governance, and interfaces that turn ambiguity into clear action.";
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "langgraph_temporal_architecture") {
+    return "Joz would use LangGraph and Temporal together because they solve different layers of the system. LangGraph is good for reasoning graphs, branching, tool choice, short-horizon state, and multi-step agent flow. Temporal is good for durable execution, retries, timeouts, approvals, crash recovery, and long-running workflows. Using only LangGraph makes durable recovery and operational guarantees weaker. Using only Temporal makes reasoning and agent state design clumsier. Together the pattern is: LangGraph decides, Temporal persists and recovers.";
+  }
+
+  if (subIntent === "organizational_ownership_layer") {
+    return "Joz would design the organisational awareness layer as an ownership-inference system, not a simple lookup table. Connectors ingest GitHub, Slack, tickets, docs, architecture records, and on-call data; processing extracts entities, services, domains, approvers, historical decisions, and recency; the knowledge layer stores competing ownership claims with confidence and provenance; and ACL-aware retrieval resolves the likely owner from code boundaries, incident history, runbooks, approver patterns, and org metadata. If two teams conflict, the system should return ranked ownership candidates with evidence, confidence, freshness, and escalation rules rather than pretending certainty.";
+  }
+
+  if (subIntent === "scale_fastapi_architecture") {
+    return "Joz would scale this by separating the stateless FastAPI API layer from background work, state, and coordination. The core moves are: run multiple FastAPI instances behind a load balancer, keep the API stateless, move sessions and transient coordination into Redis, keep durable state in PostgreSQL, push heavy or slow work into queues and workers, add caching where reads dominate, and instrument everything with traces, metrics, logs, latency budgets, and backpressure. At 100,000 users the risk is not just CPU. It is connection pressure, queue buildup, database bottlenecks, retry storms, and external dependency saturation, so autoscaling, rate limits, bounded concurrency, and database scaling need to be designed together.";
+  }
+
+  if (subIntent === "verification_architecture") {
+    return "Joz would verify this through an execution-to-state reconciliation architecture, not by trusting the agent's claim. The flow is: proposed action, policy and risk checks, controlled execution service, broker or venue acknowledgement, fill events, then an independent re-read of positions, cash, fees, and margin from the authoritative portfolio source of truth. Verification passes only if the expected delta and actual post-trade state match within defined tolerances. The safeguards are idempotent order keys, immutable audit logs, bounded retries, mismatch alerts, and human escalation when execution receipts and resulting holdings diverge.";
+  }
+
   if (subIntent === "single_agent_tradeoffs") {
     return "Joz would start with one orchestrator agent, not many. For an autonomous trading platform, a single agent is easier to verify, cheaper to run, simpler to observe, and less likely to hide coordination failures. He would switch to multiple agents only when research, portfolio reasoning, risk, compliance, execution, and verification have clearly separate responsibilities, tools, latency needs, or approval boundaries. The tradeoff is specialization and isolation versus higher coordination overhead, more state-sync risk, duplicated reasoning, deadlocks, and more failure paths. In practice the safe pattern is supervisor plus typed shared state plus explicit policy, risk gates, and verification outside the agents themselves.";
   }
@@ -732,7 +752,16 @@ function buildEvidenceBackedRouteReply({
     return null;
   }
 
-  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "single_agent_tradeoffs") {
+  if (
+    route?.selectedRoute === "skills" &&
+    [
+      "single_agent_tradeoffs",
+      "verification_architecture",
+      "scale_fastapi_architecture",
+      "organizational_ownership_layer",
+      "langgraph_temporal_architecture",
+    ].includes(route?.detectedSubIntent)
+  ) {
     return null;
   }
 
@@ -1365,6 +1394,23 @@ function detectBusinessNeed(clean) {
 function detectSystemsMindset(clean) {
   if (
     includesAny(clean, [
+      "prompt injection",
+      "malicious instructions",
+      "telegram channel",
+      "untrusted input",
+    ]) &&
+    includesAny(clean, [
+      "prevent the agent from executing",
+      "prevent the agent from",
+      "how would joz prevent",
+      "executing malicious instructions",
+    ])
+  ) {
+    return { detectedSubIntent: "prompt_injection_defense", detectedConcept: "systems_mindset" };
+  }
+
+  if (
+    includesAny(clean, [
       "how does joz think",
       "systems mindset",
       "systems thinking",
@@ -1398,6 +1444,72 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "why would joz use langgraph and temporal together",
+      "use langgraph and temporal together",
+      "langgraph and temporal together",
+      "why not use only one",
+    ]) &&
+    includesAny(clean, ["langgraph", "temporal"])
+  ) {
+    return { detectedSubIntent: "langgraph_temporal_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "organisational awareness layer",
+      "organizational awareness layer",
+      "determine ownership automatically",
+      "ownership automatically",
+      "ownership inference",
+    ]) &&
+    includesAny(clean, [
+      "two teams disagree",
+      "system ownership",
+      "ownership",
+    ])
+  ) {
+    return { detectedSubIntent: "organizational_ownership_layer", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "fastapi service currently handles 100 users",
+      "needs to handle 100,000 users",
+      "needs to handle 100000 users",
+      "scale the architecture",
+    ]) &&
+    includesAny(clean, ["fastapi", "100,000 users", "100000 users"])
+  ) {
+    return { detectedSubIntent: "scale_fastapi_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "design a verification architecture",
+      "verification architecture",
+      "guarantees the portfolio actually changed",
+      "portfolio actually changed as expected",
+      "post-trade state",
+      "post trade state",
+      "expected delta",
+      "actual holdings",
+      "execution receipt",
+      "reconciliation architecture",
+    ]) &&
+    includesAny(clean, [
+      "portfolio",
+      "sell 20%",
+      "selling 20%",
+      "agent proposes",
+      "trade",
+      "holdings",
+    ])
+  ) {
+    return { detectedSubIntent: "verification_architecture", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "single agent or multiple agents",
@@ -1589,6 +1701,24 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
   const preWorldBusinessNeed = detectBusinessNeed(clean);
+  const preWorldSkills = detectSkills(clean);
+
+  if (
+    preWorldSkills &&
+    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs"].includes(
+      preWorldSkills.detectedSubIntent
+    )
+  ) {
+    return {
+      detectedIntent: "skills",
+      detectedSubIntent: preWorldSkills.detectedSubIntent,
+      detectedConcept: preWorldSkills.detectedConcept,
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   if (preWorldBusinessNeed?.detectedSubIntent === "operating_model") {
     return {
@@ -1833,7 +1963,7 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "systems_mindset") {
-    const baseReply = composeSystemsMindsetReply();
+    const baseReply = composeSystemsMindsetReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
       baseReply,
@@ -1843,12 +1973,12 @@ export function composeJozLlmRouteReply({
     return {
       reply: evidenceReply?.reply || baseReply,
       answerSource:
-        route.detectedSubIntent === "thinking_model"
+        ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        route.detectedSubIntent === "thinking_model"
+        ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
           ? "composeSystemsMindsetReply"
           : evidenceReply?.composer || "composeSystemsMindsetReply",
       fallbackUsed: false,
