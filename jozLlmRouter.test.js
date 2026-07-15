@@ -105,6 +105,59 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
 });
 
+test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What agentic architecture does Joz do?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "agentic_architecture_approach");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /separation of responsibilities/i);
+  assert.match(resolution.reply, /API intake, orchestration, specialist agents, tool and service layers, memory and retrieval, policy and risk gates, execution services, and verification/i);
+  assert.match(resolution.reply, /thin orchestrator|typed state|scoped tools|approval boundaries/i);
+  assert.match(resolution.reply, /verification outside the agent|authoritative systems/i);
+  assert.doesNotMatch(resolution.reply, /Joz Krupa is an Agentic AI Architecture and Innovation leader/i);
+});
+
+test("routes how-and-why agentic AI prompts to the dedicated architecture approach answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "How does Joz architect agentic AI?",
+    "Why does Joz do agentic AI?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "agentic_architecture_approach");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, /separation of responsibilities/i);
+    assert.match(resolution.reply, /multi-step reasoning, tool use, workflow coordination, and controlled execution/i);
+    assert.doesNotMatch(resolution.reply, /Joz Krupa is an Agentic AI Architecture and Innovation leader/i);
+  }
+});
+
 test("routes single-agent versus multi-agent platform questions to the dedicated tradeoff answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt =

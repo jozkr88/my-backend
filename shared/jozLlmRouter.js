@@ -624,6 +624,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
     return "Joz's core stack spans agentic AI architecture and product engineering: LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. That stack matters because it supports enterprise retrieval, multimodal interfaces, and measurable product delivery rather than existing as tooling in isolation.";
   }
 
+  if (subIntent === "agentic_architecture_approach") {
+    return "Joz's agentic architecture is built around a clear separation of responsibilities: API intake, orchestration, specialist agents, tool and service layers, memory and retrieval, policy and risk gates, execution services, and verification. He prefers a thin orchestrator with typed state, scoped tools, deterministic approval boundaries, and verification outside the agent so the system can scale, stay observable, and fail safely. He uses agentic AI where multi-step reasoning, tool use, workflow coordination, and controlled execution create more value than a single prompt-response model. In practice that means retrieval for context, workflows for coordination, durable state outside the model, policy before action, and post-action verification against authoritative systems rather than trusting the model's own claim.";
+  }
+
   if (subIntent === "capabilities_overview") {
     return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering. The technical layer includes retrieval, orchestration, memory, verification, observability, Python backend systems, and 3D or spatial interface delivery. The differentiator is combining that technical depth with enterprise architecture, human adoption, and measurable outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and MarketClue.";
   }
@@ -1585,6 +1589,27 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "what agentic architecture does joz do",
+      "what agentic architecture does joz use",
+      "what agentic architecture does joz build",
+      "what agent architecture does joz do",
+      "what agent architecture does joz use",
+      "what agent architecture does joz build",
+      "how does joz architect agentic ai",
+      "how does joz do agentic ai architecture",
+      "how does joz build agentic ai",
+      "why does joz do agentic ai",
+      "why does joz use agentic ai",
+      "why does joz build agentic ai",
+      "joz agentic architecture",
+      "joz agent architecture",
+    ])
+  ) {
+    return { detectedSubIntent: "agentic_architecture_approach", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "what is an agent",
       "what is agent orchestration",
       "difference between an agent and an api",
@@ -1758,6 +1783,19 @@ function detectSkills(clean) {
       "engineering skills",
       "what can joz do",
       "what does joz do",
+    ]) &&
+    !includesAny(clean, [
+      "architecture",
+      "agentic architecture",
+      "agent architecture",
+      "system design",
+      "platform design",
+      "workflow design",
+      "orchestration",
+      "retrieval",
+      "verification",
+      "risk",
+      "infrastructure",
     ])
   ) {
     return { detectedSubIntent: "capabilities_overview", detectedConcept: "skills" };
