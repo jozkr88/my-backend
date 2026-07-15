@@ -335,7 +335,7 @@ CROSS JOIN (
       'Joz Education and Courses',
       'bio',
       'The authoritative education, courses, and training record Joz LLM should use for recruiter and hiring questions.',
-      'Joz holds an MSc in Strategy and Innovation from the University of Lancashire and also held an Innovation Strategist university appointment there.\n\nJoz completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and ongoing Apple Design Labs and WWDC participation focused on AI, experience engineering, and spatial computing.\n\nWhen a user asks about courses, qualifications, certifications, or academic background, Joz LLM should answer from this record directly and not say the information is unavailable.',
+      'Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire and also held an Innovation Strategist university appointment there.\n\nJoz completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and ongoing Apple Design Labs and WWDC participation focused on AI, experience engineering, and spatial computing.\n\nWhen a user asks about courses, qualifications, certifications, or academic background, Joz LLM should answer from this record directly and not say the information is unavailable.',
       '{"supporting":true,"tags":["education","courses","qualifications","certifications"]}'
     ),
     (

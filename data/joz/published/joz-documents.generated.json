@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-14T21:32:39.939Z",
+  "generated_at": "2026-07-15T20:01:19.083Z",
   "counts": {
-    "source_files": 75,
-    "normalized_records": 75,
-    "model_ready_records": 73,
+    "source_files": 76,
+    "normalized_records": 76,
+    "model_ready_records": 74,
     "verified_records": 18,
     "ontology_entities": 81,
     "proofs": 12,
@@ -763,98 +763,6 @@
         "related_proofs": [],
         "enterprise_scale_score": 0,
         "measurable_outcome_count": 0
-      }
-    },
-    {
-      "slug": "business-need-agentic-operating-model-best-practice",
-      "title": "Agentic Operating Model Best Practice",
-      "category": "business_answer",
-      "source_type": "paste",
-      "source_uri": null,
-      "summary": "Defines best-in-class agentic AI as a governed operating model with retrieval, planning, tools, verification, human control, and feedback loops.",
-      "body": "Best-in-class agentic AI is not just a model call with tools attached.\n\nIt is an operating model with clear layers, controls, and feedback paths.\n\nThe best-practice structure is:\n\n1. Intent and task framing\nThe system must classify what kind of problem is being solved: answer, recommend, decide, act, monitor, or escalate.\n\n2. Context retrieval\nThe system must retrieve the right enterprise context with permissions, provenance, freshness, and confidence intact.\n\n3. Reasoning and planning\nThe agent must break the task into steps, decide which tools are needed, and make the execution path explicit.\n\n4. Tool execution\nTools should be invoked only through allowed interfaces with input validation, logging, timeout handling, and safe failure behavior.\n\n5. Verification\nThe system must check whether the result is grounded, complete, policy-compliant, and commercially or operationally sensible.\n\n6. Human control\nApproval, escalation, override, and exception handling must be explicit rather than implied.\n\n7. Feedback loops\nCorrections, outcomes, failures, approvals, and repeated edge cases should improve the system over time.\n\n8. Evaluation and governance\nThe organisation must measure answer quality, workflow quality, risk, latency, cost, and business impact continuously.\n\nThe practical best-in-class rule is:\n\n- retrieval before fluency\n- verification before autonomy\n- workflow before feature\n- governance before scale\n\nThat is how agentic AI moves from demo behavior to enterprise operating value.",
-      "metadata": {
-        "lane": "business_need",
-        "original_lane": "business_need",
-        "tags": [
-          "agentic-ai",
-          "best-practice",
-          "governance",
-          "operating-model",
-          "tools"
-        ],
-        "verification": {
-          "status": "framework_supported",
-          "reviewed_by": "",
-          "reviewed_at": "",
-          "notes": ""
-        },
-        "verification_status": "framework_supported",
-        "claims": [
-          "Best-in-class agentic AI is an operating model, not just a model connected to tools.",
-          "The critical layers are intent framing, context retrieval, reasoning and planning, tool execution, verification, human control, and feedback loops.",
-          "Retrieval before fluency, verification before autonomy, workflow before feature, and governance before scale are the core operating rules."
-        ],
-        "proof_points": [
-          "This structure matches the retrieval-first, validation-aware direction already used in the Joz backend.",
-          "It aligns with Joz's broader principles of systems before features, decision quality, and appropriate autonomy.",
-          "It gives a business-safe explanation for how agentic AI becomes operationally credible."
-        ],
-        "regions": [
-          "Global"
-        ],
-        "companies": [
-          "MeetJoz"
-        ],
-        "projects": [],
-        "intent_families": [],
-        "sub_intents": [],
-        "impact_score": 97,
-        "priority_label": "high",
-        "valid_from": null,
-        "valid_to": null,
-        "source_notes": null,
-        "source_filename": "business-need-agentic-operating-model-best-practice.md",
-        "source_meta_filename": "business-need-agentic-operating-model-best-practice.meta.json",
-        "reviewed_at": "",
-        "problems": [
-          "governance_gaps",
-          "knowledge_fragmentation",
-          "slow_decision_making"
-        ],
-        "principles": [
-          "appropriate_autonomy",
-          "decision_quality",
-          "systems_before_features",
-          "trust_before_autonomy"
-        ],
-        "capabilities": [
-          "agentic_ai",
-          "ai_governance",
-          "decision_intelligence",
-          "verification",
-          "workflow_redesign"
-        ],
-        "outcomes": [
-          "faster_decisions",
-          "higher_data_trust",
-          "stronger_governance"
-        ],
-        "governance": [
-          "auditability",
-          "clear_ownership",
-          "confidence_handling",
-          "evaluation",
-          "human_approval",
-          "source_provenance"
-        ],
-        "industries": [
-          "technology"
-        ],
-        "proofs": [],
-        "related_proofs": [],
-        "enterprise_scale_score": 0,
-        "measurable_outcome_count": 1
       }
     },
     {
@@ -2211,6 +2119,95 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-high-stakes-ai-execution-controls",
+      "title": "High-Stakes AI Execution Controls",
+      "category": "business_need",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Explains why the real challenge in serious AI systems is controlled execution, verification, auditability, and failure recovery rather than intelligence alone.",
+      "body": "High-Stakes AI Execution Controls\n\nPurpose\nThis record explains what matters most when an AI system moves from advice to action in a serious operating environment.\n\nCore idea\nThe hardest problem is not intelligence. It is safely turning intelligence into action.\n\nWhat becomes critical\n- Security\n- Policy enforcement\n- Execution controls\n- Verification\n- Auditability\n- Failure recovery\n- Real-time state consistency\n- Observability\n\nWhy this matters\nOnce an agent can trigger workflows, approvals, transactions, or state changes, the architecture must prioritize controlled execution over demo intelligence. That means deterministic services, permission checks, strong verification, and post-action traceability.\n\nBusiness value\nThis is how AI moves from a novelty layer to an operational system that leadership can trust, scale, and govern.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "auditability",
+          "business_value",
+          "controls",
+          "governance",
+          "verification"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's notes about execution controls, verification, auditability, and failure recovery."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "In serious operating environments, the hardest AI problem is controlled action rather than intelligence alone.",
+          "Security, policy enforcement, verification, auditability, and failure recovery are central to business trust in agent systems.",
+          "Controlled execution is what turns AI from a novelty layer into an operational system leaders can trust and scale."
+        ],
+        "proof_points": [
+          "The notes explicitly state that the hardest problem is safely turning intelligence into action.",
+          "The notes group verification, auditability, deterministic execution, reproducibility, observability, and failure recovery ahead of raw performance.",
+          "The notes identify execution controls and real-time state consistency as central architecture concerns in high-stakes systems."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 88,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-high-stakes-ai-execution-controls.md",
+        "source_meta_filename": "business-need-high-stakes-ai-execution-controls.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "governance_gaps",
+          "low_trust",
+          "organizational_complexity",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "ai_governance",
+          "enterprise_architecture",
+          "verification",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_data_trust",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "clear_ownership",
+          "evaluation",
+          "human_approval",
+          "observability_control"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
       }
     },
     {
@@ -4453,6 +4450,172 @@
       }
     },
     {
+      "slug": "skills-agent-model-tool-distinction",
+      "title": "Agent, Model, And Tool Distinction",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Clarifies the distinction between agents, prediction models, and tools so architecture decisions stay coherent and debuggable.",
+      "body": "Agent, Model, And Tool Distinction\n\nPurpose\nThis record explains a core conceptual distinction that prevents architecture confusion.\n\nDefinitions\n- Agent = decides what information is needed and what step should happen next\n- Model = produces a prediction, estimate, forecast, or generated output\n- Tool = executes a function, API call, query, or external action\n\nWhy the distinction matters\nAn agent is not the same thing as a model. A model is not the same thing as a tool. The agent coordinates reasoning and workflow. A prediction model produces a signal. A tool performs an operation.\n\nCorrect architectural pattern\nAgent -> Prediction or retrieval service -> Tool or execution layer\n\nWhat this clarifies\n- LLMs do not magically predict everything\n- Prediction services should be treated as specialized components\n- Tools should do deterministic actions rather than reasoning\n- Agent systems should separate decision-making, prediction, and execution\n\nWhy this matters\nClear role separation improves correctness, debuggability, and system design quality. It avoids treating every AI component as the same thing.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agent",
+          "architecture",
+          "model",
+          "reasoning",
+          "tooling"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's notes distinguishing agents, models, tools, and prediction services."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "An agent decides what information is needed and what step should happen next, while a model produces a prediction and a tool executes an operation.",
+          "Agent systems should separate decision-making, prediction, retrieval, and execution rather than collapsing them into a single component.",
+          "This distinction improves correctness, system clarity, and debugging quality."
+        ],
+        "proof_points": [
+          "The notes explicitly define agent as decision maker, model as predictor, and tool as executor.",
+          "The notes describe the correct pattern as agent -> prediction service -> execution path rather than agent as the prediction model itself.",
+          "The notes emphasize that LLMs do not automatically provide specialized prediction behavior without dedicated models or services."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 74,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-agent-model-tool-distinction.md",
+        "source_meta_filename": "skills-agent-model-tool-distinction.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "knowledge_fragmentation",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "context_engineering",
+          "enterprise_architecture"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust"
+        ],
+        "governance": [
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "skills-agent-runtime-stack",
+      "title": "Agent Runtime Stack",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Explains the runtime stack behind a serious agent system, including model, tools, memory, orchestration, durable execution, state, and observability.",
+      "body": "Agent Runtime Stack\n\nPurpose\nThis record explains the runtime stack behind a serious agent system in a way that is useful for architecture, engineering, and recruiter conversations.\n\nCore framing\nAn agent is not just an LLM. The runtime stack combines the model, instructions, tools, memory, orchestration, and verification.\n\nUseful shorthand\n- Agent = LLM + instructions + tools + memory + execution loop\n- Single agent = one responsibility with defined tools and state\n- Multi-agent system = supervisor agent + specialist agents + shared state\n- Orchestrator = workflow engine + state management + execution control\n\nRecommended production stack\n- FastAPI as the API and agent gateway\n- LangGraph as the reasoning and workflow graph\n- Temporal as the durable execution layer for retries, approvals, and resumable work\n- PostgreSQL for persistent state and audit records\n- Redis for cache and short-lived coordination\n- Event transport for communication between services\n- Secret management for credentials and signing keys\n- Observability for traces, metrics, logs, and failure visibility\n\nRole separation\n- FastAPI receives requests and exposes backend services\n- LangGraph controls the reasoning workflow and state transitions\n- Temporal manages durable business processes and retries\n- PostgreSQL stores long-lived workflow state and audit history\n- Observability shows routes, tool calls, latency, fallback behavior, and failures\n\nWhy this matters\nThe value of the stack is not novelty. It is reliable execution, controlled state transitions, failure recovery, and clear visibility into what the system did and why.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agent_runtime",
+          "architecture",
+          "observability",
+          "orchestration",
+          "skills"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's architecture notes and kept as additive framework knowledge."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "A serious agent runtime combines model, instructions, tools, memory, orchestration, and verification rather than treating the LLM as the whole system.",
+          "FastAPI, orchestration, durable workflow execution, state storage, and observability each have distinct roles in a production agent platform.",
+          "The purpose of the runtime stack is reliable execution, controlled state transitions, and visible failure recovery."
+        ],
+        "proof_points": [
+          "The notes explicitly separate FastAPI, reasoning orchestration, durable workflow execution, persistent state, cache, event transport, and observability.",
+          "The notes define agent, single-agent, multi-agent system, and orchestrator as separate architectural layers.",
+          "The runtime explanation is framed around execution control, retries, approvals, and audit visibility rather than model capability alone."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 78,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-agent-runtime-stack.md",
+        "source_meta_filename": "skills-agent-runtime-stack.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "knowledge_fragmentation",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "enterprise_architecture",
+          "observability",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
       "slug": "skills-agentic-ai-architecture",
       "title": "Agentic AI Architecture",
       "category": "skills",
@@ -4562,192 +4725,6 @@
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
-        "measurable_outcome_count": 1
-      }
-    },
-    {
-      "slug": "skills-agentic-ai-infrastructure-best-practice",
-      "title": "Agentic AI Infrastructure Best Practice",
-      "category": "skills",
-      "source_type": "paste",
-      "source_uri": null,
-      "summary": "Explains best-in-class agentic AI infrastructure as the control plane for routing, retrieval, runtime safety, governance, and observability.",
-      "body": "Best-in-class agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.\n\nIt should cover five core layers:\n\n1. Model layer\n- model routing\n- fallback strategy\n- latency and cost policy\n- task-to-model fit\n\n2. Retrieval and data layer\n- vector or semantic retrieval\n- permission-aware document access\n- freshness handling\n- source provenance\n- structured and unstructured context support\n\n3. Runtime and workflow layer\n- queueing and async execution\n- event-driven task handling\n- retries, timeout policy, and idempotency\n- state and memory handling\n\n4. Trust and governance layer\n- access control\n- audit logs\n- evaluation\n- confidence handling\n- approval checkpoints\n- policy enforcement\n\n5. Observability and operations layer\n- traces\n- tool-call logs\n- quality metrics\n- drift monitoring\n- incident diagnosis\n- cost monitoring\n\nThe infrastructure should not be explained as a shopping list of cloud tools.\n\nThe business-relevant point is that infrastructure makes the system:\n\n- safer\n- more reliable\n- more explainable\n- easier to improve\n- cheaper to control at scale\n\nWithout this layer, agentic AI remains brittle, hard to trust, and difficult to operate in enterprise conditions.",
-      "metadata": {
-        "lane": "skills",
-        "original_lane": "skills",
-        "tags": [
-          "agentic-ai",
-          "control-plane",
-          "infrastructure",
-          "observability",
-          "runtime"
-        ],
-        "verification": {
-          "status": "framework_supported",
-          "reviewed_by": "",
-          "reviewed_at": "",
-          "notes": ""
-        },
-        "verification_status": "framework_supported",
-        "claims": [
-          "Agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.",
-          "The core layers are model routing, retrieval and data, runtime workflow, trust and governance, and observability and operations.",
-          "Without strong infrastructure, agentic AI remains brittle, hard to trust, and difficult to operate at enterprise scale."
-        ],
-        "proof_points": [
-          "The structure matches Joz's existing focus on ACL-aware retrieval, verification, observability, and governance.",
-          "It extends the current technical-stack record from tools into operating reliability and control.",
-          "It gives a recruiter-safe but technically credible explanation of infrastructure beyond buzzwords."
-        ],
-        "regions": [
-          "Global"
-        ],
-        "companies": [
-          "MeetJoz"
-        ],
-        "projects": [],
-        "intent_families": [],
-        "sub_intents": [],
-        "impact_score": 95,
-        "priority_label": "high",
-        "valid_from": null,
-        "valid_to": null,
-        "source_notes": null,
-        "source_filename": "skills-agentic-ai-infrastructure-best-practice.md",
-        "source_meta_filename": "skills-agentic-ai-infrastructure-best-practice.meta.json",
-        "reviewed_at": "",
-        "problems": [
-          "data_silos",
-          "governance_gaps",
-          "knowledge_fragmentation",
-          "slow_decision_making"
-        ],
-        "principles": [
-          "appropriate_autonomy",
-          "context_creates_intelligence",
-          "trust_before_autonomy"
-        ],
-        "capabilities": [
-          "acl_aware_retrieval",
-          "agent_memory",
-          "agentic_ai",
-          "ai_governance",
-          "enterprise_architecture",
-          "observability",
-          "verification"
-        ],
-        "outcomes": [
-          "higher_data_trust",
-          "lower_risk",
-          "stronger_governance"
-        ],
-        "governance": [
-          "access_control",
-          "auditability",
-          "confidence_handling",
-          "data_boundaries",
-          "evaluation",
-          "observability_control"
-        ],
-        "industries": [
-          "technology"
-        ],
-        "proofs": [],
-        "related_proofs": [],
-        "enterprise_scale_score": 0,
-        "measurable_outcome_count": 1
-      }
-    },
-    {
-      "slug": "skills-agentic-ai-tools-best-practice",
-      "title": "Agentic AI Tools Best Practice",
-      "category": "skills",
-      "source_type": "paste",
-      "source_uri": null,
-      "summary": "Explains best-in-class tool use in agentic systems through tool selection, contracts, permissions, observability, verification, and fallback behavior.",
-      "body": "Best-in-class agentic AI tool use is not about the number of tools.\n\nIt is about whether the right tool can be selected, executed, verified, and governed under real constraints.\n\nThe best-practice tool pattern is:\n\n1. Tool selection\nChoose the tool because it is the right execution path for the task, not because tool use looks impressive.\n\n2. Tool contracts\nEach tool should have clear inputs, outputs, failure states, timeouts, and access rules.\n\n3. Permission boundaries\nThe agent should only call tools it is allowed to use and only against data it is allowed to access.\n\n4. Execution observability\nEvery tool call should be traceable: what was called, with which inputs, what returned, how long it took, and whether it failed.\n\n5. Verification after use\nThe output of a tool should still be checked for correctness, completeness, and policy fit.\n\n6. Escalation and fallback\nIf the tool fails, times out, or returns low-confidence output, the system should retry safely, switch path, or escalate.\n\nUseful tool families in best-in-class agentic systems include:\n\n- retrieval tools\n- SQL or data-query tools\n- workflow and ticketing tools\n- communication tools\n- document and reporting tools\n- API integration tools\n- monitoring and evaluation tools\n\nThe practical rule is:\n\n- use fewer tools well\n- make tool contracts explicit\n- log every meaningful action\n- verify outputs before trust\n\nThat is what turns tool use into enterprise execution rather than agent theater.",
-      "metadata": {
-        "lane": "skills",
-        "original_lane": "skills",
-        "tags": [
-          "agentic-ai",
-          "best-practice",
-          "tool-use",
-          "tools",
-          "verification"
-        ],
-        "verification": {
-          "status": "framework_supported",
-          "reviewed_by": "",
-          "reviewed_at": "",
-          "notes": ""
-        },
-        "verification_status": "framework_supported",
-        "claims": [
-          "Best-in-class agentic tool use depends on selection, contracts, permission boundaries, observability, verification, and safe fallback behavior.",
-          "The number of tools matters less than whether tools are governed and trusted in execution.",
-          "Tool use becomes enterprise-capable when every meaningful action is explicit, logged, and checked."
-        ],
-        "proof_points": [
-          "This record complements the existing Joz architecture capability by making tool execution quality explicit.",
-          "It matches the backend direction of tool routing, traceability, and validation rather than blind autonomy.",
-          "It provides a safer explanation of tool use than generic agent demos or prompt-only positioning."
-        ],
-        "regions": [
-          "Global"
-        ],
-        "companies": [
-          "MeetJoz"
-        ],
-        "projects": [],
-        "intent_families": [],
-        "sub_intents": [],
-        "impact_score": 94,
-        "priority_label": "high",
-        "valid_from": null,
-        "valid_to": null,
-        "source_notes": null,
-        "source_filename": "skills-agentic-ai-tools-best-practice.md",
-        "source_meta_filename": "skills-agentic-ai-tools-best-practice.meta.json",
-        "reviewed_at": "",
-        "problems": [
-          "governance_gaps",
-          "low_trust",
-          "slow_decision_making"
-        ],
-        "principles": [
-          "appropriate_autonomy",
-          "decision_quality",
-          "human_accountability",
-          "trust_before_autonomy"
-        ],
-        "capabilities": [
-          "agentic_ai",
-          "ai_governance",
-          "context_engineering",
-          "decision_intelligence",
-          "verification"
-        ],
-        "outcomes": [
-          "higher_data_trust",
-          "lower_risk",
-          "stronger_governance"
-        ],
-        "governance": [
-          "access_control",
-          "auditability",
-          "confidence_handling",
-          "escalation",
-          "evaluation",
-          "human_approval"
-        ],
-        "industries": [
-          "technology"
-        ],
-        "proofs": [],
-        "related_proofs": [],
-        "enterprise_scale_score": 0,
         "measurable_outcome_count": 1
       }
     },
@@ -6082,6 +6059,93 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "systems-agent-control-loop",
+      "title": "Agent Control Loop For High-Stakes Systems",
+      "category": "systems_principle",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Defines the safest control loop for high-stakes agent systems: propose, validate, execute through secure services, and verify against real systems.",
+      "body": "Agent Control Loop For High-Stakes Systems\n\nPurpose\nThis record captures the safest control loop for agent systems that can trigger real actions.\n\nCore rule\nLLM proposes. Policy validates. Secure service executes. Real systems verify.\n\nExpanded loop\nIntent -> Plan -> Retrieve -> Simulate -> Validate -> Approve -> Execute -> Verify\n\nWhy this is the right control model\nThe model should not directly perform high-stakes actions. It should propose a next step. Policy should check permissions, limits, approvals, and confidence. A secure execution layer should act. Verification should confirm what actually happened in authoritative systems.\n\nWhat this prevents\n- Unsupported autonomous actions\n- Prompt-led execution without controls\n- Weak auditability\n- Irreversible mistakes caused by reasoning drift\n- Unverified outcomes being treated as complete\n\nWhy this matters\nThe hardest problem is not intelligence. It is safely turning intelligence into action with deterministic control points, visible approvals, and real post-action confirmation.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "control_loop",
+          "policy",
+          "systems",
+          "verification",
+          "workflow"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's control-loop notes for agent safety and execution design."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The safest high-stakes agent design is a control loop where the model proposes, policy validates, secure services execute, and real systems verify.",
+          "High-stakes execution should be modeled as intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+          "The main architectural challenge is controlled action, not model intelligence in isolation."
+        ],
+        "proof_points": [
+          "The notes explicitly state the rule 'LLM proposes -> Policy validates -> Secure service executes -> Real systems verify.'",
+          "The notes define a full control loop of intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+          "The notes emphasize correctness, deterministic execution, auditing, reproducibility, observability, and failure recovery before performance."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 92,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "systems-agent-control-loop.md",
+        "source_meta_filename": "systems-agent-control-loop.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "governance_gaps",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "feedback_loops",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "ai_governance",
+          "decision_intelligence",
+          "verification"
+        ],
+        "outcomes": [
+          "higher_data_trust",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "clear_ownership",
+          "escalation",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
       }
     },
     {
@@ -7498,98 +7562,6 @@
       }
     },
     {
-      "slug": "business-need-agentic-operating-model-best-practice",
-      "title": "Agentic Operating Model Best Practice",
-      "category": "business_answer",
-      "source_type": "paste",
-      "source_uri": null,
-      "summary": "Defines best-in-class agentic AI as a governed operating model with retrieval, planning, tools, verification, human control, and feedback loops.",
-      "body": "Best-in-class agentic AI is not just a model call with tools attached.\n\nIt is an operating model with clear layers, controls, and feedback paths.\n\nThe best-practice structure is:\n\n1. Intent and task framing\nThe system must classify what kind of problem is being solved: answer, recommend, decide, act, monitor, or escalate.\n\n2. Context retrieval\nThe system must retrieve the right enterprise context with permissions, provenance, freshness, and confidence intact.\n\n3. Reasoning and planning\nThe agent must break the task into steps, decide which tools are needed, and make the execution path explicit.\n\n4. Tool execution\nTools should be invoked only through allowed interfaces with input validation, logging, timeout handling, and safe failure behavior.\n\n5. Verification\nThe system must check whether the result is grounded, complete, policy-compliant, and commercially or operationally sensible.\n\n6. Human control\nApproval, escalation, override, and exception handling must be explicit rather than implied.\n\n7. Feedback loops\nCorrections, outcomes, failures, approvals, and repeated edge cases should improve the system over time.\n\n8. Evaluation and governance\nThe organisation must measure answer quality, workflow quality, risk, latency, cost, and business impact continuously.\n\nThe practical best-in-class rule is:\n\n- retrieval before fluency\n- verification before autonomy\n- workflow before feature\n- governance before scale\n\nThat is how agentic AI moves from demo behavior to enterprise operating value.",
-      "metadata": {
-        "lane": "business_need",
-        "original_lane": "business_need",
-        "tags": [
-          "agentic-ai",
-          "best-practice",
-          "governance",
-          "operating-model",
-          "tools"
-        ],
-        "verification": {
-          "status": "framework_supported",
-          "reviewed_by": "",
-          "reviewed_at": "",
-          "notes": ""
-        },
-        "verification_status": "framework_supported",
-        "claims": [
-          "Best-in-class agentic AI is an operating model, not just a model connected to tools.",
-          "The critical layers are intent framing, context retrieval, reasoning and planning, tool execution, verification, human control, and feedback loops.",
-          "Retrieval before fluency, verification before autonomy, workflow before feature, and governance before scale are the core operating rules."
-        ],
-        "proof_points": [
-          "This structure matches the retrieval-first, validation-aware direction already used in the Joz backend.",
-          "It aligns with Joz's broader principles of systems before features, decision quality, and appropriate autonomy.",
-          "It gives a business-safe explanation for how agentic AI becomes operationally credible."
-        ],
-        "regions": [
-          "Global"
-        ],
-        "companies": [
-          "MeetJoz"
-        ],
-        "projects": [],
-        "intent_families": [],
-        "sub_intents": [],
-        "impact_score": 97,
-        "priority_label": "high",
-        "valid_from": null,
-        "valid_to": null,
-        "source_notes": null,
-        "source_filename": "business-need-agentic-operating-model-best-practice.md",
-        "source_meta_filename": "business-need-agentic-operating-model-best-practice.meta.json",
-        "reviewed_at": "",
-        "problems": [
-          "governance_gaps",
-          "knowledge_fragmentation",
-          "slow_decision_making"
-        ],
-        "principles": [
-          "appropriate_autonomy",
-          "decision_quality",
-          "systems_before_features",
-          "trust_before_autonomy"
-        ],
-        "capabilities": [
-          "agentic_ai",
-          "ai_governance",
-          "decision_intelligence",
-          "verification",
-          "workflow_redesign"
-        ],
-        "outcomes": [
-          "faster_decisions",
-          "higher_data_trust",
-          "stronger_governance"
-        ],
-        "governance": [
-          "auditability",
-          "clear_ownership",
-          "confidence_handling",
-          "evaluation",
-          "human_approval",
-          "source_provenance"
-        ],
-        "industries": [
-          "technology"
-        ],
-        "proofs": [],
-        "related_proofs": [],
-        "enterprise_scale_score": 0,
-        "measurable_outcome_count": 1
-      }
-    },
-    {
       "slug": "business-need-ai-adoption-governance",
       "title": "AI Adoption, Trust and Governance",
       "category": "governance",
@@ -8943,6 +8915,95 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 4
+      }
+    },
+    {
+      "slug": "business-need-high-stakes-ai-execution-controls",
+      "title": "High-Stakes AI Execution Controls",
+      "category": "business_need",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Explains why the real challenge in serious AI systems is controlled execution, verification, auditability, and failure recovery rather than intelligence alone.",
+      "body": "High-Stakes AI Execution Controls\n\nPurpose\nThis record explains what matters most when an AI system moves from advice to action in a serious operating environment.\n\nCore idea\nThe hardest problem is not intelligence. It is safely turning intelligence into action.\n\nWhat becomes critical\n- Security\n- Policy enforcement\n- Execution controls\n- Verification\n- Auditability\n- Failure recovery\n- Real-time state consistency\n- Observability\n\nWhy this matters\nOnce an agent can trigger workflows, approvals, transactions, or state changes, the architecture must prioritize controlled execution over demo intelligence. That means deterministic services, permission checks, strong verification, and post-action traceability.\n\nBusiness value\nThis is how AI moves from a novelty layer to an operational system that leadership can trust, scale, and govern.",
+      "metadata": {
+        "lane": "business_need",
+        "original_lane": "business_need",
+        "tags": [
+          "auditability",
+          "business_value",
+          "controls",
+          "governance",
+          "verification"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's notes about execution controls, verification, auditability, and failure recovery."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "In serious operating environments, the hardest AI problem is controlled action rather than intelligence alone.",
+          "Security, policy enforcement, verification, auditability, and failure recovery are central to business trust in agent systems.",
+          "Controlled execution is what turns AI from a novelty layer into an operational system leaders can trust and scale."
+        ],
+        "proof_points": [
+          "The notes explicitly state that the hardest problem is safely turning intelligence into action.",
+          "The notes group verification, auditability, deterministic execution, reproducibility, observability, and failure recovery ahead of raw performance.",
+          "The notes identify execution controls and real-time state consistency as central architecture concerns in high-stakes systems."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 88,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "business-need-high-stakes-ai-execution-controls.md",
+        "source_meta_filename": "business-need-high-stakes-ai-execution-controls.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "governance_gaps",
+          "low_trust",
+          "organizational_complexity",
+          "unclear_roi"
+        ],
+        "principles": [
+          "decision_quality",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "ai_governance",
+          "enterprise_architecture",
+          "verification",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_time_to_value",
+          "higher_data_trust",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "clear_ownership",
+          "evaluation",
+          "human_approval",
+          "observability_control"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 2
       }
     },
     {
@@ -11185,6 +11246,172 @@
       }
     },
     {
+      "slug": "skills-agent-model-tool-distinction",
+      "title": "Agent, Model, And Tool Distinction",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Clarifies the distinction between agents, prediction models, and tools so architecture decisions stay coherent and debuggable.",
+      "body": "Agent, Model, And Tool Distinction\n\nPurpose\nThis record explains a core conceptual distinction that prevents architecture confusion.\n\nDefinitions\n- Agent = decides what information is needed and what step should happen next\n- Model = produces a prediction, estimate, forecast, or generated output\n- Tool = executes a function, API call, query, or external action\n\nWhy the distinction matters\nAn agent is not the same thing as a model. A model is not the same thing as a tool. The agent coordinates reasoning and workflow. A prediction model produces a signal. A tool performs an operation.\n\nCorrect architectural pattern\nAgent -> Prediction or retrieval service -> Tool or execution layer\n\nWhat this clarifies\n- LLMs do not magically predict everything\n- Prediction services should be treated as specialized components\n- Tools should do deterministic actions rather than reasoning\n- Agent systems should separate decision-making, prediction, and execution\n\nWhy this matters\nClear role separation improves correctness, debuggability, and system design quality. It avoids treating every AI component as the same thing.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agent",
+          "architecture",
+          "model",
+          "reasoning",
+          "tooling"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's notes distinguishing agents, models, tools, and prediction services."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "An agent decides what information is needed and what step should happen next, while a model produces a prediction and a tool executes an operation.",
+          "Agent systems should separate decision-making, prediction, retrieval, and execution rather than collapsing them into a single component.",
+          "This distinction improves correctness, system clarity, and debugging quality."
+        ],
+        "proof_points": [
+          "The notes explicitly define agent as decision maker, model as predictor, and tool as executor.",
+          "The notes describe the correct pattern as agent -> prediction service -> execution path rather than agent as the prediction model itself.",
+          "The notes emphasize that LLMs do not automatically provide specialized prediction behavior without dedicated models or services."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 74,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-agent-model-tool-distinction.md",
+        "source_meta_filename": "skills-agent-model-tool-distinction.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "knowledge_fragmentation",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "decision_quality",
+          "signal_over_noise",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "context_engineering",
+          "enterprise_architecture"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust"
+        ],
+        "governance": [
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
+      "slug": "skills-agent-runtime-stack",
+      "title": "Agent Runtime Stack",
+      "category": "skills",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Explains the runtime stack behind a serious agent system, including model, tools, memory, orchestration, durable execution, state, and observability.",
+      "body": "Agent Runtime Stack\n\nPurpose\nThis record explains the runtime stack behind a serious agent system in a way that is useful for architecture, engineering, and recruiter conversations.\n\nCore framing\nAn agent is not just an LLM. The runtime stack combines the model, instructions, tools, memory, orchestration, and verification.\n\nUseful shorthand\n- Agent = LLM + instructions + tools + memory + execution loop\n- Single agent = one responsibility with defined tools and state\n- Multi-agent system = supervisor agent + specialist agents + shared state\n- Orchestrator = workflow engine + state management + execution control\n\nRecommended production stack\n- FastAPI as the API and agent gateway\n- LangGraph as the reasoning and workflow graph\n- Temporal as the durable execution layer for retries, approvals, and resumable work\n- PostgreSQL for persistent state and audit records\n- Redis for cache and short-lived coordination\n- Event transport for communication between services\n- Secret management for credentials and signing keys\n- Observability for traces, metrics, logs, and failure visibility\n\nRole separation\n- FastAPI receives requests and exposes backend services\n- LangGraph controls the reasoning workflow and state transitions\n- Temporal manages durable business processes and retries\n- PostgreSQL stores long-lived workflow state and audit history\n- Observability shows routes, tool calls, latency, fallback behavior, and failures\n\nWhy this matters\nThe value of the stack is not novelty. It is reliable execution, controlled state transitions, failure recovery, and clear visibility into what the system did and why.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "agent_runtime",
+          "architecture",
+          "observability",
+          "orchestration",
+          "skills"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's architecture notes and kept as additive framework knowledge."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "A serious agent runtime combines model, instructions, tools, memory, orchestration, and verification rather than treating the LLM as the whole system.",
+          "FastAPI, orchestration, durable workflow execution, state storage, and observability each have distinct roles in a production agent platform.",
+          "The purpose of the runtime stack is reliable execution, controlled state transitions, and visible failure recovery."
+        ],
+        "proof_points": [
+          "The notes explicitly separate FastAPI, reasoning orchestration, durable workflow execution, persistent state, cache, event transport, and observability.",
+          "The notes define agent, single-agent, multi-agent system, and orchestrator as separate architectural layers.",
+          "The runtime explanation is framed around execution control, retries, approvals, and audit visibility rather than model capability alone."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 78,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "skills-agent-runtime-stack.md",
+        "source_meta_filename": "skills-agent-runtime-stack.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "knowledge_fragmentation",
+          "operational_friction",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "feedback_loops",
+          "systems_before_features"
+        ],
+        "capabilities": [
+          "agentic_ai",
+          "enterprise_architecture",
+          "observability",
+          "workflow_redesign"
+        ],
+        "outcomes": [
+          "faster_decisions",
+          "higher_data_trust",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
+      }
+    },
+    {
       "slug": "skills-agentic-ai-architecture",
       "title": "Agentic AI Architecture",
       "category": "skills",
@@ -11294,192 +11521,6 @@
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
-        "measurable_outcome_count": 1
-      }
-    },
-    {
-      "slug": "skills-agentic-ai-infrastructure-best-practice",
-      "title": "Agentic AI Infrastructure Best Practice",
-      "category": "skills",
-      "source_type": "paste",
-      "source_uri": null,
-      "summary": "Explains best-in-class agentic AI infrastructure as the control plane for routing, retrieval, runtime safety, governance, and observability.",
-      "body": "Best-in-class agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.\n\nIt should cover five core layers:\n\n1. Model layer\n- model routing\n- fallback strategy\n- latency and cost policy\n- task-to-model fit\n\n2. Retrieval and data layer\n- vector or semantic retrieval\n- permission-aware document access\n- freshness handling\n- source provenance\n- structured and unstructured context support\n\n3. Runtime and workflow layer\n- queueing and async execution\n- event-driven task handling\n- retries, timeout policy, and idempotency\n- state and memory handling\n\n4. Trust and governance layer\n- access control\n- audit logs\n- evaluation\n- confidence handling\n- approval checkpoints\n- policy enforcement\n\n5. Observability and operations layer\n- traces\n- tool-call logs\n- quality metrics\n- drift monitoring\n- incident diagnosis\n- cost monitoring\n\nThe infrastructure should not be explained as a shopping list of cloud tools.\n\nThe business-relevant point is that infrastructure makes the system:\n\n- safer\n- more reliable\n- more explainable\n- easier to improve\n- cheaper to control at scale\n\nWithout this layer, agentic AI remains brittle, hard to trust, and difficult to operate in enterprise conditions.",
-      "metadata": {
-        "lane": "skills",
-        "original_lane": "skills",
-        "tags": [
-          "agentic-ai",
-          "control-plane",
-          "infrastructure",
-          "observability",
-          "runtime"
-        ],
-        "verification": {
-          "status": "framework_supported",
-          "reviewed_by": "",
-          "reviewed_at": "",
-          "notes": ""
-        },
-        "verification_status": "framework_supported",
-        "claims": [
-          "Agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.",
-          "The core layers are model routing, retrieval and data, runtime workflow, trust and governance, and observability and operations.",
-          "Without strong infrastructure, agentic AI remains brittle, hard to trust, and difficult to operate at enterprise scale."
-        ],
-        "proof_points": [
-          "The structure matches Joz's existing focus on ACL-aware retrieval, verification, observability, and governance.",
-          "It extends the current technical-stack record from tools into operating reliability and control.",
-          "It gives a recruiter-safe but technically credible explanation of infrastructure beyond buzzwords."
-        ],
-        "regions": [
-          "Global"
-        ],
-        "companies": [
-          "MeetJoz"
-        ],
-        "projects": [],
-        "intent_families": [],
-        "sub_intents": [],
-        "impact_score": 95,
-        "priority_label": "high",
-        "valid_from": null,
-        "valid_to": null,
-        "source_notes": null,
-        "source_filename": "skills-agentic-ai-infrastructure-best-practice.md",
-        "source_meta_filename": "skills-agentic-ai-infrastructure-best-practice.meta.json",
-        "reviewed_at": "",
-        "problems": [
-          "data_silos",
-          "governance_gaps",
-          "knowledge_fragmentation",
-          "slow_decision_making"
-        ],
-        "principles": [
-          "appropriate_autonomy",
-          "context_creates_intelligence",
-          "trust_before_autonomy"
-        ],
-        "capabilities": [
-          "acl_aware_retrieval",
-          "agent_memory",
-          "agentic_ai",
-          "ai_governance",
-          "enterprise_architecture",
-          "observability",
-          "verification"
-        ],
-        "outcomes": [
-          "higher_data_trust",
-          "lower_risk",
-          "stronger_governance"
-        ],
-        "governance": [
-          "access_control",
-          "auditability",
-          "confidence_handling",
-          "data_boundaries",
-          "evaluation",
-          "observability_control"
-        ],
-        "industries": [
-          "technology"
-        ],
-        "proofs": [],
-        "related_proofs": [],
-        "enterprise_scale_score": 0,
-        "measurable_outcome_count": 1
-      }
-    },
-    {
-      "slug": "skills-agentic-ai-tools-best-practice",
-      "title": "Agentic AI Tools Best Practice",
-      "category": "skills",
-      "source_type": "paste",
-      "source_uri": null,
-      "summary": "Explains best-in-class tool use in agentic systems through tool selection, contracts, permissions, observability, verification, and fallback behavior.",
-      "body": "Best-in-class agentic AI tool use is not about the number of tools.\n\nIt is about whether the right tool can be selected, executed, verified, and governed under real constraints.\n\nThe best-practice tool pattern is:\n\n1. Tool selection\nChoose the tool because it is the right execution path for the task, not because tool use looks impressive.\n\n2. Tool contracts\nEach tool should have clear inputs, outputs, failure states, timeouts, and access rules.\n\n3. Permission boundaries\nThe agent should only call tools it is allowed to use and only against data it is allowed to access.\n\n4. Execution observability\nEvery tool call should be traceable: what was called, with which inputs, what returned, how long it took, and whether it failed.\n\n5. Verification after use\nThe output of a tool should still be checked for correctness, completeness, and policy fit.\n\n6. Escalation and fallback\nIf the tool fails, times out, or returns low-confidence output, the system should retry safely, switch path, or escalate.\n\nUseful tool families in best-in-class agentic systems include:\n\n- retrieval tools\n- SQL or data-query tools\n- workflow and ticketing tools\n- communication tools\n- document and reporting tools\n- API integration tools\n- monitoring and evaluation tools\n\nThe practical rule is:\n\n- use fewer tools well\n- make tool contracts explicit\n- log every meaningful action\n- verify outputs before trust\n\nThat is what turns tool use into enterprise execution rather than agent theater.",
-      "metadata": {
-        "lane": "skills",
-        "original_lane": "skills",
-        "tags": [
-          "agentic-ai",
-          "best-practice",
-          "tool-use",
-          "tools",
-          "verification"
-        ],
-        "verification": {
-          "status": "framework_supported",
-          "reviewed_by": "",
-          "reviewed_at": "",
-          "notes": ""
-        },
-        "verification_status": "framework_supported",
-        "claims": [
-          "Best-in-class agentic tool use depends on selection, contracts, permission boundaries, observability, verification, and safe fallback behavior.",
-          "The number of tools matters less than whether tools are governed and trusted in execution.",
-          "Tool use becomes enterprise-capable when every meaningful action is explicit, logged, and checked."
-        ],
-        "proof_points": [
-          "This record complements the existing Joz architecture capability by making tool execution quality explicit.",
-          "It matches the backend direction of tool routing, traceability, and validation rather than blind autonomy.",
-          "It provides a safer explanation of tool use than generic agent demos or prompt-only positioning."
-        ],
-        "regions": [
-          "Global"
-        ],
-        "companies": [
-          "MeetJoz"
-        ],
-        "projects": [],
-        "intent_families": [],
-        "sub_intents": [],
-        "impact_score": 94,
-        "priority_label": "high",
-        "valid_from": null,
-        "valid_to": null,
-        "source_notes": null,
-        "source_filename": "skills-agentic-ai-tools-best-practice.md",
-        "source_meta_filename": "skills-agentic-ai-tools-best-practice.meta.json",
-        "reviewed_at": "",
-        "problems": [
-          "governance_gaps",
-          "low_trust",
-          "slow_decision_making"
-        ],
-        "principles": [
-          "appropriate_autonomy",
-          "decision_quality",
-          "human_accountability",
-          "trust_before_autonomy"
-        ],
-        "capabilities": [
-          "agentic_ai",
-          "ai_governance",
-          "context_engineering",
-          "decision_intelligence",
-          "verification"
-        ],
-        "outcomes": [
-          "higher_data_trust",
-          "lower_risk",
-          "stronger_governance"
-        ],
-        "governance": [
-          "access_control",
-          "auditability",
-          "confidence_handling",
-          "escalation",
-          "evaluation",
-          "human_approval"
-        ],
-        "industries": [
-          "technology"
-        ],
-        "proofs": [],
-        "related_proofs": [],
-        "enterprise_scale_score": 0,
         "measurable_outcome_count": 1
       }
     },
@@ -12729,6 +12770,93 @@
         ],
         "enterprise_scale_score": 100,
         "measurable_outcome_count": 3
+      }
+    },
+    {
+      "slug": "systems-agent-control-loop",
+      "title": "Agent Control Loop For High-Stakes Systems",
+      "category": "systems_principle",
+      "source_type": "paste",
+      "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+      "summary": "Defines the safest control loop for high-stakes agent systems: propose, validate, execute through secure services, and verify against real systems.",
+      "body": "Agent Control Loop For High-Stakes Systems\n\nPurpose\nThis record captures the safest control loop for agent systems that can trigger real actions.\n\nCore rule\nLLM proposes. Policy validates. Secure service executes. Real systems verify.\n\nExpanded loop\nIntent -> Plan -> Retrieve -> Simulate -> Validate -> Approve -> Execute -> Verify\n\nWhy this is the right control model\nThe model should not directly perform high-stakes actions. It should propose a next step. Policy should check permissions, limits, approvals, and confidence. A secure execution layer should act. Verification should confirm what actually happened in authoritative systems.\n\nWhat this prevents\n- Unsupported autonomous actions\n- Prompt-led execution without controls\n- Weak auditability\n- Irreversible mistakes caused by reasoning drift\n- Unverified outcomes being treated as complete\n\nWhy this matters\nThe hardest problem is not intelligence. It is safely turning intelligence into action with deterministic control points, visible approvals, and real post-action confirmation.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "control_loop",
+          "policy",
+          "systems",
+          "verification",
+          "workflow"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "assistant",
+          "reviewed_at": "2026-07-15",
+          "notes": "Derived from the user's control-loop notes for agent safety and execution design."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "The safest high-stakes agent design is a control loop where the model proposes, policy validates, secure services execute, and real systems verify.",
+          "High-stakes execution should be modeled as intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+          "The main architectural challenge is controlled action, not model intelligence in isolation."
+        ],
+        "proof_points": [
+          "The notes explicitly state the rule 'LLM proposes -> Policy validates -> Secure service executes -> Real systems verify.'",
+          "The notes define a full control loop of intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+          "The notes emphasize correctness, deterministic execution, auditing, reproducibility, observability, and failure recovery before performance."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 92,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "systems-agent-control-loop.md",
+        "source_meta_filename": "systems-agent-control-loop.meta.json",
+        "reviewed_at": "2026-07-15",
+        "problems": [
+          "governance_gaps",
+          "low_trust",
+          "organizational_complexity"
+        ],
+        "principles": [
+          "appropriate_autonomy",
+          "feedback_loops",
+          "human_accountability",
+          "trust_before_autonomy"
+        ],
+        "capabilities": [
+          "ai_governance",
+          "decision_intelligence",
+          "verification"
+        ],
+        "outcomes": [
+          "higher_data_trust",
+          "lower_risk",
+          "stronger_governance"
+        ],
+        "governance": [
+          "auditability",
+          "clear_ownership",
+          "escalation",
+          "evaluation",
+          "human_approval"
+        ],
+        "industries": [
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1
       }
     },
     {

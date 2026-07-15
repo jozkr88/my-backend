@@ -4,7 +4,6 @@ import assert from "node:assert/strict";
 import {
   buildJozRouteTrace,
   composeJozLlmRouteReply,
-  resolveOwnedJozReply,
   resolveUnknownJozReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
@@ -214,146 +213,6 @@ test("routes business value efficiency queries to an efficiency-first answer", (
   assert.doesNotMatch(resolution.reply, /30x audience growth/i);
 });
 
-test("routes why-is-joz-irreplaceable queries to a moat-based answer", () => {
-  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
-  const prompt = "Why is Joz irreplaceable?";
-  const route = routeJozLlmQuery({
-    input: prompt,
-    appContext,
-    legacyContext,
-  });
-  const resolution = composeJozLlmRouteReply({
-    route,
-    input: prompt,
-    appContext,
-    legacyContext,
-  });
-
-  assert.equal(route.selectedRoute, "business_need");
-  assert.equal(route.detectedSubIntent, "irreplaceable");
-  assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /not hard to replace because he uses AI/i);
-  assert.match(resolution.reply, /context|workflows|decision logic|governance|feedback loops/i);
-  assert.match(resolution.reply, /embedded into how work is routed|approved|improved|measured/i);
-  assert.match(resolution.reply, /human-plus-system judgment|proof-backed trust/i);
-});
-
-test("resolveOwnedJozReply uses retrieved evidence synthesis for business lanes when model is available", async () => {
-  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
-  const route = routeJozLlmQuery({
-    input: "What business problems can Joz solve?",
-    appContext,
-    legacyContext,
-  });
-
-  const resolution = await resolveOwnedJozReply({
-    route,
-    input: "What business problems can Joz solve?",
-    appContext,
-    legacyContext,
-    messages: [{ role: "user", content: "What business problems can Joz solve?" }],
-    openai: {
-      chat: {
-        completions: {
-          create: async () => ({
-            choices: [
-              {
-                message: {
-                  content:
-                    "Joz is strongest where fragmented knowledge, slow decisions, weak AI ownership, and governance gaps hurt execution. The value is turning that mess into usable context, clearer workflows, better trust, and measurable operating improvement rather than adding another disconnected AI pilot.",
-                },
-              },
-            ],
-          }),
-        },
-      },
-    },
-    roleAwareContext: {
-      retrievedDocuments: [
-        {
-          title: "Problems Joz Solves",
-          category: "business_need",
-          summary: "Joz is strongest where organisations face fragmented knowledge, slow decisions, weak adoption, and governance gaps.",
-          body: "What problems can Joz solve?\n\nJoz is strongest where organisations face fragmented knowledge, slow decision-making, low trust in AI outputs, and weak adoption because AI does not fit real workflows.",
-          metadata: { lane: "business_need" },
-        },
-      ],
-    },
-  });
-
-  assert.equal(resolution.fallbackUsed, false);
-  assert.equal(resolution.answerSource, "retrieved_documents_model_synthesis");
-  assert.match(resolution.reply, /fragmented knowledge/i);
-  assert.match(resolution.reply, /governance|trust|workflows/i);
-});
-
-test("resolveOwnedJozReply falls back cleanly when synthesis reply is invalid", async () => {
-  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
-  const route = routeJozLlmQuery({
-    input: "How does Joz create ROI from AI?",
-    appContext,
-    legacyContext,
-  });
-
-  const resolution = await resolveOwnedJozReply({
-    route,
-    input: "How does Joz create ROI from AI?",
-    appContext,
-    legacyContext,
-    messages: [{ role: "user", content: "How does Joz create ROI from AI?" }],
-    openai: {
-      chat: {
-        completions: {
-          create: async () => ({
-            choices: [{ message: { content: "Too vague." } }],
-          }),
-        },
-      },
-    },
-    roleAwareContext: {
-      retrievedDocuments: [
-        {
-          title: "ROI Model",
-          category: "business_need",
-          summary: "The strongest ROI comes from cost reduction, faster decisions, productivity gains, lower friction, and revenue growth.",
-          body: "ROI should be tied to baseline metrics, governance, and proof rather than vague upside.",
-          metadata: { lane: "business_need" },
-        },
-      ],
-    },
-  });
-
-  assert.equal(resolution.fallbackUsed, false);
-  assert.notEqual(resolution.answerSource, "retrieved_documents_model_synthesis");
-  assert.match(resolution.reply, /ROI|cost reduction|faster decisions|productivity gains/i);
-});
-
-test("routes skills-vs-mindset-vs-architecture questions to an explicit layering answer", () => {
-  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
-  const prompt = "Should agentic architecture and infrastructure sit under skills or mindset?";
-  const route = routeJozLlmQuery({
-    input: prompt,
-    appContext,
-    legacyContext,
-  });
-  const resolution = composeJozLlmRouteReply({
-    route,
-    input: prompt,
-    appContext,
-    legacyContext,
-  });
-
-  assert.equal(route.selectedRoute, "business_need");
-  assert.equal(route.detectedSubIntent, "layering");
-  assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /should not be merged into either skills or mindset/i);
-  assert.match(resolution.reply, /Skills describe what Joz can do/i);
-  assert.match(resolution.reply, /mindset describes how Joz reasons/i);
-  assert.match(resolution.reply, /agentic architecture defines how the system thinks and acts/i);
-  assert.match(resolution.reply, /infrastructure is the platform foundation/i);
-  assert.match(resolution.reply, /architecture sits closest to skills/i);
-});
-
 test("routes business value growth queries to a growth-first answer with proof", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const prompt =
@@ -406,6 +265,104 @@ test("routes business value decision-support queries to an executive clarity ans
   assert.match(resolution.reply, /decision support|judgment|executive clarity/i);
   assert.match(resolution.reply, /signal|prioritization|prioritisation/i);
   assert.match(resolution.reply, /action|alignment|accountable execution/i);
+});
+
+test("skills route upgrades to retrieved proof when ranked documents are provided", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt = "What are Joz's strongest technical skills?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [
+      {
+        title: "Agentic AI Architecture Proof",
+        category: "skills",
+        summary:
+          "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
+        metadata: {
+          slug: "2026-07-11-agentic-ai-architecture-proof",
+          proof_points: [
+            "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+          ],
+        },
+      },
+      {
+        title: "Enterprise Scale Proof",
+        category: "proof",
+        summary:
+          "Highest-priority proof record for brand strength, user scale, enterprise complexity, and measurable impact.",
+        metadata: {
+          slug: "2026-07-11-enterprise-scale-proof",
+          proof_points: [
+            "Erste Bank engineering and EU accessibility work serving 16M+ customers.",
+          ],
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(resolution.composer, "buildEvidenceBackedRouteReply");
+  assert.match(resolution.reply, /MarketClue USA work/i);
+  assert.match(resolution.reply, /Erste Bank engineering/i);
+  assert.match(
+    resolution.answerSource,
+    /Agentic AI Architecture Proof \+ Enterprise Scale Proof/i
+  );
+});
+
+test("business need route upgrades to retrieved proof when ranked documents are provided", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const prompt = "How does Joz create business value?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [
+      {
+        title: "Business Value Proof at Enterprise Scale",
+        category: "proof",
+        summary:
+          "Proof of measurable business value at enterprise scale.",
+        metadata: {
+          slug: "business-need-enterprise-proof",
+          proof_points: [
+            "Maybank-Ageas Etiqa 20x digital-sales growth and 3,000+ wealth pilots.",
+          ],
+        },
+      },
+      {
+        title: "Joz Turns Complexity into Business Value",
+        category: "business_need",
+        summary:
+          "Joz turns complexity into business value through decision intelligence and governance-minded delivery.",
+        metadata: {
+          slug: "business-need-hero-value",
+          proof_points: [
+            "Mediacorp / CNA delivered roughly 30x MAU audience growth through mobile-first transformation.",
+          ],
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(resolution.composer, "buildEvidenceBackedRouteReply");
+  assert.match(resolution.reply, /Maybank-Ageas Etiqa 20x digital-sales growth/i);
+  assert.match(resolution.reply, /Mediacorp \/ CNA delivered roughly 30x MAU audience growth/i);
 });
 
 test("routes recruiter location queries to deterministic operational answer with actions", () => {

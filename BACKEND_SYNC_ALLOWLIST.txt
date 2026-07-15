@@ -1,0 +1,13 @@
+render.yaml
+server/index.js
+server/package.json
+server/package-lock.json
+server/RENDER_SETUP.md
+server/BACKEND_SYNC_STRUCTURE.md
+server/BACKEND_SYNC_ALLOWLIST.txt
+server/shared/
+server/tools/
+server/content/
+server/*.test.js
+data/joz/
+data/meetjoz/

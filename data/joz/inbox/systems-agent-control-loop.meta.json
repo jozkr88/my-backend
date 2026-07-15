@@ -1,0 +1,41 @@
+{
+  "slug": "systems-agent-control-loop",
+  "title": "Agent Control Loop For High-Stakes Systems",
+  "category": "systems_principle",
+  "lane": "systems_mindset",
+  "summary": "Defines the safest control loop for high-stakes agent systems: propose, validate, execute through secure services, and verify against real systems.",
+  "tags": ["control_loop", "policy", "systems", "verification", "workflow"],
+  "impact_score": 92,
+  "priority_label": "hero",
+  "source_type": "paste",
+  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-15",
+    "notes": "Derived from the user's control-loop notes for agent safety and execution design."
+  },
+  "claims": [
+    "The safest high-stakes agent design is a control loop where the model proposes, policy validates, secure services execute, and real systems verify.",
+    "High-stakes execution should be modeled as intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+    "The main architectural challenge is controlled action, not model intelligence in isolation."
+  ],
+  "proof_points": [
+    "The notes explicitly state the rule 'LLM proposes -> Policy validates -> Secure service executes -> Real systems verify.'",
+    "The notes define a full control loop of intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+    "The notes emphasize correctness, deterministic execution, auditing, reproducibility, observability, and failure recovery before performance."
+  ],
+  "regions": ["Global"],
+  "companies": [],
+  "projects": [],
+  "intent_families": [],
+  "sub_intents": [],
+  "problems": ["governance_gaps", "low_trust", "organizational_complexity"],
+  "principles": ["trust_before_autonomy", "human_accountability", "appropriate_autonomy", "feedback_loops"],
+  "capabilities": ["ai_governance", "verification", "decision_intelligence"],
+  "outcomes": ["lower_risk", "higher_data_trust", "stronger_governance"],
+  "governance": ["human_approval", "auditability", "evaluation", "clear_ownership", "escalation"],
+  "industries": ["technology"],
+  "proofs": []
+}
+

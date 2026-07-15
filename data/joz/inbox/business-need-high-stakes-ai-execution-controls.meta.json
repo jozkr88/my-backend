@@ -1,0 +1,40 @@
+{
+  "slug": "business-need-high-stakes-ai-execution-controls",
+  "title": "High-Stakes AI Execution Controls",
+  "category": "business_need",
+  "lane": "business_need",
+  "summary": "Explains why the real challenge in serious AI systems is controlled execution, verification, auditability, and failure recovery rather than intelligence alone.",
+  "tags": ["auditability", "business_value", "controls", "governance", "verification"],
+  "impact_score": 88,
+  "priority_label": "high",
+  "source_type": "paste",
+  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-15",
+    "notes": "Derived from the user's notes about execution controls, verification, auditability, and failure recovery."
+  },
+  "claims": [
+    "In serious operating environments, the hardest AI problem is controlled action rather than intelligence alone.",
+    "Security, policy enforcement, verification, auditability, and failure recovery are central to business trust in agent systems.",
+    "Controlled execution is what turns AI from a novelty layer into an operational system leaders can trust and scale."
+  ],
+  "proof_points": [
+    "The notes explicitly state that the hardest problem is safely turning intelligence into action.",
+    "The notes group verification, auditability, deterministic execution, reproducibility, observability, and failure recovery ahead of raw performance.",
+    "The notes identify execution controls and real-time state consistency as central architecture concerns in high-stakes systems."
+  ],
+  "regions": ["Global"],
+  "companies": [],
+  "projects": [],
+  "intent_families": [],
+  "sub_intents": [],
+  "problems": ["governance_gaps", "low_trust", "unclear_roi", "organizational_complexity"],
+  "principles": ["trust_before_autonomy", "human_accountability", "decision_quality"],
+  "capabilities": ["ai_governance", "verification", "workflow_redesign", "enterprise_architecture"],
+  "outcomes": ["lower_risk", "higher_data_trust", "stronger_governance", "faster_time_to_value"],
+  "governance": ["human_approval", "auditability", "evaluation", "observability_control", "clear_ownership"],
+  "industries": ["technology"],
+  "proofs": []
+}

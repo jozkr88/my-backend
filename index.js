@@ -915,6 +915,7 @@ app.post("/api/joz-llm", async (req, res) => {
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
+      retrievedDocuments: retrievalContext,
     });
     const resolution =
       ownedResolution ||

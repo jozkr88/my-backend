@@ -334,6 +334,118 @@ function normalizeList(value) {
     : [];
 }
 
+function normalizeRetrievedDocuments(retrievedDocuments = []) {
+  return Array.isArray(retrievedDocuments)
+    ? retrievedDocuments.filter(Boolean).map((doc) => ({
+        ...doc,
+        metadata: doc?.metadata || {},
+      }))
+    : [];
+}
+
+function takeLeadingSentences(text = "", count = 2) {
+  const sentences = String(text || "")
+    .trim()
+    .split(/(?<=[.!?])\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (!sentences.length) return "";
+  return sentences.slice(0, count).join(" ");
+}
+
+function extractRetrievedEvidencePoint(doc = {}) {
+  const metadata = doc?.metadata || {};
+  const proofPoints = normalizeList(metadata.proof_points);
+  const claims = normalizeList(metadata.claims);
+  const summary = String(doc.summary || "").trim();
+
+  return proofPoints[0] || claims[0] || summary || "";
+}
+
+function buildRetrievedDocumentBrief(doc = {}) {
+  const metadata = doc?.metadata || {};
+  return {
+    title: doc?.title || null,
+    category: doc?.category || null,
+    slug: metadata.slug || null,
+    lane: metadata.lane || null,
+    companies: normalizeList(metadata.companies).slice(0, 5),
+    tags: normalizeList(metadata.tags).slice(0, 6),
+    claims: normalizeList(metadata.claims).slice(0, 2),
+    proofPoints: normalizeList(metadata.proof_points).slice(0, 2),
+    verificationStatus:
+      metadata.verification_status || metadata.verification?.status || null,
+  };
+}
+
+function buildEvidenceSourceLabel(documents = []) {
+  const labels = documents
+    .map((doc) => doc?.title || doc?.metadata?.slug || null)
+    .filter(Boolean)
+    .slice(0, 2);
+
+  return labels.join(" + ");
+}
+
+function selectEvidenceDocumentsForRoute(route = {}, retrievedDocuments = []) {
+  const normalizedDocs = normalizeRetrievedDocuments(retrievedDocuments);
+  if (!normalizedDocs.length) return [];
+
+  const preferredCategoriesByRoute = {
+    business_need: new Set(["business_need", "proof", "faq", "skills"]),
+    skills: new Set(["skills", "proof", "faq", "bio"]),
+    systems_mindset: new Set(["systems_mindset", "proof", "skills", "faq"]),
+  };
+  const preferredCategories =
+    preferredCategoriesByRoute[route?.selectedRoute] || new Set();
+
+  const categorized = normalizedDocs.filter((doc) =>
+    preferredCategories.size ? preferredCategories.has(doc?.category) : true
+  );
+
+  return (categorized.length ? categorized : normalizedDocs).slice(0, 3);
+}
+
+function buildEvidenceBackedRouteReply({
+  route = {},
+  baseReply = "",
+  retrievedDocuments = [],
+} = {}) {
+  if (!["business_need", "skills", "systems_mindset"].includes(route?.selectedRoute)) {
+    return null;
+  }
+
+  const evidenceDocs = selectEvidenceDocumentsForRoute(route, retrievedDocuments);
+  if (!evidenceDocs.length) return null;
+
+  const leadSentenceCount = route.selectedRoute === "systems_mindset" ? 1 : 2;
+  const lead = takeLeadingSentences(baseReply, leadSentenceCount);
+  const evidencePoints = [
+    ...new Set(
+      evidenceDocs
+        .map((doc) => extractRetrievedEvidencePoint(doc))
+        .map((value) => String(value || "").trim())
+        .filter(Boolean)
+    ),
+  ].slice(0, 2);
+
+  if (!lead || !evidencePoints.length) return null;
+
+  const bridge =
+    route.selectedRoute === "systems_mindset"
+      ? "That discipline shows up in"
+      : "Proof:";
+  const proof = evidencePoints.join(" ");
+
+  return {
+    reply: `${lead} ${bridge} ${proof}`.trim(),
+    answerSource: buildEvidenceSourceLabel(evidenceDocs),
+    composer: "buildEvidenceBackedRouteReply",
+    evidenceDocs,
+  };
+}
+
 function buildProgrammeRecordReply(record = {}) {
   const metadata = record?.metadata || {};
   const companies = normalizeList(metadata.companies);
@@ -1070,6 +1182,7 @@ export function composeJozLlmRouteReply({
   input = "",
   appContext = {},
   legacyContext = {},
+  retrievedDocuments = [],
 } = {}) {
   const recruiterOperationalResolution = buildRecruiterOperationalResolution(route);
   if (recruiterOperationalResolution) {
@@ -1139,35 +1252,60 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "business_need") {
+    const baseReply = composeBusinessNeedReply(route.detectedSubIntent);
+    const evidenceReply = buildEvidenceBackedRouteReply({
+      route,
+      baseReply,
+      retrievedDocuments,
+    });
     return {
-      reply: composeBusinessNeedReply(route.detectedSubIntent),
-      answerSource: "JOZ_LLM_CV.experience",
-      composer: "composeBusinessNeedReply",
+      reply: evidenceReply?.reply || baseReply,
+      answerSource: evidenceReply?.answerSource || "JOZ_LLM_CV.experience",
+      composer: evidenceReply?.composer || "composeBusinessNeedReply",
       fallbackUsed: false,
       intentMode: "business_need",
-      retrievedCategories: ["business_need", "proof"],
+      retrievedCategories:
+        evidenceReply?.evidenceDocs?.map((doc) => doc.category) || ["business_need", "proof"],
     };
   }
 
   if (route?.selectedRoute === "systems_mindset") {
+    const baseReply = composeSystemsMindsetReply();
+    const evidenceReply = buildEvidenceBackedRouteReply({
+      route,
+      baseReply,
+      retrievedDocuments,
+    });
     return {
-      reply: composeSystemsMindsetReply(),
-      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
-      composer: "composeSystemsMindsetReply",
+      reply: evidenceReply?.reply || baseReply,
+      answerSource:
+        evidenceReply?.answerSource ||
+        "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer: evidenceReply?.composer || "composeSystemsMindsetReply",
       fallbackUsed: false,
       intentMode: "systems_mindset",
-      retrievedCategories: ["systems_mindset", "proof"],
+      retrievedCategories:
+        evidenceReply?.evidenceDocs?.map((doc) => doc.category) || ["systems_mindset", "proof"],
     };
   }
 
   if (route?.selectedRoute === "skills") {
+    const baseReply = composeSkillsReply(route.detectedSubIntent);
+    const evidenceReply = buildEvidenceBackedRouteReply({
+      route,
+      baseReply,
+      retrievedDocuments,
+    });
     return {
-      reply: composeSkillsReply(route.detectedSubIntent),
-      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
-      composer: "composeSkillsReply",
+      reply: evidenceReply?.reply || baseReply,
+      answerSource:
+        evidenceReply?.answerSource ||
+        "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer: evidenceReply?.composer || "composeSkillsReply",
       fallbackUsed: false,
       intentMode: "skills",
-      retrievedCategories: ["skills", "proof"],
+      retrievedCategories:
+        evidenceReply?.evidenceDocs?.map((doc) => doc.category) || ["skills", "proof"],
     };
   }
 
@@ -1303,6 +1441,9 @@ export function buildRoleAwareJozContext({
     },
     profile,
     retrievedDocuments,
+    retrievalSummary: normalizeRetrievedDocuments(retrievedDocuments).map((doc) =>
+      buildRetrievedDocumentBrief(doc)
+    ),
     cv: JOZ_LLM_CV,
     identity: JOZ_LLM_IDENTITY,
   };
