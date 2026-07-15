@@ -461,8 +461,28 @@ export async function getPrimaryJozProfile() {
 export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, query = "") {
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
-  const categories = lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"];
-  const laneAliases = [...new Set([primaryCategory, primaryCategory === "systems_mindset" ? "mindset" : null].filter(Boolean))];
+  const categories = [
+    ...new Set([
+      ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
+      "skills",
+      "systems_mindset",
+      "business_need",
+      "systems_principle",
+      "governance",
+      "governance_principle",
+    ]),
+  ];
+  const laneAliases = [
+    ...new Set(
+      [
+        primaryCategory,
+        primaryCategory === "systems_mindset" ? "mindset" : null,
+        "skills",
+        "systems_mindset",
+        "business_need",
+      ].filter(Boolean)
+    ),
+  ];
   const result = await runQuery(
     `SELECT title, category, summary, body, metadata
      FROM joz_documents
@@ -506,26 +526,37 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
     [categories, laneAliases, primaryCategory, Math.max(limit * 5, 20)]
   );
   const dbDocuments = (result.rows || []).map(normalizeJozDocumentRow);
-  const sourceDocuments = dbDocuments.length
-    ? dbDocuments
-    : loadPublishedJozDocuments()
-        .filter((doc) => {
-          const docLane = String(doc?.metadata?.lane || "").trim();
-          const docCategory = String(doc?.category || "").trim();
-          return laneAliases.includes(docLane) || categories.includes(docCategory);
-        })
-        .map((doc) => ({
-          title: doc.title,
-          category: doc.category,
-          summary: doc.summary,
-          body: doc.body,
-          metadata: {
-            ...(doc.metadata || {}),
-            slug: doc.slug || doc.metadata?.slug || null,
-            visibility: "public",
-            publish_version: null,
-          },
-        }));
+  const merged = new Map();
+
+  for (const doc of loadPublishedJozDocuments()) {
+    const docLane = String(doc?.metadata?.lane || "").trim();
+    const docCategory = String(doc?.category || "").trim();
+    if (!laneAliases.includes(docLane) && !categories.includes(docCategory)) continue;
+
+    const slug = String(doc?.slug || doc?.metadata?.slug || "").trim();
+    if (!slug) continue;
+
+    merged.set(slug, {
+      title: doc.title,
+      category: doc.category,
+      summary: doc.summary,
+      body: doc.body,
+      metadata: {
+        ...(doc.metadata || {}),
+        slug,
+        visibility: "public",
+        publish_version: null,
+      },
+    });
+  }
+
+  for (const doc of dbDocuments) {
+    const slug = String(doc?.metadata?.slug || "").trim();
+    const fallbackKey = `${doc?.title || ""}::${doc?.category || ""}`;
+    merged.set(slug || fallbackKey, doc);
+  }
+
+  const sourceDocuments = [...merged.values()];
 
   return rankJozDocumentsForQuery(sourceDocuments, {
     intentMode: primaryCategory,
