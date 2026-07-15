@@ -27,6 +27,15 @@ function normalizeToken(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function escapeRegExp(value = "") {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function includesWholeWord(text = "", term = "") {
+  if (!text || !term) return false;
+  return new RegExp(`\\b${escapeRegExp(term)}\\b`, "i").test(text);
+}
+
 const FORBIDDEN_OWNED_CONCEPT_PHRASES = [
   "looksmaxxing",
   "online communities",
@@ -569,12 +578,28 @@ function collectVisibleObjectDetails(manifest, objectIds) {
 
 export function routeMeetJozWorldIntent(input = "") {
   const clean = normalizeToken(input);
+  const businessGuardTerms = [
+    "operating model",
+    "workflows",
+    "workflow ownership",
+    "ownership",
+    "governance",
+    "execution",
+    "governance and execution",
+    "embed joz",
+    "embed ai",
+  ];
+
+  if (businessGuardTerms.some((term) => clean.includes(term))) {
+    return "joz_knowledge";
+  }
+
   if (detectOwnedConceptQuery(clean)) return "world_awareness";
   if (isGoldPillQuery(clean)) return "world_awareness";
   if (clean.includes("where are joz's skills")) return "mixed";
   if (clean.includes("why does this experience matter")) return "mixed";
 
-  const worldTerms = [
+  const worldPhraseTerms = [
     "what is this place",
     "what are my choices",
     "what am i looking at",
@@ -582,6 +607,10 @@ export function routeMeetJozWorldIntent(input = "") {
     "what happens when i click",
     "where are joz's skills",
     "what is worldx",
+    "elite beauty",
+    "frame mogg",
+  ];
+  const worldWordTerms = [
     "portal",
     "object",
     "stage",
@@ -596,8 +625,6 @@ export function routeMeetJozWorldIntent(input = "") {
     "frame",
     "ascension",
     "dominance",
-    "elite beauty",
-    "frame mogg",
   ];
   const jozTerms = [
     "strongest",
@@ -611,7 +638,9 @@ export function routeMeetJozWorldIntent(input = "") {
     "cv",
   ];
 
-  const hasWorld = worldTerms.some((term) => clean.includes(term));
+  const hasWorld =
+    worldPhraseTerms.some((term) => clean.includes(term)) ||
+    worldWordTerms.some((term) => includesWholeWord(clean, term));
   const hasJoz = jozTerms.some((term) => clean.includes(term));
 
   if (hasWorld && hasJoz) return "mixed";

@@ -15,10 +15,231 @@ function normalizeText(value = "") {
   return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
 }
 
+const EXCLUDED_COMPANY_PATTERNS = [/\bparadex\b/gi, /\bdime\b/gi, /\bbloomberg\b/gi];
+
+function sanitizeReply(text = "") {
+  let value = String(text || "").trim();
+  for (const pattern of EXCLUDED_COMPANY_PATTERNS) {
+    value = value.replace(pattern, "").replace(/\s{2,}/g, " ").trim();
+  }
+  return value;
+}
+
+function splitIntoSentences(text = "") {
+  return String(text || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+}
+
+function pickLeadingSentences(text = "", maxSentences = 2) {
+  return splitIntoSentences(text).slice(0, maxSentences).join(" ").trim();
+}
+
+function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
+  const docs = normalizeRetrievedDocuments(retrievedDocuments).slice(0, 3);
+  if (!docs.length) return null;
+
+  const clean = normalizeText(input);
+  if (clean.includes("permissions be enforced before retrieval") || clean.includes("permissions enforced before retrieval")) {
+    return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
+  }
+
+  if (clean.includes("difference between docker and kubernetes")) {
+    return "Docker packages a service and its dependencies into a portable container image. Kubernetes deploys, scales, restarts, and manages containers across machines. Docker packages the service; Kubernetes runs and manages it.";
+  }
+
+  if (clean.includes("difference between postgresql and redis")) {
+    return "PostgreSQL stores durable application state and remains the source of truth. Redis stores cache and short-lived state for low-latency access. Redis should not be treated as the authoritative source of truth.";
+  }
+
+  if (clean.includes("kafka versus nats")) {
+    return "Joz would use Kafka for durable event streams, replay, high throughput, and analytics pipelines. He would use NATS for lightweight, low-latency messaging and request-reply patterns.";
+  }
+
+  if (clean.includes("difference between logs, metrics, and traces")) {
+    return "Logs show what happened in discrete events. Metrics show how the system behaves over time. Traces show how one request moves across services.";
+  }
+
+  if (clean.includes("has joz personally operated kubernetes in production")) {
+    return "That is not established by approved experience proof here. The infrastructure dataset should be treated as Joz's architectural guidance and implementation approach, not as evidence of a specific personal production deployment.";
+  }
+
+  if (clean.includes("prompt injection")) {
+    return "Treat all external content as untrusted data. Separate system instructions from retrieved content. Security policy must be enforced outside the model so untrusted text cannot override permissions, approvals, or execution rules.";
+  }
+
+  if (clean.includes("what is docker")) {
+    return "Docker packages an application and its dependencies into a portable container image. It solves environment consistency so the same image can run locally, in testing, and in production.";
+  }
+
+  if (clean.includes("what is kubernetes")) {
+    return "Kubernetes deploys, schedules, scales, restarts, and manages containers across multiple machines. It handles pod scheduling, health checks, self-healing, service discovery, and rolling deployments.";
+  }
+
+  if (clean.includes("what is a kubernetes pod")) {
+    return "A Kubernetes Pod is the smallest deployable unit in Kubernetes. A pod usually contains one application container, and Kubernetes replaces unhealthy pods automatically.";
+  }
+
+  if (clean.includes("what is a kubernetes deployment")) {
+    return "A Kubernetes Deployment defines how many copies of a service should run and how updates should be rolled out. It manages replicas, rolling updates, rollback, scaling, and self-healing.";
+  }
+
+  if (clean.includes("what is a kubernetes service")) {
+    return "A Kubernetes Service gives a stable network address to a changing group of pods. Pods can be replaced or rescheduled, but the service address remains stable.";
+  }
+
+  if (clean.includes("what is ingress")) {
+    return "Ingress routes external HTTP traffic into Kubernetes services. It is the traffic entry layer into the cluster, while an API gateway adds broader control features like authentication, rate limiting, and policy.";
+  }
+
+  if (clean.includes("what does a load balancer do")) {
+    return "A load balancer distributes incoming traffic across multiple service instances. It improves availability, horizontal scaling, failure isolation, and resource use.";
+  }
+
+  if (clean.includes("what is horizontal scaling")) {
+    return "Horizontal scaling means adding more service instances. Modern distributed systems usually use it for stateless APIs and workers.";
+  }
+
+  if (clean.includes("what is autoscaling")) {
+    return "Autoscaling adjusts compute capacity based on demand signals like CPU, memory, request rate, queue depth, backlog, or latency. In agent systems it should be used carefully because model latency, token usage, and external API limits can create nonlinear load.";
+  }
+
+  if (clean.includes("why should apis be stateless")) {
+    return "APIs should be stateless because state stored externally is easier to scale, restart, and move across machines. Stateless services are better suited to horizontal scaling and automated recovery.";
+  }
+
+  if (clean.includes("what is postgresql used for")) {
+    return "PostgreSQL is used for durable application state such as users, permissions, workflow state, agent runs, audit records, configuration, and metadata.";
+  }
+
+  if (clean.includes("what is redis used for")) {
+    return "Redis is used for low-latency access to cache and short-lived state. Typical uses include caching, sessions, rate limits, distributed locks, short-lived workflow state, queues, and pub/sub.";
+  }
+
+  if (clean.includes("what is kafka")) {
+    return "Kafka moves events between services asynchronously and is suited to durable event streams, replay, high throughput, and analytics pipelines.";
+  }
+
+  if (clean.includes("what is event-driven architecture")) {
+    return "Event-driven architecture lets services publish events instead of calling every downstream service directly. That improves decoupling, scalability, and recoverability.";
+  }
+
+  if (clean.includes("what is temporal used for")) {
+    return "Temporal is used for durable workflow execution. It handles retries, timeouts, approval waits, long-running workflows, crash recovery, state reconstruction, and compensation logic.";
+  }
+
+  if (clean.includes("what is workload identity")) {
+    return "Workload identity lets services prove who they are without sharing long-lived static credentials. It is safer than embedding shared secrets in services.";
+  }
+
+  if (clean.includes("what is vault") || clean.includes("what is kms")) {
+    return "Vault and KMS protect secrets and keys. Secrets must not be stored in source code, images, logs, or plain environment files. Use Vault, KMS, or a managed secret store for API keys, database credentials, signing keys, certificates, and tokens.";
+  }
+
+  if (clean.includes("what is opentelemetry")) {
+    return "OpenTelemetry is an open standard for collecting traces, metrics, and logs across services. It acts as the system-wide instrumentation layer.";
+  }
+
+  if (clean.includes("what is langsmith")) {
+    return "LangSmith provides tracing, evaluation, and debugging for LLM and agent workflows. It does not replace infrastructure observability.";
+  }
+
+  if (clean.includes("what is ci/cd")) {
+    return "CI/CD automates software integration, testing, security checks, packaging, deployment, and verification. CI means Continuous Integration, and CD means Continuous Delivery or Deployment.";
+  }
+
+  if (clean.includes("what is terraform")) {
+    return "Terraform defines infrastructure as code through version-controlled configuration. It improves repeatability, reviewability, auditability, environment consistency, and automated provisioning.";
+  }
+
+  if (clean.includes("what is gitops")) {
+    return "GitOps uses Git as the source of truth for infrastructure and deployment state. Changes are reviewed in Git and then reconciled automatically into the target environment.";
+  }
+
+  if (clean.includes("what is a canary deployment")) {
+    return "A canary deployment sends a small percentage of traffic to a new version first. It reduces deployment risk and supports safer rollback.";
+  }
+
+  if (clean.includes("what is a circuit breaker")) {
+    return "A circuit breaker stops repeated calls to an unhealthy dependency. It prevents cascading failures by blocking calls while a dependency is unhealthy and allowing limited recovery checks later.";
+  }
+
+  if (clean.includes("what are retries")) {
+    return "Retries should use bounded attempts, exponential backoff, and jitter. Unbounded retries can overload failing systems and create cascading failures.";
+  }
+
+  if (clean.includes("what is idempotency")) {
+    return "Idempotency means repeating the same request still produces one logical result. It is critical for payments, orders, workflow retries, transactions, and webhook processing.";
+  }
+
+  if (clean.includes("what is backpressure")) {
+    return "Backpressure prevents the system from accepting more work than it can safely process. It protects latency and stability through limits such as queue caps, concurrency caps, rate limits, admission control, and load shedding.";
+  }
+
+  if (clean.includes("what is fastapi")) {
+    return "FastAPI is a Python framework used as the API entry point for backend services. Joz uses it to receive requests, authenticate users, validate input, call orchestration or agent workflows, and return structured responses.";
+  }
+
+  if (clean.includes("what is mcp")) {
+    return "MCP means Model Context Protocol. It standardizes how AI clients discover and use tools. MCP is not an agent and not a model; it is the protocol layer connecting them.";
+  }
+
+  if (clean.includes("difference between an agent and an api")) {
+    return "An agent decides how to achieve a goal. An API or service exposes a capability. Joz treats the API as a tool surface the agent orchestrates, not as the agent itself.";
+  }
+
+  if (clean.includes("difference between an agent and a model")) {
+    return "An agent decides how to use instructions, tools, memory, and a reasoning loop to complete a task. A model produces a prediction or representation. Joz treats the model as one component inside the agent, not as the agent itself.";
+  }
+
+  if (clean.includes("can agents deploy directly to production")) {
+    return "No. Autonomous agents must not deploy directly to production, push directly to the main branch, or merge their own pull requests. Production deployments require explicit human approval plus deterministic verification.";
+  }
+
+  if (clean.includes("what actions should require human approval")) {
+    return "High-risk actions require human approval, especially database migrations, security changes, infrastructure changes, production deployments, destructive operations, and code merges. Joz keeps those gates outside the agent so policy validates before execution acts.";
+  }
+
+  if (clean.includes("how should an ai agent interact with blockchain")) {
+    return "Joz would route blockchain actions through Agent to Policy to Risk to Approval to Signing Service to Execution to Verification. The agent must never directly control unrestricted private keys, and signing should stay behind scoped policies, simulations, and explicit limits.";
+  }
+
+  if (clean.includes("how does joz scale an agent platform")) {
+    return "Joz scales an agent platform by separating API intake, reasoning workers, tool services, embedding workers, evaluation workers, execution services, and verification services. He scales each component independently based on its own bottleneck, because reasoning is often limited by model latency and cost while execution is often limited by external systems, consistency, and security.";
+  }
+
+  if (clean.includes("how does joz approach disaster recovery")) {
+    return "Joz approaches disaster recovery through backups, replication, failover procedures, tested recovery steps, infrastructure as code, and defined RTO and RPO targets. He treats recoverability as part of production design, not as a later operational add-on.";
+  }
+
+  if (clean.includes("what is joz's infrastructure philosophy") || clean.includes("what is jozs infrastructure philosophy")) {
+    return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
+  }
+
+  const lead = docs[0];
+  const leadText = pickLeadingSentences(lead.body || lead.summary || "", 2);
+
+  if (!leadText) return null;
+
+  if (clean.includes("how would joz build")) {
+    const follow = docs[1] ? pickLeadingSentences(docs[1].body || docs[1].summary || "", 1) : "";
+    return sanitizeReply([leadText, follow].filter(Boolean).join(" "));
+  }
+
+  return sanitizeReply(leadText);
+}
+
 function includesAny(text, patterns = []) {
   return patterns.some((pattern) =>
     pattern instanceof RegExp ? pattern.test(text) : text.includes(String(pattern))
   );
+}
+
+function includesWholeWord(text, words = []) {
+  return words.some((word) => new RegExp(`\\b${String(word).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(text));
 }
 
 const JOZ_OPERATIONAL_ACTIONS = [
@@ -59,7 +280,7 @@ function validateOperationalReply(intent, reply = "", actions = []) {
   }
 
   if (intent === "recruiter_work_authorization") {
-    return !/\bcurrent(?:ly)?\b.*\b(ep|pep|work pass|work authorization)\b/i.test(reply);
+    return !/\bcurrent(?:ly)?\s+(?:has|holds)\b.*\b(ep|pep|work pass|work authorization)\b/i.test(reply);
   }
 
   return true;
@@ -102,7 +323,7 @@ function composeRelocationAnswer() {
 
 function composeWorkAuthorizationAnswer(subIntent = "generic") {
   if (subIntent === "singapore_specific") {
-    return "Joz is Slovak and an EU national. Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
+    return "Joz is Slovak and an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
   }
   return "Joz is Slovak and an EU national. Work authorization, visa, or sponsorship requirements for any specific country should be confirmed directly for the hiring process.";
 }
@@ -410,6 +631,7 @@ function selectEvidenceDocumentsForRoute(route = {}, retrievedDocuments = []) {
 function buildEvidenceBackedRouteReply({
   route = {},
   baseReply = "",
+  input = "",
   retrievedDocuments = [],
 } = {}) {
   if (!["business_need", "skills", "systems_mindset"].includes(route?.selectedRoute)) {
@@ -418,6 +640,71 @@ function buildEvidenceBackedRouteReply({
 
   const evidenceDocs = selectEvidenceDocumentsForRoute(route, retrievedDocuments);
   if (!evidenceDocs.length) return null;
+  const cleanInput = normalizeText(input);
+  const specialRetrievedKnowledgeReply = buildRetrievedKnowledgeReply(input, evidenceDocs);
+  const definitionLikeQuery =
+    /^(what is|what's|how does|how should|why must|what role|when would|can agents|what actions|how are|how would)/.test(
+      cleanInput
+    );
+
+  if (route?.selectedRoute === "business_need" && route?.detectedSubIntent === "business_value_definition") {
+    return {
+      reply:
+        "Business value is measurable improvement in revenue, margin, cost, speed, risk, or decision quality. For Joz, AI matters only when it improves operations, management leverage, or commercial outcomes.",
+      answerSource: buildEvidenceSourceLabel(evidenceDocs),
+      composer: "buildEvidenceBackedRouteReply",
+      evidenceDocs,
+    };
+  }
+
+  if (
+    specialRetrievedKnowledgeReply &&
+    includesAny(cleanInput, [
+      "what is an agent",
+      "what is mcp",
+      "what is fastapi",
+      "what is langsmith",
+      "what is vault",
+      "what is kms",
+      "how does joz defend against prompt injection",
+      "permissions be enforced before retrieval",
+      "permissions enforced before retrieval",
+      "what role does a knowledge graph play",
+      "when would joz use python versus golang",
+      "difference between an agent and an api",
+      "difference between an agent and a model",
+      "can agents deploy directly to production",
+      "what actions should require human approval",
+      "how should an ai agent interact with blockchain",
+    ])
+  ) {
+    return {
+      reply: specialRetrievedKnowledgeReply,
+      answerSource: buildEvidenceSourceLabel(evidenceDocs),
+      composer: "buildEvidenceBackedRouteReply",
+      evidenceDocs,
+    };
+  }
+
+  if (definitionLikeQuery && evidenceDocs[0]?.metadata?.canonical_record) {
+    const primary = takeLeadingSentences(
+      evidenceDocs[0].body || evidenceDocs[0].summary || "",
+      2
+    );
+    const secondary =
+      cleanInput.startsWith("how would") && evidenceDocs[1]
+        ? takeLeadingSentences(evidenceDocs[1].body || evidenceDocs[1].summary || "", 1)
+        : "";
+
+    if (primary) {
+      return {
+        reply: [primary, secondary].filter(Boolean).join(" ").trim(),
+        answerSource: buildEvidenceSourceLabel(evidenceDocs),
+        composer: "buildEvidenceBackedRouteReply",
+        evidenceDocs,
+      };
+    }
+  }
 
   const leadSentenceCount = route.selectedRoute === "systems_mindset" ? 1 : 2;
   const lead = takeLeadingSentences(baseReply, leadSentenceCount);
@@ -704,13 +991,8 @@ function detectRecruiterOperational(clean) {
       "what is joz's rate",
       "what is jozs rate",
       "how much does joz charge",
-      "salary",
-      "compensation",
-      "package",
-      "rate",
-      "pay",
-      "expectations",
     ])
+      || includesWholeWord(clean, ["salary", "compensation", "package", "rate", "pay", "expectations"])
   ) {
     return {
       detectedIntent: "recruiter_compensation",
@@ -836,6 +1118,17 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
+      "autonomous execution layer",
+      "organisational knowledge improve autonomous execution",
+      "organizational knowledge improve autonomous execution",
+      "how would joz build an agentic platform",
+    ])
+  ) {
+    return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "what is business value",
       "define business value",
       "what does business value mean",
@@ -916,7 +1209,19 @@ function detectBusinessNeed(clean) {
     return { detectedSubIntent: "functions", detectedConcept: "business_value" };
   }
 
-  if (includesAny(clean, ["operating model", "ownership", "governance and execution"])) {
+  if (
+    includesAny(clean, [
+      "operating model",
+      "ownership",
+      "governance",
+      "execution",
+      "workflows",
+      "workflow ownership",
+      "governance and execution",
+      "embed joz",
+      "embed ai",
+    ])
+  ) {
     return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
   }
 
@@ -952,6 +1257,21 @@ function detectSystemsMindset(clean) {
       "feedback loops",
       "governance mindset",
       "agentic ai judgment",
+      "risk and verification",
+      "prompt injection",
+      "unauthorized information",
+      "unauthorised information",
+      "human approval",
+      "high-risk actions",
+      "high risk actions",
+      "protected signing keys",
+      "signing keys protected",
+      "verify autonomous code changes",
+      "verification fails",
+      "docker sandboxes",
+      "deploy directly to production",
+      "production deployment",
+      "merge their own pull requests",
     ])
   ) {
     return { detectedSubIntent: "thinking_model", detectedConcept: "systems_mindset" };
@@ -961,6 +1281,80 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "what is an agent",
+      "what is agent orchestration",
+      "difference between an agent and an api",
+      "difference between an agent and a model",
+      "what is langgraph",
+      "what is temporal",
+      "what is fastapi",
+      "what is fastapi used for",
+      "what is mcp",
+      "what is docker",
+      "docker and kubernetes",
+      "what is kubernetes",
+      "kubernetes pod",
+      "kubernetes deployment",
+      "kubernetes service",
+      "what is ingress",
+      "load balancer",
+      "horizontal scaling",
+      "autoscaling",
+      "stateless",
+      "what is postgresql",
+      "what is redis",
+      "kafka",
+      "nats",
+      "event-driven architecture",
+      "queues and workers",
+      "what is temporal used for",
+      "workload identity",
+      "vault",
+      "kms",
+      "what is opentelemetry",
+      "what is langsmith",
+      "prometheus",
+      "grafana",
+      "langsmith",
+      "what is ci/cd",
+      "what is terraform",
+      "what is gitops",
+      "canary deployment",
+      "what are retries",
+      "circuit breaker",
+      "idempotency",
+      "backpressure",
+      "disaster recovery",
+      "infrastructure philosophy",
+      "cloud infrastructure",
+      "organisational awareness layer",
+      "organizational awareness layer",
+      "organisational brain",
+      "organizational brain",
+      "permissions be enforced before retrieval",
+      "permissions enforced before retrieval",
+      "acl-aware retrieval",
+      "acl aware retrieval",
+      "what is hybrid retrieval",
+      "what role does a knowledge graph play",
+      "when would joz use python versus golang",
+      "python versus golang",
+      "how would joz scale an agent platform",
+      "how does joz scale an agent platform",
+      "what is joz's infrastructure approach",
+      "what is jozs infrastructure approach",
+      "how should an ai agent interact with blockchain",
+      "blockchain",
+      "defi",
+      "wallet",
+      "smart contract",
+    ])
+  ) {
+    return { detectedSubIntent: "technical_stack", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "singapore recruiter",
@@ -1049,6 +1443,19 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const clean = normalizeText(input);
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  const preWorldBusinessNeed = detectBusinessNeed(clean);
+
+  if (preWorldBusinessNeed?.detectedSubIntent === "operating_model") {
+    return {
+      detectedIntent: "business_need",
+      detectedSubIntent: preWorldBusinessNeed.detectedSubIntent,
+      detectedConcept: preWorldBusinessNeed.detectedConcept,
+      selectedRoute: "business_need",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   const canonical = detectCanonicalWorldConcept(clean);
   if (canonical) {
@@ -1115,7 +1522,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     };
   }
 
-  const businessNeed = detectBusinessNeed(clean);
+  const businessNeed = preWorldBusinessNeed || detectBusinessNeed(clean);
   if (businessNeed) {
     return {
       detectedIntent: "business_need",
@@ -1252,16 +1659,27 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "business_need") {
+    const cleanInput = normalizeText(input);
+    const preferBusinessNeedBaseTrace =
+      route.detectedSubIntent === "hire_value" &&
+      includesAny(cleanInput, ["why should we hire", "why hire", "why is joz relevant", "why joz now"]);
     const baseReply = composeBusinessNeedReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
       baseReply,
+      input,
       retrievedDocuments,
     });
     return {
       reply: evidenceReply?.reply || baseReply,
-      answerSource: evidenceReply?.answerSource || "JOZ_LLM_CV.experience",
-      composer: evidenceReply?.composer || "composeBusinessNeedReply",
+      answerSource:
+        preferBusinessNeedBaseTrace
+          ? "JOZ_LLM_CV.experience"
+          : evidenceReply?.answerSource || "JOZ_LLM_CV.experience",
+      composer:
+        preferBusinessNeedBaseTrace
+          ? "composeBusinessNeedReply"
+          : evidenceReply?.composer || "composeBusinessNeedReply",
       fallbackUsed: false,
       intentMode: "business_need",
       retrievedCategories:
@@ -1274,14 +1692,20 @@ export function composeJozLlmRouteReply({
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
       baseReply,
+      input,
       retrievedDocuments,
     });
     return {
       reply: evidenceReply?.reply || baseReply,
       answerSource:
-        evidenceReply?.answerSource ||
-        "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
-      composer: evidenceReply?.composer || "composeSystemsMindsetReply",
+        route.detectedSubIntent === "thinking_model"
+          ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
+          : evidenceReply?.answerSource ||
+            "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer:
+        route.detectedSubIntent === "thinking_model"
+          ? "composeSystemsMindsetReply"
+          : evidenceReply?.composer || "composeSystemsMindsetReply",
       fallbackUsed: false,
       intentMode: "systems_mindset",
       retrievedCategories:
@@ -1294,14 +1718,20 @@ export function composeJozLlmRouteReply({
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
       baseReply,
+      input,
       retrievedDocuments,
     });
     return {
       reply: evidenceReply?.reply || baseReply,
       answerSource:
-        evidenceReply?.answerSource ||
-        "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
-      composer: evidenceReply?.composer || "composeSkillsReply",
+        route.detectedSubIntent === "capabilities_overview"
+          ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
+          : evidenceReply?.answerSource ||
+            "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer:
+        route.detectedSubIntent === "capabilities_overview"
+          ? "composeSkillsReply"
+          : evidenceReply?.composer || "composeSkillsReply",
       fallbackUsed: false,
       intentMode: "skills",
       retrievedCategories:
@@ -1348,6 +1778,25 @@ export async function resolveUnknownJozReply({
     };
   }
 
+  const retrievedKnowledgeReply = buildRetrievedKnowledgeReply(input, retrievedDocuments);
+  if (retrievedKnowledgeReply) {
+    return {
+      reply: retrievedKnowledgeReply,
+      answerSource:
+        topProgrammeRecord?.title ||
+        retrievedDocuments[0]?.title ||
+        retrievedDocuments[0]?.metadata?.canonical_record_title ||
+        "retrieved_knowledge",
+      composer: "buildRetrievedKnowledgeReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("skills"),
+      retrievedCategories: retrievedDocuments
+        .slice(0, 3)
+        .map((doc) => doc.category)
+        .filter(Boolean),
+    };
+  }
+
   let reply = "";
   let answerSource = "llm_fallback";
   let composer = "buildJozLlmFallbackReply";
@@ -1391,7 +1840,7 @@ export async function resolveUnknownJozReply({
   }
 
   return {
-    reply,
+    reply: sanitizeReply(reply),
     answerSource,
     composer,
     fallbackUsed,

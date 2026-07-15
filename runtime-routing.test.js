@@ -11,6 +11,8 @@ const BANNED_GOLD_PILL_TERMS = [
   "non-traditional methods",
 ];
 
+const BANNED_CANONICAL_TERMS = [/\bparadex\b/i, /\bdime\b/i, /\bbloomberg\b/i];
+
 async function postJson(pathname, body, options = {}) {
   const server = app.listen(0, "127.0.0.1");
   await new Promise((resolve) => server.once("listening", resolve));
@@ -60,6 +62,12 @@ function assertCanonicalGoldPillReply(reply) {
   }
 }
 
+function assertNoBannedCanonicalTerms(reply) {
+  for (const pattern of BANNED_CANONICAL_TERMS) {
+    assert.doesNotMatch(reply, pattern);
+  }
+}
+
 test("POST /api/joz-llm routes gold pill queries through canonical world concept", async () => {
   const { status, payload } = await postJson("/api/joz-llm", {
     sessionKey: "runtime-joz-llm-gold-pill",
@@ -101,6 +109,246 @@ test("POST /api/joz-llm verifies business value definition replies deterministic
   assert.equal(payload.verification?.status, "pass");
   assert.equal(payload.verification?.metrics?.wordCount <= 55, true);
   assert.match(String(payload.reply || ""), /business value is|measurable improvement/i);
+});
+
+test("POST /api/joz-llm does not let Root world context hijack operating model questions", async () => {
+  const question =
+    "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-operating-model-no-world-hijack",
+    messages: [{ role: "user", content: question }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "ball",
+      currentMeshStage: null,
+      app_context: {
+        current_portal: "root",
+        focused_object: "root_gold_pill",
+        device: { class: "desktop", mobile: false, ar_available: false, spatial_available: false },
+      },
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "business_need");
+  assert.equal(payload.trace?.selectedRoute, "business_need");
+  assert.equal(payload.trace?.detectedSubIntent, "operating_model");
+  assert.doesNotMatch(String(payload.reply || ""), /You are inside Root/i);
+  assert.doesNotMatch(String(payload.reply || ""), /Gold Pill represents/i);
+  assert.match(String(payload.reply || ""), /operating model|governance|ownership|workflows|execution/i);
+});
+
+test("routeMeetJozWorldIntent keeps operating model prompts out of world awareness", async () => {
+  const { routeMeetJozWorldIntent } = await import("./shared/meetJozWorld.js");
+  const question =
+    "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
+
+  assert.equal(routeMeetJozWorldIntent(question), "joz_knowledge");
+});
+
+test("POST /api/joz-llm answers canonical technical and governance questions from retrieved knowledge", async () => {
+  const cases = [
+    {
+      question: "What is an agent?",
+      expectedMode: "skills",
+      expectedPatterns: [/LLM \+ instructions \+ tools \+ memory \+ reasoning loop/i],
+      expectedCitation: "Agent Definition",
+    },
+    {
+      question: "What is MCP?",
+      expectedMode: "skills",
+      expectedPatterns: [/Model Context Protocol/i, /not an agent/i],
+      expectedCitation: "MCP",
+    },
+    {
+      question: "What is FastAPI used for?",
+      expectedMode: "skills",
+      expectedPatterns: [/Python framework/i, /API entry point/i],
+      expectedCitation: "FastAPI",
+    },
+    {
+      question: "How does Joz defend against prompt injection?",
+      expectedMode: "systems_mindset",
+      expectedPatterns: [/untrusted data/i, /system instructions/i, /security policy/i],
+      expectedCitation: "Prompt Injection Defense",
+    },
+    {
+      question: "Why must permissions be enforced before retrieval?",
+      expectedMode: "skills",
+      expectedPatterns: [/before retrieval/i, /Unauthorized information must never enter the LLM context window/i],
+      expectedCitation: "ACL-Aware Retrieval",
+    },
+    {
+      question: "How does Joz verify autonomous code changes?",
+      expectedMode: "systems_mindset",
+      expectedPatterns: [/Unit tests/i, /Integration tests/i, /verification cycle/i],
+      expectedCitation: "Autonomous Code Verification",
+    },
+    {
+      question: "When would Joz use Python versus Golang?",
+      expectedMode: "skills",
+      expectedPatterns: [/Python is suited to AI/i, /Go is suited to high-performance APIs|Go is suited to concurrency/i],
+      expectedCitation: "Golang and Python",
+    },
+    {
+      question: "What is Docker?",
+      expectedMode: "skills",
+      expectedPatterns: [/portable container image/i, /environment consistency/i],
+      expectedCitation: "Docker",
+    },
+    {
+      question: "What is Kubernetes?",
+      expectedMode: "skills",
+      expectedPatterns: [/manages containers/i, /scales|schedules|self-healing/i],
+      expectedCitation: "Kubernetes",
+    },
+    {
+      question: "What is ingress?",
+      expectedMode: "skills",
+      expectedPatterns: [/routes external HTTP traffic/i, /traffic entry/i],
+      expectedCitation: "Ingress and API Gateway",
+    },
+    {
+      question: "What is PostgreSQL used for?",
+      expectedMode: "skills",
+      expectedPatterns: [/durable application state/i, /users|permissions|workflow state|audit records/i],
+      expectedCitation: "PostgreSQL",
+    },
+    {
+      question: "What is Redis used for?",
+      expectedMode: "skills",
+      expectedPatterns: [/low-latency/i, /caching|sessions|rate limits|distributed locks/i],
+      expectedCitation: "Redis",
+    },
+    {
+      question: "What is Kafka?",
+      expectedMode: "skills",
+      expectedPatterns: [/durable event streams/i, /replay|high throughput/i],
+      expectedCitation: "Kafka and NATS",
+    },
+    {
+      question: "What is OpenTelemetry?",
+      expectedMode: "skills",
+      expectedPatterns: [/open standard/i, /traces, metrics, and logs/i],
+      expectedCitation: "OpenTelemetry",
+    },
+    {
+      question: "What is Terraform?",
+      expectedMode: "skills",
+      expectedPatterns: [/infrastructure as code/i, /repeatability|reviewability|auditability/i],
+      expectedCitation: "Infrastructure as Code",
+    },
+    {
+      question: "How does Joz scale an agent platform?",
+      expectedMode: "skills",
+      expectedPatterns: [/API intake/i, /reasoning workers|tool services|verification services/i],
+      expectedCitation: "Agent Infrastructure Scaling",
+    },
+  ];
+
+  for (const testCase of cases) {
+    const { status, payload } = await postJson("/api/joz-llm", {
+      sessionKey: `runtime-canonical-${testCase.question}`,
+      messages: [{ role: "user", content: testCase.question }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
+    });
+
+    assert.equal(status, 200, testCase.question);
+    assert.equal(payload.mode, testCase.expectedMode, testCase.question);
+    assert.ok(Array.isArray(payload.citations));
+    assert.equal(payload.citations?.[0]?.title, testCase.expectedCitation, testCase.question);
+    const reply = String(payload.reply || "");
+    for (const pattern of testCase.expectedPatterns) {
+      assert.match(reply, pattern, testCase.question);
+    }
+    assertNoBannedCanonicalTerms(reply);
+  }
+});
+
+test("POST /api/joz-llm blocks forbidden framing in canonical governance answers", async () => {
+  const cases = [
+    {
+      question: "Can agents deploy directly to production?",
+      expectedPatterns: [/must not|do not|should not/i, /production/i],
+      forbidden: [/can deploy directly to production/i],
+    },
+    {
+      question: "What actions should require human approval?",
+      expectedPatterns: [/human approval/i, /database migrations|security changes|infrastructure changes|production deployments|code merges/i],
+      forbidden: [/no approval needed/i],
+    },
+    {
+      question: "How should an AI agent interact with blockchain?",
+      expectedPatterns: [/never directly control unrestricted private keys/i, /Policy|Risk|Approval|Signing Service/i],
+      forbidden: [/private keys directly/i],
+    },
+    {
+      question: "What is the difference between an agent and an API?",
+      expectedPatterns: [/agent/i, /API|service exposes a capability/i],
+      forbidden: [/api is an agent/i],
+    },
+    {
+      question: "What is the difference between an agent and a model?",
+      expectedPatterns: [/Agent/i, /Model/i, /Tool/i],
+      forbidden: [/model is an agent/i],
+    },
+    {
+      question: "What is the difference between Docker and Kubernetes?",
+      expectedPatterns: [/Docker packages/i, /Kubernetes .* manages|Kubernetes .* runs/i],
+      forbidden: [/Docker is a virtual machine/i, /Kubernetes is a programming language/i],
+    },
+    {
+      question: "What is the difference between PostgreSQL and Redis?",
+      expectedPatterns: [/durable application state|source of truth/i, /cache|short-lived state/i],
+      forbidden: [/Redis is the authoritative source of truth/i],
+    },
+    {
+      question: "What is LangSmith?",
+      expectedPatterns: [/tracing, evaluation, and debugging/i, /does not replace infrastructure observability/i],
+      forbidden: [/replaces infrastructure observability/i],
+    },
+    {
+      question: "What is Vault or KMS?",
+      expectedPatterns: [/protect secrets and keys/i, /must not be stored in source code/i],
+      forbidden: [/store secrets in source code/i],
+    },
+    {
+      question: "What are retries?",
+      expectedPatterns: [/bounded attempts|exponential backoff|jitter/i],
+      forbidden: [/unbounded retries/i],
+    },
+    {
+      question: "Has Joz personally operated Kubernetes in production?",
+      expectedPatterns: [/approved experience data|not supported|architectural guidance/i],
+      forbidden: [/Joz personally deployed Kubernetes in production/i],
+    },
+  ];
+
+  for (const testCase of cases) {
+    const { status, payload } = await postJson("/api/joz-llm", {
+      sessionKey: `runtime-guardrail-${testCase.question}`,
+      messages: [{ role: "user", content: testCase.question }],
+      context: {
+        currentPortal: "root",
+        currentMesh: "ball",
+        currentMeshStage: null,
+      },
+    });
+
+    assert.equal(status, 200, testCase.question);
+    const reply = String(payload.reply || "");
+    for (const pattern of testCase.expectedPatterns) {
+      assert.match(reply, pattern, testCase.question);
+    }
+    for (const pattern of testCase.forbidden) {
+      assert.doesNotMatch(reply, pattern, testCase.question);
+    }
+    assertNoBannedCanonicalTerms(reply);
+  }
 });
 
 test("POST /api/agentic preserves canonical world awareness in the live response contract", async () => {
