@@ -593,3 +593,38 @@ test("unknown definition prompts ignore unrelated retrieved docs and still retur
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
 });
+
+test("common first-word typos still resolve unknown definition prompts to the knowledge-gap reply", async () => {
+  const unrelatedRetrievedDocuments = [
+    {
+      title: "Tools",
+      category: "skills",
+      summary:
+        "Tools are functions, APIs, services, databases, models, or external systems that agents can call.",
+      body:
+        "Tools are functions, APIs, services, databases, models, or external systems that agents can call. Examples: get_portfolio() get_market_data() search_documents() calculate_risk() create_order() verify_transaction() A tool executes a capability.",
+      metadata: {
+        slug: "canonical-tooling",
+        tags: ["tools", "agents"],
+      },
+    },
+  ];
+
+  const resolution = await resolveUnknownJozReply({
+    input: "hat is Paradex?",
+    messages: [{ role: "user", content: "hat is Paradex?" }],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: unrelatedRetrievedDocuments,
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.composer, "buildUnknownDefinitionGapReply");
+  assert.equal(resolution.answerSource, "knowledge_gap");
+  assert.match(
+    resolution.reply,
+    /^Paradex is not in the current Joz knowledge base\./i
+  );
+  assert.doesNotMatch(resolution.reply, /^Tools are functions/i);
+});

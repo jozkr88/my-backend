@@ -38,9 +38,28 @@ function pickLeadingSentences(text = "", maxSentences = 2) {
   return splitIntoSentences(text).slice(0, maxSentences).join(" ").trim();
 }
 
+function normalizeDefinitionPromptPrefix(text = "") {
+  const trimmed = String(text || "").trim();
+  if (!trimmed) return "";
+
+  const typoPrefixRewrites = [
+    [/^hat is\b/i, "what is"],
+    [/^wat is\b/i, "what is"],
+    [/^wht is\b/i, "what is"],
+    [/^whats\b/i, "what's"],
+  ];
+
+  for (const [pattern, replacement] of typoPrefixRewrites) {
+    if (pattern.test(trimmed)) {
+      return trimmed.replace(pattern, replacement);
+    }
+  }
+
+  return trimmed;
+}
+
 function extractDefinitionTerm(text = "") {
-  const match = String(text || "")
-    .trim()
+  const match = normalizeDefinitionPromptPrefix(text)
     .match(/^(?:what is|what's|who is|define|explain)\s+(.+?)(?:\?|\.|!)?$/i);
   if (!match) return null;
 
