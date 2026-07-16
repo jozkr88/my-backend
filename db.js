@@ -711,12 +711,58 @@ export async function listRecentJozLlmRequestEvents(limit = 20) {
   const result = await runQuery(
     `SELECT id, conversation_id, session_key, route, intent_mode, user_message, assistant_reply,
             request_context, trace, verification, verification_flow, verification_recovery,
+            review_status, issue_type, review_notes, approved_correction, reviewed_by, reviewed_at,
             retrieved_categories, retrieved_documents,
             latency_ms, response_status, created_at
      FROM joz_llm_request_events
      ORDER BY created_at DESC
      LIMIT $1`,
     [Math.max(1, Math.min(250, Number(limit) || 20))]
+  );
+  return result.rows || [];
+}
+
+export async function updateJozLlmRequestEventReview(
+  id,
+  {
+    reviewStatus = "unreviewed",
+    issueType = null,
+    reviewNotes = "",
+    approvedCorrection = "",
+    reviewedBy = "dashboard",
+  } = {}
+) {
+  const result = await runQuery(
+    `UPDATE joz_llm_request_events
+     SET review_status = $2,
+         issue_type = $3,
+         review_notes = $4,
+         approved_correction = $5,
+         reviewed_by = $6,
+         reviewed_at = NOW()
+     WHERE id = $1
+     RETURNING id, review_status, issue_type, review_notes, approved_correction, reviewed_by, reviewed_at`,
+    [
+      Number(id),
+      String(reviewStatus || "unreviewed").trim().toLowerCase() || "unreviewed",
+      issueType ? String(issueType).trim().toLowerCase() : null,
+      String(reviewNotes || "").trim(),
+      String(approvedCorrection || "").trim(),
+      String(reviewedBy || "dashboard").trim().slice(0, 120) || "dashboard",
+    ]
+  );
+  return result.rows[0] || null;
+}
+
+export async function listApprovedJozLlmCorrections(limit = 100) {
+  const result = await runQuery(
+    `SELECT id, route, intent_mode, user_message, approved_correction, issue_type, reviewed_at
+     FROM joz_llm_request_events
+     WHERE review_status = 'approved_correction'
+       AND COALESCE(approved_correction, '') <> ''
+     ORDER BY reviewed_at DESC NULLS LAST, created_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(500, Number(limit) || 100))]
   );
   return result.rows || [];
 }
@@ -1400,6 +1446,12 @@ export async function initDatabase() {
         verification JSONB NOT NULL DEFAULT '{}'::jsonb,
         verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb,
         verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb,
+        review_status TEXT NOT NULL DEFAULT 'unreviewed',
+        issue_type TEXT,
+        review_notes TEXT NOT NULL DEFAULT '',
+        approved_correction TEXT NOT NULL DEFAULT '',
+        reviewed_by TEXT,
+        reviewed_at TIMESTAMPTZ,
         retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
         retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
         latency_ms INTEGER,
@@ -1426,6 +1478,36 @@ export async function initDatabase() {
     await db.query(`
       ALTER TABLE joz_llm_request_events
       ADD COLUMN IF NOT EXISTS verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS review_status TEXT NOT NULL DEFAULT 'unreviewed'
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS issue_type TEXT
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS review_notes TEXT NOT NULL DEFAULT ''
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS approved_correction TEXT NOT NULL DEFAULT ''
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS reviewed_by TEXT
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS reviewed_at TIMESTAMPTZ
     `);
 
     await db.query(`

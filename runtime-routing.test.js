@@ -51,6 +51,26 @@ async function getJson(pathname, options = {}) {
   }
 }
 
+async function patchJson(pathname, body, options = {}) {
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((resolve) => server.once("listening", resolve));
+
+  try {
+    const { port } = server.address();
+    const response = await fetch(`http://127.0.0.1:${port}${pathname}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+      body: JSON.stringify(body),
+    });
+    const payload = await response.json();
+    return { status: response.status, payload };
+  } finally {
+    await new Promise((resolve, reject) => {
+      server.close((error) => (error ? reject(error) : resolve()));
+    });
+  }
+}
+
 function assertCanonicalGoldPillReply(reply) {
   assert.ok(
     reply.startsWith("The Gold Pill is a core concept within MeetJoz and neoMAXX."),
@@ -136,6 +156,30 @@ test("POST /api/joz-llm does not let Root world context hijack operating model q
   assert.doesNotMatch(String(payload.reply || ""), /You are inside Root/i);
   assert.doesNotMatch(String(payload.reply || ""), /Gold Pill represents/i);
   assert.match(String(payload.reply || ""), /operating model|governance|ownership|workflows|execution/i);
+});
+
+test("POST /api/joz-llm returns a clarification guard for ambiguous follow-up phrasing", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-ambiguous-follow-up",
+    messages: [{ role: "user", content: "How does Joz do it?" }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "ball",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "unknown_fallback");
+  assert.equal(payload.trace?.selectedRoute, "unknown_fallback");
+  assert.equal(payload.trace?.answerSource, "ambiguity_guard");
+  assert.equal(payload.trace?.composer, "buildAmbiguousFollowUpReply");
+  assert.match(String(payload.reply || ""), /too ambiguous on its own/i);
+  assert.match(String(payload.reply || ""), /How does Joz architect agentic AI/i);
+  assert.doesNotMatch(
+    String(payload.reply || ""),
+    /Joz starts with user intent|Joz Krupa is Slovak|British heritage|University of Central Lancashire|MSc/i
+  );
 });
 
 test("routeMeetJozWorldIntent keeps operating model prompts out of world awareness", async () => {
@@ -319,7 +363,7 @@ test("POST /api/joz-llm blocks forbidden framing in canonical governance answers
     {
       question: "What are retries?",
       expectedPatterns: [/bounded attempts|exponential backoff|jitter/i],
-      forbidden: [/unbounded retries/i],
+      forbidden: [/recommend unbounded retries/i, /^unbounded retries are (good|fine|recommended)/i],
     },
     {
       question: "Has Joz personally operated Kubernetes in production?",
@@ -443,6 +487,88 @@ test("GET /api/joz-llm/observability returns recent request events", async () =>
         String(event.route || "") === "systems_mindset"
     )
   );
+});
+
+test("PATCH /api/joz-llm/observability/:id/review persists review flags", async () => {
+  const sessionKey = `runtime-review-${Date.now()}`;
+  const seed = await postJson("/api/joz-llm", {
+    sessionKey,
+    messages: [{ role: "user", content: "What is Docker?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(seed.status, 200);
+
+  const list = await getJson("/api/joz-llm/observability?limit=20");
+  const event = (list.payload?.events || []).find(
+    (entry) => String(entry.session_key || "") === sessionKey
+  );
+
+  assert.ok(event?.id);
+
+  const review = await patchJson(`/api/joz-llm/observability/${event.id}/review`, {
+    reviewStatus: "flagged",
+    issueType: "weak_answer",
+    reviewNotes: "Needs a stronger, more contextual answer.",
+    reviewedBy: "runtime-test",
+  });
+
+  assert.equal(review.status, 200);
+  assert.equal(review.payload?.ok, true);
+  assert.equal(review.payload?.event?.review_status, "flagged");
+  assert.equal(review.payload?.event?.issue_type, "weak_answer");
+});
+
+test("approved corrections are reused for strongly matching future prompts", async () => {
+  const sessionKey = `runtime-approved-correction-${Date.now()}`;
+  const seed = await postJson("/api/joz-llm", {
+    sessionKey,
+    messages: [{ role: "user", content: "What is the purpose of this?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(seed.status, 200);
+
+  const list = await getJson("/api/joz-llm/observability?limit=20");
+  const event = (list.payload?.events || []).find(
+    (entry) => String(entry.session_key || "") === sessionKey
+  );
+
+  assert.ok(event?.id);
+
+  const correctionText =
+    "Joz LLM exists to showcase Joz's skills, experience, achievements, architecture thinking, and business value in a clear and credible way.";
+  const review = await patchJson(`/api/joz-llm/observability/${event.id}/review`, {
+    reviewStatus: "approved_correction",
+    issueType: "weak_answer",
+    reviewNotes: "Use the tighter purpose answer.",
+    approvedCorrection: correctionText,
+    reviewedBy: "runtime-test",
+  });
+
+  assert.equal(review.status, 200);
+
+  const replay = await postJson("/api/joz-llm", {
+    sessionKey: `${sessionKey}-replay`,
+    messages: [{ role: "user", content: "What's the purpose of this?" }],
+    context: {
+      currentPortal: "meet-joz",
+      currentMesh: "skills",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(replay.status, 200);
+  assert.match(String(replay.payload?.reply || ""), /showcase Joz's skills, experience, achievements/i);
+  assert.equal(replay.payload?.trace?.composer, "buildApprovedCorrectionReply");
 });
 
 test("POST /api/privacy/export returns matching fallback callback request data", async () => {
@@ -627,11 +753,11 @@ const JOZ_ROUTER_GATE_CASES = [
       detectedSubIntent: "thinking_model",
       detectedConcept: "systems_mindset",
       selectedRoute: "systems_mindset",
-      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
-      composer: "composeSystemsMindsetReply",
+      answerSource: "retrieved_knowledge",
+      composer: "buildRetrievedKnowledgeReply",
       fallbackUsed: false,
     },
-    text: [/systems before features|signal from noise/i],
+    text: [/systems before features|signal from noise|interconnected systems|technology is rarely the root problem/i],
   },
   {
     name: "business_need",

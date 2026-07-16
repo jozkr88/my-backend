@@ -20,9 +20,11 @@ import {
   getStructuredWorldState,
   initDatabase,
   isDatabaseEnabled,
+  listApprovedJozLlmCorrections,
   listRecentJozLlmRequestEvents,
   logReasoningEvent,
   logJozLlmRequestEvent,
+  updateJozLlmRequestEventReview,
 } from "./db.js";
 import {
   APP_CONTEXT,
@@ -573,6 +575,119 @@ function rememberJozObservabilityEvent(event) {
   }
 }
 
+function updateJozObservabilityFallbackReview(id, patch = {}) {
+  const event = jozObservabilityFallbackStore.find((entry) => String(entry.id) === String(id));
+  if (!event) return null;
+  event.review_status = patch.review_status ?? event.review_status ?? "unreviewed";
+  event.issue_type = patch.issue_type ?? event.issue_type ?? null;
+  event.review_notes = patch.review_notes ?? event.review_notes ?? "";
+  event.approved_correction = patch.approved_correction ?? event.approved_correction ?? "";
+  event.reviewed_by = patch.reviewed_by ?? event.reviewed_by ?? "dashboard";
+  event.reviewed_at = patch.reviewed_at ?? new Date().toISOString();
+  return event;
+}
+
+function normalizeCorrectionText(value = "") {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildCorrectionTokens(value = "") {
+  return new Set(
+    normalizeCorrectionText(value)
+      .split(" ")
+      .map((token) => token.trim())
+      .filter((token) => token.length >= 3)
+  );
+}
+
+function scoreApprovedCorrectionMatch(input = "", route = {}, candidate = {}) {
+  const inputText = normalizeCorrectionText(input);
+  const candidateText = normalizeCorrectionText(candidate.user_message || "");
+  if (!inputText || !candidateText) return 0;
+  if (inputText === candidateText) return 1;
+
+  const inputTokens = buildCorrectionTokens(inputText);
+  const candidateTokens = buildCorrectionTokens(candidateText);
+  if (!inputTokens.size || !candidateTokens.size) return 0;
+
+  let overlap = 0;
+  for (const token of inputTokens) {
+    if (candidateTokens.has(token)) overlap += 1;
+  }
+
+  const tokenCoverage = overlap / Math.max(inputTokens.size, 1);
+  const reverseCoverage = overlap / Math.max(candidateTokens.size, 1);
+  const lexicalScore = Math.max(tokenCoverage, reverseCoverage);
+  const routeBonus =
+    route?.selectedRoute &&
+    candidate?.route &&
+    String(route.selectedRoute) === String(candidate.route)
+      ? 0.12
+      : 0;
+  const substringBonus =
+    inputText.includes(candidateText) || candidateText.includes(inputText) ? 0.18 : 0;
+
+  return lexicalScore + routeBonus + substringBonus;
+}
+
+function findApprovedCorrectionMatch({ input = "", route = {}, candidates = [] } = {}) {
+  let bestMatch = null;
+  let bestScore = 0;
+
+  for (const candidate of candidates) {
+    const score = scoreApprovedCorrectionMatch(input, route, candidate);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = candidate;
+    }
+  }
+
+  if (!bestMatch) return null;
+  if (bestScore < 0.72) return null;
+
+  return {
+    ...bestMatch,
+    matchScore: bestScore,
+  };
+}
+
+function buildApprovedCorrectionDocument(match) {
+  if (!match?.approved_correction) return null;
+  return {
+    title: "Approved Reviewed Correction",
+    category: "review_correction",
+    summary: match.approved_correction,
+    body: match.approved_correction,
+    metadata: {
+      slug: `approved-correction-${match.id}`,
+      source: "joz_llm_review_feedback",
+      review_status: "approved_correction",
+      issue_type: match.issue_type || null,
+      matched_question: match.user_message || "",
+      reviewed_at: match.reviewed_at || null,
+      match_score: match.matchScore || null,
+    },
+  };
+}
+
+function buildApprovedCorrectionResolution(match, route) {
+  if (!match?.approved_correction) return null;
+  return {
+    reply: String(match.approved_correction).trim(),
+    answerSource: `approved_correction:${match.id}`,
+    composer: "buildApprovedCorrectionReply",
+    fallbackUsed: false,
+    intentMode: route?.selectedRoute || "skills",
+    retrievedCategories: ["review_correction"],
+    answerClass: "reviewed_correction",
+    confidence: "high",
+  };
+}
+
 function normalizeCallbackField(value = "", maxLength = 160) {
   return String(value || "")
     .trim()
@@ -1032,6 +1147,18 @@ app.post("/api/joz-llm", async (req, res) => {
       route.selectedRoute === "skills"
         ? route.selectedRoute
         : "skills";
+    const approvedCorrectionCandidates = isDatabaseEnabled()
+      ? await listApprovedJozLlmCorrections(120)
+      : jozObservabilityFallbackStore.filter(
+          (event) =>
+            String(event.review_status || "") === "approved_correction" &&
+            String(event.approved_correction || "").trim()
+        );
+    const approvedCorrectionMatch = findApprovedCorrectionMatch({
+      input: latestUserMessage,
+      route,
+      candidates: approvedCorrectionCandidates,
+    });
     const retrievedDocuments = await getJozDocumentsByIntent(
       retrievalIntentMode,
       8,
@@ -1044,22 +1171,31 @@ app.post("/api/joz-llm", async (req, res) => {
       body: doc.body,
       metadata: doc.metadata,
     }));
+    const approvedCorrectionDocument = buildApprovedCorrectionDocument(approvedCorrectionMatch);
+    const augmentedRetrievalContext = approvedCorrectionDocument
+      ? [approvedCorrectionDocument, ...retrievalContext]
+      : retrievalContext;
 
     const roleAwareContext = buildRoleAwareJozContext({
       buildJozLlmContext,
       profile,
       context,
       intentMode: retrievalIntentMode,
-      retrievedDocuments: retrievalContext,
+      retrievedDocuments: augmentedRetrievalContext,
     });
+    const learnedResolution = buildApprovedCorrectionResolution(
+      approvedCorrectionMatch,
+      route
+    );
     const ownedResolution = composeJozLlmRouteReply({
       route,
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
-      retrievedDocuments: retrievalContext,
+      retrievedDocuments: augmentedRetrievalContext,
     });
     let resolution =
+      learnedResolution ||
       ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
@@ -1082,7 +1218,9 @@ app.post("/api/joz-llm", async (req, res) => {
       resolution,
       trace,
       reply,
-      retrievedDocuments,
+      retrievedDocuments: approvedCorrectionDocument
+        ? [approvedCorrectionDocument, ...retrievedDocuments]
+        : retrievedDocuments,
       latencyMs: Date.now() - requestStartedAt,
     });
     let verificationRecovery = null;
@@ -1119,7 +1257,7 @@ app.post("/api/joz-llm", async (req, res) => {
           resolution: retryResolution,
           trace: retryTrace,
           reply: retryReply,
-          retrievedDocuments: [],
+          retrievedDocuments: approvedCorrectionDocument ? [approvedCorrectionDocument] : [],
           latencyMs: Date.now() - requestStartedAt,
         });
         verificationFlow.retry = buildJozVerificationStage({
@@ -1156,7 +1294,7 @@ app.post("/api/joz-llm", async (req, res) => {
             resolution: fallbackResolution,
             trace: fallbackTrace,
             reply: fallbackReply,
-            retrievedDocuments: [],
+            retrievedDocuments: approvedCorrectionDocument ? [approvedCorrectionDocument] : [],
             latencyMs: Date.now() - requestStartedAt,
           });
           verificationFlow.fallback = buildJozVerificationStage({
@@ -1270,6 +1408,79 @@ app.post("/api/joz-llm", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.patch("/api/joz-llm/observability/:id/review", async (req, res) => {
+  try {
+    const id = String(req.params?.id || "").trim();
+    if (!id) {
+      return res.status(400).json({ error: "Missing event id" });
+    }
+
+    const reviewStatus =
+      String(req.body?.reviewStatus || "unreviewed").trim().toLowerCase() || "unreviewed";
+    const issueType = String(req.body?.issueType || "").trim().toLowerCase() || null;
+    const reviewNotes = String(req.body?.reviewNotes || "").trim();
+    const approvedCorrection = String(req.body?.approvedCorrection || "").trim();
+    const reviewedBy = String(req.body?.reviewedBy || "dashboard").trim() || "dashboard";
+
+    const allowedStatuses = new Set([
+      "unreviewed",
+      "flagged",
+      "approved_correction",
+      "dismissed",
+    ]);
+    const allowedIssueTypes = new Set([
+      "wrong_answer",
+      "wrong_route",
+      "hallucination",
+      "weak_answer",
+      "bad_tone",
+      "verifier_miss",
+      "other",
+    ]);
+
+    if (!allowedStatuses.has(reviewStatus)) {
+      return res.status(400).json({ error: "Invalid review status" });
+    }
+    if (issueType && !allowedIssueTypes.has(issueType)) {
+      return res.status(400).json({ error: "Invalid issue type" });
+    }
+    if (reviewStatus === "approved_correction" && !approvedCorrection) {
+      return res.status(400).json({ error: "Approved correction is required" });
+    }
+
+    const patch = {
+      review_status: reviewStatus,
+      issue_type: issueType,
+      review_notes: reviewNotes,
+      approved_correction: approvedCorrection,
+      reviewed_by: reviewedBy,
+      reviewed_at: new Date().toISOString(),
+    };
+
+    const updated = isDatabaseEnabled()
+      ? await updateJozLlmRequestEventReview(id, {
+          reviewStatus,
+          issueType,
+          reviewNotes,
+          approvedCorrection,
+          reviewedBy,
+        })
+      : updateJozObservabilityFallbackReview(id, patch);
+
+    if (!updated) {
+      return res.status(404).json({ error: "Observability event not found" });
+    }
+
+    return res.json({
+      ok: true,
+      event: updated,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/observability/:id/review failed:", error);
     return res.status(500).json({ error: error.message });
   }
 });

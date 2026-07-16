@@ -1904,6 +1904,19 @@ function detectSystemsMindset(clean) {
     includesAny(clean, [
       "how does he think about systems",
       "how does joz think",
+      "what is joz's operating mindset",
+      "what is jozs operating mindset",
+      "operating mindset",
+      "how does joz reduce complexity",
+      "reduce complexity without losing depth",
+      "reduce complexity without losing rigor",
+      "reduce complexity without losing depth or rigor",
+      "how does joz reduce complexity without losing depth or rigor",
+      "explain how joz thinks about intelligence",
+      "how joz thinks about intelligence",
+      "explain how joz thinks about intelligence systems and decision making",
+      "intelligence, systems, and decision-making",
+      "intelligence systems and decision making",
       "systems mindset",
       "systems thinking",
       "decision-making",
@@ -2803,8 +2816,25 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "systems_mindset") {
-    const directKnowledgeReply =
-      route.detectedSubIntent === "thinking_model" ? buildRetrievedKnowledgeReply(input, retrievedDocuments) : null;
+    const allowSystemsDirectKnowledgeReply =
+      route.detectedSubIntent === "prompt_injection_defense" ||
+      includesAny(normalizeText(input), [
+        "deploy code themselves",
+        "deploy code by themselves",
+        "deploy directly to production",
+        "require human approval",
+        "human approval",
+        "protected signing keys",
+        "signing keys protected",
+        "verify autonomous code changes",
+        "unauthorized information",
+        "unauthorised information",
+        "doing something stupid in production",
+        "merge their own pull requests",
+      ]);
+    const directKnowledgeReply = allowSystemsDirectKnowledgeReply
+      ? buildRetrievedKnowledgeReply(input, retrievedDocuments)
+      : null;
     const baseReply = composeSystemsMindsetReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
@@ -2812,8 +2842,10 @@ export function composeJozLlmRouteReply({
       input,
       retrievedDocuments,
     });
+    const preferBaseSystemsReply =
+      ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent);
     return {
-      reply: directKnowledgeReply || evidenceReply?.reply || baseReply,
+      reply: directKnowledgeReply || (preferBaseSystemsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
         ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
           ? directKnowledgeReply

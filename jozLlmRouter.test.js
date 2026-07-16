@@ -1181,10 +1181,10 @@ test("routes prompt injection defense questions to the dedicated systems answer"
   assert.equal(route.selectedRoute, "systems_mindset");
   assert.equal(route.detectedSubIntent, "prompt_injection_defense");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /Telegram channel as external data|untrusted content/i);
-  assert.match(resolution.reply, /data, not instructions|separate from retrieved content/i);
-  assert.match(resolution.reply, /system policy outside the model|block tool execution/i);
-  assert.match(resolution.reply, /strict tool allowlists|ACL-aware retrieval|human approval/i);
+  assert.match(resolution.reply, /Telegram channel as external data|untrusted content|untrusted data/i);
+  assert.match(resolution.reply, /data, not instructions|separate from retrieved content|separate system instructions/i);
+  assert.match(resolution.reply, /system policy outside the model|block tool execution|outside the model/i);
+  assert.match(resolution.reply, /strict tool allowlists|ACL-aware retrieval|human approval|permissions/i);
   assert.doesNotMatch(resolution.reply, /Start with one orchestrator agent/i);
 });
 
@@ -1211,6 +1211,34 @@ test("systems safety prompts use direct technical answers instead of the generic
     assert.equal(resolution.fallbackUsed, false);
     assert.match(resolution.reply, expected);
     assert.doesNotMatch(resolution.reply, /Joz thinks in systems before features/i);
+  }
+});
+
+test("operating mindset and complexity-reduction prompts resolve to systems mindset instead of fallback guards", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "What is Joz's operating mindset when building AI systems?",
+    "How does Joz reduce complexity without losing depth or rigor?",
+    "Explain how Joz thinks about intelligence, systems, and decision-making.",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "systems_mindset");
+    assert.equal(route.detectedSubIntent, "thinking_model");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, /systems before features|signal from noise|feedback loops|human accountability/i);
+    assert.doesNotMatch(resolution.reply, /not in the current Joz knowledge base|outside the current deterministic Joz answer set/i);
   }
 });
 
