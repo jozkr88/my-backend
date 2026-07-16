@@ -1851,6 +1851,8 @@ function detectSkills(clean) {
       "fastapi service from 100 users to 100000",
       "fastapi service needs to scale from 100 to 100,000 users",
       "fastapi service needs to scale from 100 to 100000 users",
+      "scale a fastapi service from 100 to 100,000",
+      "scale a fastapi service from 100 to 100000",
       "from 100 users to 100,000",
       "from 100 users to 100000",
       "needs to handle 100,000 users",
@@ -1869,6 +1871,9 @@ function detectSkills(clean) {
       "verification architecture",
       "design a verification layer",
       "verification layer",
+      "how would joz verify it",
+      "how would he verify it",
+      "verify it",
       "finished the job",
       "check that it really did",
       "really did",
@@ -2599,7 +2604,7 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      route.detectedSubIntent === "capabilities_overview";
+      ["capabilities_overview", "collaboration"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:

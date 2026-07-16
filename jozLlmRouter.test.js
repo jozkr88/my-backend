@@ -313,6 +313,33 @@ test("identity, motivation, quality, team, and boundary phrasing resolve determi
     assert.equal(resolution.fallbackUsed, false);
   }
 
+  const teamRoute = routeJozLlmQuery({
+    input: "Can he work in a team?",
+    appContext,
+    legacyContext,
+  });
+  const teamResolution = composeJozLlmRouteReply({
+    route: teamRoute,
+    input: "Can he work in a team?",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [
+      {
+        title: "Network Security",
+        category: "skills",
+        summary: "Network security should use private subnets, firewalls, and TLS.",
+        body: "Network security should use: Private subnets Firewalls and security groups TLS everywhere.",
+        metadata: {
+          slug: "network-security",
+          tags: ["network-security"],
+        },
+      },
+    ],
+  });
+  assert.equal(teamRoute.detectedSubIntent, "collaboration");
+  assert.match(teamResolution.reply, /works well in teams across engineering, product, design, leadership, and regional stakeholder groups/i);
+  assert.doesNotMatch(teamResolution.reply, /network security|private subnets|tls everywhere/i);
+
   const boundaryReply = buildJozLlmFallbackReply("What can't you answer?");
   assert.match(boundaryReply, /background, business value, systems mindset, skills, infrastructure approach, and agent architecture/i);
   assert.match(boundaryReply, /should not invent arbitrary external entities|unsupported claims/i);
@@ -600,6 +627,19 @@ test("routes shorthand design-verification phrasing to the dedicated verificatio
   assert.equal(route.detectedSubIntent, "verification_architecture");
 });
 
+test("routes casual verify-it portfolio phrasing to the dedicated verification architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "An agent says it sold 20% of a portfolio. How would Joz verify it?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+});
+
 test("routes FastAPI scale-up questions to the dedicated scaling architecture answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt =
@@ -652,6 +692,19 @@ test("routes natural FastAPI growth phrasing to the dedicated scaling answer", (
 test("routes scale-from-100-to-100000 FastAPI phrasing to the dedicated scaling answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "A FastAPI service needs to scale from 100 to 100000 users. How would Joz scale it?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "scale_fastapi_architecture");
+});
+
+test("routes casual FastAPI scale phrasing to the dedicated scaling answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How would Joz scale a FastAPI service from 100 to 100000 users?";
   const route = routeJozLlmQuery({
     input: prompt,
     appContext,
