@@ -1923,7 +1923,7 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
 });
 
 test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {
-  for (const prompt of ["How would he do that?", "Why does he do that?"]) {
+  for (const prompt of ["How would he do that?", "Why does he do that?", "What's the purpose of this?"]) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],

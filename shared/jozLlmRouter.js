@@ -802,6 +802,12 @@ function buildAmbiguousFollowUpReply(clean = "") {
     "how would joz verify it",
     "verify it",
     "why would he do that",
+    "what is the purpose of this",
+    "what's the purpose of this",
+    "whats the purpose of this",
+    "what is the purpose of that",
+    "what's the purpose of that",
+    "whats the purpose of that",
   ]);
 
   if (ambiguousShortFollowUps.has(normalized)) {
