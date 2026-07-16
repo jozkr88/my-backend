@@ -2004,6 +2004,7 @@ function detectSkills(clean) {
       "what experience does joz have",
       "what are his capabilities",
       "what experience does he have",
+      "what does he do",
       "technical depth",
       "core capabilities",
       "technical skills",

@@ -105,6 +105,28 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
 });
 
+test("short pronoun phrasing about what he does resolves to Joz capabilities, not random technical drift", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What does he do?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /agentic AI architecture|decision intelligence|context engineering|enterprise product engineering/i);
+  assert.doesNotMatch(resolution.reply, /stateless service|local machine memory|postgresql redis object storage/i);
+});
+
 test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "What agentic architecture does Joz do?";
