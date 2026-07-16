@@ -722,7 +722,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "purpose_of_llm") {
-    return "The purpose of Joz LLM is to explain Joz clearly and credibly across background, business value, systems thinking, skills, infrastructure, and agent architecture. It should help a user understand what Joz does, how he thinks, where he creates value, and how he would design or scale AI systems. It is meant to stay grounded in the knowledge base, avoid invented claims, and ask for clarification only when the topic is genuinely unclear.";
+    return "The purpose of Joz LLM is to showcase Joz clearly and credibly: his skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work. It should help a user quickly understand what Joz has done, what he is strong at, how he thinks, where he creates value, and how he would design or scale AI systems. It should stay grounded in the knowledge base, avoid invented claims, and only ask for clarification when the topic is genuinely unclear.";
   }
 
   if (subIntent === "agentic_architecture_approach") {
@@ -2483,18 +2483,6 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const preWorldSystemsMindset = detectSystemsMindset(clean);
   const preWorldSkills = detectSkills(clean);
 
-  if (isAmbiguousFollowUp(clean)) {
-    return {
-      detectedIntent: "unknown_fallback",
-      detectedSubIntent: "ambiguous_follow_up",
-      detectedConcept: null,
-      selectedRoute: "unknown_fallback",
-      selectedWorldRecord: null,
-      worldContext,
-      worldEntity,
-    };
-  }
-
   if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
     return {
       detectedIntent: "systems_mindset",
@@ -2516,6 +2504,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "verification_architecture",
       "single_agent_tradeoffs",
       "capabilities_overview",
+      "purpose_of_llm",
       "agentic_architecture_approach",
       "agentic_architecture_why",
       "collaboration",
@@ -2528,6 +2517,18 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       detectedSubIntent: preWorldSkills.detectedSubIntent,
       detectedConcept: preWorldSkills.detectedConcept,
       selectedRoute: "skills",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
+  if (isAmbiguousFollowUp(clean)) {
+    return {
+      detectedIntent: "unknown_fallback",
+      detectedSubIntent: "ambiguous_follow_up",
+      detectedConcept: null,
+      selectedRoute: "unknown_fallback",
       selectedWorldRecord: null,
       worldContext,
       worldEntity,
@@ -2846,18 +2847,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        route.detectedSubIntent === "capabilities_overview"
+        ["capabilities_overview", "purpose_of_llm"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        route.detectedSubIntent === "capabilities_overview"
+        ["capabilities_overview", "purpose_of_llm"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"

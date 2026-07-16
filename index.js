@@ -1276,7 +1276,7 @@ app.post("/api/joz-llm", async (req, res) => {
 
 app.get("/api/joz-llm/observability", async (req, res) => {
   try {
-    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 20));
+    const limit = Math.max(1, Math.min(250, Number(req.query?.limit) || 40));
     const events = isDatabaseEnabled()
       ? await listRecentJozLlmRequestEvents(limit)
       : jozObservabilityFallbackStore.slice(0, limit);

@@ -659,6 +659,8 @@ export async function logJozLlmRequestEvent({
   requestContext = {},
   trace = {},
   verification = {},
+  verificationFlow = {},
+  verificationRecovery = {},
   retrievedCategories = [],
   retrievedDocuments = [],
   latencyMs = null,
@@ -675,12 +677,14 @@ export async function logJozLlmRequestEvent({
        request_context,
        trace,
        verification,
+       verification_flow,
+       verification_recovery,
        retrieved_categories,
        retrieved_documents,
        latency_ms,
        response_status
      )
-     VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12, $13)
+     VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13::jsonb, $14, $15)
      RETURNING id`,
     [
       conversationId,
@@ -692,6 +696,8 @@ export async function logJozLlmRequestEvent({
       JSON.stringify(requestContext || {}),
       JSON.stringify(trace || {}),
       JSON.stringify(verification || {}),
+      JSON.stringify(verificationFlow || {}),
+      JSON.stringify(verificationRecovery || {}),
       JSON.stringify(retrievedCategories || []),
       JSON.stringify(retrievedDocuments || []),
       latencyMs,
@@ -704,12 +710,13 @@ export async function logJozLlmRequestEvent({
 export async function listRecentJozLlmRequestEvents(limit = 20) {
   const result = await runQuery(
     `SELECT id, conversation_id, session_key, route, intent_mode, user_message, assistant_reply,
-            request_context, trace, verification, retrieved_categories, retrieved_documents,
+            request_context, trace, verification, verification_flow, verification_recovery,
+            retrieved_categories, retrieved_documents,
             latency_ms, response_status, created_at
      FROM joz_llm_request_events
      ORDER BY created_at DESC
      LIMIT $1`,
-    [Math.max(1, Math.min(100, Number(limit) || 20))]
+    [Math.max(1, Math.min(250, Number(limit) || 20))]
   );
   return result.rows || [];
 }
@@ -1391,6 +1398,8 @@ export async function initDatabase() {
         request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
         trace JSONB NOT NULL DEFAULT '{}'::jsonb,
         verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+        verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb,
+        verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb,
         retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
         retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
         latency_ms INTEGER,
@@ -1407,6 +1416,16 @@ export async function initDatabase() {
     await db.query(`
       CREATE INDEX IF NOT EXISTS joz_llm_request_events_route_idx
       ON joz_llm_request_events (route, created_at DESC)
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_llm_request_events
+      ADD COLUMN IF NOT EXISTS verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb
     `);
 
     await db.query(`

@@ -254,6 +254,8 @@ CREATE TABLE IF NOT EXISTS joz_llm_request_events (
   request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
   trace JSONB NOT NULL DEFAULT '{}'::jsonb,
   verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+  verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb,
+  verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb,
   retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
   retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
   latency_ms INTEGER,

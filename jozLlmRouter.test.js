@@ -1963,7 +1963,8 @@ test("purpose-of-this phrasing routes to the Joz LLM purpose answer instead of a
     assert.equal(route.detectedSubIntent, "purpose_of_llm");
     assert.equal(resolution.fallbackUsed, false);
     assert.match(String(resolution.reply || ""), /purpose of Joz LLM/i);
-    assert.match(String(resolution.reply || ""), /background, business value, systems thinking, skills, infrastructure, and agent architecture/i);
+    assert.match(String(resolution.reply || ""), /showcase Joz clearly and credibly/i);
+    assert.match(String(resolution.reply || ""), /skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work/i);
   }
 });
 
