@@ -578,6 +578,22 @@ function collectVisibleObjectDetails(manifest, objectIds) {
 
 export function routeMeetJozWorldIntent(input = "") {
   const clean = normalizeToken(input);
+  const businessGuardTerms = [
+    "operating model",
+    "workflows",
+    "workflow ownership",
+    "ownership",
+    "governance",
+    "execution",
+    "governance and execution",
+    "embed joz",
+    "embed ai",
+  ];
+
+  if (businessGuardTerms.some((term) => clean.includes(term))) {
+    return "joz_knowledge";
+  }
+
   if (detectOwnedConceptQuery(clean)) return "world_awareness";
   if (isGoldPillQuery(clean)) return "world_awareness";
   if (clean.includes("where are joz's skills")) return "mixed";
