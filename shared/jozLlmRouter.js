@@ -100,7 +100,12 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
   }
 
-  if (clean.includes("difference between docker and kubernetes") || clean.includes("docker vs kubernetes")) {
+  if (
+    clean.includes("difference between docker and kubernetes") ||
+    clean.includes("docker vs kubernetes") ||
+    clean.includes("diff between docker and kubernetes") ||
+    clean.includes("docker and kubernetes difference")
+  ) {
     return "Docker packages a service and its dependencies into a portable container image. Kubernetes deploys, scales, restarts, and manages containers across machines. Docker packages the service; Kubernetes runs and manages it.";
   }
 
@@ -138,6 +143,15 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
 
   if (clean.includes("what is an agent")) {
     return "An agent is an AI worker with a defined responsibility. In Joz's framing: Agent = LLM + instructions + tools + memory + reasoning loop. An agent interprets a goal, selects approved tools, reads relevant context, updates workflow state, and iterates until the task is complete or requires human input.";
+  }
+
+  if (
+    clean.includes("what is mcp") ||
+    clean.includes("what's mcp") ||
+    clean.includes("whats mcp") ||
+    clean.includes("mcp then")
+  ) {
+    return "MCP means Model Context Protocol. It standardizes how AI clients discover and use tools. MCP is not an agent and not a model; it is the protocol layer connecting them.";
   }
 
   if (clean.includes("what breaks first when agent systems scale")) {
@@ -316,6 +330,14 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "No. Autonomous agents must not deploy directly to production, push directly to the main branch, or merge their own pull requests. Production deployments require explicit human approval plus deterministic verification.";
   }
 
+  if (
+    clean.includes("deploy straight to prod") ||
+    clean.includes("straight to prod") ||
+    clean.includes("deploy straight to production")
+  ) {
+    return "No. Autonomous agents must not deploy directly to production, push directly to the main branch, or merge their own pull requests. Production deployments require explicit human approval plus deterministic verification.";
+  }
+
   if (clean.includes("deploy code themselves")) {
     return "Agents should not deploy code by themselves into production. Joz keeps deployment behind explicit approval, deterministic verification, rollback controls, and policy gates so the system cannot silently push unsafe changes.";
   }
@@ -325,6 +347,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   }
 
   if (clean.includes("what should always require human approval")) {
+    return "High-risk actions require human approval, especially database migrations, security changes, infrastructure changes, production deployments, destructive operations, signing operations, and code merges. Joz keeps those gates outside the agent so policy validates before execution acts.";
+  }
+
+  if (clean.includes("what should always need human approval")) {
     return "High-risk actions require human approval, especially database migrations, security changes, infrastructure changes, production deployments, destructive operations, signing operations, and code merges. Joz keeps those gates outside the agent so policy validates before execution acts.";
   }
 
@@ -1868,11 +1894,16 @@ function detectSystemsMindset(clean) {
   if (
     includesAny(clean, [
       "what should always require human approval",
+      "what should always need human approval",
       "always require human approval",
+      "always need human approval",
       "require human approval",
+      "need human approval",
       "deploy code themselves",
       "deploy code itself",
       "let agents deploy code themselves",
+      "deploy straight to prod",
+      "straight to prod",
       "something stupid in production",
     ])
   ) {
@@ -1893,6 +1924,9 @@ function detectSystemsMindset(clean) {
       "prevent the agent from executing",
       "prevent the agent from",
       "how would joz prevent",
+      "how would joz stop prompt injection",
+      "stop prompt injection",
+      "stop the agent",
       "executing malicious instructions",
       "what if",
     ])
@@ -2236,7 +2270,11 @@ function detectSkills(clean) {
       "what is fastapi",
       "what is fastapi used for",
       "what is mcp",
+      "what's mcp",
+      "whats mcp",
+      "mcp then",
       "what is docker",
+      "diff between docker and kubernetes",
       "docker vs kubernetes",
       "difference between docker and kubernetes",
       "docker and kubernetes",
@@ -2822,6 +2860,8 @@ export function composeJozLlmRouteReply({
         "deploy code themselves",
         "deploy code by themselves",
         "deploy directly to production",
+        "deploy straight to prod",
+        "straight to prod",
         "require human approval",
         "human approval",
         "protected signing keys",
