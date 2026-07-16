@@ -292,6 +292,9 @@ test("identity, motivation, quality, team, and boundary phrasing resolve determi
   const routeCases = [
     ["Who is he?", "identity_profile", "overview"],
     ["What is he?", "identity_profile", "overview"],
+    ["Where is he from?", "factual_profile", "location"],
+    ["Where is he from", "factual_profile", "location"],
+    ["What nationality is he?", "factual_profile", "nationality"],
     ["Why does Joz even bother?", "skills", "agentic_architecture_why"],
     ["Is Joz good?", "business_need", "hire_value"],
     ["Can Joz work in a team?", "skills", "collaboration"],
@@ -717,6 +720,36 @@ test("factual profile degree phrasing resolves without falling to fallback", () 
   assert.equal(route.detectedSubIntent, "degree");
   assert.equal(resolution.fallbackUsed, false);
   assert.match(resolution.reply, /MSc in Strategy and Innovation/i);
+});
+
+test("origin and nationality profile phrasing resolves without falling to guards", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const cases = [
+    ["Where is he from?", "location", /Bratislava|Slovakia|Singapore|Dubai|Zurich/i],
+    ["Where is he from", "location", /Bratislava|Slovakia|Singapore|Dubai|Zurich/i],
+    ["Where is Joz from?", "location", /Bratislava|Slovakia|Singapore|Dubai|Zurich/i],
+    ["What nationality is he?", "nationality", /Slovak|British/i],
+  ];
+
+  for (const [prompt, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "factual_profile");
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(String(resolution.reply || ""), expectedReply);
+  }
 });
 
 test("routes single-agent versus multi-agent platform questions to the dedicated tradeoff answer", () => {

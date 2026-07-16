@@ -1404,6 +1404,21 @@ function detectFactualProfile(clean) {
 
   if (
     includesAny(clean, [
+      "where is he from",
+      "where's he from",
+      "where is joz from",
+      "where's joz from",
+      "what country is he from",
+      "what country is joz from",
+      "where does he come from",
+      "where does joz come from",
+    ])
+  ) {
+    return { detectedSubIntent: "location", detectedConcept: "location" };
+  }
+
+  if (
+    includesAny(clean, [
       "how can i contact joz",
       "contact joz",
       "email joz",
@@ -1418,6 +1433,13 @@ function detectFactualProfile(clean) {
   if (
     includesAny(clean, [
       "nationality",
+      "what nationality is he",
+      "what nationality is joz",
+      "what is his nationality",
+      "what is joz's nationality",
+      "what is jozs nationality",
+      "what citizenship does he have",
+      "what citizenship does joz have",
       "citizenship",
       "work authorization",
       "singapore status",
