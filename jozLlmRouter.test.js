@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
+import { buildJozLlmFallbackReply } from "./shared/jozLlmProfile.js";
 import {
   buildJozRouteTrace,
   composeJozLlmRouteReply,
@@ -244,6 +245,39 @@ test("technical-stack pronoun prompts use direct infrastructure knowledge where 
     assert.equal(resolution.fallbackUsed, false);
     assert.match(resolution.reply, expected);
   }
+});
+
+test("identity, motivation, quality, team, and boundary phrasing resolve deterministically", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const routeCases = [
+    ["Who is he?", "identity_profile", "overview"],
+    ["Why does Joz even bother?", "skills", "agentic_architecture_why"],
+    ["Is Joz good?", "business_need", "hire_value"],
+    ["Can Joz work in a team?", "skills", "collaboration"],
+  ];
+
+  for (const [prompt, expectedRoute, expectedSubIntent] of routeCases) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, expectedRoute);
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
+    assert.equal(resolution.fallbackUsed, false);
+  }
+
+  const boundaryReply = buildJozLlmFallbackReply("What can't you answer?");
+  assert.match(boundaryReply, /background, business value, systems mindset, skills, infrastructure approach, and agent architecture/i);
+  assert.match(boundaryReply, /should not invent arbitrary external entities|unsupported claims/i);
 });
 
 test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {

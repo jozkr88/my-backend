@@ -636,6 +636,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "collaboration") {
+    return "Yes. Joz works well in teams across engineering, product, design, leadership, and regional stakeholder groups. The proof is practical: he established an HCD-AI practice, trained C-suite executives and regional teams, reduced handoff friction at Leo Burnett/Publicis, and worked across large enterprise and cross-market environments where alignment mattered as much as technical delivery.";
+  }
+
   if (subIntent === "safe_architecture_design") {
     return "Joz would design an AI platform to fail safely by separating decision-making, policy, execution, and verification so one bad model output cannot directly cause uncontrolled change. The control flow is: Policy Gate -> Approval Step -> Execution -> Verification -> Rollback or Escalation. In practice that means API boundary -> typed orchestration state -> scoped tools -> deterministic policy gates -> idempotent execution -> post-action verification -> audit trail and escalation. High-risk actions should require human approval, retries must be bounded, external dependencies need timeouts and circuit breakers, and authoritative state must stay in durable systems rather than inside the model. The goal is graceful degradation: if the model is wrong or a dependency fails, the platform slows down, stops, or escalates instead of silently taking unsafe action.";
   }
@@ -723,6 +727,9 @@ function detectProgrammeQuery(clean = "") {
 
 function buildUnknownDefinitionGapReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (normalized === "who is he" || normalized === "who is she" || normalized === "who is this") {
+    return null;
+  }
   if (normalized === "what is not in joz's knowledge base" || normalized === "what is not in jozs knowledge base") {
     return "The current Joz knowledge base does not define arbitrary external entities. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
   }
@@ -1056,6 +1063,7 @@ function detectIdentityProfile(clean) {
   if (
     includesAny(clean, [
       /^who is joz\b/,
+      /^who is he\b/,
       "tell me about joz",
       "introduce joz",
       "who is behind meetjoz",
@@ -1524,6 +1532,8 @@ function detectBusinessNeed(clean) {
       "why hire him",
       "why him",
       "why joz",
+      "is joz good",
+      "is he good",
       "business value",
       "where is the roi",
       "where does he create the most value",
@@ -1611,6 +1621,19 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "can joz work in a team",
+      "can he work in a team",
+      "does joz work well in a team",
+      "does he work well in a team",
+      "team player",
+      "cross-functional",
+    ])
+  ) {
+    return { detectedSubIntent: "collaboration", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "how would joz design an ai platform that can fail safely",
@@ -1831,6 +1854,7 @@ function detectSkills(clean) {
       "why does joz do agentic ai",
       "why does joz use agentic ai",
       "why does joz build agentic ai",
+      "why does joz even bother",
       "why agentic ai",
     ])
   ) {
@@ -2113,7 +2137,17 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
 
   if (
     preWorldSkills &&
-    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs"].includes(
+    [
+      "organizational_ownership_layer",
+      "scale_fastapi_architecture",
+      "langgraph_temporal_architecture",
+      "verification_architecture",
+      "single_agent_tradeoffs",
+      "capabilities_overview",
+      "agentic_architecture_approach",
+      "agentic_architecture_why",
+      "collaboration",
+    ].includes(
       preWorldSkills.detectedSubIntent
     )
   ) {
