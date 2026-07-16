@@ -2252,3 +2252,39 @@ test("agentic architecture approach keeps the base technical answer even when pr
   assert.match(String(resolution?.reply || ""), /verification outside the agent/i);
   assert.doesNotMatch(String(resolution?.reply || ""), /^Proof:/i);
 });
+
+test("verification now fails the older operating-model draft unless governance is made explicit", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "business" });
+  const input =
+    "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
+  const route = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+  const verification = buildJozResponseVerification({
+    input,
+    route,
+    resolution,
+    trace,
+    reply: String(resolution?.reply || "").trim(),
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.equal(route.selectedRoute, "business_need");
+  assert.equal(route.detectedSubIntent, "operating_model");
+  assert.equal(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "operating_model_policy_risk")?.status,
+    "fail"
+  );
+});

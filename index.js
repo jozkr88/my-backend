@@ -170,6 +170,69 @@ function buildJozVerificationFallbackResolution(route = {}) {
   };
 }
 
+function buildJozVerificationStage({
+  label = "",
+  reply = "",
+  trace = {},
+  verification = {},
+} = {}) {
+  return {
+    label: String(label || "").trim() || "unknown",
+    reply: String(reply || "").trim(),
+    route: trace?.selectedRoute || null,
+    subIntent: trace?.detectedSubIntent || null,
+    answerClass: trace?.answerClass || null,
+    confidence: trace?.confidence || null,
+    verificationStatus: verification?.status || null,
+    verificationSummary: verification?.summary || null,
+    verificationChecks: Array.isArray(verification?.checks)
+      ? verification.checks.map((check) => ({
+          id: check?.id || null,
+          status: check?.status || null,
+          detail: check?.detail || null,
+        }))
+      : [],
+  };
+}
+
+function buildJozVerificationRepairResolution(route = {}) {
+  if (
+    route?.selectedRoute === "business_need" &&
+    route?.detectedSubIntent === "operating_model"
+  ) {
+    return {
+      reply:
+        "Joz would design the operating model around explicit ownership, governance, workflow routing, approval boundaries, and outcome measurement. That means deciding which team owns each AI-assisted workflow, where policy and risk controls sit, which steps remain human-approved, how exceptions escalate, and which metrics prove the system is improving execution. The goal is not isolated AI features. It is governed execution with clear accountability, measurable outcomes, and AI embedded into real operating workflows.",
+      answerSource: "verification_repair",
+      composer: "buildJozVerificationRepairResolution",
+      fallbackUsed: false,
+      intentMode: "business_need",
+      retrievedCategories: [],
+      answerClass: "deterministic_business",
+      confidence: "high",
+    };
+  }
+
+  if (
+    route?.selectedRoute === "skills" &&
+    route?.detectedSubIntent === "agentic_architecture_approach"
+  ) {
+    return {
+      reply:
+        "Joz architects agentic AI as a controlled system with a thin orchestrator, typed state, scoped tools, retrieval and memory boundaries, policy and risk gates, execution services, and verification outside the agent. The orchestrator coordinates reasoning, specialist workers handle distinct tasks, tools stay tightly scoped, durable state lives outside the model, and policy checks happen before action. The architecture is designed so reasoning, tool use, approvals, execution, and verification are separable, observable, and safe to scale.",
+      answerSource: "verification_repair",
+      composer: "buildJozVerificationRepairResolution",
+      fallbackUsed: false,
+      intentMode: "skills",
+      retrievedCategories: [],
+      answerClass: "deterministic_skills",
+      confidence: "high",
+    };
+  }
+
+  return null;
+}
+
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
     .trim()
@@ -1023,15 +1086,29 @@ app.post("/api/joz-llm", async (req, res) => {
       latencyMs: Date.now() - requestStartedAt,
     });
     let verificationRecovery = null;
+    const verificationFlow = {
+      initial: buildJozVerificationStage({
+        label: "initial",
+        reply,
+        trace,
+        verification,
+      }),
+      retry: null,
+      fallback: null,
+      final: null,
+      corrected: false,
+    };
 
     if (verification.status === "fail" && route.selectedRoute !== "unknown_fallback") {
-      const retryResolution = composeJozLlmRouteReply({
-        route,
-        input: latestUserMessage,
-        appContext: validatedAppContext,
-        legacyContext: legacyRuntimeContext,
-        retrievedDocuments: [],
-      });
+      const retryResolution =
+        buildJozVerificationRepairResolution(route) ||
+        composeJozLlmRouteReply({
+          route,
+          input: latestUserMessage,
+          appContext: validatedAppContext,
+          legacyContext: legacyRuntimeContext,
+          retrievedDocuments: [],
+        });
 
       if (retryResolution) {
         const retryReply = String(retryResolution?.reply || "").trim() || enforceJozLlmReplyLimit("", 55);
@@ -1045,10 +1122,19 @@ app.post("/api/joz-llm", async (req, res) => {
           retrievedDocuments: [],
           latencyMs: Date.now() - requestStartedAt,
         });
+        verificationFlow.retry = buildJozVerificationStage({
+          label: "retry",
+          reply: retryReply,
+          trace: retryTrace,
+          verification: retryVerification,
+        });
 
         verificationRecovery = {
           attempted: true,
-          strategy: "retrieval_free_retry",
+          strategy:
+            retryResolution?.composer === "buildJozVerificationRepairResolution"
+              ? "verification_repair"
+              : "retrieval_free_retry",
           initialStatus: verification.status,
           recoveredStatus: retryVerification.status,
         };
@@ -1058,6 +1144,7 @@ app.post("/api/joz-llm", async (req, res) => {
           reply = retryReply;
           trace = retryTrace;
           verification = retryVerification;
+          verificationFlow.corrected = true;
         } else {
           const fallbackResolution = buildJozVerificationFallbackResolution(route);
           const fallbackReply =
@@ -1072,6 +1159,12 @@ app.post("/api/joz-llm", async (req, res) => {
             retrievedDocuments: [],
             latencyMs: Date.now() - requestStartedAt,
           });
+          verificationFlow.fallback = buildJozVerificationStage({
+            label: "fallback",
+            reply: fallbackReply,
+            trace: fallbackTrace,
+            verification: fallbackVerification,
+          });
 
           verificationRecovery = {
             attempted: true,
@@ -1085,9 +1178,17 @@ app.post("/api/joz-llm", async (req, res) => {
           reply = fallbackReply;
           trace = fallbackTrace;
           verification = fallbackVerification;
+          verificationFlow.corrected = true;
         }
       }
     }
+
+    verificationFlow.final = buildJozVerificationStage({
+      label: "final",
+      reply,
+      trace,
+      verification,
+    });
 
     const retrievedCategories =
       resolution?.retrievedCategories?.length
@@ -1112,6 +1213,7 @@ app.post("/api/joz-llm", async (req, res) => {
           retrievedCategories,
           trace,
           verification,
+          verificationFlow,
         },
       });
     }
@@ -1127,6 +1229,7 @@ app.post("/api/joz-llm", async (req, res) => {
       trace,
       verification,
       verificationRecovery,
+      verificationFlow,
       retrievedCategories,
       retrievedDocuments: retrievedDocuments.map((doc) => ({
         title: doc.title,
@@ -1158,6 +1261,7 @@ app.post("/api/joz-llm", async (req, res) => {
       trace,
       verification,
       verificationRecovery,
+      verificationFlow,
       observability: {
         latencyMs: verification.metrics.latencyMs,
         retrievedDocumentCount: verification.metrics.retrievedDocumentCount,
