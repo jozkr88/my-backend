@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
+import { buildJozLlmFallbackReply } from "./shared/jozLlmProfile.js";
 import {
   buildJozRouteTrace,
   composeJozLlmRouteReply,
@@ -103,6 +104,235 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
   assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
+});
+
+test("short pronoun phrasing about what he does resolves to Joz capabilities, not random technical drift", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What does he do?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /agentic AI architecture|decision intelligence|context engineering|enterprise product engineering/i);
+  assert.doesNotMatch(resolution.reply, /stateless service|local machine memory|postgresql redis object storage/i);
+});
+
+test("loose capability and differentiation phrasing resolves to capabilities overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "What is he strongest at?",
+    "What is he good at?",
+    "What can he build?",
+    "What does Joz actually do?",
+    "What makes him different?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "capabilities_overview");
+    assert.equal(resolution.fallbackUsed, false);
+  }
+});
+
+test("pronoun systems and infrastructure phrasing resolves to the intended lanes", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const cases = [
+    ["How does he think about systems?", "systems_mindset", "thinking_model"],
+    ["What is his infrastructure approach?", "skills", "technical_stack"],
+    ["How does he approach infrastructure?", "skills", "technical_stack"],
+    ["What does he know about Kubernetes?", "skills", "technical_stack"],
+    ["What kind of agent systems does he build?", "skills", "agentic_architecture_approach"],
+    ["What is his architecture style?", "skills", "agentic_architecture_approach"],
+  ];
+
+  for (const [prompt, expectedRoute, expectedSubIntent] of cases) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, expectedRoute);
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
+  }
+});
+
+test("ambiguous build scale and verify follow-ups stay guarded", async () => {
+  for (const prompt of ["How would he build that?", "How would he scale this?", "How would he verify this?", "Why would he do that?", "Why he does it?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildAmbiguousFollowUpReply");
+    assert.match(resolution.reply, /too ambiguous on its own/i);
+  }
+});
+
+test("how-does-he-work phrasing resolves to capabilities overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How does he work?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /agentic AI architecture|decision intelligence|context engineering|enterprise product engineering/i);
+  assert.doesNotMatch(resolution.reply, /network security|private subnets|firewalls and security groups|tls everywhere/i);
+});
+
+test("capabilities overview does not let retrieved evidence replace the base answer body", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What does he do?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [
+      {
+        title: "Network Security",
+        category: "skills",
+        summary: "Network security should use private subnets, firewalls, and TLS.",
+        body: "Network security should use: Private subnets Firewalls and security groups TLS everywhere.",
+        metadata: {
+          slug: "network-security",
+          tags: ["network-security"],
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.composer, "composeSkillsReply");
+  assert.equal(resolution.answerSource, "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience");
+  assert.match(resolution.reply, /agentic AI architecture|decision intelligence|context engineering|enterprise product engineering/i);
+  assert.doesNotMatch(resolution.reply, /network security|private subnets|firewalls and security groups|tls everywhere/i);
+});
+
+test("technical-stack pronoun prompts use direct infrastructure knowledge where available", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const [prompt, expected] of [
+    ["What is his infrastructure approach?", /production foundation|scalable, secure, observable, resilient/i],
+    ["How does he approach infrastructure?", /production foundation|simple infrastructure first/i],
+    ["What does he know about Kubernetes?", /orchestration layer|deploys, scales, restarts/i],
+    ["What does he know about Redis?", /low-latency layer|cache and short-lived state/i],
+    ["What does he know about Temporal?", /durable workflow execution layer|retries, timeouts, approvals/i],
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+      retrievedDocuments: [],
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "technical_stack");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, expected);
+  }
+});
+
+test("identity, motivation, quality, team, and boundary phrasing resolve deterministically", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const routeCases = [
+    ["Who is he?", "identity_profile", "overview"],
+    ["What is he?", "identity_profile", "overview"],
+    ["Why does Joz even bother?", "skills", "agentic_architecture_why"],
+    ["Is Joz good?", "business_need", "hire_value"],
+    ["Can Joz work in a team?", "skills", "collaboration"],
+  ];
+
+  for (const [prompt, expectedRoute, expectedSubIntent] of routeCases) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, expectedRoute);
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
+    assert.equal(resolution.fallbackUsed, false);
+  }
+
+  const boundaryReply = buildJozLlmFallbackReply("What can't you answer?");
+  assert.match(boundaryReply, /background, business value, systems mindset, skills, infrastructure approach, and agent architecture/i);
+  assert.match(boundaryReply, /should not invent arbitrary external entities|unsupported claims/i);
+});
+
+test("taking-the-piss or messing-around prompts return an interaction guard instead of random content", async () => {
+  for (const prompt of ["Are you taking the piss?", "Are you serious or just messing around?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildLowSignalOrBadFaithReply");
+    assert.match(resolution.reply, /testing the system|question is not serious|ask directly/i);
+  }
 });
 
 test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {
@@ -357,6 +587,19 @@ test("routes natural completion-check phrasing to the dedicated verification arc
   assert.match(resolution.reply, /Execution|Verification|Reconciliation|authoritative/i);
 });
 
+test("routes shorthand design-verification phrasing to the dedicated verification architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "An agent proposes selling 20% of a portfolio. Design verification.";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+});
+
 test("routes FastAPI scale-up questions to the dedicated scaling architecture answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt =
@@ -406,12 +649,26 @@ test("routes natural FastAPI growth phrasing to the dedicated scaling answer", (
   assert.match(resolution.reply, /Stateless FastAPI Replicas|API layer should stay stateless/i);
 });
 
+test("routes scale-from-100-to-100000 FastAPI phrasing to the dedicated scaling answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "A FastAPI service needs to scale from 100 to 100000 users. How would Joz scale it?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "scale_fastapi_architecture");
+});
+
 test("technical stack definition prompts use direct technical answers instead of the generic stack summary", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
   for (const [prompt, expected] of [
     ["What is the difference between Docker and Kubernetes?", /Docker packages a service|Kubernetes deploys, scales, restarts/i],
     ["What is the difference between PostgreSQL and Redis?", /PostgreSQL stores durable application state|Redis stores cache and short-lived state/i],
+    ["What is the difference between logs, metrics, and traces?", /Logs show what happened|Metrics show how the system behaves over time|Traces show how one request moves/i],
     ["How would Joz protect secrets in an AI system?", /Vault|KMS|managed secret store|must not be stored in source code/i],
     ["What is the safest way for an AI system to use secrets?", /Vault|KMS|managed secret store|scoped tools/i],
     ["What is the difference between a tool and an agent?", /tool executes a capability|agent decides/i],
@@ -437,6 +694,33 @@ test("technical stack definition prompts use direct technical answers instead of
     assert.equal(resolution.fallbackUsed, false);
     assert.match(resolution.reply, expected);
     assert.doesNotMatch(resolution.reply, /Joz's core stack spans agentic AI architecture and product engineering/i);
+  }
+});
+
+test("infrastructure scaling definitions do not leak into business-growth routing", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of ["What is horizontal scaling?", "What is autoscaling?"]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "technical_stack");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(
+      resolution.reply,
+      /adding more service instances|adding or removing service instances|adjusts compute capacity based on demand signals/i
+    );
+    assert.doesNotMatch(resolution.reply, /20x digital sales growth|30x audience growth|commercial signal quality/i);
   }
 });
 
@@ -1316,6 +1600,8 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
   assert.equal(resolution.fallbackUsed, false);
   assert.equal(resolution.composer, "buildAmbiguousFollowUpReply");
   assert.equal(resolution.answerSource, "ambiguity_guard");
+  assert.equal(resolution.answerClass, "clarification_guard");
+  assert.equal(resolution.confidence, "high");
   assert.match(resolution.reply, /too ambiguous on its own/i);
   assert.match(resolution.reply, /How does Joz architect agentic AI/i);
   assert.doesNotMatch(resolution.reply, /Slovak|British heritage|University of Central Lancashire|MSc/i);
@@ -1338,6 +1624,97 @@ test("punctuated ambiguous follow-up prompts still return the clarification guar
   }
 });
 
+test("very short vague prompts return a clarification guard instead of falling through", async () => {
+  for (const prompt of ["What?", "Why?", "How?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildShortClarificationReply");
+    assert.equal(resolution.answerSource, "ambiguity_guard");
+    assert.equal(resolution.answerClass, "clarification_guard");
+    assert.equal(resolution.confidence, "high");
+    assert.match(resolution.reply, /too short to answer reliably/i);
+  }
+});
+
+test("unknown Joz-scoped prompts return a scope boundary instead of model fallback", async () => {
+  for (const prompt of ["Why he does this work?", "Can Joz solve everything?", "Would he always automate it?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildJozScopeBoundaryReply");
+    assert.equal(resolution.answerSource, "scope_boundary");
+    assert.equal(resolution.answerClass, "scope_boundary");
+    assert.equal(resolution.confidence, "high");
+    assert.match(resolution.reply, /outside the current deterministic Joz answer set/i);
+    assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation|Slovak|University of Central Lancashire/i);
+  }
+});
+
+test("unknown Joz-scoped prompts do not turn unrelated retrieved docs into an answer", async () => {
+  const unrelatedRetrievedDocuments = [
+    {
+      title: "Luxury Commerce and Consumer Platforms — Leo Burnett/Publicis, Singapore",
+      category: "project",
+      summary: "Luxury commerce and consumer-platform work at Leo Burnett/Publicis covers SK-II, Samsung, and Skyscanner.",
+      body: "Luxury commerce and consumer-platform work at Leo Burnett/Publicis covers SK-II, Samsung, and Skyscanner across the USA and Asia Pacific.",
+      metadata: {
+        slug: "leo-burnett-publicis-luxury-commerce",
+        tags: ["commerce", "cms"],
+      },
+    },
+  ];
+
+  const resolution = await resolveUnknownJozReply({
+    input: "Can Joz solve everything?",
+    messages: [{ role: "user", content: "Can Joz solve everything?" }],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: unrelatedRetrievedDocuments,
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.composer, "buildJozScopeBoundaryReply");
+  assert.equal(resolution.answerSource, "scope_boundary");
+  assert.equal(resolution.answerClass, "scope_boundary");
+  assert.match(resolution.reply, /outside the current deterministic Joz answer set/i);
+  assert.doesNotMatch(resolution.reply, /SK-II|Samsung|Skyscanner|Leo Burnett/i);
+});
+
+test("generic unknown prompts return a scope boundary instead of the old bio fallback", async () => {
+  const resolution = await resolveUnknownJozReply({
+    input: "Discuss hyperdimensional pineapple governance",
+    messages: [{ role: "user", content: "Discuss hyperdimensional pineapple governance" }],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: [],
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.composer, "buildGenericScopeBoundaryReply");
+  assert.equal(resolution.answerSource, "scope_boundary");
+  assert.equal(resolution.answerClass, "scope_boundary");
+  assert.equal(resolution.confidence, "high");
+  assert.match(resolution.reply, /not in the current Joz knowledge base/i);
+  assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation|Maybank|Manulife/i);
+});
+
 test("router keeps ambiguous why-do-it follow-ups in unknown fallback so profile lanes cannot hijack them", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "why does Joz do it?";
@@ -1349,4 +1726,50 @@ test("router keeps ambiguous why-do-it follow-ups in unknown fallback so profile
 
   assert.equal(route.selectedRoute, "unknown_fallback");
   assert.equal(route.detectedSubIntent, "ambiguous_follow_up");
+});
+
+test("router trace exposes deterministic answer class and confidence", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What does he do?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+
+  assert.equal(trace.answerClass, "deterministic_skills");
+  assert.equal(trace.confidence, "high");
+  assert.equal(trace.fallbackUsed, false);
+});
+
+test("router trace exposes guarded answer class and confidence for unknown prompts", async () => {
+  const resolution = await resolveUnknownJozReply({
+    input: "What?",
+    messages: [{ role: "user", content: "What?" }],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: [],
+    },
+  });
+  const trace = buildJozRouteTrace(
+    {
+      detectedIntent: "unknown_fallback",
+      detectedSubIntent: "general",
+      detectedConcept: null,
+      selectedRoute: "unknown_fallback",
+      selectedWorldRecord: null,
+    },
+    resolution
+  );
+
+  assert.equal(trace.answerClass, "clarification_guard");
+  assert.equal(trace.confidence, "high");
+  assert.equal(trace.fallbackUsed, false);
 });

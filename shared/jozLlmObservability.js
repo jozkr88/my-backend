@@ -67,6 +67,16 @@ function buildBaseChecks({ route, resolution, trace, retrievedDocuments, reply, 
       status: wordCount <= 55 ? "pass" : wordCount <= 75 ? "warn" : "fail",
       detail: `Reply length is ${wordCount} words.`,
     },
+    {
+      id: "answer_class",
+      status: trace?.answerClass ? "pass" : "fail",
+      detail: `Answer class: ${trace?.answerClass || "missing"}.`,
+    },
+    {
+      id: "confidence_guard",
+      status: trace?.confidence === "low" ? "warn" : trace?.confidence ? "pass" : "fail",
+      detail: `Confidence: ${trace?.confidence || "missing"}.`,
+    },
   ];
 
   return { checks, wordCount };

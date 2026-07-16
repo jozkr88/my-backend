@@ -93,7 +93,8 @@ function retrievedDocsMentionDefinitionTerm(term = "", docs = []) {
   });
 }
 
-function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
+function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], options = {}) {
+  const { allowDocumentLeadFallback = true } = options;
   const clean = normalizeText(input);
   if (clean.includes("permissions be enforced before retrieval") || clean.includes("permissions enforced before retrieval")) {
     return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
@@ -336,6 +337,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
 
   const definitionTerm = extractDefinitionTerm(clean);
   if (definitionTerm && !retrievedDocsMentionDefinitionTerm(definitionTerm, docs)) {
+    return null;
+  }
+
+  if (!allowDocumentLeadFallback) {
     return null;
   }
 
@@ -807,6 +812,78 @@ function buildLowSignalOrBadFaithReply(clean = "") {
   return null;
 }
 
+function countWords(value = "") {
+  return String(value || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function buildShortClarificationReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (!normalized) return null;
+
+  const shortQuestionWords = new Set([
+    "what",
+    "why",
+    "how",
+    "who",
+    "when",
+    "where",
+    "which",
+  ]);
+
+  if (countWords(normalized) <= 3 && shortQuestionWords.has(normalized.split(" ")[0])) {
+    return "That question is too short to answer reliably. Ask with the topic included, for example: What is Kubernetes? How does Joz architect agentic AI? or Why would Joz use multiple agents here?";
+  }
+
+  return null;
+}
+
+function buildJozScopeBoundaryReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (!normalized) return null;
+
+  const asksAboutJozOrPronoun =
+    /\bjoz\b/.test(normalized) ||
+    /\bhe\b/.test(normalized) ||
+    /\bhis\b/.test(normalized);
+  const questionLike =
+    /^(what|why|how|who|when|where|which|can|should|would|does|do|is|are)\b/.test(normalized);
+
+  if (!asksAboutJozOrPronoun || !questionLike) return null;
+
+  return "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.";
+}
+
+function buildGenericScopeBoundaryReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (!normalized) return null;
+
+  return "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+}
+
+function buildPolicyResolution({
+  reply,
+  answerSource,
+  composer,
+  intentMode = mapRouteToIntentMode("unknown_fallback"),
+  retrievedCategories = [],
+  answerClass,
+  confidence = "high",
+} = {}) {
+  return {
+    reply,
+    answerSource,
+    composer,
+    fallbackUsed: false,
+    intentMode,
+    retrievedCategories,
+    answerClass,
+    confidence,
+  };
+}
+
 function normalizeList(value) {
   return Array.isArray(value)
     ? value.map((item) => String(item || "").trim()).filter(Boolean)
@@ -1052,6 +1129,33 @@ function mapRouteToIntentMode(route) {
   if (route === "skills") return "skills";
   if (route === "booking") return "booking";
   return "skills";
+}
+
+function mapRouteToAnswerClass(route = {}, resolution = {}) {
+  if (resolution?.answerSource === "knowledge_gap") return "knowledge_gap";
+  if (resolution?.answerSource === "ambiguity_guard") return "clarification_guard";
+  if (resolution?.answerSource === "interaction_guard") return "interaction_guard";
+  if (resolution?.answerSource === "scope_boundary") return "scope_boundary";
+  if (resolution?.answerSource === "retrieved_knowledge") return "retrieved_guidance";
+  if (route?.selectedRoute === "canonical_world_concept") return "deterministic_world";
+  if (route?.selectedRoute === "world_awareness") return "world_navigation";
+  if (route?.selectedRoute === "identity_profile" || route?.selectedRoute === "factual_profile") {
+    return "deterministic_profile";
+  }
+  if (route?.selectedRoute === "business_need") return "deterministic_business";
+  if (route?.selectedRoute === "systems_mindset") return "deterministic_mindset";
+  if (route?.selectedRoute === "skills") return "deterministic_skills";
+  return resolution?.fallbackUsed ? "model_fallback" : "deterministic_skills";
+}
+
+function mapRouteToConfidence(route = {}, resolution = {}) {
+  if (resolution?.fallbackUsed) return "low";
+  if (["knowledge_gap", "ambiguity_guard", "interaction_guard", "scope_boundary"].includes(resolution?.answerSource)) {
+    return "high";
+  }
+  if (resolution?.answerSource === "retrieved_knowledge") return "high";
+  if (route?.selectedRoute === "unknown_fallback") return "medium";
+  return "high";
 }
 
 function detectCanonicalWorldConcept(clean) {
@@ -1745,6 +1849,8 @@ function detectSkills(clean) {
       "fastapi service currently handles 100 users",
       "fastapi service from 100 users to 100,000",
       "fastapi service from 100 users to 100000",
+      "fastapi service needs to scale from 100 to 100,000 users",
+      "fastapi service needs to scale from 100 to 100000 users",
       "from 100 users to 100,000",
       "from 100 users to 100000",
       "needs to handle 100,000 users",
@@ -1758,6 +1864,7 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "design verification",
       "design a verification architecture",
       "verification architecture",
       "design a verification layer",
@@ -2362,6 +2469,8 @@ export function composeJozLlmRouteReply({
       fallbackUsed: false,
       intentMode: "skills",
       retrievedCategories: [],
+      answerClass: "deterministic_world",
+      confidence: "high",
     };
   }
 
@@ -2380,6 +2489,8 @@ export function composeJozLlmRouteReply({
       responseMode: worldResolution.responseMode || null,
       intentMode: "skills",
       retrievedCategories: [],
+      answerClass: "world_navigation",
+      confidence: worldResolution.fallbackUsed ? "medium" : "high",
     };
   }
 
@@ -2391,6 +2502,8 @@ export function composeJozLlmRouteReply({
       fallbackUsed: false,
       intentMode: "skills",
       retrievedCategories: ["bio", "proof"],
+      answerClass: "deterministic_profile",
+      confidence: "high",
     };
   }
 
@@ -2405,6 +2518,8 @@ export function composeJozLlmRouteReply({
       fallbackUsed: false,
       intentMode: "skills",
       retrievedCategories: ["faq", "bio"],
+      answerClass: "deterministic_profile",
+      confidence: "high",
     };
   }
 
@@ -2434,6 +2549,8 @@ export function composeJozLlmRouteReply({
       intentMode: "business_need",
       retrievedCategories:
         evidenceReply?.evidenceDocs?.map((doc) => doc.category) || ["business_need", "proof"],
+      answerClass: "deterministic_business",
+      confidence: "high",
     };
   }
 
@@ -2466,6 +2583,8 @@ export function composeJozLlmRouteReply({
       intentMode: "systems_mindset",
       retrievedCategories:
         evidenceReply?.evidenceDocs?.map((doc) => doc.category) || ["systems_mindset", "proof"],
+      answerClass: directKnowledgeReply ? "retrieved_guidance" : "deterministic_mindset",
+      confidence: "high",
     };
   }
 
@@ -2479,8 +2598,10 @@ export function composeJozLlmRouteReply({
       input,
       retrievedDocuments,
     });
+    const preferBaseSkillsReply =
+      route.detectedSubIntent === "capabilities_overview";
     return {
-      reply: directKnowledgeReply || evidenceReply?.reply || baseReply,
+      reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
         route.detectedSubIntent === "capabilities_overview"
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
@@ -2498,6 +2619,11 @@ export function composeJozLlmRouteReply({
       intentMode: "skills",
       retrievedCategories:
         evidenceReply?.evidenceDocs?.map((doc) => doc.category) || ["skills", "proof"],
+      answerClass:
+        route.detectedSubIntent === "technical_stack" && directKnowledgeReply
+          ? "retrieved_guidance"
+          : "deterministic_skills",
+      confidence: "high",
     };
   }
 
@@ -2511,6 +2637,8 @@ export function composeJozLlmRouteReply({
       fallbackUsed: false,
       intentMode: "skills",
       retrievedCategories: ["bio", "proof"],
+      answerClass: "deterministic_skills",
+      confidence: "high",
     };
   }
 
@@ -2530,55 +2658,74 @@ export async function resolveUnknownJozReply({
   const topProgrammeRecord = retrievedDocuments.find((doc) => doc?.category === "project");
 
   if (detectProgrammeQuery(clean) && topProgrammeRecord) {
-    return {
+    return buildPolicyResolution({
       reply: buildProgrammeRecordReply(topProgrammeRecord),
       answerSource: topProgrammeRecord.title || topProgrammeRecord.metadata?.source_filename || "retrieved_programme_record",
       composer: "buildProgrammeRecordReply",
-      fallbackUsed: false,
       intentMode: mapRouteToIntentMode("skills"),
       retrievedCategories: ["skills", "proof"],
-    };
+      answerClass: "retrieved_guidance",
+      confidence: "high",
+    });
   }
 
   const ambiguousFollowUpReply = buildAmbiguousFollowUpReply(clean);
   if (ambiguousFollowUpReply) {
-    return {
+    return buildPolicyResolution({
       reply: ambiguousFollowUpReply,
       answerSource: "ambiguity_guard",
       composer: "buildAmbiguousFollowUpReply",
-      fallbackUsed: false,
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
-    };
+      answerClass: "clarification_guard",
+      confidence: "high",
+    });
   }
 
   const lowSignalOrBadFaithReply = buildLowSignalOrBadFaithReply(clean);
   if (lowSignalOrBadFaithReply) {
-    return {
+    return buildPolicyResolution({
       reply: lowSignalOrBadFaithReply,
       answerSource: "interaction_guard",
       composer: "buildLowSignalOrBadFaithReply",
-      fallbackUsed: false,
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
-    };
+      answerClass: "interaction_guard",
+      confidence: "high",
+    });
   }
 
   const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(input);
   if (unknownDefinitionGapReply) {
-    return {
+    return buildPolicyResolution({
       reply: unknownDefinitionGapReply,
       answerSource: "knowledge_gap",
       composer: "buildUnknownDefinitionGapReply",
-      fallbackUsed: false,
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
-    };
+      answerClass: "knowledge_gap",
+      confidence: "high",
+    });
   }
 
-  const retrievedKnowledgeReply = buildRetrievedKnowledgeReply(input, retrievedDocuments);
+  const shortClarificationReply = buildShortClarificationReply(clean);
+  if (shortClarificationReply) {
+    return buildPolicyResolution({
+      reply: shortClarificationReply,
+      answerSource: "ambiguity_guard",
+      composer: "buildShortClarificationReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+      answerClass: "clarification_guard",
+      confidence: "high",
+    });
+  }
+
+  const retrievedKnowledgeReply = buildRetrievedKnowledgeReply(input, retrievedDocuments, {
+    allowDocumentLeadFallback: false,
+  });
   if (retrievedKnowledgeReply) {
-    return {
+    return buildPolicyResolution({
       reply: retrievedKnowledgeReply,
       answerSource:
         topProgrammeRecord?.title ||
@@ -2586,21 +2733,36 @@ export async function resolveUnknownJozReply({
         retrievedDocuments[0]?.metadata?.canonical_record_title ||
         "retrieved_knowledge",
       composer: "buildRetrievedKnowledgeReply",
-      fallbackUsed: false,
       intentMode: mapRouteToIntentMode("skills"),
       retrievedCategories: retrievedDocuments
         .slice(0, 3)
         .map((doc) => doc.category)
         .filter(Boolean),
-    };
+      answerClass: "retrieved_guidance",
+      confidence: "high",
+    });
+  }
+
+  const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean);
+  if (jozScopeBoundaryReply) {
+    return buildPolicyResolution({
+      reply: jozScopeBoundaryReply,
+      answerSource: "scope_boundary",
+      composer: "buildJozScopeBoundaryReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+      answerClass: "scope_boundary",
+      confidence: "high",
+    });
   }
 
   let reply = "";
   let answerSource = "llm_fallback";
   let composer = "buildJozLlmFallbackReply";
   let fallbackUsed = true;
+  const allowModelFallback = process.env.JOZ_LLM_ALLOW_MODEL_FALLBACK === "true";
 
-  if (openai && process.env.OPENAI_API_KEY) {
+  if (allowModelFallback && openai && process.env.OPENAI_API_KEY) {
     try {
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
@@ -2634,7 +2796,16 @@ export async function resolveUnknownJozReply({
   }
 
   if (!reply) {
-    reply = buildJozLlmFallbackReply(input);
+    const genericScopeBoundaryReply = buildGenericScopeBoundaryReply(clean);
+    return buildPolicyResolution({
+      reply: genericScopeBoundaryReply || buildJozLlmFallbackReply(input),
+      answerSource: "scope_boundary",
+      composer: "buildGenericScopeBoundaryReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+      answerClass: "scope_boundary",
+      confidence: "high",
+    });
   }
 
   return {
@@ -2644,6 +2815,8 @@ export async function resolveUnknownJozReply({
     fallbackUsed,
     intentMode: mapRouteToIntentMode("unknown_fallback"),
     retrievedCategories: [],
+    answerClass: "model_fallback",
+    confidence: "low",
   };
 }
 
@@ -2667,6 +2840,8 @@ export function buildJozRouteTrace(route, resolution) {
     recommendedActionIds: resolution?.recommendedActionIds || [],
     fallbackUsed: Boolean(resolution?.fallbackUsed),
     validationPassed: resolution?.validationPassed !== false,
+    answerClass: resolution?.answerClass || mapRouteToAnswerClass(route, resolution),
+    confidence: resolution?.confidence || mapRouteToConfidence(route, resolution),
   };
 }
 
