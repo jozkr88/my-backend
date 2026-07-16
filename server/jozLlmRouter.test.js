@@ -1337,3 +1337,16 @@ test("punctuated ambiguous follow-up prompts still return the clarification guar
     assert.match(resolution.reply, /too ambiguous on its own/i);
   }
 });
+
+test("router keeps ambiguous why-do-it follow-ups in unknown fallback so profile lanes cannot hijack them", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "why does Joz do it?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "unknown_fallback");
+  assert.equal(route.detectedSubIntent, "ambiguous_follow_up");
+});

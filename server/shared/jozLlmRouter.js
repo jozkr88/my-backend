@@ -744,6 +744,10 @@ function buildAmbiguousFollowUpReply(clean = "") {
   return null;
 }
 
+function isAmbiguousFollowUp(clean = "") {
+  return Boolean(buildAmbiguousFollowUpReply(clean));
+}
+
 function normalizeList(value) {
   return Array.isArray(value)
     ? value.map((item) => String(item || "").trim()).filter(Boolean)
@@ -2023,6 +2027,18 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const preWorldBusinessNeed = detectBusinessNeed(clean);
   const preWorldSystemsMindset = detectSystemsMindset(clean);
   const preWorldSkills = detectSkills(clean);
+
+  if (isAmbiguousFollowUp(clean)) {
+    return {
+      detectedIntent: "unknown_fallback",
+      detectedSubIntent: "ambiguous_follow_up",
+      detectedConcept: null,
+      selectedRoute: "unknown_fallback",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
     return {
