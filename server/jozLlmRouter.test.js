@@ -7,6 +7,7 @@ import {
   composeJozLlmRouteReply,
   resolveUnknownJozReply,
   routeJozLlmQuery,
+  routeJozLlmQueryWithAwareness,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 import { validateAppContext } from "./shared/meetJozWorld.js";
@@ -449,6 +450,93 @@ test("additional fuzz shorthand prompts resolve to the intended routes", () => {
   });
   assert.equal(verifyRoute.selectedRoute, "unknown_fallback");
   assert.equal(verifyRoute.detectedSubIntent, "ambiguous_follow_up");
+});
+
+test("conversation awareness can resolve ambiguous verify follow-ups from the prior verified topic", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "verify it",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "An agent says it sold 20% of a portfolio. How would Joz verify it?",
+      },
+      {
+        role: "assistant",
+        content: "Proposal -> Risk and Policy -> Execution -> Event Capture -> Verification -> Reconciliation.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "verification_architecture",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+});
+
+test("conversation awareness can resolve why-does-he-do-it follow-ups from prior agentic-architecture context", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "why does he do it",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How does Joz architect agentic AI?",
+      },
+      {
+        role: "assistant",
+        content: "Joz's agentic architecture is built around a clear separation of responsibilities.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "agentic_architecture_approach",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "agentic_architecture_why");
+});
+
+test("conversation awareness does not hijack ambiguous follow-ups when the prior route is unrelated", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "verify it",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "Who is Joz?",
+      },
+      {
+        role: "assistant",
+        content: "Joz Krupa is an Agentic AI Architecture and Innovation Leader.",
+        metadata: {
+          trace: {
+            selectedRoute: "identity_profile",
+            detectedSubIntent: "overview",
+            answerClass: "deterministic_profile",
+          },
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "unknown_fallback");
+  assert.equal(route.detectedSubIntent, "ambiguous_follow_up");
 });
 
 test("docker vs kubernetes uses the canonical direct comparison answer", () => {

@@ -815,6 +815,119 @@ function isAmbiguousFollowUp(clean = "") {
   return Boolean(buildAmbiguousFollowUpReply(clean));
 }
 
+function normalizeConversationMessages(messages = []) {
+  return Array.isArray(messages)
+    ? messages
+        .filter(Boolean)
+        .map((message) => ({
+          role: message?.role === "assistant" ? "assistant" : "user",
+          content: String(message?.content || ""),
+          metadata: message?.metadata && typeof message.metadata === "object" ? message.metadata : {},
+        }))
+        .filter((message) => message.content)
+    : [];
+}
+
+function buildConversationAwarenessContext(messages = []) {
+  const normalized = normalizeConversationMessages(messages);
+  if (!normalized.length) return null;
+
+  for (let index = normalized.length - 1; index >= 0; index -= 1) {
+    const assistant = normalized[index];
+    if (assistant.role !== "assistant") continue;
+
+    const trace = assistant?.metadata?.trace || {};
+    const selectedRoute = trace?.selectedRoute || assistant?.metadata?.route || null;
+    const detectedSubIntent = trace?.detectedSubIntent || null;
+
+    if (!selectedRoute || selectedRoute === "unknown_fallback") continue;
+
+    let lastUserPrompt = "";
+    for (let userIndex = index - 1; userIndex >= 0; userIndex -= 1) {
+      if (normalized[userIndex]?.role === "user") {
+        lastUserPrompt = normalized[userIndex].content;
+        break;
+      }
+    }
+
+    return {
+      selectedRoute,
+      detectedSubIntent,
+      answerClass: trace?.answerClass || assistant?.metadata?.answerClass || null,
+      userPrompt: lastUserPrompt,
+    };
+  }
+
+  return null;
+}
+
+function buildConversationAwareRoute(route = {}, awareness = null, input = "") {
+  if (!awareness || route?.selectedRoute !== "unknown_fallback") {
+    return route;
+  }
+
+  const clean = normalizeText(input).replace(/[?!.,]+$/g, "");
+  const priorPrompt = normalizeText(awareness?.userPrompt || "");
+  const priorSubIntent = awareness?.detectedSubIntent || null;
+
+  const inheritsVerificationRoute =
+    includesAny(clean, ["verify it", "how would he verify it", "how would joz verify it"]) &&
+    (
+      priorSubIntent === "verification_architecture" ||
+      includesAny(priorPrompt, ["portfolio", "trade", "sell 20%", "verification", "post-trade state"])
+    );
+
+  if (inheritsVerificationRoute) {
+    return {
+      ...route,
+      detectedIntent: "skills",
+      detectedSubIntent: "verification_architecture",
+      detectedConcept: "skills",
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+    };
+  }
+
+  const inheritsScalingRoute =
+    includesAny(clean, ["scale this", "how would he scale this", "how would he scale it"]) &&
+    (
+      priorSubIntent === "scale_fastapi_architecture" ||
+      includesAny(priorPrompt, ["fastapi", "100000 users", "100,000 users", "scale a fastapi service"])
+    );
+
+  if (inheritsScalingRoute) {
+    return {
+      ...route,
+      detectedIntent: "skills",
+      detectedSubIntent: "scale_fastapi_architecture",
+      detectedConcept: "skills",
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+    };
+  }
+
+  const inheritsAgenticWhyRoute =
+    includesAny(clean, ["why does he do it", "why does joz do it", "why would he do it", "why would joz do it"]) &&
+    (
+      priorSubIntent === "agentic_architecture_approach" ||
+      priorSubIntent === "agentic_architecture_why" ||
+      includesAny(priorPrompt, ["agentic ai", "agent architecture", "agentic architecture"])
+    );
+
+  if (inheritsAgenticWhyRoute) {
+    return {
+      ...route,
+      detectedIntent: "skills",
+      detectedSubIntent: "agentic_architecture_why",
+      detectedConcept: "skills",
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+    };
+  }
+
+  return route;
+}
+
 function buildLowSignalOrBadFaithReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (!normalized) return null;
@@ -2499,6 +2612,21 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     worldContext,
     worldEntity,
   };
+}
+
+export function routeJozLlmQueryWithAwareness({
+  input = "",
+  appContext = {},
+  legacyContext = {},
+  recentMessages = [],
+} = {}) {
+  const baseRoute = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const awareness = buildConversationAwarenessContext(recentMessages);
+  return buildConversationAwareRoute(baseRoute, awareness, input);
 }
 
 export function composeJozLlmRouteReply({

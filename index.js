@@ -13,6 +13,7 @@ import {
   createJozConversation,
   deleteJozPrivacyBundle,
   exportJozPrivacyBundle,
+  getRecentJozSessionMessages,
   getPortalTransition,
   getPrimaryJozProfile,
   getJozDocumentsByIntent,
@@ -60,6 +61,7 @@ import {
   buildRoleAwareJozContext,
   composeJozLlmRouteReply,
   resolveUnknownJozReply,
+  routeJozLlmQueryWithAwareness,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
@@ -111,6 +113,62 @@ const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
 );
 const DEPLOY_MARKER =
   process.env.DEPLOY_MARKER || "2026-07-16-joz-routing-audit-v1";
+
+function buildJozVerificationFallbackResolution(route = {}) {
+  if (route?.selectedRoute === "business_need") {
+    return {
+      reply:
+        "I need the business topic stated more specifically. Ask about operating model, efficiency, growth, ROI, or decision support.",
+      answerSource: "verification_guard",
+      composer: "buildJozVerificationFallbackResolution",
+      fallbackUsed: false,
+      intentMode: "business_need",
+      retrievedCategories: [],
+      answerClass: "clarification_guard",
+      confidence: "high",
+    };
+  }
+
+  if (route?.selectedRoute === "systems_mindset") {
+    return {
+      reply:
+        "I need the systems topic stated more specifically. Ask about governance, prompt injection defense, approval boundaries, or verification.",
+      answerSource: "verification_guard",
+      composer: "buildJozVerificationFallbackResolution",
+      fallbackUsed: false,
+      intentMode: "systems_mindset",
+      retrievedCategories: [],
+      answerClass: "clarification_guard",
+      confidence: "high",
+    };
+  }
+
+  if (route?.selectedRoute === "identity_profile" || route?.selectedRoute === "factual_profile") {
+    return {
+      reply:
+        "Ask specifically about Joz's background, education, location, availability, or contact details.",
+      answerSource: "verification_guard",
+      composer: "buildJozVerificationFallbackResolution",
+      fallbackUsed: false,
+      intentMode: "skills",
+      retrievedCategories: [],
+      answerClass: "clarification_guard",
+      confidence: "high",
+    };
+  }
+
+  return {
+    reply:
+      "I need the topic stated more specifically. Ask about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+    answerSource: "verification_guard",
+    composer: "buildJozVerificationFallbackResolution",
+    fallbackUsed: false,
+    intentMode: "skills",
+    retrievedCategories: [],
+    answerClass: "clarification_guard",
+    confidence: "high",
+  };
+}
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
@@ -883,10 +941,16 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
 
-    const route = routeJozLlmQuery({
+    const recentSessionMessages = await getRecentJozSessionMessages({
+      conversationId: String(req.body?.conversationId || "").trim() || null,
+      sessionKey,
+      limit: 12,
+    });
+    const route = routeJozLlmQueryWithAwareness({
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
+      recentMessages: recentSessionMessages,
     });
     const intentMode =
       String(context?.intentMode || "").trim().toLowerCase() ||
@@ -932,7 +996,7 @@ app.post("/api/joz-llm", async (req, res) => {
       legacyContext: legacyRuntimeContext,
       retrievedDocuments: retrievalContext,
     });
-    const resolution =
+    let resolution =
       ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
@@ -948,8 +1012,8 @@ app.post("/api/joz-llm", async (req, res) => {
       reply = enforceJozLlmReplyLimit("", 55);
     }
 
-    const trace = buildJozRouteTrace(route, resolution);
-    const verification = buildJozResponseVerification({
+    let trace = buildJozRouteTrace(route, resolution);
+    let verification = buildJozResponseVerification({
       input: latestUserMessage,
       route,
       resolution,
@@ -958,6 +1022,73 @@ app.post("/api/joz-llm", async (req, res) => {
       retrievedDocuments,
       latencyMs: Date.now() - requestStartedAt,
     });
+    let verificationRecovery = null;
+
+    if (verification.status === "fail" && route.selectedRoute !== "unknown_fallback") {
+      const retryResolution = composeJozLlmRouteReply({
+        route,
+        input: latestUserMessage,
+        appContext: validatedAppContext,
+        legacyContext: legacyRuntimeContext,
+        retrievedDocuments: [],
+      });
+
+      if (retryResolution) {
+        const retryReply = String(retryResolution?.reply || "").trim() || enforceJozLlmReplyLimit("", 55);
+        const retryTrace = buildJozRouteTrace(route, retryResolution);
+        const retryVerification = buildJozResponseVerification({
+          input: latestUserMessage,
+          route,
+          resolution: retryResolution,
+          trace: retryTrace,
+          reply: retryReply,
+          retrievedDocuments: [],
+          latencyMs: Date.now() - requestStartedAt,
+        });
+
+        verificationRecovery = {
+          attempted: true,
+          strategy: "retrieval_free_retry",
+          initialStatus: verification.status,
+          recoveredStatus: retryVerification.status,
+        };
+
+        if (retryVerification.status !== "fail") {
+          resolution = retryResolution;
+          reply = retryReply;
+          trace = retryTrace;
+          verification = retryVerification;
+        } else {
+          const fallbackResolution = buildJozVerificationFallbackResolution(route);
+          const fallbackReply =
+            String(fallbackResolution?.reply || "").trim() || enforceJozLlmReplyLimit("", 55);
+          const fallbackTrace = buildJozRouteTrace(route, fallbackResolution);
+          const fallbackVerification = buildJozResponseVerification({
+            input: latestUserMessage,
+            route,
+            resolution: fallbackResolution,
+            trace: fallbackTrace,
+            reply: fallbackReply,
+            retrievedDocuments: [],
+            latencyMs: Date.now() - requestStartedAt,
+          });
+
+          verificationRecovery = {
+            attempted: true,
+            strategy: "retrieval_free_retry_then_guard",
+            initialStatus: verification.status,
+            recoveredStatus: retryVerification.status,
+            fallbackStatus: fallbackVerification.status,
+          };
+
+          resolution = fallbackResolution;
+          reply = fallbackReply;
+          trace = fallbackTrace;
+          verification = fallbackVerification;
+        }
+      }
+    }
+
     const retrievedCategories =
       resolution?.retrievedCategories?.length
         ? resolution.retrievedCategories
@@ -995,6 +1126,7 @@ app.post("/api/joz-llm", async (req, res) => {
       requestContext: legacyRuntimeContext,
       trace,
       verification,
+      verificationRecovery,
       retrievedCategories,
       retrievedDocuments: retrievedDocuments.map((doc) => ({
         title: doc.title,
@@ -1025,6 +1157,7 @@ app.post("/api/joz-llm", async (req, res) => {
       mode: route.selectedRoute,
       trace,
       verification,
+      verificationRecovery,
       observability: {
         latencyMs: verification.metrics.latencyMs,
         retrievedDocumentCount: verification.metrics.retrievedDocumentCount,

@@ -602,6 +602,53 @@ export async function appendJozMessage({
   );
 }
 
+export async function getRecentJozSessionMessages({
+  conversationId = null,
+  sessionKey = null,
+  limit = 12,
+} = {}) {
+  const boundedLimit = Math.max(1, Math.min(50, Number(limit) || 12));
+
+  if (!conversationId && !sessionKey) {
+    return [];
+  }
+
+  const clauses = [];
+  const params = [];
+
+  if (conversationId) {
+    params.push(conversationId);
+    clauses.push(`c.id = $${params.length}`);
+  }
+
+  if (sessionKey) {
+    params.push(sessionKey);
+    clauses.push(`c.session_key = $${params.length}`);
+  }
+
+  params.push(boundedLimit);
+
+  const result = await runQuery(
+    `SELECT m.id,
+            m.conversation_id,
+            c.session_key,
+            m.role,
+            m.message_kind,
+            m.content,
+            m.metadata,
+            m.created_at
+     FROM joz_messages m
+     INNER JOIN joz_conversations c
+       ON c.id = m.conversation_id
+     WHERE ${clauses.join(" OR ")}
+     ORDER BY m.created_at DESC
+     LIMIT $${params.length}`,
+    params
+  );
+
+  return (result.rows || []).reverse();
+}
+
 export async function logJozLlmRequestEvent({
   conversationId = null,
   sessionKey = null,
