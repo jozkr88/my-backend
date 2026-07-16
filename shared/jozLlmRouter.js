@@ -135,6 +135,22 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
     return "What breaks first is usually not the model itself. It is queue depth, latency, tool bottlenecks, context bloat, retry storms, cache misses, database contention, or verification backlog. Joz scales agent systems by separating API intake, orchestration, tools, retrieval, execution, and verification so each bottleneck can be measured and scaled independently.";
   }
 
+  if (clean.includes("what is his infrastructure approach") || clean.includes("how does he approach infrastructure")) {
+    return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
+  }
+
+  if (clean.includes("what does he know about kubernetes")) {
+    return "Joz understands Kubernetes as the orchestration layer that deploys, scales, restarts, and manages containers across machines. He treats it as a tool for production operations when service boundaries, failure handling, and scaling needs justify the added complexity.";
+  }
+
+  if (clean.includes("what does he know about redis")) {
+    return "Joz understands Redis as the low-latency layer for cache and short-lived state. Typical uses include caching, sessions, rate limits, locks, queues, and transient workflow coordination, while durable business state stays in PostgreSQL or another source of truth.";
+  }
+
+  if (clean.includes("what does he know about temporal")) {
+    return "Joz understands Temporal as the durable workflow execution layer for retries, timeouts, approvals, crash recovery, long-running workflows, and compensation logic. He uses it when business actions must survive failure and resume safely over time.";
+  }
+
   if (clean.includes("what is docker")) {
     return "Docker packages an application and its dependencies into a portable container image. It solves environment consistency so the same image can run locally, in testing, and in production.";
   }
@@ -735,6 +751,10 @@ function buildAmbiguousFollowUpReply(clean = "") {
     "why would joz do that",
     "how would he do that",
     "why does he do that",
+    "how would he build that",
+    "how would he scale this",
+    "how would he verify this",
+    "why would he do that",
   ];
 
   if (includesAny(normalized, ambiguousShortFollowUps)) {
@@ -1414,6 +1434,7 @@ function detectBusinessNeed(clean) {
       "workflow redesign",
       "operating workflows",
       "manual handoffs",
+      "improve workflows",
     ])
   ) {
     return { detectedSubIntent: "processes", detectedConcept: "business_value" };
@@ -1500,11 +1521,17 @@ function detectBusinessNeed(clean) {
     includesAny(clean, [
       "why should we hire joz",
       "why hire joz",
+      "why hire him",
+      "why him",
+      "why joz",
       "business value",
       "where is the roi",
+      "where does he create the most value",
       "what problems can joz solve",
+      "what problems does he solve",
       "why is joz relevant now",
       "why now",
+      "why hire him now",
       "measurable outcomes",
       "business outcomes",
       "what value does joz bring",
@@ -1550,6 +1577,7 @@ function detectSystemsMindset(clean) {
 
   if (
     includesAny(clean, [
+      "how does he think about systems",
       "how does joz think",
       "systems mindset",
       "systems thinking",
@@ -1777,6 +1805,7 @@ function detectSkills(clean) {
       "what agentic architecture does joz build",
       "what is joz's agent architecture approach",
       "what is jozs agent architecture approach",
+      "what is his architecture style",
       "what agent architecture does joz do",
       "what agent architecture does joz use",
       "what agent architecture does joz build",
@@ -1791,6 +1820,7 @@ function detectSkills(clean) {
       "why separate policy from execution",
       "joz agentic architecture",
       "joz agent architecture",
+      "what kind of agent systems does he build",
     ])
   ) {
     return { detectedSubIntent: "agentic_architecture_approach", detectedConcept: "skills" };
@@ -1815,6 +1845,7 @@ function detectSkills(clean) {
       "what is the safest way for an ai system to use secrets",
       "secret management",
       "vault or kms",
+      "what tools does he use",
     ])
   ) {
     return { detectedSubIntent: "technical_stack", detectedConcept: "skills" };
@@ -1823,6 +1854,9 @@ function detectSkills(clean) {
   if (
     includesAny(clean, [
       "what is an agent",
+      "what stack does he use",
+      "what is his ai stack",
+      "what is his technical stack",
       "what is agent orchestration",
       "difference between a tool and an agent",
       "difference between an agent and an api",
@@ -1889,8 +1923,13 @@ function detectSkills(clean) {
       "what breaks first when agent systems scale",
       "wire redis and postgresql together",
       "redis and postgresql together",
+      "what does he know about kubernetes",
+      "what does he know about redis",
+      "what does he know about temporal",
       "what is joz's infrastructure approach",
       "what is jozs infrastructure approach",
+      "what is his infrastructure approach",
+      "how does he approach infrastructure",
       "how should an ai agent interact with blockchain",
       "blockchain",
       "defi",
@@ -2001,10 +2040,17 @@ function detectSkills(clean) {
       "joz's skills",
       "what are joz's skills",
       "what is joz good at",
+      "what is he good at",
+      "what is he strongest at",
       "what experience does joz have",
       "what are his capabilities",
       "what experience does he have",
       "what does he do",
+      "how does he work",
+      "what does joz actually do",
+      "what can he build",
+      "what can joz build",
+      "what makes him different",
       "technical depth",
       "core capabilities",
       "technical skills",

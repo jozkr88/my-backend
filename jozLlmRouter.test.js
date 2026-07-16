@@ -127,6 +127,125 @@ test("short pronoun phrasing about what he does resolves to Joz capabilities, no
   assert.doesNotMatch(resolution.reply, /stateless service|local machine memory|postgresql redis object storage/i);
 });
 
+test("loose capability and differentiation phrasing resolves to capabilities overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "What is he strongest at?",
+    "What is he good at?",
+    "What can he build?",
+    "What does Joz actually do?",
+    "What makes him different?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "capabilities_overview");
+    assert.equal(resolution.fallbackUsed, false);
+  }
+});
+
+test("pronoun systems and infrastructure phrasing resolves to the intended lanes", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const cases = [
+    ["How does he think about systems?", "systems_mindset", "thinking_model"],
+    ["What is his infrastructure approach?", "skills", "technical_stack"],
+    ["How does he approach infrastructure?", "skills", "technical_stack"],
+    ["What does he know about Kubernetes?", "skills", "technical_stack"],
+    ["What kind of agent systems does he build?", "skills", "agentic_architecture_approach"],
+    ["What is his architecture style?", "skills", "agentic_architecture_approach"],
+  ];
+
+  for (const [prompt, expectedRoute, expectedSubIntent] of cases) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, expectedRoute);
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
+  }
+});
+
+test("ambiguous build scale and verify follow-ups stay guarded", async () => {
+  for (const prompt of ["How would he build that?", "How would he scale this?", "How would he verify this?", "Why would he do that?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildAmbiguousFollowUpReply");
+    assert.match(resolution.reply, /too ambiguous on its own/i);
+  }
+});
+
+test("how-does-he-work phrasing resolves to capabilities overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How does he work?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+});
+
+test("technical-stack pronoun prompts use direct infrastructure knowledge where available", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const [prompt, expected] of [
+    ["What is his infrastructure approach?", /production foundation|scalable, secure, observable, resilient/i],
+    ["How does he approach infrastructure?", /production foundation|simple infrastructure first/i],
+    ["What does he know about Kubernetes?", /orchestration layer|deploys, scales, restarts/i],
+    ["What does he know about Redis?", /low-latency layer|cache and short-lived state/i],
+    ["What does he know about Temporal?", /durable workflow execution layer|retries, timeouts, approvals/i],
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+      retrievedDocuments: [],
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "technical_stack");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, expected);
+  }
+});
+
 test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "What agentic architecture does Joz do?";
