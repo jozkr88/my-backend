@@ -109,6 +109,8 @@ const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
   process.env.JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
   DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS
 );
+const DEPLOY_MARKER =
+  process.env.DEPLOY_MARKER || "2026-07-16-joz-routing-audit-v1";
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
@@ -212,7 +214,12 @@ app.use(express.json());
 
 // --- Test route ---
 app.get("/api/hello", (req, res) => {
-  res.json({ message: "Backend is connected and running!" });
+  res.json({
+    message: "Backend is connected and running!",
+    deployMarker: DEPLOY_MARKER,
+    render: Boolean(process.env.RENDER),
+    nodeEnv: process.env.NODE_ENV || "development",
+  });
 });
 
 // === FILE PERSISTENCE SETUP ===

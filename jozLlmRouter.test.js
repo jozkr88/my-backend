@@ -135,7 +135,6 @@ test("routes how-and-why agentic AI prompts to the dedicated architecture approa
 
   for (const prompt of [
     "How does Joz architect agentic AI?",
-    "Why does Joz do agentic AI?",
   ]) {
     const route = routeJozLlmQuery({
       input: prompt,
@@ -156,6 +155,82 @@ test("routes how-and-why agentic AI prompts to the dedicated architecture approa
     assert.match(resolution.reply, /multi-step reasoning, tool use, workflow coordination, and controlled execution/i);
     assert.doesNotMatch(resolution.reply, /Joz Krupa is an Agentic AI Architecture and Innovation leader/i);
   }
+});
+
+test("routes broader agent-architecture phrasing to the dedicated architecture approach answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "What is Joz's agent architecture approach?",
+    "How would Joz structure an agent system?",
+    "What architecture pattern would Joz use for agents in production?",
+    "How does Joz separate policy from execution?",
+    "Why keep policy outside the agent?",
+    "Why keep verification outside the agent?",
+    "Why separate policy from execution?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "agentic_architecture_approach");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, /separation of responsibilities|thin orchestrator|policy before action/i);
+    assert.doesNotMatch(resolution.reply, /Joz Krupa is an Agentic AI Architecture and Innovation leader/i);
+  }
+});
+
+test("routes why-agentic-AI phrasing to the dedicated motivation answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "Why does Joz do agentic AI?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "agentic_architecture_why");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /more than one-shot generation|multi-step reasoning|tool use/i);
+  assert.match(resolution.reply, /controlled execution|better decisions|safer actions/i);
+  assert.doesNotMatch(resolution.reply, /clear separation of responsibilities: API intake/i);
+});
+
+test("factual profile degree phrasing resolves without falling to fallback", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What is Joz's degree?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "factual_profile");
+  assert.equal(route.detectedSubIntent, "degree");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /MSc in Strategy and Innovation/i);
 });
 
 test("routes single-agent versus multi-agent platform questions to the dedicated tradeoff answer", () => {
@@ -185,6 +260,34 @@ test("routes single-agent versus multi-agent platform questions to the dedicated
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
 });
 
+test("routes general agent-scope tradeoff questions to the dedicated scope answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "Why would Joz use multiple agents instead of one?",
+    "When should an agent stay simple and when should it become a system?",
+    "Should Joz use one brain or many brains for an agent system?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "agent_scope_tradeoffs");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, /keep an agent simple|turn it into a broader system/i);
+    assert.match(resolution.reply, /one orchestrator|specialist workers|coordination overhead|state-sync/i);
+  }
+});
+
 test("routes portfolio verification questions to the dedicated verification architecture answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt =
@@ -210,6 +313,48 @@ test("routes portfolio verification questions to the dedicated verification arch
   assert.match(resolution.reply, /expected delta|actual post-trade state/i);
   assert.match(resolution.reply, /idempotent order keys|immutable audit logs|bounded retries|human escalation/i);
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
+test("routes general agent-action verification questions to the dedicated verification architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How would Joz design a verification layer for agents that can take actions?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Proposal -> Risk and Policy -> Execution -> Event Capture -> Verification -> Reconciliation/i);
+  assert.match(resolution.reply, /reconciliation architecture|authoritative portfolio source of truth|expected state/i);
+});
+
+test("routes natural completion-check phrasing to the dedicated verification architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "If an agent says it finished the job, how would Joz check that it really did?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+  assert.match(resolution.reply, /Execution|Verification|Reconciliation|authoritative/i);
 });
 
 test("routes FastAPI scale-up questions to the dedicated scaling architecture answer", () => {
@@ -238,6 +383,155 @@ test("routes FastAPI scale-up questions to the dedicated scaling architecture an
   assert.match(resolution.reply, /queues and workers|caching/i);
   assert.match(resolution.reply, /autoscaling|rate limits|bounded concurrency|database scaling/i);
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
+test("routes natural FastAPI growth phrasing to the dedicated scaling answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How would Joz scale a FastAPI service from 100 users to 100,000?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "scale_fastapi_architecture");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Stateless FastAPI Replicas|API layer should stay stateless/i);
+});
+
+test("technical stack definition prompts use direct technical answers instead of the generic stack summary", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const [prompt, expected] of [
+    ["What is the difference between Docker and Kubernetes?", /Docker packages a service|Kubernetes deploys, scales, restarts/i],
+    ["What is the difference between PostgreSQL and Redis?", /PostgreSQL stores durable application state|Redis stores cache and short-lived state/i],
+    ["How would Joz protect secrets in an AI system?", /Vault|KMS|managed secret store|must not be stored in source code/i],
+    ["What is the safest way for an AI system to use secrets?", /Vault|KMS|managed secret store|scoped tools/i],
+    ["What is the difference between a tool and an agent?", /tool executes a capability|agent decides/i],
+    ["What breaks first when agent systems scale?", /queue depth|latency|tool bottlenecks|verification backlog|scaled independently/i],
+    ["How would Joz wire Redis and PostgreSQL together in a real system?", /PostgreSQL.*source of truth|Redis.*cache|ephemeral state/i],
+    ["What is a Kubernetes pod?", /smallest deployable unit|pod/i],
+    ["How would Joz scale an agent platform under high concurrency?", /separating API intake, reasoning workers, tool services|bottleneck/i],
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "technical_stack");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, expected);
+    assert.doesNotMatch(resolution.reply, /Joz's core stack spans agentic AI architecture and product engineering/i);
+  }
+});
+
+test("routes fail-safe platform prompts to the dedicated safe-architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How would Joz design an AI platform that can fail safely?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "safe_architecture_design");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /fail safely|policy|verification|human approval|graceful degradation/i);
+  assert.doesNotMatch(resolution.reply, /Leo Burnett|Publicis|Luxury commerce/i);
+});
+
+test("routes production-stupidity and approval-rollback phrasing to safer routes", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const [prompt, expectedRoute] of [
+    ["How would Joz stop an AI from doing something stupid in production?", "systems_mindset"],
+    ["How would Joz structure approvals, escalation, and rollback?", "skills"],
+    ["Why not let agents just deploy code themselves?", "systems_mindset"],
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, expectedRoute);
+    assert.equal(resolution.fallbackUsed, false);
+  }
+});
+
+test("production-stupidity and deploy-themselves prompts use direct guardrail answers", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const [prompt, expected] of [
+    ["How would Joz stop an AI from doing something stupid in production?", /policy|approval|verification|stops or escalates/i],
+    ["Why not let agents just deploy code themselves?", /should not deploy code by themselves|explicit approval|rollback/i],
+    ["How would Joz structure approvals, escalation, and rollback?", /Policy Gate -> Approval Step -> Execution -> Verification -> Rollback or Escalation/i],
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, expected);
+  }
+});
+
+test("routes broad human-approval prompts to the explicit guardrail answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What should always require human approval?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "systems_mindset");
+  assert.equal(route.detectedSubIntent, "thinking_model");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /database migrations|security changes|infrastructure changes|production deployments|code merges/i);
+  assert.doesNotMatch(resolution.reply, /challenge is deciding/i);
 });
 
 test("routes full financial platform design prompts to the dedicated platform architecture answer", () => {
@@ -293,6 +587,32 @@ test("routes prompt injection defense questions to the dedicated systems answer"
   assert.match(resolution.reply, /system policy outside the model|block tool execution/i);
   assert.match(resolution.reply, /strict tool allowlists|ACL-aware retrieval|human approval/i);
   assert.doesNotMatch(resolution.reply, /Start with one orchestrator agent/i);
+});
+
+test("systems safety prompts use direct technical answers instead of the generic systems-mindset summary", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const [prompt, expected] of [
+    ["Can agents deploy directly to production?", /must not deploy directly to production|explicit human approval/i],
+    ["What actions should require human approval?", /database migrations|security changes|production deployments|code merges/i],
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "systems_mindset");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, expected);
+    assert.doesNotMatch(resolution.reply, /Joz thinks in systems before features/i);
+  }
 });
 
 test("routes organisational ownership inference questions to the dedicated awareness-layer answer", () => {
@@ -559,6 +879,48 @@ test("routes operating-model business questions to business_need instead of arch
   assert.match(resolution.reply, /operating-model level|where AI should sit|who owns what/i);
   assert.match(resolution.reply, /human approval stays|workflows escalate|outcomes are measured/i);
   assert.doesNotMatch(resolution.reply, /architecture problem, not a profile summary/i);
+});
+
+test("system architecture wording can override the operating-model business route", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "How would Joz design the system architecture behind that operating model?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "architecture_reasoning");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /architecture problem, not a profile summary/i);
+});
+
+test("exact Joz experience phrasing stays on capabilities overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What experience does Joz have?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
 });
 
 test("business value replies stay differentiated across efficiency, growth, roi, and decision support", () => {
@@ -921,4 +1283,70 @@ test("common first-word typos still resolve unknown definition prompts to the kn
     /^Paradex is not in the current Joz knowledge base\./i
   );
   assert.doesNotMatch(resolution.reply, /^Tools are functions/i);
+});
+
+test("special malformed knowledge-base question returns a clean gap answer", async () => {
+  const resolution = await resolveUnknownJozReply({
+    input: "What is not in Joz's knowledge base?",
+    messages: [{ role: "user", content: "What is not in Joz's knowledge base?" }],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: [],
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.composer, "buildUnknownDefinitionGapReply");
+  assert.match(resolution.reply, /does not define arbitrary external entities/i);
+  assert.doesNotMatch(resolution.reply, /^not in Joz's knowledge base is not/i);
+});
+
+test("ambiguous follow-up prompts return a clarification guard instead of a random profile answer", async () => {
+  const resolution = await resolveUnknownJozReply({
+    input: "How does Joz do it?",
+    messages: [
+      { role: "user", content: "How does Joz do it?" },
+    ],
+    openai: null,
+    roleAwareContext: {
+      retrievedDocuments: [],
+    },
+  });
+
+  assert.equal(resolution.fallbackUsed, false);
+  assert.equal(resolution.composer, "buildAmbiguousFollowUpReply");
+  assert.equal(resolution.answerSource, "ambiguity_guard");
+  assert.match(resolution.reply, /too ambiguous on its own/i);
+  assert.match(resolution.reply, /How does Joz architect agentic AI/i);
+  assert.doesNotMatch(resolution.reply, /Slovak|British heritage|University of Central Lancashire|MSc/i);
+});
+
+test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {
+  for (const prompt of ["How would he do that?", "Why does he do that?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildAmbiguousFollowUpReply");
+    assert.match(resolution.reply, /too ambiguous on its own/i);
+  }
+});
+
+test("router keeps ambiguous why-do-it follow-ups in unknown fallback so profile lanes cannot hijack them", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "why does Joz do it?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "unknown_fallback");
+  assert.equal(route.detectedSubIntent, "ambiguous_follow_up");
 });
