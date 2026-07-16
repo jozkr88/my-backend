@@ -100,7 +100,7 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
   }
 
-  if (clean.includes("difference between docker and kubernetes")) {
+  if (clean.includes("difference between docker and kubernetes") || clean.includes("docker vs kubernetes")) {
     return "Docker packages a service and its dependencies into a portable container image. Kubernetes deploys, scales, restarts, and manages containers across machines. Docker packages the service; Kubernetes runs and manages it.";
   }
 
@@ -113,6 +113,14 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   }
 
   if (clean.includes("difference between logs, metrics, and traces")) {
+    return "Logs show what happened in discrete events. Metrics show how the system behaves over time. Traces show how one request moves across services.";
+  }
+
+  if (clean.includes("difference between logs metrics and traces")) {
+    return "Logs show what happened in discrete events. Metrics show how the system behaves over time. Traces show how one request moves across services.";
+  }
+
+  if (clean.includes("difference between logs metrics and traces")) {
     return "Logs show what happened in discrete events. Metrics show how the system behaves over time. Traces show how one request moves across services.";
   }
 
@@ -134,6 +142,14 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
 
   if (clean.includes("what breaks first when agent systems scale")) {
     return "What breaks first is usually not the model itself. It is queue depth, latency, tool bottlenecks, context bloat, retry storms, cache misses, database contention, or verification backlog. Joz scales agent systems by separating API intake, orchestration, tools, retrieval, execution, and verification so each bottleneck can be measured and scaled independently.";
+  }
+
+  if (clean.includes("what role does a knowledge graph play")) {
+    return "A knowledge graph connects entities, relationships, permissions, and provenance so retrieval can follow structure instead of only similarity. Joz would use it where ownership, policy, org structure, workflows, or cross-system relationships matter more than plain document lookup.";
+  }
+
+  if (clean.includes("what role does a knowledge graph play")) {
+    return "A knowledge graph connects entities, relationships, permissions, and provenance so retrieval can follow structure instead of only similarity. Joz would use it where ownership, policy, org structure, workflows, or cross-system relationships matter more than plain document lookup.";
   }
 
   if (clean.includes("what is his infrastructure approach") || clean.includes("how does he approach infrastructure")) {
@@ -274,6 +290,14 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
 
   if (clean.includes("what is mcp")) {
     return "MCP means Model Context Protocol. It standardizes how AI clients discover and use tools. MCP is not an agent and not a model; it is the protocol layer connecting them.";
+  }
+
+  if (clean.includes("what stack does he use")) {
+    return "Joz's core stack spans LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, and secure API-backed execution services.";
+  }
+
+  if (clean.includes("what stack does he use")) {
+    return "Joz's core stack spans LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, and secure API-backed execution services.";
   }
 
   if (clean.includes("difference between an agent and an api")) {
@@ -752,9 +776,9 @@ function buildUnknownDefinitionGapReply(clean = "") {
 
 function buildAmbiguousFollowUpReply(clean = "") {
   if (!clean) return null;
-  const normalized = String(clean).replace(/[?!.,]+$/g, "");
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
 
-  const ambiguousShortFollowUps = [
+  const ambiguousShortFollowUps = new Set([
     "how does joz do it",
     "how would joz do it",
     "why does joz do it",
@@ -774,10 +798,13 @@ function buildAmbiguousFollowUpReply(clean = "") {
     "how would he build that",
     "how would he scale this",
     "how would he verify this",
+    "how would he verify it",
+    "how would joz verify it",
+    "verify it",
     "why would he do that",
-  ];
+  ]);
 
-  if (includesAny(normalized, ambiguousShortFollowUps)) {
+  if (ambiguousShortFollowUps.has(normalized)) {
     return "That follow-up is too ambiguous on its own. Ask the same question with the topic included, for example: How does Joz architect agentic AI? or How would Joz design that workflow?";
   }
 
@@ -996,6 +1023,7 @@ function buildEvidenceBackedRouteReply({
       "architecture_reasoning",
       "safe_architecture_design",
       "agent_scope_tradeoffs",
+      "agentic_architecture_approach",
       "agentic_architecture_why",
       "single_agent_tradeoffs",
       "verification_architecture",
@@ -1200,6 +1228,10 @@ function detectIdentityProfile(clean) {
     includesAny(clean, [
       /^who is joz\b/,
       /^who is he\b/,
+      /^who even is joz\b/,
+      /^bro who even is joz\b/,
+      /^who even is he\b/,
+      /^who is this guy\b/,
       /^what is he\b/,
       "tell me about joz",
       "introduce joz",
@@ -1486,6 +1518,7 @@ function detectRecruiterOperational(clean) {
       "opportunity",
       "discuss a role",
     ])
+      && !includesAny(clean, ["worth hiring", "is he worth hiring", "is joz worth hiring"])
   ) {
     return {
       detectedIntent: "recruiter_hiring",
@@ -1669,6 +1702,8 @@ function detectBusinessNeed(clean) {
       "why hire him",
       "why him",
       "why joz",
+      "is he worth hiring",
+      "is joz worth hiring",
       "is joz good",
       "is he good",
       "business value",
@@ -1710,6 +1745,9 @@ function detectSystemsMindset(clean) {
       "prompt injection",
       "malicious instructions",
       "telegram channel",
+      "telegram has malicious prompts",
+      "malicious prompts",
+      "prompt injection attacks",
       "untrusted input",
     ]) &&
     includesAny(clean, [
@@ -1717,6 +1755,7 @@ function detectSystemsMindset(clean) {
       "prevent the agent from",
       "how would joz prevent",
       "executing malicious instructions",
+      "what if",
     ])
   ) {
     return { detectedSubIntent: "prompt_injection_defense", detectedConcept: "systems_mindset" };
@@ -1762,6 +1801,9 @@ function detectSkills(clean) {
     includesAny(clean, [
       "can joz work in a team",
       "can he work in a team",
+      "can joz work with people",
+      "can he work with people",
+      "work with people or nah",
       "does joz work well in a team",
       "does he work well in a team",
       "team player",
@@ -1853,6 +1895,10 @@ function detectSkills(clean) {
       "fastapi service needs to scale from 100 to 100000 users",
       "scale a fastapi service from 100 to 100,000",
       "scale a fastapi service from 100 to 100000",
+      "scale fastapi from 100 to 100,000",
+      "scale fastapi from 100 to 100000",
+      "how would he scale fastapi from 100 to 100,000",
+      "how would he scale fastapi from 100 to 100000",
       "from 100 users to 100,000",
       "from 100 users to 100000",
       "needs to handle 100,000 users",
@@ -1909,6 +1955,7 @@ function detectSkills(clean) {
     includesAny(clean, [
       "single agent or multiple agents",
       "single agent or multi agent",
+      "single agent vs multi agent",
       "single-agent or multi-agent",
       "single agent versus multiple agents",
       "single agent vs multiple agents",
@@ -1927,6 +1974,7 @@ function detectSkills(clean) {
       "when he would switch",
       "when would joz switch",
       "autonomous trading platform",
+      "trading",
       "trading platform",
     ])
   ) {
@@ -2024,6 +2072,7 @@ function detectSkills(clean) {
     includesAny(clean, [
       "what is an agent",
       "what stack does he use",
+      "what is his infra approach",
       "what is his ai stack",
       "what is his technical stack",
       "what is agent orchestration",
@@ -2036,6 +2085,8 @@ function detectSkills(clean) {
       "what is fastapi used for",
       "what is mcp",
       "what is docker",
+      "docker vs kubernetes",
+      "difference between docker and kubernetes",
       "docker and kubernetes",
       "what is kubernetes",
       "kubernetes pod",
@@ -2060,6 +2111,7 @@ function detectSkills(clean) {
       "kms",
       "what is opentelemetry",
       "difference between logs, metrics, and traces",
+      "difference between logs metrics and traces",
       "what is langsmith",
       "prometheus",
       "grafana",
@@ -2181,6 +2233,8 @@ function detectSkills(clean) {
       "proof not buzzwords",
       "with proof",
       "not buzzwords",
+      "what's joz strongest at",
+      "what is joz strongest at",
       "strongest skills",
       "strongest technical skills",
       "explain joz's strongest skills",
@@ -2211,6 +2265,7 @@ function detectSkills(clean) {
       "what is joz good at",
       "what is he good at",
       "what is he strongest at",
+      "what can he do",
       "what experience does joz have",
       "what are his capabilities",
       "what experience does he have",

@@ -17,6 +17,28 @@ function summarizeChecks(checks = []) {
   return "pass";
 }
 
+function resolveWordBudgetStatus(route = {}, wordCount = 0) {
+  const subIntent = route?.detectedSubIntent || "";
+  const generousArchitectureSubroutes = new Set([
+    "financial_intelligence_platform_architecture",
+    "safe_architecture_design",
+    "scale_fastapi_architecture",
+    "verification_architecture",
+    "agent_scope_tradeoffs",
+    "single_agent_tradeoffs",
+    "agentic_architecture_approach",
+    "langgraph_temporal_architecture",
+  ]);
+
+  if (wordCount <= 55) return "pass";
+  if (generousArchitectureSubroutes.has(subIntent)) {
+    if (wordCount <= 320) return "warn";
+    return "fail";
+  }
+  if (wordCount <= 140) return "warn";
+  return "fail";
+}
+
 function buildBaseChecks({ route, resolution, trace, retrievedDocuments, reply, latencyMs }) {
   const wordCount = countWords(reply);
   const checks = [
@@ -64,7 +86,7 @@ function buildBaseChecks({ route, resolution, trace, retrievedDocuments, reply, 
     },
     {
       id: "word_budget",
-      status: wordCount <= 55 ? "pass" : wordCount <= 75 ? "warn" : "fail",
+      status: resolveWordBudgetStatus(route, wordCount),
       detail: `Reply length is ${wordCount} words.`,
     },
     {
@@ -117,9 +139,134 @@ function verifyBusinessValueDefinition(reply = "") {
   ];
 }
 
-function verifyRouteSpecificReply({ route, reply }) {
+function verifySkillsCapabilitiesOverview(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsCoreCapability =
+    clean.includes("agentic ai architecture") ||
+    clean.includes("decision intelligence") ||
+    clean.includes("context engineering") ||
+    clean.includes("enterprise product engineering");
+  const avoidsInfraOnlyDrift =
+    !clean.includes("private subnets") &&
+    !clean.includes("firewalls and security groups") &&
+    !clean.includes("tls everywhere");
+
+  return [
+    {
+      id: "skills_core_capability",
+      status: mentionsCoreCapability ? "pass" : "fail",
+      detail: mentionsCoreCapability
+        ? "Reply stays on Joz's core capability layer."
+        : "Reply drifted away from Joz's core capability layer.",
+    },
+    {
+      id: "skills_avoids_infra_only_drift",
+      status: avoidsInfraOnlyDrift ? "pass" : "fail",
+      detail: avoidsInfraOnlyDrift
+        ? "Reply did not collapse into unrelated infrastructure snippets."
+        : "Reply collapsed into unrelated infrastructure snippets.",
+    },
+  ];
+}
+
+function verifySkillsCollaboration(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsTeam =
+    clean.includes("team") ||
+    clean.includes("teams") ||
+    clean.includes("cross-functional") ||
+    clean.includes("stakeholder") ||
+    clean.includes("leadership");
+  const avoidsInfraOnlyDrift =
+    !clean.includes("private subnets") &&
+    !clean.includes("tls everywhere") &&
+    !clean.includes("blue-green deployment");
+
+  return [
+    {
+      id: "collaboration_team_signal",
+      status: mentionsTeam ? "pass" : "fail",
+      detail: mentionsTeam
+        ? "Reply stays on team and collaboration evidence."
+        : "Reply does not stay on team and collaboration evidence.",
+    },
+    {
+      id: "collaboration_avoids_infra_drift",
+      status: avoidsInfraOnlyDrift ? "pass" : "fail",
+      detail: avoidsInfraOnlyDrift
+        ? "Reply did not drift into infrastructure fragments."
+        : "Reply drifted into infrastructure fragments.",
+    },
+  ];
+}
+
+function verifyScaleFastApiArchitecture(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsScalingPattern =
+    clean.includes("load balancer") ||
+    clean.includes("stateless fastapi") ||
+    clean.includes("queue and workers") ||
+    clean.includes("redis") ||
+    clean.includes("postgresql");
+
+  return [
+    {
+      id: "fastapi_scaling_specificity",
+      status: mentionsScalingPattern ? "pass" : "fail",
+      detail: mentionsScalingPattern
+        ? "Reply includes the expected FastAPI scaling architecture elements."
+        : "Reply is too generic and missed the FastAPI scaling architecture elements.",
+    },
+  ];
+}
+
+function verifyVerificationArchitecture(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsVerificationPattern =
+    clean.includes("verification") ||
+    clean.includes("reconciliation") ||
+    clean.includes("authoritative") ||
+    clean.includes("expected delta") ||
+    clean.includes("post-trade state");
+
+  return [
+    {
+      id: "verification_architecture_specificity",
+      status: mentionsVerificationPattern ? "pass" : "fail",
+      detail: mentionsVerificationPattern
+        ? "Reply includes verification and reconciliation architecture details."
+        : "Reply is too generic and missed verification architecture details.",
+    },
+  ];
+}
+
+function verifyRouteSpecificReply({ route, reply, trace }) {
+  if (
+    ["clarification_guard", "scope_boundary", "knowledge_gap", "interaction_guard"].includes(
+      trace?.answerClass
+    )
+  ) {
+    return [];
+  }
+
   if (route?.selectedRoute === "business_need" && route?.detectedSubIntent === "business_value_definition") {
     return verifyBusinessValueDefinition(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "capabilities_overview") {
+    return verifySkillsCapabilitiesOverview(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "collaboration") {
+    return verifySkillsCollaboration(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "scale_fastapi_architecture") {
+    return verifyScaleFastApiArchitecture(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "verification_architecture") {
+    return verifyVerificationArchitecture(reply);
   }
 
   return [];
@@ -142,7 +289,7 @@ export function buildJozResponseVerification({
     reply,
     latencyMs,
   });
-  const routeChecks = verifyRouteSpecificReply({ route, reply, input });
+  const routeChecks = verifyRouteSpecificReply({ route, reply, input, trace });
   const checks = [...baseChecks, ...routeChecks];
   const status = summarizeChecks(checks);
 

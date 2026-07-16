@@ -8,6 +8,7 @@ import {
   resolveUnknownJozReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
+import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 import { validateAppContext } from "./shared/meetJozWorld.js";
 
 function buildContexts(context = {}) {
@@ -360,6 +361,146 @@ test("taking-the-piss or messing-around prompts return an interaction guard inst
     assert.equal(resolution.composer, "buildLowSignalOrBadFaithReply");
     assert.match(resolution.reply, /testing the system|question is not serious|ask directly/i);
   }
+});
+
+test("slang and shorthand human prompts still resolve to the intended routes", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const whoRoute = routeJozLlmQuery({
+    input: "bro who even is joz",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(whoRoute.selectedRoute, "identity_profile");
+  assert.equal(whoRoute.detectedSubIntent, "overview");
+
+  const teamRoute = routeJozLlmQuery({
+    input: "can he work with people or nah",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(teamRoute.selectedRoute, "skills");
+  assert.equal(teamRoute.detectedSubIntent, "collaboration");
+
+  const scaleRoute = routeJozLlmQuery({
+    input: "how would he scale fastapi from 100 to 100000",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(scaleRoute.selectedRoute, "skills");
+  assert.equal(scaleRoute.detectedSubIntent, "scale_fastapi_architecture");
+
+  const injectionRoute = routeJozLlmQuery({
+    input: "what if telegram has malicious prompts",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(injectionRoute.selectedRoute, "systems_mindset");
+  assert.equal(injectionRoute.detectedSubIntent, "prompt_injection_defense");
+
+  const dockerVsK8sRoute = routeJozLlmQuery({
+    input: "docker vs kubernetes",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(dockerVsK8sRoute.selectedRoute, "skills");
+  assert.equal(dockerVsK8sRoute.detectedSubIntent, "technical_stack");
+});
+
+test("additional fuzz shorthand prompts resolve to the intended routes", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const canDoRoute = routeJozLlmQuery({
+    input: "what can he do",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(canDoRoute.selectedRoute, "skills");
+  assert.equal(canDoRoute.detectedSubIntent, "capabilities_overview");
+
+  const strongestRoute = routeJozLlmQuery({
+    input: "what's joz strongest at",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(strongestRoute.selectedRoute, "skills");
+  assert.equal(strongestRoute.detectedSubIntent, "proof_backed_strengths");
+
+  const stackRoute = routeJozLlmQuery({
+    input: "what is his infra approach",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(stackRoute.selectedRoute, "skills");
+  assert.equal(stackRoute.detectedSubIntent, "technical_stack");
+
+  const tradeoffRoute = routeJozLlmQuery({
+    input: "single agent vs multi agent for trading",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(tradeoffRoute.selectedRoute, "skills");
+  assert.equal(tradeoffRoute.detectedSubIntent, "single_agent_tradeoffs");
+
+  const verifyRoute = routeJozLlmQuery({
+    input: "how would joz verify it",
+    appContext,
+    legacyContext,
+  });
+  assert.equal(verifyRoute.selectedRoute, "unknown_fallback");
+  assert.equal(verifyRoute.detectedSubIntent, "ambiguous_follow_up");
+});
+
+test("docker vs kubernetes uses the canonical direct comparison answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "docker vs kubernetes";
+  const route = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "technical_stack");
+  assert.match(String(resolution?.reply || ""), /docker packages/i);
+  assert.match(String(resolution?.reply || ""), /kubernetes deploys/i);
+});
+
+test("direct technical stack and knowledge-graph prompts use deterministic direct answers", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  const stackResolution = composeJozLlmRouteReply({
+    route: routeJozLlmQuery({
+      input: "what stack does he use",
+      appContext,
+      legacyContext,
+    }),
+    input: "what stack does he use",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  assert.match(String(stackResolution?.reply || ""), /LLM orchestration|RAG|FastAPI|PostgreSQL/i);
+
+  const graphResolution = composeJozLlmRouteReply({
+    route: routeJozLlmQuery({
+      input: "what role does a knowledge graph play",
+      appContext,
+      legacyContext,
+    }),
+    input: "what role does a knowledge graph play",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  assert.match(String(graphResolution?.reply || ""), /knowledge graph connects entities/i);
 });
 
 test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {
@@ -1825,4 +1966,201 @@ test("router trace exposes guarded answer class and confidence for unknown promp
   assert.equal(trace.answerClass, "clarification_guard");
   assert.equal(trace.confidence, "high");
   assert.equal(trace.fallbackUsed, false);
+});
+
+test("verification fails when capabilities overview drifts into unrelated infrastructure text", () => {
+  const route = {
+    selectedRoute: "skills",
+    detectedSubIntent: "capabilities_overview",
+  };
+  const resolution = {
+    fallbackUsed: false,
+    answerClass: "deterministic_skills",
+    confidence: "high",
+  };
+  const trace = {
+    selectedRoute: "skills",
+    answerClass: "deterministic_skills",
+    confidence: "high",
+    validationPassed: true,
+  };
+  const verification = buildJozResponseVerification({
+    route,
+    resolution,
+    trace,
+    reply:
+      "Network security should use private subnets, firewalls and security groups, and TLS everywhere.",
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.equal(verification.status, "fail");
+  assert.match(
+    verification.checks.find((check) => check.id === "skills_core_capability")?.detail || "",
+    /drifted away/i
+  );
+});
+
+test("verification fails when collaboration drifts into unrelated infrastructure text", () => {
+  const route = {
+    selectedRoute: "skills",
+    detectedSubIntent: "collaboration",
+  };
+  const resolution = {
+    fallbackUsed: false,
+    answerClass: "deterministic_skills",
+    confidence: "high",
+  };
+  const trace = {
+    selectedRoute: "skills",
+    answerClass: "deterministic_skills",
+    confidence: "high",
+    validationPassed: true,
+  };
+  const verification = buildJozResponseVerification({
+    route,
+    resolution,
+    trace,
+    reply:
+      "Private subnets, TLS everywhere, and blue-green deployment are important for production systems.",
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.equal(verification.status, "fail");
+  assert.match(
+    verification.checks.find((check) => check.id === "collaboration_team_signal")?.detail || "",
+    /does not stay on team/i
+  );
+});
+
+test("verification does not fail a valid long FastAPI scaling answer just because it is detailed", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "How would Joz scale a FastAPI service from 100 to 100000 users?";
+  const route = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+  const reply = String(resolution?.reply || "").trim();
+  const verification = buildJozResponseVerification({
+    input,
+    route,
+    resolution,
+    trace,
+    reply,
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.notEqual(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "fastapi_scaling_specificity")?.status,
+    "pass"
+  );
+});
+
+test("verification does not fail a valid long verification-architecture answer just because it is detailed", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "An agent says it sold 20% of a portfolio. How would Joz verify it?";
+  const route = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+  const reply = String(resolution?.reply || "").trim();
+  const verification = buildJozResponseVerification({
+    input,
+    route,
+    resolution,
+    trace,
+    reply,
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.notEqual(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "verification_architecture_specificity")?.status,
+    "pass"
+  );
+});
+
+test("verification does not fail a valid long financial-platform architecture answer just because it is detailed", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "design a financial intelligence platform from scratch";
+  const route = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+  const reply = String(resolution?.reply || "").trim();
+  const verification = buildJozResponseVerification({
+    input,
+    route,
+    resolution,
+    trace,
+    reply,
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.notEqual(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "word_budget")?.status,
+    "warn"
+  );
+});
+
+test("agentic architecture approach keeps the base technical answer even when proof documents are retrieved", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "How does Joz architect agentic AI?";
+  const route = routeJozLlmQuery({
+    input,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [
+      {
+        title: "MarketClue financial AI agents",
+        category: "skills",
+        summary: "Architected financial AI agents for MarketClue.",
+        body: "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
+        metadata: { slug: "marketclue-proof" },
+      },
+    ],
+  });
+
+  assert.match(String(resolution?.reply || ""), /separation of responsibilities/i);
+  assert.match(String(resolution?.reply || ""), /verification outside the agent/i);
+  assert.doesNotMatch(String(resolution?.reply || ""), /^Proof:/i);
 });
