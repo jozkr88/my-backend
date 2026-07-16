@@ -38,10 +38,62 @@ function pickLeadingSentences(text = "", maxSentences = 2) {
   return splitIntoSentences(text).slice(0, maxSentences).join(" ").trim();
 }
 
-function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
-  const docs = normalizeRetrievedDocuments(retrievedDocuments).slice(0, 3);
-  if (!docs.length) return null;
+function normalizeDefinitionPromptPrefix(text = "") {
+  const trimmed = String(text || "").trim();
+  if (!trimmed) return "";
 
+  const typoPrefixRewrites = [
+    [/^hat is\b/i, "what is"],
+    [/^wat is\b/i, "what is"],
+    [/^wht is\b/i, "what is"],
+    [/^whats\b/i, "what's"],
+  ];
+
+  for (const [pattern, replacement] of typoPrefixRewrites) {
+    if (pattern.test(trimmed)) {
+      return trimmed.replace(pattern, replacement);
+    }
+  }
+
+  return trimmed;
+}
+
+function extractDefinitionTerm(text = "") {
+  const match = normalizeDefinitionPromptPrefix(text)
+    .match(/^(?:what is|what's|who is|define|explain)\s+(.+?)(?:\?|\.|!)?$/i);
+  if (!match) return null;
+
+  const term = String(match[1] || "")
+    .trim()
+    .replace(/^(?:a|an|the)\s+/i, "")
+    .trim();
+
+  return term || null;
+}
+
+function retrievedDocsMentionDefinitionTerm(term = "", docs = []) {
+  const normalizedTerm = normalizeText(term);
+  if (!normalizedTerm || normalizedTerm.length < 2) return false;
+
+  return docs.some((doc) => {
+    const haystack = normalizeText(
+      [
+        doc?.title,
+        doc?.summary,
+        doc?.body,
+        ...(Array.isArray(doc?.metadata?.tags) ? doc.metadata.tags : []),
+        ...(Array.isArray(doc?.metadata?.claims) ? doc.metadata.claims : []),
+        ...(Array.isArray(doc?.metadata?.proof_points) ? doc.metadata.proof_points : []),
+      ]
+        .filter(Boolean)
+        .join(" ")
+    );
+
+    return haystack.includes(normalizedTerm);
+  });
+}
+
+function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
   const clean = normalizeText(input);
   if (clean.includes("permissions be enforced before retrieval") || clean.includes("permissions enforced before retrieval")) {
     return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
@@ -69,6 +121,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
 
   if (clean.includes("prompt injection")) {
     return "Treat all external content as untrusted data. Separate system instructions from retrieved content. Security policy must be enforced outside the model so untrusted text cannot override permissions, approvals, or execution rules.";
+  }
+
+  if (clean.includes("what is an agent")) {
+    return "An agent is an AI worker with a defined responsibility. In Joz's framing: Agent = LLM + instructions + tools + memory + reasoning loop. An agent interprets a goal, selects approved tools, reads relevant context, updates workflow state, and iterates until the task is complete or requires human input.";
   }
 
   if (clean.includes("what is docker")) {
@@ -207,7 +263,11 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
     return "Joz would route blockchain actions through Agent to Policy to Risk to Approval to Signing Service to Execution to Verification. The agent must never directly control unrestricted private keys, and signing should stay behind scoped policies, simulations, and explicit limits.";
   }
 
-  if (clean.includes("how does joz scale an agent platform")) {
+  if (
+    clean.includes("how does joz scale an agent platform") ||
+    clean.includes("how would joz scale an agent platform") ||
+    clean.includes("scale an agent platform under high concurrency")
+  ) {
     return "Joz scales an agent platform by separating API intake, reasoning workers, tool services, embedding workers, evaluation workers, execution services, and verification services. He scales each component independently based on its own bottleneck, because reasoning is often limited by model latency and cost while execution is often limited by external systems, consistency, and security.";
   }
 
@@ -217,6 +277,14 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
 
   if (clean.includes("what is joz's infrastructure philosophy") || clean.includes("what is jozs infrastructure philosophy")) {
     return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
+  }
+
+  const docs = normalizeRetrievedDocuments(retrievedDocuments).slice(0, 3);
+  if (!docs.length) return null;
+
+  const definitionTerm = extractDefinitionTerm(clean);
+  if (definitionTerm && !retrievedDocsMentionDefinitionTerm(definitionTerm, docs)) {
+    return null;
   }
 
   const lead = docs[0];
@@ -477,7 +545,11 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "processes") {
-    return "Joz creates value through process redesign by turning fragmented workflows into clearer AI-supported operating flows. That means better routing, fewer exception delays, faster approvals, and more reusable knowledge across ERP, finance, HR, marketing, and operations. The goal is not generic automation. It is clearer ownership, stronger control, faster throughput, and workflows redesigned around better intelligence with humans still accountable for the critical decisions.";
+    return "Joz creates value through process redesign by turning fragmented workflows into clearer AI-supported operating flows. That means better routing, fewer exception delays, faster approvals, and more reusable knowledge across ERP, finance, HR, marketing, and operations. The goal is not generic automation. It is clearer ownership, stronger control, faster throughput, and workflows redesigned around better intelligence with humans still accountable for the critical decisions. The operating proof behind that approach includes 70% lower handoff friction at Leo Burnett/Publicis and regional ML execution design at Manulife.";
+  }
+
+  if (subIntent === "function_processes") {
+    return "Joz redesigns business processes by starting at the operating work itself: map where ERP, accounting, HR, marketing, and operations lose time, create duplicate effort, or hide decisions, then insert AI only where it improves flow without removing control. That means clearer routing, approval checkpoints, exception handling, and auditability by function. The result is not one generic automation layer. It is function-specific workflow redesign with better signal, retained accountability, and less management fog. The proof is practical: handoff friction reduction at Leo Burnett/Publicis and ML-supported operating design at Manulife show the method works in real organizations.";
   }
 
   if (subIntent === "growth") {
@@ -489,25 +561,57 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "functions") {
-    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on.";
+    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on. The point is function-specific leverage, not one broad AI layer imposed on everyone the same way.";
   }
 
   if (subIntent === "operating_model") {
-    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them.";
+    return "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them. The pattern is to combine workflow design, approval checkpoints, role clarity, and measurable business outcomes before scaling autonomy.";
   }
 
   if (subIntent === "decision_support") {
-    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams when complexity is high.";
+    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams when complexity is high. The strongest proof is commercial and operational: 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, and Lean ML execution across 11 APAC markets at Manulife all depended on clearer signal and better decisions, not just more tooling.";
   }
 
   return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
 }
 
-function composeSystemsMindsetReply() {
+function composeSystemsMindsetReply(subIntent = "thinking_model") {
+  if (subIntent === "prompt_injection_defense") {
+    return "Untrusted Content -> Sanitization and Classification -> Retrieval Boundary -> LLM -> Policy Gate -> Scoped Tools. Joz would treat the Telegram channel as external data, not instructions. System policy stays outside the model, system instructions stay separate from retrieved content, and the platform must block tool execution unless deterministic policy checks pass. Tool access must use least privilege and allowlisted interfaces, inputs must pass schema validation, the agent should stay sandboxed, secrets must never appear in the context window, and high-risk actions must stop for human approval.";
+  }
+
   return "Joz thinks in systems before features: isolate signal from noise, map feedback loops, make decision paths explicit, and keep human accountability in the loop. In AI work, Joz biases toward trust, source provenance, verification, governance, and interfaces that turn ambiguity into clear action.";
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "financial_intelligence_platform_architecture") {
+    return "Joz would design it as a layered financial intelligence platform: Client and External APIs -> API Gateway -> Stateless FastAPI Services -> Orchestrator Agent -> Specialist Agents -> Policy, Risk, and Verification Gates -> Execution and Data Services -> Event Streaming -> Durable Storage -> Observability and Security Controls. APIs are the controlled entry points for market data, portfolio data, user commands, admin workflows, and external integrations. Agents are separated by responsibility such as research, signal generation, portfolio reasoning, risk review, execution planning, and post-trade verification so each step has a clear boundary. Risk sits outside the agent as deterministic policy, exposure checks, limits, approvals, and circuit breakers before any high-impact action. Verification confirms that expected state changes actually happened by reconciling execution events, portfolio state, balances, and downstream records against the authoritative source of truth. Memory stores task state, prior decisions, retrieved research, and working context, but authoritative financial state stays in durable systems rather than agent memory. Databases should separate concerns: PostgreSQL for durable workflow and portfolio state, pgvector or search indexes for retrieval, Redis for cache and short-lived coordination, and object storage for documents and event archives. Event streaming carries market updates, portfolio changes, execution events, telemetry, and workflow notifications asynchronously so services stay decoupled and replay is possible. Infrastructure should start with containers, stateless services, worker pools, queues, and Kubernetes only when scaling and isolation justify it. Observability must cover traces, metrics, logs, workflow history, model calls, tool usage, cost, latency, and verification failures. Security must enforce least privilege, workload identity, secret isolation, signed actions, audit trails, human approval for high-risk operations, and strict separation between untrusted external content and system policy.";
+  }
+
+  if (subIntent === "architecture_reasoning") {
+    return "Joz would answer this as an architecture problem, not a profile summary. The first step is to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology. Then he would separate API, orchestration, execution, data, policy, and verification responsibilities so the design can scale, fail safely, and remain observable.";
+  }
+
+  if (subIntent === "langgraph_temporal_architecture") {
+    return "LangGraph handles the reasoning graph: agent state, branches, loops, handoffs, and tool-selection flow. Temporal handles durable workflow execution: retries, timers, approvals, crash recovery, and long-running business actions. Joz would use both when agent reasoning triggers high-value actions that must survive failure and resume safely. Using only LangGraph is weaker for durable business execution, and using only Temporal does not provide agent reasoning semantics. The pattern is: LangGraph decides, Temporal persists and recovers.";
+  }
+
+  if (subIntent === "organizational_ownership_layer") {
+    return "Joz would design the organisational awareness layer as an ownership-inference system, not a simple lookup table. Connectors ingest GitHub, Slack, tickets, docs, architecture records, and on-call data; processing extracts entities, services, domains, approvers, historical decisions, and recency; the knowledge layer stores competing ownership claims with confidence and provenance; and ACL-aware retrieval resolves the likely owner from code boundaries, incident history, runbooks, approver patterns, and org metadata. If two teams conflict, the system should return ranked ownership candidates with evidence, confidence, freshness, and escalation rules rather than pretending certainty.";
+  }
+
+  if (subIntent === "scale_fastapi_architecture") {
+    return "Load Balancer -> Stateless FastAPI Replicas -> Queue and Workers -> Redis -> PostgreSQL -> Observability. Joz would first identify the bottleneck before scaling, because at 100,000 users the constraint may be CPU, connection pressure, queue buildup, cache miss rate, or database contention. The API layer should stay stateless for horizontal scaling, reads that repeat should use caching, slow or bursty work should move to async workers and queues, Redis should handle short-lived coordination and cache, PostgreSQL should remain the durable source of truth with database scaling where needed, and rate limits plus backpressure should protect the system. Kubernetes and autoscaling help only after the service boundaries and bottleneck visibility are clear.";
+  }
+
+  if (subIntent === "verification_architecture") {
+    return "Proposal -> Risk and Policy -> Execution -> Event Capture -> Verification -> Reconciliation. Joz would verify this through an execution-to-state reconciliation architecture, not by trusting the agent's claim. Define the expected state and expected delta first, send the trade through a controlled execution service with an execution ID and idempotent order keys, capture order and fill events, re-read the ledger or authoritative portfolio source of truth, then compare expected versus actual post-trade state across holdings, cash, fees, and margin. The design must handle partial fills, bounded retries, retry and reconciliation logic, immutable audit trails, and human escalation before treating the portfolio as verified.";
+  }
+
+  if (subIntent === "single_agent_tradeoffs") {
+    return "Joz would start with one orchestrator agent, not many. For an autonomous trading platform, a single agent is easier to verify, cheaper to run, simpler to observe, and less likely to hide coordination failures. He would switch to multiple agents only when research, portfolio reasoning, risk, compliance, execution, and verification have clearly separate responsibilities, tools, latency needs, or approval boundaries. The tradeoff is specialization and isolation versus higher coordination overhead, more state-sync risk, duplicated reasoning, deadlocks, and more failure paths. In practice the safe pattern is supervisor plus typed shared state plus explicit policy, risk gates, and verification outside the agents themselves.";
+  }
+
   if (subIntent === "singapore_market_fit") {
     return "Joz is strong for Singapore-market roles because the proof is already Singapore-specific and enterprise-scale. At Maybank-Ageas Etiqa, Joz helped drive 20x digital sales growth through conversational and ML-led UX. At Manulife, Joz established a Lean ML UX practice across 11 APAC markets and launched first-in-market ML UX solutions from Singapore. At Mediacorp, Joz contributed to 30x audience growth and built a global experience language across 30+ products. Joz also re-engineered Singapore Stock Exchange portals and developed Apple/Pixar-adjacent Python USD(z) and computer-vision workflows in Singapore.";
   }
@@ -522,6 +626,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
 
   if (subIntent === "technical_stack") {
     return "Joz's core stack spans agentic AI architecture and product engineering: LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. That stack matters because it supports enterprise retrieval, multimodal interfaces, and measurable product delivery rather than existing as tooling in isolation.";
+  }
+
+  if (subIntent === "agentic_architecture_approach") {
+    return "Joz's agentic architecture is built around a clear separation of responsibilities: API intake, orchestration, specialist agents, tool and service layers, memory and retrieval, policy and risk gates, execution services, and verification. He prefers a thin orchestrator with typed state, scoped tools, deterministic approval boundaries, and verification outside the agent so the system can scale, stay observable, and fail safely. He uses agentic AI where multi-step reasoning, tool use, workflow coordination, and controlled execution create more value than a single prompt-response model. In practice that means retrieval for context, workflows for coordination, durable state outside the model, policy before action, and post-action verification against authoritative systems rather than trusting the model's own claim.";
   }
 
   if (subIntent === "capabilities_overview") {
@@ -547,6 +655,38 @@ function detectProgrammeQuery(clean = "") {
     "what cms projects did joz do at",
     "what healthcare platforms did joz work on",
   ].some((pattern) => clean.includes(pattern));
+}
+
+function buildUnknownDefinitionGapReply(clean = "") {
+  const term = extractDefinitionTerm(clean);
+  if (!term) return null;
+  return `${term} is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
+}
+
+function buildAmbiguousFollowUpReply(clean = "") {
+  if (!clean) return null;
+
+  const ambiguousShortFollowUps = [
+    "how does joz do it",
+    "how would joz do it",
+    "why does joz do it",
+    "why would joz do it",
+    "what does joz mean by that",
+    "how does he do it",
+    "how would he do it",
+    "why does he do it",
+    "why would he do it",
+    "how does joz do that",
+    "how would joz do that",
+    "why does joz do that",
+    "why would joz do that",
+  ];
+
+  if (includesAny(clean, ambiguousShortFollowUps)) {
+    return "That follow-up is too ambiguous on its own. Ask the same question with the topic included, for example: How does Joz architect agentic AI? or How would Joz design that workflow?";
+  }
+
+  return null;
 }
 
 function normalizeList(value) {
@@ -635,6 +775,41 @@ function buildEvidenceBackedRouteReply({
   retrievedDocuments = [],
 } = {}) {
   if (!["business_need", "skills", "systems_mindset"].includes(route?.selectedRoute)) {
+    return null;
+  }
+
+  if (
+    route?.selectedRoute === "business_need" &&
+    [
+      "efficiency",
+      "growth",
+      "roi",
+      "processes",
+      "function_processes",
+      "functions",
+      "operating_model",
+      "decision_support",
+    ].includes(route?.detectedSubIntent)
+  ) {
+    return null;
+  }
+
+  if (
+    route?.selectedRoute === "skills" &&
+    [
+      "financial_intelligence_platform_architecture",
+      "architecture_reasoning",
+      "single_agent_tradeoffs",
+      "verification_architecture",
+      "scale_fastapi_architecture",
+      "organizational_ownership_layer",
+      "langgraph_temporal_architecture",
+    ].includes(route?.detectedSubIntent)
+  ) {
+    return null;
+  }
+
+  if (route?.selectedRoute === "systems_mindset" && route?.detectedSubIntent === "prompt_injection_defense") {
     return null;
   }
 
@@ -833,7 +1008,7 @@ function detectFactualProfile(clean) {
     return { detectedSubIntent: "education", detectedConcept: "education" };
   }
 
-  if (includesAny(clean, ["what degree does joz have", "what degree", "msc"])) {
+  if (includesAny(clean, ["what degree does joz have", "what is joz's degree", "what is jozs degree", "what degree", "msc"])) {
     return { detectedSubIntent: "degree", detectedConcept: "degree" };
   }
 
@@ -1129,6 +1304,25 @@ function detectBusinessNeed(clean) {
 
   if (
     includesAny(clean, [
+      "process redesign",
+      "redesign business processes",
+      "redesign processes",
+      "business processes",
+    ]) &&
+    includesAny(clean, [
+      "finance",
+      "erp",
+      "accounting",
+      /\bhr\b/,
+      "marketing",
+      "operations",
+    ])
+  ) {
+    return { detectedSubIntent: "function_processes", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "what is business value",
       "define business value",
       "what does business value mean",
@@ -1209,7 +1403,23 @@ function detectBusinessNeed(clean) {
     return { detectedSubIntent: "functions", detectedConcept: "business_value" };
   }
 
-  if (includesAny(clean, ["operating model", "ownership", "governance and execution"])) {
+  if (
+    includesAny(clean, [
+      "operating model",
+      "ownership",
+      "governance",
+      "workflow ownership",
+      "governance and execution",
+      "embed joz",
+      "embed ai",
+    ]) &&
+    !includesAny(clean, [
+      "system architecture",
+      "technical architecture",
+      "architecture behind",
+      "underlying architecture",
+    ])
+  ) {
     return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
   }
 
@@ -1234,6 +1444,23 @@ function detectBusinessNeed(clean) {
 }
 
 function detectSystemsMindset(clean) {
+  if (
+    includesAny(clean, [
+      "prompt injection",
+      "malicious instructions",
+      "telegram channel",
+      "untrusted input",
+    ]) &&
+    includesAny(clean, [
+      "prevent the agent from executing",
+      "prevent the agent from",
+      "how would joz prevent",
+      "executing malicious instructions",
+    ])
+  ) {
+    return { detectedSubIntent: "prompt_injection_defense", detectedConcept: "systems_mindset" };
+  }
+
   if (
     includesAny(clean, [
       "how does joz think",
@@ -1271,6 +1498,162 @@ function detectSystemsMindset(clean) {
 function detectSkills(clean) {
   if (
     includesAny(clean, [
+      "why would joz use langgraph and temporal together",
+      "use langgraph and temporal together",
+      "langgraph and temporal together",
+      "why not use only one",
+    ]) &&
+    includesAny(clean, ["langgraph", "temporal"])
+  ) {
+    return { detectedSubIntent: "langgraph_temporal_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "organisational awareness layer",
+      "organizational awareness layer",
+      "determine ownership automatically",
+      "ownership automatically",
+      "ownership inference",
+    ]) &&
+    includesAny(clean, [
+      "two teams disagree",
+      "system ownership",
+      "ownership",
+    ])
+  ) {
+    return { detectedSubIntent: "organizational_ownership_layer", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "fastapi service currently handles 100 users",
+      "needs to handle 100,000 users",
+      "needs to handle 100000 users",
+      "scale the architecture",
+    ]) &&
+    includesAny(clean, ["fastapi", "100,000 users", "100000 users"])
+  ) {
+    return { detectedSubIntent: "scale_fastapi_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "design a verification architecture",
+      "verification architecture",
+      "guarantees the portfolio actually changed",
+      "portfolio actually changed as expected",
+      "post-trade state",
+      "post trade state",
+      "expected delta",
+      "actual holdings",
+      "execution receipt",
+      "reconciliation architecture",
+    ]) &&
+    includesAny(clean, [
+      "portfolio",
+      "sell 20%",
+      "selling 20%",
+      "agent proposes",
+      "trade",
+      "holdings",
+    ])
+  ) {
+    return { detectedSubIntent: "verification_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "single agent or multiple agents",
+      "single agent or multi agent",
+      "single-agent or multi-agent",
+      "single agent versus multiple agents",
+      "single agent vs multiple agents",
+      "single agent vs multi agent",
+      "single-agent vs multi-agent",
+      "multiple agents",
+      "multi-agent",
+    ]) &&
+    includesAny(clean, [
+      "tradeoffs",
+      "trade-offs",
+      "architecture",
+      "failure modes",
+      "risks",
+      "switch from one approach to the other",
+      "when he would switch",
+      "when would joz switch",
+      "autonomous trading platform",
+      "trading platform",
+    ])
+  ) {
+    return { detectedSubIntent: "single_agent_tradeoffs", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "design an ai-native financial intelligence platform from scratch",
+      "design a financial intelligence platform from scratch",
+      "financial intelligence platform from scratch",
+      "include: apis",
+      "include: agents",
+      "include: risk",
+      "include: verification",
+      "include: memory",
+      "include: databases",
+      "include: event streaming",
+      "include: infrastructure",
+      "include: observability",
+      "include: security",
+    ]) &&
+    includesAny(clean, [
+      "financial intelligence platform",
+      "from scratch",
+      "apis",
+      "agents",
+      "risk",
+      "verification",
+      "memory",
+      "databases",
+      "event streaming",
+      "observability",
+      "security",
+    ])
+  ) {
+    return { detectedSubIntent: "financial_intelligence_platform_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "what agentic architecture does joz do",
+      "what agentic architecture does joz use",
+      "what agentic architecture does joz build",
+      "what is joz's agent architecture approach",
+      "what is jozs agent architecture approach",
+      "what agent architecture does joz do",
+      "what agent architecture does joz use",
+      "what agent architecture does joz build",
+      "how does joz architect agentic ai",
+      "how does joz do agentic ai architecture",
+      "how does joz build agentic ai",
+      "why does joz do agentic ai",
+      "why does joz use agentic ai",
+      "why does joz build agentic ai",
+      "how would joz structure an agent system",
+      "what architecture pattern would joz use for agents in production",
+      "how does joz separate policy from execution",
+      "why keep policy outside the agent",
+      "why keep verification outside the agent",
+      "why separate policy from execution",
+      "joz agentic architecture",
+      "joz agent architecture",
+    ])
+  ) {
+    return { detectedSubIntent: "agentic_architecture_approach", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "what is an agent",
       "what is agent orchestration",
       "difference between an agent and an api",
@@ -1293,6 +1676,8 @@ function detectSkills(clean) {
       "stateless",
       "what is postgresql",
       "what is redis",
+      "difference between postgresql and redis",
+      "postgresql and redis",
       "kafka",
       "nats",
       "event-driven architecture",
@@ -1375,6 +1760,34 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "how would joz",
+      "design",
+      "why would joz use",
+      "what happens if",
+      "how does joz prevent",
+      "how would joz scale",
+      "explain the tradeoffs",
+      "compare",
+    ]) &&
+    includesAny(clean, [
+      "architecture",
+      "system",
+      "workflow",
+      "scale",
+      "verification",
+      "security",
+      "agent",
+      "api",
+      "infrastructure",
+      "risk",
+      "execution",
+    ])
+  ) {
+    return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "proof, not buzzwords",
       "proof not buzzwords",
       "with proof",
@@ -1404,21 +1817,32 @@ function detectSkills(clean) {
     includesAny(clean, [
       "deep skills",
       "deepest skills",
-      "what can joz do",
-      "what can joz build",
-      "how technical is joz",
       "joz's skills",
+      "what are joz's skills",
+      "what is joz good at",
+      "what experience does joz have",
+      "what are his capabilities",
+      "what experience does he have",
       "technical depth",
       "core capabilities",
       "technical skills",
       "ai skills",
       "engineering skills",
-      "capabilities",
+      "what can joz do",
       "what does joz do",
+    ]) &&
+    !includesAny(clean, [
       "architecture",
+      "agentic architecture",
+      "agent architecture",
+      "system design",
+      "platform design",
+      "workflow design",
       "orchestration",
       "retrieval",
-      "signal reasoning",
+      "verification",
+      "risk",
+      "infrastructure",
     ])
   ) {
     return { detectedSubIntent: "capabilities_overview", detectedConcept: "skills" };
@@ -1431,6 +1855,50 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const clean = normalizeText(input);
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  const preWorldBusinessNeed = detectBusinessNeed(clean);
+  const preWorldSystemsMindset = detectSystemsMindset(clean);
+  const preWorldSkills = detectSkills(clean);
+
+  if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
+    return {
+      detectedIntent: "systems_mindset",
+      detectedSubIntent: preWorldSystemsMindset.detectedSubIntent,
+      detectedConcept: preWorldSystemsMindset.detectedConcept,
+      selectedRoute: "systems_mindset",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
+  if (
+    preWorldSkills &&
+    ["organizational_ownership_layer", "scale_fastapi_architecture", "langgraph_temporal_architecture", "verification_architecture", "single_agent_tradeoffs"].includes(
+      preWorldSkills.detectedSubIntent
+    )
+  ) {
+    return {
+      detectedIntent: "skills",
+      detectedSubIntent: preWorldSkills.detectedSubIntent,
+      detectedConcept: preWorldSkills.detectedConcept,
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
+  if (preWorldBusinessNeed?.detectedSubIntent === "operating_model") {
+    return {
+      detectedIntent: "business_need",
+      detectedSubIntent: preWorldBusinessNeed.detectedSubIntent,
+      detectedConcept: preWorldBusinessNeed.detectedConcept,
+      selectedRoute: "business_need",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   const canonical = detectCanonicalWorldConcept(clean);
   if (canonical) {
@@ -1497,7 +1965,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     };
   }
 
-  const businessNeed = detectBusinessNeed(clean);
+  const businessNeed = preWorldBusinessNeed || detectBusinessNeed(clean);
   if (businessNeed) {
     return {
       detectedIntent: "business_need",
@@ -1663,7 +2131,9 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "systems_mindset") {
-    const baseReply = composeSystemsMindsetReply();
+    const directKnowledgeReply =
+      route.detectedSubIntent === "thinking_model" ? buildRetrievedKnowledgeReply(input, retrievedDocuments) : null;
+    const baseReply = composeSystemsMindsetReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
       baseReply,
@@ -1671,15 +2141,19 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     return {
-      reply: evidenceReply?.reply || baseReply,
+      reply: directKnowledgeReply || evidenceReply?.reply || baseReply,
       answerSource:
-        route.detectedSubIntent === "thinking_model"
-          ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
+        ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
+          ? directKnowledgeReply
+            ? "retrieved_knowledge"
+            : "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        route.detectedSubIntent === "thinking_model"
-          ? "composeSystemsMindsetReply"
+        ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
+          ? directKnowledgeReply
+            ? "buildRetrievedKnowledgeReply"
+            : "composeSystemsMindsetReply"
           : evidenceReply?.composer || "composeSystemsMindsetReply",
       fallbackUsed: false,
       intentMode: "systems_mindset",
@@ -1689,6 +2163,8 @@ export function composeJozLlmRouteReply({
   }
 
   if (route?.selectedRoute === "skills") {
+    const directKnowledgeReply =
+      route.detectedSubIntent === "technical_stack" ? buildRetrievedKnowledgeReply(input, retrievedDocuments) : null;
     const baseReply = composeSkillsReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
@@ -1697,15 +2173,19 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     return {
-      reply: evidenceReply?.reply || baseReply,
+      reply: directKnowledgeReply || evidenceReply?.reply || baseReply,
       answerSource:
         route.detectedSubIntent === "capabilities_overview"
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
+          : directKnowledgeReply
+            ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
         route.detectedSubIntent === "capabilities_overview"
           ? "composeSkillsReply"
+          : directKnowledgeReply
+            ? "buildRetrievedKnowledgeReply"
           : evidenceReply?.composer || "composeSkillsReply",
       fallbackUsed: false,
       intentMode: "skills",
@@ -1750,6 +2230,30 @@ export async function resolveUnknownJozReply({
       fallbackUsed: false,
       intentMode: mapRouteToIntentMode("skills"),
       retrievedCategories: ["skills", "proof"],
+    };
+  }
+
+  const ambiguousFollowUpReply = buildAmbiguousFollowUpReply(clean);
+  if (ambiguousFollowUpReply) {
+    return {
+      reply: ambiguousFollowUpReply,
+      answerSource: "ambiguity_guard",
+      composer: "buildAmbiguousFollowUpReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+    };
+  }
+
+  const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(input);
+  if (unknownDefinitionGapReply) {
+    return {
+      reply: unknownDefinitionGapReply,
+      answerSource: "knowledge_gap",
+      composer: "buildUnknownDefinitionGapReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
     };
   }
 

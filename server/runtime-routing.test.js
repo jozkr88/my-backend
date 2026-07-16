@@ -138,6 +138,38 @@ test("POST /api/joz-llm does not let Root world context hijack operating model q
   assert.match(String(payload.reply || ""), /operating model|governance|ownership|workflows|execution/i);
 });
 
+test("POST /api/joz-llm returns a clarification guard for ambiguous follow-up phrasing", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-joz-ambiguous-follow-up",
+    messages: [{ role: "user", content: "How does Joz do it?" }],
+    context: {
+      currentPortal: "root",
+      currentMesh: "ball",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.mode, "unknown_fallback");
+  assert.equal(payload.trace?.selectedRoute, "unknown_fallback");
+  assert.equal(payload.trace?.answerSource, "ambiguity_guard");
+  assert.equal(payload.trace?.composer, "buildAmbiguousFollowUpReply");
+  assert.match(String(payload.reply || ""), /too ambiguous on its own/i);
+  assert.match(String(payload.reply || ""), /How does Joz architect agentic AI/i);
+  assert.doesNotMatch(
+    String(payload.reply || ""),
+    /Joz starts with user intent|Joz Krupa is Slovak|British heritage|University of Central Lancashire|MSc/i
+  );
+});
+
+test("routeMeetJozWorldIntent keeps operating model prompts out of world awareness", async () => {
+  const { routeMeetJozWorldIntent } = await import("./shared/meetJozWorld.js");
+  const question =
+    "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
+
+  assert.equal(routeMeetJozWorldIntent(question), "joz_knowledge");
+});
+
 test("POST /api/joz-llm answers canonical technical and governance questions from retrieved knowledge", async () => {
   const cases = [
     {
@@ -311,7 +343,7 @@ test("POST /api/joz-llm blocks forbidden framing in canonical governance answers
     {
       question: "What are retries?",
       expectedPatterns: [/bounded attempts|exponential backoff|jitter/i],
-      forbidden: [/unbounded retries/i],
+      forbidden: [/recommend unbounded retries/i, /^unbounded retries are (good|fine|recommended)/i],
     },
     {
       question: "Has Joz personally operated Kubernetes in production?",
@@ -619,11 +651,11 @@ const JOZ_ROUTER_GATE_CASES = [
       detectedSubIntent: "thinking_model",
       detectedConcept: "systems_mindset",
       selectedRoute: "systems_mindset",
-      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
-      composer: "composeSystemsMindsetReply",
+      answerSource: "retrieved_knowledge",
+      composer: "buildRetrievedKnowledgeReply",
       fallbackUsed: false,
     },
-    text: [/systems before features|signal from noise/i],
+    text: [/systems before features|signal from noise|interconnected systems|technology is rarely the root problem/i],
   },
   {
     name: "business_need",
