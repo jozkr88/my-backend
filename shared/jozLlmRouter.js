@@ -1426,6 +1426,17 @@ function detectBusinessNeed(clean) {
       "scale the business",
       "commercial performance",
       "revenue growth",
+    ]) &&
+    !includesAny(clean, [
+      "horizontal scaling",
+      "vertical scaling",
+      "autoscaling",
+      "what is scaling",
+      "what is horizontal scaling",
+      "what is autoscaling",
+      "api scaling",
+      "service scaling",
+      "kubernetes scaling",
     ])
   ) {
     return { detectedSubIntent: "growth", detectedConcept: "business_value" };
@@ -1845,6 +1856,7 @@ function detectSkills(clean) {
       "vault",
       "kms",
       "what is opentelemetry",
+      "difference between logs, metrics, and traces",
       "what is langsmith",
       "prometheus",
       "grafana",

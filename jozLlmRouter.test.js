@@ -412,6 +412,7 @@ test("technical stack definition prompts use direct technical answers instead of
   for (const [prompt, expected] of [
     ["What is the difference between Docker and Kubernetes?", /Docker packages a service|Kubernetes deploys, scales, restarts/i],
     ["What is the difference between PostgreSQL and Redis?", /PostgreSQL stores durable application state|Redis stores cache and short-lived state/i],
+    ["What is the difference between logs, metrics, and traces?", /Logs show what happened|Metrics show how the system behaves over time|Traces show how one request moves/i],
     ["How would Joz protect secrets in an AI system?", /Vault|KMS|managed secret store|must not be stored in source code/i],
     ["What is the safest way for an AI system to use secrets?", /Vault|KMS|managed secret store|scoped tools/i],
     ["What is the difference between a tool and an agent?", /tool executes a capability|agent decides/i],
@@ -437,6 +438,33 @@ test("technical stack definition prompts use direct technical answers instead of
     assert.equal(resolution.fallbackUsed, false);
     assert.match(resolution.reply, expected);
     assert.doesNotMatch(resolution.reply, /Joz's core stack spans agentic AI architecture and product engineering/i);
+  }
+});
+
+test("infrastructure scaling definitions do not leak into business-growth routing", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of ["What is horizontal scaling?", "What is autoscaling?"]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "technical_stack");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(
+      resolution.reply,
+      /adding more service instances|adding or removing service instances|adjusts compute capacity based on demand signals/i
+    );
+    assert.doesNotMatch(resolution.reply, /20x digital sales growth|30x audience growth|commercial signal quality/i);
   }
 });
 
