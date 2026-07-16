@@ -181,7 +181,7 @@ test("pronoun systems and infrastructure phrasing resolves to the intended lanes
 });
 
 test("ambiguous build scale and verify follow-ups stay guarded", async () => {
-  for (const prompt of ["How would he build that?", "How would he scale this?", "How would he verify this?", "Why would he do that?"]) {
+  for (const prompt of ["How would he build that?", "How would he scale this?", "How would he verify this?", "Why would he do that?", "Why he does it?"]) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],
@@ -252,6 +252,7 @@ test("identity, motivation, quality, team, and boundary phrasing resolve determi
 
   const routeCases = [
     ["Who is he?", "identity_profile", "overview"],
+    ["What is he?", "identity_profile", "overview"],
     ["Why does Joz even bother?", "skills", "agentic_architecture_why"],
     ["Is Joz good?", "business_need", "hire_value"],
     ["Can Joz work in a team?", "skills", "collaboration"],

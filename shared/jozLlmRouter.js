@@ -727,7 +727,14 @@ function detectProgrammeQuery(clean = "") {
 
 function buildUnknownDefinitionGapReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
-  if (normalized === "who is he" || normalized === "who is she" || normalized === "who is this") {
+  if (
+    normalized === "who is he" ||
+    normalized === "who is she" ||
+    normalized === "who is this" ||
+    normalized === "what is he" ||
+    normalized === "what is she" ||
+    normalized === "what is this"
+  ) {
     return null;
   }
   if (normalized === "what is not in joz's knowledge base" || normalized === "what is not in jozs knowledge base") {
@@ -747,6 +754,7 @@ function buildAmbiguousFollowUpReply(clean = "") {
     "how would joz do it",
     "why does joz do it",
     "why would joz do it",
+    "why he does it",
     "what does joz mean by that",
     "how does he do it",
     "how would he do it",
@@ -1064,6 +1072,7 @@ function detectIdentityProfile(clean) {
     includesAny(clean, [
       /^who is joz\b/,
       /^who is he\b/,
+      /^what is he\b/,
       "tell me about joz",
       "introduce joz",
       "who is behind meetjoz",
