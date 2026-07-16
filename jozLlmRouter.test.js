@@ -1923,7 +1923,7 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
 });
 
 test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {
-  for (const prompt of ["How would he do that?", "Why does he do that?", "What's the purpose of this?"]) {
+  for (const prompt of ["How would he do that?", "Why does he do that?"]) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],
@@ -1936,6 +1936,34 @@ test("punctuated ambiguous follow-up prompts still return the clarification guar
     assert.equal(resolution.fallbackUsed, false);
     assert.equal(resolution.composer, "buildAmbiguousFollowUpReply");
     assert.match(resolution.reply, /too ambiguous on its own/i);
+  }
+});
+
+test("purpose-of-this phrasing routes to the Joz LLM purpose answer instead of an ambiguity guard", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "What's the purpose of this?",
+    "What is this for?",
+    "Why does this LLM exist?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "purpose_of_llm");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(String(resolution.reply || ""), /purpose of Joz LLM/i);
+    assert.match(String(resolution.reply || ""), /background, business value, systems thinking, skills, infrastructure, and agent architecture/i);
   }
 });
 

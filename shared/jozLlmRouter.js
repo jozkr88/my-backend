@@ -721,6 +721,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
     return "Joz's core stack spans agentic AI architecture and product engineering: LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. That stack matters because it supports enterprise retrieval, multimodal interfaces, and measurable product delivery rather than existing as tooling in isolation.";
   }
 
+  if (subIntent === "purpose_of_llm") {
+    return "The purpose of Joz LLM is to explain Joz clearly and credibly across background, business value, systems thinking, skills, infrastructure, and agent architecture. It should help a user understand what Joz does, how he thinks, where he creates value, and how he would design or scale AI systems. It is meant to stay grounded in the knowledge base, avoid invented claims, and ask for clarification only when the topic is genuinely unclear.";
+  }
+
   if (subIntent === "agentic_architecture_approach") {
     return "Joz's agentic architecture is built around a clear separation of responsibilities: API intake, orchestration, specialist agents, tool and service layers, memory and retrieval, policy and risk gates, execution services, and verification. He prefers a thin orchestrator with typed state, scoped tools, deterministic approval boundaries, and verification outside the agent so the system can scale, stay observable, and fail safely. He uses agentic AI where multi-step reasoning, tool use, workflow coordination, and controlled execution create more value than a single prompt-response model. In practice that means retrieval for context, workflows for coordination, durable state outside the model, policy before action, and post-action verification against authoritative systems rather than trusting the model's own claim.";
   }
@@ -802,12 +806,6 @@ function buildAmbiguousFollowUpReply(clean = "") {
     "how would joz verify it",
     "verify it",
     "why would he do that",
-    "what is the purpose of this",
-    "what's the purpose of this",
-    "whats the purpose of this",
-    "what is the purpose of that",
-    "what's the purpose of that",
-    "whats the purpose of that",
   ]);
 
   if (ambiguousShortFollowUps.has(normalized)) {
@@ -2370,6 +2368,19 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "what is the purpose of this",
+      "what's the purpose of this",
+      "whats the purpose of this",
+      "what is this for",
+      "what's this for",
+      "whats this for",
+      "why does this llm exist",
+      "what does this llm do",
+      "what is the purpose of this llm",
+      "what's the purpose of this llm",
+      "whats the purpose of this llm",
+      "what does this bot do",
+      "what is this bot for",
       "proof, not buzzwords",
       "proof not buzzwords",
       "with proof",
@@ -2382,6 +2393,26 @@ function detectSkills(clean) {
       "explain jozs strongest skills",
     ])
   ) {
+    if (
+      includesAny(clean, [
+        "what is the purpose of this",
+        "what's the purpose of this",
+        "whats the purpose of this",
+        "what is this for",
+        "what's this for",
+        "whats this for",
+        "why does this llm exist",
+        "what does this llm do",
+        "what is the purpose of this llm",
+        "what's the purpose of this llm",
+        "whats the purpose of this llm",
+        "what does this bot do",
+        "what is this bot for",
+      ])
+    ) {
+      return { detectedSubIntent: "purpose_of_llm", detectedConcept: "skills" };
+    }
+
     return { detectedSubIntent: "proof_backed_strengths", detectedConcept: "skills" };
   }
 
