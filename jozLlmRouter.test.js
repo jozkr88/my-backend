@@ -281,6 +281,23 @@ test("identity, motivation, quality, team, and boundary phrasing resolve determi
   assert.match(boundaryReply, /should not invent arbitrary external entities|unsupported claims/i);
 });
 
+test("taking-the-piss or messing-around prompts return an interaction guard instead of random content", async () => {
+  for (const prompt of ["Are you taking the piss?", "Are you serious or just messing around?"]) {
+    const resolution = await resolveUnknownJozReply({
+      input: prompt,
+      messages: [{ role: "user", content: prompt }],
+      openai: null,
+      roleAwareContext: {
+        retrievedDocuments: [],
+      },
+    });
+
+    assert.equal(resolution.fallbackUsed, false);
+    assert.equal(resolution.composer, "buildLowSignalOrBadFaithReply");
+    assert.match(resolution.reply, /testing the system|question is not serious|ask directly/i);
+  }
+});
+
 test("routes agentic architecture prompts to the dedicated architecture approach answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "What agentic architecture does Joz do?";

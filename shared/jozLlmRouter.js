@@ -783,6 +783,30 @@ function isAmbiguousFollowUp(clean = "") {
   return Boolean(buildAmbiguousFollowUpReply(clean));
 }
 
+function buildLowSignalOrBadFaithReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (!normalized) return null;
+
+  if (
+    includesAny(normalized, [
+      "taking the piss",
+      "take the piss",
+      "playing us around",
+      "playing around",
+      "messing around",
+      "are you serious",
+      "are you for real",
+      "you joking",
+      "you kidding",
+      "you taking the piss",
+    ])
+  ) {
+    return "If you are testing the system or the question is not serious, ask directly. I can answer about Joz's background, business value, systems mindset, skills, infrastructure approach, and agent architecture.";
+  }
+
+  return null;
+}
+
 function normalizeList(value) {
   return Array.isArray(value)
     ? value.map((item) => String(item || "").trim()).filter(Boolean)
@@ -2522,6 +2546,18 @@ export async function resolveUnknownJozReply({
       reply: ambiguousFollowUpReply,
       answerSource: "ambiguity_guard",
       composer: "buildAmbiguousFollowUpReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+    };
+  }
+
+  const lowSignalOrBadFaithReply = buildLowSignalOrBadFaithReply(clean);
+  if (lowSignalOrBadFaithReply) {
+    return {
+      reply: lowSignalOrBadFaithReply,
+      answerSource: "interaction_guard",
+      composer: "buildLowSignalOrBadFaithReply",
       fallbackUsed: false,
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
