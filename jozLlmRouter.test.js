@@ -2180,6 +2180,64 @@ test("verification fails when capabilities overview drifts into unrelated infras
   );
 });
 
+test("verification fails when a broad in-scope Joz prompt falls into unknown fallback", () => {
+  const verification = buildJozResponseVerification({
+    input: "Tell me more about Joz",
+    route: {
+      selectedRoute: "unknown_fallback",
+      detectedSubIntent: "general",
+    },
+    resolution: {
+      fallbackUsed: false,
+      answerClass: "scope_boundary",
+    },
+    trace: {
+      selectedRoute: "unknown_fallback",
+      validationPassed: true,
+      answerClass: "scope_boundary",
+      confidence: "high",
+    },
+    reply: "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+    retrievedDocuments: [],
+    latencyMs: 200,
+  });
+
+  assert.equal(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "joz_scoped_fallback_guard")?.status,
+    "fail"
+  );
+});
+
+test("verification passes the broad Joz fallback guard when the profile prompt resolves to capabilities", () => {
+  const verification = buildJozResponseVerification({
+    input: "Tell me more about Joz",
+    route: {
+      selectedRoute: "skills",
+      detectedSubIntent: "capabilities_overview",
+    },
+    resolution: {
+      fallbackUsed: false,
+      answerClass: "deterministic_skills",
+    },
+    trace: {
+      selectedRoute: "skills",
+      validationPassed: true,
+      answerClass: "deterministic_skills",
+      confidence: "high",
+    },
+    reply: "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering.",
+    retrievedDocuments: [],
+    latencyMs: 200,
+  });
+
+  assert.notEqual(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "joz_scoped_fallback_guard")?.status,
+    "pass"
+  );
+});
+
 test("verification fails when collaboration drifts into unrelated infrastructure text", () => {
   const route = {
     selectedRoute: "skills",

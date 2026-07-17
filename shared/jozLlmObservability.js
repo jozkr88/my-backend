@@ -104,6 +104,52 @@ function buildBaseChecks({ route, resolution, trace, retrievedDocuments, reply, 
   return { checks, wordCount };
 }
 
+function isBroadJozScopedPrompt(input = "") {
+  const clean = normalizeText(input);
+  if (!clean) return false;
+
+  const explicitBroadPrompts = [
+    "tell me more about joz",
+    "tell me more about him",
+    "more about joz",
+    "who is joz",
+    "what does joz do",
+    "what does joz actually do",
+    "what can joz do",
+    "what makes him different",
+    "what is he strongest at",
+    "what is he good at",
+    "what can he do",
+    "why should we hire joz",
+    "why hire joz",
+    "why him",
+    "why joz",
+  ];
+
+  return explicitBroadPrompts.some((pattern) => clean.includes(pattern));
+}
+
+function verifyJozScopedFallbackGuard({ input = "", route = {}, trace = {} }) {
+  const broadJozScopedPrompt = isBroadJozScopedPrompt(input);
+  const answerClass = String(trace?.answerClass || "");
+  const broadPromptFellBack =
+    route?.selectedRoute === "unknown_fallback" ||
+    ["scope_boundary", "clarification_guard", "knowledge_gap"].includes(answerClass);
+
+  return [
+    {
+      id: "joz_scoped_fallback_guard",
+      status: broadJozScopedPrompt && broadPromptFellBack ? "fail" : "pass",
+      detail:
+        broadJozScopedPrompt && broadPromptFellBack
+          ? "Broad in-scope Joz prompt fell into a fallback or boundary answer."
+          : broadJozScopedPrompt
+            ? "Broad in-scope Joz prompt resolved without fallback."
+            : "Prompt is not a broad in-scope Joz profile prompt.",
+    },
+  ];
+}
+
 function verifyBusinessValueDefinition(reply = "") {
   const clean = normalizeText(reply);
   const mentionsDefinition =
@@ -405,7 +451,8 @@ export function buildJozResponseVerification({
     latencyMs,
   });
   const routeChecks = verifyRouteSpecificReply({ route, reply, input, trace });
-  const checks = [...baseChecks, ...routeChecks];
+  const fallbackGuardChecks = verifyJozScopedFallbackGuard({ input, route, trace });
+  const checks = [...baseChecks, ...fallbackGuardChecks, ...routeChecks];
   const status = summarizeChecks(checks);
 
   return {
