@@ -547,6 +547,102 @@ test("conversation awareness can resolve why-does-he-do-it follow-ups from prior
   assert.equal(route.detectedSubIntent, "agentic_architecture_why");
 });
 
+test("conversation awareness can resolve verify-it follow-ups after a why-does-he-do-it agentic thread", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "how would he verify it",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How does Joz architect agentic AI?",
+      },
+      {
+        role: "assistant",
+        content: "Joz's agentic architecture is built around a clear separation of responsibilities.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "agentic_architecture_approach",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+      {
+        role: "user",
+        content: "Why does he do it?",
+      },
+      {
+        role: "assistant",
+        content: "Joz uses agentic AI when a problem needs more than one-shot generation.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "agentic_architecture_why",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+});
+
+test("conversation awareness can resolve shorthand scale follow-ups from prior backend-scaling context", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "how wud he scale this",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How would Joz scale a backend?",
+      },
+      {
+        role: "assistant",
+        content: "Joz would answer this as an architecture problem, not a profile summary.",
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "architecture_reasoning");
+});
+
+test("conversation awareness can resolve what-breaks-first follow-ups from prior scaling context", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "what breaks first",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How would Joz scale a backend?",
+      },
+      {
+        role: "assistant",
+        content: "Joz would answer this as an architecture problem, not a profile summary.",
+      },
+    ],
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "what breaks first",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "technical_stack");
+  assert.match(String(resolution.reply || ""), /queue depth|latency|tool bottlenecks|database contention/i);
+});
+
 test("conversation awareness does not hijack ambiguous follow-ups when the prior route is unrelated", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const route = routeJozLlmQueryWithAwareness({

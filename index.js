@@ -13,18 +13,15 @@ import {
   createJozConversation,
   deleteJozPrivacyBundle,
   exportJozPrivacyBundle,
-  getRecentJozSessionMessages,
   getPortalTransition,
   getPrimaryJozProfile,
   getJozDocumentsByIntent,
   getStructuredWorldState,
   initDatabase,
   isDatabaseEnabled,
-  listApprovedJozLlmCorrections,
   listRecentJozLlmRequestEvents,
   logReasoningEvent,
   logJozLlmRequestEvent,
-  updateJozLlmRequestEventReview,
 } from "./db.js";
 import {
   APP_CONTEXT,
@@ -93,6 +90,7 @@ const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
 const jozCallbackFallbackStore = [];
 const jozObservabilityFallbackStore = [];
+const jozRecentSessionMessagesFallbackStore = new Map();
 const isNodeTestRuntime =
   process.argv.includes("--test") || process.execArgv.includes("--test");
 
@@ -113,133 +111,42 @@ const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
   process.env.JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
   DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS
 );
-const DEPLOY_MARKER =
-  process.env.DEPLOY_MARKER || "2026-07-16-joz-routing-audit-v1";
-
-function buildJozVerificationFallbackResolution(route = {}) {
-  if (route?.selectedRoute === "business_need") {
-    return {
-      reply:
-        "I need the business topic stated more specifically. Ask about operating model, efficiency, growth, ROI, or decision support.",
-      answerSource: "verification_guard",
-      composer: "buildJozVerificationFallbackResolution",
-      fallbackUsed: false,
-      intentMode: "business_need",
-      retrievedCategories: [],
-      answerClass: "clarification_guard",
-      confidence: "high",
-    };
-  }
-
-  if (route?.selectedRoute === "systems_mindset") {
-    return {
-      reply:
-        "I need the systems topic stated more specifically. Ask about governance, prompt injection defense, approval boundaries, or verification.",
-      answerSource: "verification_guard",
-      composer: "buildJozVerificationFallbackResolution",
-      fallbackUsed: false,
-      intentMode: "systems_mindset",
-      retrievedCategories: [],
-      answerClass: "clarification_guard",
-      confidence: "high",
-    };
-  }
-
-  if (route?.selectedRoute === "identity_profile" || route?.selectedRoute === "factual_profile") {
-    return {
-      reply:
-        "Ask specifically about Joz's background, education, location, availability, or contact details.",
-      answerSource: "verification_guard",
-      composer: "buildJozVerificationFallbackResolution",
-      fallbackUsed: false,
-      intentMode: "skills",
-      retrievedCategories: [],
-      answerClass: "clarification_guard",
-      confidence: "high",
-    };
-  }
-
-  return {
-    reply:
-      "I need the topic stated more specifically. Ask about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
-    answerSource: "verification_guard",
-    composer: "buildJozVerificationFallbackResolution",
-    fallbackUsed: false,
-    intentMode: "skills",
-    retrievedCategories: [],
-    answerClass: "clarification_guard",
-    confidence: "high",
-  };
-}
-
-function buildJozVerificationStage({
-  label = "",
-  reply = "",
-  trace = {},
-  verification = {},
-} = {}) {
-  return {
-    label: String(label || "").trim() || "unknown",
-    reply: String(reply || "").trim(),
-    route: trace?.selectedRoute || null,
-    subIntent: trace?.detectedSubIntent || null,
-    answerClass: trace?.answerClass || null,
-    confidence: trace?.confidence || null,
-    verificationStatus: verification?.status || null,
-    verificationSummary: verification?.summary || null,
-    verificationChecks: Array.isArray(verification?.checks)
-      ? verification.checks.map((check) => ({
-          id: check?.id || null,
-          status: check?.status || null,
-          detail: check?.detail || null,
-        }))
-      : [],
-  };
-}
-
-function buildJozVerificationRepairResolution(route = {}) {
-  if (
-    route?.selectedRoute === "business_need" &&
-    route?.detectedSubIntent === "operating_model"
-  ) {
-    return {
-      reply:
-        "Joz would design the operating model around explicit ownership, governance, workflow routing, approval boundaries, and outcome measurement. That means deciding which team owns each AI-assisted workflow, where policy and risk controls sit, which steps remain human-approved, how exceptions escalate, and which metrics prove the system is improving execution. The goal is not isolated AI features. It is governed execution with clear accountability, measurable outcomes, and AI embedded into real operating workflows.",
-      answerSource: "verification_repair",
-      composer: "buildJozVerificationRepairResolution",
-      fallbackUsed: false,
-      intentMode: "business_need",
-      retrievedCategories: [],
-      answerClass: "deterministic_business",
-      confidence: "high",
-    };
-  }
-
-  if (
-    route?.selectedRoute === "skills" &&
-    route?.detectedSubIntent === "agentic_architecture_approach"
-  ) {
-    return {
-      reply:
-        "Joz architects agentic AI as a controlled system with a thin orchestrator, typed state, scoped tools, retrieval and memory boundaries, policy and risk gates, execution services, and verification outside the agent. The orchestrator coordinates reasoning, specialist workers handle distinct tasks, tools stay tightly scoped, durable state lives outside the model, and policy checks happen before action. The architecture is designed so reasoning, tool use, approvals, execution, and verification are separable, observable, and safe to scale.",
-      answerSource: "verification_repair",
-      composer: "buildJozVerificationRepairResolution",
-      fallbackUsed: false,
-      intentMode: "skills",
-      retrievedCategories: [],
-      answerClass: "deterministic_skills",
-      confidence: "high",
-    };
-  }
-
-  return null;
-}
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ");
+}
+
+function getFallbackRecentJozSessionMessages({ sessionKey = null, limit = 12 } = {}) {
+  const key = String(sessionKey || "").trim();
+  if (!key) return [];
+  const messages = jozRecentSessionMessagesFallbackStore.get(key) || [];
+  return messages.slice(-Math.max(1, limit)).map((message) => ({
+    role: message?.role === "assistant" ? "assistant" : "user",
+    content: String(message?.content || ""),
+    metadata: message?.metadata && typeof message.metadata === "object" ? message.metadata : {},
+  }));
+}
+
+function appendFallbackRecentJozSessionMessage({
+  sessionKey = null,
+  role = "user",
+  content = "",
+  metadata = {},
+} = {}) {
+  const key = String(sessionKey || "").trim();
+  const text = String(content || "").trim();
+  if (!key || !text) return;
+
+  const existing = jozRecentSessionMessagesFallbackStore.get(key) || [];
+  existing.push({
+    role: role === "assistant" ? "assistant" : "user",
+    content: text,
+    metadata: metadata && typeof metadata === "object" ? metadata : {},
+  });
+  jozRecentSessionMessagesFallbackStore.set(key, existing.slice(-24));
 }
 
 function pruneRecentTimestamps(timestamps = [], windowMs, now) {
@@ -337,12 +244,7 @@ app.use(express.json());
 
 // --- Test route ---
 app.get("/api/hello", (req, res) => {
-  res.json({
-    message: "Backend is connected and running!",
-    deployMarker: DEPLOY_MARKER,
-    render: Boolean(process.env.RENDER),
-    nodeEnv: process.env.NODE_ENV || "development",
-  });
+  res.json({ message: "Backend is connected and running!" });
 });
 
 // === FILE PERSISTENCE SETUP ===
@@ -573,119 +475,6 @@ function rememberJozObservabilityEvent(event) {
   if (jozObservabilityFallbackStore.length > 100) {
     jozObservabilityFallbackStore.length = 100;
   }
-}
-
-function updateJozObservabilityFallbackReview(id, patch = {}) {
-  const event = jozObservabilityFallbackStore.find((entry) => String(entry.id) === String(id));
-  if (!event) return null;
-  event.review_status = patch.review_status ?? event.review_status ?? "unreviewed";
-  event.issue_type = patch.issue_type ?? event.issue_type ?? null;
-  event.review_notes = patch.review_notes ?? event.review_notes ?? "";
-  event.approved_correction = patch.approved_correction ?? event.approved_correction ?? "";
-  event.reviewed_by = patch.reviewed_by ?? event.reviewed_by ?? "dashboard";
-  event.reviewed_at = patch.reviewed_at ?? new Date().toISOString();
-  return event;
-}
-
-function normalizeCorrectionText(value = "") {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function buildCorrectionTokens(value = "") {
-  return new Set(
-    normalizeCorrectionText(value)
-      .split(" ")
-      .map((token) => token.trim())
-      .filter((token) => token.length >= 3)
-  );
-}
-
-function scoreApprovedCorrectionMatch(input = "", route = {}, candidate = {}) {
-  const inputText = normalizeCorrectionText(input);
-  const candidateText = normalizeCorrectionText(candidate.user_message || "");
-  if (!inputText || !candidateText) return 0;
-  if (inputText === candidateText) return 1;
-
-  const inputTokens = buildCorrectionTokens(inputText);
-  const candidateTokens = buildCorrectionTokens(candidateText);
-  if (!inputTokens.size || !candidateTokens.size) return 0;
-
-  let overlap = 0;
-  for (const token of inputTokens) {
-    if (candidateTokens.has(token)) overlap += 1;
-  }
-
-  const tokenCoverage = overlap / Math.max(inputTokens.size, 1);
-  const reverseCoverage = overlap / Math.max(candidateTokens.size, 1);
-  const lexicalScore = Math.max(tokenCoverage, reverseCoverage);
-  const routeBonus =
-    route?.selectedRoute &&
-    candidate?.route &&
-    String(route.selectedRoute) === String(candidate.route)
-      ? 0.12
-      : 0;
-  const substringBonus =
-    inputText.includes(candidateText) || candidateText.includes(inputText) ? 0.18 : 0;
-
-  return lexicalScore + routeBonus + substringBonus;
-}
-
-function findApprovedCorrectionMatch({ input = "", route = {}, candidates = [] } = {}) {
-  let bestMatch = null;
-  let bestScore = 0;
-
-  for (const candidate of candidates) {
-    const score = scoreApprovedCorrectionMatch(input, route, candidate);
-    if (score > bestScore) {
-      bestScore = score;
-      bestMatch = candidate;
-    }
-  }
-
-  if (!bestMatch) return null;
-  if (bestScore < 0.72) return null;
-
-  return {
-    ...bestMatch,
-    matchScore: bestScore,
-  };
-}
-
-function buildApprovedCorrectionDocument(match) {
-  if (!match?.approved_correction) return null;
-  return {
-    title: "Approved Reviewed Correction",
-    category: "review_correction",
-    summary: match.approved_correction,
-    body: match.approved_correction,
-    metadata: {
-      slug: `approved-correction-${match.id}`,
-      source: "joz_llm_review_feedback",
-      review_status: "approved_correction",
-      issue_type: match.issue_type || null,
-      matched_question: match.user_message || "",
-      reviewed_at: match.reviewed_at || null,
-      match_score: match.matchScore || null,
-    },
-  };
-}
-
-function buildApprovedCorrectionResolution(match, route) {
-  if (!match?.approved_correction) return null;
-  return {
-    reply: String(match.approved_correction).trim(),
-    answerSource: `approved_correction:${match.id}`,
-    composer: "buildApprovedCorrectionReply",
-    fallbackUsed: false,
-    intentMode: route?.selectedRoute || "skills",
-    retrievedCategories: ["review_correction"],
-    answerClass: "reviewed_correction",
-    confidence: "high",
-  };
 }
 
 function normalizeCallbackField(value = "", maxLength = 160) {
@@ -1119,8 +908,7 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
 
-    const recentSessionMessages = await getRecentJozSessionMessages({
-      conversationId: String(req.body?.conversationId || "").trim() || null,
+    const recentSessionMessages = getFallbackRecentJozSessionMessages({
       sessionKey,
       limit: 12,
     });
@@ -1147,18 +935,6 @@ app.post("/api/joz-llm", async (req, res) => {
       route.selectedRoute === "skills"
         ? route.selectedRoute
         : "skills";
-    const approvedCorrectionCandidates = isDatabaseEnabled()
-      ? await listApprovedJozLlmCorrections(120)
-      : jozObservabilityFallbackStore.filter(
-          (event) =>
-            String(event.review_status || "") === "approved_correction" &&
-            String(event.approved_correction || "").trim()
-        );
-    const approvedCorrectionMatch = findApprovedCorrectionMatch({
-      input: latestUserMessage,
-      route,
-      candidates: approvedCorrectionCandidates,
-    });
     const retrievedDocuments = await getJozDocumentsByIntent(
       retrievalIntentMode,
       8,
@@ -1171,31 +947,22 @@ app.post("/api/joz-llm", async (req, res) => {
       body: doc.body,
       metadata: doc.metadata,
     }));
-    const approvedCorrectionDocument = buildApprovedCorrectionDocument(approvedCorrectionMatch);
-    const augmentedRetrievalContext = approvedCorrectionDocument
-      ? [approvedCorrectionDocument, ...retrievalContext]
-      : retrievalContext;
 
     const roleAwareContext = buildRoleAwareJozContext({
       buildJozLlmContext,
       profile,
       context,
       intentMode: retrievalIntentMode,
-      retrievedDocuments: augmentedRetrievalContext,
+      retrievedDocuments: retrievalContext,
     });
-    const learnedResolution = buildApprovedCorrectionResolution(
-      approvedCorrectionMatch,
-      route
-    );
     const ownedResolution = composeJozLlmRouteReply({
       route,
       input: latestUserMessage,
       appContext: validatedAppContext,
       legacyContext: legacyRuntimeContext,
-      retrievedDocuments: augmentedRetrievalContext,
+      retrievedDocuments: retrievalContext,
     });
-    let resolution =
-      learnedResolution ||
+    const resolution =
       ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
@@ -1211,123 +978,16 @@ app.post("/api/joz-llm", async (req, res) => {
       reply = enforceJozLlmReplyLimit("", 55);
     }
 
-    let trace = buildJozRouteTrace(route, resolution);
-    let verification = buildJozResponseVerification({
+    const trace = buildJozRouteTrace(route, resolution);
+    const verification = buildJozResponseVerification({
       input: latestUserMessage,
       route,
       resolution,
       trace,
       reply,
-      retrievedDocuments: approvedCorrectionDocument
-        ? [approvedCorrectionDocument, ...retrievedDocuments]
-        : retrievedDocuments,
+      retrievedDocuments,
       latencyMs: Date.now() - requestStartedAt,
     });
-    let verificationRecovery = null;
-    const verificationFlow = {
-      initial: buildJozVerificationStage({
-        label: "initial",
-        reply,
-        trace,
-        verification,
-      }),
-      retry: null,
-      fallback: null,
-      final: null,
-      corrected: false,
-    };
-
-    if (verification.status === "fail" && route.selectedRoute !== "unknown_fallback") {
-      const retryResolution =
-        buildJozVerificationRepairResolution(route) ||
-        composeJozLlmRouteReply({
-          route,
-          input: latestUserMessage,
-          appContext: validatedAppContext,
-          legacyContext: legacyRuntimeContext,
-          retrievedDocuments: [],
-        });
-
-      if (retryResolution) {
-        const retryReply = String(retryResolution?.reply || "").trim() || enforceJozLlmReplyLimit("", 55);
-        const retryTrace = buildJozRouteTrace(route, retryResolution);
-        const retryVerification = buildJozResponseVerification({
-          input: latestUserMessage,
-          route,
-          resolution: retryResolution,
-          trace: retryTrace,
-          reply: retryReply,
-          retrievedDocuments: approvedCorrectionDocument ? [approvedCorrectionDocument] : [],
-          latencyMs: Date.now() - requestStartedAt,
-        });
-        verificationFlow.retry = buildJozVerificationStage({
-          label: "retry",
-          reply: retryReply,
-          trace: retryTrace,
-          verification: retryVerification,
-        });
-
-        verificationRecovery = {
-          attempted: true,
-          strategy:
-            retryResolution?.composer === "buildJozVerificationRepairResolution"
-              ? "verification_repair"
-              : "retrieval_free_retry",
-          initialStatus: verification.status,
-          recoveredStatus: retryVerification.status,
-        };
-
-        if (retryVerification.status !== "fail") {
-          resolution = retryResolution;
-          reply = retryReply;
-          trace = retryTrace;
-          verification = retryVerification;
-          verificationFlow.corrected = true;
-        } else {
-          const fallbackResolution = buildJozVerificationFallbackResolution(route);
-          const fallbackReply =
-            String(fallbackResolution?.reply || "").trim() || enforceJozLlmReplyLimit("", 55);
-          const fallbackTrace = buildJozRouteTrace(route, fallbackResolution);
-          const fallbackVerification = buildJozResponseVerification({
-            input: latestUserMessage,
-            route,
-            resolution: fallbackResolution,
-            trace: fallbackTrace,
-            reply: fallbackReply,
-            retrievedDocuments: approvedCorrectionDocument ? [approvedCorrectionDocument] : [],
-            latencyMs: Date.now() - requestStartedAt,
-          });
-          verificationFlow.fallback = buildJozVerificationStage({
-            label: "fallback",
-            reply: fallbackReply,
-            trace: fallbackTrace,
-            verification: fallbackVerification,
-          });
-
-          verificationRecovery = {
-            attempted: true,
-            strategy: "retrieval_free_retry_then_guard",
-            initialStatus: verification.status,
-            recoveredStatus: retryVerification.status,
-            fallbackStatus: fallbackVerification.status,
-          };
-
-          resolution = fallbackResolution;
-          reply = fallbackReply;
-          trace = fallbackTrace;
-          verification = fallbackVerification;
-          verificationFlow.corrected = true;
-        }
-      }
-    }
-
-    verificationFlow.final = buildJozVerificationStage({
-      label: "final",
-      reply,
-      trace,
-      verification,
-    });
-
     const retrievedCategories =
       resolution?.retrievedCategories?.length
         ? resolution.retrievedCategories
@@ -1351,10 +1011,28 @@ app.post("/api/joz-llm", async (req, res) => {
           retrievedCategories,
           trace,
           verification,
-          verificationFlow,
         },
       });
     }
+
+    appendFallbackRecentJozSessionMessage({
+      sessionKey,
+      role: "user",
+      content: latestUserMessage,
+      metadata: { intentMode, route: route.selectedRoute },
+    });
+    appendFallbackRecentJozSessionMessage({
+      sessionKey,
+      role: "assistant",
+      content: reply,
+      metadata: {
+        intentMode,
+        route: route.selectedRoute,
+        retrievedCategories,
+        trace,
+        verification,
+      },
+    });
 
     const observabilityEvent = {
       conversationId,
@@ -1366,8 +1044,6 @@ app.post("/api/joz-llm", async (req, res) => {
       requestContext: legacyRuntimeContext,
       trace,
       verification,
-      verificationRecovery,
-      verificationFlow,
       retrievedCategories,
       retrievedDocuments: retrievedDocuments.map((doc) => ({
         title: doc.title,
@@ -1398,8 +1074,6 @@ app.post("/api/joz-llm", async (req, res) => {
       mode: route.selectedRoute,
       trace,
       verification,
-      verificationRecovery,
-      verificationFlow,
       observability: {
         latencyMs: verification.metrics.latencyMs,
         retrievedDocumentCount: verification.metrics.retrievedDocumentCount,
@@ -1412,82 +1086,9 @@ app.post("/api/joz-llm", async (req, res) => {
   }
 });
 
-app.patch("/api/joz-llm/observability/:id/review", async (req, res) => {
-  try {
-    const id = String(req.params?.id || "").trim();
-    if (!id) {
-      return res.status(400).json({ error: "Missing event id" });
-    }
-
-    const reviewStatus =
-      String(req.body?.reviewStatus || "unreviewed").trim().toLowerCase() || "unreviewed";
-    const issueType = String(req.body?.issueType || "").trim().toLowerCase() || null;
-    const reviewNotes = String(req.body?.reviewNotes || "").trim();
-    const approvedCorrection = String(req.body?.approvedCorrection || "").trim();
-    const reviewedBy = String(req.body?.reviewedBy || "dashboard").trim() || "dashboard";
-
-    const allowedStatuses = new Set([
-      "unreviewed",
-      "flagged",
-      "approved_correction",
-      "dismissed",
-    ]);
-    const allowedIssueTypes = new Set([
-      "wrong_answer",
-      "wrong_route",
-      "hallucination",
-      "weak_answer",
-      "bad_tone",
-      "verifier_miss",
-      "other",
-    ]);
-
-    if (!allowedStatuses.has(reviewStatus)) {
-      return res.status(400).json({ error: "Invalid review status" });
-    }
-    if (issueType && !allowedIssueTypes.has(issueType)) {
-      return res.status(400).json({ error: "Invalid issue type" });
-    }
-    if (reviewStatus === "approved_correction" && !approvedCorrection) {
-      return res.status(400).json({ error: "Approved correction is required" });
-    }
-
-    const patch = {
-      review_status: reviewStatus,
-      issue_type: issueType,
-      review_notes: reviewNotes,
-      approved_correction: approvedCorrection,
-      reviewed_by: reviewedBy,
-      reviewed_at: new Date().toISOString(),
-    };
-
-    const updated = isDatabaseEnabled()
-      ? await updateJozLlmRequestEventReview(id, {
-          reviewStatus,
-          issueType,
-          reviewNotes,
-          approvedCorrection,
-          reviewedBy,
-        })
-      : updateJozObservabilityFallbackReview(id, patch);
-
-    if (!updated) {
-      return res.status(404).json({ error: "Observability event not found" });
-    }
-
-    return res.json({
-      ok: true,
-      event: updated,
-    });
-  } catch (error) {
-    console.error("❌ /api/joz-llm/observability/:id/review failed:", error);
-    return res.status(500).json({ error: error.message });
-  }
-});
-
 app.get("/api/joz-llm/observability", async (req, res) => {
   try {
-    const limit = Math.max(1, Math.min(250, Number(req.query?.limit) || 40));
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 20));
     const events = isDatabaseEnabled()
       ? await listRecentJozLlmRequestEvents(limit)
       : jozObservabilityFallbackStore.slice(0, limit);

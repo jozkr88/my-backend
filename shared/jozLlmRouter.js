@@ -20,7 +20,9 @@ function normalizeText(value = "") {
     .replace(/^wht is\b/g, "what is")
     .replace(/^hat is\b/g, "what is")
     .replace(/^whats\b/g, "what's")
+    .replace(/^whts\b/g, "what's")
     .replace(/^wht does he do\b/g, "what does he do")
+    .replace(/\bwud\b/g, "would")
     .replace(/\bthnk\b/g, "think");
 }
 
@@ -122,6 +124,22 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "PostgreSQL stores durable application state and remains the source of truth. Redis stores cache and short-lived state for low-latency access. Redis should not be treated as the authoritative source of truth.";
   }
 
+  if (clean.includes("is kubernetes a programming language")) {
+    return "No. Kubernetes is not a programming language. It is the orchestration layer that deploys, scales, restarts, and manages containers across machines.";
+  }
+
+  if (clean.includes("is docker a virtual machine")) {
+    return "No. Docker is not a virtual machine. Docker packages an application and its dependencies into a portable container image, while a virtual machine includes a full guest operating system.";
+  }
+
+  if (clean.includes("should redis be the source of truth")) {
+    return "No. Redis should not be the authoritative source of truth for durable business state. Joz uses Redis for cache and short-lived state, while PostgreSQL or another durable system remains the source of truth.";
+  }
+
+  if (clean.includes("does langsmith replace observability")) {
+    return "No. LangSmith does not replace infrastructure observability. It helps with LLM traces, runs, prompts, and evaluations, while OpenTelemetry, Prometheus, Grafana, and logging still cover broader system behavior.";
+  }
+
   if (clean.includes("kafka versus nats")) {
     return "Joz would use Kafka for durable event streams, replay, high throughput, and analytics pipelines. He would use NATS for lightweight, low-latency messaging and request-reply patterns.";
   }
@@ -173,6 +191,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
 
   if (clean.includes("what breaks first when agent systems scale")) {
     return "What breaks first is usually not the model itself. It is queue depth, latency, tool bottlenecks, context bloat, retry storms, cache misses, database contention, or verification backlog. Joz scales agent systems by separating API intake, orchestration, tools, retrieval, execution, and verification so each bottleneck can be measured and scaled independently.";
+  }
+
+  if (clean === "what breaks first") {
+    return "What breaks first is usually not the model itself. It is queue depth, latency, tool bottlenecks, context bloat, retry storms, cache misses, database contention, or verification backlog. Joz treats that as a bottleneck-identification problem before choosing scaling moves.";
   }
 
   if (clean.includes("what role does a knowledge graph play")) {
@@ -891,6 +913,43 @@ function normalizeConversationMessages(messages = []) {
     : [];
 }
 
+function inferAwarenessFromPrompt(prompt = "") {
+  const clean = normalizeText(prompt);
+  if (!clean) return null;
+
+  const skills = detectSkills(clean);
+  if (skills) {
+    return {
+      selectedRoute: "skills",
+      detectedSubIntent: skills.detectedSubIntent,
+      answerClass: "deterministic_skills",
+      userPrompt: prompt,
+    };
+  }
+
+  const businessNeed = detectBusinessNeed(clean);
+  if (businessNeed) {
+    return {
+      selectedRoute: "business_need",
+      detectedSubIntent: businessNeed.detectedSubIntent,
+      answerClass: "deterministic_business",
+      userPrompt: prompt,
+    };
+  }
+
+  const systemsMindset = detectSystemsMindset(clean);
+  if (systemsMindset) {
+    return {
+      selectedRoute: "systems_mindset",
+      detectedSubIntent: systemsMindset.detectedSubIntent,
+      answerClass: "deterministic_mindset",
+      userPrompt: prompt,
+    };
+  }
+
+  return null;
+}
+
 function buildConversationAwarenessContext(messages = []) {
   const normalized = normalizeConversationMessages(messages);
   if (!normalized.length) return null;
@@ -913,12 +972,24 @@ function buildConversationAwarenessContext(messages = []) {
       }
     }
 
+    if ((!selectedRoute || selectedRoute === "unknown_fallback") && lastUserPrompt) {
+      const inferred = inferAwarenessFromPrompt(lastUserPrompt);
+      if (inferred) return inferred;
+    }
+
     return {
       selectedRoute,
       detectedSubIntent,
       answerClass: trace?.answerClass || assistant?.metadata?.answerClass || null,
       userPrompt: lastUserPrompt,
     };
+  }
+
+  for (let index = normalized.length - 1; index >= 0; index -= 1) {
+    const message = normalized[index];
+    if (message.role !== "user") continue;
+    const inferred = inferAwarenessFromPrompt(message.content);
+    if (inferred) return inferred;
   }
 
   return null;
@@ -937,7 +1008,11 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "") {
     includesAny(clean, ["verify it", "how would he verify it", "how would joz verify it"]) &&
     (
       priorSubIntent === "verification_architecture" ||
-      includesAny(priorPrompt, ["portfolio", "trade", "sell 20%", "verification", "post-trade state"])
+      priorSubIntent === "agentic_architecture_approach" ||
+      priorSubIntent === "agentic_architecture_why" ||
+      priorSubIntent === "architecture_reasoning" ||
+      priorSubIntent === "scale_fastapi_architecture" ||
+      includesAny(priorPrompt, ["portfolio", "trade", "sell 20%", "verification", "post-trade state", "agentic ai", "agent architecture", "agentic architecture"])
     );
 
   if (inheritsVerificationRoute) {
@@ -952,17 +1027,38 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "") {
   }
 
   const inheritsScalingRoute =
-    includesAny(clean, ["scale this", "how would he scale this", "how would he scale it"]) &&
+    includesAny(clean, ["scale this", "how would he scale this", "how would he scale it", "how would he scale this", "how would he scale it", "how would he scale", "how would he scale this", "how would he scale it", "how would he scale this", "how would he scale this", "how would he scale this", "how would he scale this", "how would he scale this", "how wud he scale this"]) &&
     (
       priorSubIntent === "scale_fastapi_architecture" ||
-      includesAny(priorPrompt, ["fastapi", "100000 users", "100,000 users", "scale a fastapi service"])
+      priorSubIntent === "architecture_reasoning" ||
+      includesAny(priorPrompt, ["fastapi", "100000 users", "100,000 users", "scale a fastapi service", "scale a backend", "scale the backend", "scale a system"])
     );
 
   if (inheritsScalingRoute) {
     return {
       ...route,
       detectedIntent: "skills",
-      detectedSubIntent: "scale_fastapi_architecture",
+      detectedSubIntent:
+        priorSubIntent === "architecture_reasoning" ? "architecture_reasoning" : "scale_fastapi_architecture",
+      detectedConcept: "skills",
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+    };
+  }
+
+  const inheritsBreaksFirstRoute =
+    includesAny(clean, ["what breaks first"]) &&
+    (
+      priorSubIntent === "scale_fastapi_architecture" ||
+      priorSubIntent === "architecture_reasoning" ||
+      includesAny(priorPrompt, ["scale a backend", "scale the backend", "scale an agent platform", "agent systems scale", "fastapi"])
+    );
+
+  if (inheritsBreaksFirstRoute) {
+    return {
+      ...route,
+      detectedIntent: "skills",
+      detectedSubIntent: "technical_stack",
       detectedConcept: "skills",
       selectedRoute: "skills",
       selectedWorldRecord: null,
@@ -1919,6 +2015,12 @@ function detectBusinessNeed(clean) {
       "why should anyone care",
       "is he legit",
       "is this just buzzwords",
+      "this sounds fake",
+      "why should i believe it",
+      "just another ai guy",
+      "all fluff",
+      "take this seriously",
+      "for real",
     ])
   ) {
     return { detectedSubIntent: "hire_value", detectedConcept: "business_value" };
@@ -2320,11 +2422,13 @@ function detectSkills(clean) {
       "whats mcp",
       "mcp then",
       "what is docker",
+      "is docker a virtual machine",
       "diff between docker and kubernetes",
       "docker vs kubernetes",
       "difference between docker and kubernetes",
       "docker and kubernetes",
       "what is kubernetes",
+      "is kubernetes a programming language",
       "kubernetes pod",
       "kubernetes deployment",
       "kubernetes service",
@@ -2335,6 +2439,7 @@ function detectSkills(clean) {
       "stateless",
       "what is postgresql",
       "what is redis",
+      "should redis be the source of truth",
       "difference between postgresql and redis",
       "postgresql and redis",
       "kafka",
@@ -2349,6 +2454,7 @@ function detectSkills(clean) {
       "difference between logs, metrics, and traces",
       "difference between logs metrics and traces",
       "what is langsmith",
+      "does langsmith replace observability",
       "prometheus",
       "grafana",
       "langsmith",
@@ -2491,6 +2597,7 @@ function detectSkills(clean) {
       "not buzzwords",
       "what's his edge",
       "whats his edge",
+      "whts his edge",
       "what's joz strongest at",
       "what is joz strongest at",
       "strongest skills",
@@ -2555,9 +2662,12 @@ function detectSkills(clean) {
       "what kind of work does he do",
       "can he actually build things",
       "can he actually build",
+      "what does he actually build then",
+      "what does he actually build",
       "what does he know about ai agents",
       "so what is he actually good at",
       "yo what does joz do then",
+      "yo is he for real",
       "tell me more about joz",
       "tell me more about him",
       "tell me about joz",
