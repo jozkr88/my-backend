@@ -2,7 +2,6 @@ services:
   - type: web
     name: xq-backend
     runtime: node
-    rootDir: server
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/hello
