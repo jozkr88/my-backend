@@ -137,7 +137,15 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "Treat all external content as untrusted data. Separate system instructions from retrieved content. Security policy must be enforced outside the model so untrusted text cannot override permissions, approvals, or execution rules.";
   }
 
+  if (clean.includes("malicious prompts")) {
+    return "Treat all external content as untrusted data. Separate system instructions from retrieved content. Security policy must be enforced outside the model so untrusted text cannot override permissions, approvals, or execution rules.";
+  }
+
   if (clean.includes("doing something stupid in production")) {
+    return "Joz would stop that by keeping policy, approval, execution, and verification outside the model. High-risk actions should require deterministic policy checks, scoped tool permissions, bounded retries, human approval where needed, and post-action verification against authoritative state so the system stops or escalates instead of taking unsafe action.";
+  }
+
+  if (clean.includes("doing something stupid")) {
     return "Joz would stop that by keeping policy, approval, execution, and verification outside the model. High-risk actions should require deterministic policy checks, scoped tool permissions, bounded retries, human approval where needed, and post-action verification against authoritative state so the system stops or escalates instead of taking unsafe action.";
   }
 
@@ -167,6 +175,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   }
 
   if (clean.includes("what is his infrastructure approach") || clean.includes("how does he approach infrastructure")) {
+    return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
+  }
+
+  if (clean.includes("and infra")) {
     return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
   }
 
@@ -228,6 +240,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
 
   if (clean.includes("what is redis used for")) {
     return "Redis is used for low-latency access to cache and short-lived state. Typical uses include caching, sessions, rate limits, distributed locks, short-lived workflow state, queues, and pub/sub.";
+  }
+
+  if (clean.includes("what is temporal")) {
+    return "Temporal is the durable workflow execution layer for retries, timeouts, approval waits, long-running workflows, crash recovery, state reconstruction, and compensation logic.";
   }
 
   if (clean.includes("wire redis and postgresql together")) {
@@ -351,6 +367,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   }
 
   if (clean.includes("what should always need human approval")) {
+    return "High-risk actions require human approval, especially database migrations, security changes, infrastructure changes, production deployments, destructive operations, signing operations, and code merges. Joz keeps those gates outside the agent so policy validates before execution acts.";
+  }
+
+  if (clean.includes("what always needs human approval")) {
     return "High-risk actions require human approval, especially database migrations, security changes, infrastructure changes, production deployments, destructive operations, signing operations, and code merges. Joz keeps those gates outside the agent so policy validates before execution acts.";
   }
 
@@ -1865,6 +1885,7 @@ function detectBusinessNeed(clean) {
       "why should we hire joz",
       "why hire joz",
       "why hire him",
+      "why would anyone hire him",
       "why him",
       "why joz",
       "is he worth hiring",
@@ -1893,6 +1914,7 @@ function detectBusinessNeed(clean) {
 function detectSystemsMindset(clean) {
   if (
     includesAny(clean, [
+      "what always needs human approval",
       "what should always require human approval",
       "what should always need human approval",
       "always require human approval",
@@ -1929,6 +1951,8 @@ function detectSystemsMindset(clean) {
       "stop the agent",
       "executing malicious instructions",
       "what if",
+      "what would joz do",
+      "would joz do",
     ])
   ) {
     return { detectedSubIntent: "prompt_injection_defense", detectedConcept: "systems_mindset" };
@@ -1938,6 +1962,8 @@ function detectSystemsMindset(clean) {
     includesAny(clean, [
       "how does he think about systems",
       "how does joz think",
+      "how does he think",
+      "ok but how does he think",
       "what is joz's operating mindset",
       "what is jozs operating mindset",
       "operating mindset",
@@ -2337,6 +2363,7 @@ function detectSkills(clean) {
       "what does he know about kubernetes",
       "what does he know about redis",
       "what does he know about temporal",
+      "and infra",
       "what is joz's infrastructure approach",
       "what is jozs infrastructure approach",
       "what is his infrastructure approach",
@@ -2384,6 +2411,7 @@ function detectSkills(clean) {
   if (
     includesAny(clean, [
       "how would joz",
+      "how would he",
       "design",
       "why would joz use",
       "what happens if",
@@ -2393,6 +2421,7 @@ function detectSkills(clean) {
       "compare",
       "protect secrets",
       "wire",
+      "and architecture",
     ]) &&
     includesAny(clean, [
       "architecture",
@@ -2400,6 +2429,7 @@ function detectSkills(clean) {
       "platform",
       "workflow",
       "scale",
+      "backend",
       "verification",
       "security",
       "agent",
@@ -2436,6 +2466,8 @@ function detectSkills(clean) {
       "proof not buzzwords",
       "with proof",
       "not buzzwords",
+      "what's his edge",
+      "whats his edge",
       "what's joz strongest at",
       "what is joz strongest at",
       "strongest skills",
@@ -2489,8 +2521,16 @@ function detectSkills(clean) {
       "what is he good at",
       "what is he strongest at",
       "what can he do",
+      "what is joz about",
+      "what should i know about joz",
+      "what kind of work does he do",
+      "can he actually build things",
+      "what does he know about ai agents",
+      "so what is he actually good at",
+      "yo what does joz do then",
       "tell me more about joz",
       "tell me more about him",
+      "tell me about joz",
       "more about joz",
       "what experience does joz have",
       "what are his capabilities",
@@ -2501,6 +2541,7 @@ function detectSkills(clean) {
       "what can he build",
       "what can joz build",
       "what makes him different",
+      "can he lead",
       "technical depth",
       "core capabilities",
       "technical skills",
@@ -2829,7 +2870,16 @@ export function composeJozLlmRouteReply({
     const cleanInput = normalizeText(input);
     const preferBusinessNeedBaseTrace =
       route.detectedSubIntent === "hire_value" &&
-      includesAny(cleanInput, ["why should we hire", "why hire", "why is joz relevant", "why joz now"]);
+      includesAny(cleanInput, [
+        "why should we hire",
+        "why hire",
+        "why is joz relevant",
+        "why joz now",
+        "how does joz create business value",
+        "create business value",
+        "business value",
+        "why would anyone hire him",
+      ]);
     const baseReply = composeBusinessNeedReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
@@ -2838,7 +2888,7 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     return {
-      reply: evidenceReply?.reply || baseReply,
+      reply: preferBusinessNeedBaseTrace ? baseReply : evidenceReply?.reply || baseReply,
       answerSource:
         preferBusinessNeedBaseTrace
           ? "JOZ_LLM_CV.experience"
@@ -2922,18 +2972,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "proof_backed_strengths"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "proof_backed_strengths"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "proof_backed_strengths"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
