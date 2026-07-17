@@ -139,6 +139,7 @@ test("loose capability and differentiation phrasing resolves to capabilities ove
     "What can he build?",
     "What does Joz actually do?",
     "What makes him different?",
+    "Tell me more about Joz",
   ]) {
     const route = routeJozLlmQuery({
       input: prompt,
