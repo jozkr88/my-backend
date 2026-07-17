@@ -164,8 +164,10 @@ test("pronoun systems and infrastructure phrasing resolves to the intended lanes
 
   const cases = [
     ["How does he think about systems?", "systems_mindset", "thinking_model"],
+    ["How does he thnk?", "systems_mindset", "thinking_model"],
     ["What is his infrastructure approach?", "skills", "technical_stack"],
     ["How does he approach infrastructure?", "skills", "technical_stack"],
+    ["And security?", "skills", "technical_stack"],
     ["What does he know about Kubernetes?", "skills", "technical_stack"],
     ["What kind of agent systems does he build?", "skills", "agentic_architecture_approach"],
     ["What is his architecture style?", "skills", "agentic_architecture_approach"],
@@ -220,6 +222,37 @@ test("how-does-he-work phrasing resolves to capabilities overview", () => {
   assert.equal(resolution.fallbackUsed, false);
   assert.match(resolution.reply, /agentic AI architecture|decision intelligence|context engineering|enterprise product engineering/i);
   assert.doesNotMatch(resolution.reply, /network security|private subnets|firewalls and security groups|tls everywhere/i);
+});
+
+test("vague human capability phrasing resolves to capabilities overview instead of a knowledge gap", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "What's he like?",
+    "What's his thing?",
+    "What does he actually do?",
+    "Can he actually build?",
+    "Can he do it?",
+    "whats Joz about",
+    "wht does he do",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "skills");
+    assert.equal(route.detectedSubIntent, "capabilities_overview");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, /agentic ai architecture|decision intelligence|context engineering|enterprise product engineering/i);
+  }
 });
 
 test("capabilities overview does not let retrieved evidence replace the base answer body", () => {
@@ -1349,6 +1382,33 @@ test("routes proof-not-buzzwords skills queries to an evidence-first answer", ()
   assert.match(resolution.reply, /16M\+ customer-scale engineering at Erste Bank/i);
   assert.match(resolution.reply, /Versace\/SOA|ArtKorero/i);
   assert.doesNotMatch(resolution.reply, /FastAPI|PostgreSQL|pgvector|Redis/i);
+});
+
+test("soft value and anti-buzzword prompts resolve to hire-value instead of a boundary reply", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+
+  for (const prompt of [
+    "Why should anyone care?",
+    "Is he legit?",
+    "Is this just buzzwords?",
+  ]) {
+    const route = routeJozLlmQuery({
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: prompt,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "business_need");
+    assert.equal(route.detectedSubIntent, "hire_value");
+    assert.equal(resolution.fallbackUsed, false);
+    assert.match(resolution.reply, /worth hiring|enterprise-scale and measurable|20x digital sales growth|30x audience growth|16M\+ customer-scale/i);
+  }
 });
 
 test("routes css design systems motion accessibility queries to dedicated interface proof answer", () => {

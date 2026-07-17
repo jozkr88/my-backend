@@ -12,7 +12,16 @@ import {
 } from "./meetJozWorld.js";
 
 function normalizeText(value = "") {
-  return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .replace(/^waht is\b/g, "what is")
+    .replace(/^wht is\b/g, "what is")
+    .replace(/^hat is\b/g, "what is")
+    .replace(/^whats\b/g, "what's")
+    .replace(/^wht does he do\b/g, "what does he do")
+    .replace(/\bthnk\b/g, "think");
 }
 
 const EXCLUDED_COMPANY_PATTERNS = [/\bparadex\b/gi, /\bdime\b/gi, /\bbloomberg\b/gi];
@@ -180,6 +189,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
 
   if (clean.includes("and infra")) {
     return "Joz approaches infrastructure as the production foundation for scalable, secure, observable, resilient, and repeatable AI systems. He prefers simple infrastructure first, then adds Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.";
+  }
+
+  if (clean.includes("and security") || clean.includes("what is his security approach") || clean.includes("security approach")) {
+    return "Joz approaches security as a system property, not a bolt-on feature. The pattern is least-privilege access, workload identity, secret isolation, policy before execution, network boundaries, auditability, and human approval for high-risk actions.";
   }
 
   if (clean.includes("what does he know about kubernetes")) {
@@ -1903,6 +1916,9 @@ function detectBusinessNeed(clean) {
       "measurable outcomes",
       "business outcomes",
       "what value does joz bring",
+      "why should anyone care",
+      "is he legit",
+      "is this just buzzwords",
     ])
   ) {
     return { detectedSubIntent: "hire_value", detectedConcept: "business_value" };
@@ -1966,6 +1982,7 @@ function detectSystemsMindset(clean) {
       "how does he think about systems",
       "how does joz think",
       "how does he think",
+      "how does he thnk",
       "ok but how does he think",
       "what is joz's operating mindset",
       "what is jozs operating mindset",
@@ -2335,6 +2352,7 @@ function detectSkills(clean) {
       "prometheus",
       "grafana",
       "langsmith",
+      "and security",
       "what is ci/cd",
       "what is terraform",
       "what is gitops",
@@ -2371,6 +2389,8 @@ function detectSkills(clean) {
       "what is jozs infrastructure approach",
       "what is his infrastructure approach",
       "how does he approach infrastructure",
+      "what is his security approach",
+      "security approach",
       "how should an ai agent interact with blockchain",
       "blockchain",
       "defi",
@@ -2525,9 +2545,16 @@ function detectSkills(clean) {
       "what is he strongest at",
       "what can he do",
       "what is joz about",
+      "what's joz about",
+      "what's he like",
+      "whats he like",
+      "what's his thing",
+      "whats his thing",
+      "whats joz about",
       "what should i know about joz",
       "what kind of work does he do",
       "can he actually build things",
+      "can he actually build",
       "what does he know about ai agents",
       "so what is he actually good at",
       "yo what does joz do then",
@@ -2535,16 +2562,19 @@ function detectSkills(clean) {
       "tell me more about him",
       "tell me about joz",
       "more about joz",
+      "what does he actually do",
       "what experience does joz have",
       "what are his capabilities",
       "what experience does he have",
       "what does he do",
+      "wht does he do",
       "how does he work",
       "what does joz actually do",
       "what can he build",
       "what can joz build",
       "what makes him different",
       "can he lead",
+      "can he do it",
       "technical depth",
       "core capabilities",
       "technical skills",
@@ -2878,6 +2908,10 @@ export function composeJozLlmRouteReply({
         "why hire",
         "why is joz relevant",
         "why joz now",
+        "why him",
+        "why should anyone care",
+        "is he legit",
+        "is this just buzzwords",
         "how does joz create business value",
         "create business value",
         "business value",
