@@ -46,6 +46,28 @@ test("routes identity profile queries ahead of assistant fallback", () => {
   assert.doesNotMatch(resolution.reply, /Joz LLM can explain/i);
 });
 
+test("answers assistant identity and authenticity questions directly", () => {
+  const { appContext, legacyContext } = buildContexts();
+
+  for (const [input, subIntent, expected] of [
+    ["Who are you?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
+    ["Are you fake?", "authenticity", /grounded in the current MeetJoz knowledge base/i],
+  ]) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "identity_profile");
+    assert.equal(route.detectedSubIntent, subIntent);
+    assert.match(resolution.reply, expected);
+    assert.doesNotMatch(resolution.reply, /too short|not in the current Joz knowledge base/i);
+  }
+});
+
 test("routes education queries to factual profile education", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({

@@ -659,7 +659,15 @@ function buildCanonicalWorldConceptReply({ concept, appContext, legacyContext, i
   return "";
 }
 
-function composeIdentityProfileReply() {
+function composeIdentityProfileReply(subIntent = "overview") {
+  if (subIntent === "assistant_identity") {
+    return "I’m Joz LLM, the interactive MeetJoz assistant. I explain Joz Krupa's background, business value, systems mindset, skills, infrastructure, and agent architecture from the current knowledge base.";
+  }
+
+  if (subIntent === "authenticity") {
+    return "I’m a Joz LLM interface grounded in the current MeetJoz knowledge base. I should distinguish documented information from uncertainty rather than inventing claims, and I can say when something is not covered.";
+  }
+
   return [
     "Joz Krupa is an Agentic AI Architecture and Innovation Leader with experience across Singapore, Dubai, Europe, and global markets.",
     "Joz combines AI architecture, systems thinking, product strategy, design, engineering, and enterprise transformation to turn complexity into measurable business outcomes.",
@@ -1512,6 +1520,26 @@ function detectCanonicalWorldConcept(clean) {
 }
 
 function detectIdentityProfile(clean) {
+  if (includesAny(clean, [
+    /^who are you\b/,
+    /^what are you\b/,
+    "are you an ai",
+    "what is this assistant",
+  ])) {
+    return { detectedSubIntent: "assistant_identity", detectedConcept: "joz_llm" };
+  }
+
+  if (includesAny(clean, [
+    "are you fake",
+    "is this fake",
+    "are you real",
+    "is this real",
+    "is joz fake",
+    "this sounds fake",
+  ])) {
+    return { detectedSubIntent: "authenticity", detectedConcept: "joz_llm" };
+  }
+
   if (
     includesAny(clean, [
       /^who is joz\b/,
@@ -2998,7 +3026,7 @@ export function composeJozLlmRouteReply({
 
   if (route?.selectedRoute === "identity_profile") {
     return {
-      reply: composeIdentityProfileReply(),
+      reply: composeIdentityProfileReply(route.detectedSubIntent),
       answerSource: "JOZ_LLM_CV + JOZ_LLM_IDENTITY",
       composer: "composeIdentityProfileReply",
       fallbackUsed: false,
