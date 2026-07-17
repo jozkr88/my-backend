@@ -86,7 +86,7 @@ test("routes Gold Pill typo variants to canonical world concept", () => {
     currentMesh: "ball",
   });
 
-  for (const input of ["What is gold oil?", "What is gold pil?"]) {
+  for (const input of ["What is gold oil?", "What is gold pil?", "What is goldpill?"]) {
     const route = routeJozLlmQuery({
       input,
       appContext,
@@ -96,6 +96,20 @@ test("routes Gold Pill typo variants to canonical world concept", () => {
     assert.equal(route.selectedRoute, "canonical_world_concept");
     assert.equal(route.detectedConcept, "gold_pill");
   }
+});
+
+test("answers a plain greeting instead of returning the knowledge-base boundary", async () => {
+  const resolution = await resolveUnknownJozReply({
+    input: "Hello",
+    messages: [{ role: "user", content: "Hello" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+
+  assert.equal(resolution.composer, "buildGreetingReply");
+  assert.equal(resolution.answerSource, "interaction_greeting");
+  assert.match(resolution.reply, /^Hello/i);
+  assert.doesNotMatch(resolution.reply, /not in the current Joz knowledge base/i);
 });
 
 test("Gold Pill canonical route returns a non-empty direct concept answer", () => {

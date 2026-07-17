@@ -22,6 +22,7 @@ function normalizeText(value = "") {
     .replace(/^whats\b/g, "what's")
     .replace(/^whts\b/g, "what's")
     .replace(/^wht does he do\b/g, "what does he do")
+    .replace(/\bgoldpill\b/g, "gold pill")
     .replace(/\bgold oil\b/g, "gold pill")
     .replace(/\bgold pil\b/g, "gold pill")
     .replace(/\bwud\b/g, "would")
@@ -1115,6 +1116,15 @@ function buildLowSignalOrBadFaithReply(clean = "") {
   }
 
   return null;
+}
+
+function buildGreetingReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[!?.,]+$/g, "");
+  if (!["hello", "hi", "hey", "good morning", "good afternoon", "good evening"].includes(normalized)) {
+    return null;
+  }
+
+  return "Hello — I’m Joz LLM. Ask me about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
 }
 
 function countWords(value = "") {
@@ -3205,6 +3215,19 @@ export async function resolveUnknownJozReply({
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
       answerClass: "clarification_guard",
+      confidence: "high",
+    });
+  }
+
+  const greetingReply = buildGreetingReply(clean);
+  if (greetingReply) {
+    return buildPolicyResolution({
+      reply: greetingReply,
+      answerSource: "interaction_greeting",
+      composer: "buildGreetingReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+      answerClass: "interaction_guard",
       confidence: "high",
     });
   }
