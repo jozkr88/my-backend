@@ -22,6 +22,8 @@ function normalizeText(value = "") {
     .replace(/^whats\b/g, "what's")
     .replace(/^whts\b/g, "what's")
     .replace(/^wht does he do\b/g, "what does he do")
+    .replace(/\bgold oil\b/g, "gold pill")
+    .replace(/\bgold pil\b/g, "gold pill")
     .replace(/\bwud\b/g, "would")
     .replace(/\bthnk\b/g, "think");
 }
@@ -638,7 +640,11 @@ function buildRecruiterOperationalResolution(route = {}) {
 
 function buildCanonicalWorldConceptReply({ concept, appContext, legacyContext, input }) {
   if (concept === "gold_pill") {
-    return buildMeetJozWorldAwarenessReply({ input, appContext, legacyContext });
+    return [
+      "The Gold Pill is a core concept within MeetJoz and neoMAXX.",
+      "It represents skills, capabilities, competences, judgment, creativity, engineering, design, and execution combined into the ability to create high-quality innovation with AI.",
+      "Within the sequence, it is the capability trigger that opens Meet Joz and connects proof, identity, innovation, and transformation.",
+    ].join(" ");
   }
 
   if (concept === "neo_maxx") {

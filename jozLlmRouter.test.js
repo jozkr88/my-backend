@@ -80,6 +80,47 @@ test("routes Gold Pill queries to canonical world concept before world awareness
   assert.equal(route.detectedConcept, "gold_pill");
 });
 
+test("routes Gold Pill typo variants to canonical world concept", () => {
+  const { appContext, legacyContext } = buildContexts({
+    currentPortal: "root",
+    currentMesh: "ball",
+  });
+
+  for (const input of ["What is gold oil?", "What is gold pil?"]) {
+    const route = routeJozLlmQuery({
+      input,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, "canonical_world_concept");
+    assert.equal(route.detectedConcept, "gold_pill");
+  }
+});
+
+test("Gold Pill canonical route returns a non-empty direct concept answer", () => {
+  const { appContext, legacyContext } = buildContexts({
+    currentPortal: "root",
+    currentMesh: "ball",
+  });
+  const route = routeJozLlmQuery({
+    input: "What is gold oil?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "What is gold oil?",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+
+  assert.equal(route.selectedRoute, "canonical_world_concept");
+  assert.match(String(resolution.reply || ""), /Gold Pill is a core concept/i);
+  assert.doesNotMatch(String(resolution.reply || ""), /^$/);
+});
+
 test("routes deep skills queries to skills and returns technical depth reply", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const route = routeJozLlmQuery({
