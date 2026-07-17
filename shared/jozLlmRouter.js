@@ -1914,6 +1914,8 @@ function detectBusinessNeed(clean) {
 function detectSystemsMindset(clean) {
   if (
     includesAny(clean, [
+      "how would joz stop an ai from doing something stupid",
+      "stop an ai from doing something stupid",
       "what always needs human approval",
       "what should always require human approval",
       "what should always need human approval",
@@ -1926,6 +1928,7 @@ function detectSystemsMindset(clean) {
       "let agents deploy code themselves",
       "deploy straight to prod",
       "straight to prod",
+      "doing something stupid",
       "something stupid in production",
     ])
   ) {
@@ -2922,6 +2925,7 @@ export function composeJozLlmRouteReply({
         "verify autonomous code changes",
         "unauthorized information",
         "unauthorised information",
+        "doing something stupid",
         "doing something stupid in production",
         "merge their own pull requests",
       ]);

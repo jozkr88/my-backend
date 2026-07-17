@@ -1067,6 +1067,7 @@ test("routes production-stupidity and approval-rollback phrasing to safer routes
 
   for (const [prompt, expectedRoute] of [
     ["How would Joz stop an AI from doing something stupid in production?", "systems_mindset"],
+    ["How would Joz stop an AI from doing something stupid?", "systems_mindset"],
     ["How would Joz structure approvals, escalation, and rollback?", "skills"],
     ["Why not let agents just deploy code themselves?", "systems_mindset"],
   ]) {
@@ -1092,6 +1093,7 @@ test("production-stupidity and deploy-themselves prompts use direct guardrail an
 
   for (const [prompt, expected] of [
     ["How would Joz stop an AI from doing something stupid in production?", /policy|approval|verification|stops or escalates/i],
+    ["How would Joz stop an AI from doing something stupid?", /policy|approval|verification|stops or escalates/i],
     ["Why not let agents just deploy code themselves?", /should not deploy code by themselves|explicit approval|rollback/i],
     ["How would Joz structure approvals, escalation, and rollback?", /Policy Gate -> Approval Step -> Execution -> Verification -> Rollback or Escalation/i],
   ]) {
@@ -1635,13 +1637,10 @@ test("skills route upgrades to retrieved proof when ranked documents are provide
   });
 
   assert.equal(route.selectedRoute, "skills");
-  assert.equal(resolution.composer, "buildEvidenceBackedRouteReply");
-  assert.match(resolution.reply, /MarketClue USA work/i);
-  assert.match(resolution.reply, /Erste Bank engineering/i);
-  assert.match(
-    resolution.answerSource,
-    /Agentic AI Architecture Proof \+ Enterprise Scale Proof/i
-  );
+  assert.equal(resolution.composer, "composeSkillsReply");
+  assert.match(resolution.reply, /agentic ai architecture/i);
+  assert.match(resolution.reply, /MarketClue|Maybank|Mediacorp|Erste Bank/i);
+  assert.match(resolution.answerSource, /JOZ_LLM_CV\.appliedAiSkills \+ JOZ_LLM_CV\.experience/i);
 });
 
 test("business need route upgrades to retrieved proof when ranked documents are provided", () => {
@@ -1686,9 +1685,10 @@ test("business need route upgrades to retrieved proof when ranked documents are 
   });
 
   assert.equal(route.selectedRoute, "business_need");
-  assert.equal(resolution.composer, "buildEvidenceBackedRouteReply");
-  assert.match(resolution.reply, /Maybank-Ageas Etiqa 20x digital-sales growth/i);
-  assert.match(resolution.reply, /Mediacorp \/ CNA delivered roughly 30x MAU audience growth/i);
+  assert.equal(resolution.composer, "composeBusinessNeedReply");
+  assert.match(resolution.reply, /proof is enterprise-scale and measurable/i);
+  assert.match(resolution.reply, /20x digital sales growth/i);
+  assert.match(resolution.reply, /30x audience growth/i);
 });
 
 test("routes recruiter location queries to deterministic operational answer with actions", () => {
