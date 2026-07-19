@@ -70,6 +70,17 @@ test("answers assistant identity and authenticity questions directly", () => {
   }
 });
 
+test("routes Joz authenticity phrasing away from business-function matching", () => {
+  const { appContext, legacyContext } = buildContexts();
+  const input = "Is Joz real or just marketing?";
+  const route = routeJozLlmQuery({ input, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "identity_profile");
+  assert.equal(route.detectedSubIntent, "authenticity");
+  assert.match(resolution.reply, /grounded in the current MeetJoz knowledge base/i);
+});
+
 test("routes business help, AI use, self-awareness, memory, and purpose questions directly", async () => {
   const { appContext, legacyContext } = buildContexts();
   const cases = [
