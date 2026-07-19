@@ -12,7 +12,11 @@ import {
 } from "./meetJozWorld.js";
 
 function normalizeText(value = "") {
-  return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .replace(/^waht does\b/g, "what does");
 }
 
 const EXCLUDED_COMPANY_PATTERNS = [/\bparadex\b/gi, /\bdime\b/gi, /\bbloomberg\b/gi];
@@ -99,7 +103,13 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
     return "Permissions must be enforced before retrieval. Unauthorized information must never enter the LLM context window.";
   }
 
-  if (clean.includes("difference between docker and kubernetes")) {
+  if (
+    clean.includes("difference between docker and kubernetes") ||
+    clean.includes("docker vs kubernetes") ||
+    clean.includes("docker versus kubernetes") ||
+    clean.includes("when would joz use docker versus kubernetes") ||
+    clean.includes("when would joz use docker vs kubernetes")
+  ) {
     return "Docker packages a service and its dependencies into a portable container image. Kubernetes deploys, scales, restarts, and manages containers across machines. Docker packages the service; Kubernetes runs and manages it.";
   }
 
@@ -271,7 +281,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = []) {
     return "An agent decides how to use instructions, tools, memory, and a reasoning loop to complete a task. A model produces a prediction or representation. Joz treats the model as one component inside the agent, not as the agent itself.";
   }
 
-  if (clean.includes("can agents deploy directly to production")) {
+  if (
+    clean.includes("can agents deploy directly to production") ||
+    clean.includes("should an ai agent deploy directly to production")
+  ) {
     return "No. Autonomous agents must not deploy directly to production, push directly to the main branch, or merge their own pull requests. Production deployments require explicit human approval plus deterministic verification.";
   }
 
@@ -572,6 +585,10 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
+  if (subIntent === "business_diagnosis") {
+    return "Start with one decision or workflow where bad data and slow decisions are creating measurable cost, delay, or risk. Joz would map the current process, identify the authoritative sources and data owners, establish a baseline, and separate a quick enablement win from deeper data and systems work. Then pilot a bounded use case with grounded retrieval, human approval, and outcome metrics before expanding into broader automation or agents.";
+  }
+
   if (subIntent === "business_value_definition") {
     return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not feature theater. The test is simple: what changed operationally, financially, or strategically because the system works better?";
   }
@@ -629,7 +646,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "architecture_reasoning") {
-    return "Joz would answer this as an architecture problem, not a profile summary. The first step is to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology. Then he would separate API, orchestration, execution, data, policy, and verification responsibilities so the design can scale, fail safely, and remain observable.";
+    return "Joz would design this as a governed layered platform, not a single prompt loop: API intake -> typed orchestration state -> durable workflow engine for retries, approvals, timers, and recovery -> retrieval and ACL boundary -> specialist agents and scoped tools -> policy and risk gates -> controlled execution -> verification and reconciliation -> observability. Memory should hold conversation, task, and working context while authoritative business state remains in durable systems. Retrieval should preserve provenance and permissions, and verification should compare expected versus actual state before the workflow completes. The first step is still to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology.";
   }
 
   if (subIntent === "langgraph_temporal_architecture") {
@@ -1351,6 +1368,18 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
+      "i am a business owner with bad data",
+      "i'm a business owner with bad data",
+      "business owner with bad data",
+      "business owner with slow decisions",
+    ]) &&
+    includesAny(clean, ["slow decisions", "what should i do first", "where should we start"])
+  ) {
+    return { detectedSubIntent: "business_diagnosis", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "autonomous execution layer",
       "organisational knowledge improve autonomous execution",
       "organizational knowledge improve autonomous execution",
@@ -1484,6 +1513,9 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "why should we hire joz",
+      "why should a hiring manager hire joz",
+      "why would a hiring manager hire joz",
+      "hiring manager hire joz",
       "why hire joz",
       "business value",
       "where is the roi",
@@ -1557,6 +1589,7 @@ function detectSystemsMindset(clean) {
       "verification fails",
       "docker sandboxes",
       "deploy directly to production",
+      "should an ai agent deploy directly to production",
       "production deployment",
       "merge their own pull requests",
     ])
@@ -1568,6 +1601,16 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "design a governed agentic ai platform",
+      "durable workflows, retrieval, memory, and verification",
+    ]) &&
+    includesAny(clean, ["platform", "architecture", "verification", "workflows"])
+  ) {
+    return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "how would joz design an ai platform that can fail safely",
@@ -1818,6 +1861,9 @@ function detectSkills(clean) {
       "what is fastapi used for",
       "what is mcp",
       "what is docker",
+      "when would joz use docker versus kubernetes",
+      "when would joz use docker vs kubernetes",
+      "docker versus kubernetes",
       "docker and kubernetes",
       "what is kubernetes",
       "kubernetes pod",
@@ -2023,6 +2069,21 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const preWorldBusinessNeed = detectBusinessNeed(clean);
   const preWorldSystemsMindset = detectSystemsMindset(clean);
   const preWorldSkills = detectSkills(clean);
+
+  if (
+    preWorldBusinessNeed &&
+    ["business_diagnosis", "hire_value"].includes(preWorldBusinessNeed.detectedSubIntent)
+  ) {
+    return {
+      detectedIntent: "business_need",
+      detectedSubIntent: preWorldBusinessNeed.detectedSubIntent,
+      detectedConcept: preWorldBusinessNeed.detectedConcept,
+      selectedRoute: "business_need",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
 
   if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
     return {
@@ -2269,8 +2330,9 @@ export function composeJozLlmRouteReply({
   if (route?.selectedRoute === "business_need") {
     const cleanInput = normalizeText(input);
     const preferBusinessNeedBaseTrace =
-      route.detectedSubIntent === "hire_value" &&
-      includesAny(cleanInput, ["why should we hire", "why hire", "why is joz relevant", "why joz now"]);
+      route.detectedSubIntent === "business_diagnosis" ||
+      (route.detectedSubIntent === "hire_value" &&
+        includesAny(cleanInput, ["why should we hire", "why hire", "why is joz relevant", "why joz now"]));
     const baseReply = composeBusinessNeedReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
