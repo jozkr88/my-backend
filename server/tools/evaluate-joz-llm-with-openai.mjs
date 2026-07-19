@@ -15,6 +15,7 @@ for (const envPath of [path.resolve(process.cwd(), "server/.env"), path.resolve(
 
 const limit = Math.max(1, Math.min(100, Number(process.env.JOZ_EVAL_LIMIT) || 20));
 const model = process.env.JOZ_EVAL_MODEL || "gpt-4o-mini";
+const sessionKeyPrefix = String(process.env.JOZ_EVAL_SESSION_PREFIX || "").trim() || null;
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("Missing OPENAI_API_KEY. Add a current rotated key to server/.env; do not reuse an exposed historical key.");
@@ -26,7 +27,7 @@ if (!isDatabaseEnabled()) {
 }
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const events = await listUnevaluatedJozLlmRequestEvents(limit);
+const events = await listUnevaluatedJozLlmRequestEvents(limit, sessionKeyPrefix);
 
 function clampScore(value) {
   const score = Number(value);

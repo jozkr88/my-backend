@@ -19,6 +19,14 @@
       "forbiddenPhrases": ["not in the current joz knowledge base"]
     },
     {
+      "id": "assistant-identity-inverted",
+      "question": "You are who?",
+      "expectedRoute": "identity_profile",
+      "expectedSubIntent": "assistant_identity",
+      "requiredPhrases": ["joz llm"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
       "id": "authenticity",
       "question": "Are you real?",
       "expectedRoute": "identity_profile",

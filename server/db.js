@@ -668,7 +668,11 @@ export async function listRecentJozLlmRequestEvents(limit = 20) {
   return result.rows || [];
 }
 
-export async function listUnevaluatedJozLlmRequestEvents(limit = 20) {
+export async function listUnevaluatedJozLlmRequestEvents(limit = 20, sessionKeyPrefix = null) {
+  const normalizedPrefix = String(sessionKeyPrefix || "").trim();
+  const whereSession = normalizedPrefix ? " AND e.session_key LIKE $2" : "";
+  const params = [Math.max(1, Math.min(100, Number(limit) || 20))];
+  if (normalizedPrefix) params.push(`${normalizedPrefix}%`);
   const result = await runQuery(
     `SELECT e.id, e.conversation_id, e.session_key, e.route, e.intent_mode, e.user_message,
             e.assistant_reply, e.request_context, e.trace, e.verification,
@@ -676,10 +680,10 @@ export async function listUnevaluatedJozLlmRequestEvents(limit = 20) {
             e.response_status, e.created_at
      FROM joz_llm_request_events e
      LEFT JOIN joz_llm_evaluations v ON v.request_event_id = e.id
-     WHERE v.id IS NULL
+     WHERE v.id IS NULL${whereSession}
      ORDER BY e.created_at DESC
      LIMIT $1`,
-    [Math.max(1, Math.min(100, Number(limit) || 20))]
+    params
   );
   return result.rows || [];
 }

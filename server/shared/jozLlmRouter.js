@@ -1578,6 +1578,7 @@ function detectCanonicalWorldConcept(clean) {
 function detectIdentityProfile(clean) {
   if (includesAny(clean, [
     /^who are you\b/,
+    /^you are who\b/,
     /^what are you\b/,
     "are you an ai",
     "what is this assistant",

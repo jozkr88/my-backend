@@ -52,6 +52,7 @@ test("answers assistant identity and authenticity questions directly", () => {
 
   for (const [input, subIntent, expected] of [
     ["Who are you?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
+    ["You are who?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
     ["Are you fake?", "authenticity", /grounded in the current MeetJoz knowledge base/i],
   ]) {
     const route = routeJozLlmQuery({ input, appContext, legacyContext });
