@@ -729,6 +729,10 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
     return "Before recommending AI, Joz would diagnose your industry, business model, scale, biggest bottleneck, current systems and data, governance constraints, and target outcome. Then he maps quick wins, foundational work, and longer-term agentic opportunities to a baseline metric. Which matters most: revenue, customer experience, cost, operations, decisions, or risk?";
   }
 
+  if (subIntent === "ai_readiness") {
+    return "Joz would start with the business outcome and workflow, then assess data quality, system and API readiness, security, governance, and ownership. Choose one low-risk process with a baseline metric, pilot it with human approval, measure cost, speed, and quality, and scale only after the evidence is clear. That creates an AI roadmap grounded in readiness and outcomes rather than feature theater.";
+  }
+
   if (subIntent === "business_value_definition") {
     return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not feature theater. The test is simple: what changed operationally, financially, or strategically because the system works better?";
   }
@@ -771,6 +775,10 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
 function composeSystemsMindsetReply(subIntent = "thinking_model") {
   if (subIntent === "prompt_injection_defense") {
     return "Untrusted Content -> Sanitization and Classification -> Retrieval Boundary -> LLM -> Policy Gate -> Scoped Tools. Joz would treat the Telegram channel as external data, not instructions. System policy stays outside the model, system instructions stay separate from retrieved content, and the platform must block tool execution unless deterministic policy checks pass. Tool access must use least privilege and allowlisted interfaces, inputs must pass schema validation, the agent should stay sandboxed, secrets must never appear in the context window, and high-risk actions must stop for human approval.";
+  }
+
+  if (subIntent === "ai_safety") {
+    return "Joz keeps AI safe by separating untrusted content, model reasoning, policy, tools, execution, and verification. Use least privilege, schema validation, ACL-aware retrieval, prompt-injection defenses, deterministic risk gates, human approval for high-impact actions, audit trails, and post-action reconciliation. The model proposes; policy decides; controlled services execute; verification confirms.";
   }
 
   return "Joz thinks in systems before features: isolate signal from noise, map feedback loops, make decision paths explicit, and keep human accountability in the loop. In AI work, Joz biases toward trust, source provenance, verification, governance, and interfaces that turn ambiguity into clear action.";
@@ -1409,6 +1417,7 @@ function buildEvidenceBackedRouteReply({
       "permissions be enforced before retrieval",
       "permissions enforced before retrieval",
       "what role does a knowledge graph play",
+      "what is a knowledge graph",
       "when would joz use python versus golang",
       "difference between an agent and an api",
       "difference between an agent and a model",
@@ -1569,6 +1578,7 @@ function detectIdentityProfile(clean) {
     "what is this assistant",
     "tell me more about yourself",
     "tell me more about you",
+    "what do you do",
   ])) {
     return { detectedSubIntent: "assistant_identity", detectedConcept: "joz_llm" };
   }
@@ -1607,6 +1617,10 @@ function detectIdentityProfile(clean) {
     return { detectedSubIntent: "assistant_memory", detectedConcept: "joz_llm" };
   }
 
+  if (clean === "what is joz") {
+    return { detectedSubIntent: "overview", detectedConcept: "joz_identity" };
+  }
+
   if (
     includesAny(clean, [
       /^who is joz\b/,
@@ -1616,6 +1630,9 @@ function detectIdentityProfile(clean) {
       /^who even is he\b/,
       /^who is this guy\b/,
       /^what is he\b/,
+      "what is joz's background",
+      "what is jozs background",
+      "what does joz do",
       "tell me about joz",
       "introduce joz",
       "who is behind meetjoz",
@@ -1724,7 +1741,7 @@ function detectFactualProfile(clean) {
     return { detectedSubIntent: "availability", detectedConcept: "availability" };
   }
 
-  if (includesAny(clean, ["years of experience", "how many years", "experience overall", "years in ai"])) {
+  if (includesAny(clean, ["years of experience", "how many years", "experience overall", "years in ai", "joz's experience", "jozs experience", "joz experience"])) {
     return { detectedSubIntent: "experience", detectedConcept: "experience" };
   }
 
@@ -1847,6 +1864,8 @@ function detectRecruiterOperational(clean) {
       "what is jozs availability",
       "can joz start soon",
       "is joz open to opportunities",
+      "is joz open to international opportunities",
+      "international opportunities",
       "available",
       "availability",
       "open to opportunities",
@@ -1995,6 +2014,48 @@ function detectBusinessNeed(clean) {
 
   if (
     includesAny(clean, [
+      "what should we do first with ai",
+      "what should a business do first with ai",
+      "where should we start with ai",
+      "where do we start with ai",
+      "where should we start for a",
+      "where should we start",
+      "are we ready for ai",
+      "ai readiness",
+      "assess our data",
+      "assess data readiness",
+      "build an ai roadmap",
+      "ai roadmap",
+      "quick wins for a",
+      "measure readiness for a",
+      "move from copilots to agents for a",
+      "what governance do we need for a",
+      "avoid ai feature theater",
+      "avoid feature theater",
+    ])
+  ) {
+    return { detectedSubIntent: "ai_readiness", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "how does joz create",
+      "where does joz improve",
+      "what value can joz bring",
+      "how can ai improve",
+      "what outcomes should we expect",
+      "how should we tie ai to",
+      "how can joz support",
+      "what is the roi of",
+      "how can we reduce",
+      "how can we increase",
+    ])
+  ) {
+    return { detectedSubIntent: "business_help", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "autonomous execution layer",
       "organisational knowledge improve autonomous execution",
       "organizational knowledge improve autonomous execution",
@@ -2120,7 +2181,6 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "operating model",
-      "ownership",
       "governance",
       "workflow ownership",
       "governance and execution",
@@ -2132,6 +2192,15 @@ function detectBusinessNeed(clean) {
       "technical architecture",
       "architecture behind",
       "underlying architecture",
+      "knowledge graph",
+      "langgraph",
+      "temporal",
+      "docker",
+      "kubernetes",
+      "fastapi",
+      "agent platform",
+      "agent systems",
+      "what breaks first",
     ])
   ) {
     return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
@@ -2140,6 +2209,7 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "why should we hire joz",
+      "why should i hire joz",
       "why hire joz",
       "why hire him",
       "why would anyone hire him",
@@ -2177,6 +2247,39 @@ function detectBusinessNeed(clean) {
 }
 
 function detectSystemsMindset(clean) {
+  if (
+    includesAny(clean, [
+      "how does joz keep ai systems safe",
+      "how should agents handle untrusted content",
+      "how does joz verify autonomous actions",
+      "how do policy gates protect ai execution",
+      "how can agents avoid unsafe tool calls",
+      "ai governance",
+      "safe ai systems",
+      "ai safety",
+    ])
+  ) {
+    return { detectedSubIntent: "ai_safety", detectedConcept: "systems_mindset" };
+  }
+
+  if (
+    includesAny(clean, [
+      "safe",
+      "untrusted content",
+      "fail safely",
+      "tool calls",
+      "ai execution",
+      "autonomous actions",
+      "secrets",
+      "prompt injection",
+      "high-risk decisions",
+      "human approval in",
+    ]) &&
+    includesAny(clean, ["ai", "agent", "policy", "govern", "control", "protect", "prevent", "verify"])
+  ) {
+    return { detectedSubIntent: "ai_safety", detectedConcept: "systems_mindset" };
+  }
+
   if (
     includesAny(clean, [
       "how would joz stop an ai from doing something stupid",
@@ -2279,7 +2382,7 @@ function detectSystemsMindset(clean) {
 
 function detectSkills(clean) {
   if (
-    includesAny(clean, [
+    (includesAny(clean, [
       "how should we evaluate an llm rag system",
       "how do we evaluate an llm rag system",
       "how should i evaluate an llm rag system",
@@ -2287,7 +2390,48 @@ function detectSkills(clean) {
       "evaluate a rag system",
       "rag evaluation",
       "rag eval",
-    ])
+    ]) || (
+      includesAny(clean, [
+        "rag",
+        "retrieval",
+        "llm",
+        "faithfulness",
+        "faithful",
+        "citation",
+        "grounded",
+        "groundedness",
+        "recall",
+        "precision",
+        "vector search",
+        "answer relevance",
+        "evaluation set",
+        "production ai quality",
+      ]) &&
+      includesAny(clean, [
+        "evaluate",
+        "evaluation",
+        "eval",
+        "test",
+        "measure",
+        "assess",
+        "benchmark",
+        "monitor",
+        "validate",
+        "compare",
+        "quality",
+        "faithfulness",
+        "faithful",
+        "grounded",
+        "citation",
+        "recall",
+        "precision",
+        "hallucination",
+        "reliable",
+        "difference",
+        "improve",
+        "audit",
+      ])
+    ))
   ) {
     return { detectedSubIntent: "rag_evaluation", detectedConcept: "skills" };
   }
@@ -2369,6 +2513,8 @@ function detectSkills(clean) {
       "use langgraph and temporal together",
       "langgraph and temporal together",
       "why not use only one",
+      "how do langgraph and temporal work together",
+      "how do langgraph and temporal handle",
     ]) &&
     includesAny(clean, ["langgraph", "temporal"])
   ) {
@@ -2543,6 +2689,8 @@ function detectSkills(clean) {
       "joz agentic architecture",
       "joz agent architecture",
       "what kind of agent systems does he build",
+      "what is joz's agent architecture",
+      "what is jozs agent architecture",
     ])
   ) {
     return { detectedSubIntent: "agentic_architecture_approach", detectedConcept: "skills" };
@@ -2656,6 +2804,13 @@ function detectSkills(clean) {
       "python versus golang",
       "how would joz scale an agent platform",
       "how does joz scale an agent platform",
+      "how does an agent platform scale",
+      "how should an agent platform handle",
+      "what breaks first when agents scale",
+      "what breaks first when agent systems scale",
+      "what is the architecture for",
+      "how does joz scale ai systems",
+      "how should fastapi support",
       "what breaks first when agent systems scale",
       "wire redis and postgresql together",
       "redis and postgresql together",
@@ -2743,6 +2898,7 @@ function detectSkills(clean) {
       "rollback",
       "redis",
       "postgresql",
+      "ownership",
     ])
   ) {
     return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
@@ -2766,6 +2922,10 @@ function detectSkills(clean) {
       "whats the purpose of this llm",
       "what does this bot do",
       "what is this bot for",
+      "what is the purpose of joz llm",
+      "what is joz llm",
+      "what is joz llm for",
+      "what is meetjoz about",
       "proof, not buzzwords",
       "proof not buzzwords",
       "with proof",
@@ -2799,6 +2959,10 @@ function detectSkills(clean) {
         "whats the purpose of this llm",
         "what does this bot do",
         "what is this bot for",
+        "what is the purpose of joz llm",
+        "what is joz llm",
+        "what is joz llm for",
+        "what is meetjoz about",
       ])
     ) {
       return { detectedSubIntent: "purpose_of_llm", detectedConcept: "skills" };
@@ -2837,6 +3001,7 @@ function detectSkills(clean) {
       "whats his thing",
       "whats joz about",
       "what should i know about joz",
+      "ai leadership",
       "what kind of work does he do",
       "can he actually build things",
       "can he actually build",
@@ -3263,18 +3428,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSystemsReply =
-      ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent);
+      ["thinking_model", "prompt_injection_defense", "ai_safety"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSystemsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
+        ["thinking_model", "prompt_injection_defense", "ai_safety"].includes(route.detectedSubIntent)
           ? directKnowledgeReply
             ? "retrieved_knowledge"
             : "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["thinking_model", "prompt_injection_defense"].includes(route.detectedSubIntent)
+        ["thinking_model", "prompt_injection_defense", "ai_safety"].includes(route.detectedSubIntent)
           ? directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
             : "composeSystemsMindsetReply"

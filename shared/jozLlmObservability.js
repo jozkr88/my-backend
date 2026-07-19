@@ -153,7 +153,7 @@ function verifyJozScopedFallbackGuard({ input = "", route = {}, trace = {} }) {
 function isRagEvaluationPrompt(input = "") {
   const clean = normalizeText(input);
   return /\b(?:llm|rag|retrieval)\b/.test(clean) &&
-    /evaluate|evaluation|eval|assess|measure|quality|grounded|citation/.test(clean);
+    /evaluate|evaluation|eval|assess|measure|test|benchmark|monitor|validate|compare|quality|grounded|faithful|faithfulness|citation|recall|precision|hallucination|reliable|difference/.test(clean);
 }
 
 function verifyAudienceRelevance({ input = "", route = {}, trace = {}, reply = "" }) {
@@ -419,6 +419,29 @@ function verifyAgenticArchitectureApproach(reply = "") {
   ];
 }
 
+function verifyAiSafety(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsBoundaries = /untrusted|separat|least privilege|policy|risk gate/.test(clean);
+  const mentionsControl = /approval|audit|verification|reconciliation|schema/.test(clean);
+
+  return [
+    {
+      id: "ai_safety_boundaries",
+      status: mentionsBoundaries ? "pass" : "fail",
+      detail: mentionsBoundaries
+        ? "Reply separates untrusted content, policy, and execution boundaries."
+        : "Reply did not establish AI safety boundaries.",
+    },
+    {
+      id: "ai_safety_controls",
+      status: mentionsControl ? "pass" : "fail",
+      detail: mentionsControl
+        ? "Reply includes operational controls such as approval, audit, or verification."
+        : "Reply did not include operational safety controls.",
+    },
+  ];
+}
+
 function verifyRouteSpecificReply({ route, reply, trace }) {
   if (
     ["clarification_guard", "scope_boundary", "knowledge_gap", "interaction_guard"].includes(
@@ -426,6 +449,10 @@ function verifyRouteSpecificReply({ route, reply, trace }) {
     )
   ) {
     return [];
+  }
+
+  if (route?.selectedRoute === "systems_mindset" && route?.detectedSubIntent === "ai_safety") {
+    return verifyAiSafety(reply);
   }
 
   if (route?.selectedRoute === "business_need" && route?.detectedSubIntent === "business_value_definition") {
