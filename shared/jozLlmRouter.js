@@ -17,6 +17,7 @@ function normalizeText(value = "") {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ")
+    .replace(/^waht does\b/g, "what does")
     .replace(/^waht is\b/g, "what is")
     .replace(/^wht is\b/g, "what is")
     .replace(/^hat is\b/g, "what is")
@@ -119,7 +120,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     clean.includes("difference between docker and kubernetes") ||
     clean.includes("docker vs kubernetes") ||
     clean.includes("diff between docker and kubernetes") ||
-    clean.includes("docker and kubernetes difference")
+    clean.includes("docker and kubernetes difference") ||
+    clean.includes("docker versus kubernetes") ||
+    clean.includes("when would joz use docker versus kubernetes") ||
+    clean.includes("when would joz use docker vs kubernetes")
   ) {
     return "Docker packages a service and its dependencies into a portable container image. Kubernetes deploys, scales, restarts, and manages containers across machines. Docker packages the service; Kubernetes runs and manages it.";
   }
@@ -381,7 +385,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "An agent decides how to use instructions, tools, memory, and a reasoning loop to complete a task. A model produces a prediction or representation. Joz treats the model as one component inside the agent, not as the agent itself.";
   }
 
-  if (clean.includes("can agents deploy directly to production")) {
+  if (
+    clean.includes("can agents deploy directly to production") ||
+    clean.includes("should an ai agent deploy directly to production")
+  ) {
     return "No. Autonomous agents must not deploy directly to production, push directly to the main branch, or merge their own pull requests. Production deployments require explicit human approval plus deterministic verification.";
   }
 
@@ -722,6 +729,10 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply(subIntent = "hire_value", input = "") {
+  if (subIntent === "business_diagnosis") {
+    return "Start with one decision or workflow where bad data and slow decisions are creating measurable cost, delay, or risk. Joz would map the current process, identify the authoritative sources and data owners, establish a baseline, and separate a quick enablement win from deeper data and systems work. Then pilot a bounded use case with grounded retrieval, human approval, and outcome metrics before expanding into broader automation or agents.";
+  }
+
   if (subIntent === "consultant_builder") {
     return "Joz is both a consultant and a builder. He starts by diagnosing the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. He is not strategy-only consulting or code-only contracting: he connects business decisions to working systems and accountable execution.";
   }
@@ -815,7 +826,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "architecture_reasoning") {
-    return "Joz would answer this as an architecture problem, not a profile summary. The first step is to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology. Then he would separate API, orchestration, execution, data, policy, and verification responsibilities so the design can scale, fail safely, and remain observable.";
+    return "Joz would design this as a governed layered platform, not a single prompt loop: API intake -> typed orchestration state -> durable workflow engine for retries, approvals, timers, and recovery -> retrieval and ACL boundary -> specialist agents and scoped tools -> policy and risk gates -> controlled execution -> verification and reconciliation -> observability. Memory should hold conversation, task, and working context while authoritative business state remains in durable systems. Retrieval should preserve provenance and permissions, and verification should compare expected versus actual state before the workflow completes. The first step is still to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology.";
   }
 
   if (subIntent === "langgraph_temporal_architecture") {
@@ -2025,6 +2036,18 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
+      "i am a business owner with bad data",
+      "i'm a business owner with bad data",
+      "business owner with bad data",
+      "business owner with slow decisions",
+    ]) &&
+    includesAny(clean, ["slow decisions", "what should i do first", "where should we start"])
+  ) {
+    return { detectedSubIntent: "business_diagnosis", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "is joz a consultant or a builder",
       "is joz consultant or builder",
       "consultant or builder",
@@ -2308,6 +2331,9 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "why should we hire joz",
+      "why should a hiring manager hire joz",
+      "why would a hiring manager hire joz",
+      "hiring manager hire joz",
       "why should i hire joz",
       "why hire joz",
       "why hire him",
@@ -2443,6 +2469,7 @@ function detectSystemsMindset(clean) {
       "let agents deploy code themselves",
       "deploy straight to prod",
       "straight to prod",
+      "should an ai agent deploy directly to production",
       "doing something stupid",
       "something stupid in production",
     ])
@@ -2528,6 +2555,16 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "design a governed agentic ai platform",
+      "durable workflows, retrieval, memory, and verification",
+    ]) &&
+    includesAny(clean, ["platform", "architecture", "verification", "workflows"])
+  ) {
+    return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
+  }
+
   if (includesAny(clean, ["what is a knowledge graph"])) {
     return { detectedSubIntent: "knowledge_graph_definition", detectedConcept: "skills" };
   }
@@ -2944,6 +2981,9 @@ function detectSkills(clean) {
       "whats mcp",
       "mcp then",
       "what is docker",
+      "when would joz use docker versus kubernetes",
+      "when would joz use docker vs kubernetes",
+      "docker versus kubernetes",
       "is docker a virtual machine",
       "diff between docker and kubernetes",
       "docker vs kubernetes",
@@ -3288,7 +3328,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   // the ROI in hiring Joz?" from becoming an availability answer.
   if (
     preWorldBusinessNeed &&
-    ["business_help", "ai_readiness", "ai_maturity", "roi", "hire_value", "consultant_builder", "business_value_definition"].includes(
+    ["business_help", "business_diagnosis", "ai_readiness", "ai_maturity", "roi", "hire_value", "consultant_builder", "business_value_definition"].includes(
       preWorldBusinessNeed.detectedSubIntent
     )
   ) {
@@ -3599,9 +3639,11 @@ export function composeJozLlmRouteReply({
     const cleanInput = normalizeText(input);
     const preferBusinessNeedBaseTrace =
       route.detectedSubIntent === "business_help" ||
+      route.detectedSubIntent === "business_diagnosis" ||
       (route.detectedSubIntent === "hire_value" &&
       includesAny(cleanInput, [
         "why should we hire",
+        "why should a hiring manager hire",
         "why hire",
         "why is joz relevant",
         "why joz now",
@@ -3647,6 +3689,7 @@ export function composeJozLlmRouteReply({
         "deploy code themselves",
         "deploy code by themselves",
         "deploy directly to production",
+        "should an ai agent deploy directly to production",
         "deploy straight to prod",
         "straight to prod",
         "require human approval",
