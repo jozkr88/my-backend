@@ -2349,3 +2349,23 @@ test("verification now fails the older operating-model draft unless governance i
     "fail"
   );
 });
+
+test("covers the six latest recruiter-facing quality repairs", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const cases = [
+    ["When would Joz use Docker versus Kubernetes?", "skills", "technical_stack", /Docker packages.*Kubernetes deploys/i],
+    ["Why should a hiring manager hire Joz?", "business_need", "hire_value", /enterprise-scale|20x|agentic AI architecture/i],
+    ["Should an AI agent deploy directly to production?", "systems_mindset", "thinking_model", /must not deploy directly to production|explicit human approval/i],
+    ["Waht does Joz do?", "skills", "capabilities_overview", /deepest skills|agentic AI architecture/i],
+    ["I am a business owner with bad data and slow decisions. What should I do first?", "business_need", "business_diagnosis", /bad data|authoritative sources|baseline/i],
+    ["Design a governed agentic AI platform with durable workflows, retrieval, memory, and verification.", "skills", "architecture_reasoning", /durable workflow|retrieval|verification/i],
+  ];
+
+  for (const [input, expectedRoute, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    assert.equal(route.selectedRoute, expectedRoute, input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(resolution.reply, expectedReply, input);
+  }
+});
