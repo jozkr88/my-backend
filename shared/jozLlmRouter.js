@@ -2800,6 +2800,7 @@ function detectSkills(clean) {
       "acl aware retrieval",
       "what is hybrid retrieval",
       "what role does a knowledge graph play",
+      "what is a knowledge graph",
       "when would joz use python versus golang",
       "python versus golang",
       "how would joz scale an agent platform",
