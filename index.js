@@ -4,6 +4,8 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { fileURLToPath } from "url";
 import {
   appendJozMessage,
@@ -20,8 +22,12 @@ import {
   initDatabase,
   isDatabaseEnabled,
   listRecentJozLlmRequestEvents,
+  listRecentJozLlmEvaluations,
+  listJozLlmRepairCandidates,
   logReasoningEvent,
   logJozLlmRequestEvent,
+  reviewJozLlmRepairCandidate,
+  reviewJozLlmRequestEvent,
 } from "./db.js";
 import {
   APP_CONTEXT,
@@ -56,6 +62,7 @@ import {
 } from "./shared/jozLlmProfile.js";
 import {
   assertNoFallbackHijack,
+  buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   buildRoleAwareJozContext,
   composeJozLlmRouteReply,
@@ -66,6 +73,7 @@ import {
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 import { classifyJozAudience } from "./shared/jozAudienceClassifier.js";
 
+const execFileAsync = promisify(execFile);
 
 dotenv.config();
 
@@ -978,18 +986,20 @@ app.post("/api/joz-llm", async (req, res) => {
     if (!reply) {
       reply = enforceJozLlmReplyLimit("", 55);
     }
+    const preAnswerDraft = reply;
 
-    // Observability-only metadata: it never selects a route or changes the answer.
+    // Audience classification is observability-only. It does not select a route,
+    // alter the answer, or change the verification rules.
     const audienceProfile = classifyJozAudience({
       input: latestUserMessage,
       recentMessages: recentSessionMessages,
       messages,
     });
-    const trace = {
+    let trace = {
       ...buildJozRouteTrace(route, resolution),
       audienceProfile,
     };
-    const verification = buildJozResponseVerification({
+    let verification = buildJozResponseVerification({
       input: latestUserMessage,
       route,
       resolution,
@@ -998,9 +1008,79 @@ app.post("/api/joz-llm", async (req, res) => {
       retrievedDocuments,
       latencyMs: Date.now() - requestStartedAt,
     });
+    const initialVerificationStatus = verification.status;
+    let effectiveRoute = route;
+    let effectiveResolution = resolution;
+    let verificationRecovery = null;
+
+    // A narrowly scoped repair may recover an in-scope business question that
+    // was misrouted to the generic boundary. It is accepted only when the
+    // repaired answer passes the same deterministic verification checks.
+    const fallbackRepair = buildJozInScopeFallbackRepair({
+      input: latestUserMessage,
+      route,
+      resolution,
+      retrievedDocuments: retrievalContext,
+    });
+    if (fallbackRepair) {
+      const repairedTrace = {
+        ...buildJozRouteTrace(fallbackRepair.route, fallbackRepair.resolution),
+        audienceProfile,
+      };
+      const repairedVerification = buildJozResponseVerification({
+        input: latestUserMessage,
+        route: fallbackRepair.route,
+        resolution: fallbackRepair.resolution,
+        trace: repairedTrace,
+        reply: fallbackRepair.resolution.reply,
+        retrievedDocuments,
+        latencyMs: Date.now() - requestStartedAt,
+      });
+
+      if (repairedVerification.status !== "fail") {
+        effectiveRoute = fallbackRepair.route;
+        effectiveResolution = fallbackRepair.resolution;
+        reply = String(fallbackRepair.resolution.reply || "").trim();
+        verification = repairedVerification;
+        verificationRecovery = {
+          corrected: true,
+          strategy: fallbackRepair.strategy,
+          originalRoute: route.selectedRoute,
+          originalAnswerClass: resolution.answerClass || null,
+          originalDraft: preAnswerDraft,
+          finalAnswer: reply,
+        };
+        trace = {
+          ...repairedTrace,
+          verificationRecovery,
+        };
+      }
+    }
+
+    const verificationFlow = {
+      corrected: Boolean(verificationRecovery),
+      initial: {
+        reply: preAnswerDraft,
+        verificationStatus: verificationRecovery ? "repaired" : initialVerificationStatus,
+        route: route.selectedRoute,
+        subIntent: route.detectedSubIntent || null,
+      },
+      final: {
+        reply,
+        verificationStatus: verification.status,
+        route: effectiveRoute.selectedRoute,
+        subIntent: effectiveRoute.detectedSubIntent || null,
+      },
+    };
+    trace = {
+      ...trace,
+      preAnswerDraft,
+      finalAnswer: reply,
+      verificationFlow,
+    };
     const retrievedCategories =
-      resolution?.retrievedCategories?.length
-        ? resolution.retrievedCategories
+      effectiveResolution?.retrievedCategories?.length
+        ? effectiveResolution.retrievedCategories
         : retrievedDocuments.map((doc) => doc.category);
     logWorldAwarenessTrace("/api/joz-llm", trace);
 
@@ -1009,15 +1089,15 @@ app.post("/api/joz-llm", async (req, res) => {
         conversationId,
         role: "user",
         content: latestUserMessage,
-        metadata: { intentMode, route: route.selectedRoute },
+        metadata: { intentMode: effectiveRoute.selectedRoute, route: effectiveRoute.selectedRoute },
       });
       await appendJozMessage({
         conversationId,
         role: "assistant",
         content: reply,
         metadata: {
-          intentMode,
-          route: route.selectedRoute,
+          intentMode: effectiveRoute.selectedRoute,
+          route: effectiveRoute.selectedRoute,
           retrievedCategories,
           trace,
           verification,
@@ -1029,15 +1109,15 @@ app.post("/api/joz-llm", async (req, res) => {
       sessionKey,
       role: "user",
       content: latestUserMessage,
-      metadata: { intentMode, route: route.selectedRoute },
+      metadata: { intentMode: effectiveRoute.selectedRoute, route: effectiveRoute.selectedRoute },
     });
     appendFallbackRecentJozSessionMessage({
       sessionKey,
       role: "assistant",
       content: reply,
       metadata: {
-        intentMode,
-        route: route.selectedRoute,
+        intentMode: effectiveRoute.selectedRoute,
+        route: effectiveRoute.selectedRoute,
         retrievedCategories,
         trace,
         verification,
@@ -1047,8 +1127,8 @@ app.post("/api/joz-llm", async (req, res) => {
     const observabilityEvent = {
       conversationId,
       sessionKey,
-      route: route.selectedRoute,
-      intentMode,
+      route: effectiveRoute.selectedRoute,
+      intentMode: effectiveRoute.selectedRoute,
       userMessage: latestUserMessage,
       assistantReply: reply,
       requestContext: legacyRuntimeContext,
@@ -1077,14 +1157,15 @@ app.post("/api/joz-llm", async (req, res) => {
     return res.json({
       reply,
       conversationId,
-      intentMode,
-      actions: Array.isArray(resolution?.actions) ? resolution.actions : [],
+      intentMode: effectiveRoute.selectedRoute,
+      actions: Array.isArray(effectiveResolution?.actions) ? effectiveResolution.actions : [],
       citations: Array.isArray(verification?.citations) ? verification.citations : [],
       retrievedCategories,
-      mode: route.selectedRoute,
+      mode: effectiveRoute.selectedRoute,
       trace,
       audienceProfile,
       verification,
+      verificationFlow,
       observability: {
         latencyMs: verification.metrics.latencyMs,
         retrievedDocumentCount: verification.metrics.retrievedDocumentCount,
@@ -1103,22 +1184,30 @@ app.get("/api/joz-llm/observability", async (req, res) => {
     const events = isDatabaseEnabled()
       ? await listRecentJozLlmRequestEvents(limit)
       : jozObservabilityFallbackStore.slice(0, limit);
-    // Classify historical runs at read time, without rewriting existing rows.
+    // Decorate older runs at read time so the dashboard can analyze history
+    // without rewriting or migrating any existing observability records.
     const decoratedEvents = events.map((event) => {
       if (event?.trace?.audienceProfile || event?.trace?.audience_profile) return event;
-      const audienceProfile = classifyJozAudience({
-        input: event?.userMessage || event?.user_message || "",
-      });
-      let existingTrace = event?.trace && typeof event.trace === "object" ? event.trace : {};
-      if (typeof event?.trace === "string") {
-        try {
-          const parsed = JSON.parse(event.trace);
-          existingTrace = parsed && typeof parsed === "object" ? parsed : {};
-        } catch {
-          existingTrace = {};
-        }
-      }
-      return { ...event, trace: { ...existingTrace, audienceProfile } };
+      const userMessage = event?.userMessage || event?.user_message || "";
+      const audienceProfile = classifyJozAudience({ input: userMessage });
+      const existingTrace =
+        event?.trace && typeof event.trace === "object"
+          ? event.trace
+          : (() => {
+              try {
+                const parsed = JSON.parse(String(event?.trace || ""));
+                return parsed && typeof parsed === "object" ? parsed : {};
+              } catch {
+                return {};
+              }
+            })();
+      return {
+        ...event,
+        trace: {
+          ...existingTrace,
+          audienceProfile,
+        },
+      };
     });
 
     return res.json({
@@ -1129,6 +1218,110 @@ app.get("/api/joz-llm/observability", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ /api/joz-llm/observability failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.patch("/api/joz-llm/observability/:id/review", async (req, res) => {
+  try {
+    if (!isDatabaseEnabled()) {
+      return res.status(503).json({ error: "Durable review storage is not configured" });
+    }
+    const event = await reviewJozLlmRequestEvent({
+      eventId: req.params.id,
+      reviewStatus: req.body?.reviewStatus,
+      issueType: req.body?.issueType,
+      reviewNotes: req.body?.reviewNotes,
+      approvedCorrection: req.body?.approvedCorrection,
+      reviewedBy: req.body?.reviewedBy,
+    });
+    if (!event) return res.status(404).json({ error: "Observability event not found" });
+    return res.json({ ok: true, event });
+  } catch (error) {
+    console.error("❌ /api/joz-llm observability review failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/evaluations", async (req, res) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 100));
+    const evaluations = isDatabaseEnabled()
+      ? await listRecentJozLlmEvaluations(limit)
+      : [];
+    return res.json({
+      ok: true,
+      count: evaluations.length,
+      storage: isDatabaseEnabled() ? "database" : "memory",
+      evaluations,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/evaluations failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/repair-candidates", async (req, res) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 100));
+    const repairCandidates = isDatabaseEnabled()
+      ? await listJozLlmRepairCandidates(limit)
+      : [];
+    return res.json({
+      ok: true,
+      count: repairCandidates.length,
+      storage: isDatabaseEnabled() ? "database" : "memory",
+      repairCandidates,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/repair-candidates failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.patch("/api/joz-llm/repair-candidates/:id", async (req, res) => {
+  try {
+    if (!isDatabaseEnabled()) {
+      return res.status(503).json({ error: "Durable repair storage is not configured" });
+    }
+    const action = String(req.body?.action || "").trim().toLowerCase();
+    let regressionReport = {};
+
+    if (action === "approve") {
+      const goldenRunner = path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        "tools/check-joz-llm-golden.mjs"
+      );
+      const result = await execFileAsync(process.execPath, [goldenRunner], {
+        timeout: 30_000,
+        maxBuffer: 2 * 1024 * 1024,
+      });
+      regressionReport = JSON.parse(String(result.stdout || "{}"));
+      if (regressionReport.failed > 0) {
+        return res.status(409).json({
+          error: "Repair cannot be approved while the golden regression suite is failing",
+          regressionReport,
+        });
+      }
+    }
+
+    const candidate = await reviewJozLlmRepairCandidate({
+      candidateId: req.params.id,
+      action,
+      reviewedBy: req.body?.reviewedBy,
+      regressionReport,
+    });
+    if (!candidate) return res.status(404).json({ error: "Repair candidate not found" });
+    return res.json({
+      ok: true,
+      candidate,
+      note:
+        action === "approve"
+          ? "Approved after the golden regression gate. No production knowledge or routing was mutated automatically."
+          : "Repair candidate status updated.",
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm repair review failed:", error);
     return res.status(500).json({ error: error.message });
   }
 });

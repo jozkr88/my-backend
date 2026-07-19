@@ -10,6 +10,7 @@ import {
   buildMeetJozWorldAwarenessResolution,
   resolveMeetJozWorldEntity,
 } from "./meetJozWorld.js";
+import { buildBusinessTransformationReply } from "./jozBusinessTransformation.js";
 
 function normalizeText(value = "") {
   return String(value || "")
@@ -720,13 +721,13 @@ function composeFactualProfileReply(subIntent) {
   return "";
 }
 
-function composeBusinessNeedReply(subIntent = "hire_value") {
+function composeBusinessNeedReply(subIntent = "hire_value", input = "") {
   if (subIntent === "consultant_builder") {
     return "Joz is both a consultant and a builder. He starts by diagnosing the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. He is not strategy-only consulting or code-only contracting: he connects business decisions to working systems and accountable execution.";
   }
 
   if (subIntent === "business_help") {
-    return "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.";
+    return buildBusinessTransformationReply(input) || "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.";
   }
 
   if (subIntent === "ai_readiness") {
@@ -1577,6 +1578,7 @@ function detectCanonicalWorldConcept(clean) {
 function detectIdentityProfile(clean) {
   if (includesAny(clean, [
     /^who are you\b/,
+    /^you are who\b/,
     /^what are you\b/,
     "are you an ai",
     "what is this assistant",
@@ -2003,6 +2005,16 @@ function detectBusinessNeed(clean) {
       "how can joz help us",
       "how could joz help me",
       "how could joz help us",
+      "how would joz help",
+      "how does joz help",
+      "how can joz improve",
+      "how does joz improve",
+      "how can joz reduce",
+      "can joz help with workflow",
+      "what can joz do for my business",
+      "what can joz do for a business",
+      "what can joz do for our business",
+      "what business problems can joz solve",
       "how can he help me",
       "how can he help us",
       "i am a business",
@@ -2012,6 +2024,14 @@ function detectBusinessNeed(clean) {
       "d2c",
       "direct to consumer",
     ]) && includesAny(clean, ["help", "ai", "business", "joz", "he"])
+  ) {
+    return { detectedSubIntent: "business_help", detectedConcept: "business_value" };
+  }
+
+  if (
+    /\b(?:how|what|where|which|can|could|should)\b/.test(clean) &&
+    /\b(?:business|businesses|company|companies|organisation|organization|enterprise|firm|team|startup|d2c|retail|bank|insurance|manufacturing|healthcare|construction|logistics|hospitality|government)\b/.test(clean) &&
+    /\b(?:ai|artificial intelligence|llm|agent|agents|automation|copilot|workflow|data|knowledge)\b/.test(clean)
   ) {
     return { detectedSubIntent: "business_help", detectedConcept: "business_value" };
   }
@@ -2248,6 +2268,54 @@ function detectBusinessNeed(clean) {
   }
 
   return null;
+}
+
+function isGenericJozBoundaryReply(reply = "") {
+  return /not in the current joz knowledge base|outside the current deterministic joz answer set/i.test(
+    String(reply || "")
+  );
+}
+
+export function buildJozInScopeFallbackRepair({
+  input = "",
+  route = {},
+  resolution = {},
+  retrievedDocuments = [],
+} = {}) {
+  if (!isGenericJozBoundaryReply(resolution?.reply)) return null;
+
+  const businessNeed = detectBusinessNeed(normalizeText(input));
+  if (!businessNeed) return null;
+
+  const repairedRoute = {
+    ...route,
+    detectedIntent: "business_need",
+    detectedSubIntent: businessNeed.detectedSubIntent,
+    detectedConcept: businessNeed.detectedConcept,
+    selectedRoute: "business_need",
+  };
+  const repairedResolution = composeJozLlmRouteReply({
+    route: repairedRoute,
+    input,
+    retrievedDocuments,
+  });
+
+  if (!repairedResolution?.reply || isGenericJozBoundaryReply(repairedResolution.reply)) {
+    return null;
+  }
+
+  return {
+    route: repairedRoute,
+    resolution: {
+      ...repairedResolution,
+      answerSource: `guarded_repair:${repairedResolution.answerSource || "business_knowledge"}`,
+      composer: `guarded_repair:${repairedResolution.composer || "composeBusinessNeedReply"}`,
+      answerClass: "deterministic_business_repair",
+      confidence: "medium",
+      fallbackUsed: false,
+    },
+    strategy: "in_scope_business_fallback",
+  };
 }
 
 function detectSystemsMindset(clean) {
@@ -2718,6 +2786,19 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "difference between langgraph and temporal",
+      "difference between langgraph & temporal",
+      "langgraph vs temporal",
+      "langgraph versus temporal",
+      "compare langgraph and temporal",
+      "compare langgraph with temporal",
+    ])
+  ) {
+    return { detectedSubIntent: "langgraph_temporal_architecture", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "protect secrets",
       "secrets in an ai system",
       "safest way for an ai system to use secrets",
@@ -3072,6 +3153,23 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const preWorldSystemsMindset = detectSystemsMindset(clean);
   const preWorldSkills = detectSkills(clean);
 
+  // Business transformation questions must win over the broad capabilities
+  // detector, which also recognises phrases such as "what can Joz do".
+  if (
+    preWorldBusinessNeed?.detectedSubIntent === "business_help" &&
+    /\b(?:business|businesses|company|companies|organisation|organization|enterprise|firm|team|startup|d2c|retail|bank|insurance|manufacturing|healthcare|construction|logistics|hospitality|government|workflow|operations|support|costs|automation)\b/.test(clean)
+  ) {
+    return {
+      detectedIntent: "business_need",
+      detectedSubIntent: preWorldBusinessNeed.detectedSubIntent,
+      detectedConcept: preWorldBusinessNeed.detectedConcept,
+      selectedRoute: "business_need",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
   if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
     return {
       detectedIntent: "systems_mindset",
@@ -3381,7 +3479,7 @@ export function composeJozLlmRouteReply({
         "business value",
         "why would anyone hire him",
       ]));
-    const baseReply = composeBusinessNeedReply(route.detectedSubIntent);
+    const baseReply = composeBusinessNeedReply(route.detectedSubIntent, input);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
       baseReply,

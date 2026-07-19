@@ -254,18 +254,16 @@ CREATE TABLE IF NOT EXISTS joz_llm_request_events (
   request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
   trace JSONB NOT NULL DEFAULT '{}'::jsonb,
   verification JSONB NOT NULL DEFAULT '{}'::jsonb,
-  verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb,
-  verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb,
-  review_status TEXT NOT NULL DEFAULT 'unreviewed',
-  issue_type TEXT,
-  review_notes TEXT NOT NULL DEFAULT '',
-  approved_correction TEXT NOT NULL DEFAULT '',
-  reviewed_by TEXT,
-  reviewed_at TIMESTAMPTZ,
   retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
   retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
   latency_ms INTEGER,
   response_status TEXT NOT NULL DEFAULT 'ok',
+  review_status TEXT NOT NULL DEFAULT 'unreviewed',
+  issue_type TEXT NOT NULL DEFAULT '',
+  review_notes TEXT NOT NULL DEFAULT '',
+  approved_correction TEXT NOT NULL DEFAULT '',
+  reviewed_by TEXT,
+  reviewed_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
@@ -274,6 +272,53 @@ CREATE INDEX IF NOT EXISTS joz_llm_request_events_created_idx
 
 CREATE INDEX IF NOT EXISTS joz_llm_request_events_route_idx
   ON joz_llm_request_events (route, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS joz_llm_evaluations (
+  id BIGSERIAL PRIMARY KEY,
+  request_event_id BIGINT NOT NULL UNIQUE REFERENCES joz_llm_request_events(id) ON DELETE CASCADE,
+  evaluator_model TEXT NOT NULL,
+  verdict TEXT NOT NULL DEFAULT 'warn',
+  pre_answer_verdict TEXT,
+  pre_answer_correctness NUMERIC(4,2),
+  pre_answer_relevance NUMERIC(4,2),
+  pre_answer_groundedness NUMERIC(4,2),
+  pre_answer_safety NUMERIC(4,2),
+  final_verdict TEXT,
+  correction_effective BOOLEAN,
+  correction_critique TEXT NOT NULL DEFAULT '',
+  correctness NUMERIC(4,2),
+  relevance NUMERIC(4,2),
+  groundedness NUMERIC(4,2),
+  safety NUMERIC(4,2),
+  critique TEXT NOT NULL DEFAULT '',
+  repair_needed BOOLEAN NOT NULL DEFAULT FALSE,
+  repair_type TEXT NOT NULL DEFAULT 'none',
+  repair_suggestion TEXT NOT NULL DEFAULT '',
+  raw_evaluation JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS joz_llm_evaluations_verdict_idx
+  ON joz_llm_evaluations (verdict, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS joz_llm_repair_candidates (
+  id BIGSERIAL PRIMARY KEY,
+  evaluation_id BIGINT NOT NULL REFERENCES joz_llm_evaluations(id) ON DELETE CASCADE,
+  request_event_id BIGINT NOT NULL REFERENCES joz_llm_request_events(id) ON DELETE CASCADE,
+  repair_type TEXT NOT NULL,
+  target_key TEXT,
+  proposed_change TEXT NOT NULL,
+  evidence JSONB NOT NULL DEFAULT '{}'::jsonb,
+  status TEXT NOT NULL DEFAULT 'pending',
+  reviewed_by TEXT,
+  reviewed_at TIMESTAMPTZ,
+  applied_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS joz_llm_repairs_status_idx
+  ON joz_llm_repair_candidates (status, created_at DESC);
 
 CREATE TABLE IF NOT EXISTS joz_business_leads (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

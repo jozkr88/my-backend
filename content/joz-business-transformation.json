@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "description": "Business transformation answer data for Joz LLM. It maps industry problems and AI maturity to measurable outcomes.",
+  "maturityLevels": [
+    {
+      "level": 1,
+      "name": "AI readiness",
+      "signals": ["ready", "readiness", "where do we start", "first step", "starting with ai"],
+      "guidance": "baseline data, systems, security, governance, and ownership"
+    },
+    {
+      "level": 2,
+      "name": "AI enablement",
+      "signals": ["copilot", "rag", "knowledge search", "internal search", "enablement"],
+      "guidance": "use grounded copilots and retrieval with human review"
+    },
+    {
+      "level": 3,
+      "name": "Agentic operations",
+      "signals": ["agent", "agents", "workflow automation", "orchestration", "approval", "execution"],
+      "guidance": "use verified agents with policy gates, approvals, and monitoring"
+    },
+    {
+      "level": 4,
+      "name": "AI-native business",
+      "signals": ["autonomous", "ai-native", "self-improving", "operating model", "ai product"],
+      "guidance": "build governed autonomous workflows with clear accountability"
+    }
+  ],
+  "industries": [
+    { "id": "retail", "name": "Retail", "aliases": ["retail", "shop", "ecommerce", "e-commerce"], "problems": ["inventory", "pricing", "customer engagement"], "helps": ["demand forecasting", "AI shopping assistants", "inventory optimisation", "recommendation engines"], "outcomes": ["less waste", "better availability", "stronger conversion"] },
+    { "id": "insurance", "name": "Insurance", "aliases": ["insurance", "insurer", "claims"], "problems": ["slow claims", "fraud", "legacy systems", "poor customer experience"], "helps": ["document understanding", "claims workflows", "fraud intelligence", "underwriting copilots"], "outcomes": ["faster claims", "reduced fraud", "better customer experience"] },
+    { "id": "manufacturing", "name": "Manufacturing", "aliases": ["manufacturing", "factory", "industrial"], "problems": ["downtime", "quality", "maintenance", "forecasting"], "helps": ["predictive maintenance", "computer-vision inspection", "AI planners", "operational copilots"], "outcomes": ["less downtime", "higher quality", "better planning"] },
+    { "id": "banking", "name": "Banking", "aliases": ["banking", "bank", "financial services", "fintech"], "problems": ["compliance", "manual operations", "siloed knowledge", "customer support", "legacy platforms"], "helps": ["risk copilots", "AML intelligence", "knowledge retrieval", "agentic operations"], "outcomes": ["lower operational friction", "stronger controls", "faster decisions"] },
+    { "id": "healthcare", "name": "Healthcare", "aliases": ["healthcare", "health care", "hospital", "clinic"], "problems": ["scheduling", "administration", "documentation", "knowledge fragmentation"], "helps": ["workflow assistants", "document understanding", "knowledge retrieval", "care-operations automation"], "outcomes": ["less administration", "faster access", "better staff capacity"] },
+    { "id": "construction", "name": "Construction", "aliases": ["construction", "contractor", "building"], "problems": ["delays", "cost overruns", "documentation", "safety"], "helps": ["project agents", "document intelligence", "risk prediction", "computer vision"], "outcomes": ["earlier risk detection", "better control", "safer delivery"] },
+    { "id": "logistics", "name": "Logistics", "aliases": ["logistics", "transport", "shipping", "warehouse"], "problems": ["routing", "warehouse flow", "forecasting"], "helps": ["optimisation agents", "route optimisation", "warehouse AI", "forecasting"], "outcomes": ["lower transport cost", "faster fulfilment", "better utilisation"] },
+    { "id": "hospitality", "name": "Hospitality", "aliases": ["hospitality", "hotel", "restaurant", "travel"], "problems": ["staffing", "bookings", "guest experience"], "helps": ["concierge agents", "pricing optimisation", "staffing support", "operational AI"], "outcomes": ["better service", "higher utilisation", "less coordination overhead"] },
+    { "id": "government", "name": "Government", "aliases": ["government", "public sector", "municipality", "citizen services"], "problems": ["bureaucracy", "document processing", "citizen services"], "helps": ["document intelligence", "service assistants", "policy retrieval", "organisational awareness"], "outcomes": ["faster services", "clearer decisions", "lower administrative friction"] },
+    { "id": "d2c", "name": "D2C", "aliases": ["d2c", "direct to consumer", "consumer brand", "online brand"], "problems": ["customer acquisition", "support load", "conversion", "retention"], "helps": ["customer agents", "journey intelligence", "personalisation", "growth experiments"], "outcomes": ["higher conversion", "faster support", "stronger retention"] }
+  ]
+}

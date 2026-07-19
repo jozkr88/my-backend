@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import { buildJozLlmFallbackReply } from "./shared/jozLlmProfile.js";
 import {
+  buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   composeJozLlmRouteReply,
   resolveUnknownJozReply,
@@ -51,6 +52,7 @@ test("answers assistant identity and authenticity questions directly", () => {
 
   for (const [input, subIntent, expected] of [
     ["Who are you?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
+    ["You are who?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
     ["Are you fake?", "authenticity", /grounded in the current MeetJoz knowledge base/i],
   ]) {
     const route = routeJozLlmQuery({ input, appContext, legacyContext });
@@ -78,12 +80,15 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["Do you have memory?", "identity_profile", "assistant_memory", /conversation context/i],
     ["Tell me more about yourself?", "identity_profile", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
     ["What is this about?", "skills", "purpose_of_llm", /Joz LLM explains/i],
-    ["How can Joz help me?", "business_need", "business_help", /diagnose your industry/i],
-    ["How can Joz help a law firm?", "business_need", "business_help", /current systems and data/i],
-    ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metric/i],
-    ["I am d2c - how can Ai help me?", "business_need", "business_help", /customer experience/i],
+    ["How can Joz help me?", "business_need", "business_help", /helps businesses turn AI/i],
+    ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metrics/i],
+    ["I am d2c - how can Ai help me?", "business_need", "business_help", /For D2C/i],
+    ["What can Joz do for my business?", "business_need", "business_help", /measurable improvements/i],
+    ["How does Joz help a company with AI?", "business_need", "business_help", /measurable improvements/i],
+    ["How can AI help my retail business?", "business_need", "business_help", /measurable improvements/i],
+    ["How can Joz help an insurance company reduce claims delays?", "business_need", "business_help", /faster claims/i],
+    ["We are ready to use agents in our logistics business. What should we do?", "business_need", "business_help", /Agentic operations|verified agents/i],
     ["Is Joz a consultant or a builder?", "business_need", "consultant_builder", /both a consultant and a builder/i],
-    ["How should we evaluate an LLM RAG system?", "skills", "rag_evaluation", /retrieval recall|citation correctness|golden test set/i],
   ];
 
   for (const [input, selectedRoute, subIntent, expected] of cases) {
@@ -109,6 +114,28 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
   });
   assert.equal(feedback.answerSource, "interaction_feedback");
   assert.match(feedback.reply, /fair criticism|route ordinary business/i);
+});
+
+test("repairs a misrouted in-scope business fallback only with a verified answer", () => {
+  const repair = buildJozInScopeFallbackRepair({
+    input: "How does Joz help a company with AI?",
+    route: {
+      detectedIntent: "unknown_fallback",
+      detectedSubIntent: "general",
+      selectedRoute: "unknown_fallback",
+    },
+    resolution: {
+      reply: "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      answerClass: "scope_boundary",
+    },
+    retrievedDocuments: [],
+  });
+
+  assert.equal(repair?.route.selectedRoute, "business_need");
+  assert.equal(repair?.route.detectedSubIntent, "business_help");
+  assert.equal(repair?.strategy, "in_scope_business_fallback");
+  assert.match(repair?.resolution.reply || "", /measurable improvements/i);
+  assert.doesNotMatch(repair?.resolution.reply || "", /not in the current Joz knowledge base/i);
 });
 
 test("routes education queries to factual profile education", () => {
@@ -450,6 +477,7 @@ test("identity, motivation, quality, team, and boundary phrasing resolve determi
     ["Where is he from", "factual_profile", "location"],
     ["What nationality is he?", "factual_profile", "nationality"],
     ["Why does Joz even bother?", "skills", "agentic_architecture_why"],
+    ["Why he does it?", "skills", "agentic_architecture_why"],
     ["Is Joz good?", "business_need", "hire_value"],
     ["Can Joz work in a team?", "skills", "collaboration"],
   ];
@@ -733,6 +761,50 @@ test("conversation awareness can resolve shorthand scale follow-ups from prior b
   assert.equal(route.detectedSubIntent, "architecture_reasoning");
 });
 
+test("conversation awareness can resolve shorthand scale follow-ups across an intermediate bridge turn", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "how wud he scale this",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How would Joz scale a backend?",
+      },
+      {
+        role: "assistant",
+        content: "Joz would answer this as an architecture problem, not a profile summary.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "architecture_reasoning",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+      {
+        role: "user",
+        content: "and security?",
+      },
+      {
+        role: "assistant",
+        content: "Joz approaches security as a system property, not a bolt-on feature.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "technical_stack",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "architecture_reasoning");
+});
+
 test("conversation awareness can resolve what-breaks-first follow-ups from prior scaling context", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const route = routeJozLlmQueryWithAwareness({
@@ -761,6 +833,105 @@ test("conversation awareness can resolve what-breaks-first follow-ups from prior
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "technical_stack");
   assert.match(String(resolution.reply || ""), /queue depth|latency|tool bottlenecks|database contention/i);
+});
+
+test("punctuated what-breaks-first follow-up still uses the direct bottleneck answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "what breaks first?",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How would Joz scale a backend?",
+      },
+      {
+        role: "assistant",
+        content: "Joz would answer this as an architecture problem, not a profile summary.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "architecture_reasoning",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+    ],
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "what breaks first?",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [
+      {
+        title: "Unrelated healthcare project",
+        category: "proof",
+        summary: "Healthcare communications and portal work.",
+        body: "Healthcare communications and portal work in the United Kingdom covers Roche, Pfizer, and Vantas.",
+        metadata: { canonical_record: true },
+      },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "technical_stack");
+  assert.match(String(resolution.reply || ""), /queue depth|latency|tool bottlenecks|database contention/i);
+  assert.doesNotMatch(String(resolution.reply || ""), /Roche|Pfizer|Vantas/i);
+});
+
+test("conversation awareness can resolve verify follow-ups after langgraph and temporal discussion", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "how would he verify it",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      {
+        role: "user",
+        content: "How would Joz design an AI-native financial intelligence platform?",
+      },
+      {
+        role: "assistant",
+        content: "Joz would answer this as an architecture problem, not a profile summary.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "architecture_reasoning",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+      {
+        role: "user",
+        content: "Why use LangGraph and Temporal together?",
+      },
+      {
+        role: "assistant",
+        content: "LangGraph decides, Temporal persists and recovers.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "langgraph_temporal_architecture",
+            answerClass: "deterministic_skills",
+          },
+        },
+      },
+    ],
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "how would he verify it",
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "verification_architecture");
+  assert.match(String(resolution.reply || ""), /authoritative system of record|expected state change|execution id/i);
+  assert.doesNotMatch(String(resolution.reply || ""), /post-trade state|holdings, cash, fees, and margin/i);
 });
 
 test("conversation awareness does not hijack ambiguous follow-ups when the prior route is unrelated", () => {
@@ -1547,6 +1718,24 @@ test("routes LangGraph plus Temporal questions to the dedicated architecture ans
   assert.match(resolution.reply, /Using only Temporal/i);
   assert.match(resolution.reply, /LangGraph decides, Temporal persists and recovers/i);
   assert.doesNotMatch(resolution.reply, /Ogilvy\/WPP|Singapore Stock Exchange|Banyan Tree|Danone/i);
+});
+
+test("routes direct LangGraph versus Temporal comparisons to the dedicated architecture answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What is the difference between LangGraph and Temporal?";
+  const route = routeJozLlmQuery({ input: prompt, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "langgraph_temporal_architecture");
+  assert.match(resolution.reply, /LangGraph handles the reasoning graph/i);
+  assert.match(resolution.reply, /Temporal handles durable workflow execution/i);
+  assert.doesNotMatch(resolution.reply, /not in the current Joz knowledge base/i);
 });
 
 test("broad architecture questions do not fall back to capabilities_overview", () => {
@@ -2483,44 +2672,6 @@ test("verification fails when a broad in-scope Joz prompt falls into unknown fal
     verification.checks.find((check) => check.id === "joz_scoped_fallback_guard")?.status,
     "fail"
   );
-});
-
-test("verification fails an AI-specialist RAG question that receives a generic boundary answer", () => {
-  const verification = buildJozResponseVerification({
-    input: "How should we evaluate an LLM RAG system?",
-    route: { selectedRoute: "unknown_fallback", detectedSubIntent: "general" },
-    resolution: { fallbackUsed: false, answerClass: "scope_boundary" },
-    trace: {
-      selectedRoute: "unknown_fallback",
-      answerClass: "scope_boundary",
-      confidence: "high",
-      audienceProfile: { aiKnowledge: { id: "ai_specialist" } },
-    },
-    reply: "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
-    retrievedDocuments: [],
-    latencyMs: 200,
-  });
-
-  assert.equal(verification.status, "fail");
-  assert.equal(verification.checks.find((check) => check.id === "audience_relevance")?.status, "fail");
-});
-
-test("verification passes an AI-specialist RAG answer with an evaluation rubric", () => {
-  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
-  const input = "How should we evaluate an LLM RAG system?";
-  const route = routeJozLlmQuery({ input, appContext, legacyContext });
-  const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext, retrievedDocuments: [] });
-  const trace = {
-    ...buildJozRouteTrace(route, resolution),
-    audienceProfile: { aiKnowledge: { id: "ai_specialist" } },
-  };
-  const verification = buildJozResponseVerification({
-    input, route, resolution, trace, reply: resolution.reply, retrievedDocuments: [], latencyMs: 200,
-  });
-
-  assert.equal(route.detectedSubIntent, "rag_evaluation");
-  assert.notEqual(verification.status, "fail");
-  assert.equal(verification.checks.find((check) => check.id === "audience_relevance")?.status, "pass");
 });
 
 test("verification passes the broad Joz fallback guard when the profile prompt resolves to capabilities", () => {

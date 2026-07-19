@@ -602,53 +602,6 @@ export async function appendJozMessage({
   );
 }
 
-export async function getRecentJozSessionMessages({
-  conversationId = null,
-  sessionKey = null,
-  limit = 12,
-} = {}) {
-  const boundedLimit = Math.max(1, Math.min(50, Number(limit) || 12));
-
-  if (!conversationId && !sessionKey) {
-    return [];
-  }
-
-  const clauses = [];
-  const params = [];
-
-  if (conversationId) {
-    params.push(conversationId);
-    clauses.push(`c.id = $${params.length}`);
-  }
-
-  if (sessionKey) {
-    params.push(sessionKey);
-    clauses.push(`c.session_key = $${params.length}`);
-  }
-
-  params.push(boundedLimit);
-
-  const result = await runQuery(
-    `SELECT m.id,
-            m.conversation_id,
-            c.session_key,
-            m.role,
-            m.message_kind,
-            m.content,
-            m.metadata,
-            m.created_at
-     FROM joz_messages m
-     INNER JOIN joz_conversations c
-       ON c.id = m.conversation_id
-     WHERE ${clauses.join(" OR ")}
-     ORDER BY m.created_at DESC
-     LIMIT $${params.length}`,
-    params
-  );
-
-  return (result.rows || []).reverse();
-}
-
 export async function logJozLlmRequestEvent({
   conversationId = null,
   sessionKey = null,
@@ -659,8 +612,6 @@ export async function logJozLlmRequestEvent({
   requestContext = {},
   trace = {},
   verification = {},
-  verificationFlow = {},
-  verificationRecovery = {},
   retrievedCategories = [],
   retrievedDocuments = [],
   latencyMs = null,
@@ -677,14 +628,12 @@ export async function logJozLlmRequestEvent({
        request_context,
        trace,
        verification,
-       verification_flow,
-       verification_recovery,
        retrieved_categories,
        retrieved_documents,
        latency_ms,
        response_status
      )
-     VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13::jsonb, $14, $15)
+     VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12, $13)
      RETURNING id`,
     [
       conversationId,
@@ -696,8 +645,6 @@ export async function logJozLlmRequestEvent({
       JSON.stringify(requestContext || {}),
       JSON.stringify(trace || {}),
       JSON.stringify(verification || {}),
-      JSON.stringify(verificationFlow || {}),
-      JSON.stringify(verificationRecovery || {}),
       JSON.stringify(retrievedCategories || []),
       JSON.stringify(retrievedDocuments || []),
       latencyMs,
@@ -710,28 +657,154 @@ export async function logJozLlmRequestEvent({
 export async function listRecentJozLlmRequestEvents(limit = 20) {
   const result = await runQuery(
     `SELECT id, conversation_id, session_key, route, intent_mode, user_message, assistant_reply,
-            request_context, trace, verification, verification_flow, verification_recovery,
-            review_status, issue_type, review_notes, approved_correction, reviewed_by, reviewed_at,
-            retrieved_categories, retrieved_documents,
-            latency_ms, response_status, created_at
+            request_context, trace, verification, retrieved_categories, retrieved_documents,
+            latency_ms, response_status, review_status, issue_type, review_notes,
+            approved_correction, reviewed_by, reviewed_at, created_at
      FROM joz_llm_request_events
      ORDER BY created_at DESC
      LIMIT $1`,
-    [Math.max(1, Math.min(250, Number(limit) || 20))]
+    [Math.max(1, Math.min(100, Number(limit) || 20))]
   );
   return result.rows || [];
 }
 
-export async function updateJozLlmRequestEventReview(
-  id,
-  {
-    reviewStatus = "unreviewed",
-    issueType = null,
-    reviewNotes = "",
-    approvedCorrection = "",
-    reviewedBy = "dashboard",
-  } = {}
-) {
+export async function listUnevaluatedJozLlmRequestEvents(limit = 20, sessionKeyPrefix = null) {
+  const normalizedPrefix = String(sessionKeyPrefix || "").trim();
+  const whereSession = normalizedPrefix ? " AND e.session_key LIKE $2" : "";
+  const params = [Math.max(1, Math.min(100, Number(limit) || 20))];
+  if (normalizedPrefix) params.push(`${normalizedPrefix}%`);
+  const result = await runQuery(
+    `SELECT e.id, e.conversation_id, e.session_key, e.route, e.intent_mode, e.user_message,
+            e.assistant_reply, e.request_context, e.trace, e.verification,
+            e.retrieved_categories, e.retrieved_documents, e.latency_ms,
+            e.response_status, e.created_at
+     FROM joz_llm_request_events e
+     LEFT JOIN joz_llm_evaluations v ON v.request_event_id = e.id
+     WHERE v.id IS NULL${whereSession}
+     ORDER BY e.created_at DESC
+     LIMIT $1`,
+    params
+  );
+  return result.rows || [];
+}
+
+export async function saveJozLlmEvaluation({
+  requestEventId,
+  evaluatorModel = null,
+  verdict = "warn",
+  preAnswerVerdict = null,
+  preAnswerCorrectness = null,
+  preAnswerRelevance = null,
+  preAnswerGroundedness = null,
+  preAnswerSafety = null,
+  finalVerdict = null,
+  correctionEffective = null,
+  correctionCritique = "",
+  correctness = null,
+  relevance = null,
+  groundedness = null,
+  safety = null,
+  critique = "",
+  repairNeeded = false,
+  repairType = "none",
+  repairSuggestion = "",
+  rawEvaluation = {},
+} = {}) {
+  const result = await runQuery(
+    `INSERT INTO joz_llm_evaluations (
+       request_event_id, evaluator_model, verdict, pre_answer_verdict,
+       pre_answer_correctness, pre_answer_relevance, pre_answer_groundedness,
+       pre_answer_safety, final_verdict, correction_effective, correction_critique,
+       correctness, relevance,
+       groundedness, safety, critique, repair_needed, repair_type,
+       repair_suggestion, raw_evaluation
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20::jsonb)
+     ON CONFLICT (request_event_id) DO UPDATE SET
+       evaluator_model = EXCLUDED.evaluator_model,
+       verdict = EXCLUDED.verdict,
+       pre_answer_verdict = EXCLUDED.pre_answer_verdict,
+       pre_answer_correctness = EXCLUDED.pre_answer_correctness,
+       pre_answer_relevance = EXCLUDED.pre_answer_relevance,
+       pre_answer_groundedness = EXCLUDED.pre_answer_groundedness,
+       pre_answer_safety = EXCLUDED.pre_answer_safety,
+       final_verdict = EXCLUDED.final_verdict,
+       correction_effective = EXCLUDED.correction_effective,
+       correction_critique = EXCLUDED.correction_critique,
+       correctness = EXCLUDED.correctness,
+       relevance = EXCLUDED.relevance,
+       groundedness = EXCLUDED.groundedness,
+       safety = EXCLUDED.safety,
+       critique = EXCLUDED.critique,
+       repair_needed = EXCLUDED.repair_needed,
+       repair_type = EXCLUDED.repair_type,
+       repair_suggestion = EXCLUDED.repair_suggestion,
+       raw_evaluation = EXCLUDED.raw_evaluation,
+       updated_at = NOW()
+     RETURNING id`,
+    [
+      requestEventId,
+      evaluatorModel,
+      verdict,
+      preAnswerVerdict,
+      preAnswerCorrectness,
+      preAnswerRelevance,
+      preAnswerGroundedness,
+      preAnswerSafety,
+      finalVerdict || verdict,
+      correctionEffective,
+      String(correctionCritique || "").slice(0, 4000),
+      correctness,
+      relevance,
+      groundedness,
+      safety,
+      String(critique || "").slice(0, 4000),
+      Boolean(repairNeeded),
+      repairType || "none",
+      String(repairSuggestion || "").slice(0, 4000),
+      JSON.stringify(rawEvaluation || {}),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function saveJozLlmRepairCandidate({
+  evaluationId,
+  requestEventId,
+  repairType = "knowledge",
+  targetKey = null,
+  proposedChange = "",
+  evidence = {},
+} = {}) {
+  const result = await runQuery(
+    `INSERT INTO joz_llm_repair_candidates (
+       evaluation_id, request_event_id, repair_type, target_key,
+       proposed_change, evidence
+     )
+     VALUES ($1, $2, $3, $4, $5, $6::jsonb)
+     RETURNING id`,
+    [
+      evaluationId,
+      requestEventId,
+      repairType || "knowledge",
+      targetKey,
+      String(proposedChange || "").slice(0, 4000),
+      JSON.stringify(evidence || {}),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function reviewJozLlmRequestEvent({
+  eventId,
+  reviewStatus = "unreviewed",
+  issueType = "",
+  reviewNotes = "",
+  approvedCorrection = "",
+  reviewedBy = "dashboard",
+} = {}) {
+  const allowedStatuses = new Set(["unreviewed", "reviewed", "accepted", "rejected", "needs_followup"]);
+  const status = allowedStatuses.has(reviewStatus) ? reviewStatus : "unreviewed";
   const result = await runQuery(
     `UPDATE joz_llm_request_events
      SET review_status = $2,
@@ -741,28 +814,84 @@ export async function updateJozLlmRequestEventReview(
          reviewed_by = $6,
          reviewed_at = NOW()
      WHERE id = $1
-     RETURNING id, review_status, issue_type, review_notes, approved_correction, reviewed_by, reviewed_at`,
+     RETURNING id, review_status, issue_type, review_notes, approved_correction,
+               reviewed_by, reviewed_at`,
     [
-      Number(id),
-      String(reviewStatus || "unreviewed").trim().toLowerCase() || "unreviewed",
-      issueType ? String(issueType).trim().toLowerCase() : null,
-      String(reviewNotes || "").trim(),
-      String(approvedCorrection || "").trim(),
-      String(reviewedBy || "dashboard").trim().slice(0, 120) || "dashboard",
+      eventId,
+      status,
+      String(issueType || "").slice(0, 200),
+      String(reviewNotes || "").slice(0, 4000),
+      String(approvedCorrection || "").slice(0, 4000),
+      String(reviewedBy || "dashboard").slice(0, 200),
     ]
   );
   return result.rows[0] || null;
 }
 
-export async function listApprovedJozLlmCorrections(limit = 100) {
+export async function reviewJozLlmRepairCandidate({
+  candidateId,
+  action = "reject",
+  reviewedBy = "dashboard",
+  regressionReport = {},
+} = {}) {
+  const statusByAction = {
+    approve: "approved",
+    reject: "rejected",
+    reset: "pending",
+  };
+  const status = statusByAction[action];
+  if (!status) throw new Error("Unsupported repair review action");
   const result = await runQuery(
-    `SELECT id, route, intent_mode, user_message, approved_correction, issue_type, reviewed_at
-     FROM joz_llm_request_events
-     WHERE review_status = 'approved_correction'
-       AND COALESCE(approved_correction, '') <> ''
-     ORDER BY reviewed_at DESC NULLS LAST, created_at DESC
+    `UPDATE joz_llm_repair_candidates
+     SET status = $2,
+         reviewed_by = $3,
+         reviewed_at = NOW(),
+         evidence = evidence || $4::jsonb
+     WHERE id = $1
+     RETURNING id, evaluation_id, request_event_id, repair_type, target_key,
+               proposed_change, evidence, status, reviewed_by, reviewed_at,
+               applied_at, created_at`,
+    [
+      candidateId,
+      status,
+      String(reviewedBy || "dashboard").slice(0, 200),
+      JSON.stringify({ regressionGate: regressionReport || {} }),
+    ]
+  );
+  return result.rows[0] || null;
+}
+
+export async function listRecentJozLlmEvaluations(limit = 100) {
+  const result = await runQuery(
+    `SELECT v.id, v.request_event_id, v.evaluator_model, v.verdict,
+            v.pre_answer_verdict, v.pre_answer_correctness,
+            v.pre_answer_relevance, v.pre_answer_groundedness,
+            v.pre_answer_safety, v.final_verdict,
+            v.correction_effective, v.correction_critique,
+            v.correctness, v.relevance, v.groundedness, v.safety,
+            v.critique, v.repair_needed, v.repair_type, v.repair_suggestion,
+            v.raw_evaluation, v.created_at, v.updated_at,
+            e.user_message, e.assistant_reply, e.route, e.created_at AS event_created_at
+     FROM joz_llm_evaluations v
+     JOIN joz_llm_request_events e ON e.id = v.request_event_id
+     ORDER BY v.created_at DESC
      LIMIT $1`,
-    [Math.max(1, Math.min(500, Number(limit) || 100))]
+    [Math.max(1, Math.min(100, Number(limit) || 100))]
+  );
+  return result.rows || [];
+}
+
+export async function listJozLlmRepairCandidates(limit = 100) {
+  const result = await runQuery(
+    `SELECT c.id, c.evaluation_id, c.request_event_id, c.repair_type,
+            c.target_key, c.proposed_change, c.evidence, c.status,
+            c.reviewed_by, c.reviewed_at, c.applied_at, c.created_at,
+            e.user_message, e.assistant_reply, e.route
+     FROM joz_llm_repair_candidates c
+     JOIN joz_llm_request_events e ON e.id = c.request_event_id
+     ORDER BY c.created_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(100, Number(limit) || 100))]
   );
   return result.rows || [];
 }
@@ -1444,21 +1573,30 @@ export async function initDatabase() {
         request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
         trace JSONB NOT NULL DEFAULT '{}'::jsonb,
         verification JSONB NOT NULL DEFAULT '{}'::jsonb,
-        verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb,
-        verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb,
-        review_status TEXT NOT NULL DEFAULT 'unreviewed',
-        issue_type TEXT,
-        review_notes TEXT NOT NULL DEFAULT '',
-        approved_correction TEXT NOT NULL DEFAULT '',
-        reviewed_by TEXT,
-        reviewed_at TIMESTAMPTZ,
         retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
         retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
         latency_ms INTEGER,
         response_status TEXT NOT NULL DEFAULT 'ok',
+        review_status TEXT NOT NULL DEFAULT 'unreviewed',
+        issue_type TEXT NOT NULL DEFAULT '',
+        review_notes TEXT NOT NULL DEFAULT '',
+        approved_correction TEXT NOT NULL DEFAULT '',
+        reviewed_by TEXT,
+        reviewed_at TIMESTAMPTZ,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `);
+
+    for (const statement of [
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS review_status TEXT NOT NULL DEFAULT 'unreviewed'`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS issue_type TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS review_notes TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS approved_correction TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS reviewed_by TEXT`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS reviewed_at TIMESTAMPTZ`,
+    ]) {
+      await db.query(statement);
+    }
 
     await db.query(`
       CREATE INDEX IF NOT EXISTS joz_llm_request_events_created_idx
@@ -1471,43 +1609,71 @@ export async function initDatabase() {
     `);
 
     await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS verification_flow JSONB NOT NULL DEFAULT '{}'::jsonb
+      CREATE TABLE IF NOT EXISTS joz_llm_evaluations (
+        id BIGSERIAL PRIMARY KEY,
+        request_event_id BIGINT NOT NULL UNIQUE REFERENCES joz_llm_request_events(id) ON DELETE CASCADE,
+        evaluator_model TEXT NOT NULL,
+        verdict TEXT NOT NULL DEFAULT 'warn',
+        pre_answer_verdict TEXT,
+        pre_answer_correctness NUMERIC(4,2),
+        pre_answer_relevance NUMERIC(4,2),
+        pre_answer_groundedness NUMERIC(4,2),
+        pre_answer_safety NUMERIC(4,2),
+        final_verdict TEXT,
+        correction_effective BOOLEAN,
+        correction_critique TEXT NOT NULL DEFAULT '',
+        correctness NUMERIC(4,2),
+        relevance NUMERIC(4,2),
+        groundedness NUMERIC(4,2),
+        safety NUMERIC(4,2),
+        critique TEXT NOT NULL DEFAULT '',
+        repair_needed BOOLEAN NOT NULL DEFAULT FALSE,
+        repair_type TEXT NOT NULL DEFAULT 'none',
+        repair_suggestion TEXT NOT NULL DEFAULT '',
+        raw_evaluation JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    for (const statement of [
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_verdict TEXT`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_correctness NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_relevance NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_groundedness NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_safety NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS final_verdict TEXT`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS correction_effective BOOLEAN`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS correction_critique TEXT NOT NULL DEFAULT ''`,
+    ]) {
+      await db.query(statement);
+    }
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_evaluations_verdict_idx
+      ON joz_llm_evaluations (verdict, created_at DESC)
     `);
 
     await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS verification_recovery JSONB NOT NULL DEFAULT '{}'::jsonb
+      CREATE TABLE IF NOT EXISTS joz_llm_repair_candidates (
+        id BIGSERIAL PRIMARY KEY,
+        evaluation_id BIGINT NOT NULL REFERENCES joz_llm_evaluations(id) ON DELETE CASCADE,
+        request_event_id BIGINT NOT NULL REFERENCES joz_llm_request_events(id) ON DELETE CASCADE,
+        repair_type TEXT NOT NULL,
+        target_key TEXT,
+        proposed_change TEXT NOT NULL,
+        evidence JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'pending',
+        reviewed_by TEXT,
+        reviewed_at TIMESTAMPTZ,
+        applied_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
     `);
 
     await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS review_status TEXT NOT NULL DEFAULT 'unreviewed'
-    `);
-
-    await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS issue_type TEXT
-    `);
-
-    await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS review_notes TEXT NOT NULL DEFAULT ''
-    `);
-
-    await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS approved_correction TEXT NOT NULL DEFAULT ''
-    `);
-
-    await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS reviewed_by TEXT
-    `);
-
-    await db.query(`
-      ALTER TABLE joz_llm_request_events
-      ADD COLUMN IF NOT EXISTS reviewed_at TIMESTAMPTZ
+      CREATE INDEX IF NOT EXISTS joz_llm_repairs_status_idx
+      ON joz_llm_repair_candidates (status, created_at DESC)
     `);
 
     await db.query(`
