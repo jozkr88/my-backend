@@ -785,6 +785,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "knowledge_graph_definition") {
+    return "A knowledge graph represents entities, relationships, permissions, and provenance as connected structure. In Joz's architecture, it complements vector search: vectors find semantically similar passages, while the graph links ownership, policy, organisational structure, workflows, and cross-system relationships. It is useful when relationships and traceability matter, with ACLs and source provenance enforced during retrieval.";
+  }
+
   if (subIntent === "rag_evaluation") {
     return "Joz would evaluate an LLM/RAG system across five layers: retrieval recall and precision; context faithfulness and citation correctness; answer relevance and completeness; safety and ACL leakage; and production latency, cost, failure rate, and user or business outcomes. Use a golden test set offline, then trace real queries with human review and regression gates before release.";
   }
@@ -2381,6 +2385,10 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (includesAny(clean, ["what is a knowledge graph"])) {
+    return { detectedSubIntent: "knowledge_graph_definition", detectedConcept: "skills" };
+  }
+
   if (
     (includesAny(clean, [
       "how should we evaluate an llm rag system",
@@ -3090,6 +3098,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "agentic_architecture_why",
       "ai_use",
       "collaboration",
+      "knowledge_graph_definition",
     ].includes(
       preWorldSkills.detectedSubIntent
     )
@@ -3465,18 +3474,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
