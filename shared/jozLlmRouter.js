@@ -726,7 +726,7 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "business_help") {
-    return "Before recommending AI, Joz would diagnose your industry, business model, scale, biggest bottleneck, current systems and data, governance constraints, and target outcome. Then he maps quick wins, foundational work, and longer-term agentic opportunities to a baseline metric. Which matters most: revenue, customer experience, cost, operations, decisions, or risk?";
+    return "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.";
   }
 
   if (subIntent === "ai_readiness") {
