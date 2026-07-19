@@ -68,6 +68,46 @@ test("answers assistant identity and authenticity questions directly", () => {
   }
 });
 
+test("routes business help, AI use, self-awareness, memory, and purpose questions directly", async () => {
+  const { appContext, legacyContext } = buildContexts();
+  const cases = [
+    ["How does use AI?", "skills", "ai_use", /governed capability layer/i],
+    ["How does Joz use AI?", "skills", "ai_use", /governed capability layer/i],
+    ["Are you for real?", "identity_profile", "authenticity", /grounded in the current MeetJoz knowledge base/i],
+    ["Are you self aware?", "identity_profile", "self_awareness", /not self-aware or conscious/i],
+    ["Do you have memory?", "identity_profile", "assistant_memory", /conversation context/i],
+    ["Tell me more about yourself?", "identity_profile", "overview", /Joz Krupa is an Agentic AI Architecture/i],
+    ["What is this about?", "skills", "purpose_of_llm", /Joz LLM explains/i],
+    ["How can Joz help me?", "business_need", "business_help", /helps businesses turn AI/i],
+    ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metrics/i],
+    ["I am d2c - how can Ai help me?", "business_need", "business_help", /For D2C/i],
+  ];
+
+  for (const [input, selectedRoute, subIntent, expected] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input,
+      appContext,
+      legacyContext,
+    });
+
+    assert.equal(route.selectedRoute, selectedRoute, input);
+    assert.equal(route.detectedSubIntent, subIntent, input);
+    assert.match(resolution.reply, expected, input);
+    assert.doesNotMatch(resolution.reply, /not in the current Joz knowledge base|outside the current deterministic/i, input);
+  }
+
+  const feedback = await resolveUnknownJozReply({
+    input: "There's quite a high level of wrong responses",
+    messages: [{ role: "user", content: "There's quite a high level of wrong responses" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.equal(feedback.answerSource, "interaction_feedback");
+  assert.match(feedback.reply, /fair criticism|route ordinary business/i);
+});
+
 test("routes education queries to factual profile education", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({

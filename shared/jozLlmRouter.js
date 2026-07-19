@@ -668,11 +668,19 @@ function composeIdentityProfileReply(subIntent = "overview") {
     return "I’m a Joz LLM interface grounded in the current MeetJoz knowledge base. I should distinguish documented information from uncertainty rather than inventing claims, and I can say when something is not covered.";
   }
 
+  if (subIntent === "self_awareness") {
+    return "I’m not self-aware or conscious. I’m a Joz LLM interface that processes your question, uses the current knowledge base and conversation context, and should be transparent about uncertainty rather than claiming human experience.";
+  }
+
+  if (subIntent === "assistant_memory") {
+    return "I can use the current conversation context and the knowledge available to the Joz LLM backend. I do not have human memory or personal experience. Persistent observability and reviewed interaction data depend on whether the backend is connected to its database rather than temporary local memory.";
+  }
+
   return [
-    "Joz Krupa is an Agentic AI Architecture and Innovation Leader with experience across Singapore, Dubai, Europe, and global markets.",
-    "Joz combines AI architecture, systems thinking, product strategy, design, engineering, and enterprise transformation to turn complexity into measurable business outcomes.",
-    "Joz's work includes Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, Apple/Pixar-related spatial computing work, and current Agentic AI initiatives.",
-    "MeetJoz is Joz's interactive spatial experience for exploring Business Value, Systems Mindset, Skills, and neoMAXX concepts.",
+    "Joz Krupa is an Agentic AI Architecture and Innovation Leader.",
+    "He combines AI architecture, systems thinking, product strategy, design, engineering, and enterprise transformation to create measurable business outcomes.",
+    "His work spans Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and current Agentic AI initiatives.",
+    "MeetJoz explores his Business Value, Systems Mindset, Skills, and neoMAXX concepts.",
   ].join(" ");
 }
 
@@ -713,6 +721,10 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
+  if (subIntent === "business_help") {
+    return "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.";
+  }
+
   if (subIntent === "business_value_definition") {
     return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not feature theater. The test is simple: what changed operationally, financially, or strategically because the system works better?";
   }
@@ -818,7 +830,11 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "purpose_of_llm") {
-    return "The purpose of Joz LLM is to showcase Joz clearly and credibly: his skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work. It should help a user quickly understand what Joz has done, what he is strong at, how he thinks, where he creates value, and how he would design or scale AI systems. It should stay grounded in the knowledge base, avoid invented claims, and only ask for clarification when the topic is genuinely unclear.";
+    return "Joz LLM explains Joz's skills, experience, business value, systems thinking, infrastructure, and agent architecture. It should help users understand what Joz has done, where he creates value, and how he designs AI systems—grounded in the knowledge base and honest about uncertainty.";
+  }
+
+  if (subIntent === "ai_use") {
+    return "Joz uses AI as a governed capability layer. Retrieval grounds knowledge; orchestration and specialist agents handle multi-step work; tools enable controlled execution; verification and observability prove what happened. The goal is better customer experience, decisions, workflows, and measurable outcomes, with policy and human accountability outside the model.";
   }
 
   if (subIntent === "agentic_architecture_approach") {
@@ -1121,6 +1137,24 @@ function buildLowSignalOrBadFaithReply(clean = "") {
     ])
   ) {
     return "If you are testing the system or the question is not serious, ask directly. I can answer about Joz's background, business value, systems mindset, skills, infrastructure approach, and agent architecture.";
+  }
+
+  return null;
+}
+
+function buildFeedbackReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (!normalized) return null;
+
+  if (includesAny(normalized, [
+    "there's quite a high level of wrong responses",
+    "there is quite a high level of wrong responses",
+    "quite a high level of wrong responses",
+    "a lot of wrong responses",
+    "too many wrong responses",
+    "the responses are wrong",
+  ])) {
+    return "That is a fair criticism. The assistant should route ordinary business and capability questions directly instead of hiding behind the knowledge boundary. Ask the same question again after the routing update, and judge it on whether the answer is relevant, grounded, and clear about uncertainty.";
   }
 
   return null;
@@ -1534,10 +1568,33 @@ function detectIdentityProfile(clean) {
     "is this fake",
     "are you real",
     "is this real",
+    "are you for real",
+    "is this for real",
+    "is he for real",
+    "is joz for real",
+    "joz for real",
     "is joz fake",
     "this sounds fake",
   ])) {
     return { detectedSubIntent: "authenticity", detectedConcept: "joz_llm" };
+  }
+
+  if (includesAny(clean, [
+    "are you self aware",
+    "are you self-aware",
+    "are you conscious",
+    "do you have consciousness",
+  ])) {
+    return { detectedSubIntent: "self_awareness", detectedConcept: "joz_llm" };
+  }
+
+  if (includesAny(clean, [
+    "do you have memory",
+    "do you remember",
+    "do you have a memory",
+    "what do you remember",
+  ])) {
+    return { detectedSubIntent: "assistant_memory", detectedConcept: "joz_llm" };
   }
 
   if (
@@ -1559,6 +1616,8 @@ function detectIdentityProfile(clean) {
       "who built meetjoz",
       "who built meet joz",
       "who created this experience",
+      "tell me more about yourself",
+      "tell me more about you",
     ])
   ) {
     return { detectedSubIntent: "overview", detectedConcept: "joz_identity" };
@@ -1891,6 +1950,25 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
+      "how can joz help me",
+      "how can joz help us",
+      "how could joz help me",
+      "how could joz help us",
+      "how can he help me",
+      "how can he help us",
+      "i am a business",
+      "i'm a business",
+      "we are a business",
+      "we're a business",
+      "d2c",
+      "direct to consumer",
+    ]) && includesAny(clean, ["help", "ai", "business", "joz", "he"])
+  ) {
+    return { detectedSubIntent: "business_help", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       "autonomous execution layer",
       "organisational knowledge improve autonomous execution",
       "organizational knowledge improve autonomous execution",
@@ -2064,7 +2142,6 @@ function detectBusinessNeed(clean) {
       "just another ai guy",
       "all fluff",
       "take this seriously",
-      "for real",
     ])
   ) {
     return { detectedSubIntent: "hire_value", detectedConcept: "business_value" };
@@ -2175,6 +2252,17 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (includesAny(clean, [
+    "how does joz use ai",
+    "how does he use ai",
+    "how does use ai",
+    "what does joz use ai for",
+    "what does he use ai for",
+    "how is joz using ai",
+  ])) {
+    return { detectedSubIntent: "ai_use", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "can joz work in a team",
@@ -2623,6 +2711,9 @@ function detectSkills(clean) {
   if (
     includesAny(clean, [
       "what is the purpose of this",
+      "what is this about",
+      "what's this about",
+      "whats this about",
       "what's the purpose of this",
       "whats the purpose of this",
       "what is this for",
@@ -2653,6 +2744,9 @@ function detectSkills(clean) {
     if (
       includesAny(clean, [
         "what is the purpose of this",
+        "what is this about",
+        "what's this about",
+        "whats this about",
         "what's the purpose of this",
         "whats the purpose of this",
         "what is this for",
@@ -2711,7 +2805,6 @@ function detectSkills(clean) {
       "what does he know about ai agents",
       "so what is he actually good at",
       "yo what does joz do then",
-      "yo is he for real",
       "tell me more about joz",
       "tell me more about him",
       "tell me about joz",
@@ -2789,6 +2882,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "purpose_of_llm",
       "agentic_architecture_approach",
       "agentic_architecture_why",
+      "ai_use",
       "collaboration",
     ].includes(
       preWorldSkills.detectedSubIntent
@@ -3056,7 +3150,8 @@ export function composeJozLlmRouteReply({
   if (route?.selectedRoute === "business_need") {
     const cleanInput = normalizeText(input);
     const preferBusinessNeedBaseTrace =
-      route.detectedSubIntent === "hire_value" &&
+      route.detectedSubIntent === "business_help" ||
+      (route.detectedSubIntent === "hire_value" &&
       includesAny(cleanInput, [
         "why should we hire",
         "why hire",
@@ -3070,7 +3165,7 @@ export function composeJozLlmRouteReply({
         "create business value",
         "business value",
         "why would anyone hire him",
-      ]);
+      ]));
     const baseReply = composeBusinessNeedReply(route.detectedSubIntent);
     const evidenceReply = buildEvidenceBackedRouteReply({
       route,
@@ -3164,18 +3259,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "proof_backed_strengths"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "proof_backed_strengths"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "proof_backed_strengths"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
@@ -3243,6 +3338,19 @@ export async function resolveUnknownJozReply({
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
       answerClass: "clarification_guard",
+      confidence: "high",
+    });
+  }
+
+  const feedbackReply = buildFeedbackReply(clean);
+  if (feedbackReply) {
+    return buildPolicyResolution({
+      reply: feedbackReply,
+      answerSource: "interaction_feedback",
+      composer: "buildFeedbackReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+      answerClass: "interaction_guard",
       confidence: "high",
     });
   }
