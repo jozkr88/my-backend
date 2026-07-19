@@ -1559,6 +1559,8 @@ function detectIdentityProfile(clean) {
     /^what are you\b/,
     "are you an ai",
     "what is this assistant",
+    "tell me more about yourself",
+    "tell me more about you",
   ])) {
     return { detectedSubIntent: "assistant_identity", detectedConcept: "joz_llm" };
   }
@@ -1616,8 +1618,6 @@ function detectIdentityProfile(clean) {
       "who built meetjoz",
       "who built meet joz",
       "who created this experience",
-      "tell me more about yourself",
-      "tell me more about you",
     ])
   ) {
     return { detectedSubIntent: "overview", detectedConcept: "joz_identity" };

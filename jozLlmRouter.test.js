@@ -76,7 +76,7 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["Are you for real?", "identity_profile", "authenticity", /grounded in the current MeetJoz knowledge base/i],
     ["Are you self aware?", "identity_profile", "self_awareness", /not self-aware or conscious/i],
     ["Do you have memory?", "identity_profile", "assistant_memory", /conversation context/i],
-    ["Tell me more about yourself?", "identity_profile", "overview", /Joz Krupa is an Agentic AI Architecture/i],
+    ["Tell me more about yourself?", "identity_profile", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
     ["What is this about?", "skills", "purpose_of_llm", /Joz LLM explains/i],
     ["How can Joz help me?", "business_need", "business_help", /helps businesses turn AI/i],
     ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metrics/i],
