@@ -78,9 +78,10 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["Do you have memory?", "identity_profile", "assistant_memory", /conversation context/i],
     ["Tell me more about yourself?", "identity_profile", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
     ["What is this about?", "skills", "purpose_of_llm", /Joz LLM explains/i],
-    ["How can Joz help me?", "business_need", "business_help", /helps businesses turn AI/i],
-    ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metrics/i],
-    ["I am d2c - how can Ai help me?", "business_need", "business_help", /For D2C/i],
+    ["How can Joz help me?", "business_need", "business_help", /diagnose your industry/i],
+    ["How can Joz help a law firm?", "business_need", "business_help", /current systems and data/i],
+    ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metric/i],
+    ["I am d2c - how can Ai help me?", "business_need", "business_help", /customer experience/i],
   ];
 
   for (const [input, selectedRoute, subIntent, expected] of cases) {

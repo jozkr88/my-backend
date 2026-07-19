@@ -722,7 +722,7 @@ function composeFactualProfileReply(subIntent) {
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
   if (subIntent === "business_help") {
-    return "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.";
+    return "Before recommending AI, Joz would diagnose your industry, business model, scale, biggest bottleneck, current systems and data, governance constraints, and target outcome. Then he maps quick wins, foundational work, and longer-term agentic opportunities to a baseline metric. Which matters most: revenue, customer experience, cost, operations, decisions, or risk?";
   }
 
   if (subIntent === "business_value_definition") {
@@ -1950,6 +1950,8 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
+      /^how can joz help\b/,
+      /^how could joz help\b/,
       "how can joz help me",
       "how can joz help us",
       "how could joz help me",

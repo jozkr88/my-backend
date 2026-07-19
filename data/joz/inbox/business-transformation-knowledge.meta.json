@@ -1,0 +1,103 @@
+{
+  "slug": "business-transformation-knowledge",
+  "title": "Business Transformation Knowledge",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Industry-by-industry business transformation hypotheses mapping problems to Joz interventions, outcomes, technologies, and AI maturity levels.",
+  "tags": [
+    "business-transformation",
+    "industry-mapping",
+    "consulting",
+    "ai-maturity",
+    "agentic-operations",
+    "business-value",
+    "discovery"
+  ],
+  "impact_score": 99,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "claims": [
+    "Industry recommendations are hypotheses that require discovery of the real business, workflow, data, systems, risk, and baseline.",
+    "Joz can map business problems to AI, data, workflow, governance, and agentic opportunities.",
+    "AI recommendations should match organisational maturity from readiness through AI-native operations."
+  ],
+  "proof_points": [
+    "Joz has worked across financial services, insurance, media, public-sector innovation, technology, and enterprise product systems.",
+    "Joz combines agentic AI architecture, decision intelligence, context engineering, enterprise product engineering, governance, and human-centred adoption.",
+    "The dataset follows Joz's systems-before-features and trust-before-autonomy principles."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Maybank",
+    "Manulife",
+    "Mediacorp",
+    "Erste Bank",
+    "Dubai Future Foundation",
+    "MarketClue"
+  ],
+  "problems": [
+    "operational_friction",
+    "knowledge_fragmentation",
+    "slow_decision_making",
+    "ai_adoption_failure",
+    "unclear_roi",
+    "governance_gaps",
+    "manual_knowledge_work",
+    "data_silos",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "systems_before_features",
+    "trust_before_autonomy",
+    "decision_quality",
+    "context_creates_intelligence",
+    "human_accountability",
+    "appropriate_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "workflow_redesign",
+    "ai_governance",
+    "rag",
+    "verification",
+    "computer_vision",
+    "organizational_design"
+  ],
+  "outcomes": [
+    "revenue_growth",
+    "cost_reduction",
+    "productivity_gains",
+    "faster_decisions",
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_risk",
+    "knowledge_reuse"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "source_provenance",
+    "access_control",
+    "human_approval",
+    "observability_control",
+    "escalation"
+  ],
+  "industries": [
+    "financial_services",
+    "insurance",
+    "healthcare",
+    "retail",
+    "government",
+    "technology"
+  ],
+  "proofs": [
+    "maybank_digital_sales_growth",
+    "manulife_lean_ml_ux",
+    "mediacorp_audience_growth",
+    "erste_customer_scale"
+  ]
+}
