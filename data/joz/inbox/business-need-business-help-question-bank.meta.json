@@ -1,0 +1,103 @@
+{
+  "slug": "business-need-business-help-question-bank",
+  "title": "Business Help Question Bank",
+  "category": "faq",
+  "lane": "business_need",
+  "summary": "Natural business questions and grounded answers explaining how Joz creates measurable value across customer experience, operations, decisions, and growth.",
+  "tags": [
+    "business-help",
+    "question-bank",
+    "buyer",
+    "d2c",
+    "roi",
+    "operations",
+    "customer-experience",
+    "governance"
+  ],
+  "impact_score": 96,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "claims": [
+    "Business answers should begin with the problem and measurable outcome before discussing technology.",
+    "Joz connects business priorities, data, knowledge, workflows, AI architecture, governance, and human accountability.",
+    "ROI should be defined through a baseline, target metrics, assumptions, ownership, and verification rather than guaranteed in advance."
+  ],
+  "proof_points": [
+    "20x digital sales growth at Maybank-Ageas Etiqa.",
+    "Lean ML transformation across 11 APAC markets at Manulife.",
+    "30x audience growth at Mediacorp.",
+    "16M+ customer-scale engineering at Erste Bank.",
+    "70% lower agency-wide handoff friction at Leo Burnett/Publicis."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Maybank",
+    "Manulife",
+    "Mediacorp",
+    "Erste Bank",
+    "Dubai Future Foundation",
+    "Leo Burnett",
+    "Publicis"
+  ],
+  "problems": [
+    "operational_friction",
+    "knowledge_fragmentation",
+    "slow_decision_making",
+    "ai_adoption_failure",
+    "unclear_roi",
+    "governance_gaps",
+    "manual_knowledge_work",
+    "data_silos"
+  ],
+  "principles": [
+    "decision_quality",
+    "systems_before_features",
+    "trust_before_autonomy",
+    "human_accountability",
+    "context_creates_intelligence"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "workflow_redesign",
+    "ai_governance",
+    "rag",
+    "verification",
+    "rapid_prototyping"
+  ],
+  "outcomes": [
+    "revenue_growth",
+    "cost_reduction",
+    "productivity_gains",
+    "faster_decisions",
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_risk"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "source_provenance",
+    "access_control",
+    "human_approval",
+    "observability_control"
+  ],
+  "industries": [
+    "technology",
+    "retail",
+    "financial_services",
+    "media",
+    "healthcare",
+    "government"
+  ],
+  "proofs": [
+    "maybank_digital_sales_growth",
+    "manulife_lean_ml_ux",
+    "mediacorp_audience_growth",
+    "erste_customer_scale",
+    "publicis_handoff_reduction"
+  ]
+}
