@@ -1,0 +1,76 @@
+{
+  "slug": "leo-burnett-commerce-platforms",
+  "title": "Luxury Commerce and Consumer Platforms — Leo Burnett/Publicis, Singapore",
+  "category": "project",
+  "lane": "skills",
+  "summary": "Luxury e-commerce, consumer-platform, CMS, and activation work across the USA and Asia Pacific.",
+  "tags": [
+    "leo-burnett",
+    "publicis",
+    "sk-ii",
+    "samsung",
+    "skyscanner",
+    "commerce-platforms"
+  ],
+  "impact_score": 85,
+  "priority_label": "standard",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz worked on luxury commerce, CMS, and consumer-platform initiatives at Leo Burnett/Publicis.",
+    "The programme included SK-II in the USA and APAC, Samsung digital-appliances CMS work, and Skyscanner activation."
+  ],
+  "proof_points": [
+    "The broader Leo Burnett/Publicis proof includes a 70% reduction in handoff friction through code-based prototyping.",
+    "This record narrows retrieval to the grouped commerce and consumer platform programme."
+  ],
+  "companies": [
+    "Leo Burnett",
+    "P&G",
+    "Publicis",
+    "Samsung",
+    "Skyscanner"
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Singapore",
+    "USA"
+  ],
+  "industries": [
+    "creative_services",
+    "retail",
+    "technology"
+  ],
+  "capabilities": [
+    "enterprise_architecture",
+    "product_strategy",
+    "rapid_prototyping",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "lower_operational_friction"
+  ],
+  "proofs": [
+    "publicis_handoff_reduction"
+  ],
+  "projects": [
+    "Samsung Digital Appliances CMS",
+    "SK-II Asia Pacific CMS",
+    "SK-II USA e-commerce CMS",
+    "Skyscanner Activation"
+  ],
+  "intent_families": [
+    "business_need",
+    "factual_profile",
+    "skills"
+  ],
+  "sub_intents": [
+    "business_need.outcomes",
+    "factual_profile.companies",
+    "skills.enterprise_proof"
+  ],
+  "valid_from": "2014",
+  "valid_to": "2014",
+  "source_notes": "Grouped programme record. The 70% handoff-friction metric belongs to the broader Publicis delivery environment, not every individual client project."
+}

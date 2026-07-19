@@ -1,0 +1,87 @@
+{
+  "slug": "systems-agent-control-loop",
+  "title": "Agent Control Loop For High-Stakes Systems",
+  "category": "systems_principle",
+  "source_type": "paste",
+  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "summary": "Defines the safest control loop for high-stakes agent systems: propose, validate, execute through secure services, and verify against real systems.",
+  "body": "Agent Control Loop For High-Stakes Systems\n\nPurpose\nThis record captures the safest control loop for agent systems that can trigger real actions.\n\nCore rule\nLLM proposes. Policy validates. Secure service executes. Real systems verify.\n\nExpanded loop\nIntent -> Plan -> Retrieve -> Simulate -> Validate -> Approve -> Execute -> Verify\n\nWhy this is the right control model\nThe model should not directly perform high-stakes actions. It should propose a next step. Policy should check permissions, limits, approvals, and confidence. A secure execution layer should act. Verification should confirm what actually happened in authoritative systems.\n\nWhat this prevents\n- Unsupported autonomous actions\n- Prompt-led execution without controls\n- Weak auditability\n- Irreversible mistakes caused by reasoning drift\n- Unverified outcomes being treated as complete\n\nWhy this matters\nThe hardest problem is not intelligence. It is safely turning intelligence into action with deterministic control points, visible approvals, and real post-action confirmation.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "control_loop",
+      "policy",
+      "systems",
+      "verification",
+      "workflow"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-15",
+      "notes": "Derived from the user's control-loop notes for agent safety and execution design."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "The safest high-stakes agent design is a control loop where the model proposes, policy validates, secure services execute, and real systems verify.",
+      "High-stakes execution should be modeled as intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+      "The main architectural challenge is controlled action, not model intelligence in isolation."
+    ],
+    "proof_points": [
+      "The notes explicitly state the rule 'LLM proposes -> Policy validates -> Secure service executes -> Real systems verify.'",
+      "The notes define a full control loop of intent, planning, retrieval, simulation, validation, approval, execution, and verification.",
+      "The notes emphasize correctness, deterministic execution, auditing, reproducibility, observability, and failure recovery before performance."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 92,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-agent-control-loop.md",
+    "source_meta_filename": "systems-agent-control-loop.meta.json",
+    "reviewed_at": "2026-07-15",
+    "problems": [
+      "governance_gaps",
+      "low_trust",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "feedback_loops",
+      "human_accountability",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "decision_intelligence",
+      "verification"
+    ],
+    "outcomes": [
+      "higher_data_trust",
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "clear_ownership",
+      "escalation",
+      "evaluation",
+      "human_approval"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1
+  }
+}

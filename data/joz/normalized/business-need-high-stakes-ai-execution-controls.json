@@ -1,0 +1,89 @@
+{
+  "slug": "business-need-high-stakes-ai-execution-controls",
+  "title": "High-Stakes AI Execution Controls",
+  "category": "business_need",
+  "source_type": "paste",
+  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "summary": "Explains why the real challenge in serious AI systems is controlled execution, verification, auditability, and failure recovery rather than intelligence alone.",
+  "body": "High-Stakes AI Execution Controls\n\nPurpose\nThis record explains what matters most when an AI system moves from advice to action in a serious operating environment.\n\nCore idea\nThe hardest problem is not intelligence. It is safely turning intelligence into action.\n\nWhat becomes critical\n- Security\n- Policy enforcement\n- Execution controls\n- Verification\n- Auditability\n- Failure recovery\n- Real-time state consistency\n- Observability\n\nWhy this matters\nOnce an agent can trigger workflows, approvals, transactions, or state changes, the architecture must prioritize controlled execution over demo intelligence. That means deterministic services, permission checks, strong verification, and post-action traceability.\n\nBusiness value\nThis is how AI moves from a novelty layer to an operational system that leadership can trust, scale, and govern.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "auditability",
+      "business_value",
+      "controls",
+      "governance",
+      "verification"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-15",
+      "notes": "Derived from the user's notes about execution controls, verification, auditability, and failure recovery."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "In serious operating environments, the hardest AI problem is controlled action rather than intelligence alone.",
+      "Security, policy enforcement, verification, auditability, and failure recovery are central to business trust in agent systems.",
+      "Controlled execution is what turns AI from a novelty layer into an operational system leaders can trust and scale."
+    ],
+    "proof_points": [
+      "The notes explicitly state that the hardest problem is safely turning intelligence into action.",
+      "The notes group verification, auditability, deterministic execution, reproducibility, observability, and failure recovery ahead of raw performance.",
+      "The notes identify execution controls and real-time state consistency as central architecture concerns in high-stakes systems."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 88,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-high-stakes-ai-execution-controls.md",
+    "source_meta_filename": "business-need-high-stakes-ai-execution-controls.meta.json",
+    "reviewed_at": "2026-07-15",
+    "problems": [
+      "governance_gaps",
+      "low_trust",
+      "organizational_complexity",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "human_accountability",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_data_trust",
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "clear_ownership",
+      "evaluation",
+      "human_approval",
+      "observability_control"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 2
+  }
+}

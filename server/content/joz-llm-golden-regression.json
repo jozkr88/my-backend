@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "description": "Stable Joz LLM routing and answer-quality regression cases.",
+  "cases": [
+    {
+      "id": "identity-overview",
+      "question": "Who is Joz?",
+      "expectedRoute": "identity_profile",
+      "expectedSubIntent": "overview",
+      "requiredPhrases": ["agentic ai architecture"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "assistant-identity",
+      "question": "Tell me more about yourself",
+      "expectedRoute": "identity_profile",
+      "expectedSubIntent": "assistant_identity",
+      "requiredPhrases": ["joz llm"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "authenticity",
+      "question": "Are you real?",
+      "expectedRoute": "identity_profile",
+      "expectedSubIntent": "authenticity",
+      "requiredPhrases": ["knowledge base"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "capabilities",
+      "question": "What does Joz do?",
+      "expectedRoute": "skills",
+      "expectedSubIntent": "capabilities_overview",
+      "requiredPhrases": ["agentic ai architecture", "enterprise product engineering"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "ai-use",
+      "question": "How does Joz use AI?",
+      "expectedRoute": "skills",
+      "expectedSubIntent": "ai_use",
+      "requiredPhrases": ["governed capability layer"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "knowledge-graph",
+      "question": "What is a knowledge graph?",
+      "expectedRoute": "skills",
+      "expectedSubIntent": "knowledge_graph_definition",
+      "requiredPhrases": ["entities", "relationships", "provenance"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "rag-evaluation",
+      "question": "How should we evaluate an LLM RAG system?",
+      "expectedRoute": "skills",
+      "expectedSubIntent": "rag_evaluation",
+      "requiredPhrases": ["retrieval", "faithfulness", "regression"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "ai-safety",
+      "question": "How does Joz keep AI systems safe?",
+      "expectedRoute": "systems_mindset",
+      "expectedSubIntent": "ai_safety",
+      "requiredPhrases": ["untrusted content", "verification"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "agent-platform",
+      "question": "How would Joz design an agentic AI platform?",
+      "expectedRoute": "skills",
+      "expectedSubIntent": "architecture_reasoning",
+      "requiredPhrases": ["system boundary", "verification"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "langgraph-temporal",
+      "question": "What is the difference between LangGraph and Temporal?",
+      "expectedRoute": "skills",
+      "expectedSubIntent": "langgraph_temporal_architecture",
+      "requiredPhrases": ["LangGraph handles the reasoning graph", "Temporal handles durable workflow execution"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "business-help",
+      "question": "How can Joz help my business?",
+      "expectedRoute": "business_need",
+      "expectedSubIntent": "business_help",
+      "requiredPhrases": ["measurable improvements", "customer experience", "operations"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "customer-support",
+      "question": "How can Joz improve customer support?",
+      "expectedRoute": "business_need",
+      "expectedSubIntent": "business_help",
+      "requiredPhrases": ["measurable improvements", "customer experience"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "retail-business",
+      "question": "How can AI help my retail business?",
+      "expectedRoute": "business_need",
+      "expectedSubIntent": "business_help",
+      "requiredPhrases": ["measurable improvements", "demand forecasting"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "consultant-builder",
+      "question": "Is Joz a consultant or a builder?",
+      "expectedRoute": "business_need",
+      "expectedSubIntent": "consultant_builder",
+      "requiredPhrases": ["both a consultant and a builder"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "hire-value",
+      "question": "Why should we hire Joz?",
+      "expectedRoute": "business_need",
+      "expectedSubIntent": "hire_value",
+      "requiredPhrases": ["enterprise-scale", "measurable"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "gold-pill",
+      "question": "What is the Gold Pill?",
+      "expectedRoute": "canonical_world_concept",
+      "expectedSubIntent": "gold_pill",
+      "requiredPhrases": ["core concept within MeetJoz"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "greeting",
+      "question": "Hello",
+      "expectedRoute": "unknown_fallback",
+      "expectedSubIntent": "general",
+      "requiredPhrases": ["Hello", "Joz LLM"],
+      "forbiddenPhrases": ["not in the current joz knowledge base"]
+    },
+    {
+      "id": "out-of-scope-definition",
+      "question": "What is quantum computing?",
+      "expectedRoute": "unknown_fallback",
+      "expectedSubIntent": "general",
+      "requiredPhrases": ["not in the current Joz knowledge base"],
+      "forbiddenPhrases": []
+    }
+  ]
+}

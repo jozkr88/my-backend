@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: xq-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/hello
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DISABLE_FILE_MEMORY
+        value: "1"

@@ -1,0 +1,41 @@
+{
+  "slug": "skills-agent-runtime-stack",
+  "title": "Agent Runtime Stack",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Explains the runtime stack behind a serious agent system, including model, tools, memory, orchestration, durable execution, state, and observability.",
+  "tags": ["agent_runtime", "architecture", "observability", "orchestration", "skills"],
+  "impact_score": 78,
+  "priority_label": "high",
+  "source_type": "paste",
+  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-15",
+    "notes": "Derived from the user's architecture notes and kept as additive framework knowledge."
+  },
+  "claims": [
+    "A serious agent runtime combines model, instructions, tools, memory, orchestration, and verification rather than treating the LLM as the whole system.",
+    "FastAPI, orchestration, durable workflow execution, state storage, and observability each have distinct roles in a production agent platform.",
+    "The purpose of the runtime stack is reliable execution, controlled state transitions, and visible failure recovery."
+  ],
+  "proof_points": [
+    "The notes explicitly separate FastAPI, reasoning orchestration, durable workflow execution, persistent state, cache, event transport, and observability.",
+    "The notes define agent, single-agent, multi-agent system, and orchestrator as separate architectural layers.",
+    "The runtime explanation is framed around execution control, retries, approvals, and audit visibility rather than model capability alone."
+  ],
+  "regions": ["Global"],
+  "companies": [],
+  "projects": [],
+  "intent_families": [],
+  "sub_intents": [],
+  "problems": ["knowledge_fragmentation", "operational_friction", "organizational_complexity"],
+  "principles": ["context_creates_intelligence", "systems_before_features", "feedback_loops"],
+  "capabilities": ["agentic_ai", "observability", "workflow_redesign", "enterprise_architecture"],
+  "outcomes": ["faster_decisions", "higher_data_trust", "stronger_governance"],
+  "governance": ["source_provenance", "evaluation", "auditability"],
+  "industries": ["technology"],
+  "proofs": []
+}
+

@@ -1,0 +1,44 @@
+{
+  "slug": "2026-07-11-compensation-and-process-faq",
+  "title": "Compensation and Process FAQ",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Safe recruiter guidance for compensation, package, and hiring-process questions without inventing salary ranges or commercial terms.",
+  "body": "Compensation and Process FAQ\n\nPurpose\nThis record gives Joz LLM a safe response pattern for compensation, package, and hiring-process questions.\n\nCompensation handling\n- Joz LLM should not invent salary expectations, rate cards, or package ranges unless those are explicitly provided in verified source material.\n- If asked about compensation, Joz LLM should say compensation expectations can be discussed directly with Joz based on scope, seniority, geography, and working model.\n\nProcess handling\n- If asked about interview steps, process timing, or commercial discussion, Joz LLM should keep the answer practical and direct.\n- Joz LLM can say Joz is open to discussing role scope, operating model, and mutual fit directly.\n\nAnswering rule\n- Avoid vague or defensive language.\n- Avoid fabricated ranges.\n- Keep the answer commercially mature and low-friction.",
+  "metadata": {
+    "lane": "booking",
+    "tags": [
+      "recruiter_screening",
+      "compensation",
+      "salary",
+      "process",
+      "commercial",
+      "booking"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "This is a behavior rule for safe recruiter handling, intentionally avoiding fabricated salary data."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz LLM should not invent salary expectations, rate cards, or package ranges.",
+      "Compensation should be discussed directly with Joz based on scope, seniority, geography, and working model.",
+      "Process answers should stay practical and commercially mature."
+    ],
+    "proof_points": [
+      "No verified compensation figures exist in current source material.",
+      "The current knowledge base supports direct contact and recruiter-screening follow-up instead of fabricated numbers."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "source_filename": "2026-07-11-compensation-and-process-faq.md",
+    "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json"
+  }
+}

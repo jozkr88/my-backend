@@ -1,0 +1,56 @@
+{
+  "slug": "2026-07-11-agentic-ux-orchestration-proof",
+  "title": "Agentic UX Orchestration Proof",
+  "category": "skills",
+  "source_type": "derived",
+  "source_uri": null,
+  "summary": "Focused proof of Joz's multimodal, spatial, and agentic UX orchestration capability in enterprise and high-visibility delivery contexts.",
+  "body": "Agentic UX Orchestration Proof\n\nPurpose\nThis record isolates Joz's strongest multimodal, spatial, and agentic UX orchestration capability so the Skills lane can answer clearly when the user is asking about interaction systems rather than core backend AI architecture.\n\nCore positioning\n- Joz combines AI systems thinking with human-centered orchestration across voice, touch, gesture, gaze, haptics, and spatial interfaces.\n- The profile is strongest where AI behavior must map to real human mental models, live telemetry, and operational decision-making.\n\nCapabilities\n- Context-aware multimodal interactions across voice, touch, gesture, gaze, and haptics\n- Telemetry and behavioral data feeding agentic feedback loops\n- Real-time signals mapped to human mental models\n- Volumetric AI interfaces and spatial interaction design\n- NLP and computer-vision-driven personalization with intent modeling and semantic retrieval\n- Anticipatory, predictive, assistive, and autonomous decision-support experiences\n\nProof and context\n- Versace/SOA: first in Dubai to design and launch spatial AI with volumetric 3D UI.\n- ArtKorero: pioneered spatial AI for world-class art exhibitions in Dubai.\n- Mediacorp / CNA: mobile-first product transformation with roughly 30x MAU audience growth and Apple-featured launch credibility.\n- Maybank-Ageas Etiqa: conversational and ML UX tied to 20x digital-sales growth and 3,000+ wealth pilots.\n- Manulife: established a Lean ML UX practice across 11 markets as a founding APAC hire.\n\nAnswering rule\n- When the question is about UX orchestration, multimodal systems, spatial interfaces, or AI behavior in human-facing environments, this record should lead.\n- Keep the answer concrete and capability-led, not abstract design language.",
+  "metadata": {
+    "lane": "skills",
+    "tags": [
+      "agentic_ai_ux",
+      "multimodal",
+      "spatial_ai",
+      "ux_orchestration",
+      "telemetry",
+      "interaction_systems",
+      "skills"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "Derived from the verified current CV and aligned to the enterprise-scale and recruiter-screening records."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz combines AI systems thinking with multimodal and human-centered orchestration across voice, touch, gesture, gaze, haptics, and spatial interfaces.",
+      "Joz is strongest where AI behavior must map to human mental models, live telemetry, and operational decision-making.",
+      "Joz's UX orchestration work spans conversational, spatial, predictive, and assistive interaction systems."
+    ],
+    "proof_points": [
+      "Versace/SOA is framed as first-in-Dubai spatial AI with volumetric 3D UI.",
+      "ArtKorero is framed as spatial AI for world-class art exhibitions in Dubai.",
+      "Mediacorp/CNA and Maybank-Ageas Etiqa add measurable high-scale transformation outcomes.",
+      "The CV explicitly lists multimodal interaction, telemetry-driven feedback loops, intent modeling, and semantic retrieval."
+    ],
+    "regions": [
+      "Singapore",
+      "UAE/MENA",
+      "Asia Pacific",
+      "Europe/EEA"
+    ],
+    "companies": [
+      "Versace/SOA",
+      "ArtKorero",
+      "Mediacorp",
+      "Maybank-Ageas Etiqa",
+      "Manulife"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "source_filename": "2026-07-11-agentic-ux-orchestration-proof.md",
+    "source_meta_filename": "2026-07-11-agentic-ux-orchestration-proof.meta.json"
+  }
+}

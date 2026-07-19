@@ -1,0 +1,42 @@
+[
+  {
+    "id": "maxx_neurons_desktop_reveal",
+    "object_id": "maxx_neurons",
+    "device_class": "desktop",
+    "trigger": "click",
+    "effect": "pause_and_reveal",
+    "reveals_object_id": "maxx_neurodesign"
+  },
+  {
+    "id": "maxx_neurons_mobile_ar",
+    "object_id": "maxx_neurons",
+    "device_class": "mobile",
+    "trigger": "click",
+    "effect": "open_ar",
+    "asset": "n2x.glb"
+  },
+  {
+    "id": "meet_joz_skills_desktop_panel",
+    "object_id": "meet_joz_skills",
+    "device_class": "desktop",
+    "trigger": "click",
+    "effect": "reveal_panel",
+    "reveals_object_id": "meet_joz_skills_panel"
+  },
+  {
+    "id": "meet_joz_skills_mobile_spatial",
+    "object_id": "meet_joz_skills",
+    "device_class": "mobile",
+    "trigger": "click",
+    "effect": "place_in_reality",
+    "asset": "workf.glb"
+  },
+  {
+    "id": "meet_joz_skills_spatial",
+    "object_id": "meet_joz_skills",
+    "device_class": "spatial",
+    "trigger": "click",
+    "effect": "place_in_reality",
+    "asset": "workf.glb"
+  }
+]

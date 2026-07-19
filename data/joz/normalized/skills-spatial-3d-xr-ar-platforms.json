@@ -1,0 +1,115 @@
+{
+  "slug": "skills-spatial-3d-xr-ar-platforms",
+  "title": "Spatial Computing, 3D, XR, and AR Product Delivery",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Comprehensive proof for Joz's spatial computing capability across 3D web, XR/AR, volumetric UI, asset workflows, and immersive product delivery.",
+  "body": "Joz's spatial computing capability spans concept design, interaction design, technical prototyping, 3D implementation, and launch-oriented delivery across web, mobile, and spatial surfaces.\n\nThis capability includes Three.js and React Three Fiber style 3D web experiences, GLB and USD(z) asset workflows, spatial interface composition, volumetric UI, motion and environment design, multimodal interaction design, computer vision adjacency, and the practical constraints of launching immersive experiences that still need to work as products. It also includes the judgment to translate abstract spatial ideas into usable flows, not just visual demos.\n\nThe strongest positioning is not \"3D graphics specialist\" in isolation. It is that Joz can connect spatial design, engineering, AI, interface behavior, and business storytelling into one coherent delivery stack.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "3d",
+      "ar",
+      "glb",
+      "react-three-fiber",
+      "spatial-computing",
+      "threejs",
+      "usdz",
+      "volumetric-ui",
+      "webgl",
+      "xr"
+    ],
+    "verification": {
+      "status": "cv_and_project_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_and_project_supported",
+    "claims": [
+      "Joz can design and build spatial products that combine immersive interaction, technical implementation, and narrative/product intent.",
+      "His spatial capability spans 3D web interfaces, XR/AR launch flows, volumetric UI, asset pipeline judgment, and multimodal interaction design.",
+      "He can position spatial computing as a usable business and product surface rather than only as visual experimentation."
+    ],
+    "proof_points": [
+      "Designed and launched spatial AI with volumetric 3D UI for Versace/SOA in Dubai.",
+      "Pioneered spatial AI for world-class art exhibitions through ArtKorero.",
+      "Built Python USD(z) and computer-vision-adjacent workflows tied to Apple/Pixar-style pipelines.",
+      "The current app itself uses a portal-based 3D architecture with GLB assets, AR launch flows, spatial placement logic, semantic world modeling, and device-specific immersive behavior."
+    ],
+    "regions": [
+      "Dubai",
+      "Europe",
+      "Global",
+      "Singapore"
+    ],
+    "companies": [
+      "Apple",
+      "ArtKorero",
+      "Pixar",
+      "SOA",
+      "Versace"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 95,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-spatial-3d-xr-ar-platforms.md",
+    "source_meta_filename": "skills-spatial-3d-xr-ar-platforms.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "manual_knowledge_work",
+      "operational_friction",
+      "unclear_roi"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "context_creates_intelligence",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "computer_vision",
+      "multimodal_ai",
+      "product_strategy",
+      "rapid_prototyping",
+      "spatial_ai",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption",
+      "productivity_gains"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "creative_services",
+      "spatial_computing",
+      "technology"
+    ],
+    "proofs": [
+      "apple_pixar_cv_workflows",
+      "artkorero_spatial_exhibitions",
+      "versace_spatial_ai_launch"
+    ],
+    "related_proofs": [
+      "apple_pixar_cv_workflows",
+      "artkorero_spatial_exhibitions",
+      "versace_spatial_ai_launch"
+    ],
+    "enterprise_scale_score": 80,
+    "measurable_outcome_count": 3
+  }
+}

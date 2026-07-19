@@ -1,0 +1,43 @@
+{
+  "slug": "2026-07-11-why-joz-screening-answer",
+  "title": "Why Joz Screening Answer",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Concise recruiter-facing answer explaining why Joz stands out for serious AI, product, and systems roles.",
+  "body": "Why Joz Screening Answer\n\nPurpose\nThis record gives Joz LLM a concise recruiter-safe answer to the screening question: why Joz?\n\nShort answer\n- Joz combines product judgment, engineering delivery, world-class UX, and applied AI systems thinking in one profile.\n- Joz is strongest where the problem is ambiguous, the signal is noisy, and the business needs a system that can actually ship and operate.\n- Joz brings 13+ years of professional experience overall, including 8+ years in ML/AI, across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.\n\nSupporting framing\n- Joz is not just a model or prompt layer profile. Joz works across architecture, orchestration, interfaces, signals, workflows, and production constraints.\n- Joz is credible in executive-facing, cross-functional, and internationally distributed environments.\n\nAnswering rule\n- Keep the answer direct and recruiter-readable.\n- Do not lapse into hype or generic motivation.",
+  "metadata": {
+    "lane": "business_need",
+    "tags": [
+      "recruiter_screening",
+      "why_joz",
+      "hiring_fit",
+      "business_need",
+      "faq"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "Derived from verified CV, profile, and recruiter-screening facts already present in the knowledge base."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz combines product judgment, engineering delivery, UX, and applied AI systems thinking in one profile.",
+      "Joz has 13+ years of professional experience overall and 8+ years in ML/AI.",
+      "Joz is strongest in ambiguous, signal-rich environments that need deployable systems rather than generic AI talk."
+    ],
+    "proof_points": [
+      "Verified CV evidence spans finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.",
+      "Verified experience framing already establishes 13+ overall years and 8+ years in ML/AI."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "source_filename": "2026-07-11-why-joz-screening-answer.md",
+    "source_meta_filename": "2026-07-11-why-joz-screening-answer.meta.json"
+  }
+}
