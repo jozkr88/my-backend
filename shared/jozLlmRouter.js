@@ -734,6 +734,10 @@ function composeBusinessNeedReply(subIntent = "hire_value", input = "") {
     return "Joz would start with the business outcome and workflow, then assess data quality, system and API readiness, security, governance, and ownership. Choose one low-risk process with a baseline metric, pilot it with human approval, measure cost, speed, and quality, and scale only after the evidence is clear. That creates an AI roadmap grounded in readiness and outcomes rather than feature theater.";
   }
 
+  if (subIntent === "ai_maturity") {
+    return "Joz would place the company on a four-step maturity path: AI readiness for data, systems, security, and governance; AI enablement for grounded search, RAG, copilots, and process automation; agentic operations for verified workflows with approvals and monitoring; then an AI-native operating model with governed autonomy and measurable accountability. The next step should be earned by evidence from the current level, not by adding tools for their own sake.";
+  }
+
   if (subIntent === "business_value_definition") {
     return "Business value is the measurable improvement AI creates in revenue, margin, cost, speed, risk, or decision quality. For Joz, that means lower friction, faster execution, stronger management leverage, and clearer commercial outcomes, not feature theater. The test is simple: what changed operationally, financially, or strategically because the system works better?";
   }
@@ -790,6 +794,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
     return "A knowledge graph represents entities, relationships, permissions, and provenance as connected structure. In Joz's architecture, it complements vector search: vectors find semantically similar passages, while the graph links ownership, policy, organisational structure, workflows, and cross-system relationships. It is useful when relationships and traceability matter, with ACLs and source provenance enforced during retrieval.";
   }
 
+  if (subIntent === "agent_model_tool_distinction") {
+    return "A model predicts or represents information. An agent combines a model with instructions, memory, tools, and a reasoning loop to pursue a goal. A tool executes a bounded capability such as an API call, database query, calculation, or external action. In Joz's architecture, the agent decides which approved tool to use, while policy and the tool service control what can actually happen.";
+  }
+
   if (subIntent === "rag_evaluation") {
     return "Joz would evaluate an LLM/RAG system across five layers: retrieval recall and precision; context faithfulness and citation correctness; answer relevance and completeness; safety and ACL leakage; and production latency, cost, failure rate, and user or business outcomes. Use a golden test set offline, then trace real queries with human review and regression gates before release.";
   }
@@ -824,6 +832,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
 
   if (subIntent === "verification_architecture") {
     return "Proposal -> Risk and Policy -> Execution -> Event Capture -> Verification -> Reconciliation. Joz would verify this through an execution-to-state reconciliation architecture, not by trusting the agent's claim. Define the expected state and expected delta first, send the trade through a controlled execution service with an execution ID and idempotent order keys, capture order and fill events, re-read the ledger or authoritative portfolio source of truth, then compare expected versus actual post-trade state across holdings, cash, fees, and margin. The design must handle partial fills, bounded retries, retry and reconciliation logic, immutable audit trails, and human escalation before treating the portfolio as verified.";
+  }
+
+  if (subIntent === "release_verification") {
+    return "Autonomous code changes should pass a release gate before production: isolate the change, run formatting and static checks, unit and integration tests, security and dependency scans, policy checks, and targeted regression tests; compare the result with the expected behaviour; then require human approval for merge and deployment. Use a canary or staged rollout with logs, metrics, traces, rollback, and post-deployment verification. The agent may propose and prepare the change, but it must not approve or deploy its own high-risk work.";
   }
 
   if (subIntent === "single_agent_tradeoffs") {
@@ -1155,9 +1167,32 @@ function buildLowSignalOrBadFaithReply(clean = "") {
       "you joking",
       "you kidding",
       "you taking the piss",
+      "banana",
+      "thinking really hard",
     ])
   ) {
-    return "If you are testing the system or the question is not serious, ask directly. I can answer about Joz's background, business value, systems mindset, skills, infrastructure approach, and agent architecture.";
+    if (includesAny(normalized, ["banana", "thinking really hard"])) {
+      return "No—thinking hard is not enough for a banana to deploy Kubernetes. Deployment requires software, credentials, an execution environment, and controlled tooling; the question is a fun hypothetical rather than a real deployment path.";
+    }
+    return "I’m not trying to make anything up. I’m Joz LLM, grounded in the current MeetJoz knowledge base; if a claim is not documented, I should say so. Ask directly about Joz’s background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+  }
+
+  return null;
+}
+
+function buildCourtesyReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[!?.,]+/g, "").trim();
+  if (!["thanks", "thank you", "cheers", "much appreciated", "that helps", "thanks that helps"].includes(normalized)) {
+    return null;
+  }
+
+  return "You’re welcome. If useful, ask me to connect Joz’s capabilities to a business problem, role, or AI architecture decision.";
+}
+
+function buildGeneralDefinitionReply(clean = "") {
+  const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
+  if (["what is quantum computing", "what's quantum computing", "explain quantum computing", "define quantum computing"].includes(normalized)) {
+    return "Quantum computing uses quantum-mechanical states such as superposition and entanglement to process certain classes of problems differently from classical computers. It is promising for selected optimisation, simulation, and cryptographic problems, but it is not a general replacement for ordinary computing and practical large-scale systems remain difficult to build.";
   }
 
   return null;
@@ -1374,10 +1409,12 @@ function buildEvidenceBackedRouteReply({
       "architecture_reasoning",
       "safe_architecture_design",
       "agent_scope_tradeoffs",
+      "agent_model_tool_distinction",
       "agentic_architecture_approach",
       "agentic_architecture_why",
       "single_agent_tradeoffs",
       "verification_architecture",
+      "release_verification",
       "scale_fastapi_architecture",
       "organizational_ownership_layer",
       "langgraph_temporal_architecture",
@@ -1540,7 +1577,7 @@ function mapRouteToConfidence(route = {}, resolution = {}) {
 
 function detectCanonicalWorldConcept(clean) {
   const isDefinitionPrompt =
-    /^(what is|what's|explain|tell me about|define)\b/.test(clean) ||
+    /^(what is|what's|what does|explain|tell me about|define)\b/.test(clean) ||
     clean === "gold pill" ||
     clean === "pill" ||
     clean === "capsule" ||
@@ -1638,6 +1675,11 @@ function detectIdentityProfile(clean) {
       /^what is he\b/,
       "what is joz's background",
       "what is jozs background",
+      "what is joz's professional background",
+      "what is jozs professional background",
+      "professional background",
+      "professional experience",
+      "career background",
       "what does joz do",
       "tell me about joz",
       "introduce joz",
@@ -2008,11 +2050,16 @@ function detectBusinessNeed(clean) {
       "how would joz help",
       "how does joz help",
       "how can joz improve",
+      "how could joz improve",
       "how does joz improve",
       "how can joz reduce",
       "can joz help with workflow",
       "what can joz do for my business",
       "what can joz do for a business",
+      "what can joz do for a company",
+      "what can joz do for a manufacturing company",
+      "what can joz do for a healthcare organisation",
+      "what can joz do for a healthcare organization",
       "what can joz do for our business",
       "what business problems can joz solve",
       "how can he help me",
@@ -2025,6 +2072,21 @@ function detectBusinessNeed(clean) {
       "direct to consumer",
     ]) && includesAny(clean, ["help", "ai", "business", "joz", "he"])
   ) {
+    return { detectedSubIntent: "business_help", detectedConcept: "business_value" };
+  }
+
+  const hasBusinessIndustry = includesAny(clean, [
+    "retail", "ecommerce", "e-commerce", "insurance", "claims", "manufacturing", "factory",
+    "industrial", "banking", "financial services", "healthcare", "health care", "hospital",
+    "clinic", "construction", "contractor", "logistics", "transport", "shipping", "warehouse",
+    "hospitality", "hotel", "restaurant", "government", "public sector", "d2c", "consumer brand",
+  ]);
+  const hasBusinessAction = includesAny(clean, [
+    "help", "improve", "reduce", "increase", "solve", "do for", "administration", "downtime",
+    "maintenance", "quality", "routing", "route operations", "warehouse operations", "business",
+    "operations", "workflow", "process cost", "manual work",
+  ]);
+  if (hasBusinessIndustry && hasBusinessAction && /^(what|how|can|could|where|which|why|we\b|i\b)/.test(clean)) {
     return { detectedSubIntent: "business_help", detectedConcept: "business_value" };
   }
 
@@ -2053,12 +2115,22 @@ function detectBusinessNeed(clean) {
       "quick wins for a",
       "measure readiness for a",
       "move from copilots to agents for a",
+      "next ai maturity step",
+      "next maturity step",
+      "ai maturity step",
+      "maturity level",
+      "maturity model",
       "what governance do we need for a",
       "avoid ai feature theater",
       "avoid feature theater",
     ])
   ) {
-    return { detectedSubIntent: "ai_readiness", detectedConcept: "business_value" };
+    return {
+      detectedSubIntent: includesAny(clean, ["maturity", "maturity step", "maturity level", "maturity model"])
+        ? "ai_maturity"
+        : "ai_readiness",
+      detectedConcept: "business_value",
+    };
   }
 
   if (
@@ -2127,6 +2199,9 @@ function detectBusinessNeed(clean) {
       "faster execution",
       "operational leverage",
       "productivity gains",
+      "manual work",
+      "process cost",
+      "reduce manual",
     ])
   ) {
     return { detectedSubIntent: "efficiency", detectedConcept: "business_value" };
@@ -2458,6 +2533,17 @@ function detectSkills(clean) {
   }
 
   if (
+    includesAny(clean, [
+      "difference between an agent, a model, and a tool",
+      "difference between an agent, model, and tool",
+      "agent model and tool",
+      "agent, model, and tool",
+    ])
+  ) {
+    return { detectedSubIntent: "agent_model_tool_distinction", detectedConcept: "skills" };
+  }
+
+  if (
     (includesAny(clean, [
       "how should we evaluate an llm rag system",
       "how do we evaluate an llm rag system",
@@ -2681,6 +2767,16 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "when should a system use one agent versus multiple agents",
+      "when should a system use one agent versus many agents",
+      "when should we use one agent versus multiple agents",
+    ])
+  ) {
+    return { detectedSubIntent: "agent_scope_tradeoffs", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "single agent or multiple agents",
       "single agent or multi agent",
       "single agent vs multi agent",
@@ -2689,6 +2785,11 @@ function detectSkills(clean) {
       "single agent vs multiple agents",
       "single agent vs multi agent",
       "single-agent vs multi-agent",
+      "one agent versus multiple agents",
+      "one agent versus many agents",
+      "one agent vs multiple agents",
+      "one agent vs many agents",
+      "one agent versus multiple",
       "multiple agents",
       "multi-agent",
     ]) &&
@@ -2707,6 +2808,18 @@ function detectSkills(clean) {
     ])
   ) {
     return { detectedSubIntent: "single_agent_tradeoffs", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "how can autonomous code changes be verified before release",
+      "how should autonomous code changes be verified before release",
+      "verify autonomous code changes before release",
+      "verify code changes before release",
+      "code changes before release",
+    ])
+  ) {
+    return { detectedSubIntent: "release_verification", detectedConcept: "skills" };
   }
 
   if (
@@ -3170,6 +3283,26 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     };
   }
 
+  // Business value and transformation questions must win over recruiter
+  // operational phrases such as "hiring" or "role". This keeps "Where is
+  // the ROI in hiring Joz?" from becoming an availability answer.
+  if (
+    preWorldBusinessNeed &&
+    ["business_help", "ai_readiness", "ai_maturity", "roi", "hire_value", "consultant_builder", "business_value_definition"].includes(
+      preWorldBusinessNeed.detectedSubIntent
+    )
+  ) {
+    return {
+      detectedIntent: "business_need",
+      detectedSubIntent: preWorldBusinessNeed.detectedSubIntent,
+      detectedConcept: preWorldBusinessNeed.detectedConcept,
+      selectedRoute: "business_need",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
   if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
     return {
       detectedIntent: "systems_mindset",
@@ -3189,7 +3322,9 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "scale_fastapi_architecture",
       "langgraph_temporal_architecture",
       "verification_architecture",
+      "release_verification",
       "single_agent_tradeoffs",
+      "agent_model_tool_distinction",
       "capabilities_overview",
       "purpose_of_llm",
       "agentic_architecture_approach",
@@ -3668,6 +3803,19 @@ export async function resolveUnknownJozReply({
     });
   }
 
+  const courtesyReply = buildCourtesyReply(clean);
+  if (courtesyReply) {
+    return buildPolicyResolution({
+      reply: courtesyReply,
+      answerSource: "interaction_courtesy",
+      composer: "buildCourtesyReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+      answerClass: "interaction_guard",
+      confidence: "high",
+    });
+  }
+
   const greetingReply = buildGreetingReply(clean);
   if (greetingReply) {
     return buildPolicyResolution({
@@ -3677,6 +3825,19 @@ export async function resolveUnknownJozReply({
       intentMode: mapRouteToIntentMode("unknown_fallback"),
       retrievedCategories: [],
       answerClass: "interaction_guard",
+      confidence: "high",
+    });
+  }
+
+  const generalDefinitionReply = buildGeneralDefinitionReply(clean);
+  if (generalDefinitionReply) {
+    return buildPolicyResolution({
+      reply: generalDefinitionReply,
+      answerSource: "general_definition",
+      composer: "buildGeneralDefinitionReply",
+      intentMode: mapRouteToIntentMode("skills"),
+      retrievedCategories: [],
+      answerClass: "general_definition",
       confidence: "high",
     });
   }

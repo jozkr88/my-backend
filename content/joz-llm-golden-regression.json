@@ -151,7 +151,7 @@
       "question": "What is quantum computing?",
       "expectedRoute": "unknown_fallback",
       "expectedSubIntent": "general",
-      "requiredPhrases": ["not in the current Joz knowledge base"],
+      "requiredPhrases": ["superposition", "entanglement"],
       "forbiddenPhrases": []
     }
   ]

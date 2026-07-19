@@ -68,11 +68,20 @@ const evaluator = await execFileAsync(
   }
 );
 
+// db.js may print a startup status line before the evaluator's JSON. Parse the
+// JSON payload without losing a successful paid evaluation to that log line.
+const evaluatorOutput = String(evaluator.stdout || "").trim();
+const evaluatorJsonStart = evaluatorOutput.indexOf("{");
+if (evaluatorJsonStart < 0) {
+  throw new Error(`OpenAI evaluator returned no JSON summary: ${evaluatorOutput.slice(0, 500)}`);
+}
+const openaiEvaluation = JSON.parse(evaluatorOutput.slice(evaluatorJsonStart));
+
 console.log(JSON.stringify({
   localApiUrl,
   evaluatedCorpus: cases.length,
   sessionKeyPrefix,
   localResults,
-  openaiEvaluation: JSON.parse(evaluator.stdout),
+  openaiEvaluation,
   note: "OpenAI judged the pre-answer draft and final answer. Results are stored in Supabase and visible in the Joz LLM dashboard; no automatic production repair was applied.",
 }, null, 2));

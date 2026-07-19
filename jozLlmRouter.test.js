@@ -116,6 +116,46 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
   assert.match(feedback.reply, /fair criticism|route ordinary business/i);
 });
 
+test("covers recruiter-facing business, architecture, and conversational quality gaps", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const cases = [
+    ["How could Joz improve a healthcare organisation's administration?", "business_need", "business_help", /For Healthcare|less administration/i],
+    ["What can Joz do for a manufacturing company with downtime?", "business_need", "business_help", /For Manufacturing|predictive maintenance/i],
+    ["Can Joz improve warehouse and route operations?", "business_need", "business_help", /For Logistics|route optimisation/i],
+    ["Where is the ROI in hiring Joz?", "business_need", "roi", /ROI|cost reduction/i],
+    ["Can Joz reduce manual work and process cost?", "business_need", "efficiency", /manual work|process cost/i],
+    ["We are ready to use agents. What is the next AI maturity step?", "business_need", "ai_maturity", /four-step maturity|AI readiness/i],
+    ["What is the difference between an agent, a model, and a tool?", "skills", "agent_model_tool_distinction", /model predicts|bounded capability/i],
+    ["When should a system use one agent versus multiple agents?", "skills", "agent_scope_tradeoffs", /keep an agent simple|Multiple agents/i],
+    ["How can autonomous code changes be verified before release?", "skills", "release_verification", /release gate|human approval/i],
+    ["What does neoMAXX mean?", "canonical_world_concept", "neo_maxx", /neoMAXX is a concept/i],
+  ];
+
+  for (const [input, expectedRoute, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    assert.equal(route.selectedRoute, expectedRoute, input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(resolution.reply, expectedReply, input);
+  }
+
+  const courtesy = await resolveUnknownJozReply({
+    input: "Thanks, that helps.",
+    messages: [{ role: "user", content: "Thanks, that helps." }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.match(courtesy.reply, /You.re welcome/i);
+
+  const quantum = await resolveUnknownJozReply({
+    input: "What is quantum computing?",
+    messages: [{ role: "user", content: "What is quantum computing?" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.match(quantum.reply, /superposition|entanglement/i);
+});
+
 test("repairs a misrouted in-scope business fallback only with a verified answer", () => {
   const repair = buildJozInScopeFallbackRepair({
     input: "How does Joz help a company with AI?",
