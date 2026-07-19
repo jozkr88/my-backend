@@ -82,6 +82,7 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["How can Joz help a law firm?", "business_need", "business_help", /current systems and data/i],
     ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metric/i],
     ["I am d2c - how can Ai help me?", "business_need", "business_help", /customer experience/i],
+    ["Is Joz a consultant or a builder?", "business_need", "consultant_builder", /both a consultant and a builder/i],
   ];
 
   for (const [input, selectedRoute, subIntent, expected] of cases) {

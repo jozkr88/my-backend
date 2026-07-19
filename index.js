@@ -64,6 +64,7 @@ import {
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
+import { classifyJozAudience } from "./shared/jozAudienceClassifier.js";
 
 
 dotenv.config();
@@ -978,7 +979,16 @@ app.post("/api/joz-llm", async (req, res) => {
       reply = enforceJozLlmReplyLimit("", 55);
     }
 
-    const trace = buildJozRouteTrace(route, resolution);
+    // Observability-only metadata: it never selects a route or changes the answer.
+    const audienceProfile = classifyJozAudience({
+      input: latestUserMessage,
+      recentMessages: recentSessionMessages,
+      messages,
+    });
+    const trace = {
+      ...buildJozRouteTrace(route, resolution),
+      audienceProfile,
+    };
     const verification = buildJozResponseVerification({
       input: latestUserMessage,
       route,
@@ -1073,6 +1083,7 @@ app.post("/api/joz-llm", async (req, res) => {
       retrievedCategories,
       mode: route.selectedRoute,
       trace,
+      audienceProfile,
       verification,
       observability: {
         latencyMs: verification.metrics.latencyMs,
@@ -1092,12 +1103,29 @@ app.get("/api/joz-llm/observability", async (req, res) => {
     const events = isDatabaseEnabled()
       ? await listRecentJozLlmRequestEvents(limit)
       : jozObservabilityFallbackStore.slice(0, limit);
+    // Classify historical runs at read time, without rewriting existing rows.
+    const decoratedEvents = events.map((event) => {
+      if (event?.trace?.audienceProfile || event?.trace?.audience_profile) return event;
+      const audienceProfile = classifyJozAudience({
+        input: event?.userMessage || event?.user_message || "",
+      });
+      let existingTrace = event?.trace && typeof event.trace === "object" ? event.trace : {};
+      if (typeof event?.trace === "string") {
+        try {
+          const parsed = JSON.parse(event.trace);
+          existingTrace = parsed && typeof parsed === "object" ? parsed : {};
+        } catch {
+          existingTrace = {};
+        }
+      }
+      return { ...event, trace: { ...existingTrace, audienceProfile } };
+    });
 
     return res.json({
       ok: true,
-      count: events.length,
+      count: decoratedEvents.length,
       storage: isDatabaseEnabled() ? "database" : "memory",
-      events,
+      events: decoratedEvents,
     });
   } catch (error) {
     console.error("❌ /api/joz-llm/observability failed:", error);

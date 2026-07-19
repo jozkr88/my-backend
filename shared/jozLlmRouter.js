@@ -721,6 +721,10 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply(subIntent = "hire_value") {
+  if (subIntent === "consultant_builder") {
+    return "Joz is both a consultant and a builder. He starts by diagnosing the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. He is not strategy-only consulting or code-only contracting: he connects business decisions to working systems and accountable execution.";
+  }
+
   if (subIntent === "business_help") {
     return "Before recommending AI, Joz would diagnose your industry, business model, scale, biggest bottleneck, current systems and data, governance constraints, and target outcome. Then he maps quick wins, foundational work, and longer-term agentic opportunities to a baseline metric. Which matters most: revenue, customer experience, cost, operations, decisions, or risk?";
   }
@@ -1948,6 +1952,22 @@ function detectRecruiterOperational(clean) {
 }
 
 function detectBusinessNeed(clean) {
+  if (
+    includesAny(clean, [
+      "is joz a consultant or a builder",
+      "is joz consultant or builder",
+      "consultant or builder",
+      "consultant vs builder",
+      "consulting or building",
+      "does joz build",
+      "does joz actually build",
+      "is joz a builder",
+      "is joz a consultant",
+    ])
+  ) {
+    return { detectedSubIntent: "consultant_builder", detectedConcept: "business_value" };
+  }
+
   if (
     includesAny(clean, [
       /^how can joz help\b/,
