@@ -777,6 +777,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "rag_evaluation") {
+    return "Joz would evaluate an LLM/RAG system across five layers: retrieval recall and precision; context faithfulness and citation correctness; answer relevance and completeness; safety and ACL leakage; and production latency, cost, failure rate, and user or business outcomes. Use a golden test set offline, then trace real queries with human review and regression gates before release.";
+  }
+
   if (subIntent === "collaboration") {
     return "Yes. Joz works well in teams across engineering, product, design, leadership, and regional stakeholder groups. The proof is practical: he established an HCD-AI practice, trained C-suite executives and regional teams, reduced handoff friction at Leo Burnett/Publicis, and worked across large enterprise and cross-market environments where alignment mattered as much as technical delivery.";
   }
@@ -2274,6 +2278,20 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (
+    includesAny(clean, [
+      "how should we evaluate an llm rag system",
+      "how do we evaluate an llm rag system",
+      "how should i evaluate an llm rag system",
+      "evaluate an llm rag system",
+      "evaluate a rag system",
+      "rag evaluation",
+      "rag eval",
+    ])
+  ) {
+    return { detectedSubIntent: "rag_evaluation", detectedConcept: "skills" };
+  }
+
   if (includesAny(clean, [
     "how does joz use ai",
     "how does he use ai",
@@ -3281,18 +3299,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"

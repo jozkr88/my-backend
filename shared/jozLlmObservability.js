@@ -150,6 +150,32 @@ function verifyJozScopedFallbackGuard({ input = "", route = {}, trace = {} }) {
   ];
 }
 
+function isRagEvaluationPrompt(input = "") {
+  const clean = normalizeText(input);
+  return /\b(?:llm|rag|retrieval)\b/.test(clean) &&
+    /evaluate|evaluation|eval|assess|measure|quality|grounded|citation/.test(clean);
+}
+
+function verifyAudienceRelevance({ input = "", route = {}, trace = {}, reply = "" }) {
+  const knowledgeLevel = trace?.audienceProfile?.aiKnowledge?.id;
+  const genericBoundary = /not in the current joz knowledge base|outside the current deterministic joz answer set/i.test(reply);
+  const isSpecialistRagQuestion = knowledgeLevel === "ai_specialist" && isRagEvaluationPrompt(input);
+  const relevantAnswer = /retrieval|recall|precision|faithful|citation|grounded|relevance|completeness|latency|regression/i.test(reply);
+
+  if (!isSpecialistRagQuestion) {
+    return [];
+  }
+
+  const failed = route?.selectedRoute === "unknown_fallback" || genericBoundary || !relevantAnswer;
+  return [{
+    id: "audience_relevance",
+    status: failed ? "fail" : "pass",
+    detail: failed
+      ? "AI-specialist RAG question received a generic or irrelevant answer."
+      : "Answer addresses the AI-specialist RAG evaluation question.",
+  }];
+}
+
 function verifyBusinessValueDefinition(reply = "") {
   const clean = normalizeText(reply);
   const mentionsDefinition =
@@ -452,7 +478,8 @@ export function buildJozResponseVerification({
   });
   const routeChecks = verifyRouteSpecificReply({ route, reply, input, trace });
   const fallbackGuardChecks = verifyJozScopedFallbackGuard({ input, route, trace });
-  const checks = [...baseChecks, ...fallbackGuardChecks, ...routeChecks];
+  const relevanceChecks = verifyAudienceRelevance({ input, route, trace, reply });
+  const checks = [...baseChecks, ...fallbackGuardChecks, ...routeChecks, ...relevanceChecks];
   const status = summarizeChecks(checks);
 
   return {

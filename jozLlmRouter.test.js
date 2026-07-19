@@ -83,6 +83,7 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metric/i],
     ["I am d2c - how can Ai help me?", "business_need", "business_help", /customer experience/i],
     ["Is Joz a consultant or a builder?", "business_need", "consultant_builder", /both a consultant and a builder/i],
+    ["How should we evaluate an LLM RAG system?", "skills", "rag_evaluation", /retrieval recall|citation correctness|golden test set/i],
   ];
 
   for (const [input, selectedRoute, subIntent, expected] of cases) {
@@ -2482,6 +2483,44 @@ test("verification fails when a broad in-scope Joz prompt falls into unknown fal
     verification.checks.find((check) => check.id === "joz_scoped_fallback_guard")?.status,
     "fail"
   );
+});
+
+test("verification fails an AI-specialist RAG question that receives a generic boundary answer", () => {
+  const verification = buildJozResponseVerification({
+    input: "How should we evaluate an LLM RAG system?",
+    route: { selectedRoute: "unknown_fallback", detectedSubIntent: "general" },
+    resolution: { fallbackUsed: false, answerClass: "scope_boundary" },
+    trace: {
+      selectedRoute: "unknown_fallback",
+      answerClass: "scope_boundary",
+      confidence: "high",
+      audienceProfile: { aiKnowledge: { id: "ai_specialist" } },
+    },
+    reply: "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+    retrievedDocuments: [],
+    latencyMs: 200,
+  });
+
+  assert.equal(verification.status, "fail");
+  assert.equal(verification.checks.find((check) => check.id === "audience_relevance")?.status, "fail");
+});
+
+test("verification passes an AI-specialist RAG answer with an evaluation rubric", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "How should we evaluate an LLM RAG system?";
+  const route = routeJozLlmQuery({ input, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext, retrievedDocuments: [] });
+  const trace = {
+    ...buildJozRouteTrace(route, resolution),
+    audienceProfile: { aiKnowledge: { id: "ai_specialist" } },
+  };
+  const verification = buildJozResponseVerification({
+    input, route, resolution, trace, reply: resolution.reply, retrievedDocuments: [], latencyMs: 200,
+  });
+
+  assert.equal(route.detectedSubIntent, "rag_evaluation");
+  assert.notEqual(verification.status, "fail");
+  assert.equal(verification.checks.find((check) => check.id === "audience_relevance")?.status, "pass");
 });
 
 test("verification passes the broad Joz fallback guard when the profile prompt resolves to capabilities", () => {
