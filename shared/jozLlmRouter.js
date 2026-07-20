@@ -1273,7 +1273,37 @@ function buildShortClarificationReply(clean = "") {
   return null;
 }
 
-function buildJozScopeBoundaryReply(clean = "") {
+export const JOZ_ROTATING_FALLBACKS = [
+  "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+  "Joz connects business problems to working AI systems. Ask about a goal, industry, or capability.",
+  "Joz works across strategy, architecture, engineering, and AI delivery. What would you like to explore?",
+  "Joz turns complex systems into measurable outcomes. Is your focus business value, skills, or infrastructure?",
+  "Joz combines consulting with hands-on building. What challenge should we start with?",
+  "Joz designs governed AI systems that can work in the real world. What is your use case?",
+  "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+  "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
+];
+
+function hashFallbackInput(value = "") {
+  return [...String(value || "")].reduce((hash, character) => ((hash * 31 + character.charCodeAt(0)) >>> 0), 7);
+}
+
+export function selectJozRotatingFallback(clean = "", messages = []) {
+  const assistantReplies = Array.isArray(messages)
+    ? messages
+        .filter((entry) => entry?.role === "assistant")
+        .map((entry) => String(entry.content || "").trim())
+        .filter(Boolean)
+    : [];
+  const previousReply = assistantReplies.at(-1) || "";
+  let index = hashFallbackInput(`${normalizeText(clean)}:${assistantReplies.length}`) % JOZ_ROTATING_FALLBACKS.length;
+  if (JOZ_ROTATING_FALLBACKS[index] === previousReply) {
+    index = (index + 1) % JOZ_ROTATING_FALLBACKS.length;
+  }
+  return JOZ_ROTATING_FALLBACKS[index];
+}
+
+function buildJozScopeBoundaryReply(clean = "", messages = []) {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (!normalized) return null;
 
@@ -1286,14 +1316,14 @@ function buildJozScopeBoundaryReply(clean = "") {
 
   if (!asksAboutJozOrPronoun || !questionLike) return null;
 
-  return "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.";
+  return selectJozRotatingFallback(normalized, messages);
 }
 
-function buildGenericScopeBoundaryReply(clean = "") {
+function buildGenericScopeBoundaryReply(clean = "", messages = []) {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (!normalized) return null;
 
-  return "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+  return selectJozRotatingFallback(normalized, messages);
 }
 
 function buildPolicyResolution({
@@ -2046,6 +2076,16 @@ function detectRecruiterOperational(clean) {
 }
 
 function detectBusinessNeed(clean) {
+  if (
+    includesAny(clean, [
+      "can joz actually build things",
+      "can joz build things",
+      "does joz actually build",
+    ])
+  ) {
+    return { detectedSubIntent: "consultant_builder", detectedConcept: "business_value" };
+  }
+
   if (
     includesAny(clean, [
       "i am a business owner with bad data",
@@ -3252,6 +3292,7 @@ function detectSkills(clean) {
       "deepest skills",
       "joz's skills",
       "what are joz's skills",
+      "what are joz skills",
       "what skills does joz have",
       "what skills does joz possess",
       "what is joz good at",
@@ -3273,6 +3314,8 @@ function detectSkills(clean) {
       "what does he actually build then",
       "what does he actually build",
       "what does he know about ai agents",
+      "what does joz know about ai agents",
+      "what does joz know about ai agent",
       "so what is he actually good at",
       "yo what does joz do then",
       "tell me more about joz",
@@ -3970,7 +4013,7 @@ export async function resolveUnknownJozReply({
     });
   }
 
-  const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean);
+  const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean, messages);
   if (jozScopeBoundaryReply) {
     return buildPolicyResolution({
       reply: jozScopeBoundaryReply,
@@ -4023,7 +4066,7 @@ export async function resolveUnknownJozReply({
   }
 
   if (!reply) {
-    const genericScopeBoundaryReply = buildGenericScopeBoundaryReply(clean);
+    const genericScopeBoundaryReply = buildGenericScopeBoundaryReply(clean, messages);
     return buildPolicyResolution({
       reply: genericScopeBoundaryReply || buildJozLlmFallbackReply(input),
       answerSource: "scope_boundary",

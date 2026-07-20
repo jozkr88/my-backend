@@ -6,9 +6,11 @@ import {
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   composeJozLlmRouteReply,
+  JOZ_ROTATING_FALLBACKS,
   resolveUnknownJozReply,
   routeJozLlmQuery,
   routeJozLlmQueryWithAwareness,
+  selectJozRotatingFallback,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 import { validateAppContext } from "./shared/meetJozWorld.js";
@@ -2970,6 +2972,43 @@ test("verification now fails the older operating-model draft unless governance i
     verification.checks.find((check) => check.id === "operating_model_policy_risk")?.status,
     "fail"
   );
+});
+
+test("rotates generic fallbacks without repeating the previous fallback", async () => {
+  assert.equal(JOZ_ROTATING_FALLBACKS.length, 8);
+  assert.equal(new Set(JOZ_ROTATING_FALLBACKS).size, 8);
+  for (const previousReply of JOZ_ROTATING_FALLBACKS) {
+    const nextReply = selectJozRotatingFallback("unmapped subject", [
+      { role: "assistant", content: previousReply },
+    ]);
+    assert.ok(JOZ_ROTATING_FALLBACKS.includes(nextReply));
+    assert.notEqual(nextReply, previousReply);
+  }
+
+  const resolution = await resolveUnknownJozReply({
+    input: "Discuss hyperdimensional pineapple governance",
+    messages: [{ role: "user", content: "Discuss hyperdimensional pineapple governance" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.ok(JOZ_ROTATING_FALLBACKS.includes(resolution.reply));
+  assert.equal(resolution.composer, "buildGenericScopeBoundaryReply");
+});
+
+test("natural recruiter phrasing stays on verified Joz answers", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const cases = [
+    ["Can Joz actually build things?", "business_need", "consultant_builder", /both a consultant and a builder/i],
+    ["What are Joz skills?", "skills", "capabilities_overview", /deepest skills|agentic AI architecture/i],
+    ["What does Joz know about AI agents?", "skills", "capabilities_overview", /deepest skills|agentic AI architecture/i],
+  ];
+  for (const [input, expectedRoute, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext, retrievedDocuments: [] });
+    assert.equal(route.selectedRoute, expectedRoute, input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(String(resolution.reply || ""), expectedReply, input);
+  }
 });
 
 test("covers recruiter-critical live response repairs", () => {
