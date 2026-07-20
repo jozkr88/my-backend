@@ -82,7 +82,7 @@ dotenv.config();
 await initDatabase();
 
 const app = express();
-app.set("trust proxy", 1);
+app.set("trust proxy", 2);
 const isEphemeralFilesystem =
   process.env.VERCEL === "1" ||
   process.env.VERCEL === "true" ||
