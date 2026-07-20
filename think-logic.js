@@ -16,12 +16,12 @@ import {
   SURPRISE_ME_PHRASES,
   hasPhrase as sharedHasPhrase,
   normalizeVoiceTranscript,
-} from "./src/shared/voiceCanonical.js";
+} from "./shared/voiceCanonical.js";
 import {
   isMeetJozActionAllowed,
-} from "./src/shared/appWorld.js";
-import { resolveMeetJozSemanticCommand } from "./src/shared/meetJozSemantics.js";
-import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "./src/shared/voiceActions.js";
+} from "./shared/appWorld.js";
+import { resolveMeetJozSemanticCommand } from "./shared/meetJozSemantics.js";
+import { KNOWN_VOICE_ACTIONS, normalizeVoiceAction } from "./shared/voiceActions.js";
 
 export const SITE_TARGETS = {
   maxx: "/neo/maxx",
@@ -338,8 +338,8 @@ export function classifyUtilityCommand(clean) {
   if (hasPhrase(clean, CONTACT_PHRASES)) {
     return {
       action: "contact_joz",
-      target: "mailto:joz@neomaxxing.com?subject=Hey%20Joz&body=Hi%20Joz%2C%20I%20just%20checked%20out%20your%20work!%20",
-      awareness: "Opening your email app to contact Joz at joz@neomaxxing.com.",
+      target: "mailto:joz@meetjoz.com",
+      awareness: "Opening your email app to contact Joz at joz@meetjoz.com.",
     };
   }
 

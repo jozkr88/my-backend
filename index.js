@@ -4,13 +4,30 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { fileURLToPath } from "url";
 import {
+  appendJozMessage,
+  cleanupExpiredJozData,
+  createJozPrivacyRequest,
+  createJozCallbackRequest,
+  createJozConversation,
+  deleteJozPrivacyBundle,
+  exportJozPrivacyBundle,
   getPortalTransition,
+  getPrimaryJozProfile,
+  getJozDocumentsByIntent,
   getStructuredWorldState,
   initDatabase,
   isDatabaseEnabled,
+  listRecentJozLlmRequestEvents,
+  listRecentJozLlmEvaluations,
+  listJozLlmRepairCandidates,
   logReasoningEvent,
+  logJozLlmRequestEvent,
+  reviewJozLlmRepairCandidate,
+  reviewJozLlmRequestEvent,
 } from "./db.js";
 import {
   APP_CONTEXT,
@@ -32,23 +49,193 @@ import {
 import { resolveAgenticAction } from "./world-agent.js";
 import { approveAgentProposal, buildAgentSnapshot, buildFallbackAgentReply } from "./full-agent.js";
 import { buildReasoningLayers } from "./reasoning-layers.js";
+import {
+  buildMeetJozWorldAnswerContext,
+  buildMeetJozWorldAwarenessReply,
+  buildMeetJozWorldAwarenessResolution,
+  resolveMeetJozWorldEntity,
+  validateAppContext,
+} from "./shared/meetJozWorld.js";
+import {
+  buildJozLlmContext,
+  enforceJozLlmReplyLimit,
+} from "./shared/jozLlmProfile.js";
+import {
+  assertNoFallbackHijack,
+  buildJozInScopeFallbackRepair,
+  buildJozRouteTrace,
+  buildRoleAwareJozContext,
+  composeJozLlmRouteReply,
+  buildVisitorLocationReply,
+  resolveUnknownJozReply,
+  routeJozLlmQueryWithAwareness,
+  routeJozLlmQuery,
+} from "./shared/jozLlmRouter.js";
+import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
+import { classifyJozAudience } from "./shared/jozAudienceClassifier.js";
+import { resolveJozRequestGeo } from "./shared/jozGeoLocation.js";
 
+const execFileAsync = promisify(execFile);
 
 dotenv.config();
 
 await initDatabase();
 
 const app = express();
+app.set("trust proxy", 1);
 const isEphemeralFilesystem =
   process.env.VERCEL === "1" ||
   process.env.VERCEL === "true" ||
   Boolean(process.env.RENDER) ||
   process.env.DISABLE_FILE_MEMORY === "1";
 const canPersistToLocalDisk = !isEphemeralFilesystem;
+const JOZ_CHAT_SESSION_WINDOW_MS = 30_000;
+const JOZ_CHAT_SESSION_MAX_REQUESTS = 5;
+const JOZ_CHAT_IP_WINDOW_MS = 5 * 60_000;
+const JOZ_CHAT_IP_MAX_REQUESTS = 20;
+const JOZ_CHAT_DUPLICATE_WINDOW_MS = 10_000;
+const DEFAULT_JOZ_CONVERSATION_RETENTION_DAYS = 30;
+const DEFAULT_JOZ_CALLBACK_RETENTION_DAYS = 30;
+const DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS = 365;
+const jozChatSessionLog = new Map();
+const jozChatIpLog = new Map();
+const jozChatDuplicateLog = new Map();
+const jozCallbackFallbackStore = [];
+const jozObservabilityFallbackStore = [];
+const jozRecentSessionMessagesFallbackStore = new Map();
+const isNodeTestRuntime =
+  process.argv.includes("--test") || process.execArgv.includes("--test");
+
+function parseRetentionDays(value, fallbackDays) {
+  const parsed = Number.parseInt(String(value || ""), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallbackDays;
+}
+
+const JOZ_CONVERSATION_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_CONVERSATION_RETENTION_DAYS,
+  DEFAULT_JOZ_CONVERSATION_RETENTION_DAYS
+);
+const JOZ_CALLBACK_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_CALLBACK_RETENTION_DAYS,
+  DEFAULT_JOZ_CALLBACK_RETENTION_DAYS
+);
+const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+  DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS
+);
+
+function normalizeJozChatMessage(text = "") {
+  return String(text || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
+
+function getFallbackRecentJozSessionMessages({ sessionKey = null, limit = 12 } = {}) {
+  const key = String(sessionKey || "").trim();
+  if (!key) return [];
+  const messages = jozRecentSessionMessagesFallbackStore.get(key) || [];
+  return messages.slice(-Math.max(1, limit)).map((message) => ({
+    role: message?.role === "assistant" ? "assistant" : "user",
+    content: String(message?.content || ""),
+    metadata: message?.metadata && typeof message.metadata === "object" ? message.metadata : {},
+  }));
+}
+
+function appendFallbackRecentJozSessionMessage({
+  sessionKey = null,
+  role = "user",
+  content = "",
+  metadata = {},
+} = {}) {
+  const key = String(sessionKey || "").trim();
+  const text = String(content || "").trim();
+  if (!key || !text) return;
+
+  const existing = jozRecentSessionMessagesFallbackStore.get(key) || [];
+  existing.push({
+    role: role === "assistant" ? "assistant" : "user",
+    content: text,
+    metadata: metadata && typeof metadata === "object" ? metadata : {},
+  });
+  jozRecentSessionMessagesFallbackStore.set(key, existing.slice(-24));
+}
+
+function pruneRecentTimestamps(timestamps = [], windowMs, now) {
+  return timestamps.filter((timestamp) => now - timestamp < windowMs);
+}
+
+function trackJozChatWindow(store, key, windowMs, now) {
+  const recent = pruneRecentTimestamps(store.get(key) || [], windowMs, now);
+  recent.push(now);
+  store.set(key, recent);
+  return recent;
+}
+
+function getClientIp(req) {
+  return (
+    String(req.ip || "").trim() ||
+    String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
+    String(req.socket?.remoteAddress || "").trim() ||
+    "unknown"
+  );
+}
+
+function enforceJozChatRateLimit(req, sessionKey, latestUserMessage) {
+  if (process.env.NODE_ENV !== "production" || isNodeTestRuntime) return null;
+
+  const now = Date.now();
+  const ip = getClientIp(req);
+  const normalizedMessage = normalizeJozChatMessage(latestUserMessage);
+  const sessionIdentifier = sessionKey || `ip:${ip}`;
+
+  const sessionEvents = trackJozChatWindow(
+    jozChatSessionLog,
+    sessionIdentifier,
+    JOZ_CHAT_SESSION_WINDOW_MS,
+    now
+  );
+  if (sessionEvents.length > JOZ_CHAT_SESSION_MAX_REQUESTS) {
+    return {
+      status: 429,
+      error: "Too many messages in this session. Please wait a moment.",
+      retryAfterMs: JOZ_CHAT_SESSION_WINDOW_MS,
+    };
+  }
+
+  const ipEvents = trackJozChatWindow(
+    jozChatIpLog,
+    ip,
+    JOZ_CHAT_IP_WINDOW_MS,
+    now
+  );
+  if (ipEvents.length > JOZ_CHAT_IP_MAX_REQUESTS) {
+    return {
+      status: 429,
+      error: "Too many requests from this IP. Please wait a moment.",
+      retryAfterMs: JOZ_CHAT_IP_WINDOW_MS,
+    };
+  }
+
+  if (normalizedMessage) {
+    const duplicateKey = `${sessionIdentifier}:${normalizedMessage}`;
+    const lastDuplicateTimestamp = jozChatDuplicateLog.get(duplicateKey) || 0;
+    if (now - lastDuplicateTimestamp < JOZ_CHAT_DUPLICATE_WINDOW_MS) {
+      return {
+        status: 429,
+        error: "Duplicate message sent too quickly. Please wait before retrying.",
+        retryAfterMs: JOZ_CHAT_DUPLICATE_WINDOW_MS,
+      };
+    }
+    jozChatDuplicateLog.set(duplicateKey, now);
+  }
+
+  return null;
+}
 
 // ✅ Universal CORS setup — works for DreamHost frontend + Vercel backend
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // or "https://neomaxxing.com"
+  res.setHeader("Access-Control-Allow-Origin", "*"); // or "https://meetjoz.com"
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
@@ -152,6 +339,7 @@ app.post("/api/agentic", async (req, res) => {
   try {
     const input = String(req.body?.input || req.body?.transcript || "").trim();
     const context = req.body?.context || {};
+    const appContext = req.body?.app_context || context?.app_context || {};
     const currentPortal = context?.currentPortal || context?.portal || "root";
     const structuredPortalKey = currentPortal === "maxx" ? "the-vibe-energy" : currentPortal;
     const currentStateKey = inferStructuredStateKey(currentPortal, context?.currentMesh || context?.mesh || null);
@@ -163,6 +351,7 @@ app.post("/api/agentic", async (req, res) => {
 
     const enrichedContext = {
       ...context,
+      app_context: appContext,
       structuredState,
       structuredAvailableActions: structuredState?.availableActions || [],
       allowedActions: context?.allowedActions || structuredState?.availableActions || [],
@@ -172,6 +361,11 @@ app.post("/api/agentic", async (req, res) => {
         [],
     };
     const snapshot = buildAgentSnapshot({ input, context: enrichedContext, worldMap, worldMemory });
+    const canonicalWorldReply = buildMeetJozWorldAwarenessReply({
+      input,
+      appContext: snapshot.validatedAppContext,
+      legacyContext: snapshot,
+    });
     let proposal = null;
 
     if (process.env.OPENAI_API_KEY) {
@@ -202,21 +396,47 @@ app.post("/api/agentic", async (req, res) => {
 
     const clean = snapshot.normalizedInput;
     const approved = approveAgentProposal({ clean, context: snapshot, worldMap, worldMemory, proposal });
-    const reply = proposal?.response || buildFallbackAgentReply({ approved, snapshot });
+    const reply =
+      canonicalWorldReply ||
+      approved?.awareness ||
+      proposal?.response ||
+      buildFallbackAgentReply({ approved, snapshot });
+    const trace = buildWorldAwarenessTrace({
+      input,
+      appContext: snapshot.validatedAppContext,
+      legacyContext: snapshot,
+      answerSource: canonicalWorldReply
+        ? "root_gold_pill / gold_pill concept"
+        : approved?.awareness
+          ? approved?.source || "deterministic"
+          : proposal?.response
+            ? "llm_proposal"
+            : "llm_fallback",
+    });
+    logWorldAwarenessTrace("/api/agentic", trace);
 
     return res.json({
-      intent: String(proposal?.intent || approved?.action || "").trim() || "noop",
+      intent:
+        String(
+          canonicalWorldReply
+            ? "world_awareness"
+            : proposal?.intent || approved?.action || ""
+        ).trim() || "noop",
       response: reply,
       params: {
         action: approved?.action || null,
         target: approved?.target || null,
-        awareness: approved?.awareness || null,
-        source: approved?.source || "agent_noop",
+        awareness: canonicalWorldReply || approved?.awareness || null,
+        source:
+          canonicalWorldReply
+            ? "world_awareness"
+            : approved?.source || "agent_noop",
       },
       approvedAction: approved?.action || null,
       approvedTarget: approved?.target || null,
-      approvedAwareness: approved?.awareness || null,
+      approvedAwareness: canonicalWorldReply || approved?.awareness || null,
       snapshot,
+      trace,
     });
   } catch (error) {
     console.error("❌ /api/agentic failed:", error);
@@ -227,7 +447,1084 @@ app.post("/api/agentic", async (req, res) => {
 // ------------------------------------------------------------
 // 3️⃣ AI Reasoning Endpoint
 // ------------------------------------------------------------
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
+
+function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
+  const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
+  const entity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+  const resolution = buildMeetJozWorldAwarenessResolution({ input, appContext, legacyContext });
+  return {
+    detectedIntent: answerContext.route,
+    detectedConcept: resolution.detectedConcept || entity.entity || null,
+    selectedRoute: answerContext.route,
+    selectedWorldRecord: resolution.selectedWorldRecord || entity.worldRecord || null,
+    answerSource: resolution.answerSource || answerSource,
+    responseMode: resolution.responseMode || null,
+    composer: resolution.composer || null,
+    fallbackUsed: Boolean(resolution.fallbackUsed),
+    validationPassed: resolution.validationPassed !== false,
+  };
+}
+
+function logWorldAwarenessTrace(label, trace) {
+  console.log(`🧭 ${label} trace`, trace);
+}
+
+function rememberJozObservabilityEvent(event) {
+  jozObservabilityFallbackStore.unshift({
+    id: `memory-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    created_at: new Date().toISOString(),
+    conversation_id: event?.conversationId || null,
+    session_key: event?.sessionKey || null,
+    ...event,
+  });
+  if (jozObservabilityFallbackStore.length > 100) {
+    jozObservabilityFallbackStore.length = 100;
+  }
+}
+
+function normalizeCallbackField(value = "", maxLength = 160) {
+  return String(value || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .slice(0, maxLength);
+}
+
+function normalizePrivacyEmail(value = "") {
+  return normalizeCallbackField(value, 160).toLowerCase();
+}
+
+function normalizePrivacyPhone(value = "") {
+  return String(value || "").replace(/\D+/g, "").slice(0, 32);
+}
+
+function normalizePrivacyRequestType(value = "") {
+  const normalized = normalizeCallbackField(value, 32).toLowerCase();
+  return normalized === "delete" ? "delete" : normalized === "export" ? "export" : "";
+}
+
+function hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone }) {
+  return Boolean(
+    (conversationId && sessionKey) ||
+      (callbackRequestId && (email || phone)) ||
+      email ||
+      phone
+  );
+}
+
+function getPrivacyRuntimeInfo() {
+  return {
+    retentionDays: {
+      conversations: JOZ_CONVERSATION_RETENTION_DAYS,
+      callbackRequests: JOZ_CALLBACK_RETENTION_DAYS,
+      privacyRequests: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+    },
+    processors: [
+      "Supabase",
+      "OpenAI",
+      "Resend",
+    ],
+  };
+}
+
+function buildCallbackNotificationText(record) {
+  return [
+    "New Get Called request",
+    `Name: ${record.name}`,
+    `Phone: ${record.phone}`,
+    `Best time: ${record.time}`,
+    `Email: ${record.email || "Not provided"}`,
+    `Source: ${record.source}`,
+    `Conversation ID: ${record.conversationId || "Not available"}`,
+  ].join("\n");
+}
+
+function getConfiguredCallbackChannels() {
+  return {
+    email:
+      Boolean(process.env.RESEND_API_KEY) &&
+      Boolean(process.env.CALLBACK_EMAIL_TO) &&
+      Boolean(process.env.CALLBACK_EMAIL_FROM),
+  };
+}
+
+async function sendCallbackEmail(record) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${String(process.env.RESEND_API_KEY || "").trim()}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: String(process.env.CALLBACK_EMAIL_FROM || "").trim(),
+      to: [String(process.env.CALLBACK_EMAIL_TO || "").trim()],
+      subject: `Get Called request from ${record.name}`,
+      text: buildCallbackNotificationText(record),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Resend email failed with ${response.status}`);
+  }
+
+  return response.json();
+}
+
+async function deliverCallbackRequest(record) {
+  const configured = getConfiguredCallbackChannels();
+  const channels = [];
+  const errors = [];
+
+  if (configured.email) {
+    try {
+      await sendCallbackEmail(record);
+      channels.push("email");
+    } catch (error) {
+      errors.push(`email:${error?.message || error}`);
+    }
+  }
+
+  const anyChannelConfigured = configured.email;
+  const status = channels.length
+    ? "delivered"
+    : anyChannelConfigured
+      ? "delivery_failed"
+      : "stored_only";
+
+  return {
+    status,
+    channels,
+    errors,
+  };
+}
+
+function rememberCallbackRequest(record) {
+  jozCallbackFallbackStore.push({
+    ...record,
+    storedAt: new Date().toISOString(),
+  });
+}
+
+function pruneFallbackCallbackStore() {
+  const cutoffTime =
+    Date.now() - JOZ_CALLBACK_RETENTION_DAYS * 24 * 60 * 60 * 1000;
+  let removed = 0;
+
+  for (let index = jozCallbackFallbackStore.length - 1; index >= 0; index -= 1) {
+    const storedAt = new Date(jozCallbackFallbackStore[index]?.storedAt || 0).getTime();
+    if (Number.isFinite(storedAt) && storedAt < cutoffTime) {
+      jozCallbackFallbackStore.splice(index, 1);
+      removed += 1;
+    }
+  }
+
+  return removed;
+}
+
+async function applyPrivacyRetentionPolicy() {
+  const summary = await cleanupExpiredJozData({
+    conversationRetentionDays: JOZ_CONVERSATION_RETENTION_DAYS,
+    callbackRetentionDays: JOZ_CALLBACK_RETENTION_DAYS,
+    privacyRequestRetentionDays: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+  });
+  const removedFallbackCallbacks = pruneFallbackCallbackStore();
+
+  if (
+    summary.deletedConversations ||
+    summary.deletedCallbackRequests ||
+    summary.deletedPrivacyRequests ||
+    removedFallbackCallbacks
+  ) {
+    console.log("🧹 Privacy retention cleanup", {
+      ...summary,
+      deletedFallbackCallbackRequests: removedFallbackCallbacks,
+    });
+  }
+}
+
+await applyPrivacyRetentionPolicy();
+
+async function exportFallbackPrivacyBundle({ callbackRequestId, email, phone }) {
+  const normalizedEmail = normalizePrivacyEmail(email);
+  const normalizedPhone = normalizePrivacyPhone(phone);
+  const callbackRequestIdText = callbackRequestId ? String(callbackRequestId) : "";
+  const callbackRequests = jozCallbackFallbackStore.filter((record) => {
+    const emailMatches =
+      !normalizedEmail ||
+      normalizePrivacyEmail(record.email || record.requestedEmail || "") === normalizedEmail;
+    const phoneMatches =
+      !normalizedPhone ||
+      normalizePrivacyPhone(record.phone || record.requestedPhone || "") === normalizedPhone;
+    const callbackIdMatches =
+      !callbackRequestIdText ||
+      String(record.callbackRequestId || record.id || "") === callbackRequestIdText;
+    return emailMatches && phoneMatches && callbackIdMatches;
+  });
+
+  return {
+    exportedAt: new Date().toISOString(),
+    filters: {
+      conversationId: null,
+      sessionKey: null,
+      callbackRequestId: callbackRequestId || null,
+      email: email || null,
+      phone: phone || null,
+    },
+    conversations: [],
+    messages: [],
+    callbackRequests,
+  };
+}
+
+function deleteFallbackPrivacyBundle({ callbackRequestId, email, phone }) {
+  const normalizedEmail = normalizePrivacyEmail(email);
+  const normalizedPhone = normalizePrivacyPhone(phone);
+  const callbackRequestIdText = callbackRequestId ? String(callbackRequestId) : "";
+  let deletedCallbackRequests = 0;
+
+  for (let index = jozCallbackFallbackStore.length - 1; index >= 0; index -= 1) {
+    const record = jozCallbackFallbackStore[index];
+    const emailMatches =
+      !normalizedEmail ||
+      normalizePrivacyEmail(record.email || record.requestedEmail || "") === normalizedEmail;
+    const phoneMatches =
+      !normalizedPhone ||
+      normalizePrivacyPhone(record.phone || record.requestedPhone || "") === normalizedPhone;
+    const callbackIdMatches =
+      !callbackRequestIdText ||
+      String(record.callbackRequestId || record.id || "") === callbackRequestIdText;
+
+    if (emailMatches && phoneMatches && callbackIdMatches) {
+      jozCallbackFallbackStore.splice(index, 1);
+      deletedCallbackRequests += 1;
+    }
+  }
+
+  return {
+    deletedConversations: 0,
+    deletedMessages: 0,
+    deletedCallbackRequests,
+  };
+}
+
+app.get("/api/privacy/meta", (req, res) => {
+  res.json({
+    ok: true,
+    ...getPrivacyRuntimeInfo(),
+  });
+});
+
+app.post("/api/privacy/export", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+    const sessionKey = normalizeCallbackField(req.body?.sessionKey, 120) || null;
+    const callbackRequestId = normalizeCallbackField(req.body?.callbackRequestId, 80) || null;
+    const email = normalizePrivacyEmail(req.body?.email);
+    const phone = normalizePrivacyPhone(req.body?.phone);
+
+    if (!hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone })) {
+      return res.status(400).json({
+        error:
+          "Provide conversationId and sessionKey, or callbackRequestId plus email/phone, or a matching email/phone.",
+      });
+    }
+
+    const payload = isDatabaseEnabled()
+      ? await exportJozPrivacyBundle({
+          conversationId,
+          sessionKey,
+          callbackRequestId,
+          email,
+          phone,
+        })
+      : await exportFallbackPrivacyBundle({ callbackRequestId, email, phone });
+
+    const privacyRequestId = await createJozPrivacyRequest({
+      requestType: "export",
+      requestStatus:
+        payload.conversations.length || payload.messages.length || payload.callbackRequests.length
+          ? "completed"
+          : "no_match",
+      email: email || null,
+      phone: phone || null,
+      conversationId,
+      callbackRequestId: callbackRequestId ? Number(callbackRequestId) || null : null,
+      sessionKey,
+      source: "api_privacy_export",
+      payload: {
+        matchCounts: {
+          conversations: payload.conversations.length,
+          messages: payload.messages.length,
+          callbackRequests: payload.callbackRequests.length,
+        },
+      },
+    });
+
+    return res.json({
+      ok: true,
+      privacyRequestId,
+      ...getPrivacyRuntimeInfo(),
+      data: payload,
+    });
+  } catch (error) {
+    console.error("❌ /api/privacy/export failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/privacy/delete", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+    const sessionKey = normalizeCallbackField(req.body?.sessionKey, 120) || null;
+    const callbackRequestId = normalizeCallbackField(req.body?.callbackRequestId, 80) || null;
+    const email = normalizePrivacyEmail(req.body?.email);
+    const phone = normalizePrivacyPhone(req.body?.phone);
+
+    if (!hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone })) {
+      return res.status(400).json({
+        error:
+          "Provide conversationId and sessionKey, or callbackRequestId plus email/phone, or a matching email/phone.",
+      });
+    }
+
+    const deletion = isDatabaseEnabled()
+      ? await deleteJozPrivacyBundle({
+          conversationId,
+          sessionKey,
+          callbackRequestId,
+          email,
+          phone,
+        })
+      : deleteFallbackPrivacyBundle({ callbackRequestId, email, phone });
+
+    const privacyRequestId = await createJozPrivacyRequest({
+      requestType: "delete",
+      requestStatus:
+        deletion.deletedConversations ||
+        deletion.deletedMessages ||
+        deletion.deletedCallbackRequests
+          ? "completed"
+          : "no_match",
+      email: email || null,
+      phone: phone || null,
+      conversationId,
+      callbackRequestId: callbackRequestId ? Number(callbackRequestId) || null : null,
+      sessionKey,
+      source: "api_privacy_delete",
+      payload: deletion,
+    });
+
+    return res.json({
+      ok: true,
+      privacyRequestId,
+      ...getPrivacyRuntimeInfo(),
+      deletion,
+    });
+  } catch (error) {
+    console.error("❌ /api/privacy/delete failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/privacy/request", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const requestType = normalizePrivacyRequestType(req.body?.requestType);
+    const conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+    const sessionKey = normalizeCallbackField(req.body?.sessionKey, 120) || null;
+    const callbackRequestId = normalizeCallbackField(req.body?.callbackRequestId, 80) || null;
+    const email = normalizePrivacyEmail(req.body?.email);
+    const phone = normalizePrivacyPhone(req.body?.phone);
+    const details = normalizeCallbackField(req.body?.details, 800);
+
+    if (!requestType) {
+      return res.status(400).json({ error: "requestType must be export or delete" });
+    }
+
+    const privacyRequestId = await createJozPrivacyRequest({
+      requestType,
+      requestStatus: hasVerifiedPrivacyLookup({
+        conversationId,
+        sessionKey,
+        callbackRequestId,
+        email,
+        phone,
+      })
+        ? "received"
+        : "needs_manual_review",
+      email: email || null,
+      phone: phone || null,
+      conversationId,
+      callbackRequestId: callbackRequestId ? Number(callbackRequestId) || null : null,
+      sessionKey,
+      source: "api_privacy_request",
+      payload: {
+        details,
+        userAgent: String(req.headers["user-agent"] || "").slice(0, 500),
+        ip: getClientIp(req),
+      },
+    });
+
+    return res.json({
+      ok: true,
+      privacyRequestId,
+      message:
+        "Privacy request recorded. If verification is insufficient for automatic handling, manual review is required.",
+      ...getPrivacyRuntimeInfo(),
+    });
+  } catch (error) {
+    console.error("❌ /api/privacy/request failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/joz-llm", async (req, res) => {
+  try {
+    const requestStartedAt = Date.now();
+    const requestGeoPromise = isNodeTestRuntime
+      ? Promise.resolve(null)
+      : resolveJozRequestGeo(getClientIp(req));
+    const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
+    const context = req.body?.context || {};
+    const sessionKey = String(req.body?.conversationId || req.body?.sessionKey || "").trim() || null;
+    const latestUserMessage =
+      [...messages].reverse().find((entry) => entry?.role === "user")?.content || "";
+    const legacyRuntimeContext = {
+      currentPortal: context?.currentPortal || "root",
+      currentMesh: context?.currentMesh || null,
+      currentMeshStage: context?.currentMeshStage || null,
+    };
+
+    if (!String(latestUserMessage || "").trim()) {
+      return res.status(400).json({ error: "Missing user message" });
+    }
+
+    const validatedAppContext = validateAppContext(
+      context?.app_context || {},
+      legacyRuntimeContext
+    ).value;
+    const rateLimitResult = enforceJozChatRateLimit(
+      req,
+      sessionKey,
+      latestUserMessage
+    );
+    if (rateLimitResult) {
+      return res.status(rateLimitResult.status).json(rateLimitResult);
+    }
+
+    const requestGeo = await requestGeoPromise;
+    const answerContext = requestGeo
+      ? { ...context, visitorGeo: requestGeo }
+      : context;
+
+    const recentSessionMessages = getFallbackRecentJozSessionMessages({
+      sessionKey,
+      limit: 12,
+    });
+    const route = routeJozLlmQueryWithAwareness({
+      input: latestUserMessage,
+      appContext: validatedAppContext,
+      legacyContext: legacyRuntimeContext,
+      recentMessages: recentSessionMessages,
+    });
+    const intentMode =
+      String(context?.intentMode || "").trim().toLowerCase() ||
+      route.selectedRoute;
+    const profile = await getPrimaryJozProfile();
+    const conversationId = await createJozConversation({
+      profileId: profile?.id,
+      sessionKey,
+      intentMode,
+      context: legacyRuntimeContext,
+    });
+
+    const retrievalIntentMode =
+      route.selectedRoute === "business_need" ||
+      route.selectedRoute === "systems_mindset" ||
+      route.selectedRoute === "skills"
+        ? route.selectedRoute
+        : "skills";
+    const retrievedDocuments = await getJozDocumentsByIntent(
+      retrievalIntentMode,
+      8,
+      latestUserMessage
+    );
+    const retrievalContext = retrievedDocuments.map((doc) => ({
+      title: doc.title,
+      category: doc.category,
+      summary: doc.summary,
+      body: doc.body,
+      metadata: doc.metadata,
+    }));
+
+    const roleAwareContext = buildRoleAwareJozContext({
+      buildJozLlmContext,
+      profile,
+      context: answerContext,
+      intentMode: retrievalIntentMode,
+      retrievedDocuments: retrievalContext,
+    });
+    const ownedResolution =
+      buildVisitorLocationReply(latestUserMessage, requestGeo) ||
+      composeJozLlmRouteReply({
+        route,
+        input: latestUserMessage,
+        appContext: validatedAppContext,
+        legacyContext: legacyRuntimeContext,
+        retrievedDocuments: retrievalContext,
+      });
+    const resolution =
+      ownedResolution ||
+      (await resolveUnknownJozReply({
+        input: latestUserMessage,
+        messages,
+        openai,
+        roleAwareContext,
+      }));
+
+    assertNoFallbackHijack(route, resolution);
+
+    let reply = String(resolution?.reply || "").trim();
+    if (!reply) {
+      reply = enforceJozLlmReplyLimit("", 55);
+    }
+    const preAnswerDraft = reply;
+
+    // Audience classification is observability-only. It does not select a route,
+    // alter the answer, or change the verification rules.
+    const audienceProfile = classifyJozAudience({
+      input: latestUserMessage,
+      recentMessages: recentSessionMessages,
+      messages,
+    });
+    let trace = {
+      ...buildJozRouteTrace(route, resolution),
+      audienceProfile,
+    };
+    let verification = buildJozResponseVerification({
+      input: latestUserMessage,
+      route,
+      resolution,
+      trace,
+      reply,
+      retrievedDocuments,
+      latencyMs: Date.now() - requestStartedAt,
+    });
+    const initialVerificationStatus = verification.status;
+    let effectiveRoute = route;
+    let effectiveResolution = resolution;
+    let verificationRecovery = null;
+
+    // A narrowly scoped repair may recover an in-scope business question that
+    // was misrouted to the generic boundary. It is accepted only when the
+    // repaired answer passes the same deterministic verification checks.
+    const fallbackRepair = buildJozInScopeFallbackRepair({
+      input: latestUserMessage,
+      route,
+      resolution,
+      retrievedDocuments: retrievalContext,
+    });
+    if (fallbackRepair) {
+      const repairedTrace = {
+        ...buildJozRouteTrace(fallbackRepair.route, fallbackRepair.resolution),
+        audienceProfile,
+      };
+      const repairedVerification = buildJozResponseVerification({
+        input: latestUserMessage,
+        route: fallbackRepair.route,
+        resolution: fallbackRepair.resolution,
+        trace: repairedTrace,
+        reply: fallbackRepair.resolution.reply,
+        retrievedDocuments,
+        latencyMs: Date.now() - requestStartedAt,
+      });
+
+      if (repairedVerification.status !== "fail") {
+        effectiveRoute = fallbackRepair.route;
+        effectiveResolution = fallbackRepair.resolution;
+        reply = String(fallbackRepair.resolution.reply || "").trim();
+        verification = repairedVerification;
+        verificationRecovery = {
+          corrected: true,
+          strategy: fallbackRepair.strategy,
+          originalRoute: route.selectedRoute,
+          originalAnswerClass: resolution.answerClass || null,
+          originalDraft: preAnswerDraft,
+          finalAnswer: reply,
+        };
+        trace = {
+          ...repairedTrace,
+          verificationRecovery,
+        };
+      }
+    }
+
+    const verificationFlow = {
+      corrected: Boolean(verificationRecovery),
+      initial: {
+        reply: preAnswerDraft,
+        verificationStatus: verificationRecovery ? "repaired" : initialVerificationStatus,
+        route: route.selectedRoute,
+        subIntent: route.detectedSubIntent || null,
+      },
+      final: {
+        reply,
+        verificationStatus: verification.status,
+        route: effectiveRoute.selectedRoute,
+        subIntent: effectiveRoute.detectedSubIntent || null,
+      },
+    };
+    trace = {
+      ...trace,
+      preAnswerDraft,
+      finalAnswer: reply,
+      verificationFlow,
+    };
+    const retrievedCategories =
+      effectiveResolution?.retrievedCategories?.length
+        ? effectiveResolution.retrievedCategories
+        : retrievedDocuments.map((doc) => doc.category);
+    logWorldAwarenessTrace("/api/joz-llm", trace);
+
+    if (conversationId) {
+      await appendJozMessage({
+        conversationId,
+        role: "user",
+        content: latestUserMessage,
+        metadata: { intentMode: effectiveRoute.selectedRoute, route: effectiveRoute.selectedRoute },
+      });
+      await appendJozMessage({
+        conversationId,
+        role: "assistant",
+        content: reply,
+        metadata: {
+          intentMode: effectiveRoute.selectedRoute,
+          route: effectiveRoute.selectedRoute,
+          retrievedCategories,
+          trace,
+          verification,
+        },
+      });
+    }
+
+    appendFallbackRecentJozSessionMessage({
+      sessionKey,
+      role: "user",
+      content: latestUserMessage,
+      metadata: { intentMode: effectiveRoute.selectedRoute, route: effectiveRoute.selectedRoute },
+    });
+    appendFallbackRecentJozSessionMessage({
+      sessionKey,
+      role: "assistant",
+      content: reply,
+      metadata: {
+        intentMode: effectiveRoute.selectedRoute,
+        route: effectiveRoute.selectedRoute,
+        retrievedCategories,
+        trace,
+        verification,
+      },
+    });
+
+    const requestContext = {
+      ...legacyRuntimeContext,
+      ...(requestGeo ? { geo: requestGeo } : {}),
+    };
+    const observabilityEvent = {
+      conversationId,
+      sessionKey,
+      route: effectiveRoute.selectedRoute,
+      intentMode: effectiveRoute.selectedRoute,
+      userMessage: latestUserMessage,
+      assistantReply: reply,
+      requestContext,
+      trace,
+      verification,
+      retrievedCategories,
+      retrievedDocuments: retrievedDocuments.map((doc) => ({
+        title: doc.title,
+        category: doc.category,
+        slug: doc?.metadata?.slug || null,
+        verificationStatus:
+          doc?.metadata?.verification_status ||
+          doc?.metadata?.verification?.status ||
+          null,
+      })),
+      latencyMs: verification.metrics.latencyMs,
+      responseStatus: verification.status === "fail" ? "verification_failed" : "ok",
+    };
+
+    if (isDatabaseEnabled()) {
+      await logJozLlmRequestEvent(observabilityEvent);
+    } else {
+      rememberJozObservabilityEvent(observabilityEvent);
+    }
+
+    return res.json({
+      reply,
+      conversationId,
+      intentMode: effectiveRoute.selectedRoute,
+      actions: Array.isArray(effectiveResolution?.actions) ? effectiveResolution.actions : [],
+      citations: Array.isArray(verification?.citations) ? verification.citations : [],
+      retrievedCategories,
+      mode: effectiveRoute.selectedRoute,
+      trace,
+      audienceProfile,
+      verification,
+      verificationFlow,
+      observability: {
+        latencyMs: verification.metrics.latencyMs,
+        retrievedDocumentCount: verification.metrics.retrievedDocumentCount,
+        logged: true,
+      },
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/observability", async (req, res) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 20));
+    const events = isDatabaseEnabled()
+      ? await listRecentJozLlmRequestEvents(limit)
+      : jozObservabilityFallbackStore.slice(0, limit);
+    // Decorate older runs at read time so the dashboard can analyze history
+    // without rewriting or migrating any existing observability records.
+    const decoratedEvents = events.map((event) => {
+      if (event?.trace?.audienceProfile || event?.trace?.audience_profile) return event;
+      const userMessage = event?.userMessage || event?.user_message || "";
+      const audienceProfile = classifyJozAudience({ input: userMessage });
+      const existingTrace =
+        event?.trace && typeof event.trace === "object"
+          ? event.trace
+          : (() => {
+              try {
+                const parsed = JSON.parse(String(event?.trace || ""));
+                return parsed && typeof parsed === "object" ? parsed : {};
+              } catch {
+                return {};
+              }
+            })();
+      return {
+        ...event,
+        trace: {
+          ...existingTrace,
+          audienceProfile,
+        },
+      };
+    });
+
+    return res.json({
+      ok: true,
+      count: decoratedEvents.length,
+      storage: isDatabaseEnabled() ? "database" : "memory",
+      events: decoratedEvents,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/observability failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.patch("/api/joz-llm/observability/:id/review", async (req, res) => {
+  try {
+    if (!isDatabaseEnabled()) {
+      return res.status(503).json({ error: "Durable review storage is not configured" });
+    }
+    const event = await reviewJozLlmRequestEvent({
+      eventId: req.params.id,
+      reviewStatus: req.body?.reviewStatus,
+      issueType: req.body?.issueType,
+      reviewNotes: req.body?.reviewNotes,
+      approvedCorrection: req.body?.approvedCorrection,
+      reviewedBy: req.body?.reviewedBy,
+    });
+    if (!event) return res.status(404).json({ error: "Observability event not found" });
+    return res.json({ ok: true, event });
+  } catch (error) {
+    console.error("❌ /api/joz-llm observability review failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/evaluations", async (req, res) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 100));
+    const evaluations = isDatabaseEnabled()
+      ? await listRecentJozLlmEvaluations(limit)
+      : [];
+    return res.json({
+      ok: true,
+      count: evaluations.length,
+      storage: isDatabaseEnabled() ? "database" : "memory",
+      evaluations,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/evaluations failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/repair-candidates", async (req, res) => {
+  try {
+    const limit = Math.max(1, Math.min(100, Number(req.query?.limit) || 100));
+    const repairCandidates = isDatabaseEnabled()
+      ? await listJozLlmRepairCandidates(limit)
+      : [];
+    return res.json({
+      ok: true,
+      count: repairCandidates.length,
+      storage: isDatabaseEnabled() ? "database" : "memory",
+      repairCandidates,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/repair-candidates failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.patch("/api/joz-llm/repair-candidates/:id", async (req, res) => {
+  try {
+    if (!isDatabaseEnabled()) {
+      return res.status(503).json({ error: "Durable repair storage is not configured" });
+    }
+    const action = String(req.body?.action || "").trim().toLowerCase();
+    let regressionReport = {};
+
+    if (action === "approve") {
+      const goldenRunner = path.resolve(
+        path.dirname(fileURLToPath(import.meta.url)),
+        "tools/check-joz-llm-golden.mjs"
+      );
+      const result = await execFileAsync(process.execPath, [goldenRunner], {
+        timeout: 30_000,
+        maxBuffer: 2 * 1024 * 1024,
+      });
+      regressionReport = JSON.parse(String(result.stdout || "{}"));
+      if (regressionReport.failed > 0) {
+        return res.status(409).json({
+          error: "Repair cannot be approved while the golden regression suite is failing",
+          regressionReport,
+        });
+      }
+    }
+
+    const candidate = await reviewJozLlmRepairCandidate({
+      candidateId: req.params.id,
+      action,
+      reviewedBy: req.body?.reviewedBy,
+      regressionReport,
+    });
+    if (!candidate) return res.status(404).json({ error: "Repair candidate not found" });
+    return res.json({
+      ok: true,
+      candidate,
+      note:
+        action === "approve"
+          ? "Approved after the golden regression gate. No production knowledge or routing was mutated automatically."
+          : "Repair candidate status updated.",
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm repair review failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/joz-llm/landing", async (req, res) => {
+  try {
+    const label = String(req.body?.label || "").trim();
+    const assistantContent = String(req.body?.assistantContent || "").trim();
+    const intentMode = String(req.body?.intentMode || "").trim().toLowerCase() || null;
+    const sessionKey = String(req.body?.conversationId || req.body?.sessionKey || "").trim() || null;
+    const metadata = req.body?.metadata && typeof req.body.metadata === "object"
+      ? req.body.metadata
+      : {};
+
+    if (!label || !assistantContent) {
+      return res.status(400).json({ error: "Missing landing payload" });
+    }
+
+    const profile = await getPrimaryJozProfile();
+    const conversationId = await createJozConversation({
+      profileId: profile?.id,
+      sessionKey,
+      intentMode,
+      context: {
+        currentPortal: req.body?.context?.currentPortal || "root",
+        currentMesh: req.body?.context?.currentMesh || null,
+        currentMeshStage: req.body?.context?.currentMeshStage || null,
+      },
+    });
+
+    if (conversationId) {
+      await appendJozMessage({
+        conversationId,
+        role: "user",
+        content: label,
+        messageKind: "landing_selection",
+        metadata: {
+          intentMode,
+          source: "landing_button",
+          ...metadata,
+        },
+      });
+      await appendJozMessage({
+        conversationId,
+        role: "assistant",
+        content: assistantContent,
+        messageKind: "landing_panel",
+        metadata: {
+          intentMode,
+          source: "landing_button",
+          ...metadata,
+        },
+      });
+    }
+
+    return res.json({
+      ok: true,
+      conversationId,
+      intentMode,
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/landing failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/joz-llm/callback-request", async (req, res) => {
+  try {
+    await applyPrivacyRetentionPolicy();
+
+    const name = normalizeCallbackField(req.body?.name, 120);
+    const phone = normalizeCallbackField(req.body?.phone, 80);
+    const time = normalizeCallbackField(req.body?.time, 160);
+    const email = normalizeCallbackField(req.body?.email, 160);
+    const source = normalizeCallbackField(req.body?.source, 80) || "joz_llm";
+    const sessionKey =
+      normalizeCallbackField(req.body?.conversationId || req.body?.sessionKey, 120) || null;
+    const context = {
+      currentPortal: req.body?.context?.currentPortal || "root",
+      currentMesh: req.body?.context?.currentMesh || null,
+      currentMeshStage: req.body?.context?.currentMeshStage || null,
+    };
+    const consent = {
+      submitted: req.body?.privacyConsent === false ? false : true,
+      policyVersion:
+        normalizeCallbackField(req.body?.privacyPolicyVersion, 64) || "2026-07-12",
+      capturedAt: new Date().toISOString(),
+      method:
+        normalizeCallbackField(req.body?.privacyConsentMethod, 80) ||
+        "callback_request_submission",
+    };
+
+    if (!name || !phone || !time) {
+      return res.status(400).json({ error: "Missing callback name, phone, or time" });
+    }
+
+    if (!consent.submitted) {
+      return res.status(400).json({ error: "Privacy consent is required for callback requests" });
+    }
+
+    const profile = await getPrimaryJozProfile();
+    let conversationId = normalizeCallbackField(req.body?.conversationId, 120) || null;
+
+    if (!conversationId && profile?.id) {
+      conversationId = await createJozConversation({
+        profileId: profile.id,
+        sessionKey,
+        intentMode: "booking",
+        context,
+      });
+    }
+
+    const record = {
+      name,
+      phone,
+      time,
+      email,
+      source,
+      conversationId,
+    };
+    const delivery = await deliverCallbackRequest(record);
+
+    if (conversationId) {
+      await appendJozMessage({
+        conversationId,
+        role: "user",
+        content: `Get Called request: ${name}, ${phone}, ${time}${email ? `, ${email}` : ""}`,
+        messageKind: "callback_request",
+        metadata: {
+          source,
+          deliveryStatus: delivery.status,
+          notifiedChannels: delivery.channels,
+        },
+      });
+      await appendJozMessage({
+        conversationId,
+        role: "assistant",
+        content:
+          delivery.status === "delivered"
+            ? "Callback request saved and delivered to Joz."
+            : delivery.status === "delivery_failed"
+              ? "Callback request saved, but direct delivery failed."
+              : "Callback request saved for follow-up.",
+        messageKind: "callback_status",
+        metadata: {
+          source,
+          deliveryStatus: delivery.status,
+          notifiedChannels: delivery.channels,
+          deliveryErrors: delivery.errors,
+        },
+      });
+    }
+
+    const callbackRequestId = await createJozCallbackRequest({
+      conversationId,
+      profileId: profile?.id || null,
+      requestedName: name,
+      requestedPhone: phone,
+      requestedTime: time,
+      requestedEmail: email || null,
+      source,
+      payload: { context, consent },
+      deliveryStatus: delivery.status,
+      deliveryChannels: delivery.channels,
+      deliveryErrors: delivery.errors,
+    });
+
+    if (!callbackRequestId) {
+      rememberCallbackRequest({
+        ...record,
+        callbackRequestId: null,
+        deliveryStatus: delivery.status,
+        notifiedChannels: delivery.channels,
+        deliveryErrors: delivery.errors,
+        consent,
+      });
+    }
+
+    return res.json({
+      ok: true,
+      conversationId,
+      callbackRequestId,
+      delivery,
+      persistedTo: callbackRequestId ? "database" : "memory",
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-llm/callback-request failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 function inferStructuredStateKey(currentPortal, currentMesh) {
   if (currentPortal === "root") return "root";
@@ -302,7 +1599,7 @@ app.post("/api/think", async (req, res) => {
   };
 
   try {
-    const { transcript, currentPortal = "root", currentMesh = null, agentContext = null } = req.body;
+    const { transcript, currentPortal = "root", currentMesh = null, agentContext = null, app_context: appContext = null } = req.body;
     currentPortalForResponse = currentPortal;
     currentMeshForResponse = currentMesh;
     if (!transcript) return res.status(400).json({ error: "Missing transcript" });
@@ -317,6 +1614,7 @@ app.post("/api/think", async (req, res) => {
     const structuredState = currentStateKey ? await getStructuredWorldState(structuredPortalKey, currentStateKey) : null;
     const enrichedAgentContext = {
       ...(agentContext || {}),
+      app_context: appContext || agentContext?.app_context || {},
       structuredState,
       structuredAvailableActions: structuredState?.availableActions || [],
       allowedActions: agentContext?.allowedActions || structuredState?.availableActions || [],

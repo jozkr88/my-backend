@@ -1,11 +1,93 @@
 import pg from "pg";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { getJozLaneConfig, normalizeJozLaneIntent } from "./shared/jozLlmLanes.js";
+import { rankJozDocumentsForQuery } from "./shared/jozOntology.js";
 
 const { Pool } = pg;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let pool = null;
+let publishedJozDocsCache = null;
+
+const MODEL_READY_STATUSES = new Set([
+  "verified",
+  "cv_supported",
+  "project_supported",
+  "capability_supported",
+  "positioning_supported",
+  "framework_supported",
+  "cv_and_project_supported",
+]);
+
+function resolvePublishedJozDocsPath() {
+  const candidates = [
+    path.join(process.cwd(), "data", "joz", "published", "joz-documents.generated.json"),
+    path.join(__dirname, "..", "data", "joz", "published", "joz-documents.generated.json"),
+    path.join(__dirname, "data", "joz", "published", "joz-documents.generated.json"),
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
+  return candidates[0];
+}
+
+function loadPublishedJozDocuments() {
+  if (publishedJozDocsCache) return publishedJozDocsCache;
+  const docsPath = resolvePublishedJozDocsPath();
+  if (!fs.existsSync(docsPath)) {
+    publishedJozDocsCache = [];
+    return publishedJozDocsCache;
+  }
+
+  const published = JSON.parse(fs.readFileSync(docsPath, "utf8"));
+  if (Array.isArray(published?.model_ready_records)) {
+    publishedJozDocsCache = published.model_ready_records;
+    return publishedJozDocsCache;
+  }
+
+  const records = Array.isArray(published?.records) ? published.records : [];
+  publishedJozDocsCache = records.filter((record) =>
+    MODEL_READY_STATUSES.has(
+      String(
+        record?.metadata?.verification_status ||
+          record?.metadata?.verification?.status ||
+          ""
+      ).trim().toLowerCase()
+    )
+  );
+  return publishedJozDocsCache;
+}
 
 function getDatabaseUrl() {
   return process.env.SUPABASE_DB_URL || process.env.DATABASE_URL || "";
+}
+
+function normalizeJozDocumentRow(row = {}) {
+  return {
+    title: row.title,
+    category: row.category,
+    summary: row.summary,
+    body: row.body,
+    metadata: {
+      ...(row.metadata || {}),
+      slug: row.slug || row?.metadata?.slug || null,
+      visibility: row.visibility || row?.metadata?.visibility || "public",
+      publish_version: row.publish_version || row?.metadata?.publish_version || null,
+    },
+  };
+}
+
+function normalizePrivacyEmail(value = "") {
+  return String(value || "").trim().toLowerCase();
+}
+
+function normalizePrivacyPhone(value = "") {
+  return String(value || "").replace(/\D+/g, "");
 }
 
 const TRANSITION_SEED = [
@@ -351,12 +433,782 @@ function getPool() {
 
   pool = new Pool({
     connectionString: getDatabaseUrl(),
+    connectionTimeoutMillis: 10_000,
+    idleTimeoutMillis: 30_000,
     ssl: process.env.NODE_ENV === "production" || process.env.RENDER || process.env.SUPABASE_DB_URL
       ? { rejectUnauthorized: false }
       : false,
   });
 
   return pool;
+}
+
+async function runQuery(text, params = []) {
+  const db = getPool();
+  if (!db) return { rows: [] };
+  return db.query(text, params);
+}
+
+export async function getPrimaryJozProfile() {
+  const result = await runQuery(
+    `SELECT id, slug, display_name, label, headline, summary, website_url, email, phone, location
+     FROM joz_profiles
+     WHERE is_primary = TRUE
+     ORDER BY id ASC
+     LIMIT 1`
+  );
+  return result.rows[0] || null;
+}
+
+export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, query = "") {
+  const primaryCategory = normalizeJozLaneIntent(intentMode);
+  const lane = getJozLaneConfig(primaryCategory);
+  const categories = [
+    ...new Set([
+      ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
+      "skills",
+      "systems_mindset",
+      "business_need",
+      "systems_principle",
+      "governance",
+      "governance_principle",
+    ]),
+  ];
+  const laneAliases = [
+    ...new Set(
+      [
+        primaryCategory,
+        primaryCategory === "systems_mindset" ? "mindset" : null,
+        "skills",
+        "systems_mindset",
+        "business_need",
+      ].filter(Boolean)
+    ),
+  ];
+  const result = await runQuery(
+    `SELECT title, category, summary, body, metadata
+     FROM joz_documents
+     WHERE profile_id = (
+         SELECT id
+         FROM joz_profiles
+         WHERE is_primary = TRUE
+         ORDER BY updated_at DESC, id DESC
+         LIMIT 1
+       )
+       AND is_runtime_active = TRUE
+       AND visibility = 'public'
+       AND (
+         category = ANY($1::text[])
+         OR COALESCE(metadata->>'lane', '') = ANY($2::text[])
+       )
+     ORDER BY
+       CASE
+         WHEN COALESCE(metadata->>'lane', '') = ANY($2::text[]) THEN 0
+         WHEN category = $3 THEN 1
+         WHEN category = 'proof' THEN 2
+         WHEN category = 'bio' THEN 3
+         WHEN category = 'faq' THEN 4
+         ELSE 5
+       END,
+       CASE
+         WHEN LOWER(COALESCE(metadata->>'verification_status', metadata->'verification'->>'status', '')) IN ('verified', 'cv_supported') THEN 0
+         WHEN LOWER(COALESCE(metadata->>'verification_status', metadata->'verification'->>'status', '')) IN ('project_supported', 'capability_supported') THEN 1
+         ELSE 2
+       END,
+       COALESCE((metadata->>'impact_score')::int, 0) DESC,
+       CASE LOWER(COALESCE(metadata->>'priority_label', 'standard'))
+         WHEN 'hero' THEN 0
+         WHEN 'high' THEN 1
+         WHEN 'standard' THEN 2
+         ELSE 3
+       END,
+       updated_at DESC,
+       id ASC
+     LIMIT $4`,
+    [categories, laneAliases, primaryCategory, Math.max(limit * 5, 20)]
+  );
+  const dbDocuments = (result.rows || []).map(normalizeJozDocumentRow);
+  const merged = new Map();
+
+  for (const doc of loadPublishedJozDocuments()) {
+    const docLane = String(doc?.metadata?.lane || "").trim();
+    const docCategory = String(doc?.category || "").trim();
+    if (!laneAliases.includes(docLane) && !categories.includes(docCategory)) continue;
+
+    const slug = String(doc?.slug || doc?.metadata?.slug || "").trim();
+    if (!slug) continue;
+
+    merged.set(slug, {
+      title: doc.title,
+      category: doc.category,
+      summary: doc.summary,
+      body: doc.body,
+      metadata: {
+        ...(doc.metadata || {}),
+        slug,
+        visibility: "public",
+        publish_version: null,
+      },
+    });
+  }
+
+  for (const doc of dbDocuments) {
+    const slug = String(doc?.metadata?.slug || "").trim();
+    const fallbackKey = `${doc?.title || ""}::${doc?.category || ""}`;
+    merged.set(slug || fallbackKey, doc);
+  }
+
+  const sourceDocuments = [...merged.values()];
+
+  return rankJozDocumentsForQuery(sourceDocuments, {
+    intentMode: primaryCategory,
+    query,
+    limit,
+  }).map(({ _ranking, ...doc }) => doc);
+}
+
+export async function createJozConversation({
+  profileId,
+  sessionKey = null,
+  intentMode = null,
+  context = {},
+}) {
+  if (!profileId) return null;
+  const result = await runQuery(
+    `INSERT INTO joz_conversations (profile_id, session_key, intent_mode, context, last_message_at)
+     VALUES ($1, $2, $3, $4::jsonb, NOW())
+     RETURNING id`,
+    [profileId, sessionKey, intentMode, JSON.stringify(context || {})]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function appendJozMessage({
+  conversationId,
+  role,
+  content,
+  messageKind = "chat",
+  metadata = {},
+}) {
+  if (!conversationId || !role || !content) return;
+  await runQuery(
+    `INSERT INTO joz_messages (conversation_id, role, message_kind, content, metadata)
+     VALUES ($1, $2, $3, $4, $5::jsonb)`,
+    [conversationId, role, messageKind, content, JSON.stringify(metadata || {})]
+  );
+  await runQuery(
+    `UPDATE joz_conversations
+     SET last_message_at = NOW(), updated_at = NOW()
+     WHERE id = $1`,
+    [conversationId]
+  );
+}
+
+export async function logJozLlmRequestEvent({
+  conversationId = null,
+  sessionKey = null,
+  route = null,
+  intentMode = null,
+  userMessage = "",
+  assistantReply = "",
+  requestContext = {},
+  trace = {},
+  verification = {},
+  retrievedCategories = [],
+  retrievedDocuments = [],
+  latencyMs = null,
+  responseStatus = "ok",
+} = {}) {
+  const result = await runQuery(
+    `INSERT INTO joz_llm_request_events (
+       conversation_id,
+       session_key,
+       route,
+       intent_mode,
+       user_message,
+       assistant_reply,
+       request_context,
+       trace,
+       verification,
+       retrieved_categories,
+       retrieved_documents,
+       latency_ms,
+       response_status
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12, $13)
+     RETURNING id`,
+    [
+      conversationId,
+      sessionKey,
+      route,
+      intentMode,
+      userMessage,
+      assistantReply,
+      JSON.stringify(requestContext || {}),
+      JSON.stringify(trace || {}),
+      JSON.stringify(verification || {}),
+      JSON.stringify(retrievedCategories || []),
+      JSON.stringify(retrievedDocuments || []),
+      latencyMs,
+      responseStatus,
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function listRecentJozLlmRequestEvents(limit = 20) {
+  const result = await runQuery(
+    `SELECT id, conversation_id, session_key, route, intent_mode, user_message, assistant_reply,
+            request_context, trace, verification, retrieved_categories, retrieved_documents,
+            latency_ms, response_status, review_status, issue_type, review_notes,
+            approved_correction, reviewed_by, reviewed_at, created_at
+     FROM joz_llm_request_events
+     ORDER BY created_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(100, Number(limit) || 20))]
+  );
+  return result.rows || [];
+}
+
+export async function listUnevaluatedJozLlmRequestEvents(limit = 20, sessionKeyPrefix = null) {
+  const normalizedPrefix = String(sessionKeyPrefix || "").trim();
+  const whereSession = normalizedPrefix ? " AND e.session_key LIKE $2" : "";
+  const params = [Math.max(1, Math.min(100, Number(limit) || 20))];
+  if (normalizedPrefix) params.push(`${normalizedPrefix}%`);
+  const result = await runQuery(
+    `SELECT e.id, e.conversation_id, e.session_key, e.route, e.intent_mode, e.user_message,
+            e.assistant_reply, e.request_context, e.trace, e.verification,
+            e.retrieved_categories, e.retrieved_documents, e.latency_ms,
+            e.response_status, e.created_at
+     FROM joz_llm_request_events e
+     LEFT JOIN joz_llm_evaluations v ON v.request_event_id = e.id
+     WHERE v.id IS NULL${whereSession}
+     ORDER BY e.created_at DESC
+     LIMIT $1`,
+    params
+  );
+  return result.rows || [];
+}
+
+export async function saveJozLlmEvaluation({
+  requestEventId,
+  evaluatorModel = null,
+  verdict = "warn",
+  preAnswerVerdict = null,
+  preAnswerCorrectness = null,
+  preAnswerRelevance = null,
+  preAnswerGroundedness = null,
+  preAnswerSafety = null,
+  finalVerdict = null,
+  correctionEffective = null,
+  correctionCritique = "",
+  correctness = null,
+  relevance = null,
+  groundedness = null,
+  safety = null,
+  critique = "",
+  repairNeeded = false,
+  repairType = "none",
+  repairSuggestion = "",
+  rawEvaluation = {},
+} = {}) {
+  const result = await runQuery(
+    `INSERT INTO joz_llm_evaluations (
+       request_event_id, evaluator_model, verdict, pre_answer_verdict,
+       pre_answer_correctness, pre_answer_relevance, pre_answer_groundedness,
+       pre_answer_safety, final_verdict, correction_effective, correction_critique,
+       correctness, relevance,
+       groundedness, safety, critique, repair_needed, repair_type,
+       repair_suggestion, raw_evaluation
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20::jsonb)
+     ON CONFLICT (request_event_id) DO UPDATE SET
+       evaluator_model = EXCLUDED.evaluator_model,
+       verdict = EXCLUDED.verdict,
+       pre_answer_verdict = EXCLUDED.pre_answer_verdict,
+       pre_answer_correctness = EXCLUDED.pre_answer_correctness,
+       pre_answer_relevance = EXCLUDED.pre_answer_relevance,
+       pre_answer_groundedness = EXCLUDED.pre_answer_groundedness,
+       pre_answer_safety = EXCLUDED.pre_answer_safety,
+       final_verdict = EXCLUDED.final_verdict,
+       correction_effective = EXCLUDED.correction_effective,
+       correction_critique = EXCLUDED.correction_critique,
+       correctness = EXCLUDED.correctness,
+       relevance = EXCLUDED.relevance,
+       groundedness = EXCLUDED.groundedness,
+       safety = EXCLUDED.safety,
+       critique = EXCLUDED.critique,
+       repair_needed = EXCLUDED.repair_needed,
+       repair_type = EXCLUDED.repair_type,
+       repair_suggestion = EXCLUDED.repair_suggestion,
+       raw_evaluation = EXCLUDED.raw_evaluation,
+       updated_at = NOW()
+     RETURNING id`,
+    [
+      requestEventId,
+      evaluatorModel,
+      verdict,
+      preAnswerVerdict,
+      preAnswerCorrectness,
+      preAnswerRelevance,
+      preAnswerGroundedness,
+      preAnswerSafety,
+      finalVerdict || verdict,
+      correctionEffective,
+      String(correctionCritique || "").slice(0, 4000),
+      correctness,
+      relevance,
+      groundedness,
+      safety,
+      String(critique || "").slice(0, 4000),
+      Boolean(repairNeeded),
+      repairType || "none",
+      String(repairSuggestion || "").slice(0, 4000),
+      JSON.stringify(rawEvaluation || {}),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function saveJozLlmRepairCandidate({
+  evaluationId,
+  requestEventId,
+  repairType = "knowledge",
+  targetKey = null,
+  proposedChange = "",
+  evidence = {},
+} = {}) {
+  const result = await runQuery(
+    `INSERT INTO joz_llm_repair_candidates (
+       evaluation_id, request_event_id, repair_type, target_key,
+       proposed_change, evidence
+     )
+     VALUES ($1, $2, $3, $4, $5, $6::jsonb)
+     RETURNING id`,
+    [
+      evaluationId,
+      requestEventId,
+      repairType || "knowledge",
+      targetKey,
+      String(proposedChange || "").slice(0, 4000),
+      JSON.stringify(evidence || {}),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function reviewJozLlmRequestEvent({
+  eventId,
+  reviewStatus = "unreviewed",
+  issueType = "",
+  reviewNotes = "",
+  approvedCorrection = "",
+  reviewedBy = "dashboard",
+} = {}) {
+  const allowedStatuses = new Set(["unreviewed", "reviewed", "accepted", "rejected", "needs_followup"]);
+  const status = allowedStatuses.has(reviewStatus) ? reviewStatus : "unreviewed";
+  const result = await runQuery(
+    `UPDATE joz_llm_request_events
+     SET review_status = $2,
+         issue_type = $3,
+         review_notes = $4,
+         approved_correction = $5,
+         reviewed_by = $6,
+         reviewed_at = NOW()
+     WHERE id = $1
+     RETURNING id, review_status, issue_type, review_notes, approved_correction,
+               reviewed_by, reviewed_at`,
+    [
+      eventId,
+      status,
+      String(issueType || "").slice(0, 200),
+      String(reviewNotes || "").slice(0, 4000),
+      String(approvedCorrection || "").slice(0, 4000),
+      String(reviewedBy || "dashboard").slice(0, 200),
+    ]
+  );
+  return result.rows[0] || null;
+}
+
+export async function reviewJozLlmRepairCandidate({
+  candidateId,
+  action = "reject",
+  reviewedBy = "dashboard",
+  regressionReport = {},
+} = {}) {
+  const statusByAction = {
+    approve: "approved",
+    reject: "rejected",
+    reset: "pending",
+  };
+  const status = statusByAction[action];
+  if (!status) throw new Error("Unsupported repair review action");
+  const result = await runQuery(
+    `UPDATE joz_llm_repair_candidates
+     SET status = $2,
+         reviewed_by = $3,
+         reviewed_at = NOW(),
+         evidence = evidence || $4::jsonb
+     WHERE id = $1
+     RETURNING id, evaluation_id, request_event_id, repair_type, target_key,
+               proposed_change, evidence, status, reviewed_by, reviewed_at,
+               applied_at, created_at`,
+    [
+      candidateId,
+      status,
+      String(reviewedBy || "dashboard").slice(0, 200),
+      JSON.stringify({ regressionGate: regressionReport || {} }),
+    ]
+  );
+  return result.rows[0] || null;
+}
+
+export async function listRecentJozLlmEvaluations(limit = 100) {
+  const result = await runQuery(
+    `SELECT v.id, v.request_event_id, v.evaluator_model, v.verdict,
+            v.pre_answer_verdict, v.pre_answer_correctness,
+            v.pre_answer_relevance, v.pre_answer_groundedness,
+            v.pre_answer_safety, v.final_verdict,
+            v.correction_effective, v.correction_critique,
+            v.correctness, v.relevance, v.groundedness, v.safety,
+            v.critique, v.repair_needed, v.repair_type, v.repair_suggestion,
+            v.raw_evaluation, v.created_at, v.updated_at,
+            e.user_message, e.assistant_reply, e.route, e.created_at AS event_created_at
+     FROM joz_llm_evaluations v
+     JOIN joz_llm_request_events e ON e.id = v.request_event_id
+     ORDER BY v.created_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(100, Number(limit) || 100))]
+  );
+  return result.rows || [];
+}
+
+export async function listJozLlmRepairCandidates(limit = 100) {
+  const result = await runQuery(
+    `SELECT c.id, c.evaluation_id, c.request_event_id, c.repair_type,
+            c.target_key, c.proposed_change, c.evidence, c.status,
+            c.reviewed_by, c.reviewed_at, c.applied_at, c.created_at,
+            e.user_message, e.assistant_reply, e.route
+     FROM joz_llm_repair_candidates c
+     JOIN joz_llm_request_events e ON e.id = c.request_event_id
+     ORDER BY c.created_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(100, Number(limit) || 100))]
+  );
+  return result.rows || [];
+}
+
+export async function createJozCallbackRequest({
+  conversationId = null,
+  profileId = null,
+  requestedName,
+  requestedPhone,
+  requestedTime,
+  requestedEmail = null,
+  source = "joz_llm",
+  payload = {},
+  deliveryStatus = "stored_only",
+  deliveryChannels = [],
+  deliveryErrors = [],
+}) {
+  const result = await runQuery(
+    `INSERT INTO joz_callback_requests (
+       conversation_id,
+       profile_id,
+       requested_name,
+       requested_phone,
+       requested_time,
+       requested_email,
+       source,
+       payload,
+       delivery_status,
+       delivery_channels,
+       delivery_errors
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, $10::jsonb, $11::jsonb)
+     RETURNING id`,
+    [
+      conversationId,
+      profileId,
+      requestedName,
+      requestedPhone,
+      requestedTime,
+      requestedEmail,
+      source,
+      JSON.stringify(payload || {}),
+      deliveryStatus,
+      JSON.stringify(deliveryChannels || []),
+      JSON.stringify(deliveryErrors || []),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+export async function createJozPrivacyRequest({
+  requestType,
+  requestStatus = "received",
+  email = null,
+  phone = null,
+  conversationId = null,
+  callbackRequestId = null,
+  sessionKey = null,
+  source = "web",
+  payload = {},
+}) {
+  const result = await runQuery(
+    `INSERT INTO joz_privacy_requests (
+       request_type,
+       request_status,
+       email,
+       phone,
+       conversation_id,
+       callback_request_id,
+       session_key,
+       source,
+       payload
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::jsonb)
+     RETURNING id`,
+    [
+      requestType,
+      requestStatus,
+      email,
+      phone,
+      conversationId,
+      callbackRequestId,
+      sessionKey,
+      source,
+      JSON.stringify(payload || {}),
+    ]
+  );
+  return result.rows[0]?.id || null;
+}
+
+async function resolvePrivacyTargets({
+  conversationId = null,
+  sessionKey = null,
+  callbackRequestId = null,
+  email = null,
+  phone = null,
+} = {}) {
+  const normalizedEmail = normalizePrivacyEmail(email);
+  const normalizedPhone = normalizePrivacyPhone(phone);
+  const conversationIds = new Set();
+  const callbackById = new Map();
+
+  if (conversationId && sessionKey) {
+    const conversationResult = await runQuery(
+      `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context, last_message_at, created_at, updated_at
+       FROM joz_conversations
+       WHERE id = $1
+         AND session_key = $2
+       LIMIT 1`,
+      [conversationId, sessionKey]
+    );
+    for (const row of conversationResult.rows || []) {
+      conversationIds.add(row.id);
+    }
+  } else if (sessionKey) {
+    const conversationResult = await runQuery(
+      `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context, last_message_at, created_at, updated_at
+       FROM joz_conversations
+       WHERE session_key = $1`,
+      [sessionKey]
+    );
+    for (const row of conversationResult.rows || []) {
+      conversationIds.add(row.id);
+    }
+  }
+
+  const callbackClauses = [];
+  const callbackParams = [];
+
+  if (callbackRequestId) {
+    callbackParams.push(callbackRequestId);
+    callbackClauses.push(`id = $${callbackParams.length}`);
+  }
+
+  if (normalizedEmail) {
+    callbackParams.push(normalizedEmail);
+    callbackClauses.push(`LOWER(COALESCE(requested_email, '')) = $${callbackParams.length}`);
+  }
+
+  if (normalizedPhone) {
+    callbackParams.push(normalizedPhone);
+    callbackClauses.push(
+      `regexp_replace(COALESCE(requested_phone, ''), '\\D', '', 'g') = $${callbackParams.length}`
+    );
+  }
+
+  if (callbackClauses.length) {
+    const callbackResult = await runQuery(
+      `SELECT id, conversation_id, profile_id, requested_name, requested_phone, requested_time,
+              requested_email, source, payload, delivery_status, delivery_channels,
+              delivery_errors, created_at
+       FROM joz_callback_requests
+       WHERE ${callbackClauses.join(" OR ")}`,
+      callbackParams
+    );
+
+    for (const row of callbackResult.rows || []) {
+      const emailMatches =
+        !normalizedEmail ||
+        normalizePrivacyEmail(row.requested_email) === normalizedEmail;
+      const phoneMatches =
+        !normalizedPhone ||
+        normalizePrivacyPhone(row.requested_phone) === normalizedPhone;
+      const callbackIdMatches =
+        !callbackRequestId || String(row.id) === String(callbackRequestId);
+
+      if (!emailMatches || !phoneMatches || !callbackIdMatches) continue;
+
+      callbackById.set(String(row.id), row);
+      if (row.conversation_id) {
+        conversationIds.add(row.conversation_id);
+      }
+    }
+  }
+
+  let conversations = [];
+  let messages = [];
+
+  if (conversationIds.size) {
+    const ids = [...conversationIds];
+    const conversationResult = await runQuery(
+      `SELECT id, session_key, visitor_label, channel, intent_mode, lead_status, context,
+              last_message_at, created_at, updated_at
+       FROM joz_conversations
+       WHERE id = ANY($1::uuid[])
+       ORDER BY created_at ASC`,
+      [ids]
+    );
+    conversations = conversationResult.rows || [];
+
+    const messageResult = await runQuery(
+      `SELECT id, conversation_id, role, message_kind, content, tool_name, citations, metadata, created_at
+       FROM joz_messages
+       WHERE conversation_id = ANY($1::uuid[])
+       ORDER BY created_at ASC`,
+      [ids]
+    );
+    messages = messageResult.rows || [];
+  }
+
+  return {
+    conversations,
+    messages,
+    callbackRequests: [...callbackById.values()].sort(
+      (left, right) => new Date(left.created_at).getTime() - new Date(right.created_at).getTime()
+    ),
+  };
+}
+
+export async function exportJozPrivacyBundle(filters = {}) {
+  const { conversations, messages, callbackRequests } = await resolvePrivacyTargets(filters);
+
+  return {
+    exportedAt: new Date().toISOString(),
+    filters: {
+      conversationId: filters.conversationId || null,
+      sessionKey: filters.sessionKey || null,
+      callbackRequestId: filters.callbackRequestId || null,
+      email: filters.email || null,
+      phone: filters.phone || null,
+    },
+    conversations,
+    messages,
+    callbackRequests,
+  };
+}
+
+export async function deleteJozPrivacyBundle(filters = {}) {
+  const { conversations, callbackRequests } = await resolvePrivacyTargets(filters);
+  const conversationIds = [...new Set((conversations || []).map((row) => row.id).filter(Boolean))];
+  const callbackRequestIds = [...new Set((callbackRequests || []).map((row) => row.id).filter(Boolean))];
+
+  let deletedCallbackRequests = 0;
+  let deletedConversations = 0;
+  let deletedMessages = 0;
+
+  if (callbackRequestIds.length) {
+    const callbackDeleteResult = await runQuery(
+      `DELETE FROM joz_callback_requests
+       WHERE id = ANY($1::bigint[])
+       RETURNING id`,
+      [callbackRequestIds]
+    );
+    deletedCallbackRequests = callbackDeleteResult.rows?.length || 0;
+  }
+
+  if (conversationIds.length) {
+    const messageCountResult = await runQuery(
+      `SELECT COUNT(*)::int AS count
+       FROM joz_messages
+       WHERE conversation_id = ANY($1::uuid[])`,
+      [conversationIds]
+    );
+    deletedMessages = messageCountResult.rows[0]?.count || 0;
+
+    const conversationDeleteResult = await runQuery(
+      `DELETE FROM joz_conversations
+       WHERE id = ANY($1::uuid[])
+       RETURNING id`,
+      [conversationIds]
+    );
+    deletedConversations = conversationDeleteResult.rows?.length || 0;
+  }
+
+  return {
+    deletedConversations,
+    deletedMessages,
+    deletedCallbackRequests,
+  };
+}
+
+export async function cleanupExpiredJozData({
+  conversationRetentionDays = 30,
+  callbackRetentionDays = 30,
+  privacyRequestRetentionDays = 365,
+} = {}) {
+  const db = getPool();
+  if (!db) {
+    return {
+      deletedConversations: 0,
+      deletedCallbackRequests: 0,
+      deletedPrivacyRequests: 0,
+    };
+  }
+
+  const normalizedConversationDays = Math.max(1, Number(conversationRetentionDays) || 30);
+  const normalizedCallbackDays = Math.max(1, Number(callbackRetentionDays) || 30);
+  const normalizedPrivacyDays = Math.max(1, Number(privacyRequestRetentionDays) || 365);
+
+  const callbackDeleteResult = await runQuery(
+    `DELETE FROM joz_callback_requests
+     WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING id`,
+    [normalizedCallbackDays]
+  );
+
+  const conversationDeleteResult = await runQuery(
+    `DELETE FROM joz_conversations
+     WHERE COALESCE(last_message_at, updated_at, created_at) < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING id`,
+    [normalizedConversationDays]
+  );
+
+  const privacyRequestDeleteResult = await runQuery(
+    `DELETE FROM joz_privacy_requests
+     WHERE created_at < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING id`,
+    [normalizedPrivacyDays]
+  );
+
+  return {
+    deletedConversations: conversationDeleteResult.rows?.length || 0,
+    deletedCallbackRequests: callbackDeleteResult.rows?.length || 0,
+    deletedPrivacyRequests: privacyRequestDeleteResult.rows?.length || 0,
+  };
 }
 
 async function seedWorldModel(db) {
@@ -481,6 +1333,7 @@ async function seedWorldModel(db) {
 }
 
 export async function initDatabase() {
+  const configuredDatabaseUrl = getDatabaseUrl();
   const db = getPool();
   if (!db) {
     console.log("🗄️ No database URL set, using file memory only");
@@ -599,6 +1452,299 @@ export async function initDatabase() {
       )
     `);
 
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_profiles (
+        id BIGSERIAL PRIMARY KEY,
+        slug TEXT NOT NULL UNIQUE,
+        display_name TEXT NOT NULL,
+        label TEXT NOT NULL,
+        headline TEXT,
+        summary TEXT,
+        website_url TEXT,
+        email TEXT,
+        phone TEXT,
+        location TEXT,
+        is_primary BOOLEAN NOT NULL DEFAULT FALSE,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_documents (
+        id BIGSERIAL PRIMARY KEY,
+        profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+        slug TEXT NOT NULL,
+        title TEXT NOT NULL,
+        category TEXT NOT NULL,
+        source_type TEXT NOT NULL DEFAULT 'manual',
+        source_uri TEXT,
+        summary TEXT,
+        body TEXT NOT NULL,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        published_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (profile_id, slug)
+      )
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS visibility TEXT NOT NULL DEFAULT 'public'
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS is_runtime_active BOOLEAN NOT NULL DEFAULT TRUE
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS publish_version TEXT
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_documents
+      ADD COLUMN IF NOT EXISTS source_checksum TEXT
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_documents_category_idx
+      ON joz_documents (profile_id, category)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_documents_runtime_idx
+      ON joz_documents (profile_id, is_runtime_active, visibility, published_at DESC)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_documents_lane_idx
+      ON joz_documents ((metadata->>'lane'))
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_conversations (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+        session_key TEXT,
+        visitor_label TEXT,
+        channel TEXT NOT NULL DEFAULT 'web',
+        intent_mode TEXT,
+        lead_status TEXT NOT NULL DEFAULT 'anonymous',
+        context JSONB NOT NULL DEFAULT '{}'::jsonb,
+        last_message_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_conversations_profile_idx
+      ON joz_conversations (profile_id, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_messages (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        conversation_id UUID NOT NULL REFERENCES joz_conversations(id) ON DELETE CASCADE,
+        role TEXT NOT NULL CHECK (role IN ('system', 'user', 'assistant', 'tool')),
+        message_kind TEXT NOT NULL DEFAULT 'chat',
+        content TEXT NOT NULL,
+        tool_name TEXT,
+        citations JSONB NOT NULL DEFAULT '[]'::jsonb,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_messages_conversation_idx
+      ON joz_messages (conversation_id, created_at ASC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_llm_request_events (
+        id BIGSERIAL PRIMARY KEY,
+        conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+        session_key TEXT,
+        route TEXT,
+        intent_mode TEXT,
+        user_message TEXT NOT NULL,
+        assistant_reply TEXT NOT NULL,
+        request_context JSONB NOT NULL DEFAULT '{}'::jsonb,
+        trace JSONB NOT NULL DEFAULT '{}'::jsonb,
+        verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+        retrieved_categories JSONB NOT NULL DEFAULT '[]'::jsonb,
+        retrieved_documents JSONB NOT NULL DEFAULT '[]'::jsonb,
+        latency_ms INTEGER,
+        response_status TEXT NOT NULL DEFAULT 'ok',
+        review_status TEXT NOT NULL DEFAULT 'unreviewed',
+        issue_type TEXT NOT NULL DEFAULT '',
+        review_notes TEXT NOT NULL DEFAULT '',
+        approved_correction TEXT NOT NULL DEFAULT '',
+        reviewed_by TEXT,
+        reviewed_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    for (const statement of [
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS review_status TEXT NOT NULL DEFAULT 'unreviewed'`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS issue_type TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS review_notes TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS approved_correction TEXT NOT NULL DEFAULT ''`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS reviewed_by TEXT`,
+      `ALTER TABLE joz_llm_request_events ADD COLUMN IF NOT EXISTS reviewed_at TIMESTAMPTZ`,
+    ]) {
+      await db.query(statement);
+    }
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_request_events_created_idx
+      ON joz_llm_request_events (created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_request_events_route_idx
+      ON joz_llm_request_events (route, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_llm_evaluations (
+        id BIGSERIAL PRIMARY KEY,
+        request_event_id BIGINT NOT NULL UNIQUE REFERENCES joz_llm_request_events(id) ON DELETE CASCADE,
+        evaluator_model TEXT NOT NULL,
+        verdict TEXT NOT NULL DEFAULT 'warn',
+        pre_answer_verdict TEXT,
+        pre_answer_correctness NUMERIC(4,2),
+        pre_answer_relevance NUMERIC(4,2),
+        pre_answer_groundedness NUMERIC(4,2),
+        pre_answer_safety NUMERIC(4,2),
+        final_verdict TEXT,
+        correction_effective BOOLEAN,
+        correction_critique TEXT NOT NULL DEFAULT '',
+        correctness NUMERIC(4,2),
+        relevance NUMERIC(4,2),
+        groundedness NUMERIC(4,2),
+        safety NUMERIC(4,2),
+        critique TEXT NOT NULL DEFAULT '',
+        repair_needed BOOLEAN NOT NULL DEFAULT FALSE,
+        repair_type TEXT NOT NULL DEFAULT 'none',
+        repair_suggestion TEXT NOT NULL DEFAULT '',
+        raw_evaluation JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    for (const statement of [
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_verdict TEXT`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_correctness NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_relevance NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_groundedness NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS pre_answer_safety NUMERIC(4,2)`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS final_verdict TEXT`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS correction_effective BOOLEAN`,
+      `ALTER TABLE joz_llm_evaluations ADD COLUMN IF NOT EXISTS correction_critique TEXT NOT NULL DEFAULT ''`,
+    ]) {
+      await db.query(statement);
+    }
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_evaluations_verdict_idx
+      ON joz_llm_evaluations (verdict, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_llm_repair_candidates (
+        id BIGSERIAL PRIMARY KEY,
+        evaluation_id BIGINT NOT NULL REFERENCES joz_llm_evaluations(id) ON DELETE CASCADE,
+        request_event_id BIGINT NOT NULL REFERENCES joz_llm_request_events(id) ON DELETE CASCADE,
+        repair_type TEXT NOT NULL,
+        target_key TEXT,
+        proposed_change TEXT NOT NULL,
+        evidence JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'pending',
+        reviewed_by TEXT,
+        reviewed_at TIMESTAMPTZ,
+        applied_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_repairs_status_idx
+      ON joz_llm_repair_candidates (status, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_publish_runs (
+        id BIGSERIAL PRIMARY KEY,
+        profile_id BIGINT REFERENCES joz_profiles(id) ON DELETE SET NULL,
+        publish_version TEXT NOT NULL UNIQUE,
+        source_type TEXT NOT NULL DEFAULT 'joz_knowledge',
+        source_count INTEGER NOT NULL DEFAULT 0,
+        normalized_count INTEGER NOT NULL DEFAULT 0,
+        published_count INTEGER NOT NULL DEFAULT 0,
+        verification_summary JSONB NOT NULL DEFAULT '{}'::jsonb,
+        source_bundle_path TEXT,
+        notes TEXT,
+        status TEXT NOT NULL DEFAULT 'published',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_publish_runs_profile_idx
+      ON joz_publish_runs (profile_id, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_callback_requests (
+        id BIGSERIAL PRIMARY KEY,
+        conversation_id UUID,
+        profile_id BIGINT,
+        requested_name TEXT NOT NULL,
+        requested_phone TEXT NOT NULL,
+        requested_time TEXT NOT NULL,
+        requested_email TEXT,
+        source TEXT NOT NULL DEFAULT 'joz_llm',
+        payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+        delivery_status TEXT NOT NULL DEFAULT 'stored_only',
+        delivery_channels JSONB NOT NULL DEFAULT '[]'::jsonb,
+        delivery_errors JSONB NOT NULL DEFAULT '[]'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_privacy_requests (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        request_type TEXT NOT NULL,
+        request_status TEXT NOT NULL DEFAULT 'received',
+        email TEXT,
+        phone TEXT,
+        conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+        callback_request_id BIGINT REFERENCES joz_callback_requests(id) ON DELETE SET NULL,
+        session_key TEXT,
+        source TEXT NOT NULL DEFAULT 'web',
+        payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      ALTER TABLE joz_callback_requests
+      ALTER COLUMN conversation_id TYPE UUID
+      USING CASE
+        WHEN conversation_id IS NULL THEN NULL
+        ELSE conversation_id::text::uuid
+      END
+    `).catch(() => {});
+
     for (const [portalKey, currentState, commandKey, action, target, awareness = null] of TRANSITION_SEED) {
       await db.query(
         `
@@ -621,13 +1767,17 @@ export async function initDatabase() {
 
     console.log("🗄️ Supabase/Postgres ready");
   } catch (error) {
-    console.error("⚠️ Database init failed, falling back to file memory:", error.message);
     if (pool) {
       await pool.end().catch(() => {});
       pool = null;
     }
-    delete process.env.SUPABASE_DB_URL;
-    delete process.env.DATABASE_URL;
+
+    if (configuredDatabaseUrl) {
+      console.error("❌ Database init failed; Supabase/Postgres is required:", error.message);
+      throw error;
+    }
+
+    console.error("⚠️ Database init failed, using file memory:", error.message);
   }
 }
 
