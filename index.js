@@ -65,8 +65,8 @@ import {
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   buildRoleAwareJozContext,
-  composeJozLlmRouteReply,
   buildVisitorLocationReply,
+  composeJozLlmRouteReply,
   resolveUnknownJozReply,
   routeJozLlmQueryWithAwareness,
   routeJozLlmQuery,
@@ -919,11 +919,6 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
 
-    const requestGeo = await requestGeoPromise;
-    const answerContext = requestGeo
-      ? { ...context, visitorGeo: requestGeo }
-      : context;
-
     const recentSessionMessages = getFallbackRecentJozSessionMessages({
       sessionKey,
       limit: 12,
@@ -956,6 +951,10 @@ app.post("/api/joz-llm", async (req, res) => {
       8,
       latestUserMessage
     );
+    const requestGeo = await requestGeoPromise;
+    const answerContext = requestGeo
+      ? { ...context, visitorGeo: requestGeo }
+      : context;
     const retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
       category: doc.category,
@@ -1133,10 +1132,6 @@ app.post("/api/joz-llm", async (req, res) => {
       },
     });
 
-    const requestContext = {
-      ...legacyRuntimeContext,
-      ...(requestGeo ? { geo: requestGeo } : {}),
-    };
     const observabilityEvent = {
       conversationId,
       sessionKey,
@@ -1144,7 +1139,10 @@ app.post("/api/joz-llm", async (req, res) => {
       intentMode: effectiveRoute.selectedRoute,
       userMessage: latestUserMessage,
       assistantReply: reply,
-      requestContext,
+      requestContext: {
+        ...legacyRuntimeContext,
+        ...(requestGeo ? { geo: requestGeo } : {}),
+      },
       trace,
       verification,
       retrievedCategories,

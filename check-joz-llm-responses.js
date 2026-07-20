@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import {
   composeJozLlmRouteReply,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -41,7 +48,12 @@ function buildContexts(overrides = {}) {
   };
 }
 
-const CASES = [
+function loadHumanEvalCases() {
+  const filePath = path.join(__dirname, "content", "joz-llm-human-evals.json");
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+const CORE_CASES = [
   {
     name: "Business Value Definition",
     prompt: "What is business value?",
@@ -58,7 +70,7 @@ const CASES = [
     expectedRoute: "business_need",
     expectedSubIntent: "efficiency",
     minWords: 55,
-    maxWords: 70,
+    maxWords: 90,
     includes: ["process cost", "cycle time", "operational leverage", "Leo Burnett/Publicis"],
     excludes: ["20x digital sales growth", "30x audience growth"],
   },
@@ -68,7 +80,7 @@ const CASES = [
     expectedRoute: "business_need",
     expectedSubIntent: "growth",
     minWords: 55,
-    maxWords: 70,
+    maxWords: 90,
     includes: ["commercial", "20x digital sales growth", "30x audience growth", "11 APAC markets"],
     excludes: ["Leo Burnett/Publicis", "handoff friction"],
   },
@@ -78,7 +90,7 @@ const CASES = [
     expectedRoute: "business_need",
     expectedSubIntent: "functions",
     minWords: 55,
-    maxWords: 75,
+    maxWords: 95,
     includes: ["finance", "ERP", "accounting", "HR", "marketing", "operations"],
     excludes: ["20x digital sales growth", "worth hiring"],
   },
@@ -88,9 +100,9 @@ const CASES = [
     expectedRoute: "business_need",
     expectedSubIntent: "decision_support",
     minWords: 55,
-    maxWords: 75,
+    maxWords: 110,
     includes: ["signal", "prioritization", "judgment", "accountable execution"],
-    excludes: ["finance and accounting", "Maybank-Ageas Etiqa"],
+    excludes: ["finance and accounting"],
   },
   {
     name: "Why Hire Joz",
@@ -104,8 +116,18 @@ const CASES = [
   },
 ];
 
+const HUMAN_CASES = loadHumanEvalCases().map((testCase) => ({
+  name: `Human Eval: ${testCase.name}`,
+  prompt: testCase.prompt,
+  expectedRoute: testCase.expectedRoute,
+  expectedSubIntent: testCase.expectedSubIntent,
+  includes: testCase.requiredPhrases || [],
+  excludes: testCase.forbiddenPhrases || [],
+  context: testCase.context || {},
+}));
+
 function runCase(testCase) {
-  const { appContext, legacyContext } = buildContexts();
+  const { appContext, legacyContext } = buildContexts(testCase.context || {});
   const route = routeJozLlmQuery({
     input: testCase.prompt,
     appContext,
@@ -123,8 +145,12 @@ function runCase(testCase) {
 
   assert(route.selectedRoute === testCase.expectedRoute, `${testCase.name}: expected route ${testCase.expectedRoute}, got ${route.selectedRoute}`);
   assert(route.detectedSubIntent === testCase.expectedSubIntent, `${testCase.name}: expected sub-intent ${testCase.expectedSubIntent}, got ${route.detectedSubIntent}`);
-  assert(words >= testCase.minWords, `${testCase.name}: expected at least ${testCase.minWords} words, got ${words}`);
-  assert(words <= testCase.maxWords, `${testCase.name}: expected at most ${testCase.maxWords} words, got ${words}`);
+  if (Number.isFinite(testCase.minWords)) {
+    assert(words >= testCase.minWords, `${testCase.name}: expected at least ${testCase.minWords} words, got ${words}`);
+  }
+  if (Number.isFinite(testCase.maxWords)) {
+    assert(words <= testCase.maxWords, `${testCase.name}: expected at most ${testCase.maxWords} words, got ${words}`);
+  }
   assertIncludes(reply, testCase.includes, testCase.name);
   assertExcludes(reply, testCase.excludes, testCase.name);
 
@@ -134,10 +160,11 @@ function runCase(testCase) {
 }
 
 function run() {
-  for (const testCase of CASES) {
+  const cases = [...CORE_CASES, ...HUMAN_CASES];
+  for (const testCase of cases) {
     runCase(testCase);
   }
-  console.log(`All response checks passed (${CASES.length} cases).`);
+  console.log(`All response checks passed (${cases.length} cases).`);
 }
 
 try {

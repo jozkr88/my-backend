@@ -8,10 +8,11 @@
     "dev": "HOST=127.0.0.1 PORT=3001 node index.js",
     "test": "node --test think-logic.test.js world-agent.test.js full-agent.test.js structured-world.test.js reasoning-layers.test.js jozOntologyRetrieval.test.js meetJozWorld.test.js jozLlmRouter.test.js runtime-routing.test.js shared/jozGeoLocation.test.js jozVisitorLocation.test.js",
     "check:joz-llm": "node check-joz-llm-responses.js",
+    "check:joz-llm:human": "node check-joz-llm-responses.js",
     "check:joz-llm:golden": "node tools/check-joz-llm-golden.mjs",
     "test:joz-llm:openai": "node tools/test-joz-llm-openai.mjs",
-    "check:recruiter": "node check-recruiter-answers.js",
     "evaluate:joz-llm": "node tools/evaluate-joz-llm-with-openai.mjs",
+    "check:recruiter": "node check-recruiter-answers.js",
     "build:joz-knowledge": "node tools/build-joz-knowledge.js",
     "build:meetjoz-world": "node tools/build-meetjoz-world.js",
     "publish:joz-supabase": "node tools/publish-joz-to-supabase.js"

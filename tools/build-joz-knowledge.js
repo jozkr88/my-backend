@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { mapJozQueryToOntology } from "../shared/jozOntology.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +24,6 @@ function resolveRepoRoot() {
 const repoRoot = resolveRepoRoot();
 
 const dataRoot = path.join(repoRoot, "data", "joz");
-const canonicalDir = path.join(dataRoot, "canonical");
 const inboxDir = path.join(dataRoot, "inbox");
 const normalizedDir = path.join(dataRoot, "normalized");
 const publishedDir = path.join(dataRoot, "published");
@@ -104,21 +102,6 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function readJsonLines(filePath) {
-  return fs
-    .readFileSync(filePath, "utf8")
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line, index) => {
-      try {
-        return JSON.parse(line);
-      } catch (error) {
-        throw new Error(`${path.basename(filePath)}:${index + 1} invalid JSONL record`);
-      }
-    });
-}
-
 function writeJson(filePath, value) {
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
 }
@@ -137,109 +120,6 @@ function normalizeStringArray(value) {
 function normalizeScalar(value) {
   const text = String(value || "").trim();
   return text || null;
-}
-
-function slugify(value = "") {
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function buildCanonicalSlug(rawRecord = {}, sourceFilename = "") {
-  const titleSlug = slugify(rawRecord?.title || rawRecord?.id || "");
-  const sourceSlug = slugify(getBaseName(sourceFilename));
-  return `canonical-${sourceSlug}-${titleSlug}`;
-}
-
-function firstParagraph(text = "") {
-  return String(text || "")
-    .trim()
-    .split(/\n\s*\n/)[0]
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function buildSummary(text = "", maxLength = 220) {
-  const paragraph = firstParagraph(text);
-  if (!paragraph) return "";
-  if (paragraph.length <= maxLength) return paragraph;
-  return `${paragraph.slice(0, maxLength - 1).trimEnd()}…`;
-}
-
-function normalizeCanonicalPriority(value = "") {
-  const normalized = String(value || "").trim().toLowerCase();
-  if (["hero", "high", "standard", "supporting"].includes(normalized)) {
-    return normalized;
-  }
-  return "standard";
-}
-
-function buildSemanticText(title = "", content = "", tags = []) {
-  const joinedTags = normalizeStringArray(tags).join(" ");
-  return [title, title, joinedTags, joinedTags, content].filter(Boolean).join("\n");
-}
-
-function inferCanonicalLane(record = {}) {
-  const haystack = [record.title, ...(record.tags || []), record.content].join(" ").toLowerCase();
-
-  if (
-    /(langgraph|temporal|fastapi|mcp|tools|api|backend|rag|retrieval|knowledge graph|knowledge layer|memory|models|golang|python|docker|containers|kubernetes|pod|deployment|service|ingress|load balancer|autoscaling|stateless|postgresql|redis|cache|kafka|nats|event-driven|queues|workers|vault|kms|workload identity|opentelemetry|prometheus|grafana|langsmith|ci\/cd|terraform|gitops|canary|circuit breaker|idempotency|backpressure|disaster recovery|infrastructure|observability|scalability)/i.test(
-      haystack
-    )
-  ) {
-    return "skills";
-  }
-
-  if (/(positioning|implementation|how joz builds|platform|roadmap|organisational awareness layer|autonomous execution layer|organisational intelligence integration)/i.test(haystack)) {
-    return "business_need";
-  }
-
-  if (
-    /(risk|verification|security|prompt injection|guardrails|sandbox|human approval|permissions|acl|sensitive data|trust|policy|approval)/i.test(
-      haystack
-    )
-  ) {
-    return "systems_mindset";
-  }
-
-  return "skills";
-}
-
-function inferCanonicalIntentFamilies(record = {}, lane = "skills") {
-  const haystack = [record.title, ...(record.tags || []), record.content].join(" ").toLowerCase();
-  const families = new Set([lane]);
-
-  if (/(architecture|orchestration|langgraph|temporal|fastapi|mcp|rag|retrieval|knowledge|memory|observability|infrastructure|python|golang|docker|kubernetes|postgresql|redis|kafka|nats|terraform|gitops|opentelemetry|vault|workload identity|scalability)/i.test(haystack)) {
-    families.add("skills");
-  }
-  if (/(risk|verification|security|acl|permissions|prompt injection|guardrails|trust|approval|sensitive data|policy)/i.test(haystack)) {
-    families.add("systems_mindset");
-  }
-  if (/(business|organisational awareness|execution layer|implementation|approach|builds|platform)/i.test(haystack)) {
-    families.add("business_need");
-  }
-
-  return [...families];
-}
-
-function inferCanonicalSubIntents(record = {}) {
-  const haystack = [record.title, ...(record.tags || []), record.content].join(" ").toLowerCase();
-  const subIntents = new Set();
-
-  if (/agent definition|\bagent\b/i.test(haystack)) subIntents.add("agent_definition");
-  if (/(orchestration|langgraph|temporal|workflow)/i.test(haystack)) subIntents.add("orchestration");
-  if (/(fastapi|api layer|backend api)/i.test(haystack)) subIntents.add("fastapi");
-  if (/\bmcp\b/i.test(haystack)) subIntents.add("mcp");
-  if (/(rag|retrieval|knowledge graph|knowledge layer|pgvector)/i.test(haystack)) subIntents.add("retrieval");
-  if (/(acl|permissions)/i.test(haystack)) subIntents.add("acl");
-  if (/(risk|verification|approval|guardrails|prompt injection|security)/i.test(haystack)) subIntents.add("governance");
-  if (/(python|golang|infrastructure|scalability|observability|docker|kubernetes|postgresql|redis|kafka|nats|terraform|gitops|opentelemetry|vault|workload identity)/i.test(haystack)) subIntents.add("technical_stack");
-  if (/(blockchain|defi|wallet|smart contract|signing)/i.test(haystack)) subIntents.add("blockchain");
-  if (/(organisational awareness|organisational intelligence|autonomous execution)/i.test(haystack)) subIntents.add("system_architecture");
-
-  return [...subIntents];
 }
 
 function normalizeVerification(value) {
@@ -267,14 +147,6 @@ function listSourceFiles() {
   return fs
     .readdirSync(inboxDir)
     .filter((name) => name.endsWith(".md") || name.endsWith(".txt"))
-    .sort();
-}
-
-function listCanonicalJsonlFiles() {
-  if (!fs.existsSync(canonicalDir)) return [];
-  return fs
-    .readdirSync(canonicalDir)
-    .filter((name) => name.endsWith(".jsonl"))
     .sort();
 }
 
@@ -469,92 +341,6 @@ function buildNormalizedRecord(baseName, sourceFilename, ontologyIndexes, proofs
   return { errors, record: normalized };
 }
 
-function buildCanonicalRecord(rawRecord, sourceFilename, generatedAt = "") {
-  const errors = [];
-  const id = String(rawRecord?.id || "").trim();
-  const title = String(rawRecord?.title || "").trim();
-  const content = String(rawRecord?.content || "").trim();
-  const source = String(rawRecord?.source || "").trim();
-  const tags = normalizeStringArray(rawRecord?.tags);
-  const priorityLabel = normalizeCanonicalPriority(rawRecord?.priority);
-
-  if (!id) errors.push(`${sourceFilename}: canonical record missing id`);
-  if (!title) errors.push(`${sourceFilename}: canonical record missing title`);
-  if (!content) errors.push(`${sourceFilename}: canonical record missing content`);
-  if (!source) errors.push(`${sourceFilename}: canonical record missing source`);
-  if (!Array.isArray(rawRecord?.tags)) {
-    errors.push(`${sourceFilename}: canonical record tags must be an array`);
-  }
-
-  const lane = inferCanonicalLane(rawRecord);
-  const semanticText = buildSemanticText(title, content, tags);
-  const ontologyFields = mapJozQueryToOntology(semanticText);
-  const slug = buildCanonicalSlug(rawRecord, sourceFilename);
-
-  return {
-    errors,
-    record: {
-      slug,
-      title,
-      category: lane,
-      source_type: "canonical_jsonl",
-      source_uri: `data/joz/canonical/${sourceFilename}#${id}`,
-      summary: buildSummary(content, 220),
-      body: content,
-      metadata: {
-        lane,
-        original_lane: lane,
-        tags,
-        verification: {
-          status: "framework_supported",
-          reviewed_by: "codex",
-          reviewed_at: generatedAt,
-          notes: "Canonical JSONL knowledge ingest",
-        },
-        verification_status: "framework_supported",
-        claims: [],
-        proof_points: [],
-        regions: [],
-        companies: [],
-        projects: [],
-        intent_families: inferCanonicalIntentFamilies(rawRecord, lane),
-        sub_intents: inferCanonicalSubIntents(rawRecord),
-        impact_score: priorityLabel === "hero" ? 96 : priorityLabel === "high" ? 82 : 68,
-        priority_label: priorityLabel,
-        valid_from: null,
-        valid_to: null,
-        source_notes: source,
-        source_filename: sourceFilename,
-        source_meta_filename: null,
-        reviewed_at: generatedAt,
-        problems: ontologyFields.problems,
-        principles: ontologyFields.principles,
-        capabilities: ontologyFields.capabilities,
-        outcomes: ontologyFields.outcomes,
-        governance: ontologyFields.governance,
-        industries: ontologyFields.industries,
-        proofs: [],
-        related_proofs: [],
-        enterprise_scale_score: 0,
-        measurable_outcome_count: 0,
-        canonical_record: true,
-        canonical_record_id: id,
-        canonical_record_title: title,
-        canonical_record_source: source,
-        canonical_record_priority: priorityLabel,
-        canonical_record_tags: tags,
-        source_authority: source === "Joz canonical knowledge" ? 24 : 12,
-        semantic_text: semanticText,
-        keyword_terms: normalizeStringArray([
-          ...title.toLowerCase().split(/[^a-z0-9]+/),
-          ...tags.map((tag) => String(tag || "").toLowerCase()),
-        ]).filter((term) => term.length > 1),
-        exact_phrases: normalizeStringArray([title, ...tags]),
-      },
-    },
-  };
-}
-
 function validateProofSourceSlugs(proofs, slugSet) {
   const errors = [];
   const proofsBySlug = new Map();
@@ -580,8 +366,6 @@ function main() {
 
   const { bundle: ontologyBundle, indexes: ontologyIndexes, errors } = loadOntologyBundle();
   const sourceFiles = listSourceFiles();
-  const canonicalFiles = listCanonicalJsonlFiles();
-  const generatedAt = new Date().toISOString();
   const slugSet = new Set();
 
   for (const sourceFilename of sourceFiles) {
@@ -593,18 +377,6 @@ function main() {
       errors.push(`${sourceFilename}: duplicate source slug \`${slug}\``);
     }
     slugSet.add(slug);
-  }
-
-  for (const canonicalFilename of canonicalFiles) {
-    const canonicalPath = path.join(canonicalDir, canonicalFilename);
-    for (const rawRecord of readJsonLines(canonicalPath)) {
-      const slug = buildCanonicalSlug(rawRecord, canonicalFilename);
-      if (!slug) continue;
-      if (slugSet.has(slug)) {
-        errors.push(`${canonicalFilename}: duplicate canonical slug \`${slug}\``);
-      }
-      slugSet.add(slug);
-    }
   }
 
   const { errors: proofSlugErrors, proofsBySlug } = validateProofSourceSlugs(
@@ -630,30 +402,14 @@ function main() {
     records.push(record);
   }
 
-  for (const canonicalFilename of canonicalFiles) {
-    const canonicalPath = path.join(canonicalDir, canonicalFilename);
-    for (const rawRecord of readJsonLines(canonicalPath)) {
-      const { errors: itemErrors, record } = buildCanonicalRecord(
-        rawRecord,
-        canonicalFilename,
-        generatedAt
-      );
-      errors.push(...itemErrors);
-      if (!record) continue;
-
-      writeJson(path.join(normalizedDir, `${record.slug}.json`), record);
-      records.push(record);
-    }
-  }
-
+  const generatedAt = new Date().toISOString();
   const modelReadyRecords = records.filter((record) =>
     MODEL_READY_STATUSES.has(record.metadata.verification_status)
   );
   const published = {
     generated_at: generatedAt,
     counts: {
-      source_files: sourceFiles.length + canonicalFiles.length,
-      canonical_source_files: canonicalFiles.length,
+      source_files: sourceFiles.length,
       normalized_records: records.length,
       model_ready_records: modelReadyRecords.length,
       verified_records: records.filter(
