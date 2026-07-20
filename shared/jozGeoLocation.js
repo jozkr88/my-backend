@@ -1,5 +1,5 @@
 const DEFAULT_GEOIP_ENDPOINT = "https://ipwho.is/{ip}";
-const GEO_LOOKUP_TIMEOUT_MS = 700;
+const GEO_LOOKUP_TIMEOUT_MS = 2500;
 const GEO_CACHE_TTL_MS = 15 * 60 * 1000;
 const MAX_GEO_CACHE_ENTRIES = 1000;
 
