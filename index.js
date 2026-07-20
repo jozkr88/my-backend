@@ -174,6 +174,7 @@ function trackJozChatWindow(store, key, windowMs, now) {
 
 function getClientIp(req) {
   return (
+    String(req.ips?.[0] || "").trim() ||
     String(req.ip || "").trim() ||
     String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
     String(req.socket?.remoteAddress || "").trim() ||
