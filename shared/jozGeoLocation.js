@@ -1,4 +1,7 @@
-const DEFAULT_GEOIP_ENDPOINT = "https://ipwho.is/{ip}";
+const DEFAULT_GEOIP_ENDPOINTS = [
+  "https://ipwho.is/{ip}",
+  "https://freeipapi.com/api/json/{ip}",
+];
 const GEO_LOOKUP_TIMEOUT_MS = 2500;
 const GEO_CACHE_TTL_MS = 15 * 60 * 1000;
 const MAX_GEO_CACHE_ENTRIES = 1000;
@@ -57,12 +60,14 @@ function normalizeGeoResponse(payload = {}, source = "ipwho.is") {
   if (payload?.error || payload?.success === false) return null;
 
   const countryCode = cleanText(payload.country_code || payload.countryCode, 8)?.toUpperCase() || null;
-  const country = cleanText(payload.country_name || payload.country, 120);
-  const region = cleanText(payload.region, 120);
+  const country = cleanText(payload.country_name || payload.country || payload.countryName, 120);
+  const region = cleanText(payload.region || payload.regionName, 120);
   const regionCode = cleanText(payload.region_code || payload.regionCode, 32);
-  const city = cleanText(payload.city, 120);
+  const city = cleanText(payload.city || payload.cityName, 120);
   const timezone = cleanText(
-    typeof payload.timezone === "object" ? payload.timezone?.id : payload.timezone,
+    typeof payload.timezone === "object"
+      ? payload.timezone?.id
+      : payload.timezone || payload.timeZones?.[0],
     80
   );
 
@@ -99,9 +104,10 @@ function setCachedGeo(ip, value) {
   geoCache.set(ip, { value, expiresAt: Date.now() + GEO_CACHE_TTL_MS });
 }
 
-function getGeoEndpoint(ip) {
-  const template = String(process.env.JOZ_GEOIP_ENDPOINT || DEFAULT_GEOIP_ENDPOINT).trim();
-  return template.replace("{ip}", encodeURIComponent(ip));
+function getGeoEndpoints(ip) {
+  const configuredEndpoint = String(process.env.JOZ_GEOIP_ENDPOINT || "").trim();
+  const templates = configuredEndpoint ? [configuredEndpoint] : DEFAULT_GEOIP_ENDPOINTS;
+  return templates.map((template) => template.replace("{ip}", encodeURIComponent(ip)));
 }
 
 export async function resolveJozRequestGeo(ip, { fetchImpl = globalThis.fetch } = {}) {
@@ -113,24 +119,32 @@ export async function resolveJozRequestGeo(ip, { fetchImpl = globalThis.fetch } 
   const cached = getCachedGeo(normalizedIp);
   if (cached !== undefined) return cached;
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), GEO_LOOKUP_TIMEOUT_MS);
+  for (const endpoint of getGeoEndpoints(normalizedIp)) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), GEO_LOOKUP_TIMEOUT_MS);
 
-  try {
-    const response = await fetchImpl(getGeoEndpoint(normalizedIp), {
-      headers: { Accept: "application/json" },
-      signal: controller.signal,
-    });
-    if (!response.ok) return null;
+    try {
+      const response = await fetchImpl(endpoint, {
+        headers: { Accept: "application/json" },
+        signal: controller.signal,
+      });
+      if (!response.ok) continue;
 
-    const geo = normalizeGeoResponse(await response.json());
-    setCachedGeo(normalizedIp, geo);
-    return geo;
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(timeout);
+      const source = new URL(endpoint).hostname;
+      const geo = normalizeGeoResponse(await response.json(), source);
+      if (geo) {
+        setCachedGeo(normalizedIp, geo);
+        return geo;
+      }
+    } catch {
+      // Try the next provider before failing closed.
+    } finally {
+      clearTimeout(timeout);
+    }
   }
+
+  setCachedGeo(normalizedIp, null);
+  return null;
 }
 
 export function __resetJozGeoCacheForTests() {
