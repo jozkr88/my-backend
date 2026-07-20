@@ -433,6 +433,8 @@ function getPool() {
 
   pool = new Pool({
     connectionString: getDatabaseUrl(),
+    connectionTimeoutMillis: 10_000,
+    idleTimeoutMillis: 30_000,
     ssl: process.env.NODE_ENV === "production" || process.env.RENDER || process.env.SUPABASE_DB_URL
       ? { rejectUnauthorized: false }
       : false,
@@ -1331,6 +1333,7 @@ async function seedWorldModel(db) {
 }
 
 export async function initDatabase() {
+  const configuredDatabaseUrl = getDatabaseUrl();
   const db = getPool();
   if (!db) {
     console.log("🗄️ No database URL set, using file memory only");
@@ -1764,13 +1767,17 @@ export async function initDatabase() {
 
     console.log("🗄️ Supabase/Postgres ready");
   } catch (error) {
-    console.error("⚠️ Database init failed, falling back to file memory:", error.message);
     if (pool) {
       await pool.end().catch(() => {});
       pool = null;
     }
-    delete process.env.SUPABASE_DB_URL;
-    delete process.env.DATABASE_URL;
+
+    if (configuredDatabaseUrl) {
+      console.error("❌ Database init failed; Supabase/Postgres is required:", error.message);
+      throw error;
+    }
+
+    console.error("⚠️ Database init failed, using file memory:", error.message);
   }
 }
 

@@ -17,9 +17,8 @@ function normalizeText(value = "") {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ")
-    .replace(/[’‘]/g, "'")
-    .replace(/^waht does\b/g, "what does")
     .replace(/^waht is\b/g, "what is")
+    .replace(/^waht does\b/g, "what does")
     .replace(/^wht is\b/g, "what is")
     .replace(/^hat is\b/g, "what is")
     .replace(/^whats\b/g, "what's")
@@ -120,11 +119,11 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   if (
     clean.includes("difference between docker and kubernetes") ||
     clean.includes("docker vs kubernetes") ||
-    clean.includes("diff between docker and kubernetes") ||
-    clean.includes("docker and kubernetes difference") ||
     clean.includes("docker versus kubernetes") ||
     clean.includes("when would joz use docker versus kubernetes") ||
-    clean.includes("when would joz use docker vs kubernetes")
+    clean.includes("when would joz use docker vs kubernetes") ||
+    clean.includes("diff between docker and kubernetes") ||
+    clean.includes("docker and kubernetes difference")
   ) {
     return "Docker packages a service and its dependencies into a portable container image. Kubernetes deploys, scales, restarts, and manages containers across machines. Docker packages the service; Kubernetes runs and manages it.";
   }
@@ -730,16 +729,16 @@ function composeFactualProfileReply(subIntent) {
 }
 
 function composeBusinessNeedReply(subIntent = "hire_value", input = "") {
-  if (subIntent === "business_diagnosis") {
-    return "Start with one decision or workflow where bad data and slow decisions are creating measurable cost, delay, or risk. Joz would map the current process, identify the authoritative sources and data owners, establish a baseline, and separate a quick enablement win from deeper data and systems work. Then pilot a bounded use case with grounded retrieval, human approval, and outcome metrics before expanding into broader automation or agents.";
-  }
-
   if (subIntent === "consultant_builder") {
     return "Joz is both a consultant and a builder. He starts by diagnosing the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. He is not strategy-only consulting or code-only contracting: he connects business decisions to working systems and accountable execution.";
   }
 
   if (subIntent === "business_help") {
     return buildBusinessTransformationReply(input) || "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.";
+  }
+
+  if (subIntent === "business_diagnosis") {
+    return "Start with one decision or workflow where bad data and slow decisions are creating measurable cost, delay, or risk. Joz would map the current process, identify the authoritative sources and data owners, establish a baseline, and separate a quick enablement win from deeper data and systems work. Then pilot a bounded use case with grounded retrieval, human approval, and outcome metrics before expanding into broader automation or agents.";
   }
 
   if (subIntent === "ai_readiness") {
@@ -802,14 +801,6 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
-  if (subIntent === "ai_infrastructure_definition") {
-    return "AI infrastructure is the production foundation that lets AI systems run reliably: compute, model access, data and storage, networking, identity and security, orchestration, observability, evaluation, and controlled deployment. In Joz's approach, it also includes retrieval, memory, policy gates, execution services, verification, and durable workflow state so an AI system can scale, recover, and remain accountable rather than being only a model behind an API.";
-  }
-
-  if (subIntent === "ai_architecture_definition") {
-    return "AI architecture is the design of how models, data, retrieval, memory, agents, tools, workflows, policy, execution, and verification work together to deliver a reliable outcome. Joz separates reasoning from policy and execution: the model can propose, approved tools can act, deterministic controls can govern risk, and verification checks the resulting state against authoritative systems.";
-  }
-
   if (subIntent === "knowledge_graph_definition") {
     return "A knowledge graph represents entities, relationships, permissions, and provenance as connected structure. In Joz's architecture, it complements vector search: vectors find semantically similar passages, while the graph links ownership, policy, organisational structure, workflows, and cross-system relationships. It is useful when relationships and traceability matter, with ACLs and source provenance enforced during retrieval.";
   }
@@ -1273,37 +1264,7 @@ function buildShortClarificationReply(clean = "") {
   return null;
 }
 
-export const JOZ_ROTATING_FALLBACKS = [
-  "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
-  "Joz connects business problems to working AI systems. Ask about a goal, industry, or capability.",
-  "Joz works across strategy, architecture, engineering, and AI delivery. What would you like to explore?",
-  "Joz turns complex systems into measurable outcomes. Is your focus business value, skills, or infrastructure?",
-  "Joz combines consulting with hands-on building. What challenge should we start with?",
-  "Joz designs governed AI systems that can work in the real world. What is your use case?",
-  "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
-  "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
-];
-
-function hashFallbackInput(value = "") {
-  return [...String(value || "")].reduce((hash, character) => ((hash * 31 + character.charCodeAt(0)) >>> 0), 7);
-}
-
-export function selectJozRotatingFallback(clean = "", messages = []) {
-  const assistantReplies = Array.isArray(messages)
-    ? messages
-        .filter((entry) => entry?.role === "assistant")
-        .map((entry) => String(entry.content || "").trim())
-        .filter(Boolean)
-    : [];
-  const previousReply = assistantReplies.at(-1) || "";
-  let index = hashFallbackInput(`${normalizeText(clean)}:${assistantReplies.length}`) % JOZ_ROTATING_FALLBACKS.length;
-  if (JOZ_ROTATING_FALLBACKS[index] === previousReply) {
-    index = (index + 1) % JOZ_ROTATING_FALLBACKS.length;
-  }
-  return JOZ_ROTATING_FALLBACKS[index];
-}
-
-function buildJozScopeBoundaryReply(clean = "", messages = []) {
+function buildJozScopeBoundaryReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (!normalized) return null;
 
@@ -1316,14 +1277,41 @@ function buildJozScopeBoundaryReply(clean = "", messages = []) {
 
   if (!asksAboutJozOrPronoun || !questionLike) return null;
 
-  return selectJozRotatingFallback(normalized, messages);
+  return "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.";
 }
 
-function buildGenericScopeBoundaryReply(clean = "", messages = []) {
+function buildGenericScopeBoundaryReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (!normalized) return null;
 
-  return selectJozRotatingFallback(normalized, messages);
+  return "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+}
+
+export function buildVisitorLocationReply(input = "", geo = null) {
+  const clean = normalizeText(input);
+  const isVisitorLocationQuestion = [
+    /\bwhere am i\b/,
+    /\bwhat(?:'s| is) my (?:approximate )?location\b/,
+    /\bwhere am i located\b/,
+    /\bwhat (?:city|country|region) am i in\b/,
+  ].some((pattern) => pattern.test(clean));
+
+  if (!isVisitorLocationQuestion) return null;
+
+  const label = geo?.label || [geo?.city, geo?.region, geo?.country].filter(Boolean).join(", ");
+  const reply = label
+    ? `Your approximate location is ${label}. IP-based location can be inaccurate when using a VPN, proxy, or mobile network.`
+    : "Joz LLM cannot determine your approximate location right now. The location signal is unavailable.";
+
+  return buildPolicyResolution({
+    reply,
+    answerSource: geo ? "visitor_geo" : "visitor_geo_unavailable",
+    composer: "buildVisitorLocationReply",
+    intentMode: mapRouteToIntentMode("unknown_fallback"),
+    retrievedCategories: [],
+    answerClass: "visitor_location",
+    confidence: geo ? "medium" : "low",
+  });
 }
 
 function buildPolicyResolution({
@@ -1459,12 +1447,10 @@ function buildEvidenceBackedRouteReply({
       "architecture_reasoning",
       "safe_architecture_design",
       "agent_scope_tradeoffs",
-      "agent_model_tool_distinction",
       "agentic_architecture_approach",
       "agentic_architecture_why",
       "single_agent_tradeoffs",
       "verification_architecture",
-      "release_verification",
       "scale_fastapi_architecture",
       "organizational_ownership_layer",
       "langgraph_temporal_architecture",
@@ -1685,9 +1671,6 @@ function detectIdentityProfile(clean) {
     "is this for real",
     "is he for real",
     "is joz for real",
-    "is joz real",
-    "is joz real or just marketing",
-    "real or just marketing",
     "joz for real",
     "is joz fake",
     "this sounds fake",
@@ -2078,9 +2061,15 @@ function detectRecruiterOperational(clean) {
 function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
-      "can joz actually build things",
-      "can joz build things",
+      "is joz a consultant or a builder",
+      "is joz consultant or builder",
+      "consultant or builder",
+      "consultant vs builder",
+      "consulting or building",
+      "does joz build",
       "does joz actually build",
+      "is joz a builder",
+      "is joz a consultant",
     ])
   ) {
     return { detectedSubIntent: "consultant_builder", detectedConcept: "business_value" };
@@ -2096,22 +2085,6 @@ function detectBusinessNeed(clean) {
     includesAny(clean, ["slow decisions", "what should i do first", "where should we start"])
   ) {
     return { detectedSubIntent: "business_diagnosis", detectedConcept: "business_value" };
-  }
-
-  if (
-    includesAny(clean, [
-      "is joz a consultant or a builder",
-      "is joz consultant or builder",
-      "consultant or builder",
-      "consultant vs builder",
-      "consulting or building",
-      "does joz build",
-      "does joz actually build",
-      "is joz a builder",
-      "is joz a consultant",
-    ])
-  ) {
-    return { detectedSubIntent: "consultant_builder", detectedConcept: "business_value" };
   }
 
   if (
@@ -2383,10 +2356,10 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "why should we hire joz",
+      "why should i hire joz",
       "why should a hiring manager hire joz",
       "why would a hiring manager hire joz",
       "hiring manager hire joz",
-      "why should i hire joz",
       "why hire joz",
       "why hire him",
       "why would anyone hire him",
@@ -2521,7 +2494,6 @@ function detectSystemsMindset(clean) {
       "let agents deploy code themselves",
       "deploy straight to prod",
       "straight to prod",
-      "should an ai agent deploy directly to production",
       "doing something stupid",
       "something stupid in production",
     ])
@@ -2607,24 +2579,6 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
-  if (
-    includesAny(clean, [
-      "design a governed agentic ai platform",
-      "durable workflows, retrieval, memory, and verification",
-    ]) &&
-    includesAny(clean, ["platform", "architecture", "verification", "workflows"])
-  ) {
-    return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
-  }
-
-  if (includesAny(clean, ["what is ai infrastructure", "define ai infrastructure", "explain ai infrastructure"])) {
-    return { detectedSubIntent: "ai_infrastructure_definition", detectedConcept: "skills" };
-  }
-
-  if (includesAny(clean, ["what is ai architecture", "define ai architecture", "explain ai architecture"])) {
-    return { detectedSubIntent: "ai_architecture_definition", detectedConcept: "skills" };
-  }
-
   if (includesAny(clean, ["what is a knowledge graph"])) {
     return { detectedSubIntent: "knowledge_graph_definition", detectedConcept: "skills" };
   }
@@ -2638,6 +2592,16 @@ function detectSkills(clean) {
     ])
   ) {
     return { detectedSubIntent: "agent_model_tool_distinction", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "design a governed agentic ai platform",
+      "durable workflows, retrieval, memory, and verification",
+    ]) &&
+    includesAny(clean, ["platform", "architecture", "verification", "workflows"])
+  ) {
+    return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
   }
 
   if (
@@ -2704,6 +2668,16 @@ function detectSkills(clean) {
     "how is joz using ai",
   ])) {
     return { detectedSubIntent: "ai_use", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
+      "when should a system use one agent versus multiple agents",
+      "when should a system use one agent versus many agents",
+      "when should we use one agent versus multiple agents",
+    ])
+  ) {
+    return { detectedSubIntent: "agent_scope_tradeoffs", detectedConcept: "skills" };
   }
 
   if (
@@ -2860,16 +2834,6 @@ function detectSkills(clean) {
     ])
   ) {
     return { detectedSubIntent: "verification_architecture", detectedConcept: "skills" };
-  }
-
-  if (
-    includesAny(clean, [
-      "when should a system use one agent versus multiple agents",
-      "when should a system use one agent versus many agents",
-      "when should we use one agent versus multiple agents",
-    ])
-  ) {
-    return { detectedSubIntent: "agent_scope_tradeoffs", detectedConcept: "skills" };
   }
 
   if (
@@ -3041,10 +3005,10 @@ function detectSkills(clean) {
       "whats mcp",
       "mcp then",
       "what is docker",
+      "is docker a virtual machine",
       "when would joz use docker versus kubernetes",
       "when would joz use docker vs kubernetes",
       "docker versus kubernetes",
-      "is docker a virtual machine",
       "diff between docker and kubernetes",
       "docker vs kubernetes",
       "difference between docker and kubernetes",
@@ -3292,9 +3256,6 @@ function detectSkills(clean) {
       "deepest skills",
       "joz's skills",
       "what are joz's skills",
-      "what are joz skills",
-      "what skills does joz have",
-      "what skills does joz possess",
       "what is joz good at",
       "what is he good at",
       "what is he strongest at",
@@ -3314,8 +3275,6 @@ function detectSkills(clean) {
       "what does he actually build then",
       "what does he actually build",
       "what does he know about ai agents",
-      "what does joz know about ai agents",
-      "what does joz know about ai agent",
       "so what is he actually good at",
       "yo what does joz do then",
       "tell me more about joz",
@@ -3389,8 +3348,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   }
 
   // Business value and transformation questions must win over recruiter
-  // operational phrases such as "hiring" or "role". This keeps "Where is
-  // the ROI in hiring Joz?" from becoming an availability answer.
+  // operational phrases such as "hiring" or "role".
   if (
     preWorldBusinessNeed &&
     ["business_help", "business_diagnosis", "ai_readiness", "ai_maturity", "roi", "hire_value", "consultant_builder", "business_value_definition"].includes(
@@ -3437,8 +3395,6 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "ai_use",
       "collaboration",
       "knowledge_graph_definition",
-      "ai_infrastructure_definition",
-      "ai_architecture_definition",
     ].includes(
       preWorldSkills.detectedSubIntent
     )
@@ -3710,7 +3666,6 @@ export function composeJozLlmRouteReply({
       (route.detectedSubIntent === "hire_value" &&
       includesAny(cleanInput, [
         "why should we hire",
-        "why should a hiring manager hire",
         "why hire",
         "why is joz relevant",
         "why joz now",
@@ -3817,18 +3772,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
@@ -4013,7 +3968,7 @@ export async function resolveUnknownJozReply({
     });
   }
 
-  const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean, messages);
+  const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean);
   if (jozScopeBoundaryReply) {
     return buildPolicyResolution({
       reply: jozScopeBoundaryReply,
@@ -4066,7 +4021,7 @@ export async function resolveUnknownJozReply({
   }
 
   if (!reply) {
-    const genericScopeBoundaryReply = buildGenericScopeBoundaryReply(clean, messages);
+    const genericScopeBoundaryReply = buildGenericScopeBoundaryReply(clean);
     return buildPolicyResolution({
       reply: genericScopeBoundaryReply || buildJozLlmFallbackReply(input),
       answerSource: "scope_boundary",
@@ -4130,6 +4085,7 @@ export function buildRoleAwareJozContext({
       currentMeshStage: context?.currentMeshStage || null,
       targetRole: context?.targetRole || "Advanced Data Scientist",
       intentMode,
+      visitorGeo: context?.visitorGeo || context?.visitor_geo || null,
     },
     profile,
     retrievedDocuments,

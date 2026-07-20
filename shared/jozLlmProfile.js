@@ -421,10 +421,6 @@ export function buildJozLlmFallbackReply(message = "") {
     return recruiterAnswer;
   }
 
-  if (clean.includes("what can't you answer") || clean.includes("what cant you answer")) {
-    return "I can answer about Joz's background, business value, systems mindset, skills, infrastructure approach, and agent architecture. I should not invent arbitrary external entities, unstated personal facts, or unsupported claims about technologies Joz personally operated in production.";
-  }
-
   if (
     clean.includes("fit") ||
     clean.includes("match") ||

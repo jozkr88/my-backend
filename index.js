@@ -66,12 +66,14 @@ import {
   buildJozRouteTrace,
   buildRoleAwareJozContext,
   composeJozLlmRouteReply,
+  buildVisitorLocationReply,
   resolveUnknownJozReply,
   routeJozLlmQueryWithAwareness,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 import { classifyJozAudience } from "./shared/jozAudienceClassifier.js";
+import { resolveJozRequestGeo } from "./shared/jozGeoLocation.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -80,6 +82,7 @@ dotenv.config();
 await initDatabase();
 
 const app = express();
+app.set("trust proxy", 1);
 const isEphemeralFilesystem =
   process.env.VERCEL === "1" ||
   process.env.VERCEL === "true" ||
@@ -170,13 +173,9 @@ function trackJozChatWindow(store, key, windowMs, now) {
 }
 
 function getClientIp(req) {
-  const forwarded = String(req.headers["x-forwarded-for"] || "").trim();
-  if (forwarded) {
-    return forwarded.split(",")[0].trim();
-  }
-
   return (
     String(req.ip || "").trim() ||
+    String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
     String(req.socket?.remoteAddress || "").trim() ||
     "unknown"
   );
@@ -889,6 +888,9 @@ app.post("/api/privacy/request", async (req, res) => {
 app.post("/api/joz-llm", async (req, res) => {
   try {
     const requestStartedAt = Date.now();
+    const requestGeoPromise = isNodeTestRuntime
+      ? Promise.resolve(null)
+      : resolveJozRequestGeo(getClientIp(req));
     const messages = Array.isArray(req.body?.messages) ? req.body.messages : [];
     const context = req.body?.context || {};
     const sessionKey = String(req.body?.conversationId || req.body?.sessionKey || "").trim() || null;
@@ -916,6 +918,11 @@ app.post("/api/joz-llm", async (req, res) => {
     if (rateLimitResult) {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
+
+    const requestGeo = await requestGeoPromise;
+    const answerContext = requestGeo
+      ? { ...context, visitorGeo: requestGeo }
+      : context;
 
     const recentSessionMessages = getFallbackRecentJozSessionMessages({
       sessionKey,
@@ -960,17 +967,19 @@ app.post("/api/joz-llm", async (req, res) => {
     const roleAwareContext = buildRoleAwareJozContext({
       buildJozLlmContext,
       profile,
-      context,
+      context: answerContext,
       intentMode: retrievalIntentMode,
       retrievedDocuments: retrievalContext,
     });
-    const ownedResolution = composeJozLlmRouteReply({
-      route,
-      input: latestUserMessage,
-      appContext: validatedAppContext,
-      legacyContext: legacyRuntimeContext,
-      retrievedDocuments: retrievalContext,
-    });
+    const ownedResolution =
+      buildVisitorLocationReply(latestUserMessage, requestGeo) ||
+      composeJozLlmRouteReply({
+        route,
+        input: latestUserMessage,
+        appContext: validatedAppContext,
+        legacyContext: legacyRuntimeContext,
+        retrievedDocuments: retrievalContext,
+      });
     const resolution =
       ownedResolution ||
       (await resolveUnknownJozReply({
@@ -1124,6 +1133,10 @@ app.post("/api/joz-llm", async (req, res) => {
       },
     });
 
+    const requestContext = {
+      ...legacyRuntimeContext,
+      ...(requestGeo ? { geo: requestGeo } : {}),
+    };
     const observabilityEvent = {
       conversationId,
       sessionKey,
@@ -1131,7 +1144,7 @@ app.post("/api/joz-llm", async (req, res) => {
       intentMode: effectiveRoute.selectedRoute,
       userMessage: latestUserMessage,
       assistantReply: reply,
-      requestContext: legacyRuntimeContext,
+      requestContext,
       trace,
       verification,
       retrievedCategories,

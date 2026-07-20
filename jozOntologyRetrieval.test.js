@@ -37,6 +37,88 @@ function rankedSlugs(query, intentMode, limit = 5) {
   }).map((doc) => doc.slug);
 }
 
+function rankedTitles(query, intentMode, limit = 5) {
+  return rankJozDocumentsForQuery(loadDocs(), {
+    intentMode,
+    query,
+    limit,
+  }).map((doc) => doc.title);
+}
+
+test("canonical technical concept queries rank the expected records first", () => {
+  const cases = [
+    ["What is an agent?", "skills", "Agent Definition"],
+    ["What is MCP?", "skills", "MCP"],
+    ["What is LangGraph?", "skills", "Orchestration"],
+    ["What is Temporal?", "skills", "Orchestration"],
+    ["What is FastAPI used for?", "skills", "FastAPI"],
+    ["What role does a knowledge graph play?", "skills", "Organisational Knowledge Layer"],
+    ["When would Joz use Python versus Golang?", "skills", "Golang and Python"],
+  ];
+
+  for (const [query, intentMode, expectedTitle] of cases) {
+    const titles = rankedTitles(query, intentMode, 5);
+    assert.equal(titles[0], expectedTitle, `${query} should rank ${expectedTitle} first`);
+  }
+});
+
+test("canonical governance and autonomous-execution queries rank the expected records first", () => {
+  const cases = [
+    ["How does Joz defend against prompt injection?", "systems_mindset", "Prompt Injection Defense"],
+    ["Why must permissions be enforced before retrieval?", "skills", "ACL-Aware Retrieval"],
+    ["What is Joz's Organisational Awareness Layer?", "skills", "Organisational Awareness Layer"],
+    ["What is Joz's Autonomous Execution Layer?", "business_need", "Autonomous Execution Layer"],
+    ["How does Joz verify autonomous code changes?", "systems_mindset", "Autonomous Code Verification"],
+  ];
+
+  for (const [query, intentMode, expectedTitle] of cases) {
+    const titles = rankedTitles(query, intentMode, 5);
+    assert.equal(titles[0], expectedTitle, `${query} should rank ${expectedTitle} first`);
+  }
+});
+
+test("canonical infrastructure and platform queries rank the expected records first", () => {
+  const cases = [
+    ["What is Docker?", "skills", "Docker"],
+    ["What is Kubernetes?", "skills", "Kubernetes"],
+    ["What is the difference between Docker and Kubernetes?", "skills", "Kubernetes"],
+    ["What is a Kubernetes pod?", "skills", "Kubernetes Pods"],
+    ["What is a Kubernetes deployment?", "skills", "Kubernetes Deployment"],
+    ["What is a Kubernetes service?", "skills", "Kubernetes Service"],
+    ["What is ingress?", "skills", "Ingress and API Gateway"],
+    ["What does a load balancer do?", "skills", "Load Balancer"],
+    ["What is horizontal scaling?", "skills", "Horizontal and Vertical Scaling"],
+    ["What is autoscaling?", "skills", "Autoscaling"],
+    ["Why should APIs be stateless?", "skills", "Stateless Services"],
+    ["What is PostgreSQL used for?", "skills", "PostgreSQL"],
+    ["What is Redis used for?", "skills", "Redis"],
+    ["What is the difference between PostgreSQL and Redis?", "skills", "Redis"],
+    ["What is Kafka?", "skills", "Kafka and NATS"],
+    ["When would Joz use Kafka versus NATS?", "skills", "Kafka and NATS"],
+    ["What is event-driven architecture?", "skills", "Event-Driven Architecture"],
+    ["What is Temporal used for?", "skills", "Temporal"],
+    ["What is workload identity?", "skills", "Workload Identity"],
+    ["What is Vault or KMS?", "skills", "Secrets Management"],
+    ["What is OpenTelemetry?", "skills", "OpenTelemetry"],
+    ["What is the difference between logs, metrics, and traces?", "skills", "Observability"],
+    ["What is CI/CD?", "skills", "CI/CD"],
+    ["What is Terraform?", "skills", "Infrastructure as Code"],
+    ["What is GitOps?", "skills", "GitOps"],
+    ["What is a canary deployment?", "skills", "Blue-Green and Canary Deployment"],
+    ["What is a circuit breaker?", "skills", "Circuit Breaker"],
+    ["What is idempotency?", "skills", "Idempotency"],
+    ["What is backpressure?", "skills", "Backpressure"],
+    ["How does Joz scale an agent platform?", "skills", "Agent Infrastructure Scaling"],
+    ["How does Joz approach disaster recovery?", "skills", "Disaster Recovery"],
+    ["What is Joz's infrastructure philosophy?", "skills", "How Joz Approaches Infrastructure"],
+  ];
+
+  for (const [query, intentMode, expectedTitle] of cases) {
+    const titles = rankedTitles(query, intentMode, 5);
+    assert.equal(titles[0], expectedTitle, `${query} should rank ${expectedTitle} first`);
+  }
+});
+
 test("business value query prioritizes why-hire record and enterprise proof", () => {
   const slugs = rankedSlugs("Why should we hire Joz now?", "business_need", 10);
   assert.equal(slugs[0], "business-need-enterprise-proof");
