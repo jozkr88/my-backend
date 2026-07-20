@@ -17,6 +17,7 @@ function normalizeText(value = "") {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ")
+    .replace(/[’‘]/g, "'")
     .replace(/^waht does\b/g, "what does")
     .replace(/^waht is\b/g, "what is")
     .replace(/^wht is\b/g, "what is")
@@ -801,6 +802,14 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "ai_infrastructure_definition") {
+    return "AI infrastructure is the production foundation that lets AI systems run reliably: compute, model access, data and storage, networking, identity and security, orchestration, observability, evaluation, and controlled deployment. In Joz's approach, it also includes retrieval, memory, policy gates, execution services, verification, and durable workflow state so an AI system can scale, recover, and remain accountable rather than being only a model behind an API.";
+  }
+
+  if (subIntent === "ai_architecture_definition") {
+    return "AI architecture is the design of how models, data, retrieval, memory, agents, tools, workflows, policy, execution, and verification work together to deliver a reliable outcome. Joz separates reasoning from policy and execution: the model can propose, approved tools can act, deterministic controls can govern risk, and verification checks the resulting state against authoritative systems.";
+  }
+
   if (subIntent === "knowledge_graph_definition") {
     return "A knowledge graph represents entities, relationships, permissions, and provenance as connected structure. In Joz's architecture, it complements vector search: vectors find semantically similar passages, while the graph links ownership, policy, organisational structure, workflows, and cross-system relationships. It is useful when relationships and traceability matter, with ACLs and source provenance enforced during retrieval.";
   }
@@ -2568,6 +2577,14 @@ function detectSkills(clean) {
     return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
   }
 
+  if (includesAny(clean, ["what is ai infrastructure", "define ai infrastructure", "explain ai infrastructure"])) {
+    return { detectedSubIntent: "ai_infrastructure_definition", detectedConcept: "skills" };
+  }
+
+  if (includesAny(clean, ["what is ai architecture", "define ai architecture", "explain ai architecture"])) {
+    return { detectedSubIntent: "ai_architecture_definition", detectedConcept: "skills" };
+  }
+
   if (includesAny(clean, ["what is a knowledge graph"])) {
     return { detectedSubIntent: "knowledge_graph_definition", detectedConcept: "skills" };
   }
@@ -3235,6 +3252,8 @@ function detectSkills(clean) {
       "deepest skills",
       "joz's skills",
       "what are joz's skills",
+      "what skills does joz have",
+      "what skills does joz possess",
       "what is joz good at",
       "what is he good at",
       "what is he strongest at",
@@ -3375,6 +3394,8 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "ai_use",
       "collaboration",
       "knowledge_graph_definition",
+      "ai_infrastructure_definition",
+      "ai_architecture_definition",
     ].includes(
       preWorldSkills.detectedSubIntent
     )
@@ -3753,18 +3774,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"

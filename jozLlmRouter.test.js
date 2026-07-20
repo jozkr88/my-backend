@@ -81,6 +81,24 @@ test("routes Joz authenticity phrasing away from business-function matching", ()
   assert.match(resolution.reply, /grounded in the current MeetJoz knowledge base/i);
 });
 
+test("answers AI architecture, infrastructure, and natural Joz skills phrasing", () => {
+  const { appContext, legacyContext } = buildContexts();
+  const cases = [
+    ["What is AI infrastructure?", "ai_infrastructure_definition", /production foundation|compute|observability/i],
+    ["What is AI architecture?", "ai_architecture_definition", /models, data, retrieval|policy|verification/i],
+    ["What are Joz’s skills?", "capabilities_overview", /deepest skills|agentic AI architecture/i],
+    ["What skills does Joz have?", "capabilities_overview", /deepest skills|agentic AI architecture/i],
+  ];
+
+  for (const [input, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext, retrievedDocuments: [] });
+    assert.equal(route.selectedRoute, "skills", input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(String(resolution.reply || ""), expectedReply, input);
+  }
+});
+
 test("routes business help, AI use, self-awareness, memory, and purpose questions directly", async () => {
   const { appContext, legacyContext } = buildContexts();
   const cases = [
