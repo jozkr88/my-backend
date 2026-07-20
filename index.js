@@ -173,7 +173,11 @@ function trackJozChatWindow(store, key, windowMs, now) {
 }
 
 function getClientIp(req) {
+  const cloudflareIp = String(req.headers["cf-connecting-ip"] || "").trim();
+  const isCloudflareRequest = Boolean(String(req.headers["cf-ray"] || "").trim());
+
   return (
+    (isCloudflareRequest && cloudflareIp) ||
     String(req.ips?.[0] || "").trim() ||
     String(req.ip || "").trim() ||
     String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
