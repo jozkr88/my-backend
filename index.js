@@ -994,6 +994,8 @@ app.post("/api/joz-llm", async (req, res) => {
         roleAwareContext,
       }));
     const resolution = enforceJozCommercialBoundaryResolution(route, rawResolution);
+    const responseRetrievedDocuments =
+      route.detectedSubIntent === "paid_architecture_boundary" ? [] : retrievedDocuments;
 
     assertNoFallbackHijack(route, resolution);
 
@@ -1020,7 +1022,7 @@ app.post("/api/joz-llm", async (req, res) => {
       resolution,
       trace,
       reply,
-      retrievedDocuments,
+      retrievedDocuments: responseRetrievedDocuments,
       latencyMs: Date.now() - requestStartedAt,
     });
     const initialVerificationStatus = verification.status;
@@ -1094,7 +1096,9 @@ app.post("/api/joz-llm", async (req, res) => {
       verificationFlow,
     };
     const retrievedCategories =
-      effectiveResolution?.retrievedCategories?.length
+      effectiveRoute.detectedSubIntent === "paid_architecture_boundary"
+        ? []
+        : effectiveResolution?.retrievedCategories?.length
         ? effectiveResolution.retrievedCategories
         : retrievedDocuments.map((doc) => doc.category);
     logWorldAwarenessTrace("/api/joz-llm", trace);
@@ -1153,7 +1157,7 @@ app.post("/api/joz-llm", async (req, res) => {
       trace,
       verification,
       retrievedCategories,
-      retrievedDocuments: retrievedDocuments.map((doc) => ({
+      retrievedDocuments: responseRetrievedDocuments.map((doc) => ({
         title: doc.title,
         category: doc.category,
         slug: doc?.metadata?.slug || null,
