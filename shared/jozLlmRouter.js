@@ -3882,25 +3882,27 @@ export function composeJozLlmRouteReply({
     const directKnowledgeReply =
       route.detectedSubIntent === "technical_stack" ? buildRetrievedKnowledgeReply(input, retrievedDocuments) : null;
     const baseReply = composeSkillsReply(route.detectedSubIntent);
-    const evidenceReply = buildEvidenceBackedRouteReply({
-      route,
-      baseReply,
-      input,
-      retrievedDocuments,
-    });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition", "paid_architecture_boundary"].includes(route.detectedSubIntent);
+    const evidenceReply = preferBaseSkillsReply
+      ? null
+      : buildEvidenceBackedRouteReply({
+          route,
+          baseReply,
+          input,
+          retrievedDocuments,
+        });
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition", "paid_architecture_boundary"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "ai_infrastructure_definition", "ai_architecture_definition", "paid_architecture_boundary"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
