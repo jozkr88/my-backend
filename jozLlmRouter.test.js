@@ -1271,6 +1271,20 @@ test("routes single-agent versus multi-agent platform questions to the dedicated
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
 });
 
+test("sets a paid architecture boundary for bespoke company blueprints", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "If you were my Chief AI Architect, design the complete Agentic AI architecture for Cruizi. Include multi-agent architecture, LLM stack and model selection, RAG architecture and knowledge base, memory architecture, fraud detection and trust scoring, dynamic pricing, route optimisation, and customer support AI.";
+  const route = routeJozLlmQuery({ input: prompt, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input: prompt, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "paid_architecture_boundary");
+  assert.match(resolution.reply, /paid architecture engagement/i);
+  assert.match(resolution.reply, /supervisor-led agent system|typed shared state/i);
+  assert.doesNotMatch(resolution.reply, /DHL|FedEx|GLS|dynamic pricing engine/i);
+});
+
 test("routes general agent-scope tradeoff questions to the dedicated scope answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 

@@ -802,6 +802,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "paid_architecture_boundary") {
+    return "A complete company-specific architecture for a named product is the kind of work Joz would scope as a paid architecture engagement, not provide as an unbounded free blueprint. At a high level, he would start with a supervisor-led agent system, typed shared state, explicit policy and fraud/risk gates, durable workflow state, and independent verification outside the agents. A production design would require discovery of the workflows, data, integrations, compliance constraints, and operating economics. Contact Joz to scope the architecture engagement.";
+  }
+
   if (subIntent === "ai_infrastructure_definition") {
     return "AI infrastructure is the production foundation that lets AI systems run reliably: compute, model access, data and storage, networking, identity and security, orchestration, observability, evaluation, and controlled deployment. In Joz's approach, it also includes retrieval, memory, policy gates, execution services, verification, and durable workflow state so an AI system can scale, recover, and remain accountable rather than being only a model behind an API.";
   }
@@ -2634,6 +2638,46 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  const paidArchitectureTerms = [
+    "multi-agent architecture",
+    "llm stack",
+    "model selection",
+    "rag architecture",
+    "knowledge base",
+    "memory architecture",
+    "fraud detection",
+    "trust scoring",
+    "dynamic pricing",
+    "route optimization",
+    "route optimisation",
+    "customer support ai",
+  ];
+  const paidArchitectureTermCount = paidArchitectureTerms.filter((term) => clean.includes(term)).length;
+  const namesExternalProduct = includesAny(clean, [
+    "for cruizi",
+    "for my company",
+    "for our company",
+    "for my startup",
+    "for our startup",
+    "for my platform",
+    "for our platform",
+    "for my marketplace",
+    "for our marketplace",
+  ]);
+  const asksForCompleteArchitecture = includesAny(clean, [
+    "if you were my chief ai architect",
+    "design the complete agentic ai architecture",
+    "design a complete agentic ai architecture",
+    "complete company-specific architecture",
+    "complete end-to-end architecture",
+  ]);
+  if (
+    paidArchitectureTermCount >= 4 &&
+    (namesExternalProduct || asksForCompleteArchitecture)
+  ) {
+    return { detectedSubIntent: "paid_architecture_boundary", detectedConcept: "skills" };
+  }
+
   if (
     includesAny(clean, [
       "design a governed agentic ai platform",
@@ -3456,6 +3500,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "verification_architecture",
       "release_verification",
       "single_agent_tradeoffs",
+      "paid_architecture_boundary",
       "agent_model_tool_distinction",
       "capabilities_overview",
       "purpose_of_llm",
