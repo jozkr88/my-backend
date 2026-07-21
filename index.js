@@ -67,6 +67,7 @@ import {
   buildRoleAwareJozContext,
   buildVisitorLocationReply,
   composeJozLlmRouteReply,
+  enforceJozCommercialBoundaryResolution,
   resolveUnknownJozReply,
   routeJozLlmQueryWithAwareness,
   routeJozLlmQuery,
@@ -984,7 +985,7 @@ app.post("/api/joz-llm", async (req, res) => {
         legacyContext: legacyRuntimeContext,
         retrievedDocuments: retrievalContext,
       });
-    const resolution =
+    const rawResolution =
       ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
@@ -992,6 +993,7 @@ app.post("/api/joz-llm", async (req, res) => {
         openai,
         roleAwareContext,
       }));
+    const resolution = enforceJozCommercialBoundaryResolution(route, rawResolution);
 
     assertNoFallbackHijack(route, resolution);
 

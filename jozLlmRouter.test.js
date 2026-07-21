@@ -6,6 +6,7 @@ import {
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   composeJozLlmRouteReply,
+  enforceJozCommercialBoundaryResolution,
   JOZ_ROTATING_FALLBACKS,
   resolveUnknownJozReply,
   routeJozLlmQuery,
@@ -1283,6 +1284,19 @@ test("sets a paid architecture boundary for bespoke company blueprints", () => {
   assert.match(resolution.reply, /paid architecture engagement/i);
   assert.match(resolution.reply, /supervisor-led agent system|typed shared state/i);
   assert.doesNotMatch(resolution.reply, /DHL|FedEx|GLS|dynamic pricing engine/i);
+});
+
+test("commercial boundary enforcement strips evidence-enriched replies", () => {
+  const route = { selectedRoute: "skills", detectedSubIntent: "paid_architecture_boundary" };
+  const guarded = enforceJozCommercialBoundaryResolution(route, {
+    reply: "Proof: MarketClue financial AI agents with live portfolio context.",
+    answerSource: "evidence",
+    composer: "buildEvidenceBackedRouteReply",
+  });
+
+  assert.equal(guarded.answerSource, "commercial_boundary");
+  assert.equal(guarded.composer, "composeSkillsReply");
+  assert.doesNotMatch(guarded.reply, /MarketClue|Maybank|Manulife|Mediacorp|Erste/i);
 });
 
 test("routes general agent-scope tradeoff questions to the dedicated scope answer", () => {

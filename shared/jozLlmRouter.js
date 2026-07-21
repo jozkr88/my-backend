@@ -909,6 +909,21 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";
 }
 
+export function enforceJozCommercialBoundaryResolution(route = {}, resolution = null) {
+  if (route?.detectedSubIntent !== "paid_architecture_boundary") return resolution;
+
+  return {
+    ...(resolution || {}),
+    reply: composeSkillsReply("paid_architecture_boundary"),
+    answerSource: "commercial_boundary",
+    composer: "composeSkillsReply",
+    fallbackUsed: false,
+    retrievedCategories: [],
+    answerClass: "commercial_boundary",
+    confidence: "high",
+  };
+}
+
 function composeMixedReply({ worldReply }) {
   const suffix =
     "If you want the human proof behind this layer, ask about Joz's Business Value, Systems Mindset, or Skills.";
