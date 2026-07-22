@@ -67,6 +67,7 @@ import {
   buildRoleAwareJozContext,
   composeJozLlmRouteReply,
   buildVisitorLocationReply,
+  enforceJozCommercialBoundaryResolution,
   resolveUnknownJozReply,
   routeJozLlmQueryWithAwareness,
   routeJozLlmQuery,
@@ -74,6 +75,11 @@ import {
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
 import { classifyJozAudience } from "./shared/jozAudienceClassifier.js";
 import { resolveJozRequestGeo } from "./shared/jozGeoLocation.js";
+import {
+  buildJozAgentPlan,
+  buildJozRiskGateResolution,
+  classifyJozIntent,
+} from "./shared/jozIntent.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -82,7 +88,7 @@ dotenv.config();
 await initDatabase();
 
 const app = express();
-app.set("trust proxy", 1);
+app.set("trust proxy", 2);
 const isEphemeralFilesystem =
   process.env.VERCEL === "1" ||
   process.env.VERCEL === "true" ||
@@ -173,7 +179,12 @@ function trackJozChatWindow(store, key, windowMs, now) {
 }
 
 function getClientIp(req) {
+  const cloudflareIp = String(req.headers["cf-connecting-ip"] || "").trim();
+  const isCloudflareRequest = Boolean(String(req.headers["cf-ray"] || "").trim());
+
   return (
+    (isCloudflareRequest && cloudflareIp) ||
+    String(req.ips?.[0] || "").trim() ||
     String(req.ip || "").trim() ||
     String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
     String(req.socket?.remoteAddress || "").trim() ||
@@ -934,8 +945,18 @@ app.post("/api/joz-llm", async (req, res) => {
       legacyContext: legacyRuntimeContext,
       recentMessages: recentSessionMessages,
     });
+    const intentClassification = await classifyJozIntent({
+      openai,
+      input: latestUserMessage,
+      messages,
+      context,
+      route,
+    });
+    const agentPlan = buildJozAgentPlan({ classification: intentClassification });
+    const laneHint = String(context?.intentMode || "").trim().toLowerCase();
     const intentMode =
-      String(context?.intentMode || "").trim().toLowerCase() ||
+      (route.selectedRoute !== "unknown_fallback" && route.selectedRoute) ||
+      laneHint ||
       route.selectedRoute;
     const profile = await getPrimaryJozProfile();
     const conversationId = await createJozConversation({
@@ -971,6 +992,11 @@ app.post("/api/joz-llm", async (req, res) => {
       intentMode: retrievalIntentMode,
       retrievedDocuments: retrievalContext,
     });
+    roleAwareContext.intentClassification = intentClassification;
+    roleAwareContext.agentPlan = agentPlan;
+    const riskGateResolution = buildJozRiskGateResolution({
+      classification: intentClassification,
+    });
     const ownedResolution =
       buildVisitorLocationReply(latestUserMessage, requestGeo) ||
       composeJozLlmRouteReply({
@@ -980,14 +1006,19 @@ app.post("/api/joz-llm", async (req, res) => {
         legacyContext: legacyRuntimeContext,
         retrievedDocuments: retrievalContext,
       });
-    const resolution =
+    const rawResolution =
       ownedResolution ||
+      riskGateResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
         messages,
         openai,
         roleAwareContext,
+        intentClassification,
       }));
+    const resolution = enforceJozCommercialBoundaryResolution(route, rawResolution);
+    const responseRetrievedDocuments =
+      route.detectedSubIntent === "paid_architecture_boundary" ? [] : retrievedDocuments;
 
     assertNoFallbackHijack(route, resolution);
 
@@ -1007,6 +1038,12 @@ app.post("/api/joz-llm", async (req, res) => {
     let trace = {
       ...buildJozRouteTrace(route, resolution),
       audienceProfile,
+      intentClassification,
+      agentPlan,
+      risk: intentClassification.risk,
+      execution: {
+        status: intentClassification.kind === "execute" ? "not_started" : "not_required",
+      },
     };
     let verification = buildJozResponseVerification({
       input: latestUserMessage,
@@ -1014,7 +1051,7 @@ app.post("/api/joz-llm", async (req, res) => {
       resolution,
       trace,
       reply,
-      retrievedDocuments,
+      retrievedDocuments: responseRetrievedDocuments,
       latencyMs: Date.now() - requestStartedAt,
     });
     const initialVerificationStatus = verification.status;
@@ -1035,6 +1072,12 @@ app.post("/api/joz-llm", async (req, res) => {
       const repairedTrace = {
         ...buildJozRouteTrace(fallbackRepair.route, fallbackRepair.resolution),
         audienceProfile,
+        intentClassification,
+        agentPlan,
+        risk: intentClassification.risk,
+        execution: {
+          status: intentClassification.kind === "execute" ? "not_started" : "not_required",
+        },
       };
       const repairedVerification = buildJozResponseVerification({
         input: latestUserMessage,
@@ -1088,7 +1131,9 @@ app.post("/api/joz-llm", async (req, res) => {
       verificationFlow,
     };
     const retrievedCategories =
-      effectiveResolution?.retrievedCategories?.length
+      effectiveRoute.detectedSubIntent === "paid_architecture_boundary"
+        ? []
+        : effectiveResolution?.retrievedCategories?.length
         ? effectiveResolution.retrievedCategories
         : retrievedDocuments.map((doc) => doc.category);
     logWorldAwarenessTrace("/api/joz-llm", trace);
@@ -1148,7 +1193,7 @@ app.post("/api/joz-llm", async (req, res) => {
       trace,
       verification,
       retrievedCategories,
-      retrievedDocuments: retrievedDocuments.map((doc) => ({
+      retrievedDocuments: responseRetrievedDocuments.map((doc) => ({
         title: doc.title,
         category: doc.category,
         slug: doc?.metadata?.slug || null,
@@ -1177,6 +1222,9 @@ app.post("/api/joz-llm", async (req, res) => {
       mode: effectiveRoute.selectedRoute,
       trace,
       audienceProfile,
+      intent: intentClassification,
+      agentPlan,
+      risk: intentClassification.risk,
       verification,
       verificationFlow,
       observability: {

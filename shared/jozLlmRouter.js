@@ -801,6 +801,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "paid_architecture_boundary") {
+    return "A complete company-specific architecture for a named product is the kind of work Joz would scope as a paid architecture engagement, not provide as an unbounded free blueprint. At a high level, he would start with a supervisor-led agent system, typed shared state, explicit policy and fraud/risk gates, durable workflow state, and independent verification outside the agents. A production design would require discovery of the workflows, data, integrations, compliance constraints, and operating economics. Contact Joz to scope the architecture engagement.";
+  }
+
   if (subIntent === "knowledge_graph_definition") {
     return "A knowledge graph represents entities, relationships, permissions, and provenance as connected structure. In Joz's architecture, it complements vector search: vectors find semantically similar passages, while the graph links ownership, policy, organisational structure, workflows, and cross-system relationships. It is useful when relationships and traceability matter, with ACLs and source provenance enforced during retrieval.";
   }
@@ -894,6 +898,21 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";
+}
+
+export function enforceJozCommercialBoundaryResolution(route = {}, resolution = null) {
+  if (route?.detectedSubIntent !== "paid_architecture_boundary") return resolution;
+
+  return {
+    ...(resolution || {}),
+    reply: composeSkillsReply("paid_architecture_boundary"),
+    answerSource: "commercial_boundary",
+    composer: "composeSkillsReply",
+    fallbackUsed: false,
+    retrievedCategories: [],
+    answerClass: "commercial_boundary",
+    confidence: "high",
+  };
 }
 
 function composeMixedReply({ worldReply }) {
@@ -2579,6 +2598,43 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  const paidArchitectureTerms = [
+    "multi-agent architecture",
+    "llm stack",
+    "model selection",
+    "rag architecture",
+    "knowledge base",
+    "memory architecture",
+    "fraud detection",
+    "trust scoring",
+    "dynamic pricing",
+    "route optimization",
+    "route optimisation",
+    "customer support ai",
+  ];
+  const paidArchitectureTermCount = paidArchitectureTerms.filter((term) => clean.includes(term)).length;
+  const namesExternalProduct = includesAny(clean, [
+    "for cruizi",
+    "for my company",
+    "for our company",
+    "for my startup",
+    "for our startup",
+    "for my platform",
+    "for our platform",
+    "for my marketplace",
+    "for our marketplace",
+  ]);
+  const asksForCompleteArchitecture = includesAny(clean, [
+    "if you were my chief ai architect",
+    "design the complete agentic ai architecture",
+    "design a complete agentic ai architecture",
+    "complete company-specific architecture",
+    "complete end-to-end architecture",
+  ]);
+  if (paidArchitectureTermCount >= 4 && (namesExternalProduct || asksForCompleteArchitecture)) {
+    return { detectedSubIntent: "paid_architecture_boundary", detectedConcept: "skills" };
+  }
+
   if (includesAny(clean, ["what is a knowledge graph"])) {
     return { detectedSubIntent: "knowledge_graph_definition", detectedConcept: "skills" };
   }
@@ -3772,18 +3828,18 @@ export function composeJozLlmRouteReply({
       retrievedDocuments,
     });
     const preferBaseSkillsReply =
-      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent);
+      ["capabilities_overview", "collaboration", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "paid_architecture_boundary"].includes(route.detectedSubIntent);
     return {
       reply: directKnowledgeReply || (preferBaseSkillsReply ? baseReply : evidenceReply?.reply) || baseReply,
       answerSource:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "paid_architecture_boundary"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition"].includes(route.detectedSubIntent)
+        ["capabilities_overview", "purpose_of_llm", "ai_use", "proof_backed_strengths", "rag_evaluation", "knowledge_graph_definition", "paid_architecture_boundary"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
@@ -3823,12 +3879,18 @@ export async function resolveUnknownJozReply({
   messages = [],
   openai = null,
   roleAwareContext = {},
+  intentClassification = null,
 } = {}) {
   const clean = normalizeText(input);
   const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
     ? roleAwareContext.retrievedDocuments
     : [];
   const topProgrammeRecord = retrievedDocuments.find((doc) => doc?.category === "project");
+  const shouldAnswerOpenDomainQuestion =
+    intentClassification?.kind === "answer" &&
+    intentClassification?.domain === "general_knowledge" &&
+    openai &&
+    process.env.OPENAI_API_KEY;
 
   if (detectProgrammeQuery(clean) && topProgrammeRecord) {
     return buildPolicyResolution({
@@ -3921,7 +3983,7 @@ export async function resolveUnknownJozReply({
   }
 
   const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(input);
-  if (unknownDefinitionGapReply) {
+  if (unknownDefinitionGapReply && !shouldAnswerOpenDomainQuestion) {
     return buildPolicyResolution({
       reply: unknownDefinitionGapReply,
       answerSource: "knowledge_gap",
@@ -3969,7 +4031,7 @@ export async function resolveUnknownJozReply({
   }
 
   const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean);
-  if (jozScopeBoundaryReply) {
+  if (jozScopeBoundaryReply && !shouldAnswerOpenDomainQuestion) {
     return buildPolicyResolution({
       reply: jozScopeBoundaryReply,
       answerSource: "scope_boundary",
@@ -3985,7 +4047,7 @@ export async function resolveUnknownJozReply({
   let answerSource = "llm_fallback";
   let composer = "buildJozLlmFallbackReply";
   let fallbackUsed = true;
-  const allowModelFallback = process.env.JOZ_LLM_ALLOW_MODEL_FALLBACK === "true";
+  const allowModelFallback = process.env.JOZ_LLM_ALLOW_MODEL_FALLBACK !== "false";
 
   if (allowModelFallback && openai && process.env.OPENAI_API_KEY) {
     try {
@@ -3997,6 +4059,16 @@ export async function resolveUnknownJozReply({
           {
             role: "system",
             content: buildJozLlmSystemPrompt(),
+          },
+          {
+            role: "system",
+            content: JSON.stringify({
+              intentClassification,
+              instruction:
+                shouldAnswerOpenDomainQuestion
+                  ? "Answer the open-domain question directly and accurately. Do not present general knowledge as Joz's personal experience or as evidence from Joz's profile."
+                  : "Answer within the verified Joz context and do not invent unsupported facts.",
+            }),
           },
           {
             role: "system",
