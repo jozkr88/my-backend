@@ -3957,12 +3957,18 @@ export async function resolveUnknownJozReply({
   messages = [],
   openai = null,
   roleAwareContext = {},
+  intentClassification = null,
 } = {}) {
   const clean = normalizeText(input);
   const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
     ? roleAwareContext.retrievedDocuments
     : [];
   const topProgrammeRecord = retrievedDocuments.find((doc) => doc?.category === "project");
+  const shouldAnswerOpenDomainQuestion =
+    intentClassification?.kind === "answer" &&
+    intentClassification?.domain === "general_knowledge" &&
+    openai &&
+    process.env.OPENAI_API_KEY;
 
   if (detectProgrammeQuery(clean) && topProgrammeRecord) {
     return buildPolicyResolution({
@@ -4055,7 +4061,7 @@ export async function resolveUnknownJozReply({
   }
 
   const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(input);
-  if (unknownDefinitionGapReply) {
+  if (unknownDefinitionGapReply && !shouldAnswerOpenDomainQuestion) {
     return buildPolicyResolution({
       reply: unknownDefinitionGapReply,
       answerSource: "knowledge_gap",
@@ -4103,7 +4109,7 @@ export async function resolveUnknownJozReply({
   }
 
   const jozScopeBoundaryReply = buildJozScopeBoundaryReply(clean, messages);
-  if (jozScopeBoundaryReply) {
+  if (jozScopeBoundaryReply && !shouldAnswerOpenDomainQuestion) {
     return buildPolicyResolution({
       reply: jozScopeBoundaryReply,
       answerSource: "scope_boundary",
@@ -4119,7 +4125,7 @@ export async function resolveUnknownJozReply({
   let answerSource = "llm_fallback";
   let composer = "buildJozLlmFallbackReply";
   let fallbackUsed = true;
-  const allowModelFallback = process.env.JOZ_LLM_ALLOW_MODEL_FALLBACK === "true";
+  const allowModelFallback = process.env.JOZ_LLM_ALLOW_MODEL_FALLBACK !== "false";
 
   if (allowModelFallback && openai && process.env.OPENAI_API_KEY) {
     try {
@@ -4131,6 +4137,16 @@ export async function resolveUnknownJozReply({
           {
             role: "system",
             content: buildJozLlmSystemPrompt(),
+          },
+          {
+            role: "system",
+            content: JSON.stringify({
+              intentClassification,
+              instruction:
+                shouldAnswerOpenDomainQuestion
+                  ? "Answer the open-domain question directly and accurately. Do not present general knowledge as Joz's personal experience or as evidence from Joz's profile."
+                  : "Answer within the verified Joz context and do not invent unsupported facts.",
+            }),
           },
           {
             role: "system",
