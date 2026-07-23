@@ -20,11 +20,24 @@ const INTENT_DOMAINS = new Set([
 const NAVIGATION_PATTERN =
   /\b(open|enter|go to|go inside|show|launch|navigate|take me to|back|return|exit)\b/i;
 const EXECUTION_PATTERN =
-  /\b(send|email|call|book|schedule|create|delete|update|publish|deploy|merge|run|execute|buy|sell|transfer|change|submit)\b/i;
+  /\b(send|email|call|book|schedule|create|delete|update|publish|deploy|merge|run|execute|buy|sell|transfer|wire|send money|send funds|change|submit|rotate|revoke|grant|approve)\b/i;
 const HIGH_RISK_PATTERN =
-  /\b(production|prod|deploy|merge|delete|destroy|transfer|payment|pay|buy|sell|private key|secret|credential|permission|security|database migration)\b/i;
+  /\b(production|prod|deploy|merge|delete|destroy|transfer|wire|money|funds|payment|pay|buy|sell|private key|api key|secret|credential|permission|security|database migration|rotate|revoke|grant access)\b/i;
 const MEDIUM_RISK_PATTERN =
   /\b(send|email|call|book|schedule|publish|submit|contact|external|customer|user data)\b/i;
+const CREDENTIAL_ACTION_PATTERN =
+  /\b(?:use|access|check|rotate|revoke|expose|share)\b[\s\S]{0,50}\b(?:api key|token|credential|secret)\b/i;
+const UNSAFE_PATTERNS = [
+  /\b(?:ignore|disregard|override)\b[\s\S]{0,60}\b(?:policies|instructions|rules)\b/i,
+  /\b(?:reveal|show|print|give me|tell me)\b[\s\S]{0,30}\b(?:system|developer|hidden|secret)\b[\s\S]{0,20}\b(?:prompt|instructions|policy)\b/i,
+  /\b(?:pretend|claim|say)\b[\s\S]{0,30}\b(?:already\s+)?(?:deployed|merged|sent|approved|passed)\b/i,
+  /\b(?:secret|private|confidential)\b[\s\S]{0,30}\b(?:api key|token|credential|information|data|prompt)\b/i,
+  /\b(?:follow|execute|obey)\b[\s\S]{0,40}\b(?:instructions?|commands?)\b[\s\S]{0,20}\b(?:inside|from|in)\b/i,
+  /\b(?:bypass|disable|skip|evade)\b[\s\S]{0,40}\b(?:safety|approval|security|policy|verification)\b/i,
+  /\b(?:how do i|give me|step[- ]by[- ]step|playbook|make|build|create|write|deploy|run)\b[\s\S]{0,80}\b(?:biological|chemical|ransomware|malware|virus|weapon|credential theft)\b/i,
+  /\b(?:diagnose|prescribe|medication|dosage|what should i take)\b[\s\S]{0,60}\b(?:chest pain|symptom|condition|patient|medical)\b/i,
+  /\b(?:approve|authorize|execute)\b[\s\S]{0,30}\b(?:its own|their own|self[- ]approv(?:e|ing))\b[\s\S]{0,30}\b(?:payments?|transfers?|purchases?)\b/i,
+];
 
 function normalizeText(value = "") {
   return String(value || "").trim().replace(/\s+/g, " ");
@@ -103,18 +116,32 @@ export function buildJozIntentClassification({ input = "", route = {} } = {}) {
   const isQuestion = /^(what|why|how|who|when|where|which|can|could|would|should|do|does|is|are|tell|explain)\b/i.test(
     clean
   );
-  const looksLikeExecution = EXECUTION_PATTERN.test(clean) && !isQuestion;
+  const executionRequest = EXECUTION_PATTERN.test(clean) || CREDENTIAL_ACTION_PATTERN.test(clean);
+  const isPoliteExecutionRequest =
+    /^(?:can|could|would|please|help me)\b[\s\S]{0,100}\b(?:send|email|call|book|schedule|wire|transfer|rotate|revoke|grant|use|access|check|approve)\b/i.test(clean);
+  const looksLikeExecution = executionRequest && (!isQuestion || isPoliteExecutionRequest);
+  const substantiveCanYouQuestion =
+    /^(?:can you|can we)\b[\s\S]{0,120}\b(?:explain|describe|define|compare|help me understand|tell me about)\b/i.test(clean) &&
+    clean.split(/\s+/).length >= 5;
   const isAmbiguous =
     clean.length < 8 ||
     route?.detectedSubIntent === "ambiguous_follow_up" ||
-    /^(it|that|this|there|more|why|how)\b/i.test(clean);
+    /^(it|that|this|there|more|tell me more|how does (?:he|she|it|that))\b/i.test(clean) ||
+    (/^(can you|can we)\b/i.test(clean) && !substantiveCanYouQuestion) ||
+    /^(do it|what about|which one|what should|is that|can you handle|could you clarify)\b/i.test(clean) ||
+    /^(what does (?:it|that) mean|what is (?:it|that))\b/i.test(clean) ||
+    /\b(?:i need a thing|make it better)\b/i.test(clean);
 
   let kind = "answer";
   let confidence = routeKnown ? 0.88 : 0.35;
   let domain = routeKnown ? routeDomain : "other";
   let goal = route?.detectedSubIntent || "answer_user_question";
 
-  if (looksLikeExecution) {
+  if (UNSAFE_PATTERNS.some((pattern) => pattern.test(clean))) {
+    kind = "refuse";
+    confidence = 0.92;
+    goal = "refuse_unsafe_or_unsupported_request";
+  } else if (looksLikeExecution) {
     kind = "execute";
     confidence = routeKnown ? 0.82 : 0.62;
     domain = /\b(email|call|book|schedule|contact)\b/i.test(clean)
@@ -220,7 +247,7 @@ export async function classifyJozIntent({
   const fallback = buildJozIntentClassification({ input, route });
 
   if (!openai || !process.env.OPENAI_API_KEY) return fallback;
-  if (fallback.kind === "navigate" || fallback.kind === "execute") return fallback;
+  if (["navigate", "execute", "refuse"].includes(fallback.kind)) return fallback;
 
   try {
     const response = await openai.chat.completions.create({
@@ -291,6 +318,21 @@ export function buildJozRiskGateResolution({ classification = {} } = {}) {
     fallbackUsed: false,
     retrievedCategories: [],
     answerClass: "risk_gate",
+    confidence: "high",
+  };
+}
+
+export function buildJozSafetyRefusalResolution({ classification = {} } = {}) {
+  if (classification?.kind !== "refuse") return null;
+
+  return {
+    reply:
+      "I can’t help reveal hidden instructions, fabricate completed actions, expose secrets, facilitate harm, or make high-stakes decisions for you. I can help with a safe explanation, prevention plan, or approval-gated design instead.",
+    answerSource: "safety_gate",
+    composer: "buildJozSafetyRefusalResolution",
+    fallbackUsed: false,
+    retrievedCategories: [],
+    answerClass: "safety_refusal",
     confidence: "high",
   };
 }

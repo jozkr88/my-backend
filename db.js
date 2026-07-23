@@ -665,7 +665,7 @@ export async function listRecentJozLlmRequestEvents(limit = 20) {
      FROM joz_llm_request_events
      ORDER BY created_at DESC
      LIMIT $1`,
-    [Math.max(1, Math.min(100, Number(limit) || 20))]
+    [Math.max(1, Math.min(500, Number(limit) || 20))]
   );
   return result.rows || [];
 }
@@ -673,7 +673,7 @@ export async function listRecentJozLlmRequestEvents(limit = 20) {
 export async function listUnevaluatedJozLlmRequestEvents(limit = 20, sessionKeyPrefix = null) {
   const normalizedPrefix = String(sessionKeyPrefix || "").trim();
   const whereSession = normalizedPrefix ? " AND e.session_key LIKE $2" : "";
-  const params = [Math.max(1, Math.min(100, Number(limit) || 20))];
+  const params = [Math.max(1, Math.min(500, Number(limit) || 20))];
   if (normalizedPrefix) params.push(`${normalizedPrefix}%`);
   const result = await runQuery(
     `SELECT e.id, e.conversation_id, e.session_key, e.route, e.intent_mode, e.user_message,

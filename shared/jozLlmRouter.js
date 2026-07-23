@@ -2197,7 +2197,7 @@ function detectBusinessNeed(clean) {
   }
 
   const hasBusinessIndustry = includesAny(clean, [
-    "retail", "ecommerce", "e-commerce", "insurance", "claims", "manufacturing", "factory",
+    "retail", "ecommerce", "e-commerce", "insurance", "claims", "manufacturing", "manufacturer", "factory",
     "industrial", "banking", "financial services", "healthcare", "health care", "hospital",
     "clinic", "construction", "contractor", "logistics", "transport", "shipping", "warehouse",
     "hospitality", "hotel", "restaurant", "government", "public sector", "d2c", "consumer brand",
@@ -2653,6 +2653,10 @@ function detectSystemsMindset(clean) {
 }
 
 function detectSkills(clean) {
+  if (includesAny(clean, ["can you explain verification", "what is verification", "explain verification"])) {
+    return { detectedSubIntent: "verification_architecture", detectedConcept: "skills" };
+  }
+
   const paidArchitectureTerms = [
     "multi-agent architecture",
     "llm stack",

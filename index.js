@@ -78,6 +78,7 @@ import { resolveJozRequestGeo } from "./shared/jozGeoLocation.js";
 import {
   buildJozAgentPlan,
   buildJozRiskGateResolution,
+  buildJozSafetyRefusalResolution,
   classifyJozIntent,
 } from "./shared/jozIntent.js";
 
@@ -996,6 +997,9 @@ app.post("/api/joz-llm", async (req, res) => {
     const riskGateResolution = buildJozRiskGateResolution({
       classification: intentClassification,
     });
+    const safetyRefusalResolution = buildJozSafetyRefusalResolution({
+      classification: intentClassification,
+    });
     const ownedResolution =
       buildVisitorLocationReply(latestUserMessage, requestGeo) ||
       composeJozLlmRouteReply({
@@ -1006,8 +1010,9 @@ app.post("/api/joz-llm", async (req, res) => {
         retrievedDocuments: retrievalContext,
       });
     const rawResolution =
-      ownedResolution ||
+      safetyRefusalResolution ||
       riskGateResolution ||
+      ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
         messages,
