@@ -1,0 +1,46 @@
+{
+  "slug": "recruiter-strengths-and-skills-questions",
+  "title": "Recruiter Strengths And Skills Questions",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Recruiter-safe framing for Joz's strongest skills, differentiators, and proof-backed strengths.",
+  "tags": [
+    "recruiter",
+    "skills",
+    "strengths",
+    "proof"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Built from existing verified proof records and deployed recruiter-safe answer patterns already used in Joz LLM."
+  },
+  "claims": [
+    "Joz's strongest positioning combines agentic AI architecture, multimodal and spatial UX, and enterprise product engineering.",
+    "Joz should be differentiated through measurable proof rather than buzzword-heavy capability lists.",
+    "Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI projects provide the strongest recruiter-safe evidence."
+  ],
+  "proof_points": [
+    "Maybank-Ageas Etiqa: 20x digital sales growth.",
+    "Manulife: Lean ML UX practice across 11 APAC markets.",
+    "Mediacorp: 30x audience growth across 30+ products.",
+    "Erste Bank: 16M+ customer scale engineering.",
+    "MarketClue and Dubai spatial work add current technical and multimodal proof."
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Europe/EEA",
+    "UAE/MENA",
+    "Global"
+  ],
+  "companies": [
+    "Maybank-Ageas Etiqa",
+    "Manulife",
+    "Mediacorp",
+    "Erste Bank",
+    "MarketClue"
+  ]
+}

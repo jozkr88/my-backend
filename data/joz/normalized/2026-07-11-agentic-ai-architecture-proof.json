@@ -1,0 +1,84 @@
+{
+  "slug": "2026-07-11-agentic-ai-architecture-proof",
+  "title": "Agentic AI Architecture Proof",
+  "category": "skills",
+  "source_type": "derived",
+  "source_uri": null,
+  "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
+  "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MarketClue USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "architecture",
+      "orchestration",
+      "production_ai",
+      "rag",
+      "retrieval",
+      "skills"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "Derived from the verified current CV and aligned to the existing recruiter-screening and enterprise-scale records."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.",
+      "Joz's AI systems capability includes LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering.",
+      "Joz's delivery profile combines system design, memory patterns, observability, and business-facing execution."
+    ],
+    "proof_points": [
+      "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+      "Apple/Pixar-adjacent work is framed as early Python USD(z) and computer-vision AI work in Singapore.",
+      "Dubai Future Foundation and Erste Bank add public-sector and enterprise-scale delivery context.",
+      "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA",
+      "North America",
+      "Singapore",
+      "UAE/MENA"
+    ],
+    "companies": [
+      "Apple/Pixar",
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "MarketClue USA"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 84,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-07-11-agentic-ai-architecture-proof.md",
+    "source_meta_filename": "2026-07-11-agentic-ai-architecture-proof.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "8a5bc6ec893ee51559931a76a7af7f82b2cce4a69434b8d457d29ba1ee775e44",
+    "source_uri": null
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "joz-identity-background",
+  "title": "Joz Identity Background",
+  "category": "bio",
+  "lane": "skills",
+  "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
+  "tags": [
+    "identity",
+    "background",
+    "nationality",
+    "heritage",
+    "education",
+    "united_kingdom"
+  ],
+  "impact_score": 86,
+  "priority_label": "high",
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "user",
+    "reviewed_at": "2026-07-12",
+    "notes": "User confirmed canonical identity distinctions: Slovak nationality, British heritage, UK postgraduate education, and international career span."
+  },
+  "claims": [
+    "Joz Krupa is Slovak.",
+    "Joz has British heritage.",
+    "Joz completed postgraduate education in the United Kingdom.",
+    "Joz completed an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.",
+    "Joz's international career spans Singapore, Dubai, Europe, and global markets.",
+    "British heritage must remain separate from nationality, citizenship, and work authorization."
+  ],
+  "proof_points": [
+    "Nationality answer must remain Slovak and must not be replaced by British nationality.",
+    "British heritage is explicitly allowed only as heritage language, not citizenship language.",
+    "The academic record anchors to the University of Central Lancashire MSc in 2008.",
+    "Regional career references align with the broader CV and profile footprint."
+  ],
+  "regions": [
+    "Slovakia",
+    "United Kingdom",
+    "Singapore",
+    "Dubai",
+    "Europe",
+    "Global"
+  ],
+  "companies": [
+    "University of Central Lancashire",
+    "MeetJoz"
+  ],
+  "projects": [],
+  "intent_families": [
+    "identity_profile",
+    "factual_profile"
+  ],
+  "sub_intents": [
+    "background",
+    "nationality",
+    "education"
+  ],
+  "valid_from": "2008",
+  "valid_to": null,
+  "source_notes": "Canonical identity-background record. Heritage must not be upgraded into nationality or citizenship."
+}

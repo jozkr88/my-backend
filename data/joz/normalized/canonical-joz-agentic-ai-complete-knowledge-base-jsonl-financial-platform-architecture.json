@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-financial-platform-architecture",
+  "title": "Financial Platform Architecture",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_019",
+  "summary": "A modern financial intelligence platform can combine: Market data Portfolio data News and research Risk analytics Prediction models Natural-language interaction Alerts Execution Verification",
+  "body": "A modern financial intelligence platform can combine:\nMarket data\nPortfolio data\nNews and research\nRisk analytics\nPrediction models\nNatural-language interaction\nAlerts\nExecution\nVerification\n\nThe architecture should move from insight to action while keeping deterministic control over permissions, risk, and financial correctness.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "finance",
+      "platform"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "acl",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "manual_knowledge_work"
+    ],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "enterprise_architecture",
+      "verification"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "access_control"
+    ],
+    "industries": [
+      "financial_services"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_019",
+    "canonical_record_title": "Financial Platform Architecture",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "finance",
+      "platform"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Financial Platform Architecture\nFinancial Platform Architecture\nfinance platform\nfinance platform\nA modern financial intelligence platform can combine:\nMarket data\nPortfolio data\nNews and research\nRisk analytics\nPrediction models\nNatural-language interaction\nAlerts\nExecution\nVerification\n\nThe architecture should move from insight to action while keeping deterministic control over permissions, risk, and financial correctness.",
+    "keyword_terms": [
+      "architecture",
+      "finance",
+      "financial",
+      "platform"
+    ],
+    "exact_phrases": [
+      "Financial Platform Architecture",
+      "finance",
+      "platform"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "3f82eafc9524a238bf44d45593bbd361676bc6a2b3b0cb617c5000327c65596b",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_019"
+  }
+}

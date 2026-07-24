@@ -1,0 +1,85 @@
+{
+  "slug": "business-need-ai-adoption-governance",
+  "title": "AI Adoption, Trust and Governance",
+  "category": "governance",
+  "lane": "business_need",
+  "summary": "How Joz connects governance, usability, trust, and workflow fit to improve enterprise AI adoption.",
+  "tags": [
+    "ai-governance",
+    "adoption",
+    "trust",
+    "auditability",
+    "human-oversight"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "capability_supported",
+  "claims": [
+    "AI adoption is an organisational and workflow problem, not only a model-quality problem.",
+    "Trust requires source grounding, permissions, observability, evaluation, accountability, and appropriate human control.",
+    "Joz's background in human-centred systems and enterprise AI helps bridge governance and usability."
+  ],
+  "proof_points": [
+    "Applied AI skills explicitly include observability, governance, ACL-aware retrieval, verification, and feedback loops.",
+    "Established HCD–AI and Lean ML UX practices in enterprise environments.",
+    "Worked in financial services, public systems, and large-scale media where trust and operational reliability matter."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Europe",
+    "UAE"
+  ],
+  "companies": [
+    "Maybank",
+    "Manulife",
+    "Erste Bank",
+    "Mediacorp",
+    "Dubai Future Foundation"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "governance_gaps",
+    "low_trust",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "human_accountability",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "ai_governance",
+    "context_engineering",
+    "observability",
+    "verification"
+  ],
+  "outcomes": [
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_risk",
+    "stronger_governance"
+  ],
+  "governance": [
+    "access_control",
+    "auditability",
+    "escalation",
+    "evaluation",
+    "human_approval",
+    "observability_control",
+    "source_provenance"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "government",
+    "insurance"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth"
+  ]
+}

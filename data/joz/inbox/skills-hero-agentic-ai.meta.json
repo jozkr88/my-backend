@@ -1,0 +1,93 @@
+{
+  "slug": "skills-hero-agentic-ai",
+  "title": "Joz Krupa — Agentic AI Architecture and Innovation",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Primary Skills-lane positioning: Agentic AI architecture, enterprise intelligence, governance, context engineering, and multimodal AI orchestration.",
+  "tags": [
+    "agentic-ai",
+    "architecture",
+    "rag",
+    "decision-intelligence",
+    "ai-governance",
+    "context-engineering"
+  ],
+  "impact_score": 100,
+  "priority_label": "hero",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz has transitioned from large-scale digital and UX architecture into Agentic AI architecture and innovation.",
+    "His current focus includes reasoning, orchestration, RAG, embeddings, vector retrieval, memory, verification, event-driven AI, observability, and governance.",
+    "He connects technical AI architecture to measurable enterprise outcomes."
+  ],
+  "proof_points": [
+    "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
+    "Led HCD–AI, product, and data architectures for 20+ Dubai and Singapore FinTech initiatives.",
+    "Built on more than a decade of enterprise-scale product, engineering, and transformation experience."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Dubai",
+    "UAE",
+    "Europe",
+    "North America"
+  ],
+  "companies": [
+    "MarketClue",
+    "Maybank",
+    "Manulife",
+    "Mediacorp",
+    "Erste Bank",
+    "Dubai Future Foundation"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "governance_gaps",
+    "knowledge_fragmentation",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "agent_memory",
+    "agentic_ai",
+    "ai_governance",
+    "context_engineering",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "knowledge_graphs",
+    "observability",
+    "rag",
+    "verification"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_adoption",
+    "higher_data_trust",
+    "stronger_governance"
+  ],
+  "governance": [
+    "access_control",
+    "evaluation",
+    "observability_control",
+    "source_provenance"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth"
+  ]
+}

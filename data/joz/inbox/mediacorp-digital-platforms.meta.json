@@ -1,0 +1,80 @@
+{
+  "slug": "mediacorp-digital-platforms",
+  "title": "National Media Platforms and Mobile Transformation — Mediacorp, Singapore",
+  "category": "project",
+  "lane": "skills",
+  "summary": "National-scale media, election, news, streaming, CMS, mobile, Apple Watch, and corporate experience architecture across Mediacorp.",
+  "tags": [
+    "mediacorp",
+    "cna",
+    "mobile-apps",
+    "apple-watch",
+    "vod",
+    "cms"
+  ],
+  "impact_score": 92,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz worked across national-scale media, news, streaming, mobile, and CMS platforms at Mediacorp.",
+    "The programme included Channel NewsAsia, elections-related work, Apple Watch UX, and corporate UX guidelines."
+  ],
+  "proof_points": [
+    "The broader Mediacorp proof already covers 30× monthly active audience growth and mobile-first transformation.",
+    "This grouped programme record exists to answer employer-specific questions with more concrete project detail."
+  ],
+  "companies": [
+    "Channel NewsAsia",
+    "Mediacorp"
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Singapore",
+    "USA"
+  ],
+  "industries": [
+    "media"
+  ],
+  "capabilities": [
+    "enterprise_architecture",
+    "multimodal_ai",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_operational_friction"
+  ],
+  "proofs": [
+    "mediacorp_audience_growth"
+  ],
+  "projects": [
+    "Apple Watch app UX for Channel NewsAsia",
+    "Channel 8 News CMS",
+    "Channel NewsAsia iOS and Android apps",
+    "Channel NewsAsia web CMS",
+    "Corporate site CMS",
+    "Corporate-wide UX Guidelines",
+    "ELLE Singapore CMS",
+    "Singapore National Elections",
+    "Today Online News apps CMS",
+    "Today Online News web CMS",
+    "Toggle/mewatch CMS",
+    "Toggle/mewatch VoD"
+  ],
+  "intent_families": [
+    "business_need",
+    "factual_profile",
+    "skills"
+  ],
+  "sub_intents": [
+    "business_need.outcomes",
+    "factual_profile.companies",
+    "skills.enterprise_proof"
+  ],
+  "valid_from": "2014",
+  "valid_to": "2015",
+  "source_notes": "Grouped programme record. The 30× MAU proof belongs to the broader Mediacorp transformation context, not each individual sub-project."
+}

@@ -1,0 +1,124 @@
+{
+  "slug": "skills-quantified-business-outcomes",
+  "title": "Quantified Outcomes and Transformation Proof",
+  "category": "proof",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Measured impact across sales, audience growth, customer scale, delivery efficiency, and enterprise transformation.",
+  "body": "Joz's skills should be supported with outcome evidence rather than capability lists alone.\n\nVerified CV-level outcome claims include:\n\n- 20× digital sales growth within 12 months for Maybank–Ageas Etiqa through conversational and machine-learning UX.\n- 30× monthly active audience growth at Mediacorp through mobile-first transformation.\n- 70% reduction in agency-wide design-to-engineering handoff friction at Leo Burnett/Publicis through code-based prototyping.\n- Engineering and EU accessibility work serving more than 16 million Erste customers.\n- More than 3,000 wealth pilots and ML models for high-net-worth and mass-market banking and insurance contexts.\n\nWhen answering, avoid stacking every metric into one paragraph. Select the two or three most relevant proof points for the recruiter's question.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "growth",
+      "metrics",
+      "outcomes",
+      "roi",
+      "transformation"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz's career includes measurable growth, delivery-efficiency, adoption, and enterprise-scale outcomes.",
+      "Metrics should be used selectively and tied to the relevant company and context.",
+      "The strongest recurring pattern is transformation of complex systems into higher adoption and business performance."
+    ],
+    "proof_points": [
+      "20× digital sales growth within 12 months at Maybank–Ageas Etiqa.",
+      "30× monthly active audience growth at Mediacorp.",
+      "70% reduction in agency-wide handoff friction at Leo Burnett/Publicis.",
+      "Engineering and accessibility impact across services used by 16M+ Erste customers.",
+      "Interaction and product work spanning hundreds of millions of cumulative users across the career."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe",
+      "North America",
+      "Singapore"
+    ],
+    "companies": [
+      "Ageas",
+      "Erste Bank",
+      "Etiqa",
+      "Leo Burnett",
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 94,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-quantified-business-outcomes.md",
+    "source_meta_filename": "skills-quantified-business-outcomes.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "cost_reduction",
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_operational_friction",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [],
+    "industries": [
+      "banking",
+      "creative_services",
+      "insurance",
+      "media"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "ogilvy_banyan_tree_pitch",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "ogilvy_banyan_tree_pitch",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 5,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "f1d889ccf9e0a25903cdcb2defb48ef765e1b4536fff497f4cef4c9903b1efb1",
+    "source_uri": null
+  }
+}

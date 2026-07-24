@@ -1,0 +1,93 @@
+{
+  "slug": "hub71-tokenised-knowledge",
+  "title": "Tokenised Knowledge UX Strategy — Hub71, Abu Dhabi",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "UX and product strategy for tokenised knowledge concepts in the Abu Dhabi innovation ecosystem.",
+  "body": "Tokenised Knowledge UX Strategy for Hub71 focuses on product and experience strategy for knowledge systems in the Abu Dhabi innovation ecosystem.\n\nIncluded projects\n- Tokenised Knowledge UX Strategy\n\nStrategic and technical themes\n- Product strategy for making knowledge structures more reusable and actionable.\n- UX thinking around tokenised knowledge concepts without overclaiming blockchain delivery.\n- Context and information design in an innovation-ecosystem setting.\n- Enterprise-architecture thinking applied to knowledge flow, trust, and reuse.\n\nProof connection\n- This record is intentionally scoped as strategy and UX work.\n- It should not introduce unsupported financial, tokenisation, or blockchain implementation claims.\n\nRetrieval guidance\n- Use this record for questions specifically about Hub71, Abu Dhabi innovation work, or tokenised knowledge strategy.\n- Keep the answer focused on product, UX, and knowledge experience strategy.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "abu-dhabi",
+      "hub71",
+      "knowledge-strategy",
+      "tokenised-knowledge",
+      "ux-strategy"
+    ],
+    "verification": {
+      "status": "project_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "project_supported",
+    "claims": [
+      "Joz worked on tokenised knowledge UX and product strategy in the Hub71 innovation ecosystem.",
+      "The work focused on knowledge experience and product framing rather than unsupported infrastructure claims."
+    ],
+    "proof_points": [
+      "This programme record is positioned as product and UX strategy for knowledge systems.",
+      "It connects to Joz's broader context-engineering and enterprise-architecture capabilities."
+    ],
+    "regions": [
+      "Abu Dhabi",
+      "UAE"
+    ],
+    "companies": [
+      "Hub71"
+    ],
+    "projects": [
+      "Tokenised Knowledge UX Strategy"
+    ],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "skills.capabilities_overview",
+      "systems_mindset.context"
+    ],
+    "impact_score": 81,
+    "priority_label": "standard",
+    "valid_from": "2018",
+    "valid_to": null,
+    "source_notes": "Grouped programme record. No unsupported blockchain or financial claims added.",
+    "source_filename": "hub71-tokenised-knowledge.md",
+    "source_meta_filename": "hub71-tokenised-knowledge.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "context_engineering",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "product_strategy"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_data_trust",
+      "knowledge_reuse"
+    ],
+    "governance": [],
+    "industries": [
+      "financial_services",
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "5773aeee1e0bf59af5cef2d7f480f5f51091b904c1cde7a6acda126659e01537",
+    "source_uri": null
+  }
+}

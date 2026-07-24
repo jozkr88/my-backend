@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-cost-management",
+  "title": "Cost Management",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_043",
+  "summary": "Infrastructure must be cost-aware.",
+  "body": "Infrastructure must be cost-aware.\n\nControl costs through:\nAutoscaling\nRight-sizing\nCaching\nModel routing\nSpot instances where safe\nStorage lifecycle policies\nRequest quotas\nCost observability\nEnvironment shutdown schedules\n\nCost is an architecture constraint, not an afterthought.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "cost",
+      "finops",
+      "optimization"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "observability",
+      "rag"
+    ],
+    "outcomes": [
+      "cost_reduction"
+    ],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_043",
+    "canonical_record_title": "Cost Management",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "cost",
+      "finops",
+      "optimization"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Cost Management\nCost Management\ncost finops optimization\ncost finops optimization\nInfrastructure must be cost-aware.\n\nControl costs through:\nAutoscaling\nRight-sizing\nCaching\nModel routing\nSpot instances where safe\nStorage lifecycle policies\nRequest quotas\nCost observability\nEnvironment shutdown schedules\n\nCost is an architecture constraint, not an afterthought.",
+    "keyword_terms": [
+      "cost",
+      "finops",
+      "management",
+      "optimization"
+    ],
+    "exact_phrases": [
+      "Cost Management",
+      "cost",
+      "finops",
+      "optimization"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "08fc22d8aeefd2353c7f34b7c1c73dcfb44b37bab1af406f056e21166fd16c22",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_043"
+  }
+}

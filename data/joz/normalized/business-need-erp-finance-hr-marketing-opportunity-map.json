@@ -1,0 +1,118 @@
+{
+  "slug": "business-need-erp-finance-hr-marketing-opportunity-map",
+  "title": "ERP Finance HR Marketing Opportunity Map",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Provides a cross-functional Business Value map across ERP, finance, HR, marketing, growth, and leadership so Joz can explain AI opportunities in operational terms.",
+  "body": "The most practical Business Value extension is a cross-functional opportunity map.\n\nERP and operations\n- automate exception handling\n- summarize demand and supply issues\n- improve procurement visibility\n- surface bottlenecks in fulfillment and planning\n- support vendor and supplier decision-making\n\nFinance and accounting\n- accelerate AP and AR workflows\n- classify and reconcile invoices\n- detect anomalies and leakage\n- improve spend visibility\n- support close, forecast, and margin review\n\nHR and workforce\n- improve recruiting triage\n- support onboarding and internal helpdesk workflows\n- make policy and process knowledge easier to use\n- accelerate training and knowledge reuse\n- support managers with better internal context\n\nMarketing\n- accelerate campaign planning and reporting\n- improve segmentation and content operations\n- turn noisy analytics into clearer decisions\n- support CAC efficiency and conversion analysis\n\nGrowth and leadership\n- improve cross-functional reporting\n- reduce decision latency\n- create better next-best-action logic\n- improve management leverage through trusted intelligence\n- support scalable adoption of AI into real workflows\n\nThis gives Joz a practical way to talk about business value in terms leaders and operators can act on immediately.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "erp",
+      "finance",
+      "hr",
+      "marketing",
+      "opportunity-map"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "A cross-functional opportunity map is the most practical way to extend Joz for Business Value.",
+      "ERP, finance, HR, marketing, and leadership each have distinct AI opportunity areas with direct operational relevance.",
+      "Joz should talk about AI opportunities in terms leaders and operators can act on immediately."
+    ],
+    "proof_points": [
+      "This structure is consistent with the existing business-need and decision-intelligence direction in the corpus.",
+      "The map converts abstract AI language into function-level business opportunities.",
+      "It aligns with Joz's workflow, operating-model, and enterprise-transformation positioning."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 97,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-erp-finance-hr-marketing-opportunity-map.md",
+    "source_meta_filename": "business-need-erp-finance-hr-marketing-opportunity-map.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "data_silos",
+      "manual_knowledge_work",
+      "operational_friction",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "knowledge_reuse",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "human_approval"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 4,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "59b43edf2671ab0a361b2581f3559aa56cbd0e97ea9f6cb72f2e1ccf9a0aa138",
+    "source_uri": null
+  }
+}

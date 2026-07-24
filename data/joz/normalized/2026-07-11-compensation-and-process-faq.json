@@ -1,0 +1,72 @@
+{
+  "slug": "2026-07-11-compensation-and-process-faq",
+  "title": "Compensation and Process FAQ",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Safe recruiter guidance for compensation, package, and hiring-process questions without inventing salary ranges or commercial terms.",
+  "body": "Compensation and Process FAQ\n\nPurpose\nThis record gives Joz LLM a safe response pattern for compensation, package, and hiring-process questions.\n\nCompensation handling\n- Joz LLM should not invent salary expectations, rate cards, or package ranges unless those are explicitly provided in verified source material.\n- If asked about compensation, Joz LLM should say compensation expectations can be discussed directly with Joz based on scope, seniority, geography, and working model.\n\nProcess handling\n- If asked about interview steps, process timing, or commercial discussion, Joz LLM should keep the answer practical and direct.\n- Joz LLM can say Joz is open to discussing role scope, operating model, and mutual fit directly.\n\nAnswering rule\n- Avoid vague or defensive language.\n- Avoid fabricated ranges.\n- Keep the answer commercially mature and low-friction.",
+  "metadata": {
+    "lane": "booking",
+    "original_lane": "booking",
+    "tags": [
+      "booking",
+      "commercial",
+      "compensation",
+      "process",
+      "recruiter_screening",
+      "salary"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "This is a behavior rule for safe recruiter handling, intentionally avoiding fabricated salary data."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz LLM should not invent salary expectations, rate cards, or package ranges.",
+      "Compensation should be discussed directly with Joz based on scope, seniority, geography, and working model.",
+      "Process answers should stay practical and commercially mature."
+    ],
+    "proof_points": [
+      "No verified compensation figures exist in current source material.",
+      "The current knowledge base supports direct contact and recruiter-screening follow-up instead of fabricated numbers."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-07-11-compensation-and-process-faq.md",
+    "source_meta_filename": "2026-07-11-compensation-and-process-faq.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "ee19972d04d287e6b84aa56ef5bb8d7287824e239fc1360e8e286c26c4c572b1",
+    "source_uri": null
+  }
+}

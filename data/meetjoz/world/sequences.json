@@ -1,0 +1,26 @@
+[
+  {
+    "id": "maxx_neuron_sequence",
+    "portal_id": "maxx",
+    "primary_object_id": "maxx_neurons",
+    "stage_ids": [
+      "maxx_synapse_connection",
+      "maxx_signal_transfer",
+      "maxx_new_experience",
+      "maxx_connection_quality",
+      "maxx_new_pathways",
+      "maxx_neuroplasticity_metaphor"
+    ]
+  },
+  {
+    "id": "meet_joz_sequence",
+    "portal_id": "meet_joz",
+    "primary_object_id": "meet_joz_sequence_object",
+    "stage_ids": [
+      "meet_joz_flex_stage",
+      "meet_joz_ascend_stage",
+      "meet_joz_mogg_stage",
+      "meet_joz_skills_stage"
+    ]
+  }
+]

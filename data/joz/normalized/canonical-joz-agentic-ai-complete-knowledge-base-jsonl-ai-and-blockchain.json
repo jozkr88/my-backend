@@ -1,0 +1,103 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-ai-and-blockchain",
+  "title": "AI and Blockchain",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_018",
+  "summary": "AI should never directly control unrestricted private keys.",
+  "body": "AI should never directly control unrestricted private keys.\n\nPreferred flow:\nAgent → Policy → Risk → Approval → Signing Service → Smart Contract or Execution Network → Verification\n\nUse scoped session keys, workload identity, signing policies, transaction simulation, and explicit limits on assets, contracts, amounts, duration, and permissions.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai-blockchain",
+      "security",
+      "signing"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "acl",
+      "governance",
+      "technical_stack",
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "verification"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "access_control",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_018",
+    "canonical_record_title": "AI and Blockchain",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai-blockchain",
+      "security",
+      "signing"
+    ],
+    "source_authority": 24,
+    "semantic_text": "AI and Blockchain\nAI and Blockchain\nai-blockchain security signing\nai-blockchain security signing\nAI should never directly control unrestricted private keys.\n\nPreferred flow:\nAgent → Policy → Risk → Approval → Signing Service → Smart Contract or Execution Network → Verification\n\nUse scoped session keys, workload identity, signing policies, transaction simulation, and explicit limits on assets, contracts, amounts, duration, and permissions.",
+    "keyword_terms": [
+      "ai",
+      "ai-blockchain",
+      "and",
+      "blockchain",
+      "security",
+      "signing"
+    ],
+    "exact_phrases": [
+      "AI and Blockchain",
+      "ai-blockchain",
+      "security",
+      "signing"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "235a237746ae886619d86cae73f24e1e0a4c8ce59cc13a890a6f806eccd6a755",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_018"
+  }
+}

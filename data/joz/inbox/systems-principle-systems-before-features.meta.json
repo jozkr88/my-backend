@@ -1,0 +1,33 @@
+{
+  "slug": "systems-principle-systems-before-features",
+  "title": "Systems Before Features",
+  "category": "systems_principle",
+  "lane": "systems_mindset",
+  "summary": "Understand the system before adding technology.",
+  "tags": [
+    "systems",
+    "architecture",
+    "transformation"
+  ],
+  "impact_score": 97,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "problems": [
+    "ai_adoption_failure",
+    "operational_friction",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "enterprise_architecture",
+    "organizational_design",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_operational_friction"
+  ]
+}

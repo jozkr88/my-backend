@@ -1,0 +1,85 @@
+{
+  "slug": "business-need-why-hire-joz-now",
+  "title": "Why Hire Joz Now",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Explains the immediate market and organisational need for Joz's combination of Agentic AI, enterprise transformation, governance, and measurable delivery.",
+  "tags": [
+    "why-now",
+    "ai-adoption",
+    "transformation",
+    "execution",
+    "governance"
+  ],
+  "impact_score": 98,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "claims": [
+    "Many organisations now need to move from AI experimentation to accountable enterprise execution.",
+    "Joz combines AI architecture with transformation, product, engineering, governance, and senior stakeholder experience.",
+    "He is most relevant when organisations have AI ambition but lack clarity, integration, prioritisation, or measurable outcomes."
+  ],
+  "proof_points": [
+    "Experience taking large organisations through mobile, digital, ML-enabled, and AI-related transformation.",
+    "Track record across regulated financial services, national media, government, and enterprise technology.",
+    "Ability to work across executive strategy, product architecture, engineering, and human adoption."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Europe",
+    "UAE",
+    "North America"
+  ],
+  "companies": [
+    "Maybank",
+    "Manulife",
+    "Mediacorp",
+    "Erste Bank",
+    "Dubai Future Foundation",
+    "MarketClue"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "knowledge_fragmentation",
+    "organizational_complexity",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "systems_before_features",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "product_strategy",
+    "rapid_prototyping",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_decisions",
+    "faster_time_to_value",
+    "higher_adoption"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation"
+  ],
+  "industries": [
+    "financial_services",
+    "government",
+    "media",
+    "spatial_computing",
+    "technology"
+  ],
+  "proofs": [
+    "dff_rapid_ai_prototyping",
+    "manulife_lean_ml_ux",
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "versace_spatial_ai_launch"
+  ]
+}

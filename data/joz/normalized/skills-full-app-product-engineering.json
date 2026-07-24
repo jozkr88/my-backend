@@ -1,0 +1,139 @@
+{
+  "slug": "skills-full-app-product-engineering",
+  "title": "Full App, Platform, and Intelligent Product Engineering",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Comprehensive proof for Joz's ability to integrate frontend, backend, AI, voice, retrieval, world modeling, testing, and product architecture into one coherent shipped application.",
+  "body": "Joz's full app product engineering capability is the integration layer across frontend, backend, AI, APIs, voice, multimodal interaction, 3D web, and delivery architecture.\n\nThis means he can move beyond isolated specialisms and build coherent systems: React frontend architecture, component styling, API contracts, Express-style backend services, AI and agent orchestration, world-state logic, retrieval and ontology layers, testing, and release-minded engineering. It also includes the product judgment to keep the interface, reasoning model, and system behavior aligned.\n\nThis is especially important for hiring conversations because it explains why Joz can own an end-to-end intelligent product surface rather than only one narrow layer.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic-ai",
+      "api-design",
+      "express",
+      "full-stack",
+      "openai",
+      "platform",
+      "product-engineering",
+      "react",
+      "testing",
+      "voice-ui"
+    ],
+    "verification": {
+      "status": "project_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "project_supported",
+    "claims": [
+      "Joz can own the integration layer across frontend product engineering, backend services, AI orchestration, and experience architecture.",
+      "He can build applications where interface state, reasoning systems, retrieval logic, and multimodal interaction all need to work together coherently.",
+      "His value is especially high in products that combine technical depth with strong user-facing judgment."
+    ],
+    "proof_points": [
+      "Architected financial AI agents with live market and portfolio context for MarketClue.",
+      "Led product, HCD-AI, and data architecture work across large fintech and enterprise environments.",
+      "The current app combines React, 3D rendering, voice interaction, world-aware agent routing, OpenAI-backed reasoning, Express APIs, structured knowledge retrieval, and automated scenario testing."
+    ],
+    "regions": [
+      "Dubai",
+      "Europe",
+      "Global",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-full-app-product-engineering.md",
+    "source_meta_filename": "skills-full-app-product-engineering.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "knowledge_fragmentation",
+      "operational_friction",
+      "organizational_complexity",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "agentic_ai",
+      "context_engineering",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "multimodal_ai",
+      "observability",
+      "product_strategy",
+      "rag",
+      "rapid_prototyping",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_decisions",
+      "faster_time_to_value",
+      "higher_adoption",
+      "knowledge_reuse",
+      "productivity_gains"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "observability_control",
+      "source_provenance"
+    ],
+    "industries": [
+      "financial_services",
+      "media",
+      "spatial_computing",
+      "technology"
+    ],
+    "proofs": [
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 4,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "798e3912228489385f1806e72ac4af32ecdf20585763a54603e74838f28decd4",
+    "source_uri": null
+  }
+}

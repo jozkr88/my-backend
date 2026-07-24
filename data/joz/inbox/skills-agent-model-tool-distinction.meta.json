@@ -1,0 +1,41 @@
+{
+  "slug": "skills-agent-model-tool-distinction",
+  "title": "Agent, Model, And Tool Distinction",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Clarifies the distinction between agents, prediction models, and tools so architecture decisions stay coherent and debuggable.",
+  "tags": ["agent", "architecture", "model", "reasoning", "tooling"],
+  "impact_score": 74,
+  "priority_label": "high",
+  "source_type": "paste",
+  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-15",
+    "notes": "Derived from the user's notes distinguishing agents, models, tools, and prediction services."
+  },
+  "claims": [
+    "An agent decides what information is needed and what step should happen next, while a model produces a prediction and a tool executes an operation.",
+    "Agent systems should separate decision-making, prediction, retrieval, and execution rather than collapsing them into a single component.",
+    "This distinction improves correctness, system clarity, and debugging quality."
+  ],
+  "proof_points": [
+    "The notes explicitly define agent as decision maker, model as predictor, and tool as executor.",
+    "The notes describe the correct pattern as agent -> prediction service -> execution path rather than agent as the prediction model itself.",
+    "The notes emphasize that LLMs do not automatically provide specialized prediction behavior without dedicated models or services."
+  ],
+  "regions": ["Global"],
+  "companies": [],
+  "projects": [],
+  "intent_families": [],
+  "sub_intents": [],
+  "problems": ["knowledge_fragmentation", "organizational_complexity"],
+  "principles": ["signal_over_noise", "systems_before_features", "decision_quality"],
+  "capabilities": ["agentic_ai", "context_engineering", "enterprise_architecture"],
+  "outcomes": ["faster_decisions", "higher_data_trust"],
+  "governance": ["source_provenance", "evaluation"],
+  "industries": ["technology"],
+  "proofs": []
+}
+

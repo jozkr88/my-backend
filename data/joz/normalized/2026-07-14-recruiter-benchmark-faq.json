@@ -1,0 +1,88 @@
+{
+  "slug": "2026-07-14-recruiter-benchmark-faq",
+  "title": "Recruiter Benchmark FAQ",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Recruiter benchmark guidance for keeping answers generic by default while using Singapore-first proof and phrasing when Singapore is explicitly asked.",
+  "body": "Recruiter Benchmark FAQ\n\nPurpose\nThis record benchmarks recruiter-style screening and positioning questions using a Singapore-first lens internally while keeping the answer style generic unless Singapore is explicitly asked.\n\nBenchmark rule\n- Do not volunteer \"Singapore\" unless the recruiter asks about Singapore specifically.\n- Default recruiter answers should stay internationally applicable.\n- When Singapore is explicitly asked, use Singapore-relevant proof where it exists.\n\nOperational answer rules\n\nWork authorization and sponsorship\n- Joz is Slovak and an EU national.\n- For any country-specific work authorization, visa, pass status, or sponsorship requirement, Joz LLM should say it must be confirmed directly for the specific hiring process rather than assumed.\n- If Singapore is explicitly asked, Joz LLM may mention EP, PEP, work pass, or sponsorship only in the context of \"confirm directly\" wording.\n\nCompensation and package\n- Joz LLM should not invent compensation numbers, salary bands, day rates, or currency amounts.\n- Generic answers should say compensation depends on role scope, seniority, location, responsibilities, and overall package.\n- Singapore-specific answers may mention Singapore role context but should still avoid hard numbers unless separately verified.\n\nAvailability and notice period\n- Joz LLM should keep \"availability\" and \"notice period / earliest start date\" as separate recruiter answers.\n- If no verified value exists, both should be framed as direct-confirmation items rather than guesses.\n\nWorking model and relocation\n- Joz is open to remote, hybrid, or on-site arrangements depending on role, team, and location requirements.\n- Joz is open to discussing suitable international relocation where role, location, and overall fit make sense.\n\nSingapore-fit proof\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets and first-in-market ML UX solutions launched from Singapore.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Stock Exchange portals were re-engineered.\n- Apple/Pixar-adjacent Python USD(z) and computer-vision workflows were developed in Singapore.\n\nAnswering rule\n- Recruiter answers should be direct, factual, and operational.\n- Proof-led positioning answers should use evidence, not buzzwords.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "faq",
+      "positioning",
+      "recruiter_benchmark",
+      "recruiter_screening",
+      "singapore_first",
+      "skills"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "user",
+      "reviewed_at": "2026-07-14",
+      "notes": "User clarified the benchmark should be Singapore-first internally, but answers must not say Singapore unless the recruiter explicitly asks."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Recruiter answers should stay generic unless Singapore is explicitly asked.",
+      "Country-specific work authorization or sponsorship should be confirmed directly rather than assumed.",
+      "Compensation answers should avoid unverified numbers or currency amounts.",
+      "Availability and notice period should be handled as separate recruiter answers.",
+      "Singapore-fit positioning can be supported with Maybank, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent proof."
+    ],
+    "proof_points": [
+      "User direction explicitly set the answer style to Singapore-first internally but generic outwardly unless asked.",
+      "Maybank-Ageas Etiqa provides 20x digital sales growth proof in Singapore.",
+      "Manulife provides Singapore-based APAC ML UX practice proof across 11 markets.",
+      "Mediacorp provides Singapore media and design-system scale proof across 30+ products.",
+      "Singapore Exchange and Apple/Pixar-adjacent work add local technical and spatial-computing credibility."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA",
+      "Global",
+      "Singapore",
+      "UAE/MENA"
+    ],
+    "companies": [
+      "Apple",
+      "Manulife",
+      "Maybank-Ageas Etiqa",
+      "Mediacorp",
+      "Pixar",
+      "Singapore Exchange"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-07-14-recruiter-benchmark-faq.md",
+    "source_meta_filename": "2026-07-14-recruiter-benchmark-faq.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "8503bb741d801e8b1b44d270c3582c74023183370d3fbcdb96aada422d9946b4",
+    "source_uri": null
+  }
+}

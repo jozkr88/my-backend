@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-models",
+  "title": "Models",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_015",
+  "summary": "LLMs such as GPT, Claude, Gemini, Llama, and Qwen handle language reasoning and tool selection.",
+  "body": "LLMs such as GPT, Claude, Gemini, Llama, and Qwen handle language reasoning and tool selection.\n\nXGBoost and LightGBM handle structured financial prediction.\nGARCH handles volatility forecasting.\nMonte Carlo handles scenario and risk simulation.\nVaR and CVaR estimate portfolio risk.\nIsolation Forest and autoencoders detect anomalies.\nEmbedding models support semantic retrieval.\n\nAgent = decides what to do.\nModel = produces a prediction or representation.\nTool = performs an action.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "finance",
+      "ml",
+      "models"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "retrieval",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "computer_vision",
+      "rag"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "evaluation"
+    ],
+    "industries": [
+      "financial_services"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_015",
+    "canonical_record_title": "Models",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "finance",
+      "ml",
+      "models"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Models\nModels\nfinance ml models\nfinance ml models\nLLMs such as GPT, Claude, Gemini, Llama, and Qwen handle language reasoning and tool selection.\n\nXGBoost and LightGBM handle structured financial prediction.\nGARCH handles volatility forecasting.\nMonte Carlo handles scenario and risk simulation.\nVaR and CVaR estimate portfolio risk.\nIsolation Forest and autoencoders detect anomalies.\nEmbedding models support semantic retrieval.\n\nAgent = decides what to do.\nModel = produces a prediction or representation.\nTool = performs an action.",
+    "keyword_terms": [
+      "finance",
+      "ml",
+      "models"
+    ],
+    "exact_phrases": [
+      "Models",
+      "finance",
+      "ml",
+      "models"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "9ee2c63adc98178b84ed22958a49324da78626d9a96f490f3effeb341ce35332",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_015"
+  }
+}

@@ -1,0 +1,1815 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "joz-public-knowledge",
+  "tenant_id": "public",
+  "owner": "joz",
+  "classification": "public",
+  "visibility": "public",
+  "retention_policy": "until_withdrawn",
+  "generated_at": "2026-07-24T07:07:27.006Z",
+  "source_count": 78,
+  "canonical_source_count": 2,
+  "normalized_count": 162,
+  "model_ready_count": 160,
+  "verified_count": 18,
+  "error_count": 0,
+  "content_checksum": "230f31e54ce325f622221f97a430be5a86f0d28b33d7fae430cfd497572053ee",
+  "source_registry_count": 78,
+  "source_registry_checksum": "d6eb98978b9d9283d7cd9028a7807db8de238a70310ae909d39b32c355002964",
+  "sources": [
+    {
+      "source_id": "d7cf917a442ec633c88fb215",
+      "source_key": "2026-07-11-agentic-ai-architecture-proof.md",
+      "source_filename": "2026-07-11-agentic-ai-architecture-proof.md",
+      "source_uri": null,
+      "source_types": [
+        "derived"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "0a0451eb203509f04018142ecb8f2c2dede60b49941d648224768f9fea1d9ece",
+      "status": "published"
+    },
+    {
+      "source_id": "e97dc0470e2dd02105ddd2a8",
+      "source_key": "2026-07-11-agentic-ux-orchestration-proof.md",
+      "source_filename": "2026-07-11-agentic-ux-orchestration-proof.md",
+      "source_uri": null,
+      "source_types": [
+        "derived"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "9c9c0506ca5ff35431b449babf6ef4be86d0b09ac4da5ef935a7c41e9efa5636",
+      "status": "published"
+    },
+    {
+      "source_id": "5f0565abd5b329b30b407486",
+      "source_key": "2026-07-11-compensation-and-process-faq.md",
+      "source_filename": "2026-07-11-compensation-and-process-faq.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "f47ac6418d9ad5d8a2568945bd94359513a90c189999992d45e123f1b931345a",
+      "status": "published"
+    },
+    {
+      "source_id": "552f25030bd66c6c7e7d5ca7",
+      "source_key": "2026-07-11-current-agentic-ai-cv.md",
+      "source_filename": "2026-07-11-current-agentic-ai-cv.md",
+      "source_uri": "source://joz/2026-07-11-current-agentic-ai-cv.md",
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "b5181870e93ebcab93ff11f78f3ac1edcfb9b142cb3fbb921c2f629dbe77a7c0",
+      "status": "published"
+    },
+    {
+      "source_id": "ed341f4e35c78886c7b8a010",
+      "source_key": "2026-07-11-cv-company-context-web-research.md",
+      "source_filename": "2026-07-11-cv-company-context-web-research.md",
+      "source_uri": null,
+      "source_types": [
+        "web_research"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 0,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "unverified"
+      ],
+      "source_checksum": "236e6cec0ef9fdc674bfbeeacc05309baa0d534e805281f2da6ade8def0b4313",
+      "status": "published"
+    },
+    {
+      "source_id": "d736d5cd5e49215c2502f3e1",
+      "source_key": "2026-07-11-enterprise-scale-proof.md",
+      "source_filename": "2026-07-11-enterprise-scale-proof.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "92f025b7a8e19040b2281f808502ea0365324a68947f0e080d6d40c4d0df1c67",
+      "status": "published"
+    },
+    {
+      "source_id": "251c44a309fd77b7b7d5670c",
+      "source_key": "2026-07-11-location-and-working-model-faq.md",
+      "source_filename": "2026-07-11-location-and-working-model-faq.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "198a20efdd71d12848e9bb0996da540e1d2953ab956b0320aa47ea61aecd6c36",
+      "status": "published"
+    },
+    {
+      "source_id": "f280f3bacfda4f7f0678466a",
+      "source_key": "2026-07-11-recruiter-screening-faq.md",
+      "source_filename": "2026-07-11-recruiter-screening-faq.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "3817ea25a30a4cb2618ef8d78e586cdd4d13b22e908ee3cb02556b88374f980d",
+      "status": "published"
+    },
+    {
+      "source_id": "0e54c2b2b42854f43bdadbeb",
+      "source_key": "2026-07-11-why-joz-screening-answer.md",
+      "source_filename": "2026-07-11-why-joz-screening-answer.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "7616b6e541b56bac1f6ab7de4e39412e260da2a8a08997200ab4f6fb770291db",
+      "status": "published"
+    },
+    {
+      "source_id": "490db6318a7ad304c3981c7d",
+      "source_key": "2026-07-14-recruiter-benchmark-faq.md",
+      "source_filename": "2026-07-14-recruiter-benchmark-faq.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "40840c388d45e72a4a1d8fe107c98ac1850f00d638a1b63711f8096222e9a44d",
+      "status": "published"
+    },
+    {
+      "source_id": "a4acafa469ec4fe32ee8183c",
+      "source_key": "business-need-ai-adoption-governance.md",
+      "source_filename": "business-need-ai-adoption-governance.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "aa696c2f7265562593be10d9106cb83b75f4be856d9544ce9b79ab6e031828cd",
+      "status": "published"
+    },
+    {
+      "source_id": "d2c649b85b7c6ff55caacf98",
+      "source_key": "business-need-ai-by-function.md",
+      "source_filename": "business-need-ai-by-function.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "9dd026a3cff794d4ac922417b19dec84279db75fd0b782ea740007f37f1a80f8",
+      "status": "published"
+    },
+    {
+      "source_id": "a1a6f2f6f75ca424d3e77af6",
+      "source_key": "business-need-architecture-scalability.md",
+      "source_filename": "business-need-architecture-scalability.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "d5627462cca07baaf32d8160d76dd155ecb2e44cf5f2efcbddd45aa402c513f1",
+      "status": "published"
+    },
+    {
+      "source_id": "79cab85d32f5f2bf59f128e8",
+      "source_key": "business-need-buyer-faq.md",
+      "source_filename": "business-need-buyer-faq.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "874702936eca596b2dbfb313bf25e217ad473b5280c682e19f2409eff3f7fe3d",
+      "status": "published"
+    },
+    {
+      "source_id": "fca43f2604cda715a0820b98",
+      "source_key": "business-need-current-data-architecture.md",
+      "source_filename": "business-need-current-data-architecture.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "f58671e4f400302977bfce6400dcaf5e03fd53c1f2e7be9ee6b9438001cf6695",
+      "status": "published"
+    },
+    {
+      "source_id": "8f25ed56314a7c3129168128",
+      "source_key": "business-need-dataset-extension-framework.md",
+      "source_filename": "business-need-dataset-extension-framework.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "3d9770afc41bd96aaa5aacf0f291bac650f40d12b5080450ab90214a4ffe45e0",
+      "status": "published"
+    },
+    {
+      "source_id": "9fea8d4da80b62c51578c310",
+      "source_key": "business-need-decision-intelligence.md",
+      "source_filename": "business-need-decision-intelligence.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "c2e4594e4363ff3a9cb006385794c922704c60fa89977c04107248a773b17be2",
+      "status": "published"
+    },
+    {
+      "source_id": "061059f0e6ea33a47e71570d",
+      "source_key": "business-need-department-profit-use-cases.md",
+      "source_filename": "business-need-department-profit-use-cases.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "c7aa48da9d805d7f3c5629cf5126a807e2eb80b04de09412fa442dc2a8e822cb",
+      "status": "published"
+    },
+    {
+      "source_id": "fd850f6bad9628fb2b301a07",
+      "source_key": "business-need-efficiency-vs-growth.md",
+      "source_filename": "business-need-efficiency-vs-growth.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "4f941addaded4bf9aa78893050c5ee08e60d927ffaee1849fcede43b7ba587d5",
+      "status": "published"
+    },
+    {
+      "source_id": "4f244be4932d6d60238fd347",
+      "source_key": "business-need-enterprise-knowledge.md",
+      "source_filename": "business-need-enterprise-knowledge.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "92e67040ddd612335666afa4fb854b13efbac20ea702309ceb96b336671f42eb",
+      "status": "published"
+    },
+    {
+      "source_id": "cbac87317982c721902f6527",
+      "source_key": "business-need-enterprise-proof.md",
+      "source_filename": "business-need-enterprise-proof.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "a9d79bfc8fce35c9fd76600745c6547fb7984415f57eeee2190a3a1cf0a0bd52",
+      "status": "published"
+    },
+    {
+      "source_id": "dd6b8e25314d367941f86ddd",
+      "source_key": "business-need-erp-finance-hr-marketing-opportunity-map.md",
+      "source_filename": "business-need-erp-finance-hr-marketing-opportunity-map.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "c41b5a8273aa0711132f4bd67285128f6da42992304d2c8cf37ec06a8bf5dd10",
+      "status": "published"
+    },
+    {
+      "source_id": "94c4373e698362ab8dc15923",
+      "source_key": "business-need-hero-value.md",
+      "source_filename": "business-need-hero-value.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "285b2880c33dd6d281cb8e23f3d3561087dc2cdae96379a16ecb679d9e79b855",
+      "status": "published"
+    },
+    {
+      "source_id": "8c01f82b897c802cd9ea4e65",
+      "source_key": "business-need-high-stakes-ai-execution-controls.md",
+      "source_filename": "business-need-high-stakes-ai-execution-controls.md",
+      "source_uri": "source://joz/business-need-high-stakes-ai-execution-controls.md",
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "05bd02d7caa486af309d7b2b71db17f816a34550f23d03f09ab208eaff1e7827",
+      "status": "published"
+    },
+    {
+      "source_id": "b06178ffa78e850a55b9e55a",
+      "source_key": "business-need-operating-model-blueprint.md",
+      "source_filename": "business-need-operating-model-blueprint.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "68ddc805553670bc39ff0c44029340115f16fd9d55fef549896df094149cd486",
+      "status": "published"
+    },
+    {
+      "source_id": "aeced9017d16bdd1e3f84e06",
+      "source_key": "business-need-problems-joz-solves.md",
+      "source_filename": "business-need-problems-joz-solves.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "050d326652717e0d390f99860e63ea2bf55820e5c2b5bd800db47583824cc01d",
+      "status": "published"
+    },
+    {
+      "source_id": "b6089e4a40a2f9b066f2c719",
+      "source_key": "business-need-process-redesign-framework.md",
+      "source_filename": "business-need-process-redesign-framework.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "b5e5595e437af0d261502c54b5c0b284e59ba5d849207e9876b84b96a3ab8986",
+      "status": "published"
+    },
+    {
+      "source_id": "4a25b85cdaf5db9c352838ab",
+      "source_key": "business-need-profit-levers.md",
+      "source_filename": "business-need-profit-levers.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "2f05128ab61eaff081b92bd810151a2625bde73b0717e50ef9acd2838e80a8a1",
+      "status": "published"
+    },
+    {
+      "source_id": "e8c106856a365cd94d3c92fc",
+      "source_key": "business-need-roi-model.md",
+      "source_filename": "business-need-roi-model.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "270f808683440fa3a5121a2bb2584642eaa8f73ea274bebbd9e9696e49f57ca4",
+      "status": "published"
+    },
+    {
+      "source_id": "41b358837e855024d09e486c",
+      "source_key": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
+      "source_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "9accde55af2de07a07a917cff10ab544011728bbde96bad23199edcd21b6439f",
+      "status": "published"
+    },
+    {
+      "source_id": "9a468349c7c72a47da918166",
+      "source_key": "business-need-transformation-method.md",
+      "source_filename": "business-need-transformation-method.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "e64155bb4e551a1f81f0c65103d14918386c730df03baae9427bed92c9a41187",
+      "status": "published"
+    },
+    {
+      "source_id": "059a1d56dbcbf91eefdbed32",
+      "source_key": "business-need-why-hire-joz-now.md",
+      "source_filename": "business-need-why-hire-joz-now.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "1e3df4a29e15019dff1dc8c686fbae1c4a0b3354e1e268160d157e681ee14a64",
+      "status": "published"
+    },
+    {
+      "source_id": "d777163045f00df2c9913b4d",
+      "source_key": "business-need-why-joz-is-irreplaceable.md",
+      "source_filename": "business-need-why-joz-is-irreplaceable.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "b55dc39d743d4f61df8bb2723b1c9f3ce8f4c4604d6893799b1902c1d065516d",
+      "status": "published"
+    },
+    {
+      "source_id": "f13fcb35fe79e672baa1b0ca",
+      "source_key": "dubai-future-foundation-inclusive-design.md",
+      "source_filename": "dubai-future-foundation-inclusive-design.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "9b1f3b6432205ef90e246f0d3aefa9e3b75713d9572194dcc64c0f2d03ac642b",
+      "status": "published"
+    },
+    {
+      "source_id": "2df9248cccc06179613ab42a",
+      "source_key": "erste-accessibility-aem.md",
+      "source_filename": "erste-accessibility-aem.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "fe3964be9df26aebfd1b9cac5234b97dc161b8cc734394bb21ccae2aa5a14eeb",
+      "status": "published"
+    },
+    {
+      "source_id": "1746ceab7dc24da5a872e27b",
+      "source_key": "hub71-tokenised-knowledge.md",
+      "source_filename": "hub71-tokenised-knowledge.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "e99916653d574e58113b9524fe8f7daff437e7c5e0bfbd026cfc3da05bb5631c",
+      "status": "published"
+    },
+    {
+      "source_id": "fc249a16f57d277f2f00ae5d",
+      "source_key": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_001",
+      "source_types": [
+        "canonical_jsonl"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 37,
+      "model_ready_count": 37,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "5629ef58828bfe9e9f862fa32d200d3dacb050c4143ae2c57fee67f77e09ab38",
+      "status": "published"
+    },
+    {
+      "source_id": "d01a23db99d02fe60653d40d",
+      "source_key": "joz-identity-background.md",
+      "source_filename": "joz-identity-background.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "ff493caa4cab0e8a2b747558ace1e37d192697eaee59a732bb65570790c245ce",
+      "status": "published"
+    },
+    {
+      "source_id": "5da98ca7512d899c03f80b4e",
+      "source_key": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_001",
+      "source_types": [
+        "canonical_jsonl"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 49,
+      "model_ready_count": 49,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "cc09a4cf92823579c105a1643d1c2d4dd39b4f6767be0e75134848812108409f",
+      "status": "published"
+    },
+    {
+      "source_id": "ca4a6873765549e4e66144d3",
+      "source_key": "leo-burnett-commerce-platforms.md",
+      "source_filename": "leo-burnett-commerce-platforms.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "44914489878853b2ca669c6a249d99fa3b87df4b0141f3408b09f47bac934265",
+      "status": "published"
+    },
+    {
+      "source_id": "d72facb1f6d461998d966f56",
+      "source_key": "manulife-innovation-labs.md",
+      "source_filename": "manulife-innovation-labs.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "09cdf5100a7296e3b3fa8688f33bf27e795cfd2112ab84542af2d0bd92c826f6",
+      "status": "published"
+    },
+    {
+      "source_id": "bfec79729d69f214a266b5ab",
+      "source_key": "maybank-private-banking-digital.md",
+      "source_filename": "maybank-private-banking-digital.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "27bda50efba1b203562b57ded92cfe3723a980ab023361dc705708e0d190ea3d",
+      "status": "published"
+    },
+    {
+      "source_id": "4f73d3dfcd7b87364904e52a",
+      "source_key": "mediacorp-digital-platforms.md",
+      "source_filename": "mediacorp-digital-platforms.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "cef22a744878953e1bd02012351101e20e895fe6537b023762180ecd4623b556",
+      "status": "published"
+    },
+    {
+      "source_id": "fffc7bbcd77883f3222e2964",
+      "source_key": "ogilvy-enterprise-platforms.md",
+      "source_filename": "ogilvy-enterprise-platforms.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "c992c61b3eef25036ad7439db9a589157f3dbb21cb205645e180df02e2cdfb25",
+      "status": "published"
+    },
+    {
+      "source_id": "cfd9c248808454cfad17dbd5",
+      "source_key": "recruiter-agentic-ai-depth-questions.md",
+      "source_filename": "recruiter-agentic-ai-depth-questions.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "30384fa50deeb34f0891cf1dba6293dd684ab1cca63ea286142984214ada007d",
+      "status": "published"
+    },
+    {
+      "source_id": "027c5633463bf898659e89ab",
+      "source_key": "recruiter-compensation-process-questions.md",
+      "source_filename": "recruiter-compensation-process-questions.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "83bfc47b41f723981d343d0e2099c3af9f3890c44e7e0a8d600ce784b38b5c03",
+      "status": "published"
+    },
+    {
+      "source_id": "b4ef4f176162049684547504",
+      "source_key": "recruiter-core-screening-questions.md",
+      "source_filename": "recruiter-core-screening-questions.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "494e989a933872d2e02538b828d39024a9a84abda345a6f9aaaee3e0174ff136",
+      "status": "published"
+    },
+    {
+      "source_id": "031c279e94d71abe02e044d3",
+      "source_key": "recruiter-leadership-stakeholder-questions.md",
+      "source_filename": "recruiter-leadership-stakeholder-questions.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "5088dc2bc3cceb20467f041a579c96fcc5e2884171236990394c2a175fda0b77",
+      "status": "published"
+    },
+    {
+      "source_id": "a6acb5451f9b337c30a87c2b",
+      "source_key": "recruiter-product-ui-ux-accessibility-questions.md",
+      "source_filename": "recruiter-product-ui-ux-accessibility-questions.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "44901b4c76b7f109d2ee07ad99a53d5c6d5b7343ba2efddeced6c2143f84f7c4",
+      "status": "published"
+    },
+    {
+      "source_id": "ddf62ea25be227ff036a156d",
+      "source_key": "recruiter-singapore-explicit-followups.md",
+      "source_filename": "recruiter-singapore-explicit-followups.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "2309284d7ecf89291f539b46aa41ff5c78dd2cfa4cb4f7e2e8be53c3403946bb",
+      "status": "published"
+    },
+    {
+      "source_id": "98b7f3846b8f4b1b757acd31",
+      "source_key": "recruiter-strengths-and-skills-questions.md",
+      "source_filename": "recruiter-strengths-and-skills-questions.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "1f16dfbe31936389c0dbc55104d71045a008a379686a9cce739a5376ee6aef93",
+      "status": "published"
+    },
+    {
+      "source_id": "c6dc06d9e58a50b0faab15b8",
+      "source_key": "skills-agent-model-tool-distinction.md",
+      "source_filename": "skills-agent-model-tool-distinction.md",
+      "source_uri": "source://joz/skills-agent-model-tool-distinction.md",
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "0641045ba275d524071b8782e7478fd8b24a417876a8f5aadfcc3c3cfc968a35",
+      "status": "published"
+    },
+    {
+      "source_id": "2df10ba456898100bab119f1",
+      "source_key": "skills-agent-runtime-stack.md",
+      "source_filename": "skills-agent-runtime-stack.md",
+      "source_uri": "source://joz/skills-agent-runtime-stack.md",
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "49730dd6b42f78f7a6504061a3eb7f787582bc69df73e08bbf22350a5fb1c542",
+      "status": "published"
+    },
+    {
+      "source_id": "0bf6631a344c91296a06665b",
+      "source_key": "skills-agentic-ai-architecture.md",
+      "source_filename": "skills-agentic-ai-architecture.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "f9685127f543046dc71d386fea62402cbdf7092e14da39b4cc488d92dbe5d7ab",
+      "status": "published"
+    },
+    {
+      "source_id": "d1ec0f9449c67dfbc37ba4d6",
+      "source_key": "skills-agentic-ai-ux-orchestration.md",
+      "source_filename": "skills-agentic-ai-ux-orchestration.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "505e90ff152ea678f17ece1dce41cf47337d968087c8f8235570ea37aa1505f1",
+      "status": "published"
+    },
+    {
+      "source_id": "b6a9fef7160482011c9b1c80",
+      "source_key": "skills-career-transition-to-agentic-ai.md",
+      "source_filename": "skills-career-transition-to-agentic-ai.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "724a388f3f1e3072820a484568fb3154071b126dc4da99e35a947db0741fa750",
+      "status": "published"
+    },
+    {
+      "source_id": "395388ce2f03452276a8c18e",
+      "source_key": "skills-financial-services-ai.md",
+      "source_filename": "skills-financial-services-ai.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "9db63c8d622f0de66406a28cb782e28a21d403921f89809cb390815604a86229",
+      "status": "published"
+    },
+    {
+      "source_id": "c14690d0432cc0d20d55cf4c",
+      "source_key": "skills-full-app-product-engineering.md",
+      "source_filename": "skills-full-app-product-engineering.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "3db50f8800bf2bd94584216f5eedd6515472647672de5eefffeba2c6af5d333c",
+      "status": "published"
+    },
+    {
+      "source_id": "bf6e6f6c0cf0cdad7899663c",
+      "source_key": "skills-hero-agentic-ai.md",
+      "source_filename": "skills-hero-agentic-ai.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "b29847ee169ad0316ce4f871c04cd1588addeb0b974eefd3eaf41e84765b283a",
+      "status": "published"
+    },
+    {
+      "source_id": "28157f7c9af145b1caf3aad0",
+      "source_key": "skills-largest-enterprise-scale-proof.md",
+      "source_filename": "skills-largest-enterprise-scale-proof.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "361dc9e2f7c5247c9872ff798944c8613798a6e29526b0f307f7803657a7fe0a",
+      "status": "published"
+    },
+    {
+      "source_id": "ffa94526a6e04cb84574c7b8",
+      "source_key": "skills-quantified-business-outcomes.md",
+      "source_filename": "skills-quantified-business-outcomes.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "d34e6d9680b499e2dec856647146bfd3a4631c182b0b253fc776304bc26cef6c",
+      "status": "published"
+    },
+    {
+      "source_id": "2317210ccf8a9b2f2e6d37ca",
+      "source_key": "skills-recruiter-operational-facts.md",
+      "source_filename": "skills-recruiter-operational-facts.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 0,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "unverified"
+      ],
+      "source_checksum": "721bc1bbf0ecc286d1cfce10c87725716514b69c77d07fd34f9199306b06c352",
+      "status": "published"
+    },
+    {
+      "source_id": "49b82ca54af01e0731c453fe",
+      "source_key": "skills-singapore-market-proof.md",
+      "source_filename": "skills-singapore-market-proof.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 1,
+      "evidence_tiers": [
+        "verified_fact"
+      ],
+      "source_checksum": "eea6c3bbe46377b99c515924542ebdc3b88b4947c09504e40e8b600b021d21a6",
+      "status": "published"
+    },
+    {
+      "source_id": "845c3ffdd17a893f03c2c5e0",
+      "source_key": "skills-spatial-3d-xr-ar-platforms.md",
+      "source_filename": "skills-spatial-3d-xr-ar-platforms.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "87aa7af063bb154a187e6f9c2e8599fe52e592f6e19ac4fdedf3f9e2752dea47",
+      "status": "published"
+    },
+    {
+      "source_id": "9f02ea639c5745c337f75b7f",
+      "source_key": "skills-technical-platform-stack.md",
+      "source_filename": "skills-technical-platform-stack.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "eb28f489ea2f74d3df75b32e2c4fbaae9c3cab1a2fd00d233e82fe825eb31563",
+      "status": "published"
+    },
+    {
+      "source_id": "80da5f26cb9f091601dc3eb7",
+      "source_key": "skills-ui-ux-css-product-systems.md",
+      "source_filename": "skills-ui-ux-css-product-systems.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "6bedd2b9a325a3c8bd7edce7c24004a0784a6268d9bad8f3157b331cae1e46ad",
+      "status": "published"
+    },
+    {
+      "source_id": "9900dd9004b9140701d2ae36",
+      "source_key": "systems-agent-control-loop.md",
+      "source_filename": "systems-agent-control-loop.md",
+      "source_uri": "source://joz/systems-agent-control-loop.md",
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "framework_guidance"
+      ],
+      "source_checksum": "5d970862b55dd2594b67a1277ca9bc778336b5ea9a0615bee06a45eafb5de87d",
+      "status": "published"
+    },
+    {
+      "source_id": "8c9bb9681582382e15242567",
+      "source_key": "systems-agentic-ai-judgment.md",
+      "source_filename": "systems-agentic-ai-judgment.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "041f307d36df19b47d20d41a0f7724de450e808fa8abce3e389c6799bc774614",
+      "status": "published"
+    },
+    {
+      "source_id": "d2f0c6f9e2a9374feac52ef0",
+      "source_key": "systems-decision-thinking.md",
+      "source_filename": "systems-decision-thinking.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "8e293a58a6991884dfa2a4929d8e49341d278715001cb69350de4a54029c8a56",
+      "status": "published"
+    },
+    {
+      "source_id": "065f52f7f9c8a546e99462a2",
+      "source_key": "systems-feedback-loops.md",
+      "source_filename": "systems-feedback-loops.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "f3e8061b439626741f3cc97ab7e241ccdd881063cd9243837cad3581691223b5",
+      "status": "published"
+    },
+    {
+      "source_id": "97bd641b2eab0d50065f95f4",
+      "source_key": "systems-governance-mindset.md",
+      "source_filename": "systems-governance-mindset.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "9e18630e8873cbfb9ce3724f324057c7bdc14306031662cbab7882824a697f21",
+      "status": "published"
+    },
+    {
+      "source_id": "9c2cea91318fb3cda70d70b6",
+      "source_key": "systems-human-behavior.md",
+      "source_filename": "systems-human-behavior.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "c9606a10910f2fef92eb9d63ed97a8f37a0a3d1b4067d73a27c3d2c5c18d8595",
+      "status": "published"
+    },
+    {
+      "source_id": "6f56d57359c1d9b6dea050eb",
+      "source_key": "systems-mindset-hero.md",
+      "source_filename": "systems-mindset-hero.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "e8e935eabbef9a7f0e8a4790fea5068565b2b375f697652b24ac7746387c22c4",
+      "status": "published"
+    },
+    {
+      "source_id": "3cb8faa0b6ea38b9dcc420bc",
+      "source_key": "systems-organizational-failure-patterns.md",
+      "source_filename": "systems-organizational-failure-patterns.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "8c841a00d64cb495a78353ccdc280f5dad7d78058121fefa808432aee01d336c",
+      "status": "published"
+    },
+    {
+      "source_id": "3d67fd69557ca5f3f4adf27e",
+      "source_key": "systems-principle-context-creates-intelligence.md",
+      "source_filename": "systems-principle-context-creates-intelligence.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "2a5ffec3fc5717d8b60060aaf8a180513e3871651a6c59e866e4f2a81d5b22c9",
+      "status": "published"
+    },
+    {
+      "source_id": "529be76bdd889a2616d8cdef",
+      "source_key": "systems-principle-signal-over-noise.md",
+      "source_filename": "systems-principle-signal-over-noise.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "19dbeb27cb6d5d59c5459ae83f4eb1d6473f709e2d4a1c39e84f85af9fb8932d",
+      "status": "published"
+    },
+    {
+      "source_id": "368fb0f750e7ebdcdfc38fb8",
+      "source_key": "systems-principle-systems-before-features.md",
+      "source_filename": "systems-principle-systems-before-features.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "d64f57458d5d28a401774dc259a028f5cabbcbdee3f135bac3101bede798a084",
+      "status": "published"
+    },
+    {
+      "source_id": "e964d2baac77a9a7ee751795",
+      "source_key": "uk-healthcare-digital-platforms.md",
+      "source_filename": "uk-healthcare-digital-platforms.md",
+      "source_uri": null,
+      "source_types": [
+        "paste"
+      ],
+      "dataset_id": "joz-public-knowledge",
+      "tenant_id": "public",
+      "owner": "joz",
+      "classification": "public",
+      "visibility": "public",
+      "retention_policy": "until_withdrawn",
+      "record_count": 1,
+      "model_ready_count": 1,
+      "verified_count": 0,
+      "evidence_tiers": [
+        "supported_claim"
+      ],
+      "source_checksum": "4abb336297349d5382f49702cfd071e5691e1226ddacea9318cb4fa21d4310ed",
+      "status": "published"
+    }
+  ]
+}

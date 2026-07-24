@@ -1,0 +1,79 @@
+{
+  "slug": "recruiter-product-ui-ux-accessibility-questions",
+  "title": "Recruiter Product UI UX Accessibility Questions",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Recruiter-oriented question set covering UI, UX, CSS, design systems, motion, frontend implementation, and accessibility proof.",
+  "body": "Recruiter Product UI UX Accessibility Questions\n\nPurpose\nThis record covers recruiter questions around product thinking, interface craft, CSS, design systems, motion, and accessibility.\n\nQuestion set\n- How strong is Joz in UI and UX?\n- Is Joz strong in CSS and frontend implementation?\n- Does Joz understand design systems?\n- How strong is Joz in motion and interaction design?\n- Does Joz have accessibility experience?\n- Can Joz translate complex AI or platform capability into good product UX?\n\nAnswer guidance\n- Frame this as product-level interface judgment, not just visual styling.\n- Cover information architecture, interaction design, design systems, responsive frontend implementation, CSS and component styling, motion as guidance, accessibility, conversational UX, voice UX, and trust-building flows.\n- Tie interface skill to measurable outcomes and production implementation, not just mockup quality.\n\nProof anchors\n- Mediacorp: global experience language across 30+ products.\n- Leo Burnett/Publicis: 70% reduction in handoff friction through code-based prototyping.\n- Maybank: 20x digital sales growth through conversational and ML-led UX.\n- Erste Bank: accessibility and engineering at 16M+ customer scale.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "accessibility",
+      "css",
+      "recruiter",
+      "ui",
+      "ux"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-14",
+      "notes": "Built from existing UI/UX/CSS/accessibility records and router answers already validated in unit tests."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz's UI and UX strength should be framed as product-level interface judgment plus production execution.",
+      "CSS, design systems, motion, and accessibility are supported by measurable work rather than generic design claims.",
+      "Mediacorp, Leo Burnett/Publicis, Maybank, and Erste Bank provide the strongest evidence."
+    ],
+    "proof_points": [
+      "Mediacorp: experience language across 30+ products.",
+      "Leo Burnett/Publicis: 70% handoff-friction reduction through code-based prototyping.",
+      "Maybank: 20x digital sales growth through conversational and ML-led UX.",
+      "Erste Bank: accessibility at 16M+ customer scale."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Leo Burnett/Publicis",
+      "Maybank-Ageas Etiqa",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "recruiter-product-ui-ux-accessibility-questions.md",
+    "source_meta_filename": "recruiter-product-ui-ux-accessibility-questions.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "45345578471d6c9230d08ae3f177e7f572bdcd49f47af2aebabd1b8230d049a8",
+    "source_uri": null
+  }
+}

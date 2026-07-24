@@ -1,0 +1,13 @@
+[
+  { "id": "financial_services", "name": "Financial Services" },
+  { "id": "banking", "name": "Banking" },
+  { "id": "insurance", "name": "Insurance" },
+  { "id": "wealth_management", "name": "Wealth Management" },
+  { "id": "media", "name": "Media and Broadcasting" },
+  { "id": "government", "name": "Government and Public Services" },
+  { "id": "technology", "name": "Technology" },
+  { "id": "healthcare", "name": "Healthcare and MedTech" },
+  { "id": "creative_services", "name": "Creative and Agency Services" },
+  { "id": "retail", "name": "Retail and E-commerce" },
+  { "id": "spatial_computing", "name": "Spatial Computing" }
+]

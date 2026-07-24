@@ -1,0 +1,67 @@
+{
+  "slug": "business-need-dataset-extension-framework",
+  "title": "Dataset Extension Framework",
+  "category": "delivery",
+  "lane": "business_need",
+  "summary": "Defines how to extend current datasets toward business value by adding context, outcomes, process visibility, cross-system linkage, and business meaning.",
+  "tags": [
+    "dataset",
+    "extension",
+    "audit",
+    "business-value",
+    "decision-intelligence"
+  ],
+  "impact_score": 93,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "Datasets should be extended to become more decision-useful rather than simply larger.",
+    "The five key extension directions are context, outcomes, process visibility, cross-system linkage, and business meaning.",
+    "The purpose of dataset extension is to support profit, efficiency, risk, and growth decisions."
+  ],
+  "proof_points": [
+    "Operational datasets without outcomes can describe but not optimize.",
+    "Cross-system linkage is required for strategic business reasoning rather than siloed reporting.",
+    "Derived business fields are necessary to move from raw data to actionable intelligence."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "data_silos",
+    "manual_knowledge_work",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "feedback_loops",
+    "signal_over_noise"
+  ],
+  "capabilities": [
+    "context_engineering",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "higher_data_trust",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

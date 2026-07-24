@@ -1,0 +1,99 @@
+{
+  "portal": "root",
+  "title": "Root Portal",
+  "summary": "Lunar landing scene with two semantic entry routes: the gold pill into Meet Joz and the brain-plus-enter portal into MAXX.",
+  "scene": {
+    "id": "root_scene",
+    "title": "Moon Portal Landing",
+    "environment": "moon_environment",
+    "meaning": [
+      "The root portal is the app's orientation layer.",
+      "It gives the user a clean choice between the human proof world and the abstract brain world.",
+      "The moon environment frames the experience as a staged portal landing rather than a flat homepage."
+    ]
+  },
+  "objects": [
+    {
+      "id": "root_ball",
+      "mesh": "ball",
+      "asset": "ball.glb",
+      "role": "portal_entry",
+      "interactive": true,
+      "target": "/neo/meet-joz",
+      "meshAliases": ["ball", "gold_pill", "pill"],
+      "voiceAliases": [
+        "ball",
+        "gold pill",
+        "pill",
+        "meet joz",
+        "talk to joz",
+        "open meet joz"
+      ],
+      "summary": "Gold pill object that opens Meet Joz.",
+      "meaning": [
+        "This is the human-facing proof route.",
+        "It takes the user into Joz's identity, work, credibility, and capability world."
+      ]
+    },
+    {
+      "id": "root_brain",
+      "mesh": "brain",
+      "asset": "bx.glb",
+      "role": "cognitive_anchor",
+      "interactive": true,
+      "target": "/neo/maxx",
+      "meshAliases": ["brain", "bx"],
+      "voiceAliases": [
+        "brain",
+        "mind",
+        "philosophy",
+        "maxx"
+      ],
+      "summary": "Brain object representing the abstract cognitive route into MAXX.",
+      "meaning": [
+        "This is the conceptual and philosophical route.",
+        "It frames MAXX as intelligence, signal, and inner-world reasoning rather than a normal page transition."
+      ]
+    },
+    {
+      "id": "root_enter_portal",
+      "mesh": "enter_portal",
+      "asset": "enter.glb",
+      "role": "portal_trigger",
+      "interactive": true,
+      "target": "/neo/maxx",
+      "meshAliases": ["enter_portal", "enter"],
+      "voiceAliases": [
+        "enter",
+        "go inside",
+        "open portal",
+        "brain portal",
+        "enter the brain"
+      ],
+      "summary": "Visible enter trigger paired with the brain route into MAXX.",
+      "meaning": [
+        "This is the explicit invitation to enter the brain world.",
+        "It works with the brain object as the concrete portal trigger for MAXX."
+      ]
+    },
+    {
+      "id": "root_moon_environment",
+      "mesh": "moon_environment",
+      "asset": null,
+      "role": "environment",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["moon_environment", "moon", "lunar_environment"],
+      "voiceAliases": [
+        "moon",
+        "lunar environment",
+        "moon scene"
+      ],
+      "summary": "Lunar environment surrounding the root portal.",
+      "meaning": [
+        "It provides atmosphere and makes the landing feel like a portal arrival.",
+        "It is contextual, not a trigger object."
+      ]
+    }
+  ]
+}

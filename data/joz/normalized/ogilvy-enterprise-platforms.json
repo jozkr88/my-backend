@@ -1,0 +1,110 @@
+{
+  "slug": "ogilvy-enterprise-platforms",
+  "title": "Enterprise, Exchange and Commerce Platforms — Ogilvy/WPP, Singapore",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Exchange, hospitality, e-commerce, CMS, and recurring UX campaign work across Singapore, Asia Pacific, and global markets.",
+  "body": "Enterprise, exchange, hospitality, and commerce platform work at Ogilvy/WPP spans Singapore Stock Exchange, Banyan Tree, Danone, and recurring campaign delivery across Singapore and Asia Pacific.\n\nIncluded projects\n- Singapore Stock Exchange CMS\n- Banyan Tree Worldwide CMS\n- Danone e-commerce CMS\n- Annual Ogilvy UX Campaigns\n\nStrategic and technical themes\n- Enterprise and platform design in agency environments serving large organisations.\n- CMS and experience architecture across exchange, hospitality, and commerce settings.\n- Repeated campaign delivery that still required workflow discipline and reusable system thinking.\n- Product strategy and prototyping used to move quickly without losing structure.\n\nProof connection\n- This record can connect to the existing Singapore Stock Exchange and Banyan Tree proof objects where relevant.\n- It should not invent campaign metrics that do not already exist in the proof layer.\n\nRetrieval guidance\n- Use this record for Ogilvy, WPP, SGX, Banyan Tree, Danone, or CMS-project questions.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "banyan-tree",
+      "cms",
+      "danone",
+      "ogilvy",
+      "sgx",
+      "wpp"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz worked on enterprise and commerce platform programmes at Ogilvy/WPP across exchange, hospitality, and consumer contexts.",
+      "The programme included SGX, Banyan Tree, Danone, and recurring UX campaign work."
+    ],
+    "proof_points": [
+      "Existing proof objects already cover SGX responsive portal re-engineering and the Banyan Tree pitch-winning prototype.",
+      "This record groups the broader Ogilvy platform programme for employer-specific retrieval."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Global",
+      "Singapore"
+    ],
+    "companies": [
+      "Banyan Tree",
+      "Danone",
+      "Ogilvy",
+      "Singapore Stock Exchange",
+      "WPP"
+    ],
+    "projects": [
+      "Annual Ogilvy UX Campaigns",
+      "Banyan Tree Worldwide CMS",
+      "Danone e-commerce CMS",
+      "Singapore Stock Exchange CMS"
+    ],
+    "intent_families": [
+      "factual_profile",
+      "skills"
+    ],
+    "sub_intents": [
+      "factual_profile.companies",
+      "skills.enterprise_proof"
+    ],
+    "impact_score": 84,
+    "priority_label": "standard",
+    "valid_from": "2013",
+    "valid_to": "2014",
+    "source_notes": "Grouped programme record. No unsupported campaign metrics added.",
+    "source_filename": "ogilvy-enterprise-platforms.md",
+    "source_meta_filename": "ogilvy-enterprise-platforms.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "product_strategy",
+      "rapid_prototyping",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption"
+    ],
+    "governance": [],
+    "industries": [
+      "creative_services",
+      "financial_services",
+      "retail",
+      "technology"
+    ],
+    "proofs": [
+      "ogilvy_banyan_tree_pitch",
+      "sgx_responsive_portals"
+    ],
+    "related_proofs": [
+      "ogilvy_banyan_tree_pitch",
+      "sgx_responsive_portals"
+    ],
+    "enterprise_scale_score": 83,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "d11a3cd2d4f43d57f8e8ab18066d3ba65d9c52855dd62d84fd94793116b7e10c",
+    "source_uri": null
+  }
+}

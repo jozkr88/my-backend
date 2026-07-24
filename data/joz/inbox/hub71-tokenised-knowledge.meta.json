@@ -1,0 +1,62 @@
+{
+  "slug": "hub71-tokenised-knowledge",
+  "title": "Tokenised Knowledge UX Strategy — Hub71, Abu Dhabi",
+  "category": "project",
+  "lane": "skills",
+  "summary": "UX and product strategy for tokenised knowledge concepts in the Abu Dhabi innovation ecosystem.",
+  "tags": [
+    "hub71",
+    "abu-dhabi",
+    "knowledge-strategy",
+    "ux-strategy",
+    "tokenised-knowledge"
+  ],
+  "impact_score": 81,
+  "priority_label": "standard",
+  "verification": "project_supported",
+  "claims": [
+    "Joz worked on tokenised knowledge UX and product strategy in the Hub71 innovation ecosystem.",
+    "The work focused on knowledge experience and product framing rather than unsupported infrastructure claims."
+  ],
+  "proof_points": [
+    "This programme record is positioned as product and UX strategy for knowledge systems.",
+    "It connects to Joz's broader context-engineering and enterprise-architecture capabilities."
+  ],
+  "companies": [
+    "Hub71"
+  ],
+  "regions": [
+    "Abu Dhabi",
+    "UAE"
+  ],
+  "industries": [
+    "financial_services",
+    "technology"
+  ],
+  "capabilities": [
+    "context_engineering",
+    "enterprise_architecture",
+    "knowledge_graphs",
+    "product_strategy"
+  ],
+  "outcomes": [
+    "faster_time_to_value",
+    "higher_data_trust",
+    "knowledge_reuse"
+  ],
+  "proofs": [],
+  "projects": [
+    "Tokenised Knowledge UX Strategy"
+  ],
+  "intent_families": [
+    "skills",
+    "systems_mindset"
+  ],
+  "sub_intents": [
+    "skills.capabilities_overview",
+    "systems_mindset.context"
+  ],
+  "valid_from": "2018",
+  "valid_to": "",
+  "source_notes": "Grouped programme record. No unsupported blockchain or financial claims added."
+}

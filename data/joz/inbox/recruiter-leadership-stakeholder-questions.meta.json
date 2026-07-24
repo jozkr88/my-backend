@@ -1,0 +1,44 @@
+{
+  "slug": "recruiter-leadership-stakeholder-questions",
+  "title": "Recruiter Leadership And Stakeholder Questions",
+  "category": "faq",
+  "lane": "skills",
+  "summary": "Recruiter-safe guidance for questions about leadership, stakeholder management, seniority, and enterprise transformation credibility.",
+  "tags": [
+    "recruiter",
+    "leadership",
+    "stakeholders",
+    "enterprise",
+    "seniority"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Derived from verified transformation, enterprise, and cross-functional delivery evidence already present in the Joz knowledge base."
+  },
+  "claims": [
+    "Joz should be positioned as a bridge across business, product, design, engineering, and AI architecture.",
+    "Leadership answers should emphasize transformation leadership and senior stakeholder credibility without inventing unverified org-chart details.",
+    "Regulated and enterprise contexts strengthen recruiter confidence in seniority and stakeholder range."
+  ],
+  "proof_points": [
+    "Manulife: practice building across 11 APAC markets.",
+    "Maybank and Singapore Exchange: regulated-market transformation proof.",
+    "Mediacorp: shared language across 30+ products.",
+    "Erste Bank: enterprise-scale engineering context."
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Europe/EEA"
+  ],
+  "companies": [
+    "Manulife",
+    "Maybank-Ageas Etiqa",
+    "Singapore Exchange",
+    "Mediacorp",
+    "Erste Bank"
+  ]
+}

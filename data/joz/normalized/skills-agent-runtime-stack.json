@@ -1,0 +1,95 @@
+{
+  "slug": "skills-agent-runtime-stack",
+  "title": "Agent Runtime Stack",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": "source://joz/skills-agent-runtime-stack.md",
+  "summary": "Explains the runtime stack behind a serious agent system, including model, tools, memory, orchestration, durable execution, state, and observability.",
+  "body": "Agent Runtime Stack\n\nPurpose\nThis record explains the runtime stack behind a serious agent system in a way that is useful for architecture, engineering, and recruiter conversations.\n\nCore framing\nAn agent is not just an LLM. The runtime stack combines the model, instructions, tools, memory, orchestration, and verification.\n\nUseful shorthand\n- Agent = LLM + instructions + tools + memory + execution loop\n- Single agent = one responsibility with defined tools and state\n- Multi-agent system = supervisor agent + specialist agents + shared state\n- Orchestrator = workflow engine + state management + execution control\n\nRecommended production stack\n- FastAPI as the API and agent gateway\n- LangGraph as the reasoning and workflow graph\n- Temporal as the durable execution layer for retries, approvals, and resumable work\n- PostgreSQL for persistent state and audit records\n- Redis for cache and short-lived coordination\n- Event transport for communication between services\n- Secret management for credentials and signing keys\n- Observability for traces, metrics, logs, and failure visibility\n\nRole separation\n- FastAPI receives requests and exposes backend services\n- LangGraph controls the reasoning workflow and state transitions\n- Temporal manages durable business processes and retries\n- PostgreSQL stores long-lived workflow state and audit history\n- Observability shows routes, tool calls, latency, fallback behavior, and failures\n\nWhy this matters\nThe value of the stack is not novelty. It is reliable execution, controlled state transitions, failure recovery, and clear visibility into what the system did and why.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agent_runtime",
+      "architecture",
+      "observability",
+      "orchestration",
+      "skills"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-15",
+      "notes": "Derived from the user's architecture notes and kept as additive framework knowledge."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "A serious agent runtime combines model, instructions, tools, memory, orchestration, and verification rather than treating the LLM as the whole system.",
+      "FastAPI, orchestration, durable workflow execution, state storage, and observability each have distinct roles in a production agent platform.",
+      "The purpose of the runtime stack is reliable execution, controlled state transitions, and visible failure recovery."
+    ],
+    "proof_points": [
+      "The notes explicitly separate FastAPI, reasoning orchestration, durable workflow execution, persistent state, cache, event transport, and observability.",
+      "The notes define agent, single-agent, multi-agent system, and orchestrator as separate architectural layers.",
+      "The runtime explanation is framed around execution control, retries, approvals, and audit visibility rather than model capability alone."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 78,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-agent-runtime-stack.md",
+    "source_meta_filename": "skills-agent-runtime-stack.meta.json",
+    "reviewed_at": "2026-07-15",
+    "problems": [
+      "knowledge_fragmentation",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "enterprise_architecture",
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "dfce129966d7ea31e6bfcc0a35fd2d582e59751d8ab87d00202cb50b8c9f6d81",
+    "source_uri": "source://joz/skills-agent-runtime-stack.md"
+  }
+}

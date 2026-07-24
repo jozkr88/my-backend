@@ -1,0 +1,2785 @@
+{
+  "version": 1,
+  "description": "Human review queue for borderline or failed Joz quality cases.",
+  "generatedAt": "2026-07-23T13:17:02.489Z",
+  "reviewInstructions": [
+    "Label the intended kind, domain, route, and risk level.",
+    "Score answer correctness, relevance, groundedness, and safety from 0 to 5.",
+    "Record a concise correction or rationale; do not paste personal data into notes."
+  ],
+  "cases": [
+    {
+      "id": "technical-10-1",
+      "category": "technical",
+      "question": "What does a durable workflow add to an agent system?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "technical-10-2",
+      "category": "technical",
+      "question": "What does a durable workflow add to an agent system? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "technical-10-3",
+      "category": "technical",
+      "question": "What does a durable workflow add to an agent system? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-01-1",
+      "category": "open_domain",
+      "question": "What is quantum computing?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "Quantum computing uses quantum-mechanical states such as superposition and entanglement to process certain classes of problems differently from classical computers. It is promising for selected optimisation, simulation, and cryptographic problems, but it is not a general replacement for ordinary computing and practical large-scale systems remain difficult to build.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-01-2",
+      "category": "open_domain",
+      "question": "What is quantum computing? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "quantum computing? Please keep the answer practical is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-01-3",
+      "category": "open_domain",
+      "question": "What is quantum computing? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "quantum computing? I need a concise, practical answer is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-02-1",
+      "category": "open_domain",
+      "question": "How does photosynthesis work?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-02-2",
+      "category": "open_domain",
+      "question": "How does photosynthesis work? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-02-3",
+      "category": "open_domain",
+      "question": "How does photosynthesis work? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-03-1",
+      "category": "open_domain",
+      "question": "Why do eclipses happen?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-03-2",
+      "category": "open_domain",
+      "question": "Why do eclipses happen? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-03-3",
+      "category": "open_domain",
+      "question": "Why do eclipses happen? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-04-1",
+      "category": "open_domain",
+      "question": "What is the difference between weather and climate?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "difference between weather and climate is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-04-2",
+      "category": "open_domain",
+      "question": "What is the difference between weather and climate? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "difference between weather and climate? Please keep the answer practical is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-04-3",
+      "category": "open_domain",
+      "question": "What is the difference between weather and climate? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "difference between weather and climate? I need a concise, practical answer is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-05-1",
+      "category": "open_domain",
+      "question": "How does a bicycle stay upright?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-05-2",
+      "category": "open_domain",
+      "question": "How does a bicycle stay upright? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-05-3",
+      "category": "open_domain",
+      "question": "How does a bicycle stay upright? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-06-1",
+      "category": "open_domain",
+      "question": "What causes inflation?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That question is too short to answer reliably. Ask with the topic included, for example: What is Kubernetes? How does Joz architect agentic AI? or Why would Joz use multiple agents here?",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-06-2",
+      "category": "open_domain",
+      "question": "What causes inflation? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-06-3",
+      "category": "open_domain",
+      "question": "What causes inflation? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-07-1",
+      "category": "open_domain",
+      "question": "What is a black hole?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "black hole is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-07-2",
+      "category": "open_domain",
+      "question": "What is a black hole? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "black hole? Please keep the answer practical is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-07-3",
+      "category": "open_domain",
+      "question": "What is a black hole? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "black hole? I need a concise, practical answer is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-08-1",
+      "category": "open_domain",
+      "question": "How do vaccines train the immune system?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-08-2",
+      "category": "open_domain",
+      "question": "How do vaccines train the immune system? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-08-3",
+      "category": "open_domain",
+      "question": "How do vaccines train the immune system? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-09-1",
+      "category": "open_domain",
+      "question": "What is the scientific method?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "scientific method is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-09-2",
+      "category": "open_domain",
+      "question": "What is the scientific method? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "scientific method? Please keep the answer practical is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-09-3",
+      "category": "open_domain",
+      "question": "What is the scientific method? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "scientific method? I need a concise, practical answer is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-10-1",
+      "category": "open_domain",
+      "question": "How does encryption protect data?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-10-2",
+      "category": "open_domain",
+      "question": "How does encryption protect data? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "open_domain-10-3",
+      "category": "open_domain",
+      "question": "How does encryption protect data? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ambiguous-05-2",
+      "category": "ambiguous",
+      "question": "Why? Please clarify the topic.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": false,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [
+          "kind=answer, expected=clarify",
+          "domain=general_knowledge, expected=other"
+        ],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-02-1",
+      "category": "typo",
+      "question": "Hw can Joz help my business?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-02-2",
+      "category": "typo",
+      "question": "Hw can Joz help my business? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-02-3",
+      "category": "typo",
+      "question": "Hw can Joz help my business? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-05-1",
+      "category": "typo",
+      "question": "Hwo are you?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-05-2",
+      "category": "typo",
+      "question": "Hwo are you? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-05-3",
+      "category": "typo",
+      "question": "Hwo are you? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-07-1",
+      "category": "typo",
+      "question": "Can Joz help reduce process cots?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-07-2",
+      "category": "typo",
+      "question": "Can Joz help reduce process cots? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-07-3",
+      "category": "typo",
+      "question": "Can Joz help reduce process cots? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-09-1",
+      "category": "typo",
+      "question": "Is Joz a consultnat or builder?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-09-2",
+      "category": "typo",
+      "question": "Is Joz a consultnat or builder? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "typo-09-3",
+      "category": "typo",
+      "question": "Is Joz a consultnat or builder? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "adversarial-12-1",
+      "category": "adversarial",
+      "question": "Can a banana deploy Kubernetes by thinking really hard?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "No—thinking hard is not enough for a banana to deploy Kubernetes. Deployment requires software, credentials, an execution environment, and controlled tooling; the question is a fun hypothetical rather than a real deployment path.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "adversarial-12-2",
+      "category": "adversarial",
+      "question": "Can a banana deploy Kubernetes by thinking really hard? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "No—thinking hard is not enough for a banana to deploy Kubernetes. Deployment requires software, credentials, an execution environment, and controlled tooling; the question is a fun hypothetical rather than a real deployment path.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "adversarial-12-3",
+      "category": "adversarial",
+      "question": "Can a banana deploy Kubernetes by thinking really hard? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "No—thinking hard is not enough for a banana to deploy Kubernetes. Deployment requires software, credentials, an execution environment, and controlled tooling; the question is a fun hypothetical rather than a real deployment path.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "multi_turn-07-1",
+      "category": "multi_turn",
+      "question": "What is the difference between an agent and a tool?",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "difference between an agent and a tool is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "multi_turn-07-2",
+      "category": "multi_turn",
+      "question": "What is the difference between an agent and a tool? Please keep the answer practical.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "difference between an agent and a tool? Please keep the answer practical is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "multi_turn-07-3",
+      "category": "multi_turn",
+      "question": "What is the difference between an agent and a tool? I need a concise, practical answer.",
+      "route": "unknown_fallback",
+      "subIntent": "general",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "general_knowledge",
+        "goal": "answer_open_ended_question",
+        "entities": [],
+        "confidence": 0.35,
+        "confidenceBand": "low",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "warn",
+      "reply": "difference between an agent and a tool? I need a concise, practical answer is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "intentPass": true,
+      "answerPass": true,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "multi_turn-08-1",
+      "category": "multi_turn",
+      "question": "How should we start with AI governance?",
+      "route": "business_need",
+      "subIntent": "operating_model",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "business",
+        "goal": "operating_model",
+        "entities": [],
+        "confidence": 0.88,
+        "confidenceBand": "high",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "fail",
+      "reply": "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them. The pattern is to combine workflow design, approval checkpoints, role clarity, and measurable business outcomes before scaling autonomy.",
+      "intentPass": true,
+      "answerPass": false,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [
+          "deterministic verification failed"
+        ],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "multi_turn-08-2",
+      "category": "multi_turn",
+      "question": "How should we start with AI governance? Please keep the answer practical.",
+      "route": "business_need",
+      "subIntent": "operating_model",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "business",
+        "goal": "operating_model",
+        "entities": [],
+        "confidence": 0.88,
+        "confidenceBand": "high",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "fail",
+      "reply": "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them. The pattern is to combine workflow design, approval checkpoints, role clarity, and measurable business outcomes before scaling autonomy.",
+      "intentPass": true,
+      "answerPass": false,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [
+          "deterministic verification failed"
+        ],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "multi_turn-08-3",
+      "category": "multi_turn",
+      "question": "How should we start with AI governance? I need a concise, practical answer.",
+      "route": "business_need",
+      "subIntent": "operating_model",
+      "intent": {
+        "version": "1",
+        "source": "deterministic",
+        "kind": "answer",
+        "domain": "business",
+        "goal": "operating_model",
+        "entities": [],
+        "confidence": 0.88,
+        "confidenceBand": "high",
+        "needsClarification": false,
+        "risk": {
+          "level": "low",
+          "requiresApproval": false,
+          "reasons": []
+        }
+      },
+      "verification": "fail",
+      "reply": "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer accountability, and AI embedded into real operations rather than sitting beside them. The pattern is to combine workflow design, approval checkpoints, role clarity, and measurable business outcomes before scaling autonomy.",
+      "intentPass": true,
+      "answerPass": false,
+      "riskPass": true,
+      "groundingPass": true,
+      "failures": {
+        "intent": [],
+        "answer": [
+          "deterministic verification failed"
+        ],
+        "risk": [],
+        "grounding": []
+      },
+      "needsHumanReview": true,
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7268",
+      "category": "real_user",
+      "question": "How does Joz improve decision support through better signal, prioritization, judgment, and clarity in noisy business environments?",
+      "assistantReply": "Joz helps businesses turn AI into measurable improvements in customer experience, operations, decisions, and growth. He identifies the workflow, grounds knowledge, connects approved tools, and adds governance, verification, and human approval where risk matters. For D2C, that can improve customer journeys, support, conversion, and coordination. Start with a real problem and baseline metrics.",
+      "observedRoute": "business_need",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7267",
+      "category": "real_user",
+      "question": "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context.",
+      "assistantReply": "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on. The point is function-specific leverage, not one broad AI layer imposed on everyone the same way.",
+      "observedRoute": "business_need",
+      "observedVerification": "warn",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7266",
+      "category": "real_user",
+      "question": "What is the Gold Pill?",
+      "assistantReply": "The Gold Pill is a core concept within MeetJoz and neoMAXX. It represents skills, capabilities, competences, judgment, creativity, engineering, design, and execution combined into the ability to create high-quality innovation with AI. Within the sequence, it is the capability trigger that opens Meet Joz and connects proof, identity, innovation, and transformation.",
+      "observedRoute": "canonical_world_concept",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7265",
+      "category": "real_user",
+      "question": "The Gold Pill",
+      "assistantReply": "The Gold Pill is a core concept within MeetJoz and neoMAXX. It represents the combination of skills, capabilities, competences, judgment, creativity, engineering, design, and execution required to create high-quality innovation with AI and competitive advantage. Other pill metaphors claim to explain reality. The Gold Pill represents the capability to create new reality through innovation. It matters because neoMAXX uses human judgment, AI-powered design, engineering, code, and computation for It creates novel, high-quality products, services, and experiences by combining human judgment with AI-powered design, engineering, code, and computation. Available next actions here are Enter Meet Joz,",
+      "observedRoute": "world_awareness",
+      "observedVerification": "warn",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7264",
+      "category": "real_user",
+      "question": "What is neomaxxing?",
+      "assistantReply": "neoMAXX is a concept created by [PERSON]. It combines human judgment, AI capability, design, engineering, and execution into a higher-$1 [REFERENCE] system. In the sequence, neoMAXX frames the intelligence world, while MeetJoz shows the applied human proof, business value, systems mindset, and deeper skills around it.",
+      "observedRoute": "canonical_world_concept",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7262",
+      "category": "real_user",
+      "question": "Design a governed agentic AI platform with durable workflows, retrieval, memory, and verification.",
+      "assistantReply": "Joz would design this as a governed layered platform, not a single prompt loop: API intake -> typed orchestration state -> durable workflow engine for retries, approvals, timers, and recovery -> retrieval and ACL boundary -> specialist agents and scoped tools -> policy and risk gates -> controlled execution -> verification and reconciliation -> observability. Memory should hold conversation, task, and working context while authoritative business state remains in durable systems. Retrieval should preserve provenance and permissions, and verification should compare expected versus actual state before the workflow completes. The first step is still to identify the system boundary, authoritative",
+      "observedRoute": "skills",
+      "observedVerification": "warn",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7211",
+      "category": "real_user",
+      "question": "How does Joz think about operating models, AI adoption, governance, and turning AI into a measurable capability?",
+      "assistantReply": "Joz creates value at the operating-model level by helping a company decide where AI should sit, who owns what, where human approval stays, how workflows escalate, and how outcomes are measured. That matters because isolated AI features do not scale without governance and execution design. The result is stronger adoption, clearer $1 [REFERENCE], and AI embedded into real operations rather than sitting beside them. The pattern is to combine workflow design, approval checkpoints, role clarity, and measurable business outcomes before scaling autonomy.",
+      "observedRoute": "business_need",
+      "observedVerification": "fail",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7210",
+      "category": "real_user",
+      "question": "hello",
+      "assistantReply": "Hello — I’m Joz LLM. Ask me about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7202",
+      "category": "real_user",
+      "question": "If you were my Chief AI Architect, design the complete Agentic AI architecture for Cruizi. Include multi-agent architecture, LLM stack and model selection, RAG architecture and knowledge base, memory architecture, fraud detection and trust scoring, dynamic pricing, route optimisation, and customer support AI.",
+      "assistantReply": "A complete company-specific architecture for a named product is the kind of work Joz would scope as a paid architecture engagement, not provide as an unbounded free blueprint. At a high level, he would start with a supervisor-led agent system, typed shared state, explicit policy and fraud/risk gates, durable workflow state, and independent verification outside the agents. A production design would require discovery of the workflows, data, integrations, compliance constraints, and operating economics. Contact Joz to scope the architecture engagement.",
+      "observedRoute": "skills",
+      "observedVerification": "warn",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7198",
+      "category": "real_user",
+      "question": "How",
+      "assistantReply": "That question is too short to answer reliably. Ask with the topic included, for example: What is Kubernetes? How does Joz architect agentic AI? or Why would Joz use multiple agents here?",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7197",
+      "category": "real_user",
+      "question": "Joz",
+      "assistantReply": "Joz designs governed AI systems that can work in the real world. What is your use case?",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7196",
+      "category": "real_user",
+      "question": "I’m building Cruizi – a global logistics marketplace connecting verified travelers with shippers for same-day and next-day international delivery while also integrating carriers like DHL, FedEx, GLS and others into a single platform. If you were my Chief AI Architect, design the complete Agentic AI architecture for Cruizi. Please include: 1. Multi-agent architecture (roles and responsibilities of each agent) 2. LLM stack and model selection 3. RAG architecture and knowledge base 4. Memory architecture (short-term and long-term) 5. Fraud detection and trust scoring 6. Dynamic pricing engine 7. Route optimization 8. Customer support AI",
+      "assistantReply": "Joz would start with one orchestrator agent, not many. For an autonomous trading platform, a single agent is easier to verify, cheaper to run, simpler to observe, and less likely to hide coordination failures. He would switch to multiple agents only when research, portfolio reasoning, risk, compliance, execution, and verification have clearly separate responsibilities, tools, latency needs, or approval boundaries. The tradeoff is specialization and isolation versus higher coordination overhead, more state-sync risk, duplicated reasoning, deadlocks, and more failure paths. In practice the safe pattern is supervisor plus typed shared state plus explicit policy, risk gates, and verification out",
+      "observedRoute": "skills",
+      "observedVerification": "warn",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7195",
+      "category": "real_user",
+      "question": "Cruizi technologies",
+      "assistantReply": "Joz works across strategy, architecture, engineering, and AI delivery. What would you like to explore?",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7194",
+      "category": "real_user",
+      "question": "[PERSON] AI",
+      "assistantReply": "Joz connects business problems to working AI systems. Ask about a goal, industry, or capability.",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7190",
+      "category": "real_user",
+      "question": "Where am I?",
+      "assistantReply": "Your approximate location is Seattle, Washington, United States. IP-based location can be inaccurate when using a VPN, proxy, or mobile network.",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7179",
+      "category": "real_user",
+      "question": "Who is Joz?",
+      "assistantReply": "[PERSON] is an Agentic AI Architecture and Innovation Leader. He combines AI architecture, systems thinking, product strategy, design, engineering, and enterprise transformation to create measurable business outcomes. His work spans Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and current Agentic AI initiatives. MeetJoz explores his Business Value, Systems Mindset, Skills, and neoMAXX concepts.",
+      "observedRoute": "identity_profile",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7177",
+      "category": "real_user",
+      "question": "[PERSON]",
+      "assistantReply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7176",
+      "category": "real_user",
+      "question": "What’s up",
+      "assistantReply": "Joz combines consulting with hands-on building. What challenge should we start with?",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7175",
+      "category": "real_user",
+      "question": "Hey",
+      "assistantReply": "Hello — I’m Joz LLM. Ask me about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
+      "observedRoute": "unknown_fallback",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7173",
+      "category": "real_user",
+      "question": "who are you",
+      "assistantReply": "I’m Joz LLM, the interactive MeetJoz assistant. I explain [PERSON]'s background, business value, systems mindset, skills, infrastructure, and agent architecture from the current knowledge base.",
+      "observedRoute": "identity_profile",
+      "observedVerification": "pass",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "real-user-7172",
+      "category": "real_user",
+      "question": "Can Joz actually build things?",
+      "assistantReply": "Joz is both a consultant and a builder. He starts by diagnosing the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. Proof: The workflow explicitly separates inbox, normalized, ontology, and published layers. This framing is consistent with the current Joz architecture, systems-mindset, and decision-intelligence records.",
+      "observedRoute": "business_need",
+      "observedVerification": "warn",
+      "expected": null,
+      "humanLabel": null,
+      "reviewStatus": "pending",
+      "source": "anonymized_production_observability",
+      "humanReview": {
+        "status": "pending",
+        "reviewer": null,
+        "label": null,
+        "scores": null,
+        "notes": ""
+      }
+    }
+  ]
+}

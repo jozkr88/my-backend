@@ -1,0 +1,117 @@
+{
+  "slug": "business-need-department-profit-use-cases",
+  "title": "Department by Department Profit Use Cases",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Maps department-specific AI use cases to profit impact across finance, ERP, HR, marketing, sales, and leadership.",
+  "body": "Each department should be described in terms of profit impact, not just AI activity.\n\nFinance and accounting\n- reduce invoice processing cost\n- improve collections and cash timing\n- lower close-cycle effort\n- improve margin visibility\n- reduce spend leakage\n\nERP and operations\n- reduce exception handling cost\n- improve inventory and procurement decisions\n- lower workflow delay\n- reduce supplier friction\n- improve fulfillment visibility\n\nHR and workforce\n- reduce recruiting and onboarding overhead\n- improve manager support\n- reduce repetitive policy and service work\n- accelerate workforce capability ramp-up\n\nMarketing\n- improve CAC efficiency\n- reduce campaign operations cost\n- improve segmentation and reporting clarity\n- support conversion and retention performance\n\nSales and revenue operations\n- improve lead quality\n- accelerate proposals and follow-up\n- improve pipeline visibility\n- reduce churn risk\n- support expansion opportunities\n\nLeadership and management\n- improve cross-functional visibility\n- reduce decision latency\n- improve operating discipline\n- increase output per leader through better synthesis and follow-through\n\nThe value of this structure is that every use case ties back to:\n\n- cost\n- margin\n- revenue\n- speed\n- risk\n\nThat is the right commercial language.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "department",
+      "finance",
+      "operations",
+      "profit",
+      "use-cases"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Each department should be described in terms of profit impact, not just AI activity.",
+      "Finance, ERP, HR, marketing, sales, and leadership each have distinct cost, margin, revenue, speed, and risk levers.",
+      "This department-level framing is the right commercial language for AI value."
+    ],
+    "proof_points": [
+      "This structure is a direct extension of the profit-lever and function-opportunity records.",
+      "It turns business-value framing into department-specific operating relevance.",
+      "It aligns with enterprise stakeholder expectations for commercial clarity."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 97,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-department-profit-use-cases.md",
+    "source_meta_filename": "business-need-department-profit-use-cases.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "manual_knowledge_work",
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "enterprise_architecture",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "lower_risk",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "human_approval"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 5,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "e83802dc54a0b444c224c52e9eab48ae1cd39a4524df43308ea50d4656c26922",
+    "source_uri": null
+  }
+}

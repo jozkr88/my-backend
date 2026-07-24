@@ -1,0 +1,47 @@
+{
+  "slug": "2026-07-11-recruiter-screening-faq",
+  "title": "Recruiter Screening FAQ",
+  "category": "faq",
+  "lane": "skills",
+  "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
+  "tags": [
+    "recruiter_screening",
+    "faq",
+    "contact",
+    "experience",
+    "availability",
+    "nationality",
+    "skills"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "user",
+    "reviewed_at": "2026-07-11",
+    "notes": "User confirmed recruiter-focused facts including Slovak/EU nationality, Singapore EP/PEP, contact details, and experience framing."
+  },
+  "claims": [
+    "Joz is Slovak and an EU national.",
+    "Joz's Singapore status is EP/PEP.",
+    "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
+    "Joz has 13+ years of professional experience overall and 8+ years in ML/AI.",
+    "Availability and start date should be confirmed directly with Joz unless explicitly verified elsewhere."
+  ],
+  "proof_points": [
+    "Nationality and Singapore status were explicitly provided by the user for recruiter screening.",
+    "The CV source includes the same email, phone number, and website.",
+    "The dated professional timeline runs from 2013 to present.",
+    "ML/AI-focused work is framed from 2018 to present."
+  ],
+  "regions": [
+    "European Union",
+    "Singapore",
+    "UAE/MENA",
+    "Europe/EEA",
+    "Asia Pacific"
+  ],
+  "companies": [
+    "meetjoz.com"
+  ]
+}

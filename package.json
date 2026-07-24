@@ -1,0 +1,34 @@
+{
+  "name": "joz-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "HOST=127.0.0.1 PORT=3001 node index.js",
+    "test": "node --test think-logic.test.js world-agent.test.js full-agent.test.js structured-world.test.js reasoning-layers.test.js jozOntologyRetrieval.test.js meetJozWorld.test.js jozLlmRouter.test.js jozIntent.test.js runtime-routing.test.js shared/jozGeoLocation.test.js shared/jozDataGovernance.test.js shared/jozModelGateway.test.js jozVisitorLocation.test.js",
+    "check:joz-llm": "node check-joz-llm-responses.js",
+    "check:joz-llm:golden": "node tools/check-joz-llm-golden.mjs",
+    "build:joz-quality-corpus": "node tools/build-joz-quality-corpus.mjs",
+    "export:joz-real-users": "node tools/export-anonymized-real-user-questions.mjs",
+    "check:joz-quality": "node tools/run-joz-quality-gate.mjs",
+    "check:joz-quality:artifacts": "JOZ_QUALITY_WRITE_ARTIFACTS=true node tools/run-joz-quality-gate.mjs",
+    "score:joz-human-review": "node tools/score-joz-human-review.mjs",
+    "test:joz-llm:openai": "node tools/test-joz-llm-openai.mjs",
+    "test:joz-llm:openai:stress": "node tools/test-joz-llm-openai-stress.mjs",
+    "check:recruiter": "node check-recruiter-answers.js",
+    "evaluate:joz-llm": "node tools/evaluate-joz-llm-with-openai.mjs",
+    "build:joz-knowledge": "node tools/build-joz-knowledge.js",
+    "build:meetjoz-world": "node tools/build-meetjoz-world.js",
+    "publish:joz-supabase": "node tools/publish-joz-to-supabase.js",
+    "audit:joz-data": "node tools/audit-joz-data.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "jose": "^6.2.4",
+    "openai": "^4.104.0",
+    "pg": "^8.21.0"
+  }
+}

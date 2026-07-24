@@ -1,0 +1,14 @@
+[
+  { "source_id": "root_gold_pill", "type": "navigates_to", "target_id": "meet_joz" },
+  { "source_id": "root_enter", "type": "navigates_to", "target_id": "maxx" },
+  { "source_id": "root_brain", "type": "represents", "target_id": "maxx" },
+  { "source_id": "maxx_neurons", "type": "reveals_on_desktop", "target_id": "maxx_neurodesign" },
+  { "source_id": "maxx_neurons", "type": "opens_ar_on_mobile", "target_id": "maxx_neurons" },
+  { "source_id": "meet_joz_sequence_object", "type": "contains_stage", "target_id": "meet_joz_flex_stage" },
+  { "source_id": "meet_joz_sequence_object", "type": "contains_stage", "target_id": "meet_joz_ascend_stage" },
+  { "source_id": "meet_joz_sequence_object", "type": "contains_stage", "target_id": "meet_joz_mogg_stage" },
+  { "source_id": "meet_joz_sequence_object", "type": "contains_stage", "target_id": "meet_joz_skills_stage" },
+  { "source_id": "meet_joz_skills", "type": "reveals_on_desktop", "target_id": "meet_joz_skills_panel" },
+  { "source_id": "meet_joz_skills", "type": "opens_spatially", "target_id": "meet_joz_skills" },
+  { "source_id": "meet_joz_semantic_city", "type": "surrounds", "target_id": "meet_joz_sequence_object" }
+]

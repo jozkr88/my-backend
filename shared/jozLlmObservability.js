@@ -1,0 +1,600 @@
+function normalizeText(value = "") {
+  return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function countWords(value = "") {
+  return String(value || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function summarizeChecks(checks = []) {
+  const hasFail = checks.some((check) => check.status === "fail");
+  const hasWarn = checks.some((check) => check.status === "warn");
+  if (hasFail) return "fail";
+  if (hasWarn) return "warn";
+  return "pass";
+}
+
+function buildGroundingCheck({ route = {}, resolution = {}, retrievedDocuments = [] } = {}) {
+  const groundedRoutes = new Set(["business_need", "skills", "systems_mindset"]);
+  const routeRequiresJozEvidence = groundedRoutes.has(route?.selectedRoute);
+  const source = String(resolution?.answerSource || "").toLowerCase();
+  const modelGeneratedAnswer = source === "openai_model" || source === "model_fallback";
+  const hasEvidence = retrievedDocuments.some((doc) => {
+    const tier = String(doc?.metadata?.evidence_tier || "unverified");
+    return tier !== "unverified";
+  });
+
+  if (routeRequiresJozEvidence && modelGeneratedAnswer && !hasEvidence) {
+    return {
+      id: "grounding_provenance",
+      status: "fail",
+      detail: "A model-generated Joz answer has no verified or supported source attached.",
+    };
+  }
+
+  return {
+    id: "grounding_provenance",
+    status: hasEvidence ? "pass" : "warn",
+    detail: hasEvidence
+      ? "Answer has verified or supported source evidence attached."
+      : routeRequiresJozEvidence
+        ? "No verified or supported source evidence is attached to this route."
+        : "Source evidence is optional for this route.",
+  };
+}
+
+function resolveWordBudgetStatus(route = {}, wordCount = 0) {
+  const subIntent = route?.detectedSubIntent || "";
+  const generousArchitectureSubroutes = new Set([
+    "financial_intelligence_platform_architecture",
+    "safe_architecture_design",
+    "scale_fastapi_architecture",
+    "verification_architecture",
+    "agent_scope_tradeoffs",
+    "single_agent_tradeoffs",
+    "agentic_architecture_approach",
+    "langgraph_temporal_architecture",
+    "paid_architecture_spec",
+  ]);
+
+  if (wordCount <= 55) return "pass";
+  if (generousArchitectureSubroutes.has(subIntent)) {
+    if (wordCount <= 320) return "warn";
+    return "fail";
+  }
+  if (wordCount <= 140) return "warn";
+  return "fail";
+}
+
+function buildBaseChecks({ route, resolution, trace, retrievedDocuments, reply, latencyMs }) {
+  const wordCount = countWords(reply);
+  const checks = [
+    {
+      id: "non_empty_reply",
+      status: reply ? "pass" : "fail",
+      detail: reply ? "Assistant reply is present." : "Assistant reply is empty.",
+    },
+    {
+      id: "route_alignment",
+      status:
+        trace?.selectedRoute && route?.selectedRoute && trace.selectedRoute === route.selectedRoute
+          ? "pass"
+          : "fail",
+      detail: `Selected route: ${trace?.selectedRoute || "unknown"}.`,
+    },
+    {
+      id: "deterministic_validation",
+      status: trace?.validationPassed === false ? "fail" : "pass",
+      detail:
+        trace?.validationPassed === false
+          ? "A deterministic route-specific validation failed."
+          : "Route-specific validation passed.",
+    },
+    {
+      id: "fallback_control",
+      status:
+        route?.selectedRoute !== "unknown_fallback" && resolution?.fallbackUsed ? "fail" : "pass",
+      detail: resolution?.fallbackUsed
+        ? "Fallback path was used."
+        : "Fallback path was not used.",
+    },
+    {
+      id: "retrieval_context",
+      status: (retrievedDocuments?.length || 0) > 0 ? "pass" : "warn",
+      detail:
+        (retrievedDocuments?.length || 0) > 0
+          ? `Retrieved ${retrievedDocuments.length} supporting documents.`
+          : "No retrieval documents were attached.",
+    },
+    {
+      id: "latency_budget",
+      status: Number.isFinite(latencyMs) && latencyMs <= 4000 ? "pass" : "warn",
+      detail: `Latency ${Number.isFinite(latencyMs) ? latencyMs : "unknown"}ms.`,
+    },
+    {
+      id: "word_budget",
+      status: resolveWordBudgetStatus(route, wordCount),
+      detail: `Reply length is ${wordCount} words.`,
+    },
+    {
+      id: "answer_class",
+      status: trace?.answerClass ? "pass" : "fail",
+      detail: `Answer class: ${trace?.answerClass || "missing"}.`,
+    },
+    {
+      id: "confidence_guard",
+      status: trace?.confidence === "low" ? "warn" : trace?.confidence ? "pass" : "fail",
+      detail: `Confidence: ${trace?.confidence || "missing"}.`,
+    },
+  ];
+
+  return { checks, wordCount };
+}
+
+function isBroadJozScopedPrompt(input = "") {
+  const clean = normalizeText(input);
+  if (!clean) return false;
+
+  const explicitBroadPrompts = [
+    "tell me more about joz",
+    "tell me more about him",
+    "more about joz",
+    "who is joz",
+    "what does joz do",
+    "what does joz actually do",
+    "what can joz do",
+    "what makes him different",
+    "what is he strongest at",
+    "what is he good at",
+    "what can he do",
+    "why should we hire joz",
+    "why hire joz",
+    "why him",
+    "why joz",
+  ];
+
+  return explicitBroadPrompts.some((pattern) => clean.includes(pattern));
+}
+
+function verifyJozScopedFallbackGuard({ input = "", route = {}, trace = {} }) {
+  const broadJozScopedPrompt = isBroadJozScopedPrompt(input);
+  const answerClass = String(trace?.answerClass || "");
+  const broadPromptFellBack =
+    route?.selectedRoute === "unknown_fallback" ||
+    ["scope_boundary", "clarification_guard", "knowledge_gap"].includes(answerClass);
+
+  return [
+    {
+      id: "joz_scoped_fallback_guard",
+      status: broadJozScopedPrompt && broadPromptFellBack ? "fail" : "pass",
+      detail:
+        broadJozScopedPrompt && broadPromptFellBack
+          ? "Broad in-scope Joz prompt fell into a fallback or boundary answer."
+          : broadJozScopedPrompt
+            ? "Broad in-scope Joz prompt resolved without fallback."
+            : "Prompt is not a broad in-scope Joz profile prompt.",
+    },
+  ];
+}
+
+function isRagEvaluationPrompt(input = "") {
+  const clean = normalizeText(input);
+  return /\b(?:llm|rag|retrieval)\b/.test(clean) &&
+    /evaluate|evaluation|eval|assess|measure|test|benchmark|monitor|validate|compare|quality|grounded|faithful|faithfulness|citation|recall|precision|hallucination|reliable|difference/.test(clean);
+}
+
+function verifyAudienceRelevance({ input = "", route = {}, trace = {}, reply = "" }) {
+  const knowledgeLevel = trace?.audienceProfile?.aiKnowledge?.id;
+  const genericBoundary = /not in the current joz knowledge base|outside the current deterministic joz answer set/i.test(reply);
+  const isSpecialistRagQuestion = knowledgeLevel === "ai_specialist" && isRagEvaluationPrompt(input);
+  const relevantAnswer = /retrieval|recall|precision|faithful|citation|grounded|relevance|completeness|latency|regression/i.test(reply);
+
+  if (!isSpecialistRagQuestion) {
+    return [];
+  }
+
+  const failed = route?.selectedRoute === "unknown_fallback" || genericBoundary || !relevantAnswer;
+  return [{
+    id: "audience_relevance",
+    status: failed ? "fail" : "pass",
+    detail: failed
+      ? "AI-specialist RAG question received a generic or irrelevant answer."
+      : "Answer addresses the AI-specialist RAG evaluation question.",
+  }];
+}
+
+function verifyBusinessValueDefinition(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsDefinition =
+    clean.includes("measurable improvement") ||
+    clean.includes("business value is") ||
+    clean.includes("measurable");
+  const mentionsOutcomeAxis =
+    /\brevenue\b|\bmargin\b|\bcost\b|\bspeed\b|\brisk\b|\bdecision quality\b/.test(clean);
+  const avoidsGenericHirePitch = !clean.startsWith("joz is worth hiring because");
+
+  return [
+    {
+      id: "definition_clarity",
+      status: mentionsDefinition ? "pass" : "fail",
+      detail: mentionsDefinition
+        ? "Reply defines business value directly."
+        : "Reply does not clearly define business value.",
+    },
+    {
+      id: "outcome_axes",
+      status: mentionsOutcomeAxis ? "pass" : "warn",
+      detail: mentionsOutcomeAxis
+        ? "Reply includes measurable business outcome axes."
+        : "Reply does not name outcome axes like cost, speed, or revenue.",
+    },
+    {
+      id: "avoids_generic_hire_pitch",
+      status: avoidsGenericHirePitch ? "pass" : "fail",
+      detail: avoidsGenericHirePitch
+        ? "Reply stays on the definition request."
+        : "Reply drifted into a generic hire pitch.",
+    },
+  ];
+}
+
+function verifySkillsCapabilitiesOverview(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsCoreCapability =
+    clean.includes("agentic ai architecture") ||
+    clean.includes("decision intelligence") ||
+    clean.includes("context engineering") ||
+    clean.includes("enterprise product engineering");
+  const avoidsInfraOnlyDrift =
+    !clean.includes("private subnets") &&
+    !clean.includes("firewalls and security groups") &&
+    !clean.includes("tls everywhere");
+
+  return [
+    {
+      id: "skills_core_capability",
+      status: mentionsCoreCapability ? "pass" : "fail",
+      detail: mentionsCoreCapability
+        ? "Reply stays on Joz's core capability layer."
+        : "Reply drifted away from Joz's core capability layer.",
+    },
+    {
+      id: "skills_avoids_infra_only_drift",
+      status: avoidsInfraOnlyDrift ? "pass" : "fail",
+      detail: avoidsInfraOnlyDrift
+        ? "Reply did not collapse into unrelated infrastructure snippets."
+        : "Reply collapsed into unrelated infrastructure snippets.",
+    },
+  ];
+}
+
+function verifySkillsCollaboration(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsTeam =
+    clean.includes("team") ||
+    clean.includes("teams") ||
+    clean.includes("cross-functional") ||
+    clean.includes("stakeholder") ||
+    clean.includes("leadership");
+  const avoidsInfraOnlyDrift =
+    !clean.includes("private subnets") &&
+    !clean.includes("tls everywhere") &&
+    !clean.includes("blue-green deployment");
+
+  return [
+    {
+      id: "collaboration_team_signal",
+      status: mentionsTeam ? "pass" : "fail",
+      detail: mentionsTeam
+        ? "Reply stays on team and collaboration evidence."
+        : "Reply does not stay on team and collaboration evidence.",
+    },
+    {
+      id: "collaboration_avoids_infra_drift",
+      status: avoidsInfraOnlyDrift ? "pass" : "fail",
+      detail: avoidsInfraOnlyDrift
+        ? "Reply did not drift into infrastructure fragments."
+        : "Reply drifted into infrastructure fragments.",
+    },
+  ];
+}
+
+function verifyScaleFastApiArchitecture(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsScalingPattern =
+    clean.includes("load balancer") ||
+    clean.includes("stateless fastapi") ||
+    clean.includes("queue and workers") ||
+    clean.includes("redis") ||
+    clean.includes("postgresql");
+
+  return [
+    {
+      id: "fastapi_scaling_specificity",
+      status: mentionsScalingPattern ? "pass" : "fail",
+      detail: mentionsScalingPattern
+        ? "Reply includes the expected FastAPI scaling architecture elements."
+        : "Reply is too generic and missed the FastAPI scaling architecture elements.",
+    },
+  ];
+}
+
+function verifyVerificationArchitecture(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsVerificationPattern =
+    clean.includes("verification") ||
+    clean.includes("reconciliation") ||
+    clean.includes("authoritative") ||
+    clean.includes("expected delta") ||
+    clean.includes("post-trade state");
+
+  return [
+    {
+      id: "verification_architecture_specificity",
+      status: mentionsVerificationPattern ? "pass" : "fail",
+      detail: mentionsVerificationPattern
+        ? "Reply includes verification and reconciliation architecture details."
+        : "Reply is too generic and missed verification architecture details.",
+    },
+  ];
+}
+
+function verifyOperatingModel(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsOwnership = /\bowner\b|\bownership\b|\bwho owns\b/.test(clean);
+  const mentionsGovernance = /\bgovernance\b|\bpolicy\b/.test(clean);
+  const mentionsWorkflow = /\bworkflow\b|\bworkflows\b|\bescalat/.test(clean);
+  const mentionsApproval = /\bapproval\b|\bapprover\b|\bhuman approval\b/.test(clean);
+  const mentionsMeasurement = /\bmeasure\b|\bmeasured\b|\bmetrics\b|\boutcomes\b/.test(clean);
+  const mentionsPolicyOrRisk = /\bpolicy\b|\brisk\b/.test(clean);
+
+  return [
+    {
+      id: "operating_model_ownership",
+      status: mentionsOwnership ? "pass" : "fail",
+      detail: mentionsOwnership
+        ? "Reply names ownership explicitly."
+        : "Reply did not make ownership explicit.",
+    },
+    {
+      id: "operating_model_governance",
+      status: mentionsGovernance ? "pass" : "fail",
+      detail: mentionsGovernance
+        ? "Reply names governance or control explicitly."
+        : "Reply did not make governance or control explicit.",
+    },
+    {
+      id: "operating_model_workflow",
+      status: mentionsWorkflow ? "pass" : "fail",
+      detail: mentionsWorkflow
+        ? "Reply stays on workflow design."
+        : "Reply did not stay concrete on workflows.",
+    },
+    {
+      id: "operating_model_approval",
+      status: mentionsApproval ? "pass" : "fail",
+      detail: mentionsApproval
+        ? "Reply includes approval boundaries."
+        : "Reply did not include approval boundaries.",
+    },
+    {
+      id: "operating_model_measurement",
+      status: mentionsMeasurement ? "pass" : "fail",
+      detail: mentionsMeasurement
+        ? "Reply includes measurement or outcomes."
+        : "Reply did not include measurement or outcomes.",
+    },
+    {
+      id: "operating_model_policy_risk",
+      status: mentionsPolicyOrRisk ? "pass" : "fail",
+      detail: mentionsPolicyOrRisk
+        ? "Reply includes policy or risk controls."
+        : "Reply did not include policy or risk controls.",
+    },
+  ];
+}
+
+function verifyAgenticArchitectureApproach(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsOrchestrator =
+    clean.includes("orchestrator") || clean.includes("orchestration");
+  const mentionsTools =
+    clean.includes("tool") || clean.includes("service layer") || clean.includes("scoped tools");
+  const mentionsPolicy =
+    clean.includes("policy") || clean.includes("risk gates") || clean.includes("approval boundaries");
+  const mentionsVerification =
+    clean.includes("verification") || clean.includes("verify");
+  const mentionsState =
+    clean.includes("typed state") || clean.includes("durable state") || clean.includes("memory");
+
+  return [
+    {
+      id: "agentic_architecture_orchestrator",
+      status: mentionsOrchestrator ? "pass" : "fail",
+      detail: mentionsOrchestrator
+        ? "Reply includes orchestration."
+        : "Reply did not name orchestration.",
+    },
+    {
+      id: "agentic_architecture_tools",
+      status: mentionsTools ? "pass" : "fail",
+      detail: mentionsTools
+        ? "Reply includes tool or service boundaries."
+        : "Reply did not include tool or service boundaries.",
+    },
+    {
+      id: "agentic_architecture_policy",
+      status: mentionsPolicy ? "pass" : "fail",
+      detail: mentionsPolicy
+        ? "Reply includes policy or risk boundaries."
+        : "Reply did not include policy or risk boundaries.",
+    },
+    {
+      id: "agentic_architecture_verification",
+      status: mentionsVerification ? "pass" : "fail",
+      detail: mentionsVerification
+        ? "Reply includes verification."
+        : "Reply did not include verification.",
+    },
+    {
+      id: "agentic_architecture_state",
+      status: mentionsState ? "pass" : "fail",
+      detail: mentionsState
+        ? "Reply includes state or memory handling."
+        : "Reply did not include state or memory handling.",
+    },
+  ];
+}
+
+function verifyAiSafety(reply = "") {
+  const clean = normalizeText(reply);
+  const mentionsBoundaries = /untrusted|separat|least privilege|policy|risk gate/.test(clean);
+  const mentionsControl = /approval|audit|verification|reconciliation|schema/.test(clean);
+
+  return [
+    {
+      id: "ai_safety_boundaries",
+      status: mentionsBoundaries ? "pass" : "fail",
+      detail: mentionsBoundaries
+        ? "Reply separates untrusted content, policy, and execution boundaries."
+        : "Reply did not establish AI safety boundaries.",
+    },
+    {
+      id: "ai_safety_controls",
+      status: mentionsControl ? "pass" : "fail",
+      detail: mentionsControl
+        ? "Reply includes operational controls such as approval, audit, or verification."
+        : "Reply did not include operational safety controls.",
+    },
+  ];
+}
+
+function verifyRouteSpecificReply({ route, reply, trace }) {
+  if (
+    ["clarification_guard", "scope_boundary", "knowledge_gap", "interaction_guard"].includes(
+      trace?.answerClass
+    )
+  ) {
+    return [];
+  }
+
+  if (route?.selectedRoute === "systems_mindset" && route?.detectedSubIntent === "ai_safety") {
+    return verifyAiSafety(reply);
+  }
+
+  if (route?.selectedRoute === "business_need" && route?.detectedSubIntent === "business_value_definition") {
+    return verifyBusinessValueDefinition(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "capabilities_overview") {
+    return verifySkillsCapabilitiesOverview(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "collaboration") {
+    return verifySkillsCollaboration(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "scale_fastapi_architecture") {
+    return verifyScaleFastApiArchitecture(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "verification_architecture") {
+    return verifyVerificationArchitecture(reply);
+  }
+
+  if (route?.selectedRoute === "business_need" && route?.detectedSubIntent === "operating_model") {
+    return verifyOperatingModel(reply);
+  }
+
+  if (route?.selectedRoute === "skills" && route?.detectedSubIntent === "agentic_architecture_approach") {
+    return verifyAgenticArchitectureApproach(reply);
+  }
+
+  return [];
+}
+
+export function buildJozResponseVerification({
+  input = "",
+  route = {},
+  resolution = {},
+  trace = {},
+  reply = "",
+  retrievedDocuments = [],
+  latencyMs = 0,
+} = {}) {
+  const { checks: baseChecks, wordCount } = buildBaseChecks({
+    route,
+    resolution,
+    trace,
+    retrievedDocuments,
+    reply,
+    latencyMs,
+  });
+  const routeChecks = verifyRouteSpecificReply({ route, reply, input, trace });
+  const fallbackGuardChecks = verifyJozScopedFallbackGuard({ input, route, trace });
+  const relevanceChecks = verifyAudienceRelevance({ input, route, trace, reply });
+  const groundingCheck = buildGroundingCheck({ route, resolution, retrievedDocuments });
+  const checks = [...baseChecks, groundingCheck, ...fallbackGuardChecks, ...routeChecks, ...relevanceChecks];
+  const status = summarizeChecks(checks);
+  const confidenceBand = trace?.intentClassification?.confidenceBand || null;
+  const uncertaintyReasons = [];
+  if (confidenceBand === "medium" || confidenceBand === "low") {
+    uncertaintyReasons.push(`Intent confidence is ${confidenceBand}.`);
+  }
+  if (groundingCheck.status !== "pass") {
+    uncertaintyReasons.push("Verified source evidence is incomplete for this response.");
+  }
+  if (status === "fail") {
+    uncertaintyReasons.push("One or more deterministic response checks failed.");
+  }
+
+  return {
+    status,
+    summary:
+      status === "pass"
+        ? "Reply passed deterministic verification."
+        : status === "warn"
+          ? "Reply passed core checks with warnings."
+          : "Reply failed one or more deterministic checks.",
+    metrics: {
+      latencyMs,
+      wordCount,
+      retrievedDocumentCount: retrievedDocuments.length,
+    },
+    grounding: {
+      status: groundingCheck.status,
+      sourceCount: retrievedDocuments.length,
+      verifiedOrSupportedSourceCount: retrievedDocuments.filter((doc) =>
+        ["verified_fact", "supported_claim", "framework_guidance"].includes(
+          String(doc?.metadata?.evidence_tier || "")
+        )
+      ).length,
+    },
+    uncertainty: {
+      level: status === "fail" || confidenceBand === "low"
+        ? "high"
+        : uncertaintyReasons.length > 0 || confidenceBand === "medium"
+          ? "medium"
+          : "low",
+      reasons: uncertaintyReasons,
+      shouldEscalate: status === "fail" || uncertaintyReasons.length > 0,
+    },
+    citations: retrievedDocuments.slice(0, 5).map((doc) => ({
+      title: doc?.title || null,
+      category: doc?.category || null,
+      slug: doc?.metadata?.slug || null,
+      evidenceTier: doc?.metadata?.evidence_tier || null,
+      datasetId: doc?.metadata?.dataset_id || null,
+      sourceUri: doc?.metadata?.source_uri || doc?.source_uri || null,
+      sourceChecksum: doc?.metadata?.source_checksum || null,
+      verificationStatus:
+        doc?.metadata?.verification_status ||
+        doc?.metadata?.verification?.status ||
+        null,
+    })),
+    checks,
+  };
+}

@@ -1,0 +1,97 @@
+{
+  "slug": "uk-healthcare-digital-platforms",
+  "title": "Healthcare and Mobile-first Platforms — United Kingdom",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Healthcare communications, portal, CMS, webcast, and mobile-first platform work in the United Kingdom.",
+  "body": "Healthcare communications and portal work in the United Kingdom covers Roche, Pfizer, and Vantas across webcast, CMS, and mobile-first platform delivery.\n\nIncluded projects\n- Digital Video Webcasts — Roche\n- Pfizer Health Portal CMS\n- Mobile-first Web Portals — Vantas\n\nStrategic and technical themes\n- Digital-platform and communications design in healthcare and medtech-adjacent settings.\n- CMS and portal architecture where clarity, trust, and usability matter.\n- Mobile-first experience thinking for practical adoption across constrained user contexts.\n- Delivery focused on platform and communication outcomes rather than unsupported clinical claims.\n\nProof connection\n- This record is intentionally descriptive and does not introduce unsupported medical, clinical, or quantified outcome claims.\n\nRetrieval guidance\n- Use this record for UK healthcare-platform questions, Roche, Pfizer, Vantas, webcasts, health portals, or mobile-first portal work.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "healthcare",
+      "mobile-first-portals",
+      "pfizer",
+      "roche",
+      "uk",
+      "vantas"
+    ],
+    "verification": {
+      "status": "project_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "project_supported",
+    "claims": [
+      "Joz worked on healthcare communications and digital platforms in the United Kingdom for Roche, Pfizer, and Vantas.",
+      "The programme covered webcasts, portal CMS work, and mobile-first platforms without implying clinical ownership."
+    ],
+    "proof_points": [
+      "This record is scoped to platform and communication delivery rather than medical or clinical claims.",
+      "A dedicated healthcare industry tag is used because the existing ontology previously lacked one."
+    ],
+    "regions": [
+      "Europe",
+      "United Kingdom"
+    ],
+    "companies": [
+      "Pfizer",
+      "Roche",
+      "Vantas"
+    ],
+    "projects": [
+      "Digital Video Webcasts — Roche",
+      "Mobile-first Web Portals — Vantas",
+      "Pfizer Health Portal CMS"
+    ],
+    "intent_families": [
+      "factual_profile",
+      "skills"
+    ],
+    "sub_intents": [
+      "factual_profile.companies",
+      "skills.enterprise_proof"
+    ],
+    "impact_score": 77,
+    "priority_label": "standard",
+    "valid_from": "2013",
+    "valid_to": "2014",
+    "source_notes": "Grouped programme record. Healthcare industry ID added because the controlled ontology previously lacked a safe healthcare bucket.",
+    "source_filename": "uk-healthcare-digital-platforms.md",
+    "source_meta_filename": "uk-healthcare-digital-platforms.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption"
+    ],
+    "governance": [],
+    "industries": [
+      "healthcare",
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "7f0122750747c1df1f514c970a4bcb1197767ba4c804e8696af751e47e52a895",
+    "source_uri": null
+  }
+}

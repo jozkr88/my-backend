@@ -1,0 +1,70 @@
+{
+  "slug": "business-need-operating-model-blueprint",
+  "title": "Business Value Operating Model Blueprint",
+  "category": "delivery",
+  "lane": "business_need",
+  "summary": "Defines the structure of a serious AI business value operating model, including profit levers, opportunities, process redesign, governance, KPIs, quick wins, and a scaling roadmap.",
+  "tags": [
+    "operating-model",
+    "blueprint",
+    "governance",
+    "roi",
+    "roadmap"
+  ],
+  "impact_score": 98,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "The right end state is a business value operating model rather than a loose collection of AI ideas.",
+    "A serious AI transformation blueprint needs profit levers, function opportunities, process redesign, governance, KPI logic, quick wins, and a scaling roadmap.",
+    "The central question is where value exists, what should change, how it should be governed, and how it should scale."
+  ],
+  "proof_points": [
+    "This blueprint is consistent with the profit-lever, process-redesign, and function-opportunity records already added.",
+    "It matches the current Joz emphasis on systems, governance, evaluation, and real operating value.",
+    "The structure avoids technology-first AI programs with weak commercial accountability."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "governance_gaps",
+    "operational_friction",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "decision_quality",
+    "feedback_loops",
+    "systems_before_features",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "enterprise_architecture",
+    "organizational_design",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "faster_time_to_value",
+    "lower_risk",
+    "revenue_growth",
+    "stronger_governance"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "human_approval",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

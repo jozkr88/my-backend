@@ -1,0 +1,120 @@
+# Joz Knowledge Workflow
+
+This folder is the working source of truth for new Joz LLM knowledge.
+
+For the full lane cleanup and handoff plan, also read:
+
+- `server/JOZ_LLM_REFACTOR_PLAN.md`
+- `server/JOZ_LLM_ARCHITECTURE.md`
+
+## Purpose
+
+Use this workflow when new source material arrives:
+
+- CV fragments
+- project descriptions
+- presentation text
+- hiring notes
+- raw pasted evidence
+- image notes and captions
+
+The goal is to keep raw source material separate from normalized, verified, model-ready knowledge.
+
+## Folder layout
+
+- `inbox/`
+  Raw pasted text or markdown files go here first.
+- `templates/`
+  Templates for source metadata.
+- `ontology/`
+  Shared entities and proof objects used to connect the three lanes.
+- `normalized/`
+  Generated structured records per source item.
+- `published/`
+  Generated model-ready aggregate outputs.
+
+## How to add new material
+
+1. Create a text or markdown file in `inbox/`.
+
+Example:
+
+- `inbox/2026-07-11-agentic-ai-skills.md`
+
+2. Create a matching sidecar metadata file next to it.
+
+Example:
+
+- `inbox/2026-07-11-agentic-ai-skills.meta.json`
+
+3. Fill in the metadata using `templates/source-record.template.json`.
+
+4. Run:
+
+```bash
+cd server
+npm run build:joz-knowledge
+```
+
+5. Review:
+
+- `data/joz/normalized/*.json`
+- `data/joz/published/joz-documents.generated.json`
+- `data/joz/published/joz-ontology.generated.json`
+- `data/joz/published/joz-knowledge-report.json`
+
+## Verification rule
+
+Nothing should be treated as model-ready unless the sidecar metadata marks it clearly.
+
+Recommended statuses:
+
+- `draft`
+- `needs_review`
+- `verified`
+
+Additional supported statuses may be used for retrieval support when they are grounded in stronger source material:
+
+- `cv_supported`
+- `project_supported`
+- `capability_supported`
+- `positioning_supported`
+- `framework_supported`
+- `cv_and_project_supported`
+
+Only `verified` records should be treated as strong publishable evidence.
+Supported statuses can be used as secondary retrieval context, but they should not be treated as the same quality tier as fully verified proof.
+
+## Expected assistant behavior
+
+When new text is pasted:
+
+1. preserve the raw source in `inbox/`
+2. normalize it into a structured record
+3. verify claims and proof points
+4. publish only the verified parts into Joz response logic
+
+## Published outputs
+
+- `published.records`
+  Full normalized corpus for auditability and inspection.
+- `published.model_ready_records`
+  Runtime-safe subset excluding `draft` and `needs_review` records.
+
+This keeps the full corpus available for review while preventing unresolved material from entering the default retrieval path.
+
+## Data governance fields
+
+The build adds governance metadata to every normalized and published record:
+
+- `schema_version` for the record contract
+- `dataset_id` and `tenant_id` for isolation boundaries
+- `classification`, `visibility`, `owner`, and `retention_policy`
+- `evidence_tier` to distinguish verified facts from supported claims and framework guidance
+- `source_checksum` for content integrity
+
+The public corpus uses dataset `joz-public-knowledge` and tenant `public`. Customer data must use a separate dataset and tenant and must pass an authorization-aware retrieval path before it reaches model context. The generated `published/joz-dataset-manifest.json` records the dataset checksum and build counts.
+
+Internal filesystem paths are converted to stable `source://joz/...` identifiers during the build. Do not commit `.env` files or credentials; use local environment files or deployment secret storage.
+
+For the complete source-to-runtime architecture and Supabase control-plane tables, see `server/JOZ_DATA_CONTROL_PLANE.md`. Run `cd server && npm run audit:joz-data` for a read-only overview of the local dataset and the connected Supabase dataset.

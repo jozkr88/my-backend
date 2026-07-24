@@ -1,0 +1,89 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-backpressure",
+  "title": "Backpressure",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_039",
+  "summary": "Backpressure prevents the system from accepting more work than it can safely process.",
+  "body": "Backpressure prevents the system from accepting more work than it can safely process.\n\nTechniques:\nQueue limits\nRate limits\nConcurrency caps\nLoad shedding\nAdmission control\nPriority queues\n\nBackpressure protects latency and system stability.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "backpressure",
+      "reliability",
+      "scalability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_039",
+    "canonical_record_title": "Backpressure",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "backpressure",
+      "reliability",
+      "scalability"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Backpressure\nBackpressure\nbackpressure reliability scalability\nbackpressure reliability scalability\nBackpressure prevents the system from accepting more work than it can safely process.\n\nTechniques:\nQueue limits\nRate limits\nConcurrency caps\nLoad shedding\nAdmission control\nPriority queues\n\nBackpressure protects latency and system stability.",
+    "keyword_terms": [
+      "backpressure",
+      "reliability",
+      "scalability"
+    ],
+    "exact_phrases": [
+      "Backpressure",
+      "backpressure",
+      "reliability",
+      "scalability"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "1be60ce7de9eb9dfd053316ee7da59e7dc3a8f9905dde5389aebfca932ca8979",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_039"
+  }
+}

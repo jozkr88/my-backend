@@ -1,0 +1,98 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-rag-and-knowledge",
+  "title": "RAG and Knowledge",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_013",
+  "summary": "RAG retrieves relevant information before generation.",
+  "body": "RAG retrieves relevant information before generation.\n\nPipeline:\nConnectors → Processing → Embeddings → Vector Store → Retrieval → Reranking → LLM\n\nUse PostgreSQL for metadata and permissions, pgvector or another vector store for semantic search, and a knowledge graph when entity relationships and dependencies matter.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "knowledge",
+      "rag",
+      "retrieval"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "acl",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "knowledge_graphs",
+      "rag"
+    ],
+    "outcomes": [],
+    "governance": [
+      "access_control",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_013",
+    "canonical_record_title": "RAG and Knowledge",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "knowledge",
+      "rag",
+      "retrieval"
+    ],
+    "source_authority": 24,
+    "semantic_text": "RAG and Knowledge\nRAG and Knowledge\nknowledge rag retrieval\nknowledge rag retrieval\nRAG retrieves relevant information before generation.\n\nPipeline:\nConnectors → Processing → Embeddings → Vector Store → Retrieval → Reranking → LLM\n\nUse PostgreSQL for metadata and permissions, pgvector or another vector store for semantic search, and a knowledge graph when entity relationships and dependencies matter.",
+    "keyword_terms": [
+      "and",
+      "knowledge",
+      "rag",
+      "retrieval"
+    ],
+    "exact_phrases": [
+      "RAG and Knowledge",
+      "knowledge",
+      "rag",
+      "retrieval"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "49164fd0f1f4fdb30bde149b070a2b5b11c498fe93158feea1427c2a0e5cf2f1",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_013"
+  }
+}

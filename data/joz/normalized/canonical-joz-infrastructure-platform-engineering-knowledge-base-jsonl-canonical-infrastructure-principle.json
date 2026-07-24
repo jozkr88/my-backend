@@ -1,0 +1,90 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-canonical-infrastructure-principle",
+  "title": "Canonical Infrastructure Principle",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_048",
+  "summary": "Containers package services. Kubernetes runs and scales them. Cloud provides the environment. Databases store durable state. Queues and events coordinate work. Secrets systems protect credentials. Observability explains…",
+  "body": "Containers package services.\nKubernetes runs and scales them.\nCloud provides the environment.\nDatabases store durable state.\nQueues and events coordinate work.\nSecrets systems protect credentials.\nObservability explains what happened.\nCI/CD ships changes safely.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "canonical",
+      "infrastructure"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "observability"
+    ],
+    "outcomes": [],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_048",
+    "canonical_record_title": "Canonical Infrastructure Principle",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "canonical",
+      "infrastructure"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Canonical Infrastructure Principle\nCanonical Infrastructure Principle\ncanonical infrastructure\ncanonical infrastructure\nContainers package services.\nKubernetes runs and scales them.\nCloud provides the environment.\nDatabases store durable state.\nQueues and events coordinate work.\nSecrets systems protect credentials.\nObservability explains what happened.\nCI/CD ships changes safely.",
+    "keyword_terms": [
+      "canonical",
+      "infrastructure",
+      "principle"
+    ],
+    "exact_phrases": [
+      "Canonical Infrastructure Principle",
+      "canonical",
+      "infrastructure"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "ec3d71fa31a5bc1037305c239ec7b49deefe4d75ebe1ca94901158ecb632db55",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_048"
+  }
+}

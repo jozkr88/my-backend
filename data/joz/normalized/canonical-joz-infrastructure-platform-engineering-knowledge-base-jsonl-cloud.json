@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-cloud",
+  "title": "Cloud",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_003",
+  "summary": "Cloud provides compute, networking, storage, managed databases, queues, identity, observability, and deployment services.",
+  "body": "Cloud provides compute, networking, storage, managed databases, queues, identity, observability, and deployment services.\n\nTypical providers:\nAWS\nMicrosoft Azure\nGoogle Cloud Platform\n\nCloud = where the platform runs.\nIt should be designed for availability, isolation, cost control, scalability, and recoverability.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "aws",
+      "azure",
+      "cloud",
+      "gcp"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "observability",
+      "rag"
+    ],
+    "outcomes": [
+      "cost_reduction"
+    ],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_003",
+    "canonical_record_title": "Cloud",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "aws",
+      "azure",
+      "cloud",
+      "gcp"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Cloud\nCloud\naws azure cloud gcp\naws azure cloud gcp\nCloud provides compute, networking, storage, managed databases, queues, identity, observability, and deployment services.\n\nTypical providers:\nAWS\nMicrosoft Azure\nGoogle Cloud Platform\n\nCloud = where the platform runs.\nIt should be designed for availability, isolation, cost control, scalability, and recoverability.",
+    "keyword_terms": [
+      "aws",
+      "azure",
+      "cloud",
+      "gcp"
+    ],
+    "exact_phrases": [
+      "Cloud",
+      "aws",
+      "azure",
+      "cloud",
+      "gcp"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "a35204e24b63a32aaff51ee01832a3282e3f4824f298377656d2dacd032baf9e",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_003"
+  }
+}

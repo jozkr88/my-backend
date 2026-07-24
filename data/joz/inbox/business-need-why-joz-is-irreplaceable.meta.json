@@ -1,0 +1,67 @@
+{
+  "slug": "business-need-why-joz-is-irreplaceable",
+  "title": "Why Joz Is Irreplaceable",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Explains that Joz becomes hard to replace through context, workflows, decision logic, governance, and feedback loops rather than generic AI usage.",
+  "tags": [
+    "moat",
+    "irreplaceable",
+    "context",
+    "workflow",
+    "governance"
+  ],
+  "impact_score": 99,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "Joz is not irreplaceable because he uses AI, but because the value sits in context, workflows, decision logic, governance, and feedback loops.",
+    "The strongest moat comes from workflow embeddedness and company-specific operating intelligence.",
+    "A generic chatbot is replaceable; a system with integrated context and decision logic is much harder to replace."
+  ],
+  "proof_points": [
+    "This framing is consistent with the current Joz architecture, systems-mindset, and decision-intelligence records.",
+    "The current corpus already emphasizes governance, verification, and context engineering rather than generic AI claims.",
+    "The architecture direction already supports retrieval, workflow logic, and curated trust rather than pure chat output."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "knowledge_fragmentation",
+    "low_trust",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "feedback_loops",
+    "human_accountability",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agent_memory",
+    "context_engineering",
+    "decision_intelligence",
+    "verification",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "higher_adoption",
+    "higher_data_trust",
+    "knowledge_reuse",
+    "stronger_governance"
+  ],
+  "governance": [
+    "evaluation",
+    "human_approval",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

@@ -1,0 +1,91 @@
+{
+  "slug": "skills-agent-model-tool-distinction",
+  "title": "Agent, Model, And Tool Distinction",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": "source://joz/skills-agent-model-tool-distinction.md",
+  "summary": "Clarifies the distinction between agents, prediction models, and tools so architecture decisions stay coherent and debuggable.",
+  "body": "Agent, Model, And Tool Distinction\n\nPurpose\nThis record explains a core conceptual distinction that prevents architecture confusion.\n\nDefinitions\n- Agent = decides what information is needed and what step should happen next\n- Model = produces a prediction, estimate, forecast, or generated output\n- Tool = executes a function, API call, query, or external action\n\nWhy the distinction matters\nAn agent is not the same thing as a model. A model is not the same thing as a tool. The agent coordinates reasoning and workflow. A prediction model produces a signal. A tool performs an operation.\n\nCorrect architectural pattern\nAgent -> Prediction or retrieval service -> Tool or execution layer\n\nWhat this clarifies\n- LLMs do not magically predict everything\n- Prediction services should be treated as specialized components\n- Tools should do deterministic actions rather than reasoning\n- Agent systems should separate decision-making, prediction, and execution\n\nWhy this matters\nClear role separation improves correctness, debuggability, and system design quality. It avoids treating every AI component as the same thing.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agent",
+      "architecture",
+      "model",
+      "reasoning",
+      "tooling"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-15",
+      "notes": "Derived from the user's notes distinguishing agents, models, tools, and prediction services."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "An agent decides what information is needed and what step should happen next, while a model produces a prediction and a tool executes an operation.",
+      "Agent systems should separate decision-making, prediction, retrieval, and execution rather than collapsing them into a single component.",
+      "This distinction improves correctness, system clarity, and debugging quality."
+    ],
+    "proof_points": [
+      "The notes explicitly define agent as decision maker, model as predictor, and tool as executor.",
+      "The notes describe the correct pattern as agent -> prediction service -> execution path rather than agent as the prediction model itself.",
+      "The notes emphasize that LLMs do not automatically provide specialized prediction behavior without dedicated models or services."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 74,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-agent-model-tool-distinction.md",
+    "source_meta_filename": "skills-agent-model-tool-distinction.meta.json",
+    "reviewed_at": "2026-07-15",
+    "problems": [
+      "knowledge_fragmentation",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "decision_quality",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "context_engineering",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust"
+    ],
+    "governance": [
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "abb8e50e1e3316c2acd386a79cfabd1b57c449b58912b39edea6278b82d15a29",
+    "source_uri": "source://joz/skills-agent-model-tool-distinction.md"
+  }
+}

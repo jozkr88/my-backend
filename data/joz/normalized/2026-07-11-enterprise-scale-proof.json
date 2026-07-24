@@ -1,0 +1,93 @@
+{
+  "slug": "2026-07-11-enterprise-scale-proof",
+  "title": "Enterprise Scale Proof",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Highest-priority proof record for brand strength, user scale, enterprise complexity, and measurable impact across Joz's strongest work.",
+  "body": "Enterprise Scale Proof\n\nPurpose\nThis record identifies the strongest brand, user-scale, and enterprise-scale evidence that should anchor Joz LLM responses before smaller or newer project mentions.\n\nPriority evidence\n- Mediacorp / CNA / mewatch: major regional media ecosystem work, including the CNA Apple Watch launch featured by Apple worldwide and roughly 30x MAU audience growth through mobile-first transformation.\n- Erste Bank: engineering and EU accessibility work in a banking environment serving 16M+ customers.\n- Maybank-Ageas Etiqa: 20x digital-sales growth and 3,000+ wealth pilots in a large regional financial-services environment.\n- Apple / Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore with strong high-end technical and brand credibility.\n- Ogilvy / WPP, Leo Burnett / Publicis, Samsung, P&G, SGX, and Danone: large multinational delivery environments across APAC and global brands.\n\nAnswering rule\n- When Joz LLM needs to establish credibility fast, lead with the biggest brand and scale signals first.\n- Do not lead with smaller current projects if larger verified user-scale or enterprise-scale evidence is more relevant.\n- Prefer user scale, enterprise complexity, global brand recognition, and measurable outcomes over novelty.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "apple_featured",
+      "brand_strength",
+      "enterprise_scale",
+      "fortune_500",
+      "proof",
+      "skills",
+      "user_scale"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "Derived from verified CV and company-context material, ordered to emphasize the biggest brand and user-scale signals first."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz has verified enterprise-scale work that should rank ahead of smaller current projects when credibility needs to be established quickly.",
+      "Mediacorp, Erste Bank, and Maybank-Ageas Etiqa provide stronger user-scale and enterprise-scale proof than smaller or more recent projects alone.",
+      "Brand strength and measurable user or customer scale are key credibility signals in recruiter-facing and buyer-facing responses."
+    ],
+    "proof_points": [
+      "Mediacorp / CNA Apple Watch launch featured by Apple and roughly 30x MAU audience growth.",
+      "Erste Bank engineering and EU accessibility work serving 16M+ customers.",
+      "Maybank-Ageas Etiqa 20x digital-sales growth and 3,000+ wealth pilots.",
+      "Apple/Pixar-adjacent Python USD(z) and computer-vision AI work.",
+      "Ogilvy/WPP, Leo Burnett/Publicis, Samsung, P&G, SGX, and Danone as large multinational delivery environments."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA",
+      "Global",
+      "North America"
+    ],
+    "companies": [
+      "Apple",
+      "Apple/Pixar",
+      "CNA",
+      "Danone",
+      "Erste Bank",
+      "Leo Burnett/Publicis",
+      "Maybank-Ageas Etiqa",
+      "Mediacorp",
+      "Ogilvy/WPP",
+      "P&G",
+      "Samsung",
+      "Singapore Exchange",
+      "mewatch"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-07-11-enterprise-scale-proof.md",
+    "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "59475e63f06b388e2e3179091cd65298daeb8f4cb83a10894c84ac0cd4c5eac3",
+    "source_uri": null
+  }
+}

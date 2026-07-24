@@ -1,0 +1,35 @@
+{
+  "slug": "systems-principle-context-creates-intelligence",
+  "title": "Context Creates Intelligence",
+  "category": "systems_principle",
+  "lane": "systems_mindset",
+  "summary": "Data without context rarely creates usable intelligence.",
+  "tags": [
+    "context",
+    "knowledge",
+    "rag",
+    "decision-making"
+  ],
+  "impact_score": 98,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "problems": [
+    "data_silos",
+    "knowledge_fragmentation",
+    "manual_knowledge_work"
+  ],
+  "principles": [
+    "context_creates_intelligence"
+  ],
+  "capabilities": [
+    "agent_memory",
+    "context_engineering",
+    "knowledge_graphs",
+    "rag"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "knowledge_reuse"
+  ]
+}
