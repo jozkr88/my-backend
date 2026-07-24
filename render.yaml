@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: xq-backend
+    runtime: node
+    buildCommand: npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality
+    startCommand: npm start
+    healthCheckPath: /api/hello
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: JOZ_REQUIRE_AUTH
+        value: "true"
+      - key: JOZ_MODEL_PROVIDER
+        value: "openai"
+      - key: JOZ_MODEL
+        value: "gpt-4o-mini"
+      - key: JOZ_REQUIRE_DATABASE
+        value: "true"
+      - key: DISABLE_FILE_MEMORY
+        value: "1"
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS
+        sync: false
+      - key: JOZ_ARCHITECTURE_REVIEW_CURRENCY
+        value: usd
+      - key: JOZ_PUBLIC_APP_URL
+        sync: false
