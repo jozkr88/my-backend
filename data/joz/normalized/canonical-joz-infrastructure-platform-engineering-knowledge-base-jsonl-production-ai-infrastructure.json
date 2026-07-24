@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-production-ai-infrastructure",
+  "title": "Production AI Infrastructure",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_046",
+  "summary": "A production AI platform needs more than an LLM API.",
+  "body": "A production AI platform needs more than an LLM API.\n\nIt needs:\nAuthentication\nRate limiting\nWorkflow orchestration\nState management\nCaching\nQueues\nModel routing\nTool security\nEvaluation\nObservability\nSecrets management\nCI/CD\nRecovery\nCost controls",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "platform",
+      "production-ai"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction",
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_046",
+    "canonical_record_title": "Production AI Infrastructure",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "platform",
+      "production-ai"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Production AI Infrastructure\nProduction AI Infrastructure\nplatform production-ai\nplatform production-ai\nA production AI platform needs more than an LLM API.\n\nIt needs:\nAuthentication\nRate limiting\nWorkflow orchestration\nState management\nCaching\nQueues\nModel routing\nTool security\nEvaluation\nObservability\nSecrets management\nCI/CD\nRecovery\nCost controls",
+    "keyword_terms": [
+      "ai",
+      "infrastructure",
+      "platform",
+      "production",
+      "production-ai"
+    ],
+    "exact_phrases": [
+      "Production AI Infrastructure",
+      "platform",
+      "production-ai"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "5e2d60851301cfa5ff56dedcc5015b94e033fbb2181b0d07894d1172e4b5e68b",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_046"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-golang-and-python",
+  "title": "Golang and Python",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_016",
+  "summary": "Python is suited to AI, machine learning, retrieval, agent orchestration, FastAPI, data science, and rapid experimentation.",
+  "body": "Python is suited to AI, machine learning, retrieval, agent orchestration, FastAPI, data science, and rapid experimentation.\n\nGo is suited to high-performance APIs, concurrency, streaming systems, networking, distributed infrastructure, and latency-sensitive execution services.\n\nA practical polyglot architecture can use Python for intelligence and Go for execution-heavy services.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "architecture",
+      "golang",
+      "python"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "fastapi",
+      "retrieval",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture",
+      "rag",
+      "rapid_prototyping"
+    ],
+    "outcomes": [],
+    "governance": [
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_016",
+    "canonical_record_title": "Golang and Python",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "architecture",
+      "golang",
+      "python"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Golang and Python\nGolang and Python\narchitecture golang python\narchitecture golang python\nPython is suited to AI, machine learning, retrieval, agent orchestration, FastAPI, data science, and rapid experimentation.\n\nGo is suited to high-performance APIs, concurrency, streaming systems, networking, distributed infrastructure, and latency-sensitive execution services.\n\nA practical polyglot architecture can use Python for intelligence and Go for execution-heavy services.",
+    "keyword_terms": [
+      "and",
+      "architecture",
+      "golang",
+      "python"
+    ],
+    "exact_phrases": [
+      "Golang and Python",
+      "architecture",
+      "golang",
+      "python"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "053c117eefd7f8c65f341dc4307a5c2af82141bcdd164048fdfd95e6dacbef33",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_016"
+  }
+}

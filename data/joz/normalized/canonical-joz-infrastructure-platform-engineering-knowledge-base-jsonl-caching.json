@@ -1,0 +1,97 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-caching",
+  "title": "Caching",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_017",
+  "summary": "Caching stores frequently used data closer to the application.",
+  "body": "Caching stores frequently used data closer to the application.\n\nBenefits:\nLower latency\nReduced database load\nReduced external API cost\nHigher throughput\n\nRisks:\nStale data\nIncorrect invalidation\nMemory pressure\nInconsistent state\n\nNever treat cache as the source of truth.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "cache",
+      "performance",
+      "redis"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agent_memory"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "lower_risk"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_017",
+    "canonical_record_title": "Caching",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "cache",
+      "performance",
+      "redis"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Caching\nCaching\ncache performance redis\ncache performance redis\nCaching stores frequently used data closer to the application.\n\nBenefits:\nLower latency\nReduced database load\nReduced external API cost\nHigher throughput\n\nRisks:\nStale data\nIncorrect invalidation\nMemory pressure\nInconsistent state\n\nNever treat cache as the source of truth.",
+    "keyword_terms": [
+      "cache",
+      "caching",
+      "performance",
+      "redis"
+    ],
+    "exact_phrases": [
+      "Caching",
+      "cache",
+      "performance",
+      "redis"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "c3a19516f2441e2f504db15f1d907c6d865f327fa7290e27a81239ea9a2d0914",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_017"
+  }
+}

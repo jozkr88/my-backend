@@ -51,26 +51,6 @@ async function getJson(pathname, options = {}) {
   }
 }
 
-async function patchJson(pathname, body, options = {}) {
-  const server = app.listen(0, "127.0.0.1");
-  await new Promise((resolve) => server.once("listening", resolve));
-
-  try {
-    const { port } = server.address();
-    const response = await fetch(`http://127.0.0.1:${port}${pathname}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-      body: JSON.stringify(body),
-    });
-    const payload = await response.json();
-    return { status: response.status, payload };
-  } finally {
-    await new Promise((resolve, reject) => {
-      server.close((error) => (error ? reject(error) : resolve()));
-    });
-  }
-}
-
 function assertCanonicalGoldPillReply(reply) {
   assert.ok(
     reply.startsWith("The Gold Pill is a core concept within MeetJoz and neoMAXX."),
@@ -487,88 +467,6 @@ test("GET /api/joz-llm/observability returns recent request events", async () =>
         String(event.route || "") === "systems_mindset"
     )
   );
-});
-
-test("PATCH /api/joz-llm/observability/:id/review persists review flags", async () => {
-  const sessionKey = `runtime-review-${Date.now()}`;
-  const seed = await postJson("/api/joz-llm", {
-    sessionKey,
-    messages: [{ role: "user", content: "What is Docker?" }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "skills",
-      currentMeshStage: null,
-    },
-  });
-
-  assert.equal(seed.status, 200);
-
-  const list = await getJson("/api/joz-llm/observability?limit=20");
-  const event = (list.payload?.events || []).find(
-    (entry) => String(entry.session_key || "") === sessionKey
-  );
-
-  assert.ok(event?.id);
-
-  const review = await patchJson(`/api/joz-llm/observability/${event.id}/review`, {
-    reviewStatus: "flagged",
-    issueType: "weak_answer",
-    reviewNotes: "Needs a stronger, more contextual answer.",
-    reviewedBy: "runtime-test",
-  });
-
-  assert.equal(review.status, 200);
-  assert.equal(review.payload?.ok, true);
-  assert.equal(review.payload?.event?.review_status, "flagged");
-  assert.equal(review.payload?.event?.issue_type, "weak_answer");
-});
-
-test("approved corrections are reused for strongly matching future prompts", async () => {
-  const sessionKey = `runtime-approved-correction-${Date.now()}`;
-  const seed = await postJson("/api/joz-llm", {
-    sessionKey,
-    messages: [{ role: "user", content: "What is the purpose of this?" }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "skills",
-      currentMeshStage: null,
-    },
-  });
-
-  assert.equal(seed.status, 200);
-
-  const list = await getJson("/api/joz-llm/observability?limit=20");
-  const event = (list.payload?.events || []).find(
-    (entry) => String(entry.session_key || "") === sessionKey
-  );
-
-  assert.ok(event?.id);
-
-  const correctionText =
-    "Joz LLM exists to showcase Joz's skills, experience, achievements, architecture thinking, and business value in a clear and credible way.";
-  const review = await patchJson(`/api/joz-llm/observability/${event.id}/review`, {
-    reviewStatus: "approved_correction",
-    issueType: "weak_answer",
-    reviewNotes: "Use the tighter purpose answer.",
-    approvedCorrection: correctionText,
-    reviewedBy: "runtime-test",
-  });
-
-  assert.equal(review.status, 200);
-
-  const replay = await postJson("/api/joz-llm", {
-    sessionKey: `${sessionKey}-replay`,
-    messages: [{ role: "user", content: "What's the purpose of this?" }],
-    context: {
-      currentPortal: "meet-joz",
-      currentMesh: "skills",
-      currentMeshStage: null,
-    },
-  });
-
-  assert.equal(replay.status, 200);
-  assert.match(String(replay.payload?.reply || ""), /showcase Joz's skills, experience, achievements/i);
-  assert.equal(replay.payload?.trace?.composer, "buildApprovedCorrectionReply");
 });
 
 test("POST /api/privacy/export returns matching fallback callback request data", async () => {

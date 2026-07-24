@@ -57,6 +57,16 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "ee19972d04d287e6b84aa56ef5bb8d7287824e239fc1360e8e286c26c4c572b1",
+    "source_uri": null
   }
 }

@@ -1,0 +1,94 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-environment-strategy",
+  "title": "Environment Strategy",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_044",
+  "summary": "Use separate environments: Local Development Testing Staging Production",
+  "body": "Use separate environments:\nLocal\nDevelopment\nTesting\nStaging\nProduction\n\nProduction access should be restricted.\nConfiguration should be environment-specific.\nPromotions should follow controlled CI/CD workflows.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "environments",
+      "production",
+      "staging"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_044",
+    "canonical_record_title": "Environment Strategy",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "environments",
+      "production",
+      "staging"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Environment Strategy\nEnvironment Strategy\nenvironments production staging\nenvironments production staging\nUse separate environments:\nLocal\nDevelopment\nTesting\nStaging\nProduction\n\nProduction access should be restricted.\nConfiguration should be environment-specific.\nPromotions should follow controlled CI/CD workflows.",
+    "keyword_terms": [
+      "environment",
+      "environments",
+      "production",
+      "staging",
+      "strategy"
+    ],
+    "exact_phrases": [
+      "Environment Strategy",
+      "environments",
+      "production",
+      "staging"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "4191a6b4ee0031ec1303973d89f1e38daf7b32899b3f57495a7a870b1ac13b78",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_044"
+  }
+}

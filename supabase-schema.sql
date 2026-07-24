@@ -168,6 +168,68 @@ CREATE TABLE IF NOT EXISTS joz_documents (
   UNIQUE (profile_id, slug)
 );
 
+CREATE TABLE IF NOT EXISTS joz_datasets (
+  id BIGSERIAL PRIMARY KEY,
+  profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+  dataset_id TEXT NOT NULL,
+  tenant_id TEXT NOT NULL,
+  name TEXT NOT NULL,
+  owner TEXT NOT NULL,
+  classification TEXT NOT NULL DEFAULT 'public',
+  visibility TEXT NOT NULL DEFAULT 'public',
+  retention_policy TEXT NOT NULL DEFAULT 'until_withdrawn',
+  schema_version TEXT NOT NULL DEFAULT '1.0',
+  source_count INTEGER NOT NULL DEFAULT 0,
+  normalized_count INTEGER NOT NULL DEFAULT 0,
+  published_count INTEGER NOT NULL DEFAULT 0,
+  model_ready_count INTEGER NOT NULL DEFAULT 0,
+  verified_count INTEGER NOT NULL DEFAULT 0,
+  content_checksum TEXT,
+  status TEXT NOT NULL DEFAULT 'published',
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  published_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (profile_id, dataset_id, tenant_id)
+);
+
+CREATE INDEX IF NOT EXISTS joz_datasets_tenant_idx
+  ON joz_datasets (tenant_id, dataset_id, status);
+
+CREATE TABLE IF NOT EXISTS joz_data_sources (
+  id BIGSERIAL PRIMARY KEY,
+  profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+  dataset_id TEXT NOT NULL,
+  tenant_id TEXT NOT NULL,
+  source_id TEXT NOT NULL,
+  source_key TEXT NOT NULL,
+  source_filename TEXT,
+  source_uri TEXT,
+  source_types JSONB NOT NULL DEFAULT '[]'::jsonb,
+  owner TEXT NOT NULL,
+  classification TEXT NOT NULL DEFAULT 'public',
+  visibility TEXT NOT NULL DEFAULT 'public',
+  retention_policy TEXT NOT NULL DEFAULT 'until_withdrawn',
+  record_count INTEGER NOT NULL DEFAULT 0,
+  model_ready_count INTEGER NOT NULL DEFAULT 0,
+  verified_count INTEGER NOT NULL DEFAULT 0,
+  evidence_tiers JSONB NOT NULL DEFAULT '[]'::jsonb,
+  source_checksum TEXT,
+  status TEXT NOT NULL DEFAULT 'published',
+  last_ingested_at TIMESTAMPTZ,
+  last_published_at TIMESTAMPTZ,
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (profile_id, dataset_id, tenant_id, source_key)
+);
+
+CREATE INDEX IF NOT EXISTS joz_data_sources_tenant_idx
+  ON joz_data_sources (tenant_id, dataset_id, status);
+
+CREATE INDEX IF NOT EXISTS joz_data_sources_source_id_idx
+  ON joz_data_sources (source_id);
+
 CREATE TABLE IF NOT EXISTS joz_document_chunks (
   id BIGSERIAL PRIMARY KEY,
   document_id BIGINT NOT NULL REFERENCES joz_documents(id) ON DELETE CASCADE,
@@ -319,6 +381,46 @@ CREATE TABLE IF NOT EXISTS joz_llm_repair_candidates (
 
 CREATE INDEX IF NOT EXISTS joz_llm_repairs_status_idx
   ON joz_llm_repair_candidates (status, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS joz_action_proposals (
+  proposal_id TEXT PRIMARY KEY,
+  session_key TEXT,
+  action TEXT NOT NULL,
+  risk TEXT NOT NULL DEFAULT 'unknown',
+  proposal JSONB NOT NULL DEFAULT '{}'::jsonb,
+  status TEXT NOT NULL DEFAULT 'pending',
+  approval_token_hash TEXT NOT NULL,
+  execution_token_hash TEXT,
+  approved_by TEXT,
+  result JSONB,
+  verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  expires_at TIMESTAMPTZ NOT NULL,
+  approved_at TIMESTAMPTZ,
+  completed_at TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS joz_action_proposals_status_idx
+  ON joz_action_proposals (status, created_at DESC);
+
+CREATE INDEX IF NOT EXISTS joz_action_proposals_session_idx
+  ON joz_action_proposals (session_key, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS joz_action_events (
+  id BIGSERIAL PRIMARY KEY,
+  proposal_id TEXT NOT NULL REFERENCES joz_action_proposals(proposal_id) ON DELETE CASCADE,
+  event_type TEXT NOT NULL,
+  actor TEXT NOT NULL DEFAULT 'system',
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS joz_action_events_proposal_idx
+  ON joz_action_events (proposal_id, created_at ASC);
+
+CREATE INDEX IF NOT EXISTS joz_action_events_created_idx
+  ON joz_action_events (created_at DESC);
 
 CREATE TABLE IF NOT EXISTS joz_business_leads (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

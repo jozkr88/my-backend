@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-langsmith",
+  "title": "LangSmith",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_029",
+  "summary": "LangSmith provides tracing, evaluation, and debugging for LLM and agent workflows.",
+  "body": "LangSmith provides tracing, evaluation, and debugging for LLM and agent workflows.\n\nIt can record:\nPrompts\nModel responses\nAgent transitions\nTool calls\nLatency\nToken usage\nFailures\nEvaluation scores\n\nLangSmith complements, but does not replace, infrastructure observability.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agents",
+      "langsmith",
+      "observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agentic_ai",
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "higher_adoption"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_029",
+    "canonical_record_title": "LangSmith",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agents",
+      "langsmith",
+      "observability"
+    ],
+    "source_authority": 12,
+    "semantic_text": "LangSmith\nLangSmith\nagents langsmith observability\nagents langsmith observability\nLangSmith provides tracing, evaluation, and debugging for LLM and agent workflows.\n\nIt can record:\nPrompts\nModel responses\nAgent transitions\nTool calls\nLatency\nToken usage\nFailures\nEvaluation scores\n\nLangSmith complements, but does not replace, infrastructure observability.",
+    "keyword_terms": [
+      "agents",
+      "langsmith",
+      "observability"
+    ],
+    "exact_phrases": [
+      "LangSmith",
+      "agents",
+      "langsmith",
+      "observability"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "45fd157180d541c28859287208837f51fc465fa647ff3321743ebbc1c9aacb6e",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_029"
+  }
+}

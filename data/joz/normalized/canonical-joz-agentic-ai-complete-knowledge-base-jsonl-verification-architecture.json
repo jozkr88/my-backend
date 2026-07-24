@@ -1,0 +1,90 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-verification-architecture",
+  "title": "Verification Architecture",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_010",
+  "summary": "Verification happens after execution.",
+  "body": "Verification happens after execution.\n\nInputs:\nExpected result\nOrder and fill events\nLedger state\nUpdated balances and positions\nFees and margin state\n\nOutputs:\nVerified\nPartially completed\nFailed\nReconciliation required\n\nVerification must use authoritative systems, not the LLM's interpretation.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "reconciliation",
+      "verification"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture",
+      "verification"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_010",
+    "canonical_record_title": "Verification Architecture",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "reconciliation",
+      "verification"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Verification Architecture\nVerification Architecture\nreconciliation verification\nreconciliation verification\nVerification happens after execution.\n\nInputs:\nExpected result\nOrder and fill events\nLedger state\nUpdated balances and positions\nFees and margin state\n\nOutputs:\nVerified\nPartially completed\nFailed\nReconciliation required\n\nVerification must use authoritative systems, not the LLM's interpretation.",
+    "keyword_terms": [
+      "architecture",
+      "reconciliation",
+      "verification"
+    ],
+    "exact_phrases": [
+      "Verification Architecture",
+      "reconciliation",
+      "verification"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "35b915660398abbf930f25a94d8c94cc3f0713eec3630fb8972fc5ad1398c361",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_010"
+  }
+}

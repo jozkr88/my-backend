@@ -3,7 +3,7 @@
   "title": "Agent, Model, And Tool Distinction",
   "category": "skills",
   "source_type": "paste",
-  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "source_uri": "source://joz/skills-agent-model-tool-distinction.md",
   "summary": "Clarifies the distinction between agents, prediction models, and tools so architecture decisions stay coherent and debuggable.",
   "body": "Agent, Model, And Tool Distinction\n\nPurpose\nThis record explains a core conceptual distinction that prevents architecture confusion.\n\nDefinitions\n- Agent = decides what information is needed and what step should happen next\n- Model = produces a prediction, estimate, forecast, or generated output\n- Tool = executes a function, API call, query, or external action\n\nWhy the distinction matters\nAn agent is not the same thing as a model. A model is not the same thing as a tool. The agent coordinates reasoning and workflow. A prediction model produces a signal. A tool performs an operation.\n\nCorrect architectural pattern\nAgent -> Prediction or retrieval service -> Tool or execution layer\n\nWhat this clarifies\n- LLMs do not magically predict everything\n- Prediction services should be treated as specialized components\n- Tools should do deterministic actions rather than reasoning\n- Agent systems should separate decision-making, prediction, and execution\n\nWhy this matters\nClear role separation improves correctness, debuggability, and system design quality. It avoids treating every AI component as the same thing.",
   "metadata": {
@@ -76,6 +76,16 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "abb8e50e1e3316c2acd386a79cfabd1b57c449b58912b39edea6278b82d15a29",
+    "source_uri": "source://joz/skills-agent-model-tool-distinction.md"
   }
 }

@@ -1,0 +1,93 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-redis",
+  "title": "Redis",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_016",
+  "summary": "Redis is an in-memory data store used for low-latency access.",
+  "body": "Redis is an in-memory data store used for low-latency access.\n\nTypical uses:\nCaching\nSessions\nRate limits\nDistributed locks\nShort-lived workflow state\nQueues\nPub/sub\n\nRedis = desk drawer.\nPostgreSQL = warehouse.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "cache",
+      "redis",
+      "sessions"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agent_memory",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_016",
+    "canonical_record_title": "Redis",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "cache",
+      "redis",
+      "sessions"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Redis\nRedis\ncache redis sessions\ncache redis sessions\nRedis is an in-memory data store used for low-latency access.\n\nTypical uses:\nCaching\nSessions\nRate limits\nDistributed locks\nShort-lived workflow state\nQueues\nPub/sub\n\nRedis = desk drawer.\nPostgreSQL = warehouse.",
+    "keyword_terms": [
+      "cache",
+      "redis",
+      "sessions"
+    ],
+    "exact_phrases": [
+      "Redis",
+      "cache",
+      "redis",
+      "sessions"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "533c7fa01ef162e5855149de5f54fd17050a58346ea1fdaf0cd9843638d0c7a1",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_016"
+  }
+}

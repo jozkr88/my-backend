@@ -1,0 +1,87 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-kubernetes-pods",
+  "title": "Kubernetes Pods",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_006",
+  "summary": "A Kubernetes Pod is the smallest deployable unit in Kubernetes.",
+  "body": "A Kubernetes Pod is the smallest deployable unit in Kubernetes.\n\nA pod usually contains one application container, such as:\nFastAPI service\nAgent worker\nBackground job\nTool service\n\nPods are disposable. Kubernetes replaces unhealthy pods automatically.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "kubernetes",
+      "pods"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "fastapi",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [
+      "healthcare"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_006",
+    "canonical_record_title": "Kubernetes Pods",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "kubernetes",
+      "pods"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Kubernetes Pods\nKubernetes Pods\nkubernetes pods\nkubernetes pods\nA Kubernetes Pod is the smallest deployable unit in Kubernetes.\n\nA pod usually contains one application container, such as:\nFastAPI service\nAgent worker\nBackground job\nTool service\n\nPods are disposable. Kubernetes replaces unhealthy pods automatically.",
+    "keyword_terms": [
+      "kubernetes",
+      "pods"
+    ],
+    "exact_phrases": [
+      "Kubernetes Pods",
+      "kubernetes",
+      "pods"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "0756b3714f154fe437286573bbeb3e536235eb1aa6b191371abd41802b971f86",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_006"
+  }
+}

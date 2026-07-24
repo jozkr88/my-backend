@@ -112,6 +112,16 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 3
+    "measurable_outcome_count": 3,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "c3b23c31816215691f3da05098b41f42eaec40298978f1b1c50da17fd2ed450d",
+    "source_uri": null
   }
 }

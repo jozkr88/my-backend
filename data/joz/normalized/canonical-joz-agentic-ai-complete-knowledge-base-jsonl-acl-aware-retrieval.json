@@ -1,0 +1,106 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-acl-aware-retrieval",
+  "title": "ACL-Aware Retrieval",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_028",
+  "summary": "Permissions must be enforced before retrieval.",
+  "body": "Permissions must be enforced before retrieval.\n\nThe system first authenticates the user, resolves source-system permissions, applies metadata and ACL filters, retrieves only authorized content, reranks results, and then provides permitted context to the LLM.\n\nUnauthorized information must never enter the LLM context window.\n\nACLs should be inherited from source systems whenever possible and all retrieval operations should be auditable.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "acl",
+      "permissions",
+      "retrieval",
+      "security"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "acl",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [
+      "context_creates_intelligence",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "context_engineering",
+      "rag"
+    ],
+    "outcomes": [],
+    "governance": [
+      "access_control",
+      "auditability",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_028",
+    "canonical_record_title": "ACL-Aware Retrieval",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "acl",
+      "permissions",
+      "retrieval",
+      "security"
+    ],
+    "source_authority": 24,
+    "semantic_text": "ACL-Aware Retrieval\nACL-Aware Retrieval\nacl permissions retrieval security\nacl permissions retrieval security\nPermissions must be enforced before retrieval.\n\nThe system first authenticates the user, resolves source-system permissions, applies metadata and ACL filters, retrieves only authorized content, reranks results, and then provides permitted context to the LLM.\n\nUnauthorized information must never enter the LLM context window.\n\nACLs should be inherited from source systems whenever possible and all retrieval operations should be auditable.",
+    "keyword_terms": [
+      "acl",
+      "aware",
+      "permissions",
+      "retrieval",
+      "security"
+    ],
+    "exact_phrases": [
+      "ACL-Aware Retrieval",
+      "acl",
+      "permissions",
+      "retrieval",
+      "security"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "734b811fddfc6310b3bbb8ecbd6d2baeec5d3b17996cfd4e4ab0d031a17a4017",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_028"
+  }
+}

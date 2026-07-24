@@ -12,7 +12,7 @@
       "explore",
       "open"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.891Z"
+    "lastUpdated": "2026-07-24T19:04:18.047Z"
   },
   "1": {
     "commands": [],
@@ -26,7 +26,7 @@
       "start flex",
       "activate flex"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.891Z"
+    "lastUpdated": "2026-07-24T19:04:18.047Z"
   },
   "2": {
     "commands": [],
@@ -40,7 +40,7 @@
       "talents",
       "resume"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.891Z"
+    "lastUpdated": "2026-07-24T19:04:18.047Z"
   },
   "3": {
     "commands": [],
@@ -53,7 +53,7 @@
       "explore projects",
       "show creations"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.891Z"
+    "lastUpdated": "2026-07-24T19:04:18.047Z"
   },
   "4": {
     "commands": [],
@@ -66,7 +66,7 @@
       "previous",
       "exit"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.891Z"
+    "lastUpdated": "2026-07-24T19:04:18.047Z"
   },
   "brain": {
     "action": "portal",
@@ -92,7 +92,7 @@
       "open the flex",
       "open maxx"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.895Z"
+    "lastUpdated": "2026-07-24T19:04:18.050Z"
   },
   "vibe": {
     "action": "activate",
@@ -162,7 +162,7 @@
       "meet jos",
       "neo meet joz"
     ],
-    "lastUpdated": "2026-06-07T18:42:19.896Z"
+    "lastUpdated": "2026-07-24T19:04:18.050Z"
   },
   "n2x": {
     "action": "toggleNeurons",
@@ -599,5 +599,27 @@
     "action": "defined",
     "context": {},
     "lastUpdated": "2026-06-07T18:42:26.625Z"
+  },
+  "neurotransmitters": {
+    "action": "toggleNeurotransmitters",
+    "context": {
+      "target": null
+    },
+    "commands": [
+      "pause neurons",
+      "pause animation",
+      "stop animation",
+      "stop neurons",
+      "pause",
+      "resume neurons",
+      "resume animation",
+      "continue animation",
+      "toggle neurons",
+      "play",
+      "play neurons",
+      "start neurons",
+      "start animation"
+    ],
+    "lastUpdated": "2026-07-24T19:04:18.044Z"
   }
 }

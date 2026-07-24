@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-prompt-injection-defense",
+  "title": "Prompt Injection Defense",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_012",
+  "summary": "Treat all external content as untrusted data.",
+  "body": "Treat all external content as untrusted data.\n\nSeparate system instructions from retrieved content.\nNever allow retrieved text to modify security policy.\nRestrict tool permissions by user and agent.\nValidate tool arguments against schemas.\nApply deterministic policy checks before side effects.\nTrace and audit all tool use.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "guardrails",
+      "prompt-injection"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "acl",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "low_trust"
+    ],
+    "principles": [
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval"
+    ],
+    "outcomes": [
+      "higher_data_trust"
+    ],
+    "governance": [
+      "access_control",
+      "auditability"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_012",
+    "canonical_record_title": "Prompt Injection Defense",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "guardrails",
+      "prompt-injection"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Prompt Injection Defense\nPrompt Injection Defense\nguardrails prompt-injection\nguardrails prompt-injection\nTreat all external content as untrusted data.\n\nSeparate system instructions from retrieved content.\nNever allow retrieved text to modify security policy.\nRestrict tool permissions by user and agent.\nValidate tool arguments against schemas.\nApply deterministic policy checks before side effects.\nTrace and audit all tool use.",
+    "keyword_terms": [
+      "defense",
+      "guardrails",
+      "injection",
+      "prompt",
+      "prompt-injection"
+    ],
+    "exact_phrases": [
+      "Prompt Injection Defense",
+      "guardrails",
+      "prompt-injection"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "5e2d6cad474d88649bbb40128f6e889b09f8f6874703fb7ee6feb42de06bdffc",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_012"
+  }
+}

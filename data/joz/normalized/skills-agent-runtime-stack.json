@@ -3,7 +3,7 @@
   "title": "Agent Runtime Stack",
   "category": "skills",
   "source_type": "paste",
-  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "source_uri": "source://joz/skills-agent-runtime-stack.md",
   "summary": "Explains the runtime stack behind a serious agent system, including model, tools, memory, orchestration, durable execution, state, and observability.",
   "body": "Agent Runtime Stack\n\nPurpose\nThis record explains the runtime stack behind a serious agent system in a way that is useful for architecture, engineering, and recruiter conversations.\n\nCore framing\nAn agent is not just an LLM. The runtime stack combines the model, instructions, tools, memory, orchestration, and verification.\n\nUseful shorthand\n- Agent = LLM + instructions + tools + memory + execution loop\n- Single agent = one responsibility with defined tools and state\n- Multi-agent system = supervisor agent + specialist agents + shared state\n- Orchestrator = workflow engine + state management + execution control\n\nRecommended production stack\n- FastAPI as the API and agent gateway\n- LangGraph as the reasoning and workflow graph\n- Temporal as the durable execution layer for retries, approvals, and resumable work\n- PostgreSQL for persistent state and audit records\n- Redis for cache and short-lived coordination\n- Event transport for communication between services\n- Secret management for credentials and signing keys\n- Observability for traces, metrics, logs, and failure visibility\n\nRole separation\n- FastAPI receives requests and exposes backend services\n- LangGraph controls the reasoning workflow and state transitions\n- Temporal manages durable business processes and retries\n- PostgreSQL stores long-lived workflow state and audit history\n- Observability shows routes, tool calls, latency, fallback behavior, and failures\n\nWhy this matters\nThe value of the stack is not novelty. It is reliable execution, controlled state transitions, failure recovery, and clear visibility into what the system did and why.",
   "metadata": {
@@ -80,6 +80,16 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "dfce129966d7ea31e6bfcc0a35fd2d582e59751d8ab87d00202cb50b8c9f6d81",
+    "source_uri": "source://joz/skills-agent-runtime-stack.md"
   }
 }

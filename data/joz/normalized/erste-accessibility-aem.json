@@ -85,6 +85,16 @@
       "erste_customer_scale"
     ],
     "enterprise_scale_score": 98,
-    "measurable_outcome_count": 2
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "694c5e9e036527602900131414b729ddb624833fc8324d5e4fb538021a0a43e2",
+    "source_uri": null
   }
 }

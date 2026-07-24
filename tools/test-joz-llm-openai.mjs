@@ -17,7 +17,7 @@ if (!process.env.OPENAI_API_KEY && !localOnly) {
 
 const localApiUrl = String(process.env.JOZ_LOCAL_API_URL || "http://127.0.0.1:3016").replace(/\/$/, "");
 const datasetName = String(process.env.JOZ_OPENAI_QUALITY_DATASET || "joz-llm-golden-273.json").trim();
-const datasetPath = path.resolve(projectRoot, "content", datasetName);
+const datasetPath = path.resolve(projectRoot, "server/content", datasetName);
 const dataset = JSON.parse(await fs.readFile(datasetPath, "utf8"));
 const limit = Math.max(1, Math.min(500, Number(process.env.JOZ_OPENAI_QUALITY_LIMIT) || dataset.cases.length));
 const cases = dataset.cases.slice(0, limit);
@@ -95,7 +95,7 @@ const evaluator = await execFileAsync(
   process.execPath,
   ["tools/evaluate-joz-llm-with-openai.mjs"],
   {
-    cwd: projectRoot,
+    cwd: path.resolve(projectRoot, "server"),
     env: {
       ...process.env,
       JOZ_EVAL_LIMIT: String(cases.length),
@@ -105,8 +105,8 @@ const evaluator = await execFileAsync(
   }
 );
 
-// db.js may print a startup status line before the evaluator's JSON. Parse the
-// JSON payload without losing a successful paid evaluation to that log line.
+// db.js may print a startup status line before the evaluator JSON. Parse the
+// JSON payload without turning a successful evaluation into a wrapper error.
 const evaluatorOutput = String(evaluator.stdout || "").trim();
 const evaluatorJsonStart = evaluatorOutput.indexOf("{");
 if (evaluatorJsonStart < 0) {

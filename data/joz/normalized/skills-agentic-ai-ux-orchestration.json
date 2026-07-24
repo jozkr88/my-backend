@@ -106,6 +106,16 @@
       "versace_spatial_ai_launch"
     ],
     "enterprise_scale_score": 99,
-    "measurable_outcome_count": 3
+    "measurable_outcome_count": 3,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "000d44f34c177ffeb1151263029b4938eba8dfef34e50828106d760b83f25782",
+    "source_uri": null
   }
 }

@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-autonomous-execution-layer",
+  "title": "Autonomous Execution Layer",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_032",
+  "summary": "The Autonomous Execution Layer transforms organisational awareness into governed action.",
+  "body": "The Autonomous Execution Layer transforms organisational awareness into governed action.\n\nAgent loop:\nTask → Plan → Retrieve Context → Implement → Verify → Repair → Verify → Pull Request\n\nAgents retrieve ownership information, historical decisions, architecture constraints, coding standards, operational requirements, and relevant documentation before making changes.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "agent-loop",
+      "autonomous-execution",
+      "hands"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "system_architecture"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "context_creates_intelligence"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "context_engineering",
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [
+      "clear_ownership"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_032",
+    "canonical_record_title": "Autonomous Execution Layer",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agent-loop",
+      "autonomous-execution",
+      "hands"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Autonomous Execution Layer\nAutonomous Execution Layer\nagent-loop autonomous-execution hands\nagent-loop autonomous-execution hands\nThe Autonomous Execution Layer transforms organisational awareness into governed action.\n\nAgent loop:\nTask → Plan → Retrieve Context → Implement → Verify → Repair → Verify → Pull Request\n\nAgents retrieve ownership information, historical decisions, architecture constraints, coding standards, operational requirements, and relevant documentation before making changes.",
+    "keyword_terms": [
+      "agent-loop",
+      "autonomous",
+      "autonomous-execution",
+      "execution",
+      "hands",
+      "layer"
+    ],
+    "exact_phrases": [
+      "Autonomous Execution Layer",
+      "agent-loop",
+      "autonomous-execution",
+      "hands"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "4ea5d472e0d7d6313d7bf881a0f2dde034a2a7b4b0565e16c248a9e40e0d1058",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_032"
+  }
+}

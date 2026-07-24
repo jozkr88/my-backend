@@ -98,6 +98,16 @@
       "manulife_lean_ml_ux"
     ],
     "enterprise_scale_score": 97,
-    "measurable_outcome_count": 2
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "4f878947f70a136c725c40473614bc9aa2b2581c7b1080f3f08a7da52eced3bb",
+    "source_uri": null
   }
 }

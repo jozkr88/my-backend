@@ -108,6 +108,16 @@
       "maybank_digital_sales_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 1
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "fc7fcbe44abfd07bb9de1684df2202334c8718a30e4e0aaf590efd79ae170987",
+    "source_uri": null
   }
 }
