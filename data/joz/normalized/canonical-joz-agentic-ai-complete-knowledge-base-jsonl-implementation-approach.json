@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-implementation-approach",
+  "title": "Implementation Approach",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_023",
+  "summary": "Start with one narrow, read-only workflow.",
+  "body": "Start with one narrow, read-only workflow.\n\nPhase 1:\nReceive a user question.\nRetrieve trusted data.\nRun one agent workflow.\nReturn a structured, cited answer.\n\nPhase 2:\nGenerate a typed proposal.\nSimulate risk.\nApply policy.\nRequest approval.\n\nPhase 3:\nExecute through a restricted service.\nVerify the final state.\nReconcile failures.\nMaintain a complete audit trail.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "implementation",
+      "roadmap"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "low_trust",
+      "manual_knowledge_work",
+      "operational_friction"
+    ],
+    "principles": [
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "higher_data_trust",
+      "lower_risk"
+    ],
+    "governance": [
+      "auditability",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_023",
+    "canonical_record_title": "Implementation Approach",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "implementation",
+      "roadmap"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Implementation Approach\nImplementation Approach\nimplementation roadmap\nimplementation roadmap\nStart with one narrow, read-only workflow.\n\nPhase 1:\nReceive a user question.\nRetrieve trusted data.\nRun one agent workflow.\nReturn a structured, cited answer.\n\nPhase 2:\nGenerate a typed proposal.\nSimulate risk.\nApply policy.\nRequest approval.\n\nPhase 3:\nExecute through a restricted service.\nVerify the final state.\nReconcile failures.\nMaintain a complete audit trail.",
+    "keyword_terms": [
+      "approach",
+      "implementation",
+      "roadmap"
+    ],
+    "exact_phrases": [
+      "Implementation Approach",
+      "implementation",
+      "roadmap"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "7dcc96e352855de55efe559a07b6e327492ddb050f94366a744aaa5b45d05fc8",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_023"
+  }
+}

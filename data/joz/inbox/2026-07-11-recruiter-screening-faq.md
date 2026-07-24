@@ -7,7 +7,7 @@ Screening Answers
 
 Nationality and work status
 - Joz is Slovak and an EU national.
-- Joz's current Singapore pass status, work authorization, or sponsorship requirement should be confirmed directly with Joz rather than assumed.
+- Joz's Singapore status is EP/PEP.
 
 Primary contact details
 - Email: joz@meetjoz.com
@@ -25,7 +25,7 @@ Years of experience
 - The ML/AI-focused timeline is based on work from 2018 to present.
 
 Education
-- Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire.
+- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.
 - Joz also held an Innovation Strategist university appointment there.
 - Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.
 

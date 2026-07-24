@@ -1,0 +1,87 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-gitops",
+  "title": "GitOps",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_033",
+  "summary": "GitOps uses Git as the source of truth for infrastructure and deployment state.",
+  "body": "GitOps uses Git as the source of truth for infrastructure and deployment state.\n\nFlow:\nChange configuration in Git\n→ Review\n→ Merge\n→ Automated reconciliation\n→ Cluster updated\n\nArgo CD and Flux are common GitOps tools.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "argocd",
+      "flux",
+      "gitops"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_033",
+    "canonical_record_title": "GitOps",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "argocd",
+      "flux",
+      "gitops"
+    ],
+    "source_authority": 12,
+    "semantic_text": "GitOps\nGitOps\nargocd flux gitops\nargocd flux gitops\nGitOps uses Git as the source of truth for infrastructure and deployment state.\n\nFlow:\nChange configuration in Git\n→ Review\n→ Merge\n→ Automated reconciliation\n→ Cluster updated\n\nArgo CD and Flux are common GitOps tools.",
+    "keyword_terms": [
+      "argocd",
+      "flux",
+      "gitops"
+    ],
+    "exact_phrases": [
+      "GitOps",
+      "argocd",
+      "flux",
+      "gitops"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "2023178f50d34583c73e88ab9bb73e36829a347e1a3ed4b4733159acb0e36f4a",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_033"
+  }
+}

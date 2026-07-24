@@ -16,6 +16,9 @@ In your local [server/.env](/Users/jozzox/Downloads/xq/server/.env) or deploymen
 ```env
 OPENAI_API_KEY=...
 SUPABASE_DB_URL=postgresql://postgres:<password>@<host>:5432/postgres
+SUPABASE_URL=https://your-project.supabase.co
+JOZ_REQUIRE_AUTH=true
+JOZ_REQUIRE_DATABASE=true
 ```
 
 `DATABASE_URL` also works, but `SUPABASE_DB_URL` is preferred for clarity.
@@ -32,13 +35,14 @@ If the DB connection is present, the server will:
 - use Postgres for `meet-joz` transitions first
 - log reasoning decisions into `reasoning_events`
 - have the initial Joz LLM profile, button-lane capabilities, and seeded knowledge documents available
-- fall back to file memory if no DB URL is set
+- fail closed in production when no DB URL is set; local development can explicitly set `JOZ_REQUIRE_DATABASE=false` to use the non-durable fallback
 
 ### Notes
 
 - This is direct Postgres access, not the Supabase JS client.
 - Your Express backend remains the reasoning gateway.
 - Supabase is only the database layer in this setup.
+- Supabase Auth issues the access JWT. The frontend sends it as `Authorization: Bearer ...`; Express verifies it before proposal approval or execution. Set `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` in the frontend build environment and use `/auth` for email/password or magic-link sign-in.
 
 ## Callback Email Notification With Supabase
 

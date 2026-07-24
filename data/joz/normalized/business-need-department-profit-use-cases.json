@@ -102,6 +102,16 @@
       "mediacorp_audience_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 5
+    "measurable_outcome_count": 5,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "e83802dc54a0b444c224c52e9eab48ae1cd39a4524df43308ea50d4656c26922",
+    "source_uri": null
   }
 }

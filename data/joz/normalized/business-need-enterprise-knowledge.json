@@ -95,6 +95,16 @@
       "marketclue_financial_agents"
     ],
     "enterprise_scale_score": 98,
-    "measurable_outcome_count": 2
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "7dbd174b112339e90299b6aef94af8c476ad69ff3fa54d387249349e208d342f",
+    "source_uri": null
   }
 }

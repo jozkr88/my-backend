@@ -3,7 +3,7 @@
   "title": "Agent Control Loop For High-Stakes Systems",
   "category": "systems_principle",
   "source_type": "paste",
-  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "source_uri": "source://joz/systems-agent-control-loop.md",
   "summary": "Defines the safest control loop for high-stakes agent systems: propose, validate, execute through secure services, and verify against real systems.",
   "body": "Agent Control Loop For High-Stakes Systems\n\nPurpose\nThis record captures the safest control loop for agent systems that can trigger real actions.\n\nCore rule\nLLM proposes. Policy validates. Secure service executes. Real systems verify.\n\nExpanded loop\nIntent -> Plan -> Retrieve -> Simulate -> Validate -> Approve -> Execute -> Verify\n\nWhy this is the right control model\nThe model should not directly perform high-stakes actions. It should propose a next step. Policy should check permissions, limits, approvals, and confidence. A secure execution layer should act. Verification should confirm what actually happened in authoritative systems.\n\nWhat this prevents\n- Unsupported autonomous actions\n- Prompt-led execution without controls\n- Weak auditability\n- Irreversible mistakes caused by reasoning drift\n- Unverified outcomes being treated as complete\n\nWhy this matters\nThe hardest problem is not intelligence. It is safely turning intelligence into action with deterministic control points, visible approvals, and real post-action confirmation.",
   "metadata": {
@@ -82,6 +82,16 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "92a8e6d62689201ed4a2f0b2f9c19af3fef04a2785fabd27ee41bece8394a6a2",
+    "source_uri": "source://joz/systems-agent-control-loop.md"
   }
 }

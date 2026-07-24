@@ -82,6 +82,16 @@
       "dff_rapid_ai_prototyping"
     ],
     "enterprise_scale_score": 81,
-    "measurable_outcome_count": 2
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "e054b37b46f8a5432c29d91263d66f0d477d6478fc183cbc2dc6c2a4227413cf",
+    "source_uri": null
   }
 }

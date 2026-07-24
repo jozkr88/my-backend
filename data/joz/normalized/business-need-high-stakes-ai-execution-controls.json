@@ -3,7 +3,7 @@
   "title": "High-Stakes AI Execution Controls",
   "category": "business_need",
   "source_type": "paste",
-  "source_uri": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "source_uri": "source://joz/business-need-high-stakes-ai-execution-controls.md",
   "summary": "Explains why the real challenge in serious AI systems is controlled execution, verification, auditability, and failure recovery rather than intelligence alone.",
   "body": "High-Stakes AI Execution Controls\n\nPurpose\nThis record explains what matters most when an AI system moves from advice to action in a serious operating environment.\n\nCore idea\nThe hardest problem is not intelligence. It is safely turning intelligence into action.\n\nWhat becomes critical\n- Security\n- Policy enforcement\n- Execution controls\n- Verification\n- Auditability\n- Failure recovery\n- Real-time state consistency\n- Observability\n\nWhy this matters\nOnce an agent can trigger workflows, approvals, transactions, or state changes, the architecture must prioritize controlled execution over demo intelligence. That means deterministic services, permission checks, strong verification, and post-action traceability.\n\nBusiness value\nThis is how AI moves from a novelty layer to an operational system that leadership can trust, scale, and govern.",
   "metadata": {
@@ -84,6 +84,16 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 2
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "553eb9dde1ce08b5bede85e18103c31eadbc073e2643fa39f901eb378cc7328f",
+    "source_uri": "source://joz/business-need-high-stakes-ai-execution-controls.md"
   }
 }

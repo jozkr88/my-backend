@@ -1,0 +1,103 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-organisational-retrieval-strategy",
+  "title": "Organisational Retrieval Strategy",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_029",
+  "summary": "Use hybrid retrieval:",
+  "body": "Use hybrid retrieval:\n\nMetadata filtering\nKeyword search\nVector search\nGraph traversal\nRecency scoring\nSource-trust scoring\nOwnership weighting\n\nRetrieved results should be ranked by relevance, freshness, authority, and permission validity before they are supplied to the LLM.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "graph",
+      "hybrid-retrieval",
+      "ranking"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "retrieval"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "low_trust"
+    ],
+    "principles": [
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "product_strategy",
+      "rag"
+    ],
+    "outcomes": [
+      "higher_data_trust"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_029",
+    "canonical_record_title": "Organisational Retrieval Strategy",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "graph",
+      "hybrid-retrieval",
+      "ranking"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Organisational Retrieval Strategy\nOrganisational Retrieval Strategy\ngraph hybrid-retrieval ranking\ngraph hybrid-retrieval ranking\nUse hybrid retrieval:\n\nMetadata filtering\nKeyword search\nVector search\nGraph traversal\nRecency scoring\nSource-trust scoring\nOwnership weighting\n\nRetrieved results should be ranked by relevance, freshness, authority, and permission validity before they are supplied to the LLM.",
+    "keyword_terms": [
+      "graph",
+      "hybrid-retrieval",
+      "organisational",
+      "ranking",
+      "retrieval",
+      "strategy"
+    ],
+    "exact_phrases": [
+      "Organisational Retrieval Strategy",
+      "graph",
+      "hybrid-retrieval",
+      "ranking"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "ec48ce332f086263b5da6b1a5d0b8d8c42c04bf069a9114bca34b6e7ef7474db",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_029"
+  }
+}

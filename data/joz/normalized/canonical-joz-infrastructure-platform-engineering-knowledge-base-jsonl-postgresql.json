@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-postgresql",
+  "title": "PostgreSQL",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_014",
+  "summary": "PostgreSQL is the primary relational database for durable application state.",
+  "body": "PostgreSQL is the primary relational database for durable application state.\n\nTypical data:\nUsers\nPermissions\nWorkflow state\nAgent runs\nOrders\nAudit records\nConfiguration\nMetadata\n\nPostgreSQL = permanent filing system.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "database",
+      "postgresql",
+      "state"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "acl",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [
+      "access_control",
+      "auditability"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_014",
+    "canonical_record_title": "PostgreSQL",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "database",
+      "postgresql",
+      "state"
+    ],
+    "source_authority": 12,
+    "semantic_text": "PostgreSQL\nPostgreSQL\ndatabase postgresql state\ndatabase postgresql state\nPostgreSQL is the primary relational database for durable application state.\n\nTypical data:\nUsers\nPermissions\nWorkflow state\nAgent runs\nOrders\nAudit records\nConfiguration\nMetadata\n\nPostgreSQL = permanent filing system.",
+    "keyword_terms": [
+      "database",
+      "postgresql",
+      "state"
+    ],
+    "exact_phrases": [
+      "PostgreSQL",
+      "database",
+      "postgresql",
+      "state"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "0774a8d99fa033a570e042d681c0c65dc0a354efb8112d8e980bcc9791910d53",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_014"
+  }
+}

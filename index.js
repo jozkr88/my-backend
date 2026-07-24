@@ -17,13 +17,18 @@ import {
   exportJozPrivacyBundle,
   getPortalTransition,
   getPrimaryJozProfile,
+  getJozDataControlOverview,
   getJozDocumentsByIntent,
   getStructuredWorldState,
   initDatabase,
   isDatabaseEnabled,
+  isDatabaseRequired,
   listRecentJozLlmRequestEvents,
   listRecentJozLlmEvaluations,
   listJozLlmRepairCandidates,
+  loadJozActionProposal,
+  saveJozActionProposal,
+  updateJozActionProposal,
   logReasoningEvent,
   logJozLlmRequestEvent,
   reviewJozLlmRepairCandidate,
@@ -65,16 +70,34 @@ import {
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   buildRoleAwareJozContext,
-  buildVisitorLocationReply,
   composeJozLlmRouteReply,
+  buildVisitorLocationReply,
   enforceJozCommercialBoundaryResolution,
   resolveUnknownJozReply,
   routeJozLlmQueryWithAwareness,
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
+import {
+  createJozModelGateway,
+  getJozModelRuntimeDescriptor,
+  isJozModelGatewayAvailable,
+} from "./shared/jozModelGateway.js";
+import { requireJozAuth } from "./shared/jozAuth.js";
 import { classifyJozAudience } from "./shared/jozAudienceClassifier.js";
 import { resolveJozRequestGeo } from "./shared/jozGeoLocation.js";
+import {
+  approveJozActionProposal,
+  beginJozActionExecution,
+  completeJozActionExecution,
+  getJozActionProposalRecord,
+  hydrateJozActionProposal,
+  registerJozActionProposal,
+} from "./shared/jozActionProposals.js";
+import {
+  executeJozAllowlistedAction,
+  verifyJozAllowlistedAction,
+} from "./shared/jozActionExecutor.js";
 import {
   buildJozAgentPlan,
   buildJozRiskGateResolution,
@@ -88,6 +111,14 @@ dotenv.config();
 
 await initDatabase();
 
+const JOZ_BUILD_ID = String(
+  process.env.RENDER_GIT_COMMIT ||
+  process.env.COMMIT_SHA ||
+  process.env.JOZ_BUILD_ID ||
+  "local"
+).trim();
+const JOZ_ROUTER_VERSION = "2026-07-24-intake-hardening-1";
+
 const app = express();
 app.set("trust proxy", 2);
 const isEphemeralFilesystem =
@@ -96,6 +127,7 @@ const isEphemeralFilesystem =
   Boolean(process.env.RENDER) ||
   process.env.DISABLE_FILE_MEMORY === "1";
 const canPersistToLocalDisk = !isEphemeralFilesystem;
+const canUseLocalWorldMemory = canPersistToLocalDisk && !isDatabaseRequired();
 const JOZ_CHAT_SESSION_WINDOW_MS = 30_000;
 const JOZ_CHAT_SESSION_MAX_REQUESTS = 5;
 const JOZ_CHAT_IP_WINDOW_MS = 5 * 60_000;
@@ -264,7 +296,68 @@ app.use(express.json());
 
 // --- Test route ---
 app.get("/api/hello", (req, res) => {
-  res.json({ message: "Backend is connected and running!" });
+  res.json({
+    message: "Backend is connected and running!",
+    buildId: JOZ_BUILD_ID,
+    routerVersion: JOZ_ROUTER_VERSION,
+    modelRuntime,
+  });
+});
+
+app.get("/api/version", (req, res) => {
+  res.json({
+    buildId: JOZ_BUILD_ID,
+    routerVersion: JOZ_ROUTER_VERSION,
+    environment: process.env.NODE_ENV || "development",
+    modelRuntime,
+  });
+});
+
+app.get("/api/joz-data/overview", async (req, res) => {
+  try {
+    const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+    const manifestPath = path.join(repoRoot, "data", "joz", "published", "joz-dataset-manifest.json");
+    const bundlePath = path.join(repoRoot, "data", "joz", "published", "joz-documents.generated.json");
+    const manifest = fs.existsSync(manifestPath)
+      ? JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+      : {};
+    const bundle = fs.existsSync(bundlePath)
+      ? JSON.parse(fs.readFileSync(bundlePath, "utf8"))
+      : {};
+    const localRecords = Array.isArray(bundle?.records) ? bundle.records : [];
+    const evidenceTiers = {};
+    for (const record of localRecords) {
+      const tier = record?.metadata?.evidence_tier || "unverified";
+      evidenceTiers[tier] = (evidenceTiers[tier] || 0) + 1;
+    }
+
+    return res.json({
+      ok: true,
+      generatedAt: new Date().toISOString(),
+      local: {
+        manifest,
+        recordCount: localRecords.length,
+        modelReadyCount: Array.isArray(bundle?.model_ready_records) ? bundle.model_ready_records.length : 0,
+        evidenceTiers,
+        sources: Array.isArray(manifest?.sources) ? manifest.sources : [],
+      },
+      runtime: {
+        databaseEnabled: isDatabaseEnabled(),
+        databaseRequired: isDatabaseRequired(),
+        source: isDatabaseRequired()
+          ? "supabase_postgres"
+          : isDatabaseEnabled()
+            ? "supabase_postgres_plus_local_build_artifact"
+            : "local_file_memory",
+        localFallbackEnabled: !isDatabaseRequired(),
+      },
+      modelRuntime,
+      supabase: await getJozDataControlOverview(),
+    });
+  } catch (error) {
+    console.error("❌ /api/joz-data/overview failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
 });
 
 // === FILE PERSISTENCE SETUP ===
@@ -274,12 +367,14 @@ let worldMap = {};
 
 // 🔹 Load memory
 try {
-  if (fs.existsSync(MEMORY_FILE)) {
+  if (canUseLocalWorldMemory && fs.existsSync(MEMORY_FILE)) {
     const raw = fs.readFileSync(MEMORY_FILE, "utf8");
     worldMemory = JSON.parse(raw);
     console.log(`💾 Loaded ${Object.keys(worldMemory).length} worldMemory objects`);
-  } else {
+  } else if (canUseLocalWorldMemory) {
     console.log("🆕 No existing world memory, starting fresh");
+  } else {
+    console.log("💾 Local world memory disabled; database control plane is authoritative");
   }
 } catch (err) {
   console.error("⚠️ Failed to load world memory:", err);
@@ -287,8 +382,8 @@ try {
 
 // 🔹 Save helper
 function saveWorldMemory() {
-  if (!canPersistToLocalDisk) {
-    console.log("💾 Skipping worldMemory save on ephemeral host");
+  if (!canUseLocalWorldMemory) {
+    console.log("💾 Skipping worldMemory save; database control plane is authoritative");
     return;
   }
 
@@ -304,6 +399,11 @@ function saveWorldMemory() {
 // 1️⃣ World Map Updates
 // ------------------------------------------------------------
 app.post("/api/world-map", (req, res) => {
+  if (!canUseLocalWorldMemory) {
+    return res.status(503).json({
+      error: "Database-backed world state is required; local world-memory writes are disabled.",
+    });
+  }
   worldMap = req.body.worldMap || {};
   mergeWorldMapIntoMemory(worldMap);
   if (canPersistToLocalDisk) saveWorldMemory();
@@ -311,12 +411,24 @@ app.post("/api/world-map", (req, res) => {
   res.json({ success: true });
 });
 
-app.get("/api/world-map", (req, res) => res.json(worldMap));
+app.get("/api/world-map", (req, res) => {
+  if (!canUseLocalWorldMemory) {
+    return res.status(503).json({
+      error: "Database-backed world state is required; local world-memory reads are disabled.",
+    });
+  }
+  return res.json(worldMap);
+});
 
 // ------------------------------------------------------------
 // 2️⃣ World Memory Storage
 // ------------------------------------------------------------
 app.post("/api/world-memory", (req, res) => {
+  if (!canUseLocalWorldMemory) {
+    return res.status(503).json({
+      error: "Database-backed world state is required; local world-memory writes are disabled.",
+    });
+  }
   const { mesh, action, context, commands = [] } = req.body;
   if (!mesh) return res.status(400).json({ error: "Missing mesh name" });
 
@@ -345,7 +457,14 @@ app.post("/api/world-memory", (req, res) => {
   res.json({ success: true, memory: worldMemory });
 });
 
-app.get("/api/world-memory", (req, res) => res.json(worldMemory));
+app.get("/api/world-memory", (req, res) => {
+  if (!canUseLocalWorldMemory) {
+    return res.status(503).json({
+      error: "Database-backed world state is required; local world-memory reads are disabled.",
+    });
+  }
+  return res.json(worldMemory);
+});
 
 app.post("/api/agentic", async (req, res) => {
   try {
@@ -380,7 +499,7 @@ app.post("/api/agentic", async (req, res) => {
     });
     let proposal = null;
 
-    if (process.env.OPENAI_API_KEY) {
+    if (isJozModelGatewayAvailable(openai)) {
       try {
         const response = await openai.chat.completions.create({
           model: "gpt-4o-mini",
@@ -459,9 +578,11 @@ app.post("/api/agentic", async (req, res) => {
 // ------------------------------------------------------------
 // 3️⃣ AI Reasoning Endpoint
 // ------------------------------------------------------------
-const openai = process.env.OPENAI_API_KEY
+const hostedModelClient = process.env.OPENAI_API_KEY
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
   : null;
+const openai = createJozModelGateway({ client: hostedModelClient });
+const modelRuntime = getJozModelRuntimeDescriptor(openai);
 
 function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
   const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
@@ -931,10 +1052,22 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
 
-    const recentSessionMessages = getFallbackRecentJozSessionMessages({
-      sessionKey,
-      limit: 12,
-    });
+    const requestGeo = await requestGeoPromise;
+    const answerContext = requestGeo
+      ? { ...context, visitorGeo: requestGeo }
+      : context;
+
+    const requestConversationMessages = messages
+      .filter((message) => message?.role === "user" || message?.role === "assistant")
+      .map((message) => ({
+        role: message.role,
+        content: String(message.content || ""),
+        metadata: message?.metadata && typeof message.metadata === "object" ? message.metadata : {},
+      }));
+    const recentSessionMessages = [
+      ...getFallbackRecentJozSessionMessages({ sessionKey, limit: 12 }),
+      ...requestConversationMessages,
+    ].slice(-12);
     const route = routeJozLlmQueryWithAwareness({
       input: latestUserMessage,
       appContext: validatedAppContext,
@@ -968,15 +1101,11 @@ app.post("/api/joz-llm", async (req, res) => {
       route.selectedRoute === "skills"
         ? route.selectedRoute
         : "skills";
-    const retrievedDocuments = await getJozDocumentsByIntent(
-      retrievalIntentMode,
-      8,
-      latestUserMessage
-    );
-    const requestGeo = await requestGeoPromise;
-    const answerContext = requestGeo
-      ? { ...context, visitorGeo: requestGeo }
-      : context;
+    const retrievedDocuments = intentClassification.needsClarification ||
+      intentClassification.kind === "execute" ||
+      intentClassification.kind === "refuse"
+      ? []
+      : await getJozDocumentsByIntent(retrievalIntentMode, 8, latestUserMessage);
     const retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
       category: doc.category,
@@ -996,6 +1125,7 @@ app.post("/api/joz-llm", async (req, res) => {
     roleAwareContext.agentPlan = agentPlan;
     const riskGateResolution = buildJozRiskGateResolution({
       classification: intentClassification,
+      input: latestUserMessage,
     });
     const safetyRefusalResolution = buildJozSafetyRefusalResolution({
       classification: intentClassification,
@@ -1041,12 +1171,15 @@ app.post("/api/joz-llm", async (req, res) => {
     });
     let trace = {
       ...buildJozRouteTrace(route, resolution),
+      modelRuntime,
       audienceProfile,
       intentClassification,
       agentPlan,
       risk: intentClassification.risk,
       execution: {
-        status: intentClassification.kind === "execute" ? "not_started" : "not_required",
+        status: intentClassification.kind === "execute" ? "approval_required" : "not_required",
+        proposed: intentClassification.kind === "execute",
+        executed: false,
       },
     };
     let verification = buildJozResponseVerification({
@@ -1075,12 +1208,15 @@ app.post("/api/joz-llm", async (req, res) => {
     if (fallbackRepair) {
       const repairedTrace = {
         ...buildJozRouteTrace(fallbackRepair.route, fallbackRepair.resolution),
+        modelRuntime,
         audienceProfile,
         intentClassification,
         agentPlan,
         risk: intentClassification.risk,
         execution: {
-          status: intentClassification.kind === "execute" ? "not_started" : "not_required",
+          status: intentClassification.kind === "execute" ? "approval_required" : "not_required",
+          proposed: intentClassification.kind === "execute",
+          executed: false,
         },
       };
       const repairedVerification = buildJozResponseVerification({
@@ -1134,6 +1270,70 @@ app.post("/api/joz-llm", async (req, res) => {
       finalAnswer: reply,
       verificationFlow,
     };
+    const execution = effectiveResolution?.execution || trace.execution;
+    let approval = null;
+    if (effectiveResolution?.proposal) {
+      const registered = registerJozActionProposal({
+        proposal: effectiveResolution.proposal,
+        sessionKey,
+      });
+      const persistedRecord = getJozActionProposalRecord(registered.proposal.proposalId);
+      await saveJozActionProposal({
+        proposal: registered.proposal,
+        sessionKey,
+        status: persistedRecord?.status || "pending",
+        approvalTokenHash: persistedRecord?.tokenHash || "",
+        executionTokenHash: persistedRecord?.executionTokenHash || null,
+        createdAt: persistedRecord?.createdAt || null,
+        expiresAt: persistedRecord?.expiresAt || registered.approval.expiresAt,
+        eventType: "proposed",
+        actor: "joz_llm",
+        eventMetadata: { risk: registered.proposal.risk || "unknown" },
+      });
+      effectiveResolution = {
+        ...effectiveResolution,
+        proposal: registered.proposal,
+      };
+      execution.proposal = registered.proposal;
+      approval = registered.approval;
+    }
+    trace = { ...trace, execution };
+    const reviewReasons = [];
+    if (verification.status === "fail") {
+      reviewReasons.push("deterministic_verification_failed");
+    }
+    if (intentClassification.confidenceBand === "medium") {
+      reviewReasons.push("medium_intent_confidence");
+    }
+    if (
+      ["business_need", "skills", "systems_mindset"].includes(effectiveRoute.selectedRoute) &&
+      verification?.grounding?.status !== "pass"
+    ) {
+      reviewReasons.push("grounding_needs_review");
+    }
+    const review = {
+      required: reviewReasons.length > 0,
+      reasons: reviewReasons,
+      status: reviewReasons.length > 0 ? "unreviewed" : "not_required",
+    };
+    const responseActions = (Array.isArray(effectiveResolution?.actions)
+      ? effectiveResolution.actions
+      : []
+    ).map((action) => {
+      if (action?.id !== "architecture_review_pay") return action;
+      if (conversationId) {
+        return {
+          ...action,
+          href: `/api/joz-llm/architecture-checkout?conversationId=${encodeURIComponent(conversationId)}`,
+        };
+      }
+      return {
+        id: "architecture_review_contact",
+        label: "Email Joz to start payment",
+        type: "mailto",
+        href: "mailto:joz@meetjoz.com?subject=Paid%20architecture%20review",
+      };
+    });
     const retrievedCategories =
       effectiveRoute.detectedSubIntent === "paid_architecture_boundary"
         ? []
@@ -1157,8 +1357,10 @@ app.post("/api/joz-llm", async (req, res) => {
           intentMode: effectiveRoute.selectedRoute,
           route: effectiveRoute.selectedRoute,
           retrievedCategories,
+          actions: responseActions,
           trace,
           verification,
+          review,
         },
       });
     }
@@ -1179,9 +1381,14 @@ app.post("/api/joz-llm", async (req, res) => {
         retrievedCategories,
         trace,
         verification,
+        review,
       },
     });
 
+    const requestContext = {
+      ...legacyRuntimeContext,
+      ...(requestGeo ? { geo: requestGeo } : {}),
+    };
     const observabilityEvent = {
       conversationId,
       sessionKey,
@@ -1189,12 +1396,10 @@ app.post("/api/joz-llm", async (req, res) => {
       intentMode: effectiveRoute.selectedRoute,
       userMessage: latestUserMessage,
       assistantReply: reply,
-      requestContext: {
-        ...legacyRuntimeContext,
-        ...(requestGeo ? { geo: requestGeo } : {}),
-      },
+      requestContext,
       trace,
       verification,
+      review,
       retrievedCategories,
       retrievedDocuments: responseRetrievedDocuments.map((doc) => ({
         title: doc.title,
@@ -1206,7 +1411,12 @@ app.post("/api/joz-llm", async (req, res) => {
           null,
       })),
       latencyMs: verification.metrics.latencyMs,
-      responseStatus: verification.status === "fail" ? "verification_failed" : "ok",
+      responseStatus:
+        verification.status === "fail"
+          ? "verification_failed"
+          : review.required
+            ? "needs_review"
+            : "ok",
     };
 
     if (isDatabaseEnabled()) {
@@ -1217,9 +1427,12 @@ app.post("/api/joz-llm", async (req, res) => {
 
     return res.json({
       reply,
+      buildId: JOZ_BUILD_ID,
+      routerVersion: JOZ_ROUTER_VERSION,
+      modelRuntime,
       conversationId,
       intentMode: effectiveRoute.selectedRoute,
-      actions: Array.isArray(effectiveResolution?.actions) ? effectiveResolution.actions : [],
+      actions: responseActions,
       citations: Array.isArray(verification?.citations) ? verification.citations : [],
       retrievedCategories,
       mode: effectiveRoute.selectedRoute,
@@ -1228,7 +1441,11 @@ app.post("/api/joz-llm", async (req, res) => {
       intent: intentClassification,
       agentPlan,
       risk: intentClassification.risk,
+      execution,
+      proposal: effectiveResolution?.proposal || null,
+      approval,
       verification,
+      review,
       verificationFlow,
       observability: {
         latencyMs: verification.metrics.latencyMs,
@@ -1239,6 +1456,111 @@ app.post("/api/joz-llm", async (req, res) => {
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);
     return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/joz-llm/proposals/:proposalId/approve", requireJozAuth, async (req, res) => {
+  if (isDatabaseEnabled()) {
+    const persisted = await loadJozActionProposal(req.params.proposalId);
+    if (persisted) hydrateJozActionProposal(persisted);
+  }
+  const result = approveJozActionProposal({
+    proposalId: req.params.proposalId,
+    token: req.body?.token,
+    approvedBy: req.jozAuth?.userId || req.body?.approvedBy || "chat",
+  });
+  if (!result.ok) return res.status(result.status).json({ error: result.error });
+  const updatedRecord = getJozActionProposalRecord(req.params.proposalId);
+  const persistedApproval = await updateJozActionProposal({
+    proposalId: req.params.proposalId,
+    status: updatedRecord?.status || "approved_not_executed",
+    expectedStatus: "pending",
+    expectedApprovalTokenHash: updatedRecord?.tokenHash || null,
+    executionTokenHash: updatedRecord?.executionTokenHash || null,
+    approvedBy: updatedRecord?.approvedBy || "chat",
+    approvedAt: updatedRecord?.approvedAt || null,
+    eventType: "approved",
+    actor: req.jozAuth?.userId || updatedRecord?.approvedBy || "chat",
+    eventMetadata: req.jozAuth ? { userId: req.jozAuth.userId, email: req.jozAuth.email } : {},
+  });
+  if (isDatabaseEnabled() && !persistedApproval) {
+    return res.status(409).json({ error: "Proposal was changed by another worker" });
+  }
+  return res.json(result);
+});
+
+app.post("/api/joz-llm/proposals/:proposalId/execute", requireJozAuth, async (req, res) => {
+  if (isDatabaseEnabled()) {
+    const persisted = await loadJozActionProposal(req.params.proposalId);
+    if (persisted) hydrateJozActionProposal(persisted);
+  }
+  const preExecutionRecord = getJozActionProposalRecord(req.params.proposalId);
+  const started = beginJozActionExecution({
+    proposalId: req.params.proposalId,
+    executionToken: req.body?.executionToken,
+  });
+  if (!started.ok) return res.status(started.status).json({ error: started.error });
+  if (req.jozAuth?.userId && started.proposal?.approvedBy && started.proposal.approvedBy !== req.jozAuth.userId) {
+    return res.status(403).json({ error: "Only the approving user can execute this proposal" });
+  }
+  const persistedStart = await updateJozActionProposal({
+    proposalId: req.params.proposalId,
+    status: "executing",
+    expectedStatus: "approved_not_executed",
+    expectedExecutionTokenHash: preExecutionRecord?.executionTokenHash || null,
+    executionTokenHash: null,
+    eventType: "execution_started",
+    actor: req.jozAuth?.userId || "chat",
+    eventMetadata: req.jozAuth ? { userId: req.jozAuth.userId, email: req.jozAuth.email } : {},
+  });
+  if (isDatabaseEnabled() && !persistedStart) {
+    return res.status(409).json({ error: "Proposal was changed by another worker" });
+  }
+
+  try {
+    const result = executeJozAllowlistedAction({ proposal: started.proposal });
+    const verification = verifyJozAllowlistedAction({ proposal: started.proposal, result });
+    const completed = completeJozActionExecution({
+      proposalId: req.params.proposalId,
+      result,
+      verification,
+    });
+    await updateJozActionProposal({
+      proposalId: req.params.proposalId,
+      status: completed?.proposal?.status || "verification_failed",
+      expectedStatus: "executing",
+      result,
+      verification,
+      completedAt: completed?.proposal?.completedAt || new Date().toISOString(),
+      eventType: verification?.verified ? "verified" : "verification_failed",
+      actor: req.jozAuth?.userId || "system",
+      eventMetadata: {
+        action: started.proposal?.action || null,
+        ...(req.jozAuth ? { userId: req.jozAuth.userId, email: req.jozAuth.email } : {}),
+      },
+    });
+    return res.json(completed);
+  } catch (error) {
+    const verification = { verified: false, checks: [{ id: "executor", status: "fail", detail: error.message }] };
+    const completed = completeJozActionExecution({
+      proposalId: req.params.proposalId,
+      result: null,
+      verification,
+    });
+    await updateJozActionProposal({
+      proposalId: req.params.proposalId,
+      status: "verification_failed",
+      result: null,
+      verification,
+      completedAt: completed?.proposal?.completedAt || new Date().toISOString(),
+      eventType: "execution_failed",
+      actor: req.jozAuth?.userId || "system",
+      eventMetadata: {
+        error: error.message,
+        ...(req.jozAuth ? { userId: req.jozAuth.userId, email: req.jozAuth.email } : {}),
+      },
+    });
+    return res.status(error.status || 500).json({ error: error.message, ...completed });
   }
 });
 
@@ -1449,6 +1771,70 @@ app.post("/api/joz-llm/landing", async (req, res) => {
   } catch (error) {
     console.error("❌ /api/joz-llm/landing failed:", error);
     return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/joz-llm/architecture-checkout", async (req, res) => {
+  const conversationId = normalizeCallbackField(req.query?.conversationId, 120);
+  const configuredCheckoutUrl = String(process.env.JOZ_ARCHITECTURE_CHECKOUT_URL || "").trim();
+
+  if (configuredCheckoutUrl) {
+    return res.redirect(303, configuredCheckoutUrl);
+  }
+
+  const stripeSecretKey = String(process.env.STRIPE_SECRET_KEY || "").trim();
+  const priceCents = Number.parseInt(
+    String(process.env.JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS || ""),
+    10
+  );
+  const currency = String(process.env.JOZ_ARCHITECTURE_REVIEW_CURRENCY || "usd")
+    .trim()
+    .toLowerCase();
+
+  if (!stripeSecretKey || !conversationId || !Number.isInteger(priceCents) || priceCents <= 0) {
+    return res
+      .status(503)
+      .type("html")
+      .send(
+        "<h1>Payment is not configured</h1><p>The architecture brief is saved in the chat. Joz still needs to configure the secure checkout before payment can start.</p>"
+      );
+  }
+
+  const configuredOrigin = String(process.env.JOZ_PUBLIC_APP_URL || "").trim().replace(/\/$/, "");
+  const requestOrigin = `${req.protocol}://${req.get("host")}`.replace(/\/$/, "");
+  const origin = configuredOrigin || requestOrigin;
+  const form = new URLSearchParams({
+    mode: "payment",
+    "success_url": `${origin}/?joz_payment=success&session_id={CHECKOUT_SESSION_ID}`,
+    "cancel_url": `${origin}/?joz_payment=cancelled`,
+    "line_items[0][price_data][currency]": currency,
+    "line_items[0][price_data][product_data][name]": "Joz paid architecture review",
+    "line_items[0][price_data][product_data][description]": "Company-specific AI architecture review and implementation scope.",
+    "line_items[0][price_data][unit_amount]": String(priceCents),
+    "line_items[0][quantity]": "1",
+    client_reference_id: conversationId,
+    "metadata[conversation_id]": conversationId,
+    "metadata[offer]": "paid_architecture_review",
+  });
+
+  try {
+    const stripeResponse = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${stripeSecretKey}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: form,
+    });
+    const session = await stripeResponse.json();
+    if (!stripeResponse.ok || !session?.url) {
+      console.error("❌ Stripe architecture checkout failed:", session?.error?.message || session);
+      return res.status(502).send("Payment could not be started. Please return to the chat and try again.");
+    }
+    return res.redirect(303, session.url);
+  } catch (error) {
+    console.error("❌ Architecture checkout request failed:", error);
+    return res.status(502).send("Payment could not be started. Please return to the chat and try again.");
   }
 });
 
@@ -1814,6 +2200,13 @@ Rules:
 - In meet-joz, worldx.glb is the surrounding semantic world and is not interactive, model1.glb is the main interactive object, Ascend/Discover is the clout-scale-heart-prestige layer, Skills/Mogg is the deeper work-capability layer, and back actions can visually unwind the sequence toward root.
 - If Allowed actions (guardrail) is provided, do not return an action outside that list unless the action is "contact_joz", "call_joz", "hide_contact_buttons", or "show_contact_buttons".
 `;
+
+    if (!isJozModelGatewayAvailable(openai)) {
+      return sendThinkResult(
+        { action: null, target: null, awareness: "No model provider is configured for this voice request." },
+        "model_unavailable",
+      );
+    }
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",

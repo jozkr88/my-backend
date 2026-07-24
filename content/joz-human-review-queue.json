@@ -1,7 +1,7 @@
 {
   "version": 1,
   "description": "Human review queue for borderline or failed Joz quality cases.",
-  "generatedAt": "2026-07-23T15:25:37.664Z",
+  "generatedAt": "2026-07-23T13:17:02.489Z",
   "reviewInstructions": [
     "Label the intended kind, domain, route, and risk level.",
     "Score answer correctness, relevance, groundedness, and safety from 0 to 5.",
@@ -31,7 +31,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -74,7 +74,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -117,7 +117,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -289,7 +289,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz designs governed AI systems that can work in the real world. What is your use case?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -332,7 +332,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz designs governed AI systems that can work in the real world. What is your use case?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -375,7 +375,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz turns complex systems into measurable outcomes. Is your focus business value, skills, or infrastructure?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -418,7 +418,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -461,7 +461,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -504,7 +504,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz combines consulting with hands-on building. What challenge should we start with?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -676,7 +676,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -719,7 +719,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -762,7 +762,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -848,7 +848,7 @@
         }
       },
       "verification": "warn",
-      "reply": "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -891,7 +891,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz designs governed AI systems that can work in the real world. What is your use case?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1063,7 +1063,7 @@
         }
       },
       "verification": "warn",
-      "reply": "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1106,7 +1106,7 @@
         }
       },
       "verification": "warn",
-      "reply": "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1149,7 +1149,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz designs governed AI systems that can work in the real world. What is your use case?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1321,7 +1321,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1364,7 +1364,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1407,7 +1407,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz combines consulting with hands-on building. What challenge should we start with?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1450,7 +1450,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz combines consulting with hands-on building. What challenge should we start with?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": false,
       "answerPass": true,
       "riskPass": true,
@@ -1496,7 +1496,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1539,7 +1539,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1582,7 +1582,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1625,7 +1625,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz works across strategy, architecture, engineering, and AI delivery. What would you like to explore?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1668,7 +1668,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz works across strategy, architecture, engineering, and AI delivery. What would you like to explore?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1711,7 +1711,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz diagnoses the problem, designs the system, and builds the solution. What are you trying to solve?",
+      "reply": "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1754,7 +1754,7 @@
         }
       },
       "verification": "warn",
-      "reply": "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1797,7 +1797,7 @@
         }
       },
       "verification": "warn",
-      "reply": "I can explain Joz’s background, business value, skills, or AI approach. Which direction interests you?",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1840,7 +1840,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz designs governed AI systems that can work in the real world. What is your use case?",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1883,7 +1883,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1926,7 +1926,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz brings together AI architecture, product thinking, and execution. What do you want to understand?",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,
@@ -1969,7 +1969,7 @@
         }
       },
       "verification": "warn",
-      "reply": "Joz combines consulting with hands-on building. What challenge should we start with?",
+      "reply": "That is outside the current deterministic Joz answer set. Ask specifically about Joz's background, business value, systems mindset, infrastructure approach, agent architecture, or implementation choices.",
       "intentPass": true,
       "answerPass": true,
       "riskPass": true,

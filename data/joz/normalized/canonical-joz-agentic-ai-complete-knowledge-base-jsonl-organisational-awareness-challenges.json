@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-organisational-awareness-challenges",
+  "title": "Organisational Awareness Challenges",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_031",
+  "summary": "The primary challenges are:",
+  "body": "The primary challenges are:\n\nACL enforcement\nOwnership inference\nKnowledge freshness\nConflicting sources\nSource trust\nStale decisions\nEntity resolution\nMaintaining citations\nPreventing unauthorized retrieval\nPreserving user trust as organisational knowledge changes",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "challenges",
+      "organisational-awareness"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "acl",
+      "system_architecture"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "low_trust"
+    ],
+    "principles": [
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "rag"
+    ],
+    "outcomes": [
+      "higher_data_trust"
+    ],
+    "governance": [
+      "access_control",
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_031",
+    "canonical_record_title": "Organisational Awareness Challenges",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "challenges",
+      "organisational-awareness"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Organisational Awareness Challenges\nOrganisational Awareness Challenges\nchallenges organisational-awareness\nchallenges organisational-awareness\nThe primary challenges are:\n\nACL enforcement\nOwnership inference\nKnowledge freshness\nConflicting sources\nSource trust\nStale decisions\nEntity resolution\nMaintaining citations\nPreventing unauthorized retrieval\nPreserving user trust as organisational knowledge changes",
+    "keyword_terms": [
+      "awareness",
+      "challenges",
+      "organisational",
+      "organisational-awareness"
+    ],
+    "exact_phrases": [
+      "Organisational Awareness Challenges",
+      "challenges",
+      "organisational-awareness"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "d17be517bce16011b373edef9b1ec4a47494c4bd23fd90e3173f91d011d18363",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_031"
+  }
+}

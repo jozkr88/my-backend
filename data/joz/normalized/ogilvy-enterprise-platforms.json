@@ -95,6 +95,16 @@
       "sgx_responsive_portals"
     ],
     "enterprise_scale_score": 83,
-    "measurable_outcome_count": 2
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "d11a3cd2d4f43d57f8e8ab18066d3ba65d9c52855dd62d84fd94793116b7e10c",
+    "source_uri": null
   }
 }

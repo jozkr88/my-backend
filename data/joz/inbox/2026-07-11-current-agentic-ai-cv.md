@@ -56,9 +56,9 @@ Deployed cross-platform UGC apps for Danone across 8 APAC markets.
 
 Postgraduate Education
 MSc Strategy and Innovation 2008
-University of Central Lancashire, United Kingdom
+University of Lancashire, United Kingdom
 Innovation Strategist (University Appointment) 2008–2012
-University of Central Lancashire, United Kingdom
+University of Lancashire, United Kingdom
 MIT/IDEO Design Thinking 2017–2018
 Certifications in Human–Centered Design and Innovation
 Apple Design Labs, Silicon Valley 2015–Present

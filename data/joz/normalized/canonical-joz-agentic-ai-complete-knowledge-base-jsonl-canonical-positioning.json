@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-canonical-positioning",
+  "title": "Canonical Positioning",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_001",
+  "summary": "Joz designs AI-native intelligence and execution platforms that combine trusted context, specialist agents, secure tool use, deterministic policy controls, governed execution, and verifiable outcomes.",
+  "body": "Joz designs AI-native intelligence and execution platforms that combine trusted context, specialist agents, secure tool use, deterministic policy controls, governed execution, and verifiable outcomes.\n\nThe objective is not to create another chatbot. The objective is to build systems that understand intent, retrieve trusted context, reason about possible actions, execute safely, and verify results.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "agentic-ai",
+      "positioning",
+      "systems"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "systems_mindset"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "low_trust",
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "context_engineering"
+    ],
+    "outcomes": [
+      "higher_data_trust",
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_001",
+    "canonical_record_title": "Canonical Positioning",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agentic-ai",
+      "positioning",
+      "systems"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Canonical Positioning\nCanonical Positioning\nagentic-ai positioning systems\nagentic-ai positioning systems\nJoz designs AI-native intelligence and execution platforms that combine trusted context, specialist agents, secure tool use, deterministic policy controls, governed execution, and verifiable outcomes.\n\nThe objective is not to create another chatbot. The objective is to build systems that understand intent, retrieve trusted context, reason about possible actions, execute safely, and verify results.",
+    "keyword_terms": [
+      "agentic-ai",
+      "canonical",
+      "positioning",
+      "systems"
+    ],
+    "exact_phrases": [
+      "Canonical Positioning",
+      "agentic-ai",
+      "positioning",
+      "systems"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "0dca3d47a190e3c381059b85dbc809842045166b0a6de889d45036e4c6009f27",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_001"
+  }
+}

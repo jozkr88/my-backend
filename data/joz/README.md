@@ -102,3 +102,19 @@ When new text is pasted:
   Runtime-safe subset excluding `draft` and `needs_review` records.
 
 This keeps the full corpus available for review while preventing unresolved material from entering the default retrieval path.
+
+## Data governance fields
+
+The build adds governance metadata to every normalized and published record:
+
+- `schema_version` for the record contract
+- `dataset_id` and `tenant_id` for isolation boundaries
+- `classification`, `visibility`, `owner`, and `retention_policy`
+- `evidence_tier` to distinguish verified facts from supported claims and framework guidance
+- `source_checksum` for content integrity
+
+The public corpus uses dataset `joz-public-knowledge` and tenant `public`. Customer data must use a separate dataset and tenant and must pass an authorization-aware retrieval path before it reaches model context. The generated `published/joz-dataset-manifest.json` records the dataset checksum and build counts.
+
+Internal filesystem paths are converted to stable `source://joz/...` identifiers during the build. Do not commit `.env` files or credentials; use local environment files or deployment secret storage.
+
+For the complete source-to-runtime architecture and Supabase control-plane tables, see `server/JOZ_DATA_CONTROL_PLANE.md`. Run `cd server && npm run audit:joz-data` for a read-only overview of the local dataset and the connected Supabase dataset.

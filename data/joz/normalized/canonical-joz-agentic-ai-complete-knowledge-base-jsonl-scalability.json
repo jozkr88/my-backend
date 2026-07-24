@@ -1,0 +1,96 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-scalability",
+  "title": "Scalability",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_020",
+  "summary": "Scale by separating reasoning, policy, execution, and verification into independently deployable services.",
+  "body": "Scale by separating reasoning, policy, execution, and verification into independently deployable services.\n\nUse stateless APIs behind load balancers, horizontal scaling, Redis caching, event streams, durable workflows, database replication, backpressure, rate limits, and full observability.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "distributed-systems",
+      "scalability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "observability",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_020",
+    "canonical_record_title": "Scalability",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "distributed-systems",
+      "scalability"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Scalability\nScalability\ndistributed-systems scalability\ndistributed-systems scalability\nScale by separating reasoning, policy, execution, and verification into independently deployable services.\n\nUse stateless APIs behind load balancers, horizontal scaling, Redis caching, event streams, durable workflows, database replication, backpressure, rate limits, and full observability.",
+    "keyword_terms": [
+      "distributed-systems",
+      "scalability"
+    ],
+    "exact_phrases": [
+      "Scalability",
+      "distributed-systems",
+      "scalability"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "b13e2486a089e1ead653262b3eeb0bf75b137223e9d20e52ca74e0f7a7c8fcc7",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_020"
+  }
+}

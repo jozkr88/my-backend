@@ -1,7 +1,7 @@
 {
   "version": 2,
   "description": "Expanded Joz LLM golden corpus for intent, answer, risk, grounding, ambiguity, and multi-turn regression testing.",
-  "generatedAt": "2026-07-23T15:25:37.474Z",
+  "generatedAt": "2026-07-23T13:14:53.406Z",
   "total": 273,
   "categories": [
     "business",
