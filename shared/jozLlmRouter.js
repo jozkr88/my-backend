@@ -11,6 +11,7 @@ import {
   resolveMeetJozWorldEntity,
 } from "./meetJozWorld.js";
 import { buildBusinessTransformationReply } from "./jozBusinessTransformation.js";
+import { buildJozContextPacket } from "./jozContextEngineering.js";
 
 function isModelAvailable(model = null) {
   if (!model) return false;
@@ -4529,7 +4530,9 @@ export async function resolveUnknownJozReply({
           },
           {
             role: "system",
-            content: JSON.stringify(roleAwareContext),
+            content: JSON.stringify(
+              roleAwareContext?.contextPacket || roleAwareContext
+            ),
           },
           ...messages.slice(-8).map((entry) => ({
             role: entry.role === "assistant" ? "assistant" : "user",
@@ -4604,9 +4607,15 @@ export function buildRoleAwareJozContext({
   profile,
   context = {},
   intentMode = "skills",
+  input = "",
+  messages = [],
+  route = {},
+  intentClassification = {},
+  agentPlan = null,
   retrievedDocuments = [],
+  retrievalMeta = {},
 } = {}) {
-  return {
+  const baseContext = {
     ...buildJozLlmContext(),
     runtime: {
       currentPortal: context?.currentPortal || "root",
@@ -4618,10 +4627,29 @@ export function buildRoleAwareJozContext({
     },
     profile,
     retrievedDocuments,
+    retrievalMeta,
     retrievalSummary: normalizeRetrievedDocuments(retrievedDocuments).map((doc) =>
       buildRetrievedDocumentBrief(doc)
     ),
     cv: JOZ_LLM_CV,
     identity: JOZ_LLM_IDENTITY,
+  };
+
+  return {
+    ...baseContext,
+    contextPacket: buildJozContextPacket({
+      input,
+      messages,
+      context,
+      intentMode,
+      route,
+      intentClassification,
+      agentPlan,
+      retrievedDocuments,
+      retrievalMeta,
+      profile,
+      identity: JOZ_LLM_IDENTITY,
+      cv: JOZ_LLM_CV,
+    }),
   };
 }

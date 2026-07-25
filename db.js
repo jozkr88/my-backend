@@ -9,6 +9,7 @@ import {
   JOZ_PUBLIC_DATASET_ID,
   JOZ_PUBLIC_TENANT_ID,
 } from "./shared/jozDataGovernance.js";
+import { buildPgvectorLiteral } from "./shared/jozHybridRetrieval.js";
 
 const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);
@@ -665,6 +666,98 @@ export async function getJozDocumentsByIntent(
     query,
     limit,
   }).map(({ _ranking, ...doc }) => doc);
+}
+
+export async function getJozSemanticDocumentsByQuery(
+  intentMode = "skills",
+  embedding = [],
+  limit = 8,
+  { tenantId = JOZ_PUBLIC_TENANT_ID, datasetId = JOZ_PUBLIC_DATASET_ID } = {}
+) {
+  if (!isDatabaseEnabled() || !Array.isArray(embedding) || embedding.length === 0) return [];
+
+  const primaryCategory = normalizeJozLaneIntent(intentMode);
+  const lane = getJozLaneConfig(primaryCategory);
+  const categories = [
+    ...new Set([
+      ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
+      "skills",
+      "systems_mindset",
+      "business_need",
+      "systems_principle",
+      "governance",
+      "governance_principle",
+    ]),
+  ];
+  const vector = buildPgvectorLiteral(embedding);
+  const result = await runQuery(
+    `WITH ranked_chunks AS (
+       SELECT
+         d.id, d.slug, d.title, d.category, d.summary, d.body, d.metadata,
+         d.visibility, d.publish_version, d.updated_at,
+         c.embedding_model,
+         (1 - (c.embedding <=> $1::vector))::float8 AS semantic_similarity,
+         ROW_NUMBER() OVER (
+           PARTITION BY d.id
+           ORDER BY c.embedding <=> $1::vector, c.id ASC
+         ) AS chunk_rank
+       FROM joz_document_chunks c
+       JOIN joz_documents d ON d.id = c.document_id
+       WHERE d.profile_id = (
+           SELECT id FROM joz_profiles
+           WHERE is_primary = TRUE
+           ORDER BY updated_at DESC, id DESC
+           LIMIT 1
+         )
+         AND d.is_runtime_active = TRUE
+         AND d.visibility = 'public'
+         AND c.embedding IS NOT NULL
+         AND COALESCE(d.metadata->>'tenant_id', 'public') = $2
+         AND COALESCE(d.metadata->>'visibility', 'public') = 'public'
+         AND ($3::text IS NULL OR COALESCE(d.metadata->>'dataset_id', 'joz-public-knowledge') = $3)
+         AND (
+           d.category = ANY($4::text[])
+           OR COALESCE(d.metadata->>'lane', '') = ANY($5::text[])
+         )
+     )
+     SELECT id, slug, title, category, summary, body, metadata,
+            visibility, publish_version, updated_at, embedding_model,
+            semantic_similarity
+     FROM ranked_chunks
+     WHERE chunk_rank = 1
+     ORDER BY semantic_similarity DESC, id ASC
+     LIMIT $6`,
+    [
+      vector,
+      String(tenantId || JOZ_PUBLIC_TENANT_ID),
+      datasetId ? String(datasetId) : null,
+      categories,
+      [
+        primaryCategory,
+        primaryCategory === "systems_mindset" ? "mindset" : null,
+        "skills",
+        "systems_mindset",
+        "business_need",
+      ].filter(Boolean),
+      Math.max(limit * 3, 20),
+    ]
+  );
+
+  return (result.rows || []).map((row) => {
+    const normalized = normalizeJozDocumentRow(row);
+    return {
+    ...normalized,
+    metadata: {
+      ...normalized.metadata,
+      updated_at: row.updated_at || null,
+    },
+    retrieval: {
+      method: "pgvector",
+      semanticSimilarity: Number(row.semantic_similarity) || 0,
+      embeddingModel: row.embedding_model || null,
+    },
+    };
+  });
 }
 
 export async function createJozConversation({

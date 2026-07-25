@@ -255,6 +255,10 @@ CREATE INDEX IF NOT EXISTS joz_documents_lane_idx
 CREATE INDEX IF NOT EXISTS joz_document_chunks_document_idx
   ON joz_document_chunks (document_id, chunk_index);
 
+CREATE INDEX IF NOT EXISTS joz_document_chunks_embedding_hnsw_idx
+  ON joz_document_chunks USING hnsw (embedding vector_cosine_ops)
+  WHERE embedding IS NOT NULL;
+
 CREATE TABLE IF NOT EXISTS joz_publish_runs (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES joz_profiles(id) ON DELETE SET NULL,

@@ -19,6 +19,7 @@ import {
   getPrimaryJozProfile,
   getJozDataControlOverview,
   getJozDocumentsByIntent,
+  getJozSemanticDocumentsByQuery,
   getStructuredWorldState,
   initDatabase,
   isDatabaseEnabled,
@@ -78,6 +79,12 @@ import {
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
+import {
+  createJozQueryEmbedding,
+  getJozEmbeddingModel,
+  isJozPgvectorEnabled,
+  mergeJozRetrievalResults,
+} from "./shared/jozHybridRetrieval.js";
 import {
   createJozModelGateway,
   getJozModelRuntimeDescriptor,
@@ -1101,11 +1108,67 @@ app.post("/api/joz-llm", async (req, res) => {
       route.selectedRoute === "skills"
         ? route.selectedRoute
         : "skills";
-    const retrievedDocuments = intentClassification.needsClarification ||
+    const retrievalMeta = {
+      method: "exact",
+      semanticEnabled: false,
+      semanticStatus: isJozPgvectorEnabled() ? "not_requested" : "disabled_by_feature_flag",
+      exactCount: 0,
+      semanticCount: 0,
+      embeddingModel: null,
+    };
+    const exactDocuments = intentClassification.needsClarification ||
       intentClassification.kind === "execute" ||
       intentClassification.kind === "refuse"
       ? []
       : await getJozDocumentsByIntent(retrievalIntentMode, 8, latestUserMessage);
+    let retrievedDocuments = exactDocuments;
+    retrievalMeta.exactCount = exactDocuments.length;
+
+    const canUseSemanticRetrieval =
+      isJozPgvectorEnabled() &&
+      Boolean(hostedModelClient?.embeddings?.create) &&
+      isDatabaseEnabled() &&
+      !intentClassification.needsClarification &&
+      intentClassification.kind !== "execute" &&
+      intentClassification.kind !== "refuse";
+
+    if (canUseSemanticRetrieval) {
+      retrievalMeta.semanticEnabled = true;
+      retrievalMeta.semanticStatus = "requested";
+      retrievalMeta.embeddingModel = getJozEmbeddingModel();
+      try {
+        const queryEmbedding = await createJozQueryEmbedding({
+          client: hostedModelClient,
+          query: latestUserMessage,
+          model: retrievalMeta.embeddingModel,
+        });
+        if (queryEmbedding) {
+          const semanticDocuments = await getJozSemanticDocumentsByQuery(
+            retrievalIntentMode,
+            queryEmbedding,
+            8
+          );
+          retrievedDocuments = mergeJozRetrievalResults({
+            exactDocuments,
+            semanticDocuments,
+            limit: 8,
+          });
+          retrievalMeta.method = semanticDocuments.length ? "hybrid" : "exact_fallback";
+          retrievalMeta.semanticCount = semanticDocuments.length;
+          retrievalMeta.semanticStatus = semanticDocuments.length ? "ok" : "empty";
+        } else {
+          retrievalMeta.semanticStatus = "embedding_empty";
+        }
+      } catch (error) {
+        retrievalMeta.method = "exact_fallback";
+        retrievalMeta.semanticStatus = "unavailable";
+        retrievalMeta.semanticError = String(error?.code || error?.message || "semantic_retrieval_failed").slice(0, 160);
+      }
+    } else if (isJozPgvectorEnabled() && !isDatabaseEnabled()) {
+      retrievalMeta.semanticStatus = "database_unavailable";
+    } else if (isJozPgvectorEnabled() && !hostedModelClient?.embeddings?.create) {
+      retrievalMeta.semanticStatus = "embedding_client_unavailable";
+    }
     const retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
       category: doc.category,
@@ -1119,7 +1182,13 @@ app.post("/api/joz-llm", async (req, res) => {
       profile,
       context: answerContext,
       intentMode: retrievalIntentMode,
+      input: latestUserMessage,
+      messages: recentSessionMessages,
+      route,
+      intentClassification,
+      agentPlan,
       retrievedDocuments: retrievalContext,
+      retrievalMeta,
     });
     roleAwareContext.intentClassification = intentClassification;
     roleAwareContext.agentPlan = agentPlan;
@@ -1175,6 +1244,14 @@ app.post("/api/joz-llm", async (req, res) => {
       audienceProfile,
       intentClassification,
       agentPlan,
+      contextEngineering: roleAwareContext.contextPacket
+        ? {
+            schema: roleAwareContext.contextPacket.schema,
+            budget: roleAwareContext.contextPacket.budget,
+            provenance: roleAwareContext.contextPacket.provenance,
+          }
+        : null,
+      retrieval: retrievalMeta,
       risk: intentClassification.risk,
       execution: {
         status: intentClassification.kind === "execute" ? "approval_required" : "not_required",
@@ -1212,6 +1289,14 @@ app.post("/api/joz-llm", async (req, res) => {
         audienceProfile,
         intentClassification,
         agentPlan,
+        contextEngineering: roleAwareContext.contextPacket
+          ? {
+              schema: roleAwareContext.contextPacket.schema,
+              budget: roleAwareContext.contextPacket.budget,
+              provenance: roleAwareContext.contextPacket.provenance,
+            }
+          : null,
+        retrieval: retrievalMeta,
         risk: intentClassification.risk,
         execution: {
           status: intentClassification.kind === "execute" ? "approval_required" : "not_required",
