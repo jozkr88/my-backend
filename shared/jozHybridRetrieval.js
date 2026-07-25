@@ -16,7 +16,11 @@ export function isJozPgvectorEnabled(env = process.env) {
   // Render is production-only and already requires the database. Keep local
   // development opt-in, but do not leave the deployed vector index dormant if
   // a blueprint sync omits this non-secret flag.
-  return String(env?.RENDER || "").trim().toLowerCase() === "true";
+  return (
+    String(env?.RENDER || "").trim().toLowerCase() === "true" ||
+    (String(env?.NODE_ENV || "").trim().toLowerCase() === "production" &&
+      String(env?.JOZ_REQUIRE_DATABASE || "").trim().toLowerCase() === "true")
+  );
 }
 
 export function getJozEmbeddingModel(env = process.env) {
