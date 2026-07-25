@@ -124,7 +124,7 @@ const JOZ_BUILD_ID = String(
   process.env.JOZ_BUILD_ID ||
   "local"
 ).trim();
-const JOZ_ROUTER_VERSION = "2026-07-25-pgvector-hybrid-1";
+const JOZ_ROUTER_VERSION = "2026-07-25-pgvector-hybrid-2";
 
 const app = express();
 app.set("trust proxy", 2);
