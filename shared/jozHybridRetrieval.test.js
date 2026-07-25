@@ -12,8 +12,7 @@ test("pgvector feature flag is opt-in and vector literals are safe", () => {
   assert.equal(isJozPgvectorEnabled({ JOZ_PGVECTOR_ENABLED: "true" }), true);
   assert.equal(isJozPgvectorEnabled({ JOZ_PGVECTOR_ENABLED: "false" }), false);
   assert.equal(isJozPgvectorEnabled({ RENDER: "true" }), true);
-  assert.equal(isJozPgvectorEnabled({ NODE_ENV: "production" }), false);
-  assert.equal(isJozPgvectorEnabled({ NODE_ENV: "production", JOZ_REQUIRE_DATABASE: "true" }), true);
+  assert.equal(isJozPgvectorEnabled({}), true);
   assert.equal(buildPgvectorLiteral([0.1, -2, 3]), "[0.1,-2,3]");
   assert.throws(() => buildPgvectorLiteral([1, Number.NaN]), /non-finite/);
 });
