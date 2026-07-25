@@ -1209,6 +1209,14 @@ function buildAmbiguousFollowUpReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
 
   const ambiguousShortFollowUps = new Set([
+    "now what",
+    "what now",
+    "next",
+    "what next",
+    "continue",
+    "go on",
+    "okay",
+    "ok",
     "how does joz do it",
     "how would joz do it",
     "why does joz do it",
