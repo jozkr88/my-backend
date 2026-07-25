@@ -471,7 +471,15 @@ export async function getPrimaryJozProfile() {
     `SELECT id, slug, display_name, label, headline, summary, website_url, email, phone, location
      FROM joz_profiles
      WHERE is_primary = TRUE
-     ORDER BY id ASC
+     ORDER BY (
+       SELECT COUNT(*)
+       FROM joz_documents d
+       WHERE d.profile_id = joz_profiles.id
+         AND d.is_runtime_active = TRUE
+         AND d.visibility = 'public'
+     ) DESC,
+     updated_at DESC,
+     id DESC
      LIMIT 1`
   );
   return result.rows[0] || null;
@@ -582,7 +590,15 @@ export async function getJozDocumentsByIntent(
          SELECT id
          FROM joz_profiles
          WHERE is_primary = TRUE
-         ORDER BY updated_at DESC, id DESC
+         ORDER BY (
+           SELECT COUNT(*)
+           FROM joz_documents d
+           WHERE d.profile_id = joz_profiles.id
+             AND d.is_runtime_active = TRUE
+             AND d.visibility = 'public'
+         ) DESC,
+         updated_at DESC,
+         id DESC
          LIMIT 1
        )
        AND is_runtime_active = TRUE
@@ -706,7 +722,15 @@ export async function getJozSemanticDocumentsByQuery(
        WHERE d.profile_id = (
            SELECT id FROM joz_profiles
            WHERE is_primary = TRUE
-           ORDER BY updated_at DESC, id DESC
+         ORDER BY (
+           SELECT COUNT(*)
+           FROM joz_documents d
+           WHERE d.profile_id = joz_profiles.id
+             AND d.is_runtime_active = TRUE
+             AND d.visibility = 'public'
+         ) DESC,
+         updated_at DESC,
+         id DESC
            LIMIT 1
          )
          AND d.is_runtime_active = TRUE
