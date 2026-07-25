@@ -10,9 +10,13 @@ function finiteNumber(value, fallback = 0) {
 }
 
 export function isJozPgvectorEnabled(env = process.env) {
-  return ["1", "true", "yes", "on"].includes(
-    String(env?.JOZ_PGVECTOR_ENABLED || "").trim().toLowerCase()
-  );
+  const configured = String(env?.JOZ_PGVECTOR_ENABLED || "").trim().toLowerCase();
+  if (configured) return ["1", "true", "yes", "on"].includes(configured);
+
+  // Render is production-only and already requires the database. Keep local
+  // development opt-in, but do not leave the deployed vector index dormant if
+  // a blueprint sync omits this non-secret flag.
+  return String(env?.RENDER || "").trim().toLowerCase() === "true";
 }
 
 export function getJozEmbeddingModel(env = process.env) {
