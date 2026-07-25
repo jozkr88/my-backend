@@ -20,6 +20,10 @@ services:
         value: "openai"
       - key: JOZ_MODEL
         value: "gpt-4o-mini"
+      - key: JOZ_PGVECTOR_ENABLED
+        value: "true"
+      - key: JOZ_EMBEDDING_MODEL
+        value: text-embedding-3-small
       - key: JOZ_REQUIRE_DATABASE
         value: "true"
       - key: DISABLE_FILE_MEMORY
