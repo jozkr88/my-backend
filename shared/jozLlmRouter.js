@@ -4348,6 +4348,7 @@ export async function resolveUnknownJozReply({
   const shouldAnswerOpenDomainQuestion =
     intentClassification?.kind === "answer" &&
     intentClassification?.domain === "general_knowledge" &&
+    !intentClassification?.needsClarification &&
     isModelAvailable(openai) &&
     !(unknownDefinitionGapReply && intentClassification?.needsClarification);
 
