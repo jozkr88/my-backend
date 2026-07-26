@@ -1,0 +1,18 @@
+{
+  "world_id": "meetjoz_spatial_world",
+  "source_dir": "/Users/jozzox/Downloads/xq/data/meetjoz/world",
+  "published_manifest": "/Users/jozzox/Downloads/xq/data/meetjoz/published/meetjoz-world.generated.json",
+  "issues": [],
+  "counts": {
+    "portals": 3,
+    "objects": 26,
+    "sequences": 2,
+    "states": 11,
+    "actions": 13,
+    "device_behaviors": 5,
+    "concepts": 13,
+    "relationships": 12,
+    "navigation_faq": 8
+  },
+  "status": "ok"
+}

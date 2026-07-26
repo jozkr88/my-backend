@@ -1,0 +1,98 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-orchestration",
+  "title": "Orchestration",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_004",
+  "summary": "Agent orchestration coordinates agents, tools, memory, and workflow state.",
+  "body": "Agent orchestration coordinates agents, tools, memory, and workflow state.\n\nLangGraph is suitable for reasoning graphs, branching, loops, shared state, and multi-agent coordination.\nTemporal is suitable for durable execution, retries, approvals, crash recovery, and long-running workflows.\nCustom state machines can be used when requirements are simple or highly specialized.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "langgraph",
+      "orchestration",
+      "temporal"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agent_memory",
+      "agentic_ai",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_004",
+    "canonical_record_title": "Orchestration",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "langgraph",
+      "orchestration",
+      "temporal"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Orchestration\nOrchestration\nlanggraph orchestration temporal\nlanggraph orchestration temporal\nAgent orchestration coordinates agents, tools, memory, and workflow state.\n\nLangGraph is suitable for reasoning graphs, branching, loops, shared state, and multi-agent coordination.\nTemporal is suitable for durable execution, retries, approvals, crash recovery, and long-running workflows.\nCustom state machines can be used when requirements are simple or highly specialized.",
+    "keyword_terms": [
+      "langgraph",
+      "orchestration",
+      "temporal"
+    ],
+    "exact_phrases": [
+      "Orchestration",
+      "langgraph",
+      "orchestration",
+      "temporal"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "055d0a95489d070ce14aff33805dd9c1149d9d3e12180e347d8441a21f9dfd63",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_004"
+  }
+}

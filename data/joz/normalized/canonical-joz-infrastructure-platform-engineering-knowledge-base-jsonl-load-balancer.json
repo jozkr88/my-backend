@@ -1,0 +1,85 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-load-balancer",
+  "title": "Load Balancer",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_010",
+  "summary": "A load balancer distributes incoming traffic across multiple service instances.",
+  "body": "A load balancer distributes incoming traffic across multiple service instances.\n\nBenefits:\nHigher availability\nHorizontal scaling\nFailure isolation\nBetter resource use\n\nLoad Balancer = receptionist directing users to available servers.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "load-balancer",
+      "scalability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_010",
+    "canonical_record_title": "Load Balancer",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "load-balancer",
+      "scalability"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Load Balancer\nLoad Balancer\nload-balancer scalability\nload-balancer scalability\nA load balancer distributes incoming traffic across multiple service instances.\n\nBenefits:\nHigher availability\nHorizontal scaling\nFailure isolation\nBetter resource use\n\nLoad Balancer = receptionist directing users to available servers.",
+    "keyword_terms": [
+      "balancer",
+      "load",
+      "load-balancer",
+      "scalability"
+    ],
+    "exact_phrases": [
+      "Load Balancer",
+      "load-balancer",
+      "scalability"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "fc78114eab0894d57199882cfbbeda060d687bbbcf47441ee4e4dd84f95224aa",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_010"
+  }
+}

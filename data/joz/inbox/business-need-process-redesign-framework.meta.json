@@ -1,0 +1,67 @@
+{
+  "slug": "business-need-process-redesign-framework",
+  "title": "Process Redesign Framework",
+  "category": "delivery",
+  "lane": "business_need",
+  "summary": "Defines the practical framework for redesigning business processes around AI, with current process, friction, cost, intervention, human role, systems, KPIs, and controls.",
+  "tags": [
+    "process",
+    "redesign",
+    "workflow",
+    "controls",
+    "kpi"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "The serious AI opportunity is usually redesigning the process, not just answering faster.",
+    "A strong process redesign needs current-state, problem, value, intervention, human role, systems, KPI, and control definitions.",
+    "Joz should frame AI work as operating-model change rather than shallow feature insertion."
+  ],
+  "proof_points": [
+    "The current Joz business-need and systems records already support workflow-first thinking.",
+    "This framework is aligned with governance, evaluation, and decision-quality principles already present in the corpus.",
+    "Process redesign language is stronger for enterprise stakeholders than generic automation claims."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "manual_knowledge_work",
+    "operational_friction",
+    "slow_decision_making",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "decision_quality",
+    "systems_before_features",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "organizational_design",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "lower_operational_friction",
+    "productivity_gains",
+    "stronger_governance"
+  ],
+  "governance": [
+    "evaluation",
+    "human_approval",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

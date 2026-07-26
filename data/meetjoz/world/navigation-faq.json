@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is this place?",
+    "intent": "world_awareness",
+    "answer_hint": "Explain the current portal using its role and canonical question."
+  },
+  {
+    "question": "What are my choices here?",
+    "intent": "world_awareness",
+    "answer_hint": "At root, explain Meet Joz via the Gold Pill and MAXX via the Enter/Brain route."
+  },
+  {
+    "question": "What is the Gold Pill?",
+    "intent": "world_awareness",
+    "answer_hint": "Explain skills, capabilities, competences, AI-enabled innovation, and competitive advantage."
+  },
+  {
+    "question": "What am I looking at in neoMAXX?",
+    "intent": "world_awareness",
+    "answer_hint": "Explain the Human Neuron, AI Neuron, synapse, signal exchange, and new experience metaphor."
+  },
+  {
+    "question": "What happens when I click the neuron?",
+    "intent": "world_awareness",
+    "answer_hint": "Desktop pauses and reveals neurodesign; mobile opens AR."
+  },
+  {
+    "question": "What stage am I in?",
+    "intent": "world_awareness",
+    "answer_hint": "At Mogg, explain the digital twin stage and distinguish it from the later workf skills layer."
+  },
+  {
+    "question": "Where are Joz's skills?",
+    "intent": "mixed",
+    "answer_hint": "Later workf.glb stage in Meet Joz."
+  },
+  {
+    "question": "What is worldx?",
+    "intent": "world_awareness",
+    "answer_hint": "Abstract gold semantic city surrounding the controlled sequence."
+  }
+]

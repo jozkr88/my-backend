@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-single-agent-and-multi-agent",
+  "title": "Single-Agent and Multi-Agent",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_005",
+  "summary": "Start with one orchestrator agent. Use multiple agents only when responsibilities are clearly separable.",
+  "body": "Start with one orchestrator agent. Use multiple agents only when responsibilities are clearly separable.\n\nTypical specialists:\nResearch Agent\nPortfolio Agent\nRisk Agent\nExecution Agent\nVerification Agent\nSupervisor Agent\n\nAgents should communicate through typed shared state rather than unrestricted free-form conversations.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "multi-agent",
+      "shared-state"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "manual_knowledge_work"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agentic_ai",
+      "verification"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_005",
+    "canonical_record_title": "Single-Agent and Multi-Agent",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "multi-agent",
+      "shared-state"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Single-Agent and Multi-Agent\nSingle-Agent and Multi-Agent\nmulti-agent shared-state\nmulti-agent shared-state\nStart with one orchestrator agent. Use multiple agents only when responsibilities are clearly separable.\n\nTypical specialists:\nResearch Agent\nPortfolio Agent\nRisk Agent\nExecution Agent\nVerification Agent\nSupervisor Agent\n\nAgents should communicate through typed shared state rather than unrestricted free-form conversations.",
+    "keyword_terms": [
+      "agent",
+      "and",
+      "multi",
+      "multi-agent",
+      "shared-state",
+      "single"
+    ],
+    "exact_phrases": [
+      "Single-Agent and Multi-Agent",
+      "multi-agent",
+      "shared-state"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "80b95c81e6f5c65acf89b21abd27c6e5859f4ce7c270800c98b222022a8607b3",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_005"
+  }
+}

@@ -1,0 +1,15 @@
+[
+  { "id": "go_meet_joz", "action": "ball", "label": "Enter Meet Joz", "target_portal_id": "meet_joz" },
+  { "id": "go_maxx_via_enter", "action": "brain", "label": "Enter neoMAXX", "target_portal_id": "maxx" },
+  { "id": "go_maxx_via_brain", "action": "brain", "label": "Enter the Brain", "target_portal_id": "maxx" },
+  { "id": "pause_neurons", "action": "n2x_pause", "label": "Pause neurons", "target_object_id": "maxx_neurons" },
+  { "id": "resume_neurons", "action": "n2x_resume", "label": "Resume neurons", "target_object_id": "maxx_neurons" },
+  { "id": "launch_n2x_ar", "action": "launch_in_space_n2x", "label": "Open neoMAXX neuron AR", "target_object_id": "maxx_neurons" },
+  { "id": "show_flex", "action": "vibe", "label": "Open Flex", "target_object_id": "meet_joz_flex" },
+  { "id": "show_ascend", "action": "discover", "label": "Open Ascend", "target_object_id": "meet_joz_ascend" },
+  { "id": "show_mogg", "action": "skills", "label": "Open Mogg", "target_object_id": "meet_joz_mogg" },
+  { "id": "show_skills_layer", "action": "skills", "label": "Open Skills Layer", "target_object_id": "meet_joz_skills" },
+  { "id": "show_skills_panel", "action": "show_skills_panel", "label": "Reveal Skills Panel", "target_object_id": "meet_joz_skills_panel" },
+  { "id": "launch_workf_spatial", "action": "launch_in_space_workf", "label": "Place Skills in Reality", "target_object_id": "meet_joz_skills" },
+  { "id": "back_to_root", "action": "back", "label": "Return to root", "target_portal_id": "root" }
+]

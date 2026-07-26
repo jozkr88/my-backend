@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-stateless-services",
+  "title": "Stateless Services",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_013",
+  "summary": "A stateless service does not depend on local machine memory between requests.",
+  "body": "A stateless service does not depend on local machine memory between requests.\n\nState is stored externally in:\nPostgreSQL\nRedis\nObject storage\nWorkflow engines\n\nStateless services are easier to scale, restart, and move across machines.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "scalability",
+      "services",
+      "stateless"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "retrieval",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agent_memory",
+      "rag",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_013",
+    "canonical_record_title": "Stateless Services",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "scalability",
+      "services",
+      "stateless"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Stateless Services\nStateless Services\nscalability services stateless\nscalability services stateless\nA stateless service does not depend on local machine memory between requests.\n\nState is stored externally in:\nPostgreSQL\nRedis\nObject storage\nWorkflow engines\n\nStateless services are easier to scale, restart, and move across machines.",
+    "keyword_terms": [
+      "scalability",
+      "services",
+      "stateless"
+    ],
+    "exact_phrases": [
+      "Stateless Services",
+      "scalability",
+      "services",
+      "stateless"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "89da561cf146c408e3f2f75e4ab80656047a3a22efebf0196d73f74366a1639f",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_013"
+  }
+}

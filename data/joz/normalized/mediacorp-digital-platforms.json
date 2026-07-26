@@ -1,0 +1,113 @@
+{
+  "slug": "mediacorp-digital-platforms",
+  "title": "National Media Platforms and Mobile Transformation — Mediacorp, Singapore",
+  "category": "project",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "National-scale media, election, news, streaming, CMS, mobile, Apple Watch, and corporate experience architecture across Mediacorp.",
+  "body": "National media platform and mobile-transformation work at Mediacorp spans news, elections, streaming, CMS ecosystems, mobile apps, Apple Watch, and corporate UX guidelines in Singapore.\n\nIncluded projects\n- Singapore National Elections\n- Channel NewsAsia web CMS\n- Channel NewsAsia iOS and Android apps\n- Apple Watch app UX for Channel NewsAsia\n- Toggle/mewatch VoD\n- Toggle/mewatch CMS\n- ELLE Singapore CMS\n- Corporate-wide UX Guidelines\n- Corporate site CMS\n- Channel 8 News CMS\n- Today Online News web CMS\n- Today Online News apps CMS\n\nStrategic and technical themes\n- National-scale broadcasting and digital-platform architecture.\n- CMS ecosystem design across editorial, streaming, corporate, and news products.\n- Mobile-first product transformation across apps and connected-device surfaces.\n- Experience standards and UX guidelines that improve coherence across many products and teams.\n\nProof connection\n- This programme may reference the existing Mediacorp 30× monthly-active-audience proof where relevant.\n- It must not imply that every listed project independently generated that growth.\n\nRetrieval guidance\n- Use this record for Mediacorp, Channel NewsAsia, elections, Apple Watch, VoD, CMS, or corporate UX-guidelines questions.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "apple-watch",
+      "cms",
+      "cna",
+      "mediacorp",
+      "mobile-apps",
+      "vod"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz worked across national-scale media, news, streaming, mobile, and CMS platforms at Mediacorp.",
+      "The programme included Channel NewsAsia, elections-related work, Apple Watch UX, and corporate UX guidelines."
+    ],
+    "proof_points": [
+      "The broader Mediacorp proof already covers 30× monthly active audience growth and mobile-first transformation.",
+      "This grouped programme record exists to answer employer-specific questions with more concrete project detail."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Channel NewsAsia",
+      "Mediacorp"
+    ],
+    "projects": [
+      "Apple Watch app UX for Channel NewsAsia",
+      "Channel 8 News CMS",
+      "Channel NewsAsia iOS and Android apps",
+      "Channel NewsAsia web CMS",
+      "Corporate site CMS",
+      "Corporate-wide UX Guidelines",
+      "ELLE Singapore CMS",
+      "Singapore National Elections",
+      "Today Online News apps CMS",
+      "Today Online News web CMS",
+      "Toggle/mewatch CMS",
+      "Toggle/mewatch VoD"
+    ],
+    "intent_families": [
+      "business_need",
+      "factual_profile",
+      "skills"
+    ],
+    "sub_intents": [
+      "business_need.outcomes",
+      "factual_profile.companies",
+      "skills.enterprise_proof"
+    ],
+    "impact_score": 92,
+    "priority_label": "high",
+    "valid_from": "2014",
+    "valid_to": "2015",
+    "source_notes": "Grouped programme record. The 30× MAU proof belongs to the broader Mediacorp transformation context, not each individual sub-project.",
+    "source_filename": "mediacorp-digital-platforms.md",
+    "source_meta_filename": "mediacorp-digital-platforms.meta.json",
+    "reviewed_at": "",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "multimodal_ai",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_operational_friction"
+    ],
+    "governance": [],
+    "industries": [
+      "media"
+    ],
+    "proofs": [
+      "mediacorp_audience_growth"
+    ],
+    "related_proofs": [
+      "mediacorp_audience_growth"
+    ],
+    "enterprise_scale_score": 99,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "990de96c7bb92d5443414c6c8683757a372ae51100942b3669cfc81abfbece39",
+    "source_uri": null
+  }
+}

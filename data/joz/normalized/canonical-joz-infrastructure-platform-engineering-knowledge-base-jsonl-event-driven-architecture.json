@@ -1,0 +1,97 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-event-driven-architecture",
+  "title": "Event-Driven Architecture",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_019",
+  "summary": "Event-driven architecture lets services publish events instead of calling every downstream service directly.",
+  "body": "Event-driven architecture lets services publish events instead of calling every downstream service directly.\n\nExample:\nTradeExecuted event\n→ Portfolio updater\n→ Risk updater\n→ Audit service\n→ Notification service\n→ Analytics pipeline\n\nThis improves decoupling, scalability, and recoverability.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "architecture",
+      "event-driven",
+      "messaging"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "auditability"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_019",
+    "canonical_record_title": "Event-Driven Architecture",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "architecture",
+      "event-driven",
+      "messaging"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Event-Driven Architecture\nEvent-Driven Architecture\narchitecture event-driven messaging\narchitecture event-driven messaging\nEvent-driven architecture lets services publish events instead of calling every downstream service directly.\n\nExample:\nTradeExecuted event\n→ Portfolio updater\n→ Risk updater\n→ Audit service\n→ Notification service\n→ Analytics pipeline\n\nThis improves decoupling, scalability, and recoverability.",
+    "keyword_terms": [
+      "architecture",
+      "driven",
+      "event",
+      "event-driven",
+      "messaging"
+    ],
+    "exact_phrases": [
+      "Event-Driven Architecture",
+      "architecture",
+      "event-driven",
+      "messaging"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "7be8b5e72ab539fcd9d2985bafd8bc880e6998f24604624026885b634770b6cd",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_019"
+  }
+}

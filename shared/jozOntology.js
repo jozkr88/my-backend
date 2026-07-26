@@ -43,8 +43,11 @@ const VERIFICATION_WEIGHTS = {
   project_supported: 24,
   positioning_supported: 23,
   capability_supported: 21,
+  cv_and_project_supported: 28,
+  framework_supported: 12,
   needs_review: 8,
   draft: 0,
+  user_provided: 0,
 };
 
 const QUERY_FIELD_WEIGHTS = {
@@ -353,13 +356,26 @@ function normalizeVerification(value) {
   return String(value || "").trim().toLowerCase() || "draft";
 }
 
+function normalizeEvidenceTier(metadata = {}, verificationStatus = "draft") {
+  const explicit = String(metadata.evidence_tier || "").trim().toLowerCase();
+  if (explicit) return explicit;
+  if (verificationStatus === "verified") return "verified_fact";
+  if (["cv_supported", "project_supported", "capability_supported", "positioning_supported", "cv_and_project_supported"].includes(verificationStatus)) {
+    return "supported_claim";
+  }
+  if (verificationStatus === "framework_supported") return "framework_guidance";
+  return "unverified";
+}
+
 function normalizeMetadata(metadata = {}) {
   const lane = normalizeLaneAlias(metadata.lane || metadata.normalized_lane || "");
+  const verificationStatus = normalizeVerification(metadata.verification_status || metadata.verification);
   return {
     ...metadata,
     lane,
     normalized_lane: lane,
-    verification_status: normalizeVerification(metadata.verification_status || metadata.verification),
+    verification_status: verificationStatus,
+    evidence_tier: normalizeEvidenceTier(metadata, verificationStatus),
     priority_label: String(metadata.priority_label || "standard").trim().toLowerCase() || "standard",
     impact_score: Number.isFinite(Number(metadata.impact_score)) ? Number(metadata.impact_score) : 0,
     problems: normalizeArray(metadata.problems),

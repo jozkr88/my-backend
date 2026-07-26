@@ -1,0 +1,46 @@
+{
+  "slug": "recruiter-singapore-explicit-followups",
+  "title": "Recruiter Singapore Explicit Follow Ups",
+  "category": "faq",
+  "lane": "skills",
+  "summary": "Singapore-specific recruiter follow-up question set for market fit, proof, compensation context, work authorization handling, and relocation when Singapore is explicitly asked.",
+  "tags": [
+    "recruiter",
+    "singapore",
+    "market_fit",
+    "work_authorization",
+    "compensation"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Aligned with the user-approved Singapore-first benchmark: use Singapore proof internally, but only surface Singapore framing when explicitly asked."
+  },
+  "claims": [
+    "Singapore-specific recruiter framing should only be used when Singapore is explicitly asked.",
+    "The strongest Singapore proof spans Maybank-Ageas Etiqa, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent work.",
+    "Singapore work-pass or sponsorship questions should use confirm-directly wording rather than assumed status."
+  ],
+  "proof_points": [
+    "Maybank-Ageas Etiqa: 20x digital sales growth.",
+    "Manulife: Lean ML UX practice across 11 APAC markets from Singapore.",
+    "Mediacorp: 30x audience growth and 30+ products.",
+    "Singapore Exchange: regulated portal re-engineering.",
+    "Apple/Pixar-adjacent work: Python USD(z), computer vision, and spatial workflows in Singapore."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific"
+  ],
+  "companies": [
+    "Maybank-Ageas Etiqa",
+    "Manulife",
+    "Mediacorp",
+    "Singapore Exchange",
+    "Apple",
+    "Pixar"
+  ]
+}

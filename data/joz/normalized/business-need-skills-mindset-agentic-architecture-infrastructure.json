@@ -1,0 +1,96 @@
+{
+  "slug": "business-need-skills-mindset-agentic-architecture-infrastructure",
+  "title": "Skills Mindset Agentic Architecture Infrastructure",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Separates skills, mindset, agentic architecture, and infrastructure so Joz can explain the stack without conceptual muddle.",
+  "body": "The clean structure is to separate four things that are often confused:\n\n1. Skills\nWhat Joz can do.\n\nExamples:\n- finance analysis\n- ERP reasoning\n- margin diagnostics\n- AI architecture\n- workflow redesign\n- executive briefing support\n\n2. Mindset\nHow Joz thinks while doing it.\n\nExamples:\n- profit-oriented\n- operator-minded\n- efficiency-first\n- cross-functional\n- governance-aware\n- decision-focused\n\n3. Agentic architecture\nHow tasks are decomposed, routed, coordinated, and executed across agents and tools.\n\nExamples:\n- agent routing\n- planning\n- tool use\n- escalation paths\n- execution flow\n- memory and verification loops\n\n4. Infrastructure\nWhat controls, secures, observes, and scales the whole system.\n\nExamples:\n- permissions\n- model routing\n- observability\n- evaluation\n- audit logs\n- cost controls\n- reliability\n\nThe practical rule is:\n\n- Skills = business competencies\n- Mindset = reasoning posture\n- Agentic architecture = execution model\n- Infrastructure = platform foundation\n\nIf these are mixed together, the system becomes conceptually muddy and harder to scale.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "agentic-architecture",
+      "infrastructure",
+      "mindset",
+      "skills",
+      "structure"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Skills, mindset, agentic architecture, and infrastructure should be treated as distinct layers.",
+      "Skills are business competencies, mindset is reasoning posture, agentic architecture is the execution model, and infrastructure is the platform foundation.",
+      "Mixing these concepts together makes the system harder to explain and harder to scale."
+    ],
+    "proof_points": [
+      "This structure matches the current architecture and lane logic already emerging in the Joz knowledge base.",
+      "The distinction supports cleaner positioning and cleaner implementation decisions.",
+      "It aligns with the current direction of separating business-useful knowledge from runtime and control mechanics."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 95,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
+    "source_meta_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "knowledge_fragmentation",
+      "organizational_complexity",
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "organizational_design"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "knowledge_reuse",
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "4e3a56183c729297f0463f21a1eadcfa2acd72fcd1005490c10ce16943439886",
+    "source_uri": null
+  }
+}

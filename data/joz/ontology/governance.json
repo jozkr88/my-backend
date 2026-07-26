@@ -1,0 +1,12 @@
+[
+  { "id": "human_approval", "name": "Human Approval" },
+  { "id": "auditability", "name": "Auditability" },
+  { "id": "source_provenance", "name": "Source Provenance" },
+  { "id": "access_control", "name": "Access Control" },
+  { "id": "confidence_handling", "name": "Confidence and Uncertainty Handling" },
+  { "id": "evaluation", "name": "AI Evaluation" },
+  { "id": "observability_control", "name": "Operational Observability" },
+  { "id": "clear_ownership", "name": "Clear Ownership" },
+  { "id": "escalation", "name": "Human Escalation" },
+  { "id": "data_boundaries", "name": "Data Boundaries" }
+]

@@ -1,0 +1,14 @@
+[
+  { "id": "revenue_growth", "name": "Revenue Growth" },
+  { "id": "higher_adoption", "name": "Higher Adoption" },
+  { "id": "faster_decisions", "name": "Faster Decisions" },
+  { "id": "lower_risk", "name": "Lower Risk" },
+  { "id": "cost_reduction", "name": "Cost Reduction" },
+  { "id": "productivity_gains", "name": "Productivity Gains" },
+  { "id": "lower_operational_friction", "name": "Lower Operational Friction" },
+  { "id": "better_customer_experience", "name": "Better Customer Experience" },
+  { "id": "higher_data_trust", "name": "Higher Data Trust" },
+  { "id": "faster_time_to_value", "name": "Faster Time to Value" },
+  { "id": "knowledge_reuse", "name": "Improved Knowledge Reuse" },
+  { "id": "stronger_governance", "name": "Stronger Governance" }
+]

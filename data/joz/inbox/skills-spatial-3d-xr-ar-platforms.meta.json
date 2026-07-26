@@ -1,0 +1,87 @@
+{
+  "slug": "skills-spatial-3d-xr-ar-platforms",
+  "title": "Spatial Computing, 3D, XR, and AR Product Delivery",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Comprehensive proof for Joz's spatial computing capability across 3D web, XR/AR, volumetric UI, asset workflows, and immersive product delivery.",
+  "tags": [
+    "threejs",
+    "react-three-fiber",
+    "3d",
+    "xr",
+    "ar",
+    "spatial-computing",
+    "usdz",
+    "glb",
+    "volumetric-ui",
+    "webgl"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "cv_and_project_supported",
+  "claims": [
+    "Joz can design and build spatial products that combine immersive interaction, technical implementation, and narrative/product intent.",
+    "His spatial capability spans 3D web interfaces, XR/AR launch flows, volumetric UI, asset pipeline judgment, and multimodal interaction design.",
+    "He can position spatial computing as a usable business and product surface rather than only as visual experimentation."
+  ],
+  "proof_points": [
+    "Designed and launched spatial AI with volumetric 3D UI for Versace/SOA in Dubai.",
+    "Pioneered spatial AI for world-class art exhibitions through ArtKorero.",
+    "Built Python USD(z) and computer-vision-adjacent workflows tied to Apple/Pixar-style pipelines.",
+    "The current app itself uses a portal-based 3D architecture with GLB assets, AR launch flows, spatial placement logic, semantic world modeling, and device-specific immersive behavior."
+  ],
+  "regions": [
+    "Dubai",
+    "Singapore",
+    "Europe",
+    "Global"
+  ],
+  "companies": [
+    "Versace",
+    "SOA",
+    "ArtKorero",
+    "Apple",
+    "Pixar"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "manual_knowledge_work",
+    "operational_friction",
+    "unclear_roi"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "systems_before_features",
+    "appropriate_autonomy",
+    "feedback_loops"
+  ],
+  "capabilities": [
+    "computer_vision",
+    "multimodal_ai",
+    "product_strategy",
+    "rapid_prototyping",
+    "spatial_ai",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption",
+    "productivity_gains"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "creative_services",
+    "spatial_computing",
+    "technology"
+  ],
+  "proofs": [
+    "apple_pixar_cv_workflows",
+    "artkorero_spatial_exhibitions",
+    "versace_spatial_ai_launch"
+  ]
+}

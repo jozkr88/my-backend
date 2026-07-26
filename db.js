@@ -4,6 +4,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { getJozLaneConfig, normalizeJozLaneIntent } from "./shared/jozLlmLanes.js";
 import { rankJozDocumentsForQuery } from "./shared/jozOntology.js";
+import {
+  isDocumentAllowedForTenant,
+  JOZ_PUBLIC_DATASET_ID,
+  JOZ_PUBLIC_TENANT_ID,
+} from "./shared/jozDataGovernance.js";
+import { buildPgvectorLiteral } from "./shared/jozHybridRetrieval.js";
 
 const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);
@@ -37,6 +43,7 @@ function resolvePublishedJozDocsPath() {
 }
 
 function loadPublishedJozDocuments() {
+  if (isDatabaseRequired()) return [];
   if (publishedJozDocsCache) return publishedJozDocsCache;
   const docsPath = resolvePublishedJozDocsPath();
   if (!fs.existsSync(docsPath)) {
@@ -78,6 +85,10 @@ function normalizeJozDocumentRow(row = {}) {
       slug: row.slug || row?.metadata?.slug || null,
       visibility: row.visibility || row?.metadata?.visibility || "public",
       publish_version: row.publish_version || row?.metadata?.publish_version || null,
+      dataset_id: row?.metadata?.dataset_id || JOZ_PUBLIC_DATASET_ID,
+      tenant_id: row?.metadata?.tenant_id || JOZ_PUBLIC_TENANT_ID,
+      classification: row?.metadata?.classification || "public",
+      evidence_tier: row?.metadata?.evidence_tier || "unverified",
     },
   };
 }
@@ -427,6 +438,12 @@ export function isDatabaseEnabled() {
   return Boolean(getDatabaseUrl());
 }
 
+export function isDatabaseRequired() {
+  return String(process.env.JOZ_REQUIRE_DATABASE || "").trim().toLowerCase() === "true" ||
+    String(process.env.RENDER || "").trim().toLowerCase() === "true" ||
+    String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
+}
+
 function getPool() {
   if (!isDatabaseEnabled()) return null;
   if (pool) return pool;
@@ -454,13 +471,94 @@ export async function getPrimaryJozProfile() {
     `SELECT id, slug, display_name, label, headline, summary, website_url, email, phone, location
      FROM joz_profiles
      WHERE is_primary = TRUE
-     ORDER BY id ASC
+     ORDER BY (
+       SELECT COUNT(*)
+       FROM joz_documents d
+       WHERE d.profile_id = joz_profiles.id
+         AND d.is_runtime_active = TRUE
+         AND d.visibility = 'public'
+     ) DESC,
+     updated_at DESC,
+     id DESC
      LIMIT 1`
   );
   return result.rows[0] || null;
 }
 
-export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, query = "") {
+export async function getJozDataControlOverview() {
+  if (!isDatabaseEnabled()) {
+    return {
+      reachable: false,
+      required: isDatabaseRequired(),
+      runtimeSource: "local_file_memory",
+      reason: "database_not_configured",
+      datasets: [],
+      sources: [],
+      counts: {},
+    };
+  }
+
+  try {
+    const [datasetResult, sourceResult, countResult] = await Promise.all([
+      runQuery(`
+        SELECT dataset_id, tenant_id, name, owner, classification, visibility,
+               schema_version, source_count, normalized_count, published_count,
+               model_ready_count, verified_count, content_checksum, status,
+               published_at, updated_at
+        FROM joz_datasets
+        WHERE tenant_id = 'public' AND dataset_id = 'joz-public-knowledge'
+        ORDER BY updated_at DESC
+      `),
+      runQuery(`
+        SELECT dataset_id, tenant_id, source_id, source_key, source_filename,
+               source_uri, source_types, owner, classification, visibility,
+               record_count, model_ready_count, verified_count, evidence_tiers,
+               source_checksum, status, last_published_at, updated_at
+        FROM joz_data_sources
+        WHERE tenant_id = 'public' AND dataset_id = 'joz-public-knowledge'
+        ORDER BY source_key ASC
+      `),
+      runQuery(`
+        SELECT
+          (SELECT COUNT(*) FROM joz_documents WHERE visibility = 'public')::int AS documents,
+          (SELECT COUNT(*) FROM joz_documents WHERE visibility = 'public' AND is_runtime_active = TRUE)::int AS active_documents,
+          (SELECT COUNT(*) FROM joz_conversations)::int AS conversations,
+          (SELECT COUNT(*) FROM joz_messages)::int AS messages,
+          (SELECT COUNT(*) FROM joz_llm_request_events)::int AS request_events,
+          (SELECT COUNT(*) FROM joz_llm_evaluations)::int AS evaluations,
+          (SELECT COUNT(*) FROM joz_action_proposals)::int AS action_proposals,
+          (SELECT COUNT(*) FROM joz_action_events)::int AS action_events
+      `),
+    ]);
+
+    return {
+      reachable: true,
+      required: isDatabaseRequired(),
+      runtimeSource: "supabase_postgres",
+      datasets: datasetResult.rows || [],
+      sources: sourceResult.rows || [],
+      counts: countResult.rows[0] || {},
+    };
+  } catch (error) {
+    return {
+      reachable: false,
+      required: isDatabaseRequired(),
+      runtimeSource: "supabase_postgres",
+      reason: error?.message || "data control tables are not available",
+      code: error?.code || null,
+      datasets: [],
+      sources: [],
+      counts: {},
+    };
+  }
+}
+
+export async function getJozDocumentsByIntent(
+  intentMode = "skills",
+  limit = 8,
+  query = "",
+  { tenantId = JOZ_PUBLIC_TENANT_ID, datasetId = JOZ_PUBLIC_DATASET_ID } = {}
+) {
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
   const categories = [
@@ -492,11 +590,22 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
          SELECT id
          FROM joz_profiles
          WHERE is_primary = TRUE
-         ORDER BY updated_at DESC, id DESC
+         ORDER BY (
+           SELECT COUNT(*)
+           FROM joz_documents d
+           WHERE d.profile_id = joz_profiles.id
+             AND d.is_runtime_active = TRUE
+             AND d.visibility = 'public'
+         ) DESC,
+         updated_at DESC,
+         id DESC
          LIMIT 1
        )
        AND is_runtime_active = TRUE
        AND visibility = 'public'
+       AND COALESCE(metadata->>'tenant_id', 'public') = $5
+       AND COALESCE(metadata->>'visibility', 'public') = 'public'
+       AND ($6::text IS NULL OR COALESCE(metadata->>'dataset_id', 'joz-public-knowledge') = $6)
        AND (
          category = ANY($1::text[])
          OR COALESCE(metadata->>'lane', '') = ANY($2::text[])
@@ -525,7 +634,14 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
        updated_at DESC,
        id ASC
      LIMIT $4`,
-    [categories, laneAliases, primaryCategory, Math.max(limit * 5, 20)]
+    [
+      categories,
+      laneAliases,
+      primaryCategory,
+      Math.max(limit * 5, 20),
+      String(tenantId || JOZ_PUBLIC_TENANT_ID),
+      datasetId ? String(datasetId) : null,
+    ]
   );
   const dbDocuments = (result.rows || []).map(normalizeJozDocumentRow);
   const merged = new Map();
@@ -534,6 +650,7 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
     const docLane = String(doc?.metadata?.lane || "").trim();
     const docCategory = String(doc?.category || "").trim();
     if (!laneAliases.includes(docLane) && !categories.includes(docCategory)) continue;
+    if (!isDocumentAllowedForTenant(doc, { tenantId, datasetId })) continue;
 
     const slug = String(doc?.slug || doc?.metadata?.slug || "").trim();
     if (!slug) continue;
@@ -546,7 +663,7 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
       metadata: {
         ...(doc.metadata || {}),
         slug,
-        visibility: "public",
+        visibility: doc?.metadata?.visibility || "public",
         publish_version: null,
       },
     });
@@ -565,6 +682,106 @@ export async function getJozDocumentsByIntent(intentMode = "skills", limit = 8, 
     query,
     limit,
   }).map(({ _ranking, ...doc }) => doc);
+}
+
+export async function getJozSemanticDocumentsByQuery(
+  intentMode = "skills",
+  embedding = [],
+  limit = 8,
+  { tenantId = JOZ_PUBLIC_TENANT_ID, datasetId = JOZ_PUBLIC_DATASET_ID } = {}
+) {
+  if (!isDatabaseEnabled() || !Array.isArray(embedding) || embedding.length === 0) return [];
+
+  const primaryCategory = normalizeJozLaneIntent(intentMode);
+  const lane = getJozLaneConfig(primaryCategory);
+  const categories = [
+    ...new Set([
+      ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
+      "skills",
+      "systems_mindset",
+      "business_need",
+      "systems_principle",
+      "governance",
+      "governance_principle",
+    ]),
+  ];
+  const vector = buildPgvectorLiteral(embedding);
+  const result = await runQuery(
+    `WITH ranked_chunks AS (
+       SELECT
+         d.id, d.slug, d.title, d.category, d.summary, d.body, d.metadata,
+         d.visibility, d.publish_version, d.updated_at,
+         c.embedding_model,
+         (1 - (c.embedding <=> $1::vector))::float8 AS semantic_similarity,
+         ROW_NUMBER() OVER (
+           PARTITION BY d.id
+           ORDER BY c.embedding <=> $1::vector, c.id ASC
+         ) AS chunk_rank
+       FROM joz_document_chunks c
+       JOIN joz_documents d ON d.id = c.document_id
+       WHERE d.profile_id = (
+           SELECT id FROM joz_profiles
+           WHERE is_primary = TRUE
+         ORDER BY (
+           SELECT COUNT(*)
+           FROM joz_documents d
+           WHERE d.profile_id = joz_profiles.id
+             AND d.is_runtime_active = TRUE
+             AND d.visibility = 'public'
+         ) DESC,
+         updated_at DESC,
+         id DESC
+           LIMIT 1
+         )
+         AND d.is_runtime_active = TRUE
+         AND d.visibility = 'public'
+         AND c.embedding IS NOT NULL
+         AND COALESCE(d.metadata->>'tenant_id', 'public') = $2
+         AND COALESCE(d.metadata->>'visibility', 'public') = 'public'
+         AND ($3::text IS NULL OR COALESCE(d.metadata->>'dataset_id', 'joz-public-knowledge') = $3)
+         AND (
+           d.category = ANY($4::text[])
+           OR COALESCE(d.metadata->>'lane', '') = ANY($5::text[])
+         )
+     )
+     SELECT id, slug, title, category, summary, body, metadata,
+            visibility, publish_version, updated_at, embedding_model,
+            semantic_similarity
+     FROM ranked_chunks
+     WHERE chunk_rank = 1
+     ORDER BY semantic_similarity DESC, id ASC
+     LIMIT $6`,
+    [
+      vector,
+      String(tenantId || JOZ_PUBLIC_TENANT_ID),
+      datasetId ? String(datasetId) : null,
+      categories,
+      [
+        primaryCategory,
+        primaryCategory === "systems_mindset" ? "mindset" : null,
+        "skills",
+        "systems_mindset",
+        "business_need",
+      ].filter(Boolean),
+      Math.max(limit * 3, 20),
+    ]
+  );
+
+  return (result.rows || []).map((row) => {
+    const normalized = normalizeJozDocumentRow(row);
+    return {
+    ...normalized,
+    metadata: {
+      ...normalized.metadata,
+      updated_at: row.updated_at || null,
+    },
+    retrieval: {
+      method: "pgvector",
+      semanticSimilarity: Number(row.semantic_similarity) || 0,
+      embeddingModel: row.embedding_model || null,
+    },
+    };
+  });
 }
 
 export async function createJozConversation({
@@ -602,6 +819,229 @@ export async function appendJozMessage({
      WHERE id = $1`,
     [conversationId]
   );
+}
+
+export async function upsertBusinessValueCase({
+  caseId = null,
+  conversationId = null,
+  sessionKey = null,
+  companyKey = null,
+  state = {},
+} = {}) {
+  if (!isDatabaseEnabled()) return null;
+
+  const normalizedStatus =
+    state?.status === "verified"
+      ? "verified"
+      : state?.status === "in_progress"
+        ? "in_progress"
+        : "open";
+
+  try {
+    if (caseId) {
+      const result = await runQuery(
+        `UPDATE joz_business_value_cases
+         SET conversation_id = COALESCE($2, conversation_id),
+             session_key = COALESCE($3, session_key),
+             company_key = COALESCE($4, company_key),
+             status = $5,
+             active_node = $6,
+             diagnosis = $7::jsonb,
+             evidence = $8::jsonb,
+             missing_evidence = $9::jsonb,
+             confidence = $10,
+             approval = $11::jsonb,
+             solution_map = $12::jsonb,
+             current_state = $13::jsonb,
+             updated_at = NOW(),
+             closed_at = CASE WHEN $5 = 'verified' THEN COALESCE(closed_at, NOW()) ELSE NULL END
+         WHERE id = $1
+         RETURNING *`,
+        [
+          caseId,
+          conversationId,
+          sessionKey,
+          companyKey,
+          normalizedStatus,
+          state.activeNode || "data",
+          JSON.stringify(state.diagnosis || {}),
+          JSON.stringify(state.evidence || []),
+          JSON.stringify(state.missingEvidence || []),
+          Number(state.confidence) || 0,
+          JSON.stringify(state.approval || {}),
+          JSON.stringify(state.solutionMap || {}),
+          JSON.stringify(state),
+        ]
+      );
+      return result.rows[0] || null;
+    }
+
+    const existing = sessionKey
+      ? await runQuery(
+          `SELECT id
+           FROM joz_business_value_cases
+           WHERE session_key = $1 AND status <> 'closed'
+           ORDER BY updated_at DESC
+           LIMIT 1`,
+          [sessionKey]
+        )
+      : { rows: [] };
+    const existingId = existing.rows[0]?.id || null;
+    if (existingId) {
+      return upsertBusinessValueCase({
+        caseId: existingId,
+        conversationId,
+        sessionKey,
+        companyKey,
+        state,
+      });
+    }
+
+    const result = await runQuery(
+      `INSERT INTO joz_business_value_cases (
+         conversation_id, session_key, company_key, status, active_node,
+         diagnosis, evidence, missing_evidence, confidence, approval,
+         solution_map, current_state
+       )
+       VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9,
+               $10::jsonb, $11::jsonb, $12::jsonb)
+       RETURNING *`,
+      [
+        conversationId,
+        sessionKey,
+        companyKey,
+        normalizedStatus,
+        state.activeNode || "data",
+        JSON.stringify(state.diagnosis || {}),
+        JSON.stringify(state.evidence || []),
+        JSON.stringify(state.missingEvidence || []),
+        Number(state.confidence) || 0,
+        JSON.stringify(state.approval || {}),
+        JSON.stringify(state.solutionMap || {}),
+        JSON.stringify(state),
+      ]
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to persist Business Value case:", error.message);
+    return null;
+  }
+}
+
+export async function appendBusinessValueCaseEvent({
+  caseId,
+  eventType,
+  actor = "joz_llm",
+  payload = {},
+  sourceMessageId = null,
+} = {}) {
+  if (!isDatabaseEnabled() || !caseId || !eventType) return null;
+  try {
+    const result = await runQuery(
+      `INSERT INTO joz_business_value_case_events
+       (case_id, event_type, actor, payload, source_message_id)
+       VALUES ($1, $2, $3, $4::jsonb, $5)
+       RETURNING id, case_id, event_type, actor, payload, created_at`,
+      [caseId, eventType, actor, JSON.stringify(payload || {}), sourceMessageId]
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to persist Business Value case event:", error.message);
+    return null;
+  }
+}
+
+export async function getBusinessValueCase(caseId) {
+  if (!isDatabaseEnabled() || !caseId) return null;
+  try {
+    const [caseResult, eventResult, evidenceResult] = await Promise.all([
+      runQuery(`SELECT * FROM joz_business_value_cases WHERE id = $1`, [caseId]),
+      runQuery(
+        `SELECT id, case_id, event_type, actor, payload, source_message_id, created_at
+         FROM joz_business_value_case_events
+         WHERE case_id = $1
+         ORDER BY created_at ASC`,
+        [caseId]
+      ),
+      runQuery(
+        `SELECT id, case_id, evidence_key, node, value, source_type, source_ref,
+                verification_status, collected_at, verified_at
+         FROM joz_business_value_evidence
+         WHERE case_id = $1
+         ORDER BY collected_at ASC`,
+        [caseId]
+      ),
+    ]);
+    if (!caseResult.rows[0]) return null;
+    return {
+      ...caseResult.rows[0],
+      events: eventResult.rows || [],
+      evidence_records: evidenceResult.rows || [],
+    };
+  } catch (error) {
+    console.error("⚠️ Failed to load Business Value case:", error.message);
+    return null;
+  }
+}
+
+export async function upsertBusinessValueEvidence({ caseId, records = [] } = {}) {
+  if (!isDatabaseEnabled() || !caseId || !Array.isArray(records) || !records.length) return [];
+  const saved = [];
+  for (const record of records) {
+    try {
+      const result = await runQuery(
+        `INSERT INTO joz_business_value_evidence
+           (case_id, evidence_key, node, value, source_type, source_ref, verification_status, collected_at)
+         VALUES ($1, $2, $3, $4::jsonb, $5, $6, $7, COALESCE($8::timestamptz, NOW()))
+         ON CONFLICT (case_id, evidence_key) DO UPDATE SET
+           value = EXCLUDED.value,
+           source_type = EXCLUDED.source_type,
+           source_ref = EXCLUDED.source_ref,
+           verification_status = CASE
+             WHEN joz_business_value_evidence.verification_status IN ('verified', 'corroborated')
+               THEN joz_business_value_evidence.verification_status
+             ELSE EXCLUDED.verification_status
+           END
+         RETURNING id, case_id, evidence_key, node, value, source_type, source_ref,
+                   verification_status, collected_at, verified_at`,
+        [
+          caseId,
+          record.evidenceKey,
+          record.node,
+          JSON.stringify(record.value || {}),
+          record.sourceType || "company_document",
+          record.sourceRef || null,
+          record.verificationStatus || "unverified",
+          record.collectedAt || null,
+        ]
+      );
+      if (result.rows[0]) saved.push(result.rows[0]);
+    } catch (error) {
+      console.error("⚠️ Failed to persist Business Value evidence:", error.message);
+    }
+  }
+  return saved;
+}
+
+export async function reviewBusinessValueEvidence({
+  caseId,
+  evidenceKey,
+  verificationStatus = "verified",
+  actor = "company_reviewer",
+} = {}) {
+  if (!isDatabaseEnabled() || !caseId || !evidenceKey) return null;
+  const allowed = new Set(["claimed", "corroborated", "verified", "rejected"]);
+  if (!allowed.has(verificationStatus)) throw new Error("Unsupported evidence review status");
+  const result = await runQuery(
+    `UPDATE joz_business_value_evidence
+     SET verification_status = $3,
+         verified_at = CASE WHEN $3 = 'verified' THEN NOW() ELSE NULL END
+     WHERE case_id = $1 AND evidence_key = $2
+     RETURNING id, case_id, evidence_key, node, value, source_type, source_ref,
+               verification_status, collected_at, verified_at`,
+    [caseId, evidenceKey, verificationStatus]
+  );
+  return result.rows[0] ? { ...result.rows[0], reviewedBy: actor } : null;
 }
 
 export async function logJozLlmRequestEvent({
@@ -656,6 +1096,180 @@ export async function logJozLlmRequestEvent({
   return result.rows[0]?.id || null;
 }
 
+export async function saveJozActionProposal({
+  proposal = {},
+  sessionKey = null,
+  status = "pending",
+  approvalTokenHash = "",
+  executionTokenHash = null,
+  approvedBy = null,
+  result = null,
+  verification = {},
+  createdAt = null,
+  expiresAt = null,
+  approvedAt = null,
+  completedAt = null,
+  eventType = "proposed",
+  actor = "system",
+  eventMetadata = {},
+} = {}) {
+  if (!isDatabaseEnabled() || !proposal?.proposalId || !approvalTokenHash || !expiresAt) return null;
+
+  const resultRow = await runQuery(
+    `INSERT INTO joz_action_proposals (
+       proposal_id, session_key, action, risk, proposal, status,
+       approval_token_hash, execution_token_hash, approved_by, result,
+       verification, created_at, expires_at, approved_at, completed_at, updated_at
+     )
+     VALUES ($1, $2, $3, $4, $5::jsonb, $6, $7, $8, $9, $10::jsonb,
+             $11::jsonb, $12, $13, $14, $15, NOW())
+     ON CONFLICT (proposal_id) DO UPDATE SET
+       session_key = EXCLUDED.session_key,
+       action = EXCLUDED.action,
+       risk = EXCLUDED.risk,
+       proposal = EXCLUDED.proposal,
+       status = EXCLUDED.status,
+       approval_token_hash = EXCLUDED.approval_token_hash,
+       execution_token_hash = EXCLUDED.execution_token_hash,
+       approved_by = EXCLUDED.approved_by,
+       result = EXCLUDED.result,
+       verification = EXCLUDED.verification,
+       expires_at = EXCLUDED.expires_at,
+       approved_at = EXCLUDED.approved_at,
+       completed_at = EXCLUDED.completed_at,
+       updated_at = NOW()
+     RETURNING proposal_id`,
+    [
+      String(proposal.proposalId),
+      sessionKey,
+      String(proposal.action || "requested_action"),
+      String(proposal.risk || "unknown"),
+      JSON.stringify(proposal || {}),
+      String(status || "pending"),
+      String(approvalTokenHash),
+      executionTokenHash,
+      approvedBy,
+      result === null ? null : JSON.stringify(result),
+      JSON.stringify(verification || {}),
+      createdAt || new Date().toISOString(),
+      expiresAt,
+      approvedAt,
+      completedAt,
+    ]
+  );
+
+  if (eventType) {
+    await recordJozActionEvent({
+      proposalId: proposal.proposalId,
+      eventType,
+      actor,
+      metadata: eventMetadata,
+    });
+  }
+
+  return resultRow.rows[0]?.proposal_id || null;
+}
+
+export async function loadJozActionProposal(proposalId) {
+  if (!isDatabaseEnabled() || !proposalId) return null;
+  const result = await runQuery(
+    `SELECT proposal_id, session_key, proposal, status, approval_token_hash,
+            execution_token_hash, approved_by, result, verification,
+            created_at, expires_at, approved_at, completed_at
+     FROM joz_action_proposals
+     WHERE proposal_id = $1
+     LIMIT 1`,
+    [String(proposalId)]
+  );
+  const row = result.rows[0];
+  if (!row) return null;
+  return {
+    proposal: { ...(row.proposal || {}), proposalId: row.proposal_id, expiresAt: row.expires_at },
+    sessionKey: row.session_key,
+    status: row.status,
+    tokenHash: row.approval_token_hash,
+    executionTokenHash: row.execution_token_hash,
+    approvedBy: row.approved_by,
+    result: row.result,
+    verification: row.verification || {},
+    createdAt: row.created_at,
+    expiresAt: row.expires_at,
+    approvedAt: row.approved_at,
+    completedAt: row.completed_at,
+  };
+}
+
+export async function updateJozActionProposal({
+  proposalId,
+  status,
+  expectedStatus = null,
+  expectedApprovalTokenHash = null,
+  expectedExecutionTokenHash = null,
+  executionTokenHash,
+  approvedBy,
+  result,
+  verification,
+  approvedAt,
+  completedAt,
+  eventType = null,
+  actor = "system",
+  eventMetadata = {},
+} = {}) {
+  if (!isDatabaseEnabled() || !proposalId) return null;
+  const resultRow = await runQuery(
+    `UPDATE joz_action_proposals
+     SET status = COALESCE($2, status),
+         execution_token_hash = CASE WHEN $3::boolean THEN $4 ELSE execution_token_hash END,
+         approved_by = COALESCE($5, approved_by),
+         result = CASE WHEN $6::boolean THEN $7::jsonb ELSE result END,
+         verification = CASE WHEN $8::boolean THEN $9::jsonb ELSE verification END,
+         approved_at = COALESCE($10, approved_at),
+         completed_at = COALESCE($11, completed_at),
+         updated_at = NOW()
+     WHERE proposal_id = $1
+       AND ($12::text IS NULL OR status = $12)
+       AND ($13::text IS NULL OR approval_token_hash = $13)
+       AND ($14::text IS NULL OR execution_token_hash = $14)
+     RETURNING proposal_id`,
+    [
+      String(proposalId),
+      status || null,
+      executionTokenHash !== undefined,
+      executionTokenHash === undefined ? null : executionTokenHash,
+      approvedBy || null,
+      result !== undefined,
+      result === undefined || result === null ? null : JSON.stringify(result),
+      verification !== undefined,
+      verification === undefined ? null : JSON.stringify(verification || {}),
+      approvedAt || null,
+      completedAt || null,
+      expectedStatus,
+      expectedApprovalTokenHash,
+      expectedExecutionTokenHash,
+    ]
+  );
+  if (eventType) {
+    await recordJozActionEvent({ proposalId, eventType, actor, metadata: eventMetadata });
+  }
+  return resultRow.rows[0]?.proposal_id || null;
+}
+
+export async function recordJozActionEvent({
+  proposalId,
+  eventType,
+  actor = "system",
+  metadata = {},
+} = {}) {
+  if (!isDatabaseEnabled() || !proposalId || !eventType) return null;
+  const result = await runQuery(
+    `INSERT INTO joz_action_events (proposal_id, event_type, actor, metadata)
+     VALUES ($1, $2, $3, $4::jsonb)
+     RETURNING id`,
+    [String(proposalId), String(eventType), String(actor || "system").slice(0, 200), JSON.stringify(metadata || {})]
+  );
+  return result.rows[0]?.id || null;
+}
+
 export async function listRecentJozLlmRequestEvents(limit = 20) {
   const result = await runQuery(
     `SELECT id, conversation_id, session_key, route, intent_mode, user_message, assistant_reply,
@@ -665,7 +1279,7 @@ export async function listRecentJozLlmRequestEvents(limit = 20) {
      FROM joz_llm_request_events
      ORDER BY created_at DESC
      LIMIT $1`,
-    [Math.max(1, Math.min(100, Number(limit) || 20))]
+    [Math.max(1, Math.min(500, Number(limit) || 20))]
   );
   return result.rows || [];
 }
@@ -673,7 +1287,7 @@ export async function listRecentJozLlmRequestEvents(limit = 20) {
 export async function listUnevaluatedJozLlmRequestEvents(limit = 20, sessionKeyPrefix = null) {
   const normalizedPrefix = String(sessionKeyPrefix || "").trim();
   const whereSession = normalizedPrefix ? " AND e.session_key LIKE $2" : "";
-  const params = [Math.max(1, Math.min(100, Number(limit) || 20))];
+  const params = [Math.max(1, Math.min(500, Number(limit) || 20))];
   if (normalizedPrefix) params.push(`${normalizedPrefix}%`);
   const result = await runQuery(
     `SELECT e.id, e.conversation_id, e.session_key, e.route, e.intent_mode, e.user_message,
@@ -1336,6 +1950,9 @@ export async function initDatabase() {
   const configuredDatabaseUrl = getDatabaseUrl();
   const db = getPool();
   if (!db) {
+    if (isDatabaseRequired()) {
+      throw new Error("Database is required in production. Configure SUPABASE_DB_URL or DATABASE_URL; local data fallback is disabled.");
+    }
     console.log("🗄️ No database URL set, using file memory only");
     return;
   }
@@ -1368,6 +1985,41 @@ export async function initDatabase() {
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_action_proposals (
+        proposal_id TEXT PRIMARY KEY,
+        session_key TEXT,
+        action TEXT NOT NULL,
+        risk TEXT NOT NULL DEFAULT 'unknown',
+        proposal JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'pending',
+        approval_token_hash TEXT NOT NULL,
+        execution_token_hash TEXT,
+        approved_by TEXT,
+        result JSONB,
+        verification JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        expires_at TIMESTAMPTZ NOT NULL,
+        approved_at TIMESTAMPTZ,
+        completed_at TIMESTAMPTZ,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_action_events (
+        id BIGSERIAL PRIMARY KEY,
+        proposal_id TEXT NOT NULL REFERENCES joz_action_proposals(proposal_id) ON DELETE CASCADE,
+        event_type TEXT NOT NULL,
+        actor TEXT NOT NULL DEFAULT 'system',
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`CREATE INDEX IF NOT EXISTS joz_action_proposals_status_idx ON joz_action_proposals (status, created_at DESC)`);
+    await db.query(`CREATE INDEX IF NOT EXISTS joz_action_events_proposal_idx ON joz_action_events (proposal_id, created_at ASC)`);
 
     await db.query(`
       CREATE TABLE IF NOT EXISTS world_portals (
@@ -1522,6 +2174,78 @@ export async function initDatabase() {
     await db.query(`
       CREATE INDEX IF NOT EXISTS joz_documents_lane_idx
       ON joz_documents ((metadata->>'lane'))
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_datasets (
+        id BIGSERIAL PRIMARY KEY,
+        profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+        dataset_id TEXT NOT NULL,
+        tenant_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        owner TEXT NOT NULL,
+        classification TEXT NOT NULL DEFAULT 'public',
+        visibility TEXT NOT NULL DEFAULT 'public',
+        retention_policy TEXT NOT NULL DEFAULT 'until_withdrawn',
+        schema_version TEXT NOT NULL DEFAULT '1.0',
+        source_count INTEGER NOT NULL DEFAULT 0,
+        normalized_count INTEGER NOT NULL DEFAULT 0,
+        published_count INTEGER NOT NULL DEFAULT 0,
+        model_ready_count INTEGER NOT NULL DEFAULT 0,
+        verified_count INTEGER NOT NULL DEFAULT 0,
+        content_checksum TEXT,
+        status TEXT NOT NULL DEFAULT 'published',
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        published_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (profile_id, dataset_id, tenant_id)
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_datasets_tenant_idx
+      ON joz_datasets (tenant_id, dataset_id, status)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_data_sources (
+        id BIGSERIAL PRIMARY KEY,
+        profile_id BIGINT NOT NULL REFERENCES joz_profiles(id) ON DELETE CASCADE,
+        dataset_id TEXT NOT NULL,
+        tenant_id TEXT NOT NULL,
+        source_id TEXT NOT NULL,
+        source_key TEXT NOT NULL,
+        source_filename TEXT,
+        source_uri TEXT,
+        source_types JSONB NOT NULL DEFAULT '[]'::jsonb,
+        owner TEXT NOT NULL,
+        classification TEXT NOT NULL DEFAULT 'public',
+        visibility TEXT NOT NULL DEFAULT 'public',
+        retention_policy TEXT NOT NULL DEFAULT 'until_withdrawn',
+        record_count INTEGER NOT NULL DEFAULT 0,
+        model_ready_count INTEGER NOT NULL DEFAULT 0,
+        verified_count INTEGER NOT NULL DEFAULT 0,
+        evidence_tiers JSONB NOT NULL DEFAULT '[]'::jsonb,
+        source_checksum TEXT,
+        status TEXT NOT NULL DEFAULT 'published',
+        last_ingested_at TIMESTAMPTZ,
+        last_published_at TIMESTAMPTZ,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (profile_id, dataset_id, tenant_id, source_key)
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_data_sources_tenant_idx
+      ON joz_data_sources (tenant_id, dataset_id, status)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_data_sources_source_id_idx
+      ON joz_data_sources (source_id)
     `);
 
     await db.query(`
@@ -1945,4 +2669,28 @@ export async function logReasoningEvent(event) {
   } catch (error) {
     console.error("⚠️ Failed to log reasoning event:", error.message);
   }
+}
+
+export async function createJozAIComplianceIncident({
+  companyKey = null,
+  reporterId = null,
+  category,
+  severity = "medium",
+  description,
+  containment = null,
+} = {}) {
+  const db = getPool();
+  if (!db) return null;
+  const result = await db.query(
+    `
+      INSERT INTO joz_ai_compliance_incidents (
+        company_key, reporter_id, category, severity, description, containment
+      )
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING id, company_key, reporter_id, category, severity, description,
+        containment, status, created_at, updated_at, resolved_at
+    `,
+    [companyKey, reporterId, category, severity, description, containment],
+  );
+  return result.rows[0] || null;
 }

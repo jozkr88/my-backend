@@ -1,0 +1,41 @@
+{
+  "slug": "systems-mindset-hero",
+  "title": "Joz's Systems Mindset",
+  "category": "systems_mindset",
+  "lane": "systems_mindset",
+  "summary": "Organizations are living systems of people, incentives, decisions, workflows, data, and feedback loops.",
+  "tags": [
+    "systems-thinking",
+    "decision-quality",
+    "feedback-loops",
+    "complexity",
+    "agentic-ai"
+  ],
+  "impact_score": 100,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "problems": [
+    "knowledge_fragmentation",
+    "organizational_complexity",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "feedback_loops",
+    "human_accountability",
+    "signal_over_noise",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "context_engineering",
+    "decision_intelligence",
+    "organizational_design",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "lower_operational_friction"
+  ]
+}

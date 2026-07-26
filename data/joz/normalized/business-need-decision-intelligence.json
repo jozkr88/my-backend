@@ -1,0 +1,116 @@
+{
+  "slug": "business-need-decision-intelligence",
+  "title": "Enterprise Decision Intelligence",
+  "category": "capability",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "How Joz turns data, knowledge, and operational signals into clearer priorities and faster decisions.",
+  "body": "Enterprise Decision Intelligence means turning distributed data and knowledge into a trusted view of:\n\n- what changed\n- why it matters\n- how confident the organisation should be\n- what action is recommended\n- who owns the decision\n- what evidence supports it\n- what outcome should be measured\n\nJoz's approach combines enterprise retrieval, semantic context, knowledge structures, agentic reasoning, verification, permissions, and human approval.\n\nThis is valuable when leadership is overwhelmed by reports but still lacks clarity. The objective is not to create another dashboard. It is to reduce decision latency, increase signal quality, and make action more accountable.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "context",
+      "decision-intelligence",
+      "executive-intelligence",
+      "prioritisation",
+      "signals"
+    ],
+    "verification": {
+      "status": "capability_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "capability_supported",
+    "claims": [
+      "Joz designs systems that distinguish material signals from organisational noise.",
+      "Decision intelligence combines retrieval, context, evidence, confidence, business impact, and recommended action.",
+      "The goal is not more dashboards but better decisions and faster execution."
+    ],
+    "proof_points": [
+      "Current focus on context engineering, RAG, agent memory, retrieval, verification, and AI governance.",
+      "Long-term experience translating complex information into usable enterprise products.",
+      "Transformation work across executives, regional teams, national media, banking, and government."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-decision-intelligence.md",
+    "source_meta_filename": "business-need-decision-intelligence.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "knowledge_fragmentation",
+      "low_trust",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "signal_over_noise"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agent_memory",
+      "context_engineering",
+      "decision_intelligence",
+      "rag",
+      "verification"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "knowledge_reuse",
+      "productivity_gains"
+    ],
+    "governance": [
+      "access_control",
+      "confidence_handling",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "9fd6dea4710db2d5fc4f27801eefcb62e8fcff474abca4026077bd1b6ea1a6e5",
+    "source_uri": null
+  }
+}

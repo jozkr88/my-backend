@@ -13,7 +13,7 @@ for (const envPath of [path.resolve(process.cwd(), "server/.env"), path.resolve(
   dotenv.config({ path: envPath });
 }
 
-const limit = Math.max(1, Math.min(100, Number(process.env.JOZ_EVAL_LIMIT) || 20));
+const limit = Math.max(1, Math.min(500, Number(process.env.JOZ_EVAL_LIMIT) || 20));
 const model = process.env.JOZ_EVAL_MODEL || "gpt-4o-mini";
 const sessionKeyPrefix = String(process.env.JOZ_EVAL_SESSION_PREFIX || "").trim() || null;
 

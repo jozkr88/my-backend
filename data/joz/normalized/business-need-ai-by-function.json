@@ -1,0 +1,118 @@
+{
+  "slug": "business-need-ai-by-function",
+  "title": "AI Opportunities by Business Function",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Maps Joz business-value opportunities by function across finance, ERP, HR, marketing, sales, and leadership rather than abstract AI categories.",
+  "body": "The strongest way to extend Joz for business value is by mapping AI opportunities by business function rather than by generic AI category.\n\nCore function areas:\n\n1. Finance and accounting\n- invoice handling\n- AP and AR workflows\n- close support\n- spend visibility\n- forecasting support\n- anomaly detection\n\n2. ERP and operations\n- procurement\n- exception handling\n- inventory visibility\n- planning support\n- supplier coordination\n- fulfillment bottleneck analysis\n\n3. HR and workforce\n- recruiting support\n- onboarding\n- policy Q&A\n- manager support\n- internal service workflows\n- training and knowledge reuse\n\n4. Marketing\n- campaign planning\n- reporting synthesis\n- segmentation\n- content operations\n- attribution interpretation\n- CAC efficiency support\n\n5. Sales and revenue operations\n- lead qualification\n- proposal and follow-up support\n- CRM hygiene\n- forecasting assistance\n- churn and renewal signals\n- next-best action\n\n6. Leadership and transformation\n- cross-functional reporting\n- operating model redesign\n- KPI synthesis\n- scenario support\n- AI adoption governance\n\nThis is useful because leaders usually buy outcomes by function, not abstract agent categories.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "erp",
+      "finance",
+      "hr",
+      "marketing",
+      "sales"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "The strongest business-value framing is to map AI opportunities by function rather than by generic AI category.",
+      "Finance, ERP, HR, marketing, sales, and leadership each have distinct AI opportunity patterns.",
+      "Function-specific framing makes Joz commercially clearer to decision-makers."
+    ],
+    "proof_points": [
+      "Joz already has financial-services, enterprise-transformation, and decision-intelligence proof across multiple regulated and scaled environments.",
+      "The current knowledge base already supports workflow redesign and business-value positioning.",
+      "Department-level framing is a natural extension of the existing business-need lane."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-ai-by-function.md",
+    "source_meta_filename": "business-need-ai-by-function.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "data_silos",
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "knowledge_reuse",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "human_approval"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 4,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "56639b6a16b5f3560e7aa55ce1901acf3f029650b6e9510dacaad4dd16795427",
+    "source_uri": null
+  }
+}

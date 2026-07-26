@@ -1,0 +1,43 @@
+{
+  "slug": "systems-agentic-ai-judgment",
+  "title": "Agentic AI Requires Judgment",
+  "category": "governance_principle",
+  "lane": "systems_mindset",
+  "summary": "Agentic AI success depends on judgment, boundaries, and accountability.",
+  "tags": [
+    "agentic-ai",
+    "judgment",
+    "autonomy",
+    "governance"
+  ],
+  "impact_score": 98,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "problems": [
+    "ai_adoption_failure",
+    "governance_gaps",
+    "low_trust"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "human_accountability",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "ai_governance",
+    "observability",
+    "verification"
+  ],
+  "outcomes": [
+    "higher_adoption",
+    "lower_risk",
+    "stronger_governance"
+  ],
+  "governance": [
+    "auditability",
+    "escalation",
+    "evaluation",
+    "human_approval"
+  ]
+}

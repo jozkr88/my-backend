@@ -1,0 +1,82 @@
+{
+  "slug": "business-need-roi-model",
+  "title": "Where the ROI Comes From",
+  "category": "roi",
+  "lane": "business_need",
+  "summary": "Defines the principal ROI levers for Joz's work: revenue growth, productivity, cost reduction, risk reduction, faster decisions, and improved adoption.",
+  "tags": [
+    "roi",
+    "revenue",
+    "cost-reduction",
+    "productivity",
+    "risk",
+    "decision-speed"
+  ],
+  "impact_score": 97,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "ROI should be tied to a measurable business baseline and target, not generic AI activity.",
+    "Joz's work creates value through revenue uplift, reduced manual effort, lower delivery friction, improved adoption, reduced risk, and faster decisions.",
+    "Every proposed initiative should have a value owner, metric, baseline, target, and verification method."
+  ],
+  "proof_points": [
+    "20× digital sales growth at Maybank–Ageas Etiqa.",
+    "30× audience growth at Mediacorp.",
+    "70% reduction in handoff friction at Publicis.",
+    "Large-scale accessibility and engineering impact at Erste."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Maybank",
+    "Ageas",
+    "Etiqa",
+    "Mediacorp",
+    "Publicis",
+    "Erste Bank"
+  ],
+  "problems": [
+    "manual_knowledge_work",
+    "operational_friction",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "decision_quality",
+    "feedback_loops",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "faster_time_to_value",
+    "lower_risk",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "media"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "publicis_handoff_reduction"
+  ]
+}

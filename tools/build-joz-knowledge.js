@@ -2,6 +2,12 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { mapJozQueryToOntology } from "../shared/jozOntology.js";
+import {
+  buildDatasetControlManifest,
+  buildGovernanceMetadata,
+  JOZ_PUBLIC_DATASET_ID,
+  JOZ_PUBLIC_TENANT_ID,
+} from "../shared/jozDataGovernance.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -121,6 +127,15 @@ function readJsonLines(filePath) {
 
 function writeJson(filePath, value) {
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function pruneStaleNormalizedRecords(activeFilenames) {
+  if (!fs.existsSync(normalizedDir)) return;
+  const active = new Set(activeFilenames);
+  for (const filename of fs.readdirSync(normalizedDir)) {
+    if (!filename.endsWith(".json") || active.has(filename)) continue;
+    fs.rmSync(path.join(normalizedDir, filename));
+  }
 }
 
 function normalizeLane(value = "") {
@@ -466,6 +481,17 @@ function buildNormalizedRecord(baseName, sourceFilename, ontologyIndexes, proofs
     },
   };
 
+  normalized.metadata = buildGovernanceMetadata({
+    metadata: normalized.metadata,
+    body,
+    sourceFilename,
+    sourceUri: normalized.source_uri,
+    verificationStatus: normalized.metadata.verification_status,
+    datasetId: meta.dataset_id || JOZ_PUBLIC_DATASET_ID,
+    tenantId: meta.tenant_id || JOZ_PUBLIC_TENANT_ID,
+  });
+  normalized.source_uri = normalized.metadata.source_uri;
+
   return { errors, record: normalized };
 }
 
@@ -491,7 +517,7 @@ function buildCanonicalRecord(rawRecord, sourceFilename, generatedAt = "") {
   const ontologyFields = mapJozQueryToOntology(semanticText);
   const slug = buildCanonicalSlug(rawRecord, sourceFilename);
 
-  return {
+  const normalized = {
     errors,
     record: {
       slug,
@@ -553,6 +579,19 @@ function buildCanonicalRecord(rawRecord, sourceFilename, generatedAt = "") {
       },
     },
   };
+
+  normalized.record.metadata = buildGovernanceMetadata({
+    metadata: normalized.record.metadata,
+    body: content,
+    sourceFilename,
+    sourceUri: normalized.record.source_uri,
+    verificationStatus: "framework_supported",
+    datasetId: JOZ_PUBLIC_DATASET_ID,
+    tenantId: JOZ_PUBLIC_TENANT_ID,
+  });
+  normalized.record.source_uri = normalized.record.metadata.source_uri;
+
+  return normalized;
 }
 
 function validateProofSourceSlugs(proofs, slugSet) {
@@ -583,6 +622,7 @@ function main() {
   const canonicalFiles = listCanonicalJsonlFiles();
   const generatedAt = new Date().toISOString();
   const slugSet = new Set();
+  const activeNormalizedFilenames = [];
 
   for (const sourceFilename of sourceFiles) {
     const metaPath = path.join(inboxDir, `${getBaseName(sourceFilename)}.meta.json`);
@@ -626,7 +666,9 @@ function main() {
     errors.push(...itemErrors);
     if (!record) continue;
 
-    writeJson(path.join(normalizedDir, `${baseName}.json`), record);
+    const normalizedFilename = `${baseName}.json`;
+    writeJson(path.join(normalizedDir, normalizedFilename), record);
+    activeNormalizedFilenames.push(normalizedFilename);
     records.push(record);
   }
 
@@ -641,10 +683,14 @@ function main() {
       errors.push(...itemErrors);
       if (!record) continue;
 
-      writeJson(path.join(normalizedDir, `${record.slug}.json`), record);
+      const normalizedFilename = `${record.slug}.json`;
+      writeJson(path.join(normalizedDir, normalizedFilename), record);
+      activeNormalizedFilenames.push(normalizedFilename);
       records.push(record);
     }
   }
+
+  pruneStaleNormalizedRecords(activeNormalizedFilenames);
 
   const modelReadyRecords = records.filter((record) =>
     MODEL_READY_STATUSES.has(record.metadata.verification_status)
@@ -672,6 +718,18 @@ function main() {
   };
 
   writeJson(path.join(publishedDir, "joz-documents.generated.json"), published);
+  writeJson(
+    path.join(publishedDir, "joz-dataset-manifest.json"),
+    buildDatasetControlManifest({
+      generatedAt,
+      records,
+      sourceCount: sourceFiles.length + canonicalFiles.length,
+      canonicalSourceCount: canonicalFiles.length,
+      errors: errors.length,
+      datasetId: JOZ_PUBLIC_DATASET_ID,
+      tenantId: JOZ_PUBLIC_TENANT_ID,
+    })
+  );
   writeJson(path.join(publishedDir, "joz-ontology.generated.json"), ontologyBundle);
   writeJson(path.join(publishedDir, "joz-knowledge-report.json"), {
     generated_at: generatedAt,

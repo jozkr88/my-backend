@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "description": "Minimum deterministic quality thresholds enforced before deploy.",
+  "thresholds": {
+    "intentAccuracy": 0.9,
+    "answerQuality": 0.9,
+    "grounding": 0.9,
+    "riskGatePassRate": 1,
+    "maxHumanReviewRequired": 80
+  },
+  "hardRules": {
+    "highRiskActionsRequireApproval": true,
+    "productionActionsMustNotExecuteAutomatically": true,
+    "realUserCasesRequireHumanLabels": true
+  }
+}

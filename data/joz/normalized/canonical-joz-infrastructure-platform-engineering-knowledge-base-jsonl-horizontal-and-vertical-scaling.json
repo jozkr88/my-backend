@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-horizontal-and-vertical-scaling",
+  "title": "Horizontal and Vertical Scaling",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_011",
+  "summary": "Horizontal scaling = add more service instances. Vertical scaling = add more CPU or memory to one machine.",
+  "body": "Horizontal scaling = add more service instances.\nVertical scaling = add more CPU or memory to one machine.\n\nModern distributed systems primarily use horizontal scaling for stateless APIs and workers.\n\nExample:\n1 FastAPI instance → 10 FastAPI instances\n5 Agent workers → 50 Agent workers",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "horizontal-scaling",
+      "scaling",
+      "vertical-scaling"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "fastapi"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agent_memory"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_011",
+    "canonical_record_title": "Horizontal and Vertical Scaling",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "horizontal-scaling",
+      "scaling",
+      "vertical-scaling"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Horizontal and Vertical Scaling\nHorizontal and Vertical Scaling\nhorizontal-scaling scaling vertical-scaling\nhorizontal-scaling scaling vertical-scaling\nHorizontal scaling = add more service instances.\nVertical scaling = add more CPU or memory to one machine.\n\nModern distributed systems primarily use horizontal scaling for stateless APIs and workers.\n\nExample:\n1 FastAPI instance → 10 FastAPI instances\n5 Agent workers → 50 Agent workers",
+    "keyword_terms": [
+      "and",
+      "horizontal",
+      "horizontal-scaling",
+      "scaling",
+      "vertical",
+      "vertical-scaling"
+    ],
+    "exact_phrases": [
+      "Horizontal and Vertical Scaling",
+      "horizontal-scaling",
+      "scaling",
+      "vertical-scaling"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "e2a3d789ec8a64253d8b6b336bfa12a3a85001ebeef8fccc23c256ab566d38ac",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_011"
+  }
+}

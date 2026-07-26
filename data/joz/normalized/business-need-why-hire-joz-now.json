@@ -1,0 +1,126 @@
+{
+  "slug": "business-need-why-hire-joz-now",
+  "title": "Why Hire Joz Now",
+  "category": "business_answer",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Explains the immediate market and organisational need for Joz's combination of Agentic AI, enterprise transformation, governance, and measurable delivery.",
+  "body": "Why hire Joz now?\n\nBecause many organisations have reached the point where AI ambition is no longer the main problem. The real problems are prioritisation, integration, trust, governance, adoption, and measurable return.\n\nJoz is valuable now because he brings together areas that are often separated:\n\n- Agentic AI and enterprise architecture\n- business and product strategy\n- data, retrieval, context, and decision systems\n- governance and human oversight\n- interaction design and adoption\n- execution across large, complex organisations\n\nHe is particularly relevant when an organisation has multiple AI pilots, disconnected systems, fragmented knowledge, unclear ownership, or pressure to show business value quickly.\n\nThe strongest answer should be:\n“Hire Joz when the organisation needs to turn AI from a collection of experiments into a governed, usable, and measurable operating capability.”",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "ai-adoption",
+      "execution",
+      "governance",
+      "transformation",
+      "why-now"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [
+      "Many organisations now need to move from AI experimentation to accountable enterprise execution.",
+      "Joz combines AI architecture with transformation, product, engineering, governance, and senior stakeholder experience.",
+      "He is most relevant when organisations have AI ambition but lack clarity, integration, prioritisation, or measurable outcomes."
+    ],
+    "proof_points": [
+      "Experience taking large organisations through mobile, digital, ML-enabled, and AI-related transformation.",
+      "Track record across regulated financial services, national media, government, and enterprise technology.",
+      "Ability to work across executive strategy, product architecture, engineering, and human adoption."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe",
+      "North America",
+      "Singapore",
+      "UAE"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Manulife",
+      "MarketClue",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 98,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-why-hire-joz-now.md",
+    "source_meta_filename": "business-need-why-hire-joz-now.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "knowledge_fragmentation",
+      "organizational_complexity",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "product_strategy",
+      "rapid_prototyping",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "faster_decisions",
+      "faster_time_to_value",
+      "higher_adoption"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [
+      "financial_services",
+      "government",
+      "media",
+      "spatial_computing",
+      "technology"
+    ],
+    "proofs": [
+      "dff_rapid_ai_prototyping",
+      "manulife_lean_ml_ux",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "versace_spatial_ai_launch"
+    ],
+    "related_proofs": [
+      "dff_rapid_ai_prototyping",
+      "manulife_lean_ml_ux",
+      "marketclue_financial_agents",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "versace_spatial_ai_launch"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 3,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "456a9c9cff87a27ae441a26c705c733339898f9433a6244d0aa99154915211f7",
+    "source_uri": null
+  }
+}

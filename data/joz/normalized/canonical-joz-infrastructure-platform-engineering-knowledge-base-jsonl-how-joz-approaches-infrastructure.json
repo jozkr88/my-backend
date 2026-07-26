@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-how-joz-approaches-infrastructure",
+  "title": "How Joz Approaches Infrastructure",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049",
+  "summary": "Joz designs infrastructure around clear boundaries, independent scaling, secure identities, durable state, controlled deployment, and measurable reliability.",
+  "body": "Joz designs infrastructure around clear boundaries, independent scaling, secure identities, durable state, controlled deployment, and measurable reliability.\n\nHe prefers simple infrastructure first, then introduces Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "approach",
+      "infrastructure",
+      "joz"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_049",
+    "canonical_record_title": "How Joz Approaches Infrastructure",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "approach",
+      "infrastructure",
+      "joz"
+    ],
+    "source_authority": 12,
+    "semantic_text": "How Joz Approaches Infrastructure\nHow Joz Approaches Infrastructure\napproach infrastructure joz\napproach infrastructure joz\nJoz designs infrastructure around clear boundaries, independent scaling, secure identities, durable state, controlled deployment, and measurable reliability.\n\nHe prefers simple infrastructure first, then introduces Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.",
+    "keyword_terms": [
+      "approach",
+      "approaches",
+      "how",
+      "infrastructure",
+      "joz"
+    ],
+    "exact_phrases": [
+      "How Joz Approaches Infrastructure",
+      "approach",
+      "infrastructure",
+      "joz"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "9d4521c7c830b33d6fa99d91c5bbcfe71acde2a9bf5b922589088d7fff2789d0",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049"
+  }
+}

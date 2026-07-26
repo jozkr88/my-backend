@@ -1,0 +1,79 @@
+{
+  "slug": "business-need-erp-finance-hr-marketing-opportunity-map",
+  "title": "ERP Finance HR Marketing Opportunity Map",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Provides a cross-functional Business Value map across ERP, finance, HR, marketing, growth, and leadership so Joz can explain AI opportunities in operational terms.",
+  "tags": [
+    "erp",
+    "finance",
+    "hr",
+    "marketing",
+    "opportunity-map"
+  ],
+  "impact_score": 97,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "A cross-functional opportunity map is the most practical way to extend Joz for Business Value.",
+    "ERP, finance, HR, marketing, and leadership each have distinct AI opportunity areas with direct operational relevance.",
+    "Joz should talk about AI opportunities in terms leaders and operators can act on immediately."
+  ],
+  "proof_points": [
+    "This structure is consistent with the existing business-need and decision-intelligence direction in the corpus.",
+    "The map converts abstract AI language into function-level business opportunities.",
+    "It aligns with Joz's workflow, operating-model, and enterprise-transformation positioning."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Erste Bank",
+    "Manulife",
+    "Maybank",
+    "Mediacorp"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "data_silos",
+    "manual_knowledge_work",
+    "operational_friction",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "knowledge_reuse",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "human_approval"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "media",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth"
+  ]
+}

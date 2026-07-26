@@ -1,0 +1,43 @@
+{
+  "slug": "systems-governance-mindset",
+  "title": "Governance as a System",
+  "category": "governance_principle",
+  "lane": "systems_mindset",
+  "summary": "Governance is an enabling mechanism, not merely compliance.",
+  "tags": [
+    "governance",
+    "trust",
+    "ai",
+    "accountability"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "problems": [
+    "ai_adoption_failure",
+    "governance_gaps",
+    "low_trust"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "human_accountability",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "ai_governance",
+    "observability",
+    "verification"
+  ],
+  "outcomes": [
+    "higher_adoption",
+    "lower_risk",
+    "stronger_governance"
+  ],
+  "governance": [
+    "auditability",
+    "escalation",
+    "evaluation",
+    "human_approval",
+    "source_provenance"
+  ]
+}

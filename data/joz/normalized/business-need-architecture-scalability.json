@@ -1,0 +1,100 @@
+{
+  "slug": "business-need-architecture-scalability",
+  "title": "How Scalable the Current Architecture Is",
+  "category": "delivery",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Clarifies that the current architecture scales well for curated knowledge and retrieval, but not yet as a full enterprise operational intelligence platform.",
+  "body": "The current Joz architecture is scalable as a curated knowledge and retrieval system, but not yet as a large enterprise operational data platform.\n\nWhat scales well now:\n\n- adding more knowledge records\n- expanding proof-backed source material\n- growing ontology coverage\n- improving retrieval precision through metadata\n- publishing safer runtime subsets\n\nWhat does not scale well yet:\n\n- high-frequency live business data ingestion\n- large operational event streams\n- multi-tenant platform complexity\n- rich long-term agent state and memory across many users\n- deep cross-system analytics across ERP, CRM, HR, marketing, and finance\n\nThe next scaling constraints will come from content volume, verification workload, update frequency, and the mixing of curated knowledge with operational data.\n\nThe correct next architecture split is:\n\n- knowledge content layer\n- operational data layer\n- retrieval and indexing layer\n- agent memory and state layer\n- governance and evaluation layer\n\nSo the honest answer is that the current architecture is strong for curated knowledge scale, but it is still an early-phase architecture for enterprise operating intelligence.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "architecture",
+      "knowledge-system",
+      "operating-model",
+      "phase-2",
+      "scalability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "The current architecture is scalable as a curated knowledge and retrieval system.",
+      "It is not yet scalable as a full enterprise operational data and intelligence platform.",
+      "The next scaling step requires separating knowledge content, operational data, retrieval infrastructure, memory, and governance."
+    ],
+    "proof_points": [
+      "The current architecture is file-based and curation-heavy.",
+      "The publish process is batch-oriented rather than designed for rapid operational data ingestion.",
+      "The current runtime is strong at retrieval and routing but not yet built as a broad analytical platform."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 90,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-architecture-scalability.md",
+    "source_meta_filename": "business-need-architecture-scalability.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "knowledge_fragmentation",
+      "operational_friction",
+      "organizational_complexity",
+      "unclear_roi"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "feedback_loops",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "decision_intelligence",
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "knowledge_reuse",
+      "productivity_gains",
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "human_approval",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "e2c171a34d1cd115a4ed9c00758601c6778840e08102eb020b0e74eb0eb03e43",
+    "source_uri": null
+  }
+}

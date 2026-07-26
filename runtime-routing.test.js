@@ -111,6 +111,26 @@ test("POST /api/joz-llm verifies business value definition replies deterministic
   assert.match(String(payload.reply || ""), /business value is|measurable improvement/i);
 });
 
+test("POST /api/joz-llm returns a conservative diagnostic state inside Business Value", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-business-value-diagnostic",
+    messages: [{ role: "user", content: "Our AI outputs are too generic and users do not trust them." }],
+    context: {
+      currentPortal: "business-value",
+      currentMesh: "adoption",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.businessValueAgent?.schema, "business_value_diagnostic.v1");
+  assert.equal(payload.businessValueAgent?.activeNode, "adoption");
+  assert.equal(payload.businessValueAgent?.diagnosis?.type, "working_hypothesis");
+  assert.equal(payload.businessValueAgent?.diagnosis?.notYetVerified, true);
+  assert.equal(payload.businessValueAgent?.approval?.status, "pending");
+  assert.ok(Array.isArray(payload.businessValueAgent?.missingEvidence));
+});
+
 test("POST /api/joz-llm does not let Root world context hijack operating model questions", async () => {
   const question =
     "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";

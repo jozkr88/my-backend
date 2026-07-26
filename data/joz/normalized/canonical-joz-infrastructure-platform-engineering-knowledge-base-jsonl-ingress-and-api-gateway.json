@@ -1,0 +1,94 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-ingress-and-api-gateway",
+  "title": "Ingress and API Gateway",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_009",
+  "summary": "Ingress routes external HTTP traffic into Kubernetes services.",
+  "body": "Ingress routes external HTTP traffic into Kubernetes services.\n\nAn API Gateway adds:\nAuthentication\nRate limiting\nRequest routing\nVersioning\nQuotas\nTraffic policies\nObservability\n\nIngress = traffic entry into the cluster.\nAPI Gateway = managed front door and control layer for APIs.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "api-gateway",
+      "ingress",
+      "kubernetes"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "observability"
+    ],
+    "outcomes": [],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_009",
+    "canonical_record_title": "Ingress and API Gateway",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "api-gateway",
+      "ingress",
+      "kubernetes"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Ingress and API Gateway\nIngress and API Gateway\napi-gateway ingress kubernetes\napi-gateway ingress kubernetes\nIngress routes external HTTP traffic into Kubernetes services.\n\nAn API Gateway adds:\nAuthentication\nRate limiting\nRequest routing\nVersioning\nQuotas\nTraffic policies\nObservability\n\nIngress = traffic entry into the cluster.\nAPI Gateway = managed front door and control layer for APIs.",
+    "keyword_terms": [
+      "and",
+      "api",
+      "api-gateway",
+      "gateway",
+      "ingress",
+      "kubernetes"
+    ],
+    "exact_phrases": [
+      "Ingress and API Gateway",
+      "api-gateway",
+      "ingress",
+      "kubernetes"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "a3d0661ee158b90a7108b04838cbca0b2ba1cb104993cda7c60f5d91f6648b5f",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_009"
+  }
+}

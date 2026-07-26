@@ -1,0 +1,122 @@
+{
+  "slug": "skills-technical-platform-stack",
+  "title": "Technical Platform and Engineering Skills",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Backend AI stack, frontend engineering, spatial computing, prototyping, accessibility, and production integration.",
+  "body": "Joz's technical skill set spans AI backend architecture, product engineering, frontend systems, spatial computing, and rapid prototyping.\n\nCurrent AI and backend stack:\nPython, FastAPI, Django, Flask, PostgreSQL, pgvector, SQLAlchemy 2.0 asynchronous patterns, asyncpg, Redis, Docker, Linux, Git, REST APIs, event-driven workflows, caching, streaming, observability, CI/CD, automated testing, RAG, embeddings, vector search, semantic retrieval, agent memory, verification, and governance.\n\nProduct and experience engineering:\nReact, Vue, Angular, Flutter, Xcode, Android Studio, WebGL, Three.js, p5, Canvas, SCSS, design systems, rapid code-based prototyping, WCAG, EAA, privacy by design, and GDPR-aware experience design.\n\nSpatial and multimodal:\nUSD and USDZ workflows, Unity, Unreal, Python, C#, C++, computer vision, 3D mathematics, vectors, linear algebra, Blender, Maya, Cinema 4D, and multimodal interaction design.\n\nUse this record for technical-depth questions. Do not let the long tool list dominate general recruiter answers.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "accessibility",
+      "fastapi",
+      "pgvector",
+      "postgresql",
+      "python",
+      "react",
+      "redis",
+      "webgl"
+    ],
+    "verification": {
+      "status": "cv_and_project_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_and_project_supported",
+    "claims": [
+      "Joz combines AI architecture with hands-on engineering and prototyping.",
+      "His current stack includes Python backend technologies and retrieval infrastructure.",
+      "His broader engineering experience includes modern frontend systems, WebGL, spatial computing, accessibility, and design systems."
+    ],
+    "proof_points": [
+      "Python, FastAPI, SQLAlchemy async, PostgreSQL, pgvector, Redis, Docker, Linux, REST APIs and event-driven workflows.",
+      "React, Vue, Angular, Flutter, JavaScript design systems, WebGL, Three.js, p5 and Canvas.",
+      "USD(z), Unity/Unreal workflows, computer vision, 3D mathematics and spatial interfaces.",
+      "WCAG and European Accessibility Act implementation experience."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Apple",
+      "Erste Bank",
+      "MarketClue",
+      "Pixar"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 86,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-technical-platform-stack.md",
+    "source_meta_filename": "skills-technical-platform-stack.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "knowledge_fragmentation",
+      "manual_knowledge_work"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "feedback_loops"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agent_memory",
+      "agentic_ai",
+      "computer_vision",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "multimodal_ai",
+      "observability",
+      "rag",
+      "spatial_ai",
+      "verification"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_data_trust",
+      "productivity_gains"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control",
+      "source_provenance"
+    ],
+    "industries": [
+      "financial_services",
+      "spatial_computing",
+      "technology"
+    ],
+    "proofs": [
+      "apple_pixar_cv_workflows",
+      "dff_rapid_ai_prototyping",
+      "marketclue_financial_agents",
+      "versace_spatial_ai_launch"
+    ],
+    "related_proofs": [
+      "apple_pixar_cv_workflows",
+      "dff_rapid_ai_prototyping",
+      "marketclue_financial_agents",
+      "versace_spatial_ai_launch"
+    ],
+    "enterprise_scale_score": 90,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "63271fcafc1412b3e31d9307da3a228646c9f2e153e68aedf2a616b79f588433",
+    "source_uri": null
+  }
+}

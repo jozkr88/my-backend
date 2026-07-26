@@ -1,0 +1,110 @@
+{
+  "slug": "business-need-enterprise-knowledge",
+  "title": "Fragmented Knowledge to Usable Intelligence",
+  "category": "capability",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Business value of turning scattered enterprise knowledge into permission-aware, source-grounded, reusable intelligence.",
+  "body": "Most organisations do not have a knowledge shortage. They have a usability and trust problem.\n\nCritical information is distributed across:\n\n- documents\n- chats\n- tickets\n- repositories\n- portals\n- databases\n- emails\n- individual experts\n- legacy systems\n\nJoz can help convert this fragmented environment into a permission-aware intelligence layer.\n\nThe business value includes:\n\n- faster employee answers\n- less duplicated work\n- fewer repeated questions\n- stronger onboarding\n- improved operational continuity\n- better cross-team alignment\n- source-grounded decisions\n- lower dependency on individual knowledge holders\n\nThe architecture should preserve access control, provenance, freshness, confidence, and the distinction between verified facts and generated interpretation.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "acl",
+      "enterprise-rag",
+      "knowledge-management",
+      "retrieval",
+      "search"
+    ],
+    "verification": {
+      "status": "capability_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "capability_supported",
+    "claims": [
+      "Enterprise knowledge is often present but operationally unusable because it is fragmented, inaccessible, outdated, or untrusted.",
+      "Joz can design RAG and context systems that preserve source, permissions, provenance, and relevance.",
+      "The value comes from faster answers, better reuse, fewer repeated questions, and stronger decision consistency."
+    ],
+    "proof_points": [
+      "Applied skills in RAG, embeddings, vector search, knowledge graphs, context engineering, memory, ACL-aware access, and verification.",
+      "Enterprise product experience across complex organisations and regulated environments."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Erste Bank",
+      "Manulife",
+      "Maybank",
+      "Mediacorp"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 94,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-enterprise-knowledge.md",
+    "source_meta_filename": "business-need-enterprise-knowledge.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "knowledge_fragmentation",
+      "manual_knowledge_work",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agent_memory",
+      "context_engineering",
+      "knowledge_graphs",
+      "rag"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "knowledge_reuse",
+      "productivity_gains"
+    ],
+    "governance": [
+      "access_control",
+      "data_boundaries",
+      "source_provenance"
+    ],
+    "industries": [
+      "financial_services",
+      "government",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "marketclue_financial_agents"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "marketclue_financial_agents"
+    ],
+    "enterprise_scale_score": 98,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "7dbd174b112339e90299b6aef94af8c476ad69ff3fa54d387249349e208d342f",
+    "source_uri": null
+  }
+}

@@ -17,6 +17,35 @@ function summarizeChecks(checks = []) {
   return "pass";
 }
 
+function buildGroundingCheck({ route = {}, resolution = {}, retrievedDocuments = [] } = {}) {
+  const groundedRoutes = new Set(["business_need", "skills", "systems_mindset"]);
+  const routeRequiresJozEvidence = groundedRoutes.has(route?.selectedRoute);
+  const source = String(resolution?.answerSource || "").toLowerCase();
+  const modelGeneratedAnswer = source === "openai_model" || source === "model_fallback";
+  const hasEvidence = retrievedDocuments.some((doc) => {
+    const tier = String(doc?.metadata?.evidence_tier || "unverified");
+    return tier !== "unverified";
+  });
+
+  if (routeRequiresJozEvidence && modelGeneratedAnswer && !hasEvidence) {
+    return {
+      id: "grounding_provenance",
+      status: "fail",
+      detail: "A model-generated Joz answer has no verified or supported source attached.",
+    };
+  }
+
+  return {
+    id: "grounding_provenance",
+    status: hasEvidence ? "pass" : "warn",
+    detail: hasEvidence
+      ? "Answer has verified or supported source evidence attached."
+      : routeRequiresJozEvidence
+        ? "No verified or supported source evidence is attached to this route."
+        : "Source evidence is optional for this route.",
+  };
+}
+
 function resolveWordBudgetStatus(route = {}, wordCount = 0) {
   const subIntent = route?.detectedSubIntent || "";
   const generousArchitectureSubroutes = new Set([
@@ -28,6 +57,7 @@ function resolveWordBudgetStatus(route = {}, wordCount = 0) {
     "single_agent_tradeoffs",
     "agentic_architecture_approach",
     "langgraph_temporal_architecture",
+    "paid_architecture_spec",
   ]);
 
   if (wordCount <= 55) return "pass";
@@ -506,8 +536,20 @@ export function buildJozResponseVerification({
   const routeChecks = verifyRouteSpecificReply({ route, reply, input, trace });
   const fallbackGuardChecks = verifyJozScopedFallbackGuard({ input, route, trace });
   const relevanceChecks = verifyAudienceRelevance({ input, route, trace, reply });
-  const checks = [...baseChecks, ...fallbackGuardChecks, ...routeChecks, ...relevanceChecks];
+  const groundingCheck = buildGroundingCheck({ route, resolution, retrievedDocuments });
+  const checks = [...baseChecks, groundingCheck, ...fallbackGuardChecks, ...routeChecks, ...relevanceChecks];
   const status = summarizeChecks(checks);
+  const confidenceBand = trace?.intentClassification?.confidenceBand || null;
+  const uncertaintyReasons = [];
+  if (confidenceBand === "medium" || confidenceBand === "low") {
+    uncertaintyReasons.push(`Intent confidence is ${confidenceBand}.`);
+  }
+  if (groundingCheck.status !== "pass") {
+    uncertaintyReasons.push("Verified source evidence is incomplete for this response.");
+  }
+  if (status === "fail") {
+    uncertaintyReasons.push("One or more deterministic response checks failed.");
+  }
 
   return {
     status,
@@ -522,10 +564,32 @@ export function buildJozResponseVerification({
       wordCount,
       retrievedDocumentCount: retrievedDocuments.length,
     },
+    grounding: {
+      status: groundingCheck.status,
+      sourceCount: retrievedDocuments.length,
+      verifiedOrSupportedSourceCount: retrievedDocuments.filter((doc) =>
+        ["verified_fact", "supported_claim", "framework_guidance"].includes(
+          String(doc?.metadata?.evidence_tier || "")
+        )
+      ).length,
+    },
+    uncertainty: {
+      level: status === "fail" || confidenceBand === "low"
+        ? "high"
+        : uncertaintyReasons.length > 0 || confidenceBand === "medium"
+          ? "medium"
+          : "low",
+      reasons: uncertaintyReasons,
+      shouldEscalate: status === "fail" || uncertaintyReasons.length > 0,
+    },
     citations: retrievedDocuments.slice(0, 5).map((doc) => ({
       title: doc?.title || null,
       category: doc?.category || null,
       slug: doc?.metadata?.slug || null,
+      evidenceTier: doc?.metadata?.evidence_tier || null,
+      datasetId: doc?.metadata?.dataset_id || null,
+      sourceUri: doc?.metadata?.source_uri || doc?.source_uri || null,
+      sourceChecksum: doc?.metadata?.source_checksum || null,
       verificationStatus:
         doc?.metadata?.verification_status ||
         doc?.metadata?.verification?.status ||

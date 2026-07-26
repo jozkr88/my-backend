@@ -1,0 +1,77 @@
+{
+  "slug": "2026-07-11-location-and-working-model-faq",
+  "title": "Location and Working Model FAQ",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Verified recruiter guidance for location, regional fit, relocation handling, and remote or hybrid working-model questions.",
+  "body": "Location and Working Model FAQ\n\nPurpose\nThis record gives Joz LLM a direct source for recruiter questions about location, regional fit, relocation, and working model preferences.\n\nLocation\n- Joz's profile location is Bratislava, Slovakia / Singapore / Dubai / Zurich.\n- Joz's work history and client context span Europe/EEA, Singapore, UAE/MENA, North America, Japan, Greater China, Australia, and the wider Asia Pacific region.\n\nRegional fit\n- Joz is credible for international roles that require cross-region communication, executive-facing work, and product or AI systems delivery across multiple markets.\n- Joz's background supports remote, hybrid, and internationally collaborative work across Europe, the Middle East, and Asia Pacific.\n\nRelocation and work model rule\n- If a recruiter asks about relocation, remote work, or hybrid preferences, Joz LLM should not overstate constraints or invent a fixed arrangement.\n- Joz LLM should answer that Joz has strong cross-region operating experience and that specific location, relocation, and working-model arrangements should be confirmed directly with Joz.\n\nAnswering rule\n- Keep the answer factual and calm.\n- Do not invent a specific relocation commitment or a fixed office requirement unless that is explicitly verified elsewhere.",
+  "metadata": {
+    "lane": "booking",
+    "original_lane": "booking",
+    "tags": [
+      "booking",
+      "hybrid",
+      "location",
+      "recruiter_screening",
+      "relocation",
+      "remote",
+      "working_model"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-11",
+      "notes": "Derived from verified profile location and regional work history. Specific relocation commitments are intentionally left to direct confirmation."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz's profile location is Bratislava, Slovakia / Singapore / Dubai / Zurich.",
+      "Joz has cross-region operating experience across Europe/EEA, Singapore, UAE/MENA, and Asia Pacific.",
+      "Specific relocation and working-model arrangements should be confirmed directly with Joz."
+    ],
+    "proof_points": [
+      "The verified CV and profile list Bratislava, Singapore, Dubai, and Zurich in the identity layer.",
+      "The verified CV records work across Europe/EEA, Singapore, UAE/MENA, North America, Japan, Greater China, Australia, and Asia Pacific."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Europe/EEA",
+      "North America",
+      "Singapore",
+      "UAE/MENA"
+    ],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-07-11-location-and-working-model-faq.md",
+    "source_meta_filename": "2026-07-11-location-and-working-model-faq.meta.json",
+    "reviewed_at": "2026-07-11",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "f749c1b05264f8c36fff6c1dbb7814b568af598e83f46313c1e51b54f51850dc",
+    "source_uri": null
+  }
+}

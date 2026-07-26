@@ -1,0 +1,75 @@
+{
+  "slug": "systems-organizational-failure-patterns",
+  "title": "Organizational Failure Patterns",
+  "category": "failure_pattern",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Many failures repeat across industries regardless of technology.",
+  "body": "Common organizational failure patterns include:\n\n- dashboard overload\n- AI pilot fatigue\n- duplicated work\n- unclear ownership\n- information asymmetry\n- governance theatre\n- excessive approvals\n- disconnected incentives\n\nJoz views these as system-level problems.\n\nThe solution is rarely another dashboard or another meeting.\n\nThe solution is redesigning information flow, accountability, and feedback loops.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "complexity",
+      "failure-patterns",
+      "organizational-design"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 94,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-organizational-failure-patterns.md",
+    "source_meta_filename": "systems-organizational-failure-patterns.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "governance_gaps",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "human_accountability",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "lower_operational_friction",
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "f8ed212472829567b26d14d68abf8d1502bfa0c1a831af471d5fbb3f8dc9bead",
+    "source_uri": null
+  }
+}

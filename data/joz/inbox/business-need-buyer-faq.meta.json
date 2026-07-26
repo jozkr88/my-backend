@@ -1,0 +1,72 @@
+{
+  "slug": "business-need-buyer-faq",
+  "title": "Business Need Buyer FAQ",
+  "category": "faq",
+  "lane": "business_need",
+  "summary": "Compact buyer and recruiter answers for value, ROI, differentiation, delivery, and fit questions.",
+  "tags": [
+    "faq",
+    "buyer",
+    "recruiter",
+    "roi",
+    "fit"
+  ],
+  "impact_score": 91,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "claims": [
+    "The Business Need lane should answer in business language before technical language.",
+    "Answers should be concise, evidence-based, and explicit about assumptions.",
+    "Joz's differentiation is the combination of AI architecture, enterprise transformation, human adoption, governance, and measurable outcomes."
+  ],
+  "proof_points": [
+    "Enterprise outcomes across financial services, national media, public systems, and technology.",
+    "Current Agentic AI, RAG, context engineering, governance, and decision-intelligence capability."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Maybank",
+    "Manulife",
+    "Mediacorp",
+    "Erste Bank",
+    "Dubai Future Foundation",
+    "MarketClue"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "knowledge_fragmentation",
+    "unclear_roi"
+  ],
+  "principles": [
+    "decision_quality",
+    "systems_before_features",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "ai_governance",
+    "decision_intelligence"
+  ],
+  "outcomes": [
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_risk"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "financial_services",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "slug": "business-need-enterprise-proof",
+  "title": "Business Value Proof at Enterprise Scale",
+  "category": "proof",
+  "lane": "business_need",
+  "summary": "Largest and most measurable evidence supporting Joz's business-value positioning.",
+  "tags": [
+    "enterprise-proof",
+    "measurable-impact",
+    "fortune-500",
+    "singapore",
+    "apac"
+  ],
+  "impact_score": 99,
+  "priority_label": "hero",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz's business-value positioning is supported by measurable transformation across enterprise and national-scale organisations.",
+    "The strongest proof should be selected based on relevance rather than presented as an undifferentiated achievement list.",
+    "Enterprise-scale outcomes should rank above smaller current experiments."
+  ],
+  "proof_points": [
+    "Maybank–Ageas Etiqa: 20× digital sales growth within 12 months.",
+    "Mediacorp: 30× monthly active audience growth across a mobile-first transformation.",
+    "Publicis: 70% reduction in design-to-engineering handoff friction.",
+    "Erste Bank: engineering and accessibility work serving 16M+ customers.",
+    "Manulife: Lean ML UX practice across 11 markets and executive-level transformation."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Europe",
+    "USA",
+    "Canada"
+  ],
+  "companies": [
+    "Maybank",
+    "Ageas",
+    "Etiqa",
+    "Mediacorp",
+    "Publicis",
+    "Erste Bank",
+    "Manulife"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "low_trust",
+    "operational_friction",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "decision_quality",
+    "feedback_loops",
+    "systems_before_features",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "organizational_design",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "cost_reduction",
+    "higher_adoption",
+    "lower_risk",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "access_control",
+    "clear_ownership",
+    "human_approval"
+  ],
+  "industries": [
+    "banking",
+    "creative_services",
+    "financial_services",
+    "insurance",
+    "media",
+    "wealth_management"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "ogilvy_banyan_tree_pitch",
+    "publicis_handoff_reduction",
+    "sgx_responsive_portals"
+  ]
+}

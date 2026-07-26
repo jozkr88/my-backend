@@ -1,0 +1,82 @@
+{
+  "slug": "systems-mindset-hero",
+  "title": "Joz's Systems Mindset",
+  "category": "systems_mindset",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Organizations are living systems of people, incentives, decisions, workflows, data, and feedback loops.",
+  "body": "Joz approaches organizations as interconnected systems rather than collections of isolated departments, tools, or projects.\n\nTechnology is rarely the root problem.\n\nThe underlying challenges are usually:\n\n- poor information flow\n- weak decision quality\n- unclear ownership\n- conflicting incentives\n- fragmented knowledge\n- missing feedback loops\n- low trust\n- execution friction\n\nHis systems mindset combines enterprise transformation, human-centered design, governance, decision intelligence, and Agentic AI.\n\nThe objective is not simply to optimize a process.\n\nThe objective is to improve how the entire system learns, adapts, coordinates, and makes decisions over time.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "agentic-ai",
+      "complexity",
+      "decision-quality",
+      "feedback-loops",
+      "systems-thinking"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-mindset-hero.md",
+    "source_meta_filename": "systems-mindset-hero.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "knowledge_fragmentation",
+      "organizational_complexity",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "feedback_loops",
+      "human_accountability",
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "context_engineering",
+      "decision_intelligence",
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "lower_operational_friction"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "92a8dc46844867fac608703585bd74afe63f3c151a9c51b8a2dd3a52c31ed41b",
+    "source_uri": null
+  }
+}

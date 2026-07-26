@@ -24,7 +24,10 @@ function toArray(value) {
 }
 
 function normalizeToken(value) {
-  return String(value || "").trim().toLowerCase();
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\bgoldpill\b/g, "gold pill");
 }
 
 function escapeRegExp(value = "") {

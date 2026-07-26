@@ -1,0 +1,88 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-canonical-architecture-principle",
+  "title": "Canonical Architecture Principle",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_024",
+  "summary": "AI reasons → Policy validates → Execution acts → Verification confirms.",
+  "body": "AI reasons → Policy validates → Execution acts → Verification confirms.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "canonical",
+      "principle"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "verification"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_024",
+    "canonical_record_title": "Canonical Architecture Principle",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "canonical",
+      "principle"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Canonical Architecture Principle\nCanonical Architecture Principle\ncanonical principle\ncanonical principle\nAI reasons → Policy validates → Execution acts → Verification confirms.",
+    "keyword_terms": [
+      "architecture",
+      "canonical",
+      "principle"
+    ],
+    "exact_phrases": [
+      "Canonical Architecture Principle",
+      "canonical",
+      "principle"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "6d97d4c56cec2e15e0a143f8addf04164d814d8b6d6e7687ff4c9291a8df6dd1",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_024"
+  }
+}

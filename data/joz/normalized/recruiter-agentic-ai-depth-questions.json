@@ -1,0 +1,72 @@
+{
+  "slug": "recruiter-agentic-ai-depth-questions",
+  "title": "Recruiter Agentic AI Depth Questions",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Recruiter-oriented question set for testing Joz's technical depth in agentic AI architecture and production AI systems.",
+  "body": "Recruiter Agentic AI Depth Questions\n\nPurpose\nThis record covers recruiter questions that probe beyond generic \"AI\" language into actual architecture depth.\n\nQuestion set\n- How technical is Joz in AI?\n- What kind of AI systems does Joz build?\n- How strong is Joz in agentic AI architecture?\n- Does Joz understand RAG, orchestration, memory, or evaluation?\n- Is Joz hands-on or just high-level?\n- Can Joz work across product, architecture, and implementation?\n\nAnswer guidance\n- Describe the full agent operating model: intent, retrieval, authorised context, reasoning, planning, execution, verification, and human escalation.\n- Make it clear Joz is not just a prompt engineer or generic AI consultant.\n- Use enterprise retrieval, ACL-aware responses, observability, governance, and production workflow language when the recruiter asks for depth.\n- Keep the explanation accessible to non-technical recruiters while still sounding technically real.\n\nProof anchors\n- Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.\n- MarketClue and current AI initiatives as live-product proof.\n- Enterprise context engineering and governance framing from current Joz LLM architecture work.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "architecture",
+      "recruiter",
+      "technical_depth"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-07-14",
+      "notes": "Aligned with the existing verified agentic AI architecture records and current router answers."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz can be positioned as hands-on in agentic AI architecture rather than only strategic.",
+      "The strongest technical framing is the full operating model of enterprise agents across retrieval, reasoning, execution, verification, and governance.",
+      "Recruiter answers should distinguish Joz from prompt-only AI profiles."
+    ],
+    "proof_points": [
+      "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
+      "Current Joz LLM and MarketClue work provide live-system relevance."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MarketClue"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "recruiter-agentic-ai-depth-questions.md",
+    "source_meta_filename": "recruiter-agentic-ai-depth-questions.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "246496654f994221d6c828ffedd35bd7533f2ff69f21f215eef8a5eb635c823f",
+    "source_uri": null
+  }
+}

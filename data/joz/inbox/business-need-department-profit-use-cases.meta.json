@@ -1,0 +1,78 @@
+{
+  "slug": "business-need-department-profit-use-cases",
+  "title": "Department by Department Profit Use Cases",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Maps department-specific AI use cases to profit impact across finance, ERP, HR, marketing, sales, and leadership.",
+  "tags": [
+    "department",
+    "profit",
+    "use-cases",
+    "finance",
+    "operations"
+  ],
+  "impact_score": 97,
+  "priority_label": "hero",
+  "verification": "framework_supported",
+  "claims": [
+    "Each department should be described in terms of profit impact, not just AI activity.",
+    "Finance, ERP, HR, marketing, sales, and leadership each have distinct cost, margin, revenue, speed, and risk levers.",
+    "This department-level framing is the right commercial language for AI value."
+  ],
+  "proof_points": [
+    "This structure is a direct extension of the profit-lever and function-opportunity records.",
+    "It turns business-value framing into department-specific operating relevance.",
+    "It aligns with enterprise stakeholder expectations for commercial clarity."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Erste Bank",
+    "Manulife",
+    "Maybank",
+    "Mediacorp"
+  ],
+  "problems": [
+    "manual_knowledge_work",
+    "operational_friction",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "decision_quality",
+    "signal_over_noise",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "enterprise_architecture",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "lower_risk",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "human_approval"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "media",
+    "technology"
+  ],
+  "proofs": [
+    "erste_customer_scale",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth"
+  ]
+}

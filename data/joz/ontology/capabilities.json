@@ -1,0 +1,20 @@
+[
+  { "id": "agentic_ai", "name": "Agentic AI Architecture" },
+  { "id": "rag", "name": "Retrieval-Augmented Generation" },
+  { "id": "context_engineering", "name": "Context Engineering" },
+  { "id": "decision_intelligence", "name": "Decision Intelligence" },
+  { "id": "ai_governance", "name": "AI Governance" },
+  { "id": "knowledge_graphs", "name": "Knowledge Graphs" },
+  { "id": "agent_memory", "name": "Agent Memory" },
+  { "id": "acl_aware_retrieval", "name": "ACL-Aware Retrieval" },
+  { "id": "verification", "name": "Verification Frameworks" },
+  { "id": "observability", "name": "AI Observability" },
+  { "id": "multimodal_ai", "name": "Multimodal AI" },
+  { "id": "computer_vision", "name": "Computer Vision" },
+  { "id": "spatial_ai", "name": "Spatial AI" },
+  { "id": "enterprise_architecture", "name": "Enterprise Architecture" },
+  { "id": "workflow_redesign", "name": "Workflow Redesign" },
+  { "id": "rapid_prototyping", "name": "Rapid AI Prototyping" },
+  { "id": "product_strategy", "name": "Product Strategy" },
+  { "id": "organizational_design", "name": "Organizational Design" }
+]

@@ -1,0 +1,76 @@
+{
+  "slug": "ogilvy-enterprise-platforms",
+  "title": "Enterprise, Exchange and Commerce Platforms — Ogilvy/WPP, Singapore",
+  "category": "project",
+  "lane": "skills",
+  "summary": "Exchange, hospitality, e-commerce, CMS, and recurring UX campaign work across Singapore, Asia Pacific, and global markets.",
+  "tags": [
+    "ogilvy",
+    "wpp",
+    "sgx",
+    "banyan-tree",
+    "danone",
+    "cms"
+  ],
+  "impact_score": 84,
+  "priority_label": "standard",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz worked on enterprise and commerce platform programmes at Ogilvy/WPP across exchange, hospitality, and consumer contexts.",
+    "The programme included SGX, Banyan Tree, Danone, and recurring UX campaign work."
+  ],
+  "proof_points": [
+    "Existing proof objects already cover SGX responsive portal re-engineering and the Banyan Tree pitch-winning prototype.",
+    "This record groups the broader Ogilvy platform programme for employer-specific retrieval."
+  ],
+  "companies": [
+    "Banyan Tree",
+    "Danone",
+    "Ogilvy",
+    "Singapore Stock Exchange",
+    "WPP"
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Global",
+    "Singapore"
+  ],
+  "industries": [
+    "creative_services",
+    "financial_services",
+    "retail",
+    "technology"
+  ],
+  "capabilities": [
+    "enterprise_architecture",
+    "product_strategy",
+    "rapid_prototyping",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption"
+  ],
+  "proofs": [
+    "ogilvy_banyan_tree_pitch",
+    "sgx_responsive_portals"
+  ],
+  "projects": [
+    "Annual Ogilvy UX Campaigns",
+    "Banyan Tree Worldwide CMS",
+    "Danone e-commerce CMS",
+    "Singapore Stock Exchange CMS"
+  ],
+  "intent_families": [
+    "factual_profile",
+    "skills"
+  ],
+  "sub_intents": [
+    "factual_profile.companies",
+    "skills.enterprise_proof"
+  ],
+  "valid_from": "2013",
+  "valid_to": "2014",
+  "source_notes": "Grouped programme record. No unsupported campaign metrics added."
+}

@@ -1,0 +1,109 @@
+[
+  {
+    "name": "Broad Profile Overview",
+    "prompt": "Tell me more about Joz",
+    "context": {
+      "currentPortal": "root",
+      "currentMesh": "ball",
+      "currentMeshStage": null
+    },
+    "expectedRoute": "skills",
+    "expectedSubIntent": "capabilities_overview",
+    "expectedAnswerClass": "deterministic_skills",
+    "requiredPhrases": ["agentic ai architecture", "decision intelligence", "context engineering"],
+    "forbiddenPhrases": ["not in the current joz knowledge base", "outside the current deterministic joz answer set"]
+  },
+  {
+    "name": "Pronoun Capability Overview",
+    "prompt": "What does he do?",
+    "context": {
+      "currentPortal": "meet-joz",
+      "currentMesh": "skills",
+      "currentMeshStage": "skills_stop"
+    },
+    "expectedRoute": "skills",
+    "expectedSubIntent": "capabilities_overview",
+    "expectedAnswerClass": "deterministic_skills",
+    "requiredPhrases": ["agentic ai architecture", "enterprise product engineering"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  },
+  {
+    "name": "Systems Mindset",
+    "prompt": "What is Joz's operating mindset when building AI systems?",
+    "context": {
+      "currentPortal": "root",
+      "currentMesh": "brain",
+      "currentMeshStage": null,
+      "intentMode": "systems_mindset"
+    },
+    "expectedRoute": "systems_mindset",
+    "expectedSubIntent": "thinking_model",
+    "requiredPhrases": ["systems before features", "signal", "verification"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  },
+  {
+    "name": "MCP Shorthand",
+    "prompt": "What's MCP then?",
+    "context": {
+      "currentPortal": "meet-joz",
+      "currentMesh": "skills",
+      "currentMeshStage": "skills_stop"
+    },
+    "expectedRoute": "skills",
+    "expectedSubIntent": "technical_stack",
+    "requiredPhrases": ["model context protocol"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  },
+  {
+    "name": "Docker Kubernetes Diff",
+    "prompt": "What's the diff between Docker and Kubernetes?",
+    "context": {
+      "currentPortal": "meet-joz",
+      "currentMesh": "skills",
+      "currentMeshStage": "skills_stop"
+    },
+    "expectedRoute": "skills",
+    "expectedSubIntent": "technical_stack",
+    "requiredPhrases": ["docker packages", "kubernetes deploys"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  },
+  {
+    "name": "Human Approval Guardrail",
+    "prompt": "What should always need human approval?",
+    "context": {
+      "currentPortal": "root",
+      "currentMesh": "brain",
+      "currentMeshStage": null
+    },
+    "expectedRoute": "systems_mindset",
+    "expectedSubIntent": "thinking_model",
+    "requiredPhrases": ["human approval", "production deployments"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  },
+  {
+    "name": "Production Deploy Guardrail",
+    "prompt": "Can agents deploy straight to prod or no?",
+    "context": {
+      "currentPortal": "root",
+      "currentMesh": "brain",
+      "currentMeshStage": null
+    },
+    "expectedRoute": "systems_mindset",
+    "expectedSubIntent": "thinking_model",
+    "requiredPhrases": ["must not deploy directly to production", "human approval"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  },
+  {
+    "name": "Prompt Injection Defense",
+    "prompt": "An agent reads malicious Telegram prompts. How would Joz stop prompt injection?",
+    "context": {
+      "currentPortal": "root",
+      "currentMesh": "brain",
+      "currentMeshStage": null
+    },
+    "expectedRoute": "systems_mindset",
+    "expectedSubIntent": "prompt_injection_defense",
+    "requiredPhrases": ["untrusted data", "system instructions", "outside the model"],
+    "forbiddenPhrases": ["not in the current joz knowledge base"]
+  }
+]

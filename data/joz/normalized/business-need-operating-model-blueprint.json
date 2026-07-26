@@ -1,0 +1,104 @@
+{
+  "slug": "business-need-operating-model-blueprint",
+  "title": "Business Value Operating Model Blueprint",
+  "category": "delivery",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Defines the structure of a serious AI business value operating model, including profit levers, opportunities, process redesign, governance, KPIs, quick wins, and a scaling roadmap.",
+  "body": "The right end state is not a loose collection of AI ideas. It is a business value operating model.\n\nThat operating model should have eight parts:\n\n1. Executive summary\nWhat value is being created and why it matters now.\n\n2. Profit-lever model\nHow value connects to revenue, margin, cost, working capital, risk, and execution speed.\n\n3. Function-by-function opportunity view\nWhere finance, ERP, HR, marketing, sales, support, and leadership can use AI productively.\n\n4. Process redesign framework\nHow current workflows change, where humans stay in the loop, and where control points sit.\n\n5. Governance model\nHow approval, evidence, auditability, risk thresholds, and ownership are handled.\n\n6. KPI and ROI model\nHow baseline, target, value owner, and verification method are defined.\n\n7. 90-day quick wins\nWhat can be tested quickly with real workflow value.\n\n8. 12-month scaling roadmap\nWhat should be integrated, operationalized, and scaled only after value and controls are credible.\n\nThis is the serious way to talk about AI transformation.\n\nThe point is not “where can we use AI?”\nThe point is:\n\n- where does value exist\n- what should change\n- how should it be governed\n- how should it scale",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "blueprint",
+      "governance",
+      "operating-model",
+      "roadmap",
+      "roi"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "The right end state is a business value operating model rather than a loose collection of AI ideas.",
+      "A serious AI transformation blueprint needs profit levers, function opportunities, process redesign, governance, KPI logic, quick wins, and a scaling roadmap.",
+      "The central question is where value exists, what should change, how it should be governed, and how it should scale."
+    ],
+    "proof_points": [
+      "This blueprint is consistent with the profit-lever, process-redesign, and function-opportunity records already added.",
+      "It matches the current Joz emphasis on systems, governance, evaluation, and real operating value.",
+      "The structure avoids technology-first AI programs with weak commercial accountability."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "MeetJoz"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 98,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-operating-model-blueprint.md",
+    "source_meta_filename": "business-need-operating-model-blueprint.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "governance_gaps",
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "enterprise_architecture",
+      "organizational_design",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "faster_time_to_value",
+      "lower_risk",
+      "revenue_growth",
+      "stronger_governance"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation",
+      "human_approval",
+      "source_provenance"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 5,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "fa1150d3ea356eb7f51c9e4f8ed42456b8b0d30b983c24e108e035ae12cf2db9",
+    "source_uri": null
+  }
+}

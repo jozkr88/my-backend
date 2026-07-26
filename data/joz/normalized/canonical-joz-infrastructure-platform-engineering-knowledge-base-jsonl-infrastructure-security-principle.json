@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-infrastructure-security-principle",
+  "title": "Infrastructure Security Principle",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_047",
+  "summary": "Infrastructure should assume every network, service, credential, tool, and workload may be compromised.",
+  "body": "Infrastructure should assume every network, service, credential, tool, and workload may be compromised.\n\nUse least privilege, workload identity, short-lived credentials, network isolation, immutable audit logs, and explicit approval for high-risk operations.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "infrastructure",
+      "security",
+      "zero-trust"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "low_trust"
+    ],
+    "principles": [
+      "trust_before_autonomy"
+    ],
+    "capabilities": [],
+    "outcomes": [
+      "higher_data_trust",
+      "lower_risk"
+    ],
+    "governance": [
+      "auditability",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_047",
+    "canonical_record_title": "Infrastructure Security Principle",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "infrastructure",
+      "security",
+      "zero-trust"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Infrastructure Security Principle\nInfrastructure Security Principle\ninfrastructure security zero-trust\ninfrastructure security zero-trust\nInfrastructure should assume every network, service, credential, tool, and workload may be compromised.\n\nUse least privilege, workload identity, short-lived credentials, network isolation, immutable audit logs, and explicit approval for high-risk operations.",
+    "keyword_terms": [
+      "infrastructure",
+      "principle",
+      "security",
+      "zero-trust"
+    ],
+    "exact_phrases": [
+      "Infrastructure Security Principle",
+      "infrastructure",
+      "security",
+      "zero-trust"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "92e1ce360526a68eb3a585ebd856b68ee98d8e8fe67485fa1c8518081c2f3d57",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_047"
+  }
+}

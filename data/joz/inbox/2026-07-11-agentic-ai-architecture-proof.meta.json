@@ -1,0 +1,50 @@
+{
+  "slug": "2026-07-11-agentic-ai-architecture-proof",
+  "title": "Agentic AI Architecture Proof",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
+  "tags": [
+    "agentic_ai",
+    "architecture",
+    "orchestration",
+    "rag",
+    "retrieval",
+    "production_ai",
+    "skills"
+  ],
+  "impact_score": 84,
+  "priority_label": "high",
+  "source_type": "derived",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-11",
+    "notes": "Derived from the verified current CV and aligned to the existing recruiter-screening and enterprise-scale records."
+  },
+  "claims": [
+    "Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.",
+    "Joz's AI systems capability includes LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering.",
+    "Joz's delivery profile combines system design, memory patterns, observability, and business-facing execution."
+  ],
+  "proof_points": [
+    "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+    "Apple/Pixar-adjacent work is framed as early Python USD(z) and computer-vision AI work in Singapore.",
+    "Dubai Future Foundation and Erste Bank add public-sector and enterprise-scale delivery context.",
+    "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
+  ],
+  "regions": [
+    "North America",
+    "Europe/EEA",
+    "Singapore",
+    "UAE/MENA",
+    "Asia Pacific"
+  ],
+  "companies": [
+    "MarketClue USA",
+    "Apple/Pixar",
+    "Dubai Future Foundation",
+    "Erste Bank"
+  ]
+}

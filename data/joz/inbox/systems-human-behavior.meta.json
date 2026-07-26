@@ -1,0 +1,32 @@
+{
+  "slug": "systems-human-behavior",
+  "title": "Human Behavior Shapes Systems",
+  "category": "systems_principle",
+  "lane": "systems_mindset",
+  "summary": "Systems are ultimately driven by human incentives and behavior.",
+  "tags": [
+    "behavior",
+    "incentives",
+    "adoption"
+  ],
+  "impact_score": 93,
+  "priority_label": "high",
+  "verification": "positioning_supported",
+  "problems": [
+    "ai_adoption_failure",
+    "low_trust",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "human_accountability",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "organizational_design",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "higher_adoption",
+    "lower_operational_friction"
+  ]
+}

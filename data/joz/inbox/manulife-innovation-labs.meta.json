@@ -1,0 +1,80 @@
+{
+  "slug": "manulife-innovation-labs",
+  "title": "Innovation Labs, ML and Digital Investment UX — Manulife, Singapore",
+  "category": "project",
+  "lane": "skills",
+  "summary": "Innovation-lab, machine-learning, investment, field-research, internal-platform, and 3D experience work across Singapore and Asia Pacific.",
+  "tags": [
+    "manulife",
+    "innovation-labs",
+    "digital-investment",
+    "ml-ux",
+    "field-research",
+    "3d-vr"
+  ],
+  "impact_score": 92,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz worked on innovation-lab, ML/AI/data UX, internal platform, investment, field-research, and 3D experience initiatives at Manulife.",
+    "The programme spanned both customer-facing and internal innovation contexts across Singapore and Asia Pacific."
+  ],
+  "proof_points": [
+    "The broader Manulife proof already covers Lean ML UX across 11 markets.",
+    "This grouped programme record preserves the individual project names for employer-specific retrieval."
+  ],
+  "companies": [
+    "Manulife"
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Cambodia",
+    "Canada",
+    "Singapore",
+    "USA"
+  ],
+  "industries": [
+    "financial_services",
+    "insurance",
+    "technology",
+    "wealth_management"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "multimodal_ai",
+    "organizational_design",
+    "product_strategy",
+    "rapid_prototyping",
+    "spatial_ai"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption",
+    "knowledge_reuse"
+  ],
+  "proofs": [
+    "manulife_lean_ml_ux"
+  ],
+  "projects": [
+    "3D VR Innovation Space",
+    "Digital Fund Purchase",
+    "Internal Innovation Portal",
+    "Lean AI UX Field Research in Cambodia",
+    "ML/AI/Data UX and Interaction Design"
+  ],
+  "intent_families": [
+    "business_need",
+    "skills",
+    "systems_mindset"
+  ],
+  "sub_intents": [
+    "business_need.ai_adoption",
+    "skills.financial_services",
+    "skills.multimodal",
+    "systems_mindset.feedback_loops"
+  ],
+  "valid_from": "2015",
+  "valid_to": "2016",
+  "source_notes": "Grouped programme record. No single unsupported metric is attributed across all included projects."
+}

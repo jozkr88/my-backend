@@ -1,0 +1,92 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-workload-identity",
+  "title": "Workload Identity",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_023",
+  "summary": "Workload identity lets services prove who they are without sharing long-lived static credentials.",
+  "body": "Workload identity lets services prove who they are without sharing long-lived static credentials.\n\nExamples:\nAWS IAM roles for workloads\nKubernetes service accounts\nOIDC-based federation\nShort-lived tokens\n\nWorkload identity is safer than embedding shared secrets in services.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "identity",
+      "security",
+      "workload-identity"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_023",
+    "canonical_record_title": "Workload Identity",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "identity",
+      "security",
+      "workload-identity"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Workload Identity\nWorkload Identity\nidentity security workload-identity\nidentity security workload-identity\nWorkload identity lets services prove who they are without sharing long-lived static credentials.\n\nExamples:\nAWS IAM roles for workloads\nKubernetes service accounts\nOIDC-based federation\nShort-lived tokens\n\nWorkload identity is safer than embedding shared secrets in services.",
+    "keyword_terms": [
+      "identity",
+      "security",
+      "workload",
+      "workload-identity"
+    ],
+    "exact_phrases": [
+      "Workload Identity",
+      "identity",
+      "security",
+      "workload-identity"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "6c64f5020a9b983e6903aaf5154ae157d90cdec2493efb18080a0c961c421cc2",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_023"
+  }
+}

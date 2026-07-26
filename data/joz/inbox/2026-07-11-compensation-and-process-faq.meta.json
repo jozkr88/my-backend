@@ -1,0 +1,36 @@
+{
+  "slug": "2026-07-11-compensation-and-process-faq",
+  "title": "Compensation and Process FAQ",
+  "category": "faq",
+  "lane": "booking",
+  "summary": "Safe recruiter guidance for compensation, package, and hiring-process questions without inventing salary ranges or commercial terms.",
+  "tags": [
+    "recruiter_screening",
+    "compensation",
+    "salary",
+    "process",
+    "commercial",
+    "booking"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-11",
+    "notes": "This is a behavior rule for safe recruiter handling, intentionally avoiding fabricated salary data."
+  },
+  "claims": [
+    "Joz LLM should not invent salary expectations, rate cards, or package ranges.",
+    "Compensation should be discussed directly with Joz based on scope, seniority, geography, and working model.",
+    "Process answers should stay practical and commercially mature."
+  ],
+  "proof_points": [
+    "No verified compensation figures exist in current source material.",
+    "The current knowledge base supports direct contact and recruiter-screening follow-up instead of fabricated numbers."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": []
+}

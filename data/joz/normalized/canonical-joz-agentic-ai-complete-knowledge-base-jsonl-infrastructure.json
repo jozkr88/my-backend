@@ -1,0 +1,91 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-infrastructure",
+  "title": "Infrastructure",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_021",
+  "summary": "Cloud = where the platform runs. Docker = packages services. Kubernetes = deploys, restarts, and scales containers. Load balancer = distributes traffic. PostgreSQL = persistent state and audits. Redis = cache and short-…",
+  "body": "Cloud = where the platform runs.\nDocker = packages services.\nKubernetes = deploys, restarts, and scales containers.\nLoad balancer = distributes traffic.\nPostgreSQL = persistent state and audits.\nRedis = cache and short-lived state.\nKafka or NATS = event transport.\nVault or KMS = secrets and signing-key protection.\nOpenTelemetry = traces, metrics, and logs.\nCI/CD = automated build, test, security checks, and deployment.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "cloud",
+      "infrastructure"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack",
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "observability"
+    ],
+    "outcomes": [],
+    "governance": [
+      "auditability"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_021",
+    "canonical_record_title": "Infrastructure",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "cloud",
+      "infrastructure"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Infrastructure\nInfrastructure\ncloud infrastructure\ncloud infrastructure\nCloud = where the platform runs.\nDocker = packages services.\nKubernetes = deploys, restarts, and scales containers.\nLoad balancer = distributes traffic.\nPostgreSQL = persistent state and audits.\nRedis = cache and short-lived state.\nKafka or NATS = event transport.\nVault or KMS = secrets and signing-key protection.\nOpenTelemetry = traces, metrics, and logs.\nCI/CD = automated build, test, security checks, and deployment.",
+    "keyword_terms": [
+      "cloud",
+      "infrastructure"
+    ],
+    "exact_phrases": [
+      "Infrastructure",
+      "cloud",
+      "infrastructure"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "7744fe22911e3dc479359e16b525f4923dac85b2cc51565e15e3c48f49e4a672",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_021"
+  }
+}

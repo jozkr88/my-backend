@@ -1,0 +1,66 @@
+{
+  "slug": "2026-07-11-cv-company-context-web-research",
+  "title": "CV Company Context Web Research",
+  "category": "proof",
+  "lane": "skills",
+  "summary": "Web-researched context for companies and institutions named across Joz CV material, used to explain their sector, scale, and why they strengthen Joz credibility.",
+  "tags": [
+    "company_context",
+    "cv",
+    "proof",
+    "skills",
+    "web_research",
+    "recruiter_context"
+  ],
+  "source_type": "web_research",
+  "source_uri": "",
+  "verification": {
+    "status": "needs_review",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-11",
+    "notes": "Compiled from web search. Some entities remain ambiguous and are intentionally flagged for review."
+  },
+  "claims": [
+    "The CV includes work across major banking, insurance, media, technology, agency, hospitality, and consumer-goods environments.",
+    "Several named companies represent global or regional enterprise-scale environments rather than small local brands.",
+    "Some entities from the CV still require higher-confidence source resolution before being treated as fully verified company context."
+  ],
+  "proof_points": [
+    "Maybank is one of Southeast Asia's major banking groups.",
+    "Manulife is a large multinational insurance and financial services company.",
+    "Mediacorp is Singapore's state-owned media group.",
+    "Ogilvy and Leo Burnett are major global agency networks linked to WPP and Publicis respectively.",
+    "SGX is Singapore's exchange operator.",
+    "P&G, Samsung, Apple, and Pixar provide major global enterprise context."
+  ],
+  "regions": [
+    "North America",
+    "Europe",
+    "Singapore",
+    "UAE",
+    "Asia Pacific"
+  ],
+  "companies": [
+    "Apple",
+    "Pixar",
+    "Dubai Future Foundation",
+    "Erste Bank",
+    "Maybank",
+    "Etiqa",
+    "Manulife",
+    "Mediacorp",
+    "Leo Burnett",
+    "Publicis Groupe",
+    "Ogilvy",
+    "WPP",
+    "Procter & Gamble",
+    "Samsung",
+    "Singapore Exchange",
+    "Danone",
+    "Banyan Group",
+    "Stanford d.school",
+    "MarketClue USA",
+    "ArtKorero",
+    "SOA"
+  ]
+}

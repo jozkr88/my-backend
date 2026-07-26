@@ -1,0 +1,64 @@
+{
+  "slug": "dubai-future-foundation-inclusive-design",
+  "title": "Designing Inclusive Dubai — Dubai Future Foundation",
+  "category": "project",
+  "lane": "skills",
+  "summary": "Inclusive public-service and innovation experience work for Dubai Future Foundation, connecting human-centred design, accessibility, government transformation, and rapid innovation.",
+  "tags": [
+    "dubai-future-foundation",
+    "inclusive-design",
+    "government-innovation",
+    "public-service",
+    "rapid-prototyping"
+  ],
+  "impact_score": 85,
+  "priority_label": "standard",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz worked on inclusive public-service and innovation experience design for Dubai Future Foundation.",
+    "The work connected accessibility, government transformation, and rapid prototyping in a Dubai/UAE innovation context."
+  ],
+  "proof_points": [
+    "Dubai Future Foundation appears in the current CV and proof corpus as part of UAE innovation and rapid prototyping work.",
+    "This programme record focuses the retrieval unit on inclusive design rather than broad AI positioning."
+  ],
+  "companies": [
+    "Dubai Future Foundation"
+  ],
+  "regions": [
+    "Dubai",
+    "UAE"
+  ],
+  "industries": [
+    "government",
+    "technology"
+  ],
+  "capabilities": [
+    "organizational_design",
+    "product_strategy",
+    "rapid_prototyping",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption"
+  ],
+  "proofs": [
+    "dff_rapid_ai_prototyping"
+  ],
+  "projects": [
+    "Designing Inclusive Dubai"
+  ],
+  "intent_families": [
+    "business_need",
+    "skills"
+  ],
+  "sub_intents": [
+    "business_need.problems_solved",
+    "skills.enterprise_proof"
+  ],
+  "valid_from": "2018",
+  "valid_to": "",
+  "source_notes": "Grouped programme record created from existing CV/project history. No unsupported metrics added."
+}

@@ -1,0 +1,76 @@
+{
+  "slug": "maybank-private-banking-digital",
+  "title": "Private Banking, Wealth and Conversational AI — Maybank–Ageas, Singapore",
+  "category": "project",
+  "lane": "skills",
+  "summary": "Private banking, wealth, HNW, design-system, CMS, and conversational-AI work across Singapore and Asia Pacific.",
+  "tags": [
+    "maybank",
+    "private-banking",
+    "wealth",
+    "hnw",
+    "cms",
+    "conversational-ai"
+  ],
+  "impact_score": 93,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz worked across private banking, wealth/HNW, design systems, CMS, and conversational-AI related experience work for Maybank–Ageas Etiqa.",
+    "The programme connected enterprise delivery, wealth journeys, and ML-enabled customer experience."
+  ],
+  "proof_points": [
+    "The broader Maybank proof includes 20× digital sales growth within 12 months.",
+    "The broader programme also includes 3,000+ wealth pilots and ML models for HNW and mass-market contexts."
+  ],
+  "companies": [
+    "Ageas",
+    "Etiqa",
+    "Maybank"
+  ],
+  "regions": [
+    "Asia Pacific",
+    "Singapore"
+  ],
+  "industries": [
+    "banking",
+    "insurance",
+    "wealth_management"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "enterprise_architecture",
+    "organizational_design",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "higher_adoption",
+    "lower_operational_friction",
+    "revenue_growth"
+  ],
+  "proofs": [
+    "maybank_digital_sales_growth"
+  ],
+  "projects": [
+    "Design Systems",
+    "ML/Conversational AI UX",
+    "Private Banking CMS",
+    "Wealth/HNW CMS UX"
+  ],
+  "intent_families": [
+    "business_need",
+    "factual_profile",
+    "skills"
+  ],
+  "sub_intents": [
+    "business_need.outcomes",
+    "business_need.roi",
+    "factual_profile.companies",
+    "skills.financial_services"
+  ],
+  "valid_from": "2016",
+  "valid_to": "2018",
+  "source_notes": "Grouped programme record. Quantified Maybank growth is referenced only through existing proof objects."
+}

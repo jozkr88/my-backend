@@ -1,0 +1,37 @@
+{
+  "slug": "recruiter-compensation-process-questions",
+  "title": "Recruiter Compensation And Process Questions",
+  "category": "faq",
+  "lane": "skills",
+  "summary": "Recruiter-safe handling for compensation, package expectations, working model, relocation, and hiring-process questions.",
+  "tags": [
+    "recruiter",
+    "compensation",
+    "process",
+    "working_model",
+    "relocation"
+  ],
+  "source_type": "paste",
+  "source_uri": "",
+  "verification": {
+    "status": "verified",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-07-14",
+    "notes": "Aligned with the existing recruiter benchmark record and deterministic operational answer patterns already implemented."
+  },
+  "claims": [
+    "Compensation answers should avoid unverified numbers and depend on role, location, scope, seniority, responsibilities, and package.",
+    "Working-model and relocation answers should stay flexible and recruiter-safe.",
+    "Process answers should route recruiters to direct contact with Joz."
+  ],
+  "proof_points": [
+    "Recruiter benchmark rules define compensation, working-model, and relocation handling.",
+    "Existing operational facts provide the direct contact path."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "meetjoz.com"
+  ]
+}

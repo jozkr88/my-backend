@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-organisational-intelligence-integration",
+  "title": "Organisational Intelligence Integration",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_036",
+  "summary": "The Organisational Awareness Layer is the knowledge foundation for the Autonomous Execution Layer.",
+  "body": "The Organisational Awareness Layer is the knowledge foundation for the Autonomous Execution Layer.\n\nBefore acting, agents retrieve:\nOwnership\nHistorical decisions\nArchitecture constraints\nOperational standards\nRelevant documentation\nSecurity policies\nBusiness requirements\n\nThis grounds actions in organisational context rather than relying only on repository contents or model assumptions.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "execution",
+      "integration",
+      "organisational-intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "system_architecture"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "context_creates_intelligence"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "context_engineering",
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [
+      "clear_ownership"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_036",
+    "canonical_record_title": "Organisational Intelligence Integration",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "execution",
+      "integration",
+      "organisational-intelligence"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Organisational Intelligence Integration\nOrganisational Intelligence Integration\nexecution integration organisational-intelligence\nexecution integration organisational-intelligence\nThe Organisational Awareness Layer is the knowledge foundation for the Autonomous Execution Layer.\n\nBefore acting, agents retrieve:\nOwnership\nHistorical decisions\nArchitecture constraints\nOperational standards\nRelevant documentation\nSecurity policies\nBusiness requirements\n\nThis grounds actions in organisational context rather than relying only on repository contents or model assumptions.",
+    "keyword_terms": [
+      "execution",
+      "integration",
+      "intelligence",
+      "organisational",
+      "organisational-intelligence"
+    ],
+    "exact_phrases": [
+      "Organisational Intelligence Integration",
+      "execution",
+      "integration",
+      "organisational-intelligence"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "754843f6d2d4d171ef2e1b8655e41e99dcbe1d05519e66e7c843b30cf760b6a5",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_036"
+  }
+}

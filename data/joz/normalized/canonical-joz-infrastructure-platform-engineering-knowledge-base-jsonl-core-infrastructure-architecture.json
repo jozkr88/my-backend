@@ -1,0 +1,107 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-core-infrastructure-architecture",
+  "title": "Core Infrastructure Architecture",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_002",
+  "summary": "User → DNS/CDN → Load Balancer or API Gateway → FastAPI/API Services → Agent Workers → Tools and Domain Services → Databases and External Systems",
+  "body": "User → DNS/CDN → Load Balancer or API Gateway → FastAPI/API Services → Agent Workers → Tools and Domain Services → Databases and External Systems\n\nSupporting layers:\nContainers\nKubernetes\nWorkflow durability\nCaching\nEvent transport\nSecrets management\nObservability\nCI/CD\nSecurity controls\nDisaster recovery",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "architecture",
+      "cloud",
+      "platform"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "fastapi",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture",
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_002",
+    "canonical_record_title": "Core Infrastructure Architecture",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "architecture",
+      "cloud",
+      "platform"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Core Infrastructure Architecture\nCore Infrastructure Architecture\narchitecture cloud platform\narchitecture cloud platform\nUser → DNS/CDN → Load Balancer or API Gateway → FastAPI/API Services → Agent Workers → Tools and Domain Services → Databases and External Systems\n\nSupporting layers:\nContainers\nKubernetes\nWorkflow durability\nCaching\nEvent transport\nSecrets management\nObservability\nCI/CD\nSecurity controls\nDisaster recovery",
+    "keyword_terms": [
+      "architecture",
+      "cloud",
+      "core",
+      "infrastructure",
+      "platform"
+    ],
+    "exact_phrases": [
+      "Core Infrastructure Architecture",
+      "architecture",
+      "cloud",
+      "platform"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "3bed866de82b2eb0d9841efb8298ce461989942f6788fa8afcf43fa6024b70f1",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_002"
+  }
+}

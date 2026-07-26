@@ -1,0 +1,83 @@
+{
+  "slug": "systems-agentic-ai-judgment",
+  "title": "Agentic AI Requires Judgment",
+  "category": "governance_principle",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Agentic AI success depends on judgment, boundaries, and accountability.",
+  "body": "Agentic AI is not simply automation.\n\nThe challenge is deciding:\n\n- what should be autonomous\n- what should remain human\n- when escalation is required\n- what evidence is sufficient\n- who remains accountable\n\nJoz approaches agentic systems as decision systems.\n\nThe objective is not maximum autonomy.\n\nThe objective is appropriate autonomy supported by trust, governance, observability, and clear ownership.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "agentic-ai",
+      "autonomy",
+      "governance",
+      "judgment"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 98,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-agentic-ai-judgment.md",
+    "source_meta_filename": "systems-agentic-ai-judgment.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "governance_gaps",
+      "low_trust"
+    ],
+    "principles": [
+      "appropriate_autonomy",
+      "human_accountability",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "ai_governance",
+      "observability",
+      "verification"
+    ],
+    "outcomes": [
+      "higher_adoption",
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "escalation",
+      "evaluation",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 2,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "195779e825919242ec42843399c589f533b3705bb6275028e2b53c2e4f02329e",
+    "source_uri": null
+  }
+}

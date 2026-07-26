@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-service-mesh",
+  "title": "Service Mesh",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_025",
+  "summary": "A service mesh manages service-to-service communication.",
+  "body": "A service mesh manages service-to-service communication.\n\nCapabilities can include:\nMutual TLS\nTraffic policies\nRetries\nCircuit breaking\nObservability\nService identity\n\nExamples:\nIstio\nLinkerd\n\nUse a service mesh only when complexity justifies it.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "istio",
+      "linkerd",
+      "service-mesh"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "organizational_complexity"
+    ],
+    "principles": [],
+    "capabilities": [
+      "observability"
+    ],
+    "outcomes": [],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_025",
+    "canonical_record_title": "Service Mesh",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "istio",
+      "linkerd",
+      "service-mesh"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Service Mesh\nService Mesh\nistio linkerd service-mesh\nistio linkerd service-mesh\nA service mesh manages service-to-service communication.\n\nCapabilities can include:\nMutual TLS\nTraffic policies\nRetries\nCircuit breaking\nObservability\nService identity\n\nExamples:\nIstio\nLinkerd\n\nUse a service mesh only when complexity justifies it.",
+    "keyword_terms": [
+      "istio",
+      "linkerd",
+      "mesh",
+      "service",
+      "service-mesh"
+    ],
+    "exact_phrases": [
+      "Service Mesh",
+      "istio",
+      "linkerd",
+      "service-mesh"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "94ab2abbeacb92e75a6be102f4fcb49d319684466d0f37ca2c9b13a656d5fa35",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_025"
+  }
+}

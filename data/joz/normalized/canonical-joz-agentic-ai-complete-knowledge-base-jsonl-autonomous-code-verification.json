@@ -1,0 +1,93 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-autonomous-code-verification",
+  "title": "Autonomous Code Verification",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_033",
+  "summary": "Every autonomous code change should pass:",
+  "body": "Every autonomous code change should pass:\n\nUnit tests\nIntegration tests\nType checking\nLinting\nSecurity scanning\nDependency checks\nArchitectural checks\nBusiness-intent validation\n\nIf verification fails, the agent repairs the issue and repeats the verification cycle.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "autonomous-code",
+      "testing",
+      "verification"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "verification"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_033",
+    "canonical_record_title": "Autonomous Code Verification",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "autonomous-code",
+      "testing",
+      "verification"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Autonomous Code Verification\nAutonomous Code Verification\nautonomous-code testing verification\nautonomous-code testing verification\nEvery autonomous code change should pass:\n\nUnit tests\nIntegration tests\nType checking\nLinting\nSecurity scanning\nDependency checks\nArchitectural checks\nBusiness-intent validation\n\nIf verification fails, the agent repairs the issue and repeats the verification cycle.",
+    "keyword_terms": [
+      "autonomous",
+      "autonomous-code",
+      "code",
+      "testing",
+      "verification"
+    ],
+    "exact_phrases": [
+      "Autonomous Code Verification",
+      "autonomous-code",
+      "testing",
+      "verification"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "076c96ea9a500a0ef57875c5da6107312b2c1adbd2ef4acdaf073b1201775946",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_033"
+  }
+}

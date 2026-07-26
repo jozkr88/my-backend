@@ -1,0 +1,110 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-organisational-knowledge-layer",
+  "title": "Organisational Knowledge Layer",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_027",
+  "summary": "The Organisational Knowledge Layer can combine:",
+  "body": "The Organisational Knowledge Layer can combine:\n\nPostgreSQL for metadata, source references, ACLs, ownership records, and audit events.\npgvector for semantic retrieval.\nKeyword indexes for exact-term retrieval.\nA knowledge graph for ownership, decisions, relationships, dependencies, systems, teams, and architecture.\nObject storage for source documents and large artefacts.\n\nThe system should preserve provenance so every answer can cite its source.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "knowledge-graph",
+      "knowledge-layer",
+      "pgvector",
+      "postgresql"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "acl",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "rag"
+    ],
+    "outcomes": [],
+    "governance": [
+      "access_control",
+      "auditability",
+      "clear_ownership",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_027",
+    "canonical_record_title": "Organisational Knowledge Layer",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "knowledge-graph",
+      "knowledge-layer",
+      "pgvector",
+      "postgresql"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Organisational Knowledge Layer\nOrganisational Knowledge Layer\nknowledge-graph knowledge-layer pgvector postgresql\nknowledge-graph knowledge-layer pgvector postgresql\nThe Organisational Knowledge Layer can combine:\n\nPostgreSQL for metadata, source references, ACLs, ownership records, and audit events.\npgvector for semantic retrieval.\nKeyword indexes for exact-term retrieval.\nA knowledge graph for ownership, decisions, relationships, dependencies, systems, teams, and architecture.\nObject storage for source documents and large artefacts.\n\nThe system should preserve provenance so every answer can cite its source.",
+    "keyword_terms": [
+      "knowledge",
+      "knowledge-graph",
+      "knowledge-layer",
+      "layer",
+      "organisational",
+      "pgvector",
+      "postgresql"
+    ],
+    "exact_phrases": [
+      "Organisational Knowledge Layer",
+      "knowledge-graph",
+      "knowledge-layer",
+      "pgvector",
+      "postgresql"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "b8d32a59090e15ab6b410ac7c106d1f1b9a0d18f19230f4289e28722f4f9316f",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_027"
+  }
+}

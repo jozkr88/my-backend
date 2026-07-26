@@ -1,0 +1,72 @@
+{
+  "slug": "business-need-efficiency-vs-growth",
+  "title": "Efficiency Versus Growth",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Separates AI business value into efficiency effects and growth effects so the operating model and ROI case stay clear.",
+  "tags": [
+    "efficiency",
+    "growth",
+    "roi",
+    "operating-model",
+    "scale"
+  ],
+  "impact_score": 94,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "AI value should be separated into efficiency and growth conversations.",
+    "Efficiency focuses on cost, time, friction, and standardization.",
+    "Growth focuses on output, conversion, customer relevance, and scaling strategic capacity."
+  ],
+  "proof_points": [
+    "The existing Joz proof base already includes both growth outcomes and operational friction reduction.",
+    "Separating these frames helps avoid vague ROI language.",
+    "This distinction matches how leaders evaluate cost programs versus growth programs."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Maybank",
+    "Mediacorp",
+    "Publicis"
+  ],
+  "problems": [
+    "operational_friction",
+    "slow_decision_making",
+    "unclear_roi"
+  ],
+  "principles": [
+    "decision_quality",
+    "signal_over_noise",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "cost_reduction",
+    "faster_decisions",
+    "productivity_gains",
+    "revenue_growth"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation"
+  ],
+  "industries": [
+    "banking",
+    "financial_services",
+    "insurance",
+    "media",
+    "technology"
+  ],
+  "proofs": [
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "publicis_handoff_reduction"
+  ]
+}

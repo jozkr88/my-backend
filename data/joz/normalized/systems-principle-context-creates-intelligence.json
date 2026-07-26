@@ -1,0 +1,76 @@
+{
+  "slug": "systems-principle-context-creates-intelligence",
+  "title": "Context Creates Intelligence",
+  "category": "systems_principle",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Data without context rarely creates usable intelligence.",
+  "body": "Joz believes intelligence emerges from context rather than isolated data.\n\nA metric, document, report, or model output only becomes meaningful when connected to:\n\n- purpose\n- history\n- ownership\n- constraints\n- confidence\n- business impact\n\nThis principle directly influences his work in RAG, context engineering, memory systems, and enterprise knowledge architectures.\n\nContext creates understanding.\nUnderstanding creates better decisions.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "context",
+      "decision-making",
+      "knowledge",
+      "rag"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 98,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-principle-context-creates-intelligence.md",
+    "source_meta_filename": "systems-principle-context-creates-intelligence.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "data_silos",
+      "knowledge_fragmentation",
+      "manual_knowledge_work"
+    ],
+    "principles": [
+      "context_creates_intelligence"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "context_engineering",
+      "knowledge_graphs",
+      "rag"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust",
+      "knowledge_reuse"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "40006324b007c740c939b7043a3317e3f8e8131d82bc0c578d2d062e771d5080",
+    "source_uri": null
+  }
+}

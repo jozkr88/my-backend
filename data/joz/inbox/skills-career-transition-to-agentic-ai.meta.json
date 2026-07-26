@@ -1,0 +1,77 @@
+{
+  "slug": "skills-career-transition-to-agentic-ai",
+  "title": "Career Transition into Agentic AI",
+  "category": "narrative",
+  "lane": "skills",
+  "summary": "Explains the credible progression from interaction engineering and digital transformation into ML-enabled systems and Agentic AI.",
+  "tags": [
+    "career-transition",
+    "agentic-ai",
+    "ml-ux",
+    "digital-transformation",
+    "narrative"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "The transition into Agentic AI is an evolution of Joz's work on human decision systems, enterprise data, ML-enabled products, and complex digital ecosystems.",
+    "His earlier career is relevant foundation, not unrelated legacy experience.",
+    "The common thread is turning complexity into usable intelligence and measurable outcomes."
+  ],
+  "proof_points": [
+    "Large-scale interaction and product architecture at Ogilvy, Publicis, Mediacorp, Manulife, and Maybank.",
+    "ML UX practices and pilots at Manulife and Maybank–Ageas Etiqa.",
+    "Current Agentic AI, RAG, financial agents, spatial AI, context engineering, and governance focus."
+  ],
+  "regions": [
+    "Singapore",
+    "Asia Pacific",
+    "Europe",
+    "Dubai",
+    "USA"
+  ],
+  "companies": [
+    "Ogilvy",
+    "Publicis",
+    "Mediacorp",
+    "Manulife",
+    "Maybank",
+    "MarketClue"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "knowledge_fragmentation",
+    "manual_knowledge_work"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "context_creates_intelligence",
+    "feedback_loops"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "computer_vision",
+    "multimodal_ai",
+    "organizational_design",
+    "product_strategy",
+    "spatial_ai"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption"
+  ],
+  "industries": [
+    "financial_services",
+    "spatial_computing",
+    "technology"
+  ],
+  "proofs": [
+    "apple_pixar_cv_workflows",
+    "artkorero_spatial_exhibitions",
+    "dff_rapid_ai_prototyping",
+    "manulife_lean_ml_ux",
+    "versace_spatial_ai_launch"
+  ]
+}

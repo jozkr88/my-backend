@@ -1,0 +1,94 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-fastapi",
+  "title": "FastAPI",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_008",
+  "summary": "FastAPI is a Python framework used to build backend APIs and services.",
+  "body": "FastAPI is a Python framework used to build backend APIs and services.\n\nIn a web application:\nFrontend → FastAPI → Orchestrator → Agents → Tools → Response\n\nFastAPI receives requests, authenticates users, validates input, calls workflows or services, and returns structured responses. It is the API entry point, not the AI reasoning layer.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "api",
+      "backend",
+      "fastapi"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "fastapi",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "agentic_ai",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_008",
+    "canonical_record_title": "FastAPI",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "api",
+      "backend",
+      "fastapi"
+    ],
+    "source_authority": 24,
+    "semantic_text": "FastAPI\nFastAPI\napi backend fastapi\napi backend fastapi\nFastAPI is a Python framework used to build backend APIs and services.\n\nIn a web application:\nFrontend → FastAPI → Orchestrator → Agents → Tools → Response\n\nFastAPI receives requests, authenticates users, validates input, calls workflows or services, and returns structured responses. It is the API entry point, not the AI reasoning layer.",
+    "keyword_terms": [
+      "api",
+      "backend",
+      "fastapi"
+    ],
+    "exact_phrases": [
+      "FastAPI",
+      "api",
+      "backend",
+      "fastapi"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "b5a3f4ca17488bff13084ad6c32c7f6676c9b7f355555e4dd3725cac09631aa9",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_008"
+  }
+}

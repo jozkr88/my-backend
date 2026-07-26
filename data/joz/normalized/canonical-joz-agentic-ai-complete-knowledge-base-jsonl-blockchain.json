@@ -1,0 +1,93 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-blockchain",
+  "title": "Blockchain",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_017",
+  "summary": "Blockchain is a distributed ledger for transaction ordering, state, ownership, and settlement.",
+  "body": "Blockchain is a distributed ledger for transaction ordering, state, ownership, and settlement.\n\nRelevant concepts:\nSmart contracts\nWallets\nPrivate keys\nLayer 1 and Layer 2 networks\nDeFi\nDecentralized exchanges\nOn-chain settlement\nTokenized assets\nOracles\nAccount abstraction\nSession keys\nMultisignature and MPC custody",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "blockchain",
+      "crypto",
+      "defi"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "acl",
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval"
+    ],
+    "outcomes": [],
+    "governance": [
+      "access_control",
+      "clear_ownership"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_017",
+    "canonical_record_title": "Blockchain",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "blockchain",
+      "crypto",
+      "defi"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Blockchain\nBlockchain\nblockchain crypto defi\nblockchain crypto defi\nBlockchain is a distributed ledger for transaction ordering, state, ownership, and settlement.\n\nRelevant concepts:\nSmart contracts\nWallets\nPrivate keys\nLayer 1 and Layer 2 networks\nDeFi\nDecentralized exchanges\nOn-chain settlement\nTokenized assets\nOracles\nAccount abstraction\nSession keys\nMultisignature and MPC custody",
+    "keyword_terms": [
+      "blockchain",
+      "crypto",
+      "defi"
+    ],
+    "exact_phrases": [
+      "Blockchain",
+      "blockchain",
+      "crypto",
+      "defi"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "8ceef8332f4e446bae4a9c24583905f24d7b68d4af9e9f457d4db37171458c00",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_017"
+  }
+}

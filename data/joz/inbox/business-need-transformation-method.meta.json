@@ -1,0 +1,77 @@
+{
+  "slug": "business-need-transformation-method",
+  "title": "From Business Problem to Agentic AI Value",
+  "category": "delivery",
+  "lane": "business_need",
+  "summary": "Repeatable method for identifying, designing, testing, and scaling high-value Agentic AI opportunities.",
+  "tags": [
+    "delivery",
+    "discovery",
+    "prototype",
+    "roadmap",
+    "measurement"
+  ],
+  "impact_score": 93,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "Joz begins with the business problem, baseline, decision, workflow, and value metric before selecting technology.",
+    "He can translate ambiguous needs into architecture, prototype, governance requirements, and a measurable implementation roadmap.",
+    "The preferred delivery model proves value early and scales only after evidence."
+  ],
+  "proof_points": [
+    "Experience across discovery, architecture, prototyping, engineering collaboration, executive alignment, and enterprise rollout.",
+    "Rapid AI prototyping for Dubai Future Foundation and current AI initiatives.",
+    "Long record of transformation across multiple industries and markets."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "Dubai Future Foundation",
+    "Maybank",
+    "Manulife",
+    "Mediacorp",
+    "MarketClue"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "knowledge_fragmentation",
+    "operational_friction",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "decision_quality",
+    "feedback_loops",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "decision_intelligence",
+    "organizational_design",
+    "product_strategy",
+    "rapid_prototyping",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "faster_time_to_value",
+    "higher_adoption",
+    "lower_operational_friction",
+    "productivity_gains"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation"
+  ],
+  "industries": [
+    "financial_services",
+    "media",
+    "technology"
+  ],
+  "proofs": [
+    "dff_rapid_ai_prototyping",
+    "manulife_lean_ml_ux",
+    "maybank_digital_sales_growth",
+    "publicis_handoff_reduction"
+  ]
+}

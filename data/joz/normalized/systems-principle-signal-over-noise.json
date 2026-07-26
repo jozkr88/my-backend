@@ -1,0 +1,71 @@
+{
+  "slug": "systems-principle-signal-over-noise",
+  "title": "Signal Over Noise",
+  "category": "systems_principle",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "More information does not automatically create better decisions.",
+  "body": "One of Joz's core principles is signal over noise.\n\nOrganizations rarely suffer from a lack of information.\n\nThey suffer from an inability to identify what matters.\n\nThe goal of intelligence systems is not to generate more reports, dashboards, notifications, or alerts.\n\nThe goal is to surface the highest-signal information, explain why it matters, and connect it to action.\n\nGood systems reduce cognitive load.\nBad systems increase it.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "decision-intelligence",
+      "noise",
+      "signal"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 99,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-principle-signal-over-noise.md",
+    "source_meta_filename": "systems-principle-signal-over-noise.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "knowledge_fragmentation",
+      "slow_decision_making"
+    ],
+    "principles": [
+      "signal_over_noise"
+    ],
+    "capabilities": [
+      "context_engineering",
+      "decision_intelligence"
+    ],
+    "outcomes": [
+      "faster_decisions",
+      "higher_data_trust"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 1,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "f2f315c4664429487ee5ee549728516f163b44b53caee86acaaa1370c92da62f",
+    "source_uri": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "slug": "systems-feedback-loops",
+  "title": "Feedback Loops and Adaptation",
+  "category": "feedback_loop",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Healthy systems learn from outcomes and adjust behavior.",
+  "body": "Systems improve through feedback.\n\nWithout feedback loops:\n\n- mistakes repeat\n- blind spots grow\n- trust declines\n- learning slows\n\nJoz looks for mechanisms that connect actions to outcomes.\n\nThis principle appears in:\n\n- AI evaluation\n- observability\n- product analytics\n- customer feedback\n- governance reviews\n- operational metrics\n\nThe strongest systems continuously learn from evidence.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "adaptation",
+      "feedback-loops",
+      "learning"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 95,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "systems-feedback-loops.md",
+    "source_meta_filename": "systems-feedback-loops.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "operational_friction"
+    ],
+    "principles": [
+      "feedback_loops"
+    ],
+    "capabilities": [
+      "observability",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "faster_time_to_value",
+      "higher_adoption",
+      "productivity_gains"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 3,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "26c6ae467f2032c49da3fe37b7ebed55076fbdff1eb99f05928bb40d8e22dcb3",
+    "source_uri": null
+  }
+}

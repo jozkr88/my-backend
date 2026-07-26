@@ -1,0 +1,91 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-ci-cd",
+  "title": "CI/CD",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_030",
+  "summary": "CI/CD automates software integration, testing, security checks, packaging, and deployment.",
+  "body": "CI/CD automates software integration, testing, security checks, packaging, and deployment.\n\nTypical flow:\nCommit → Build → Unit Tests → Integration Tests → Security Scan → Docker Image → Deploy → Verify\n\nCI = Continuous Integration.\nCD = Continuous Delivery or Deployment.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "automation",
+      "ci-cd",
+      "deployment"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_030",
+    "canonical_record_title": "CI/CD",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "automation",
+      "ci-cd",
+      "deployment"
+    ],
+    "source_authority": 12,
+    "semantic_text": "CI/CD\nCI/CD\nautomation ci-cd deployment\nautomation ci-cd deployment\nCI/CD automates software integration, testing, security checks, packaging, and deployment.\n\nTypical flow:\nCommit → Build → Unit Tests → Integration Tests → Security Scan → Docker Image → Deploy → Verify\n\nCI = Continuous Integration.\nCD = Continuous Delivery or Deployment.",
+    "keyword_terms": [
+      "automation",
+      "cd",
+      "ci",
+      "ci-cd",
+      "deployment"
+    ],
+    "exact_phrases": [
+      "CI/CD",
+      "automation",
+      "ci-cd",
+      "deployment"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "ef20a534986a5de5764e109453b8c37d1b9f189e85f236cb07cf95b5be35bb39",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_030"
+  }
+}

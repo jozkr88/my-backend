@@ -1,0 +1,85 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-circuit-breaker",
+  "title": "Circuit Breaker",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_037",
+  "summary": "A circuit breaker stops repeated calls to an unhealthy dependency.",
+  "body": "A circuit breaker stops repeated calls to an unhealthy dependency.\n\nStates:\nClosed = calls allowed\nOpen = calls blocked\nHalf-open = limited test calls\n\nCircuit breakers prevent cascading failures.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "circuit-breaker",
+      "resilience"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [
+      "healthcare"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_037",
+    "canonical_record_title": "Circuit Breaker",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "circuit-breaker",
+      "resilience"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Circuit Breaker\nCircuit Breaker\ncircuit-breaker resilience\ncircuit-breaker resilience\nA circuit breaker stops repeated calls to an unhealthy dependency.\n\nStates:\nClosed = calls allowed\nOpen = calls blocked\nHalf-open = limited test calls\n\nCircuit breakers prevent cascading failures.",
+    "keyword_terms": [
+      "breaker",
+      "circuit",
+      "circuit-breaker",
+      "resilience"
+    ],
+    "exact_phrases": [
+      "Circuit Breaker",
+      "circuit-breaker",
+      "resilience"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "c6bfe0ac578c630568dbed3526d96013d9e0cd25735f432a952a37d51426486a",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_037"
+  }
+}

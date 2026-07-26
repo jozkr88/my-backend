@@ -6,6 +6,7 @@ import {
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
   composeJozLlmRouteReply,
+  enforceJozCommercialBoundaryResolution,
   resolveUnknownJozReply,
   routeJozLlmQuery,
   routeJozLlmQueryWithAwareness,
@@ -45,6 +46,249 @@ test("routes identity profile queries ahead of assistant fallback", () => {
   assert.equal(trace.fallbackUsed, false);
   assert.match(resolution.reply, /Joz Krupa is an Agentic AI Architecture and Innovation Leader/i);
   assert.doesNotMatch(resolution.reply, /Joz LLM can explain/i);
+});
+
+test("answers generic questions from the active Business Value portal context", () => {
+  const { appContext, legacyContext } = buildContexts({
+    currentPortal: "business-value",
+    currentMesh: "data",
+  });
+  const route = routeJozLlmQuery({
+    input: "what is this about?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "what is this about?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_value_portal");
+  assert.equal(route.detectedSubIntent, "portal_context");
+  assert.match(resolution.reply, /Business Value portal/i);
+  assert.match(resolution.reply, /Data Reality/i);
+  assert.match(resolution.reply, /27%/i);
+  assert.doesNotMatch(resolution.reply, /Singapore/i);
+});
+
+test("routes natural AI architecture creation requests into brief intake", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "I want to create AI architecture",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "paid_architecture_intake_start");
+
+  const continued = routeJozLlmQueryWithAwareness({
+    input: "now what",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      { role: "user", content: "I want to create AI architecture" },
+      {
+        role: "assistant",
+        content: "Great. We will build the brief here in chat.",
+        metadata: {
+          trace: {
+            selectedRoute: "skills",
+            detectedSubIntent: "paid_architecture_intake_start",
+          },
+        },
+      },
+    ],
+  });
+
+  assert.equal(continued.selectedRoute, "skills");
+  assert.equal(continued.detectedSubIntent, "paid_architecture_intake");
+});
+
+test("keeps verification and low-confidence follow-ups in the architecture context", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const messages = [
+    { role: "user", content: "What can Joz build?" },
+    {
+      role: "assistant",
+      content: "Joz builds governed agentic systems.",
+      metadata: { trace: { selectedRoute: "skills", detectedSubIntent: "capabilities_overview" } },
+    },
+    { role: "user", content: "How does he design agentic systems?" },
+    {
+      role: "assistant",
+      content: "He separates proposal, policy, execution, and verification.",
+      metadata: { trace: { selectedRoute: "skills", detectedSubIntent: "architecture_reasoning" } },
+    },
+  ];
+
+  const verificationFollowUp = routeJozLlmQueryWithAwareness({
+    input: "How does he verify actions?",
+    appContext,
+    legacyContext,
+    recentMessages: messages,
+  });
+  assert.equal(verificationFollowUp.selectedRoute, "skills");
+  assert.equal(verificationFollowUp.detectedSubIntent, "verification_architecture");
+
+  messages.push(
+    { role: "user", content: "How does he verify actions?" },
+    {
+      role: "assistant",
+      content: "Actions are checked against durable evidence.",
+      metadata: { trace: { selectedRoute: "skills", detectedSubIntent: "verification_architecture" } },
+    },
+  );
+
+  const safetyFollowUp = routeJozLlmQueryWithAwareness({
+    input: "What happens when confidence is low?",
+    appContext,
+    legacyContext,
+    recentMessages: messages,
+  });
+  assert.equal(safetyFollowUp.selectedRoute, "systems_mindset");
+  assert.equal(safetyFollowUp.detectedSubIntent, "ai_safety");
+  assert.match(
+    composeJozLlmRouteReply({ route: safetyFollowUp }).reply,
+    /untrusted content|verification|approval/i,
+  );
+});
+
+test("routes typo-tolerant agentic logistics app requests into brief intake", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "i wan to create agentic app for ligistics",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "paid_architecture_intake_start");
+});
+
+test("counts the current architecture brief answer once and advances one field", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "an app for sending and receiving documents",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      { role: "user", content: "I want to create AI architecture" },
+      { role: "assistant", content: "Great. We will build the brief here in chat." },
+      { role: "user", content: "an app for sending and receiving documents" },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "paid_architecture_intake");
+  assert.equal(route.architectureBrief.answers.length, 1);
+  const resolution = composeJozLlmRouteReply({ route, input: "an app for sending and receiving documents" });
+  assert.match(resolution.reply, /Who will use it/i);
+});
+
+test("keeps a Slovak organisational-memory description inside the brief intake", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "Cieľom je vytvoriť firemnú pamäť, ktorá priebežne buduje znalosti z GitHubu, Slacku, AI chatov a dokumentov.",
+    appContext,
+    legacyContext,
+    recentMessages: [
+      { role: "user", content: "lets create an origanisational ai brain" },
+      { role: "assistant", content: "Great. We will build the brief here in chat." },
+      { role: "user", content: "Cieľom je vytvoriť firemnú pamäť, ktorá priebežne buduje znalosti z GitHubu, Slacku, AI chatov a dokumentov." },
+    ],
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "paid_architecture_intake");
+  assert.equal(route.architectureBrief.answers.length, 1);
+  assert.match(composeJozLlmRouteReply({ route }).reply, /Who will use it/i);
+});
+
+test("routes a smart-quoted organisational AI brain prompt into brief intake", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "“lets create an origanisational ai brain",
+    appContext,
+    legacyContext,
+    recentMessages: [],
+  });
+
+  assert.equal(route.detectedSubIntent, "paid_architecture_intake_start");
+  assert.match(composeJozLlmRouteReply({ route }).reply, /Great\. We will build the brief/i);
+});
+
+test("routes company-specific agentic architecture phrasing into brief intake", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQueryWithAwareness({
+    input: "please build a company-specific agentic AI architecture",
+    appContext,
+    legacyContext,
+    recentMessages: [],
+  });
+
+  assert.equal(route.detectedSubIntent, "paid_architecture_intake_start");
+  assert.match(composeJozLlmRouteReply({ route }).reply, /Great\. We will build the brief/i);
+});
+
+test("does not count natural continuation fillers as architecture answers", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  for (const input of ["what next", "please continue", "let us continue"]) {
+    const route = routeJozLlmQueryWithAwareness({
+      input,
+      appContext,
+      legacyContext,
+      recentMessages: [
+        { role: "user", content: "lets create an origanisational ai brain" },
+        { role: "assistant", content: "Great. We will build the brief here in chat." },
+      ],
+    });
+
+    assert.equal(route.detectedSubIntent, "paid_architecture_intake", input);
+    assert.equal(route.architectureBrief.answers.length, 0, input);
+  }
+});
+
+test("matches out-of-order brief answers to named fields and preserves the final brief order", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const messages = [
+    { role: "user", content: "lets create an origanisational ai brain" },
+    { role: "assistant", content: "Great. We will build the brief here in chat." },
+  ];
+  const answers = [
+    "Operations and engineering will use it for ownership and decision workflows.",
+    "A company memory product for a logistics business; the outcome is faster decisions.",
+    "GitHub, Slack, documents, APIs, and internal databases.",
+    "Permissions, provenance, GDPR, latency, budget, and approval controls.",
+    "A trusted pilot adopted weekly by three teams within 90 days.",
+  ];
+
+  let route = null;
+  for (const input of answers) {
+    route = routeJozLlmQueryWithAwareness({
+      input,
+      appContext,
+      legacyContext,
+      recentMessages: messages,
+    });
+    const reply = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    messages.push({ role: "user", content: input }, { role: "assistant", content: reply.reply });
+  }
+
+  assert.equal(route.detectedSubIntent, "paid_architecture_spec");
+  assert.deepEqual(Object.keys(route.architectureBrief.fields), [
+    "business_context",
+    "users_workflow",
+    "data_integrations",
+    "constraints_controls",
+    "success_delivery",
+  ]);
+  const finalReply = composeJozLlmRouteReply({ route });
+  assert.match(finalReply.reply, /Business context and outcome: A company memory product/i);
+  assert.match(finalReply.reply, /Users and priority workflow: Operations and engineering/i);
+  assert.equal(finalReply.actions?.[0]?.id, "architecture_review_pay");
 });
 
 test("answers assistant identity and authenticity questions directly", () => {
@@ -154,6 +398,51 @@ test("covers aligned recruiter-facing business, architecture, and conversational
     roleAwareContext: { retrievedDocuments: [] },
   });
   assert.match(quantum.reply, /superposition|entanglement/i);
+});
+
+test("repairs the six weak responses found by the 50-case local quality run", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const cases = [
+    [
+      "When would Joz use Docker versus Kubernetes?",
+      "skills",
+      "technical_stack",
+      /Docker packages.*Kubernetes deploys/i,
+    ],
+    [
+      "Why should a hiring manager hire Joz?",
+      "business_need",
+      "hire_value",
+      /enterprise-scale|20x|agentic AI architecture/i,
+    ],
+    [
+      "Should an AI agent deploy directly to production?",
+      "systems_mindset",
+      "thinking_model",
+      /must not deploy directly to production|explicit human approval/i,
+    ],
+    ["Waht does Joz do?", "skills", "capabilities_overview", /deepest skills|agentic AI architecture/i],
+    [
+      "I am a business owner with bad data and slow decisions. What should I do first?",
+      "business_need",
+      "business_diagnosis",
+      /bad data|authoritative sources|baseline/i,
+    ],
+    [
+      "Design a governed agentic AI platform with durable workflows, retrieval, memory, and verification.",
+      "skills",
+      "architecture_reasoning",
+      /architecture problem|system boundary|verification/i,
+    ],
+  ];
+
+  for (const [input, expectedRoute, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    assert.equal(route.selectedRoute, expectedRoute, input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(resolution.reply, expectedReply, input);
+  }
 });
 
 test("repairs a misrouted in-scope business fallback only with a verified answer", () => {
@@ -369,6 +658,60 @@ test("pronoun systems and infrastructure phrasing resolves to the intended lanes
 
     assert.equal(route.selectedRoute, expectedRoute);
     assert.equal(route.detectedSubIntent, expectedSubIntent);
+  }
+});
+
+test("differentiates systems-mindset explanations instead of reusing one generic answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const cases = [
+    [
+      "Explain how Joz thinks about intelligence, systems, and decision-making.",
+      "intelligence_decision_model",
+      /signal into accountable decisions|decision path/i,
+    ],
+    [
+      "What is Joz's operating mindset when building AI systems?",
+      "operating_mindset",
+      /systems before features|evidence before autonomy/i,
+    ],
+    [
+      "How does Joz reduce complexity without losing depth or rigor?",
+      "complexity_reduction",
+      /separating concerns|durable state from model context/i,
+    ],
+  ];
+
+  for (const [input, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    assert.equal(route.selectedRoute, "systems_mindset", input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(resolution.reply, expectedReply, input);
+  }
+});
+
+test("routes enterprise agentic systems and UX orchestration prompts to proof-rich skills answers", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const cases = [
+    [
+      "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context.",
+      "agentic_systems_orchestration",
+      /MarketClue|Maybank|Manulife|enterprise pattern/i,
+    ],
+    [
+      "Explain Joz's strongest agentic UX orchestration capabilities, with emphasis on multimodal systems, spatial interfaces, and company scale.",
+      "agentic_ux_orchestration",
+      /multimodal|spatial|Mediacorp|Erste Bank/i,
+    ],
+  ];
+
+  for (const [input, expectedSubIntent, expectedReply] of cases) {
+    const route = routeJozLlmQuery({ input, appContext, legacyContext });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    assert.equal(route.selectedRoute, "skills", input);
+    assert.equal(route.detectedSubIntent, expectedSubIntent, input);
+    assert.match(resolution.reply, expectedReply, input);
+    assert.doesNotMatch(resolution.reply, /Joz LLM can explain Joz's fit/i, input);
   }
 });
 
@@ -1238,6 +1581,33 @@ test("routes single-agent versus multi-agent platform questions to the dedicated
   assert.match(resolution.reply, /coordination overhead|state-sync risk|deadlocks|failure paths/i);
   assert.match(resolution.reply, /typed shared state|policy|risk gates|verification/i);
   assert.doesNotMatch(resolution.reply, /Joz's deepest skills are in agentic AI architecture/i);
+});
+
+test("sets a paid architecture boundary for bespoke company blueprints", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt =
+    "If you were my Chief AI Architect, design the complete Agentic AI architecture for Cruizi. Include multi-agent architecture, LLM stack and model selection, RAG architecture and knowledge base, memory architecture, fraud detection and trust scoring, dynamic pricing, route optimisation, and customer support AI.";
+  const route = routeJozLlmQuery({ input: prompt, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input: prompt, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "paid_architecture_boundary");
+  assert.match(resolution.reply, /paid architecture engagement/i);
+  assert.match(resolution.reply, /supervisor-led agent system|typed shared state/i);
+  assert.doesNotMatch(resolution.reply, /DHL|FedEx|GLS|dynamic pricing engine/i);
+});
+
+test("commercial boundary enforcement strips evidence-enriched replies", () => {
+  const route = { selectedRoute: "skills", detectedSubIntent: "paid_architecture_boundary" };
+  const guarded = enforceJozCommercialBoundaryResolution(route, {
+    reply: "Proof: MarketClue financial AI agents with live portfolio context.",
+    answerSource: "evidence",
+    composer: "buildEvidenceBackedRouteReply",
+  });
+
+  assert.equal(guarded.answerSource, "commercial_boundary");
+  assert.equal(guarded.composer, "composeSkillsReply");
+  assert.doesNotMatch(guarded.reply, /MarketClue|Maybank|Manulife|Mediacorp|Erste/i);
 });
 
 test("routes general agent-scope tradeoff questions to the dedicated scope answer", () => {
@@ -2457,7 +2827,7 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
 });
 
 test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {
-  for (const prompt of ["How would he do that?", "Why does he do that?"]) {
+  for (const prompt of ["How would he do that?", "Why does he do that?", "now what", "what next"]) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],
@@ -2878,6 +3248,48 @@ test("verification does not fail a valid long financial-platform architecture an
   );
 });
 
+test("verification allows a complete paid architecture brief to remain detailed", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const recentMessages = [];
+  let final = null;
+  for (const input of [
+    "Start the paid architecture brief.",
+    "A company memory product for a logistics business; the outcome is faster decisions.",
+    "Operations and engineering; ownership and decision workflows.",
+    "GitHub, Slack, documents, APIs, and internal databases.",
+    "Permissions, provenance, GDPR, latency, budget, and approval controls.",
+    "A trusted pilot adopted weekly by three teams within 90 days.",
+  ]) {
+    const route = routeJozLlmQueryWithAwareness({
+      input,
+      appContext,
+      legacyContext,
+      recentMessages,
+    });
+    const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+    const trace = buildJozRouteTrace(route, resolution);
+    final = { route, resolution, trace };
+    recentMessages.push(
+      { role: "user", content: input },
+      { role: "assistant", content: resolution.reply, metadata: { trace } },
+    );
+  }
+
+  const verification = buildJozResponseVerification({
+    input: "A trusted pilot adopted weekly by three teams within 90 days.",
+    route: final.route,
+    resolution: final.resolution,
+    trace: final.trace,
+    reply: final.resolution.reply,
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.equal(final.route.detectedSubIntent, "paid_architecture_spec");
+  assert.notEqual(verification.status, "fail");
+  assert.equal(verification.checks.find((check) => check.id === "word_budget")?.status, "warn");
+});
+
 test("agentic architecture approach keeps the base technical answer even when proof documents are retrieved", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const input = "How does Joz architect agentic AI?";
@@ -2907,7 +3319,7 @@ test("agentic architecture approach keeps the base technical answer even when pr
   assert.doesNotMatch(String(resolution?.reply || ""), /^Proof:/i);
 });
 
-test("verification now fails the older operating-model draft unless governance is made explicit", () => {
+test("verification passes the operating-model governance answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "business" });
   const input =
     "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
@@ -2936,9 +3348,96 @@ test("verification now fails the older operating-model draft unless governance i
 
   assert.equal(route.selectedRoute, "business_need");
   assert.equal(route.detectedSubIntent, "operating_model");
-  assert.equal(verification.status, "fail");
+  assert.notEqual(verification.status, "fail");
   assert.equal(
     verification.checks.find((check) => check.id === "operating_model_policy_risk")?.status,
-    "fail"
+    "pass"
   );
+});
+
+test("verification passes the concise AI-governance starting answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const input = "How should we start with AI governance?";
+  const route = routeJozLlmQuery({ input, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input,
+    appContext,
+    legacyContext,
+    retrievedDocuments: [],
+  });
+  const trace = buildJozRouteTrace(route, resolution);
+  const verification = buildJozResponseVerification({
+    input,
+    route,
+    resolution,
+    trace,
+    reply: String(resolution?.reply || "").trim(),
+    retrievedDocuments: [],
+    latencyMs: 120,
+  });
+
+  assert.equal(route.detectedSubIntent, "operating_model");
+  assert.notEqual(verification.status, "fail");
+  assert.equal(
+    verification.checks.find((check) => check.id === "operating_model_policy_risk")?.status,
+    "pass"
+  );
+});
+
+test("runs a paid architecture brief entirely through chat before checkout", () => {
+  const bespokeInput =
+    "Design a complete company-specific multi-agent architecture for my startup with RAG architecture, model selection, fraud detection, trust scoring, and dynamic pricing.";
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const recentMessages = [];
+  const resolve = (input) => {
+    const route = routeJozLlmQueryWithAwareness({
+      input,
+      appContext,
+      legacyContext,
+      recentMessages,
+    });
+    const resolution = enforceJozCommercialBoundaryResolution(
+      route,
+      composeJozLlmRouteReply({ route, input, appContext, legacyContext, retrievedDocuments: [] })
+    );
+    recentMessages.push(
+      { role: "user", content: input },
+      {
+        role: "assistant",
+        content: resolution.reply,
+        metadata: {
+          trace: {
+            selectedRoute: route.selectedRoute,
+            detectedSubIntent: route.detectedSubIntent,
+            answerClass: resolution.answerClass,
+          },
+        },
+      }
+    );
+    return { route, resolution };
+  };
+
+  const boundary = resolve(bespokeInput);
+  assert.equal(boundary.route.detectedSubIntent, "paid_architecture_boundary");
+  assert.equal(boundary.resolution.actions?.[0]?.type, "chat_prompt");
+
+  const start = resolve("Start the paid architecture brief.");
+  assert.equal(start.route.detectedSubIntent, "paid_architecture_intake_start");
+  assert.match(start.resolution.reply, /What company or product/i);
+
+  for (const answer of [
+    "Cruizi marketplace; improve profitable bookings.",
+    "Travellers and operators; booking and support.",
+    "Postgres, Stripe, CRM, maps, and support tools.",
+    "GDPR, payment security, approvals, and a lean team.",
+    "Reduce support time by 50%; pilot in 90 days.",
+  ]) {
+    const next = resolve(answer);
+    if (answer.startsWith("Reduce")) {
+      assert.equal(next.route.detectedSubIntent, "paid_architecture_spec");
+      assert.match(next.resolution.reply, /Draft paid architecture brief/i);
+      assert.equal(next.resolution.actions?.[0]?.id, "architecture_review_pay");
+    }
+  }
 });

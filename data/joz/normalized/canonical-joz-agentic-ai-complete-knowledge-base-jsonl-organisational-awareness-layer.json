@@ -1,0 +1,110 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-organisational-awareness-layer",
+  "title": "Organisational Awareness Layer",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_026",
+  "summary": "The Organisational Awareness Layer transforms fragmented company information into trusted collective intelligence.",
+  "body": "The Organisational Awareness Layer transforms fragmented company information into trusted collective intelligence.\n\nArchitecture:\nConnectors → Processing → Knowledge Layer → ACL-Aware Retrieval → Answering\n\nConnectors ingest data from GitHub, Slack, documentation systems, wikis, ticketing tools, architecture repositories, and other approved enterprise sources.\n\nProcessing performs data cleaning, normalization, deduplication, chunking, metadata tagging, sensitivity classification, ownership extraction, recency analysis, and embedding generation.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "brain",
+      "enterprise-ai",
+      "organisational-awareness"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "acl",
+      "system_architecture"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "knowledge_fragmentation",
+      "low_trust"
+    ],
+    "principles": [
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "enterprise_architecture",
+      "rag"
+    ],
+    "outcomes": [
+      "higher_data_trust"
+    ],
+    "governance": [
+      "access_control",
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_026",
+    "canonical_record_title": "Organisational Awareness Layer",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "brain",
+      "enterprise-ai",
+      "organisational-awareness"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Organisational Awareness Layer\nOrganisational Awareness Layer\nbrain enterprise-ai organisational-awareness\nbrain enterprise-ai organisational-awareness\nThe Organisational Awareness Layer transforms fragmented company information into trusted collective intelligence.\n\nArchitecture:\nConnectors → Processing → Knowledge Layer → ACL-Aware Retrieval → Answering\n\nConnectors ingest data from GitHub, Slack, documentation systems, wikis, ticketing tools, architecture repositories, and other approved enterprise sources.\n\nProcessing performs data cleaning, normalization, deduplication, chunking, metadata tagging, sensitivity classification, ownership extraction, recency analysis, and embedding generation.",
+    "keyword_terms": [
+      "awareness",
+      "brain",
+      "enterprise-ai",
+      "layer",
+      "organisational",
+      "organisational-awareness"
+    ],
+    "exact_phrases": [
+      "Organisational Awareness Layer",
+      "brain",
+      "enterprise-ai",
+      "organisational-awareness"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "6e8ca2da9c0bb065db8a2a6c80c8a79e6758119bbdff8ed96b553339dd13a8ca",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_026"
+  }
+}

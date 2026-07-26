@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-agent-infrastructure-scaling",
+  "title": "Agent Infrastructure Scaling",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_045",
+  "summary": "Scale agent systems by separating: API intake Reasoning workers Tool services Embedding workers Evaluation workers Execution services Verification services",
+  "body": "Scale agent systems by separating:\nAPI intake\nReasoning workers\nTool services\nEmbedding workers\nEvaluation workers\nExecution services\nVerification services\n\nScale each component independently based on its own bottleneck.\n\nReasoning services are often limited by model latency and cost.\nExecution services are often limited by external systems, consistency, and security.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agent-infrastructure",
+      "scalability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "verification"
+    ],
+    "outcomes": [
+      "cost_reduction"
+    ],
+    "governance": [
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_045",
+    "canonical_record_title": "Agent Infrastructure Scaling",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agent-infrastructure",
+      "scalability"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Agent Infrastructure Scaling\nAgent Infrastructure Scaling\nagent-infrastructure scalability\nagent-infrastructure scalability\nScale agent systems by separating:\nAPI intake\nReasoning workers\nTool services\nEmbedding workers\nEvaluation workers\nExecution services\nVerification services\n\nScale each component independently based on its own bottleneck.\n\nReasoning services are often limited by model latency and cost.\nExecution services are often limited by external systems, consistency, and security.",
+    "keyword_terms": [
+      "agent",
+      "agent-infrastructure",
+      "infrastructure",
+      "scalability",
+      "scaling"
+    ],
+    "exact_phrases": [
+      "Agent Infrastructure Scaling",
+      "agent-infrastructure",
+      "scalability"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "00ed673336bc3886dd1154bef32143302b8f7d1e13875ee293ee0da601eb52b5",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_045"
+  }
+}

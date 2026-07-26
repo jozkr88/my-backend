@@ -1,0 +1,88 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-kubernetes-service",
+  "title": "Kubernetes Service",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_008",
+  "summary": "A Kubernetes Service gives a stable network address to a changing group of pods.",
+  "body": "A Kubernetes Service gives a stable network address to a changing group of pods.\n\nPods can be replaced or rescheduled, but the service address remains stable.\n\nService = internal network endpoint for a group of pods.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "kubernetes",
+      "networking",
+      "service-discovery"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_008",
+    "canonical_record_title": "Kubernetes Service",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "kubernetes",
+      "networking",
+      "service-discovery"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Kubernetes Service\nKubernetes Service\nkubernetes networking service-discovery\nkubernetes networking service-discovery\nA Kubernetes Service gives a stable network address to a changing group of pods.\n\nPods can be replaced or rescheduled, but the service address remains stable.\n\nService = internal network endpoint for a group of pods.",
+    "keyword_terms": [
+      "kubernetes",
+      "networking",
+      "service",
+      "service-discovery"
+    ],
+    "exact_phrases": [
+      "Kubernetes Service",
+      "kubernetes",
+      "networking",
+      "service-discovery"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "c90bf6d2a6c662834468c1c33727792820cd9149702563298057fd5ba1825bb3",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_008"
+  }
+}

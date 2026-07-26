@@ -6,6 +6,25 @@ This is the first production-oriented architecture for `Joz LLM` using:
 - `Supabase` for Postgres, storage, and retrieval-backed knowledge
 - optional `Redis` later for hot session memory, caching, and queues
 
+## Transformer model boundary
+
+Joz uses a provider-agnostic model gateway around a decoder-only transformer. The default is a hosted OpenAI-compatible model, but the same control plane can route to a private transformer served by vLLM or TGI through an OpenAI-compatible `/chat/completions` endpoint.
+
+The transformer is responsible for language understanding and generation. Joz remains responsible for intent classification, Supabase retrieval, tenant/data permissions, risk gates, approvals, tool allowlists, verification, audit events, and uncertainty escalation. Changing the model provider must not bypass those controls.
+
+Configure the model boundary with:
+
+```env
+JOZ_MODEL_PROVIDER=openai
+JOZ_MODEL=gpt-4o-mini
+# or:
+# JOZ_MODEL_PROVIDER=self_hosted_transformer
+# JOZ_TRANSFORMER_BASE_URL=http://transformer.internal/v1
+# JOZ_TRANSFORMER_MODEL=your-model-id
+```
+
+The runtime exposes the selected provider, model, transformer architecture, availability, and `joz-control-plane` data boundary through `/api/version` and the LLM response trace.
+
 ### System shape
 
 1. `UI layer`

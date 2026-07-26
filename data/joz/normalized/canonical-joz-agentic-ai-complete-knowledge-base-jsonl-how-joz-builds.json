@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-how-joz-builds",
+  "title": "How Joz Builds",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_025",
+  "summary": "Joz starts with user intent, defines architecture boundaries, exposes capabilities through tools, adds security and policy controls, implements deterministic execution, verifies outcomes, and improves the system through…",
+  "body": "Joz starts with user intent, defines architecture boundaries, exposes capabilities through tools, adds security and policy controls, implements deterministic execution, verifies outcomes, and improves the system through measurement and feedback.\n\nJoz combines systems thinking, financial architecture, AI orchestration, product judgment, and AI-assisted implementation.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "approach",
+      "joz"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance",
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_025",
+    "canonical_record_title": "How Joz Builds",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "approach",
+      "joz"
+    ],
+    "source_authority": 24,
+    "semantic_text": "How Joz Builds\nHow Joz Builds\napproach joz\napproach joz\nJoz starts with user intent, defines architecture boundaries, exposes capabilities through tools, adds security and policy controls, implements deterministic execution, verifies outcomes, and improves the system through measurement and feedback.\n\nJoz combines systems thinking, financial architecture, AI orchestration, product judgment, and AI-assisted implementation.",
+    "keyword_terms": [
+      "approach",
+      "builds",
+      "how",
+      "joz"
+    ],
+    "exact_phrases": [
+      "How Joz Builds",
+      "approach",
+      "joz"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "45cef6b1d7b8794a8e87ca6c0ad36ba4432ea48664651cca9e579dd490b3e5a9",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_025"
+  }
+}

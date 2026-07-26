@@ -1,0 +1,100 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-autoscaling",
+  "title": "Autoscaling",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_012",
+  "summary": "Autoscaling adjusts compute capacity based on demand.",
+  "body": "Autoscaling adjusts compute capacity based on demand.\n\nSignals can include:\nCPU\nMemory\nRequest rate\nQueue depth\nWorkflow backlog\nLatency\nCustom business metrics\n\nUse autoscaling carefully for agent systems because LLM latency, token usage, and external API limits can create nonlinear load.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "autoscaling",
+      "capacity",
+      "kubernetes"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "technical_stack"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "signal_over_noise",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "higher_adoption"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_012",
+    "canonical_record_title": "Autoscaling",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "autoscaling",
+      "capacity",
+      "kubernetes"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Autoscaling\nAutoscaling\nautoscaling capacity kubernetes\nautoscaling capacity kubernetes\nAutoscaling adjusts compute capacity based on demand.\n\nSignals can include:\nCPU\nMemory\nRequest rate\nQueue depth\nWorkflow backlog\nLatency\nCustom business metrics\n\nUse autoscaling carefully for agent systems because LLM latency, token usage, and external API limits can create nonlinear load.",
+    "keyword_terms": [
+      "autoscaling",
+      "capacity",
+      "kubernetes"
+    ],
+    "exact_phrases": [
+      "Autoscaling",
+      "autoscaling",
+      "capacity",
+      "kubernetes"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "6192ef349f6dcd923eb4578e2bb6782530c620ee72fb8c3b7641f70893b3801c",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_012"
+  }
+}

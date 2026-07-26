@@ -1,0 +1,9 @@
+{
+  "id": "meetjoz_spatial_world",
+  "name": "MeetJoz Spatial World",
+  "version": 1,
+  "portal_ids": ["root", "maxx", "meet_joz"],
+  "sequence_ids": ["maxx_neuron_sequence", "meet_joz_sequence"],
+  "concept_ids": ["neo_maxx", "gold_pill"],
+  "description": "Backend-owned spatial world model for the Root, neoMAXX, and Meet Joz portals."
+}

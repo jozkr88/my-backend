@@ -1,0 +1,94 @@
+{
+  "slug": "canonical-joz-agentic-ai-complete-knowledge-base-jsonl-agent-definition",
+  "title": "Agent Definition",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_003",
+  "summary": "Agent = LLM + instructions + tools + memory + reasoning loop.",
+  "body": "Agent = LLM + instructions + tools + memory + reasoning loop.\n\nAn agent is an AI worker with a defined responsibility. It interprets a goal, selects approved tools, reads relevant context, updates workflow state, and iterates until the task is complete or requires human input.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agent",
+      "definition"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz canonical knowledge",
+    "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "human_accountability"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "context_engineering",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_complete_003",
+    "canonical_record_title": "Agent Definition",
+    "canonical_record_source": "Joz canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agent",
+      "definition"
+    ],
+    "source_authority": 24,
+    "semantic_text": "Agent Definition\nAgent Definition\nagent definition\nagent definition\nAgent = LLM + instructions + tools + memory + reasoning loop.\n\nAn agent is an AI worker with a defined responsibility. It interprets a goal, selects approved tools, reads relevant context, updates workflow state, and iterates until the task is complete or requires human input.",
+    "keyword_terms": [
+      "agent",
+      "definition"
+    ],
+    "exact_phrases": [
+      "Agent Definition",
+      "agent",
+      "definition"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "0e2db22e7b74152c5d7b75761d18e2af213c5d48a41406e45651c122322133c3",
+    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_003"
+  }
+}

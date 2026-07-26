@@ -1,0 +1,42 @@
+[
+  {
+    "id": "signal_over_noise",
+    "name": "Signal Over Noise",
+    "description": "More information is not the goal; the goal is clearer prioritization and action."
+  },
+  {
+    "id": "context_creates_intelligence",
+    "name": "Context Creates Intelligence",
+    "description": "Data becomes useful when connected to purpose, history, ownership, confidence, and impact."
+  },
+  {
+    "id": "systems_before_features",
+    "name": "Systems Before Features",
+    "description": "Understand the workflow, incentives, and decision structure before adding technology."
+  },
+  {
+    "id": "trust_before_autonomy",
+    "name": "Trust Before Autonomy",
+    "description": "Autonomy should increase only when evidence, observability, and accountability are credible."
+  },
+  {
+    "id": "human_accountability",
+    "name": "Human Accountability",
+    "description": "AI can support or execute decisions, but responsibility must remain explicit."
+  },
+  {
+    "id": "feedback_loops",
+    "name": "Feedback Loops",
+    "description": "Systems must learn from outcomes and adjust behavior over time."
+  },
+  {
+    "id": "decision_quality",
+    "name": "Decision Quality",
+    "description": "The value of intelligence is measured by the quality and speed of decisions it enables."
+  },
+  {
+    "id": "appropriate_autonomy",
+    "name": "Appropriate Autonomy",
+    "description": "The objective is not maximum automation but the correct balance between agent and human control."
+  }
+]

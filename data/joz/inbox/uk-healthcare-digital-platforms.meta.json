@@ -1,0 +1,66 @@
+{
+  "slug": "uk-healthcare-digital-platforms",
+  "title": "Healthcare and Mobile-first Platforms — United Kingdom",
+  "category": "project",
+  "lane": "skills",
+  "summary": "Healthcare communications, portal, CMS, webcast, and mobile-first platform work in the United Kingdom.",
+  "tags": [
+    "healthcare",
+    "uk",
+    "roche",
+    "pfizer",
+    "vantas",
+    "mobile-first-portals"
+  ],
+  "impact_score": 77,
+  "priority_label": "standard",
+  "verification": "project_supported",
+  "claims": [
+    "Joz worked on healthcare communications and digital platforms in the United Kingdom for Roche, Pfizer, and Vantas.",
+    "The programme covered webcasts, portal CMS work, and mobile-first platforms without implying clinical ownership."
+  ],
+  "proof_points": [
+    "This record is scoped to platform and communication delivery rather than medical or clinical claims.",
+    "A dedicated healthcare industry tag is used because the existing ontology previously lacked one."
+  ],
+  "companies": [
+    "Pfizer",
+    "Roche",
+    "Vantas"
+  ],
+  "regions": [
+    "Europe",
+    "United Kingdom"
+  ],
+  "industries": [
+    "healthcare",
+    "technology"
+  ],
+  "capabilities": [
+    "enterprise_architecture",
+    "product_strategy",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption"
+  ],
+  "proofs": [],
+  "projects": [
+    "Digital Video Webcasts — Roche",
+    "Mobile-first Web Portals — Vantas",
+    "Pfizer Health Portal CMS"
+  ],
+  "intent_families": [
+    "factual_profile",
+    "skills"
+  ],
+  "sub_intents": [
+    "factual_profile.companies",
+    "skills.enterprise_proof"
+  ],
+  "valid_from": "2013",
+  "valid_to": "2014",
+  "source_notes": "Grouped programme record. Healthcare industry ID added because the controlled ontology previously lacked a safe healthcare bucket."
+}

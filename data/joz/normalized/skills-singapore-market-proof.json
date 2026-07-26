@@ -1,0 +1,82 @@
+{
+  "slug": "skills-singapore-market-proof",
+  "title": "Singapore Market Proof",
+  "category": "skills",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Evidence set for explaining why Joz is strong for Singapore-market roles across AI, UX systems, enterprise delivery, and spatial computing.",
+  "body": "Singapore Market Proof\n\nPurpose\nThis record gives Joz LLM a compact evidence set for skill and recruiter questions about why Joz is relevant for Singapore-market roles.\n\nProof set\n- Maybank-Ageas Etiqa: Joz helped drive 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Joz established a Lean ML UX practice across 11 APAC markets and launched first-in-market ML UX solutions from Singapore.\n- Mediacorp: Joz contributed to 30x audience growth and built a global experience language across 30+ products.\n- Singapore Stock Exchange: Joz re-engineered portal experiences in a regulated-market context.\n- Apple/Pixar-adjacent work in Singapore: Joz developed Python USD(z) and computer-vision workflows tied to spatial computing and 3D pipelines.\n\nSkill interpretation\n- These examples support AI architecture, ML product delivery, UX systems thinking, design-system execution, regulated-enterprise delivery, and spatial-computing credibility.\n- The value is not just \"worked in Singapore.\" The value is measurable outcome plus technical depth inside Singapore-relevant environments.\n\nAnswering rule\n- Use this proof set when asked why Joz is strong for Singapore roles or Singapore recruiters.\n- Do not inject Singapore into generic skills answers unless the prompt asks for it.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "market_fit",
+      "proof",
+      "recruiter",
+      "singapore",
+      "skills"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "user",
+      "reviewed_at": "2026-07-14",
+      "notes": "Compiled from verified user-approved positioning and programme evidence already used in Joz LLM answers."
+    },
+    "verification_status": "verified",
+    "claims": [
+      "Joz has measurable Singapore-market proof across banking, insurance, media, exchange platforms, and spatial computing.",
+      "The strongest Singapore proof spans Maybank-Ageas Etiqa, Manulife, Mediacorp, Singapore Exchange, and Apple/Pixar-adjacent work.",
+      "This proof supports both recruiter positioning and skill explanation for Singapore roles."
+    ],
+    "proof_points": [
+      "Maybank-Ageas Etiqa: 20x digital sales growth.",
+      "Manulife: Lean ML UX practice across 11 APAC markets from Singapore.",
+      "Mediacorp: 30x audience growth and a global experience language across 30+ products.",
+      "Singapore Exchange: regulated portal re-engineering.",
+      "Apple/Pixar-adjacent work: Python USD(z), computer vision, and spatial-computing workflows in Singapore."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Singapore"
+    ],
+    "companies": [
+      "Apple",
+      "Manulife",
+      "Maybank-Ageas Etiqa",
+      "Mediacorp",
+      "Pixar",
+      "Singapore Exchange"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 0,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "skills-singapore-market-proof.md",
+    "source_meta_filename": "skills-singapore-market-proof.meta.json",
+    "reviewed_at": "2026-07-14",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "verified_fact",
+    "source_checksum": "a1b22b938f891ebf18e9a4d51d481017ba343c5b18df2468d0048446d3b5594c",
+    "source_uri": null
+  }
+}

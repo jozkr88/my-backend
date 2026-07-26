@@ -1,0 +1,80 @@
+{
+  "slug": "skills-agentic-ai-ux-orchestration",
+  "title": "Agentic AI UX Orchestration",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Human-agent interaction, multimodal systems, spatial AI, behavioural signals, and decision-oriented AI experience design.",
+  "tags": [
+    "ai-ux",
+    "multimodal",
+    "voice",
+    "computer-vision",
+    "spatial-computing",
+    "personalisation"
+  ],
+  "impact_score": 92,
+  "priority_label": "high",
+  "verification": "cv_supported",
+  "claims": [
+    "Joz designs context-aware multimodal interactions across voice, touch, gesture, gaze, haptics, and spatial interfaces.",
+    "He maps real-time signals and behavioural data to human mental models and agentic feedback loops.",
+    "His earlier UX and engineering career is a foundation for trusted human-agent orchestration."
+  ],
+  "proof_points": [
+    "Spatial AI and volumetric 3D interface work for Versace/SOA and ArtKorero.",
+    "Python USD(z) and Computer Vision work connected to Apple/Pixar workflows.",
+    "Large-scale interaction architecture across Mediacorp, Maybank, Manulife, Publicis, and Ogilvy."
+  ],
+  "regions": [
+    "Singapore",
+    "Dubai",
+    "Asia Pacific",
+    "Silicon Valley"
+  ],
+  "companies": [
+    "Versace",
+    "ArtKorero",
+    "Apple",
+    "Pixar",
+    "Mediacorp",
+    "Maybank",
+    "Manulife"
+  ],
+  "problems": [
+    "ai_adoption_failure",
+    "manual_knowledge_work",
+    "operational_friction"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "feedback_loops",
+    "systems_before_features"
+  ],
+  "capabilities": [
+    "computer_vision",
+    "multimodal_ai",
+    "product_strategy",
+    "rapid_prototyping",
+    "spatial_ai",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_time_to_value",
+    "higher_adoption",
+    "productivity_gains"
+  ],
+  "industries": [
+    "creative_services",
+    "media",
+    "spatial_computing",
+    "technology"
+  ],
+  "proofs": [
+    "apple_pixar_cv_workflows",
+    "artkorero_spatial_exhibitions",
+    "mediacorp_audience_growth",
+    "publicis_handoff_reduction",
+    "versace_spatial_ai_launch"
+  ]
+}

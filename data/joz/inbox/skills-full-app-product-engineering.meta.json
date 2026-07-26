@@ -1,0 +1,100 @@
+{
+  "slug": "skills-full-app-product-engineering",
+  "title": "Full App, Platform, and Intelligent Product Engineering",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Comprehensive proof for Joz's ability to integrate frontend, backend, AI, voice, retrieval, world modeling, testing, and product architecture into one coherent shipped application.",
+  "tags": [
+    "react",
+    "express",
+    "api-design",
+    "openai",
+    "agentic-ai",
+    "voice-ui",
+    "testing",
+    "product-engineering",
+    "full-stack",
+    "platform"
+  ],
+  "impact_score": 96,
+  "priority_label": "high",
+  "verification": "project_supported",
+  "claims": [
+    "Joz can own the integration layer across frontend product engineering, backend services, AI orchestration, and experience architecture.",
+    "He can build applications where interface state, reasoning systems, retrieval logic, and multimodal interaction all need to work together coherently.",
+    "His value is especially high in products that combine technical depth with strong user-facing judgment."
+  ],
+  "proof_points": [
+    "Architected financial AI agents with live market and portfolio context for MarketClue.",
+    "Led product, HCD-AI, and data architecture work across large fintech and enterprise environments.",
+    "The current app combines React, 3D rendering, voice interaction, world-aware agent routing, OpenAI-backed reasoning, Express APIs, structured knowledge retrieval, and automated scenario testing."
+  ],
+  "regions": [
+    "USA",
+    "Singapore",
+    "Dubai",
+    "Europe",
+    "Global"
+  ],
+  "companies": [
+    "MarketClue",
+    "Maybank",
+    "Manulife",
+    "Erste Bank",
+    "Mediacorp"
+  ],
+  "problems": [
+    "data_silos",
+    "knowledge_fragmentation",
+    "operational_friction",
+    "slow_decision_making",
+    "organizational_complexity"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "systems_before_features",
+    "decision_quality",
+    "feedback_loops"
+  ],
+  "capabilities": [
+    "agent_memory",
+    "agentic_ai",
+    "context_engineering",
+    "decision_intelligence",
+    "enterprise_architecture",
+    "knowledge_graphs",
+    "multimodal_ai",
+    "observability",
+    "product_strategy",
+    "rag",
+    "rapid_prototyping",
+    "verification",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "better_customer_experience",
+    "faster_decisions",
+    "faster_time_to_value",
+    "higher_adoption",
+    "knowledge_reuse",
+    "productivity_gains"
+  ],
+  "governance": [
+    "clear_ownership",
+    "evaluation",
+    "observability_control",
+    "source_provenance"
+  ],
+  "industries": [
+    "financial_services",
+    "media",
+    "spatial_computing",
+    "technology"
+  ],
+  "proofs": [
+    "marketclue_financial_agents",
+    "maybank_digital_sales_growth",
+    "mediacorp_audience_growth",
+    "publicis_handoff_reduction"
+  ]
+}

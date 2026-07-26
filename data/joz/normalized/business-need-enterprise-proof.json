@@ -1,0 +1,137 @@
+{
+  "slug": "business-need-enterprise-proof",
+  "title": "Business Value Proof at Enterprise Scale",
+  "category": "proof",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Largest and most measurable evidence supporting Joz's business-value positioning.",
+  "body": "The strongest evidence that Joz creates business value comes from measurable transformation:\n\nMaybank–Ageas Etiqa\n- 20× growth in digital sales within 12 months\n- more than 3,000 wealth pilots and ML models\n- HCD–AI practice and executive capability-building\n\nMediacorp\n- 30× monthly active audience growth\n- mobile-first transformation across more than 30 products\n- nationally significant Singapore media environment\n\nLeo Burnett/Publicis\n- 70% reduction in agency-wide handoff friction through code-based prototyping\n\nErste Bank\n- engineering and European accessibility work serving more than 16 million customers\n\nManulife\n- Lean ML UX practice across 11 Asia Pacific markets\n- first-in-market work across Singapore, the USA, and Canada\n- regional CEO advisory\n\nUse the evidence most relevant to the question. For sales and customer growth, lead with Maybank. For national or platform scale, lead with Mediacorp and Erste. For organisational AI adoption, lead with Manulife and Maybank.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "apac",
+      "enterprise-proof",
+      "fortune-500",
+      "measurable-impact",
+      "singapore"
+    ],
+    "verification": {
+      "status": "cv_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "cv_supported",
+    "claims": [
+      "Joz's business-value positioning is supported by measurable transformation across enterprise and national-scale organisations.",
+      "The strongest proof should be selected based on relevance rather than presented as an undifferentiated achievement list.",
+      "Enterprise-scale outcomes should rank above smaller current experiments."
+    ],
+    "proof_points": [
+      "Maybank–Ageas Etiqa: 20× digital sales growth within 12 months.",
+      "Mediacorp: 30× monthly active audience growth across a mobile-first transformation.",
+      "Publicis: 70% reduction in design-to-engineering handoff friction.",
+      "Erste Bank: engineering and accessibility work serving 16M+ customers.",
+      "Manulife: Lean ML UX practice across 11 markets and executive-level transformation."
+    ],
+    "regions": [
+      "Asia Pacific",
+      "Canada",
+      "Europe",
+      "Singapore",
+      "USA"
+    ],
+    "companies": [
+      "Ageas",
+      "Erste Bank",
+      "Etiqa",
+      "Manulife",
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 99,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-enterprise-proof.md",
+    "source_meta_filename": "business-need-enterprise-proof.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "low_trust",
+      "operational_friction",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "organizational_design",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "cost_reduction",
+      "higher_adoption",
+      "lower_risk",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "access_control",
+      "clear_ownership",
+      "human_approval"
+    ],
+    "industries": [
+      "banking",
+      "creative_services",
+      "financial_services",
+      "insurance",
+      "media",
+      "wealth_management"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "ogilvy_banyan_tree_pitch",
+      "publicis_handoff_reduction",
+      "sgx_responsive_portals"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "ogilvy_banyan_tree_pitch",
+      "publicis_handoff_reduction",
+      "sgx_responsive_portals"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 5,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "supported_claim",
+    "source_checksum": "3df7a7658ad126284f5182b4c1987280d11d2bc7dfec0cd7def9634ed258b11e",
+    "source_uri": null
+  }
+}

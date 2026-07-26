@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-joz-infrastructure-platform-engineering-knowledge-base-jsonl-rate-limiting",
+  "title": "Rate Limiting",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_040",
+  "summary": "Rate limiting controls how many requests a user, service, or agent can make.",
+  "body": "Rate limiting controls how many requests a user, service, or agent can make.\n\nIt protects:\nAPIs\nModel providers\nDatabases\nTool services\nTrading systems\n\nLimits can be based on requests, tokens, cost, or risk.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "cost-control",
+      "rate-limiting",
+      "security"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz infrastructure canonical knowledge",
+    "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [],
+    "outcomes": [
+      "cost_reduction",
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "joz_infra_040",
+    "canonical_record_title": "Rate Limiting",
+    "canonical_record_source": "Joz infrastructure canonical knowledge",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "cost-control",
+      "rate-limiting",
+      "security"
+    ],
+    "source_authority": 12,
+    "semantic_text": "Rate Limiting\nRate Limiting\ncost-control rate-limiting security\ncost-control rate-limiting security\nRate limiting controls how many requests a user, service, or agent can make.\n\nIt protects:\nAPIs\nModel providers\nDatabases\nTool services\nTrading systems\n\nLimits can be based on requests, tokens, cost, or risk.",
+    "keyword_terms": [
+      "cost-control",
+      "limiting",
+      "rate",
+      "rate-limiting",
+      "security"
+    ],
+    "exact_phrases": [
+      "Rate Limiting",
+      "cost-control",
+      "rate-limiting",
+      "security"
+    ],
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "50beca71aeec9fc6e4e82720fdee83a688f87d5ff14cd1fefec0985d36159783",
+    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_040"
+  }
+}

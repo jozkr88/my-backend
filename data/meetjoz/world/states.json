@@ -1,0 +1,109 @@
+[
+  {
+    "id": "root_idle",
+    "portal_id": "root",
+    "label": "Root Choice State",
+    "focused_object_ids": ["root_gold_pill", "root_brain", "root_enter"],
+    "available_action_ids": ["go_meet_joz", "go_maxx_via_enter", "go_maxx_via_brain"]
+  },
+  {
+    "id": "maxx_synapse_connection",
+    "portal_id": "maxx",
+    "sequence_id": "maxx_neuron_sequence",
+    "order": 1,
+    "label": "Synapse Formation",
+    "object_id": "maxx_neurons",
+    "meaning": "Two neurons connect and form their synapse.",
+    "available_action_ids": ["pause_neurons", "resume_neurons", "launch_n2x_ar", "back_to_root"]
+  },
+  {
+    "id": "maxx_signal_transfer",
+    "portal_id": "maxx",
+    "sequence_id": "maxx_neuron_sequence",
+    "order": 2,
+    "label": "Signal Transfer",
+    "object_id": "maxx_neurons",
+    "meaning": "Transmitters then send signals between the neurons.",
+    "available_action_ids": ["pause_neurons", "resume_neurons", "launch_n2x_ar", "back_to_root"]
+  },
+  {
+    "id": "maxx_new_experience",
+    "portal_id": "maxx",
+    "sequence_id": "maxx_neuron_sequence",
+    "order": 3,
+    "label": "New Experience",
+    "object_id": "maxx_neurons",
+    "meaning": "New Experience is created.",
+    "available_action_ids": ["pause_neurons", "resume_neurons", "launch_n2x_ar", "back_to_root"]
+  },
+  {
+    "id": "maxx_connection_quality",
+    "portal_id": "maxx",
+    "sequence_id": "maxx_neuron_sequence",
+    "order": 4,
+    "label": "Connection Quality",
+    "object_id": "maxx_neurons",
+    "meaning": "The quality of Experience is shaped by neural connections.",
+    "available_action_ids": ["pause_neurons", "resume_neurons", "launch_n2x_ar", "back_to_root"]
+  },
+  {
+    "id": "maxx_new_pathways",
+    "portal_id": "maxx",
+    "sequence_id": "maxx_neuron_sequence",
+    "order": 5,
+    "label": "New Pathways",
+    "object_id": "maxx_neurons",
+    "meaning": "These connections scale and establish new neural pathways.",
+    "available_action_ids": ["pause_neurons", "resume_neurons", "launch_n2x_ar", "back_to_root"]
+  },
+  {
+    "id": "maxx_neuroplasticity_metaphor",
+    "portal_id": "maxx",
+    "sequence_id": "maxx_neuron_sequence",
+    "order": 6,
+    "label": "Neuroplasticity and Neurogenesis",
+    "object_id": "maxx_neurons",
+    "meaning": "Welcome to Neuroplasticity and Neurogenesis, used here as a transformation metaphor rather than a literal scientific claim.",
+    "available_action_ids": ["pause_neurons", "resume_neurons", "launch_n2x_ar", "back_to_root"]
+  },
+  {
+    "id": "meet_joz_flex_stage",
+    "portal_id": "meet_joz",
+    "sequence_id": "meet_joz_sequence",
+    "order": 1,
+    "label": "Flex / Vibe",
+    "object_id": "meet_joz_flex",
+    "meaning": "Entry, presence, atmosphere, tone, arrival, and making the world inhabitable.",
+    "available_action_ids": ["show_flex", "show_ascend", "show_mogg", "back_to_root"]
+  },
+  {
+    "id": "meet_joz_ascend_stage",
+    "portal_id": "meet_joz",
+    "sequence_id": "meet_joz_sequence",
+    "order": 2,
+    "label": "Ascend / Discover",
+    "object_id": "meet_joz_ascend",
+    "meaning": "Prestige, aura, scale, recognition, rank, pull, transformation, and visible proof.",
+    "available_action_ids": ["show_ascend", "show_mogg", "show_flex", "back_to_root"]
+  },
+  {
+    "id": "meet_joz_mogg_stage",
+    "portal_id": "meet_joz",
+    "sequence_id": "meet_joz_sequence",
+    "order": 3,
+    "label": "Mogg",
+    "object_id": "meet_joz_mogg",
+    "meaning": "Joz's digital twin and conceptual identity layer.",
+    "available_action_ids": ["show_mogg", "show_skills_layer", "show_ascend", "back_to_root"]
+  },
+  {
+    "id": "meet_joz_skills_stage",
+    "portal_id": "meet_joz",
+    "sequence_id": "meet_joz_sequence",
+    "order": 4,
+    "label": "Skills / workf.glb",
+    "object_id": "meet_joz_skills",
+    "meaning": "Deep work, capabilities, skills, execution, and operational competence.",
+    "available_action_ids": ["show_skills_layer", "show_skills_panel", "show_mogg", "launch_workf_spatial", "back_to_root"]
+  }
+]

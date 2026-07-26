@@ -1,0 +1,30 @@
+{
+  "slug": "systems-principle-signal-over-noise",
+  "title": "Signal Over Noise",
+  "category": "systems_principle",
+  "lane": "systems_mindset",
+  "summary": "More information does not automatically create better decisions.",
+  "tags": [
+    "signal",
+    "noise",
+    "decision-intelligence"
+  ],
+  "impact_score": 99,
+  "priority_label": "hero",
+  "verification": "positioning_supported",
+  "problems": [
+    "knowledge_fragmentation",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "signal_over_noise"
+  ],
+  "capabilities": [
+    "context_engineering",
+    "decision_intelligence"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "slug": "business-need-profit-levers",
+  "title": "AI Profit Levers",
+  "category": "roi",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Defines the main profit levers through which AI creates commercial value: revenue, margin, cost, working capital, error reduction, and management leverage.",
+  "body": "The right way to explain AI business value is through profit levers, not through generic feature lists.\n\nThe main profit levers are:\n\n1. Revenue growth\nImprove conversion, customer relevance, proposal quality, response speed, retention, and cross-sell or upsell performance.\n\n2. Gross margin improvement\nReduce delivery waste, improve pricing support, optimize operational decisions, and lower avoidable service cost.\n\n3. SG&A reduction\nReduce manual reporting, coordination, reconciliation, support workload, and repeated knowledge work.\n\n4. Working capital improvement\nImprove collections, payment timing, exception resolution, invoice handling, and inventory or procurement visibility.\n\n5. Error and leakage reduction\nReduce compliance misses, duplicate work, processing errors, poor handoffs, and bad decisions made on incomplete context.\n\n6. Management leverage\nGive leaders clearer cross-functional visibility, better scenario synthesis, faster decision cycles, and better execution follow-through.\n\nThe important principle is that AI should be connected to measurable P&L impact:\n\n- revenue\n- margin\n- cost\n- working capital\n- risk\n- execution speed\n\nThis is how Joz should frame business value when the goal is commercial credibility rather than buzzwords.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "cost",
+      "margin",
+      "profit",
+      "roi",
+      "working-capital"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "AI business value should be explained through profit levers rather than generic feature lists.",
+      "The main commercial levers are revenue growth, gross margin improvement, SG&A reduction, working capital improvement, error reduction, and management leverage.",
+      "Joz should connect AI work to measurable P&L impact rather than abstract innovation language."
+    ],
+    "proof_points": [
+      "Revenue and growth proof already exists in Maybank and Mediacorp records.",
+      "Operational friction reduction is already supported by the Publicis handoff-reduction proof.",
+      "Decision quality and governance language are already consistent with the systems and business-need records."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 98,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-profit-levers.md",
+    "source_meta_filename": "business-need-profit-levers.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "manual_knowledge_work",
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "decision_quality",
+      "feedback_loops",
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "decision_intelligence",
+      "organizational_design",
+      "product_strategy",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "faster_decisions",
+      "faster_time_to_value",
+      "lower_risk",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "clear_ownership",
+      "evaluation"
+    ],
+    "industries": [
+      "banking",
+      "financial_services",
+      "insurance",
+      "media",
+      "technology"
+    ],
+    "proofs": [
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 6,
+    "schema_version": "1.0",
+    "dataset_id": "joz-public-knowledge",
+    "tenant_id": "public",
+    "owner": "joz",
+    "classification": "public",
+    "visibility": "public",
+    "retention_policy": "until_withdrawn",
+    "evidence_tier": "framework_guidance",
+    "source_checksum": "ac4188b36c3deebdaf9401d3d6fe8cdf04cc3641c5fc3d9699aebc5005590a78",
+    "source_uri": null
+  }
+}
