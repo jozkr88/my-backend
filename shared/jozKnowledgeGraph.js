@@ -121,7 +121,7 @@ function nodeSearchText(node = {}) {
   ).toLowerCase();
 }
 
-function queryStartNodeIds(query = "", graph = {}) {
+export function getJozKnowledgeGraphQueryStartNodeIds(query = "", graph = {}) {
   const ontology = mapJozQueryToOntology(query);
   const ids = new Set();
 
@@ -189,7 +189,7 @@ export function queryJozKnowledgeGraph({ graph = loadPublishedJozKnowledgeGraph(
     };
   }
 
-  const starts = queryStartNodeIds(query, graph);
+  const starts = getJozKnowledgeGraphQueryStartNodeIds(query, graph);
   const nodes = graphNodeMap(graph);
   const adjacency = buildAdjacency(graph);
   const documentCandidates = new Map();

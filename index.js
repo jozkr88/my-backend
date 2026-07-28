@@ -87,9 +87,8 @@ import {
 } from "./shared/jozHybridRetrieval.js";
 import {
   getJozKnowledgeGraphMode,
-  loadPublishedJozKnowledgeGraph,
-  queryJozKnowledgeGraph,
 } from "./shared/jozKnowledgeGraph.js";
+import { queryJozKnowledgeGraphRuntime } from "./shared/neo4jJozKnowledgeGraph.js";
 import {
   createJozModelGateway,
   getJozModelRuntimeDescriptor,
@@ -1188,8 +1187,7 @@ app.post("/api/joz-llm", async (req, res) => {
     const knowledgeGraphMode = getJozKnowledgeGraphMode();
     let knowledgeGraph = null;
     if (knowledgeGraphMode !== "disabled" && intentClassification.kind !== "execute" && intentClassification.kind !== "refuse") {
-      knowledgeGraph = queryJozKnowledgeGraph({
-        graph: loadPublishedJozKnowledgeGraph(),
+      knowledgeGraph = await queryJozKnowledgeGraphRuntime({
         query: latestUserMessage,
         limit: 8,
       });
@@ -1216,6 +1214,8 @@ app.post("/api/joz-llm", async (req, res) => {
       }
       retrievalMeta.knowledgeGraph = {
         mode: knowledgeGraphMode,
+        backend: knowledgeGraph.backend || "artifact",
+        fallbackReason: knowledgeGraph.fallbackReason || null,
         shadow: knowledgeGraphMode !== "augment",
         activeInContext: knowledgeGraphMode === "augment" && retrievalContext.some((document) => document?.metadata?.graphEvidence),
         nodeCount: knowledgeGraph.nodeCount,
@@ -1228,6 +1228,8 @@ app.post("/api/joz-llm", async (req, res) => {
     } else {
       retrievalMeta.knowledgeGraph = {
         mode: knowledgeGraphMode,
+        backend: "disabled",
+        fallbackReason: null,
         shadow: false,
         activeInContext: false,
         nodeCount: 0,
