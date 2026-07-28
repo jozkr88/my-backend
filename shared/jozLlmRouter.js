@@ -1256,6 +1256,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
     return "Joz is strongest where AI, product, and execution have to work together under real constraints. The core strengths are agentic AI architecture, multimodal and spatial UX, and end-to-end product engineering. The proof is concrete: MarketClue financial AI agents with live portfolio context, 20x digital sales growth at Maybank, a Lean ML UX practice across 11 Manulife markets, 30x audience growth at Mediacorp, 16M+ customer-scale engineering at Erste Bank, and spatial AI work for Versace/SOA and ArtKorero in Dubai. The differentiator is not a long tool list. It is the ability to turn complex systems into working intelligent products people can trust, use, and scale.";
   }
 
+  if (subIntent === "financial_ai_proof") {
+    return "The clearest proof is MarketClue USA: Joz architected financial AI agents with live market data, asset portfolios, risk workflows, alerts, and more than 50 quant-modelling tools. That work combines agent orchestration, financial RAG, vector retrieval, PostgreSQL/pgvector, Redis, RabbitMQ, and verification around portfolio and risk decisions. The wider proof layer includes 20× digital sales growth at Maybank–Ageas Etiqa and enterprise-scale financial and insurance engineering across Singapore and APAC.";
+  }
+
   if (subIntent === "technical_stack") {
     return "Joz's core stack spans agentic AI architecture and product engineering: LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, ACL-aware retrieval, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, WebGL, spatial computing, and computer vision. That stack matters because it supports enterprise retrieval, multimodal interfaces, and measurable product delivery rather than existing as tooling in isolation.";
   }
@@ -3895,6 +3899,20 @@ function detectSkills(clean) {
 
   if (
     includesAny(clean, [
+      "what proves joz can build financial ai",
+      "what proves joz can build financial intelligence",
+      "proof joz can build financial ai",
+      "financial ai proof",
+    ]) || (
+      includesAny(clean, ["what proves", "proof of", "proof that"]) &&
+      includesAny(clean, ["financial ai", "financial intelligence", "financial agents", "marketclue"])
+    )
+  ) {
+    return { detectedSubIntent: "financial_ai_proof", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "what is the purpose of this",
       "what is this about",
       "what's this about",
@@ -4079,6 +4097,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "agentic_ux_orchestration",
       "safe_architecture_design",
       "proof_backed_strengths",
+      "financial_ai_proof",
     ].includes(preWorldSkills.detectedSubIntent)
   ) {
     return {
@@ -4188,7 +4207,8 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "paid_architecture_spec",
       "agent_model_tool_distinction",
       "capabilities_overview",
-      "proof_backed_strengths",
+          "proof_backed_strengths",
+          "financial_ai_proof",
       "purpose_of_llm",
       "agentic_architecture_approach",
       "agentic_architecture_why",
@@ -4632,6 +4652,7 @@ export function composeJozLlmRouteReply({
         "purpose_of_llm",
         "ai_use",
         "proof_backed_strengths",
+        "financial_ai_proof",
         "rag_evaluation",
         "knowledge_graph_definition",
         "paid_architecture_boundary",
@@ -4653,7 +4674,8 @@ export function composeJozLlmRouteReply({
           "capabilities_overview",
           "purpose_of_llm",
           "ai_use",
-          "proof_backed_strengths",
+        "proof_backed_strengths",
+        "financial_ai_proof",
           "rag_evaluation",
           "knowledge_graph_definition",
           "agentic_systems_orchestration",
@@ -4670,6 +4692,7 @@ export function composeJozLlmRouteReply({
           "purpose_of_llm",
           "ai_use",
           "proof_backed_strengths",
+          "financial_ai_proof",
           "rag_evaluation",
           "knowledge_graph_definition",
           "agentic_systems_orchestration",

@@ -2199,6 +2199,30 @@ test("routes proof-not-buzzwords skills queries to an evidence-first answer", ()
   assert.doesNotMatch(resolution.reply, /FastAPI|PostgreSQL|pgvector|Redis/i);
 });
 
+test("routes financial AI proof questions to the MarketClue evidence answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What proves Joz can build financial AI?";
+  const route = routeJozLlmQuery({
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: prompt,
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "financial_ai_proof");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /MarketClue USA/i);
+  assert.match(resolution.reply, /financial AI agents/i);
+  assert.match(resolution.reply, /50 quant-modelling tools/i);
+  assert.doesNotMatch(resolution.reply, /outside the current deterministic Joz answer set/i);
+});
+
 test("soft value and anti-buzzword prompts resolve to hire-value instead of a boundary reply", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
