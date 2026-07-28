@@ -21,4 +21,4 @@ Answer guidance
 
 Proof anchors
 - Existing recruiter benchmark rules for compensation, working model, and relocation.
-- Existing operational contact details: joz@meetjoz.com and +65 3107 2412.
+- Current operational contact details: joz@meetjoz.com and +65 3107 2412.

@@ -18,8 +18,8 @@ Question set
 
 Answer guidance
 - Keep answers short, factual, and recruiter-safe.
-- Use "Agentic AI Architecture and Innovation Leader" as the main current positioning.
-- Use 13+ years overall experience.
+- Use "Agentic AI Engineering, AI Product Engineering and Multimodal AI" as the current positioning, with Agentic AI Architecture and Multimodal AI Leader as the senior experience framing.
+- Use 15+ years overall experience from the current CV.
 - For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.
 - For nationality, use Slovak and EU national or citizen wording.
 - For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.

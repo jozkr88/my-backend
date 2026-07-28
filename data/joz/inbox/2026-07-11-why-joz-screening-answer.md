@@ -6,7 +6,7 @@ This record gives Joz LLM a concise recruiter-safe answer to the screening quest
 Short answer
 - Joz combines product judgment, engineering delivery, world-class UX, and applied AI systems thinking in one profile.
 - Joz is strongest where the problem is ambiguous, the signal is noisy, and the business needs a system that can actually ship and operate.
-- Joz brings 13+ years of professional experience overall, including 8+ years in ML/AI, across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.
+- Joz brings 15+ years of professional experience across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces, with direct Agentic AI engineering and multimodal AI work in the current CV.
 
 Supporting framing
 - Joz is not just a model or prompt layer profile. Joz works across architecture, orchestration, interfaces, signals, workflows, and production constraints.

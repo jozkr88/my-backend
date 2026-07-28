@@ -4,8 +4,9 @@ Purpose
 This record gives Joz LLM a direct source for recruiter questions about location, regional fit, relocation, and working model preferences.
 
 Location
-- Joz's profile location is Bratislava, Slovakia / Singapore / Dubai / Zurich.
-- Joz's work history and client context span Europe/EEA, Singapore, UAE/MENA, North America, Japan, Greater China, Australia, and the wider Asia Pacific region.
+- Joz's current CV lists Singapore and Dubai as current locations.
+- Joz's work history includes Europe/EEA, APAC, the US, and the Middle East.
+- Joz's work history and client context span Europe/EEA, Singapore, UAE/MENA, North America, APAC, the US, and the wider Middle East.
 
 Regional fit
 - Joz is credible for international roles that require cross-region communication, executive-facing work, and product or AI systems delivery across multiple markets.

@@ -16,18 +16,18 @@
   "verification": {
     "status": "verified",
     "reviewed_by": "assistant",
-    "reviewed_at": "2026-07-14",
-    "notes": "Derived from existing verified recruiter facts, CV timeline, and recruiter benchmark rules already approved in the dataset."
+    "reviewed_at": "2026-07-27",
+    "notes": "Updated from the user's new CV while preserving recruiter benchmark rules for unverified operational facts."
   },
   "claims": [
-    "Joz should be positioned as an Agentic AI Architecture and Innovation Leader.",
-    "Joz has 13+ years of professional experience overall.",
+    "Joz should be positioned as an Agentic AI Engineer and AI Product Engineer focused on Agentic AI Architecture and Multimodal AI.",
+    "Joz has 15+ years of professional experience overall.",
     "AI and ML experience should be framed as a progression rather than an inflated single number.",
     "Unverified residence, notice period, and earliest start date should be confirmed directly with Joz."
   ],
   "proof_points": [
     "Existing recruiter screening and CV records establish current positioning and timeline.",
-    "Existing operational recruiter records establish direct contact details.",
+    "Existing operational recruiter records establish direct contact details at joz@meetjoz.com and +65 3107 2412.",
     "Recruiter benchmark rules define how to handle unverified operational facts."
   ],
   "regions": [

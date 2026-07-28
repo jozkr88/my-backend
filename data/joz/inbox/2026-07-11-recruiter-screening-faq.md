@@ -12,16 +12,16 @@ Nationality and work status
 Primary contact details
 - Email: joz@meetjoz.com
 - Phone: +65 3107 2412
-- Website: https://meetjoz.com
+- CV / portfolio: https://meejoz.com
 
 Availability
 - Joz's current availability and start date should be confirmed directly with Joz.
 - Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.
 
 Years of experience
-- Joz has 13+ years of professional experience overall.
+- Joz has 15+ years of professional experience overall.
 - Joz has 8+ years in ML/AI.
-- The overall timeline is based on professional roles from 2013 to present.
+- The overall timeline is based on professional roles from 2013 to present and the current CV states 15+ years.
 - The ML/AI-focused timeline is based on work from 2018 to present.
 
 Education
@@ -30,7 +30,7 @@ Education
 - Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.
 
 Core skills
-- Agentic AI architecture and orchestration
+- Agentic AI engineering, AI product engineering, multimodal AI, architecture, and orchestration
 - Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs
 - Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops
 - Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces

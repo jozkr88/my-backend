@@ -6,16 +6,16 @@
   "classification": "public",
   "visibility": "public",
   "retention_policy": "until_withdrawn",
-  "generated_at": "2026-07-24T07:07:27.006Z",
+  "generated_at": "2026-07-28T07:19:37.859Z",
   "source_count": 78,
   "canonical_source_count": 2,
   "normalized_count": 162,
   "model_ready_count": 160,
   "verified_count": 18,
   "error_count": 0,
-  "content_checksum": "230f31e54ce325f622221f97a430be5a86f0d28b33d7fae430cfd497572053ee",
+  "content_checksum": "bff34f4465b0faf02942d294cfe80a663b28f1ac847ad820660c8d33085cb7e1",
   "source_registry_count": 78,
-  "source_registry_checksum": "d6eb98978b9d9283d7cd9028a7807db8de238a70310ae909d39b32c355002964",
+  "source_registry_checksum": "58937ba4b257633fbee6ef3bef3d18fee04e017246bc792e0c0e1c3e7c3aa570",
   "sources": [
     {
       "source_id": "d7cf917a442ec633c88fb215",
@@ -106,7 +106,7 @@
       "evidence_tiers": [
         "verified_fact"
       ],
-      "source_checksum": "b5181870e93ebcab93ff11f78f3ac1edcfb9b142cb3fbb921c2f629dbe77a7c0",
+      "source_checksum": "442e6778549cbd746493fed065dd83c4e579773a90415c129d29900b3d8b0b18",
       "status": "published"
     },
     {
@@ -175,7 +175,7 @@
       "evidence_tiers": [
         "verified_fact"
       ],
-      "source_checksum": "198a20efdd71d12848e9bb0996da540e1d2953ab956b0320aa47ea61aecd6c36",
+      "source_checksum": "9d8046d5cbf1cbecf52cff217c4f8442eb92b45960b5500b6751368248e2ea42",
       "status": "published"
     },
     {
@@ -198,7 +198,7 @@
       "evidence_tiers": [
         "verified_fact"
       ],
-      "source_checksum": "3817ea25a30a4cb2618ef8d78e586cdd4d13b22e908ee3cb02556b88374f980d",
+      "source_checksum": "388e588b13583eac25bf0159f9b847b4a6326143f5b1c5067886074efe910822",
       "status": "published"
     },
     {
@@ -221,7 +221,7 @@
       "evidence_tiers": [
         "verified_fact"
       ],
-      "source_checksum": "7616b6e541b56bac1f6ab7de4e39412e260da2a8a08997200ab4f6fb770291db",
+      "source_checksum": "b364e6ce931c0c8470dea62655c2919901e1ae53d4ae7da121c77426898ad5f9",
       "status": "published"
     },
     {
@@ -1072,7 +1072,7 @@
       "evidence_tiers": [
         "verified_fact"
       ],
-      "source_checksum": "83bfc47b41f723981d343d0e2099c3af9f3890c44e7e0a8d600ce784b38b5c03",
+      "source_checksum": "8bdb679f4fc0deae19d54f77b1e9c100adc28ea8b12ded7ed30e3268cc6f9aa1",
       "status": "published"
     },
     {
@@ -1095,7 +1095,7 @@
       "evidence_tiers": [
         "verified_fact"
       ],
-      "source_checksum": "494e989a933872d2e02538b828d39024a9a84abda345a6f9aaaee3e0174ff136",
+      "source_checksum": "4fb60f4a2f735b2461a496d11c7bece43edca8a4b7a82a8829819f77ffd8c391",
       "status": "published"
     },
     {
@@ -1440,7 +1440,7 @@
       "evidence_tiers": [
         "unverified"
       ],
-      "source_checksum": "721bc1bbf0ecc286d1cfce10c87725716514b69c77d07fd34f9199306b06c352",
+      "source_checksum": "e20dae3ce28d7fc431963faaaa3a07e9b63f9dbba4c28f9fc6b6150ce3c31d00",
       "status": "published"
     },
     {

@@ -18,17 +18,17 @@
   "verification": {
     "status": "verified",
     "reviewed_by": "assistant",
-    "reviewed_at": "2026-07-11",
-    "notes": "Derived from verified profile location and regional work history. Specific relocation commitments are intentionally left to direct confirmation."
+    "reviewed_at": "2026-07-27",
+    "notes": "Updated from the user's new CV. Specific relocation commitments are intentionally left to direct confirmation."
   },
   "claims": [
-    "Joz's profile location is Bratislava, Slovakia / Singapore / Dubai / Zurich.",
-    "Joz has cross-region operating experience across Europe/EEA, Singapore, UAE/MENA, and Asia Pacific.",
+    "Joz's current CV lists Singapore and Dubai as current locations.",
+    "Joz has cross-region operating experience across Europe/EEA, APAC, the US, and the Middle East.",
     "Specific relocation and working-model arrangements should be confirmed directly with Joz."
   ],
   "proof_points": [
-    "The verified CV and profile list Bratislava, Singapore, Dubai, and Zurich in the identity layer.",
-    "The verified CV records work across Europe/EEA, Singapore, UAE/MENA, North America, Japan, Greater China, Australia, and Asia Pacific."
+    "The current CV lists Singapore and Dubai and records work across Europe/EEA, APAC, the US, and the Middle East.",
+    "The broader verified CV history also records work across North America, Japan, Greater China, Australia, and Asia Pacific."
   ],
   "regions": [
     "Europe/EEA",
