@@ -2,7 +2,6 @@ services:
   - type: web
     name: xq-backend
     runtime: node
-    rootDir: server
     buildCommand: npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality
     startCommand: npm start
     healthCheckPath: /api/hello
