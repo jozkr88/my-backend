@@ -3441,3 +3441,100 @@ test("runs a paid architecture brief entirely through chat before checkout", () 
     }
   }
 });
+
+test("handles natural recruiter and product questions without falling into generic replies", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const cases = [
+    {
+      input: "Why should a company hire Joz?",
+      selectedRoute: "business_need",
+      detectedSubIntent: "hire_value",
+      reply: /proof is enterprise-scale and measurable/i,
+    },
+    {
+      input: "What is Joz's strongest technical skill?",
+      selectedRoute: "skills",
+      detectedSubIntent: "proof_backed_strengths",
+      reply: /agentic ai architecture|MarketClue|multimodal/i,
+    },
+    {
+      input: "How does Joz build agentic AI systems?",
+      selectedRoute: "skills",
+      detectedSubIntent: "agentic_architecture_approach",
+      reply: /clear separation|policy before action|post-action verification/i,
+    },
+    {
+      input: "How should memory and shared state work in an agent system?",
+      selectedRoute: "skills",
+      detectedSubIntent: "architecture_reasoning",
+      reply: /architecture problem|typed orchestration state|authoritative systems/i,
+    },
+    {
+      input: "What is the difference between an agent, a model, and an API?",
+      selectedRoute: "skills",
+      detectedSubIntent: "agent_model_tool_distinction",
+      reply: /model predicts|agent combines|api exposes/i,
+    },
+    {
+      input: "How does Joz use voice and 3D interaction?",
+      selectedRoute: "skills",
+      detectedSubIntent: "agentic_ux_orchestration",
+      reply: /multimodal|spatial|3d/i,
+    },
+    {
+      input: "What was Joz's biggest enterprise achievement?",
+      selectedRoute: "skills",
+      detectedSubIntent: "proof_backed_strengths",
+      reply: /MarketClue|Maybank|Mediacorp|Erste/i,
+    },
+    {
+      input: "What does durable execution add to an agent system?",
+      selectedRoute: "skills",
+      detectedSubIntent: "architecture_reasoning",
+      reply: /durable workflow|crash recovery|approval waits/i,
+    },
+    {
+      input: "Can an autonomous agent deploy directly to production?",
+      selectedRoute: "systems_mindset",
+      detectedSubIntent: "thinking_model",
+      reply: /must not deploy directly to production|human approval|deterministic verification/i,
+    },
+  ];
+
+  for (const testCase of cases) {
+    const route = routeJozLlmQuery({
+      input: testCase.input,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: testCase.input,
+      appContext,
+      legacyContext,
+      retrievedDocuments: [],
+    });
+
+    assert.equal(route.selectedRoute, testCase.selectedRoute, testCase.input);
+    assert.equal(route.detectedSubIntent, testCase.detectedSubIntent, testCase.input);
+    assert.match(String(resolution.reply || ""), testCase.reply, testCase.input);
+    assert.doesNotMatch(String(resolution.reply || ""), /outside the current deterministic|not in the current joz knowledge base/i);
+  }
+
+  const marketClue = await resolveUnknownJozReply({
+    input: "Tell me about MarketClue.",
+    roleAwareContext: {
+      retrievedDocuments: [
+        {
+          title: "MarketClue USA",
+          category: "project",
+          summary: "Financial AI agents with live market data, portfolio context, and quant tools.",
+          metadata: { companies: ["MarketClue USA"], projects: ["financial AI assistant"] },
+        },
+      ],
+    },
+  });
+
+  assert.equal(marketClue.answerSource, "MarketClue USA");
+  assert.match(marketClue.reply, /live market data|financial AI agents/i);
+});

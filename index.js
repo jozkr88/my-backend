@@ -2536,8 +2536,9 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
       currentMesh: req.body?.context?.currentMesh || null,
       currentMeshStage: req.body?.context?.currentMeshStage || null,
     };
+    const consentGiven = req.body?.privacyConsent === true;
     const consent = {
-      submitted: req.body?.privacyConsent === false ? false : true,
+      submitted: consentGiven,
       policyVersion:
         normalizeCallbackField(req.body?.privacyPolicyVersion, 64) || "2026-07-12",
       capturedAt: new Date().toISOString(),
@@ -2550,7 +2551,7 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
       return res.status(400).json({ error: "Missing callback name, phone, or time" });
     }
 
-    if (!consent.submitted) {
+    if (!consentGiven) {
       return res.status(400).json({ error: "Privacy consent is required for callback requests" });
     }
 

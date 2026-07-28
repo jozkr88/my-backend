@@ -422,6 +422,7 @@ test("POST /api/joz-llm/callback-request stores callback requests and returns de
     name: "Casey Example",
     phone: "+1 415 555 0100",
     time: "Tomorrow 3pm",
+    privacyConsent: true,
     context: {
       currentPortal: "meet-joz",
       currentMesh: "skills",
@@ -434,6 +435,17 @@ test("POST /api/joz-llm/callback-request stores callback requests and returns de
   assert.match(String(payload.delivery?.status || ""), /^(delivered|stored_only|delivery_failed)$/);
   assert.ok(Array.isArray(payload.delivery?.channels));
   assert.match(String(payload.persistedTo || ""), /^(database|memory)$/);
+});
+
+test("POST /api/joz-llm/callback-request requires explicit privacy consent", async () => {
+  const { status, payload } = await postJson("/api/joz-llm/callback-request", {
+    name: "Casey Example",
+    phone: "+1 415 555 0100",
+    time: "Tomorrow 3pm",
+  });
+
+  assert.equal(status, 400);
+  assert.match(String(payload.error || ""), /privacy consent is required/i);
 });
 
 test("POST /api/joz-llm/callback-request validates required fields", async () => {
@@ -498,6 +510,7 @@ test("POST /api/privacy/export returns matching fallback callback request data",
     phone: uniquePhone,
     email: uniqueEmail,
     time: "Monday 10:00",
+    privacyConsent: true,
     context: {
       currentPortal: "meet-joz",
       currentMesh: "skills",
@@ -554,6 +567,7 @@ test("POST /api/privacy/delete removes matching fallback callback request data",
     phone: uniquePhone,
     email: uniqueEmail,
     time: "Friday 16:00",
+    privacyConsent: true,
     context: {
       currentPortal: "meet-joz",
       currentMesh: "discover",

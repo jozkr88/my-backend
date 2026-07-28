@@ -1,10 +1,10 @@
 export const JOZ_LLM_IDENTITY = {
   name: "Jozef Krupa",
   label: "Joz LLM",
-  website: "https://meetjoz.com",
+  website: "https://meejoz.com",
   email: "joz@meetjoz.com",
   phone: "+65 3107 2412",
-  location: "Bratislava, Slovakia / Singapore / Dubai / Zurich",
+  location: "Singapore / Dubai",
   recruiterProfile: {
     nationality: "Slovak / European Union",
     singaporeStatus: "Confirm directly with Joz; do not claim an active EP or PEP without confirmation.",
@@ -21,7 +21,7 @@ export const JOZ_LLM_IDENTITY = {
     availability:
       "Joz's current availability and start date should be confirmed directly with Joz at joz@meetjoz.com or +65 3107 2412.",
     experience:
-      "Joz has 13+ years of professional experience overall, including 8+ years in ML/AI. That is based on the dated CV timeline from 2013 to present, with ML/AI-focused work from 2018 onward.",
+      "Joz has 15+ years of professional experience overall, with direct Agentic AI engineering and multimodal AI work in the current CV.",
     education:
       "Joz holds an MSc in Strategy and Innovation from the University of Central Lancashire and held an Innovation Strategist university appointment there. Joz also completed MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC programs focused on AI and spatial computing.",
     skills:
@@ -31,9 +31,9 @@ export const JOZ_LLM_IDENTITY = {
 
 export const JOZ_LLM_CV = {
   headline:
-    "Agentic AI architect and applied AI product leader with 13+ years of experience overall, including 8+ years in ML/AI, across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.",
+    "Agentic AI engineer and AI product engineering leader focused on Agentic AI Architecture and Multimodal AI, with 15+ years across finance, insurance, media, public-sector innovation, spatial computing, and intelligent interfaces.",
   experienceSummary: {
-    overallYears: "13+",
+    overallYears: "15+",
     mlAiYears: "8+",
     overallBasis: "Professional timeline runs from 2013 to present.",
     mlAiBasis: "ML/AI-focused work is positioned from 2018 to present.",
@@ -87,9 +87,9 @@ export const JOZ_LLM_CV = {
   },
   experience: [
     {
-      title: "Agentic AI Architecture and Innovation Leader",
+      title: "Agentic AI Architecture and Multimodal AI Leader",
       period: "2018-Present",
-      regions: "Singapore, Dubai, Zurich and Europe/EU/EEA",
+      regions: "Singapore, Dubai, Europe/EU/EEA, APAC, the US, and the Middle East",
       highlights: [
         "Architected financial AI agents with live data and asset portfolios for MarketClue USA.",
         "Pioneered spatial AI for world-class art exhibitions in Dubai through ArtKorero.",
@@ -361,7 +361,7 @@ export function buildJozLlmSystemPrompt() {
     "When discussing AI autonomy or governance, bias toward trust before autonomy, human accountability, verification, source provenance, and clear escalation paths.",
     "The embedded profile and CV context are authoritative for Joz identity, education, geography, and experience.",
     "If the user asks about education, qualifications, regions, or career background, answer directly from the provided profile instead of saying the information is unavailable.",
-    "If the user asks about years of experience, answer with 13+ years overall and 8+ years in ML/AI, based on the dated CV timeline from 2013 to present and ML/AI-focused work from 2018 to present.",
+    "If the user asks about years of experience, answer with 15+ years overall and ground the answer in the dated CV timeline and current Agentic AI engineering and multimodal AI positioning.",
     "If the user asks about nationality, work authorization, Singapore status, email, phone, or contact details, answer directly from the recruiter profile.",
     "If the user asks about availability or start date, do not invent one. Say current availability should be confirmed directly with Joz and provide the contact details when useful.",
     "Do not invent employers, degrees, models shipped, or production claims beyond the provided profile.",
@@ -463,5 +463,5 @@ export function buildJozLlmFallbackReply(message = "") {
     return "A digital twin should be a decision layer, not just a visual one. It should combine process state, anomaly signals, forecasts, and model confidence to drive faster diagnosis and clearer action.";
   }
 
-  return "Ask about Joz's background, business value, systems mindset, skills, contact details, or the Gold Pill.";
+  return "Ask about Joz's background, business value, systems mindset, skills, infrastructure approach, and agent architecture. I should not invent arbitrary external entities or make unsupported claims.";
 }

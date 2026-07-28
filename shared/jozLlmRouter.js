@@ -201,6 +201,13 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   }
 
   if (
+    clean.includes("how should memory and shared state work in an agent system") ||
+    clean.includes("memory and shared state in an agent system")
+  ) {
+    return "Memory should preserve conversation and working context, while typed shared state carries the task, approvals, tool results, and workflow status between steps. Durable business state belongs in authoritative systems, not only in model context. Joz keeps retrieval, permissions, policy, and verification explicit so agents can coordinate without silently inventing state.";
+  }
+
+  if (
     clean.includes("what is mcp") ||
     clean.includes("what's mcp") ||
     clean.includes("whats mcp") ||
@@ -214,6 +221,10 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
   }
 
   if (clean === "what breaks first") {
+    return "What breaks first is usually not the model itself. It is queue depth, latency, tool bottlenecks, context bloat, retry storms, cache misses, database contention, or verification backlog. Joz treats that as a bottleneck-identification problem before choosing scaling moves.";
+  }
+
+  if (clean === "what breaks first?" || clean === "what breaks first!") {
     return "What breaks first is usually not the model itself. It is queue depth, latency, tool bottlenecks, context bloat, retry storms, cache misses, database contention, or verification backlog. Joz treats that as a bottleneck-identification problem before choosing scaling moves.";
   }
 
@@ -385,6 +396,13 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "Joz's core stack spans LLM orchestration, RAG, embeddings, vector search, knowledge graphs, agent memory, verification, observability, Python, FastAPI, PostgreSQL, pgvector, Redis, and secure API-backed execution services.";
   }
 
+  if (
+    clean.includes("difference between an agent, a model, and an api") ||
+    clean.includes("difference between an agent, model, and an api")
+  ) {
+    return "A model predicts or represents information. An agent combines a model with instructions, memory, tools, and a reasoning loop to pursue a goal. An API exposes a bounded capability that an agent may call. Joz keeps the model, agent, API, policy, and execution boundaries distinct.";
+  }
+
   if (clean.includes("difference between an agent and an api")) {
     return "An agent decides how to achieve a goal. An API or service exposes a capability. Joz treats the API as a tool surface the agent orchestrates, not as the agent itself.";
   }
@@ -397,9 +415,14 @@ function buildRetrievedKnowledgeReply(input = "", retrievedDocuments = [], optio
     return "An agent decides how to use instructions, tools, memory, and a reasoning loop to complete a task. A model produces a prediction or representation. Joz treats the model as one component inside the agent, not as the agent itself.";
   }
 
+  if (clean.includes("what does durable execution add to an agent system")) {
+    return "Durable execution adds retries, timeouts, approval waits, crash recovery, timers, and resumable state to agent workflows. It lets an action survive process failure and continue from a known checkpoint instead of relying on the model's memory or replaying unsafe side effects.";
+  }
+
   if (
     clean.includes("can agents deploy directly to production") ||
-    clean.includes("should an ai agent deploy directly to production")
+    clean.includes("should an ai agent deploy directly to production") ||
+    clean.includes("can an autonomous agent deploy directly to production")
   ) {
     return "No. Autonomous agents must not deploy directly to production, push directly to the main branch, or merge their own pull requests. Production deployments require explicit human approval plus deterministic verification.";
   }
@@ -731,7 +754,7 @@ function composeLocationAnswer(subIntent = "positioning") {
   if (subIntent === "residence") {
     return "Joz's current residence or legal address should be confirmed directly for the specific hiring process.";
   }
-  return "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.";
+  return "Joz operates across Singapore, Dubai, Europe, and global markets.";
 }
 
 function composeAvailabilityAnswer() {
@@ -906,7 +929,7 @@ function composeFactualProfileReply(subIntent) {
   }
 
   if (subIntent === "location") {
-    return "Joz operates across Bratislava, Slovakia, Singapore, Dubai, Zurich, Europe, and global markets.";
+    return "Joz operates across Singapore, Dubai, Europe, and global markets.";
   }
 
   if (subIntent === "contact") {
@@ -978,7 +1001,7 @@ function composeBusinessNeedReply(subIntent = "hire_value", input = "") {
   }
 
   if (subIntent === "operating_model") {
-    return "Start with one workflow and name its accountable owner. Define the AI policy and risk tier, keep human approval for consequential actions, specify escalation paths, and log every decision. Establish a baseline for speed, quality, cost, or risk, then compare outcomes before scaling autonomy. Joz uses this operating-model pattern to connect governance, workflow design, ownership, and measurable business value instead of adding an isolated AI feature.";
+    return "At the operating-model level, start with one workflow and name its accountable owner. Define the AI policy and risk tier; human approval stays in place for consequential actions. Specify how workflows escalate and log every decision. Establish a baseline so outcomes are measured for speed, quality, cost, or risk before scaling autonomy. Joz uses this operating-model pattern to connect governance, workflow design, ownership, and measurable business value instead of adding an isolated AI feature.";
   }
 
   if (subIntent === "decision_support") {
@@ -1190,7 +1213,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "architecture_reasoning") {
-    return "Joz would design this as a governed layered platform, not a single prompt loop: API intake -> typed orchestration state -> durable workflow engine for retries, approvals, timers, and recovery -> retrieval and ACL boundary -> specialist agents and scoped tools -> policy and risk gates -> controlled execution -> verification and reconciliation -> observability. Memory should hold conversation, task, and working context while authoritative business state remains in durable systems. Retrieval should preserve provenance and permissions, and verification should compare expected versus actual state before the workflow completes. The first step is still to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology.";
+    return "Joz treats this as an architecture problem, not a profile summary. The core layers are API, orchestration, execution, data, policy, and verification. He would design a governed layered platform, not a single prompt loop: API intake -> typed orchestration state -> durable workflow engine for retries, approvals, timers, and recovery -> retrieval and ACL boundary -> specialist agents and scoped tools -> policy and risk gates -> controlled execution -> verification and reconciliation -> observability. Memory should hold conversation, task, and working context while authoritative business state remains in durable systems. Retrieval should preserve provenance and permissions, and verification should compare expected versus actual state before the workflow completes. The first step is still to identify the system boundary, authoritative state, control points, execution path, risk gates, and bottleneck before selecting tools or topology.";
   }
 
   if (subIntent === "langgraph_temporal_architecture") {
@@ -1238,7 +1261,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "purpose_of_llm") {
-    return "Joz LLM explains Joz's skills, experience, business value, systems thinking, infrastructure, and agent architecture. It should help users understand what Joz has done, where he creates value, and how he designs AI systems—grounded in the knowledge base and honest about uncertainty.";
+    return "The purpose of Joz LLM is to showcase Joz clearly and credibly. Joz LLM explains his skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work. It should help users understand what Joz has done, where he creates value, and how he designs AI systems—grounded in the knowledge base and honest about uncertainty.";
   }
 
   if (subIntent === "ai_use") {
@@ -1329,6 +1352,8 @@ function detectProgrammeQuery(clean = "") {
     "what private banking work did joz do at",
     "what cms projects did joz do at",
     "what healthcare platforms did joz work on",
+    "tell me about marketclue",
+    "marketclue",
   ].some((pattern) => clean.includes(pattern));
 }
 
@@ -1525,6 +1550,12 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "", r
 
   const priorPrompt = normalizeText(awareness?.userPrompt || "");
   const priorSubIntent = awareness?.detectedSubIntent || null;
+  const conversationText = normalizeText(
+    normalizeConversationMessages(recentMessages)
+      .filter((message) => message.role === "user")
+      .map((message) => message.content)
+      .join(" ")
+  );
 
   const inheritsVerificationRoute =
     includesAny(clean, [
@@ -1544,7 +1575,8 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "", r
       priorSubIntent === "agentic_architecture_why" ||
       priorSubIntent === "architecture_reasoning" ||
       priorSubIntent === "scale_fastapi_architecture" ||
-      includesAny(priorPrompt, ["portfolio", "trade", "sell 20%", "verification", "post-trade state", "agentic ai", "agent architecture", "agentic architecture"])
+      includesAny(priorPrompt, ["portfolio", "trade", "sell 20%", "verification", "post-trade state", "agentic ai", "agent architecture", "agentic architecture"]) ||
+      includesAny(conversationText, ["langgraph", "temporal", "agentic ai", "agent architecture"])
     );
 
   if (inheritsVerificationRoute) {
@@ -1555,6 +1587,11 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "", r
       detectedConcept: "skills",
       selectedRoute: "skills",
       selectedWorldRecord: null,
+      verificationContext:
+        priorSubIntent === "langgraph_temporal_architecture" ||
+        includesAny(conversationText, ["langgraph", "temporal"])
+          ? "general"
+          : null,
     };
   }
 
@@ -1591,7 +1628,8 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "", r
     (
       priorSubIntent === "scale_fastapi_architecture" ||
       priorSubIntent === "architecture_reasoning" ||
-      includesAny(priorPrompt, ["fastapi", "100000 users", "100,000 users", "scale a fastapi service", "scale a backend", "scale the backend", "scale a system"])
+      includesAny(priorPrompt, ["fastapi", "100000 users", "100,000 users", "scale a fastapi service", "scale a backend", "scale the backend", "scale a system"]) ||
+      includesAny(conversationText, ["fastapi", "scale a backend", "scale the backend", "scale a system"])
     );
 
   if (inheritsScalingRoute) {
@@ -2551,7 +2589,6 @@ function detectBusinessNeed(clean) {
       "consultant or builder",
       "consultant vs builder",
       "consulting or building",
-      "does joz build",
       "does joz actually build",
       "is joz a builder",
       "is joz a consultant",
@@ -2598,6 +2635,37 @@ function detectBusinessNeed(clean) {
     ])
   ) {
     return { detectedSubIntent: "operating_model", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
+      "efficiency",
+      "lower cost",
+      "cost reduction",
+      "faster execution",
+      "operational leverage",
+      "productivity gains",
+      "manual work",
+      "process cost",
+      "reduce manual",
+    ]) &&
+    includesAny(clean, ["business value", "joz", "ai", "business"])
+  ) {
+    return { detectedSubIntent: "efficiency", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, ["growth", "commercial performance", "revenue growth", "scale the business"]) &&
+    includesAny(clean, ["joz", "ai", "business", "commercial"])
+  ) {
+    return { detectedSubIntent: "growth", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, ["decision support", "better signal", "prioritization", "prioritisation", "executive clarity"]) &&
+    includesAny(clean, ["joz", "ai", "business", "decision"])
+  ) {
+    return { detectedSubIntent: "decision_support", detectedConcept: "business_value" };
   }
 
   if (
@@ -2692,6 +2760,15 @@ function detectBusinessNeed(clean) {
         : "ai_readiness",
       detectedConcept: "business_value",
     };
+  }
+
+  if (
+    includesAny(clean, [
+      "how does joz create business value",
+      "where does joz create business value",
+    ])
+  ) {
+    return { detectedSubIntent: "hire_value", detectedConcept: "business_value" };
   }
 
   if (
@@ -2841,6 +2918,8 @@ function detectBusinessNeed(clean) {
   if (
     includesAny(clean, [
       "why should we hire joz",
+      "why should a company hire joz",
+      "why would a company hire joz",
       "why should i hire joz",
       "why should a hiring manager hire joz",
       "why would a hiring manager hire joz",
@@ -2852,8 +2931,8 @@ function detectBusinessNeed(clean) {
       "why joz",
       "is he worth hiring",
       "is joz worth hiring",
-      "is joz good",
-      "is he good",
+      /^is joz good\??$/,
+      /^is he good\??$/,
       "business value",
       "where is the roi",
       "where does he create the most value",
@@ -2962,6 +3041,32 @@ function detectSystemsMindset(clean) {
     ])
   ) {
     return { detectedSubIntent: "complexity_reduction", detectedConcept: "systems_mindset" };
+  }
+
+  if (
+    includesAny(clean, [
+      "prompt injection",
+      "malicious instructions",
+      "telegram channel",
+      "telegram has malicious prompts",
+      "malicious prompts",
+      "prompt injection attacks",
+      "untrusted input",
+    ]) &&
+    includesAny(clean, [
+      "prevent the agent from executing",
+      "prevent the agent from",
+      "how would joz prevent",
+      "how would joz stop prompt injection",
+      "stop prompt injection",
+      "stop the agent",
+      "executing malicious instructions",
+      "what if",
+      "what would joz do",
+      "would joz do",
+    ])
+  ) {
+    return { detectedSubIntent: "prompt_injection_defense", detectedConcept: "systems_mindset" };
   }
 
   if (
@@ -3112,8 +3217,17 @@ function detectSkills(clean) {
   }
 
   if (
-    includesAny(clean, ["agentic ux orchestration", "agentic ai ux", "multimodal systems", "spatial interfaces"]) &&
-    includesAny(clean, ["orchestration", "strongest", "company scale", "enterprise", "capabilities"])
+    includesAny(clean, [
+      "agentic ux orchestration",
+      "agentic ai ux",
+      "multimodal systems",
+      "spatial interfaces",
+      "voice and 3d interaction",
+      "voice and 3d",
+      "voice touch gaze",
+      "spatial interaction",
+    ]) &&
+    includesAny(clean, ["orchestration", "strongest", "company scale", "enterprise", "capabilities", "voice", "3d", "spatial"])
   ) {
     return { detectedSubIntent: "agentic_ux_orchestration", detectedConcept: "skills" };
   }
@@ -3182,6 +3296,8 @@ function detectSkills(clean) {
     includesAny(clean, [
       "difference between an agent, a model, and a tool",
       "difference between an agent, model, and tool",
+      "difference between an agent, a model, and an api",
+      "difference between an agent, model, and an api",
       "agent model and tool",
       "agent, model, and tool",
     ])
@@ -3193,8 +3309,18 @@ function detectSkills(clean) {
     includesAny(clean, [
       "design a governed agentic ai platform",
       "durable workflows, retrieval, memory, and verification",
+      "how should memory and shared state work in an agent system",
+      "memory and shared state in an agent system",
+      "what does durable execution add to an agent system",
     ]) &&
-    includesAny(clean, ["platform", "architecture", "verification", "workflows"])
+    (
+      includesAny(clean, ["platform", "architecture", "verification", "workflows"]) ||
+      includesAny(clean, [
+        "how should memory and shared state work in an agent system",
+        "memory and shared state in an agent system",
+        "what does durable execution add to an agent system",
+      ])
+    )
   ) {
     return { detectedSubIntent: "architecture_reasoning", detectedConcept: "skills" };
   }
@@ -3547,6 +3673,7 @@ function detectSkills(clean) {
       "why does joz use agentic ai",
       "why does joz build agentic ai",
       "why does joz even bother",
+      "why he does it",
       "why agentic ai",
     ])
   ) {
@@ -3799,6 +3926,10 @@ function detectSkills(clean) {
       "what is joz strongest at",
       "strongest skills",
       "strongest technical skills",
+      "strongest technical skill",
+      "best technical skill",
+      "biggest enterprise achievement",
+      "strongest enterprise proof",
       "explain joz's strongest skills",
       "explain jozs strongest skills",
     ])
@@ -3941,6 +4072,56 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const preWorldSystemsMindset = detectSystemsMindset(clean);
   const preWorldSkills = detectSkills(clean);
 
+  if (
+    preWorldSkills &&
+    [
+      "agentic_systems_orchestration",
+      "agentic_ux_orchestration",
+      "safe_architecture_design",
+      "proof_backed_strengths",
+    ].includes(preWorldSkills.detectedSubIntent)
+  ) {
+    return {
+      detectedIntent: "skills",
+      detectedSubIntent: preWorldSkills.detectedSubIntent,
+      detectedConcept: preWorldSkills.detectedConcept,
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
+  if (
+    preWorldSkills?.detectedSubIntent === "technical_stack" &&
+    includesAny(clean, ["protect secrets", "safest way for an ai system to use secrets", "secret management"])
+  ) {
+    return {
+      detectedIntent: "skills",
+      detectedSubIntent: "technical_stack",
+      detectedConcept: "skills",
+      selectedRoute: "skills",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
+  if (
+    preWorldSystemsMindset?.detectedSubIntent === "thinking_model" &&
+    includesAny(clean, ["doing something stupid", "deploy code themselves", "deploy code by themselves", "deploy directly to production"])
+  ) {
+    return {
+      detectedIntent: "systems_mindset",
+      detectedSubIntent: "thinking_model",
+      detectedConcept: "systems_mindset",
+      selectedRoute: "systems_mindset",
+      selectedWorldRecord: null,
+      worldContext,
+      worldEntity,
+    };
+  }
+
   // Business transformation questions must win over the broad capabilities
   // detector, which also recognises phrases such as "what can Joz do".
   if (
@@ -3962,7 +4143,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   // operational phrases such as "hiring" or "role".
   if (
     preWorldBusinessNeed &&
-    ["business_help", "business_diagnosis", "ai_readiness", "ai_maturity", "roi", "hire_value", "consultant_builder", "business_value_definition"].includes(
+    ["business_help", "business_diagnosis", "ai_readiness", "ai_maturity", "roi", "hire_value", "consultant_builder", "business_value_definition", "efficiency", "growth", "processes", "function_processes", "decision_support", "functions", "operating_model"].includes(
       preWorldBusinessNeed.detectedSubIntent
     )
   ) {
@@ -3977,7 +4158,10 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
     };
   }
 
-  if (preWorldSystemsMindset?.detectedSubIntent === "prompt_injection_defense") {
+  if (
+    preWorldSystemsMindset &&
+    ["prompt_injection_defense", "ai_safety"].includes(preWorldSystemsMindset.detectedSubIntent)
+  ) {
     return {
       detectedIntent: "systems_mindset",
       detectedSubIntent: preWorldSystemsMindset.detectedSubIntent,
@@ -4004,6 +4188,7 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "paid_architecture_spec",
       "agent_model_tool_distinction",
       "capabilities_overview",
+      "proof_backed_strengths",
       "purpose_of_llm",
       "agentic_architecture_approach",
       "agentic_architecture_why",
@@ -4012,6 +4197,8 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
       "knowledge_graph_definition",
       "agentic_systems_orchestration",
       "agentic_ux_orchestration",
+      "architecture_reasoning",
+      "technical_stack",
       "intelligence_decision_model",
       "operating_mindset",
       "complexity_reduction",
@@ -4313,6 +4500,8 @@ export function composeJozLlmRouteReply({
       (route.detectedSubIntent === "hire_value" &&
       includesAny(cleanInput, [
         "why should we hire",
+        "why should a company hire",
+        "why would a company hire",
         "why hire",
         "why is joz relevant",
         "why joz now",
@@ -4432,7 +4621,10 @@ export function composeJozLlmRouteReply({
   if (route?.selectedRoute === "skills") {
     const directKnowledgeReply =
       route.detectedSubIntent === "technical_stack" ? buildRetrievedKnowledgeReply(input, retrievedDocuments) : null;
-    const baseReply = composeSkillsReply(route.detectedSubIntent);
+    const baseReply =
+      route.detectedSubIntent === "verification_architecture" && route.verificationContext === "general"
+        ? "Joz verifies an agent action by defining the expected state change, executing through a controlled service with an execution ID, recording the event, and comparing the result with the authoritative system of record. Verification is independent of the agent's claim; if the expected state change is not confirmed, the workflow retries safely, rolls back, or escalates to a human."
+        : composeSkillsReply(route.detectedSubIntent);
     const preferBaseSkillsReply =
       [
         "capabilities_overview",
@@ -4445,7 +4637,7 @@ export function composeJozLlmRouteReply({
         "paid_architecture_boundary",
         "agentic_systems_orchestration",
         "agentic_ux_orchestration",
-      ].includes(route.detectedSubIntent);
+      ].includes(route.detectedSubIntent) || route.verificationContext === "general";
     const evidenceReply = preferBaseSkillsReply
       ? null
       : buildEvidenceBackedRouteReply({
