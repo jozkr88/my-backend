@@ -559,6 +559,19 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
 });
 
+test("routes natural skills-of-Joz phrasing to capabilities overview", () => {
+  const route = routeJozLlmQuery({ input: "What are the skills of Joz?" });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "What are the skills of Joz?",
+  });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capabilities_overview");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /Agentic AI|agentic AI/i);
+});
+
 test("short pronoun phrasing about what he does resolves to Joz capabilities, not random technical drift", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "What does he do?";

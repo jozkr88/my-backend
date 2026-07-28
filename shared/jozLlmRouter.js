@@ -3721,6 +3721,8 @@ function detectSkills(clean) {
       "deepest skills",
       "joz's skills",
       "what are joz's skills",
+      "what are the skills of joz",
+      "what skills does joz have",
       "what is joz good at",
       "what is he good at",
       "what is he strongest at",
