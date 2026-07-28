@@ -27,7 +27,7 @@ services:
       - key: JOZ_REQUIRE_DATABASE
         value: "true"
       - key: JOZ_KNOWLEDGE_GRAPH_MODE
-        value: "shadow"
+        value: "augment"
       - key: NEO4J_URI
         sync: false
       - key: NEO4J_USERNAME
