@@ -109,6 +109,11 @@ import {
   mergeJozRetrievalResults,
 } from "./shared/jozHybridRetrieval.js";
 import {
+  getJozKnowledgeGraphMode,
+  loadPublishedJozKnowledgeGraph,
+  queryJozKnowledgeGraph,
+} from "./shared/jozKnowledgeGraph.js";
+import {
   createJozModelGateway,
   getJozModelRuntimeDescriptor,
   isJozModelGatewayAvailable,
@@ -1472,6 +1477,39 @@ app.post("/api/joz-llm", async (req, res) => {
       body: doc.body,
       metadata: doc.metadata,
     }));
+
+    // Graph retrieval starts in shadow mode. It observes the same request and
+    // records evidence paths, but it does not enter the model context unless
+    // the deployment explicitly promotes it to augment mode.
+    const knowledgeGraphMode = getJozKnowledgeGraphMode();
+    if (knowledgeGraphMode !== "disabled" && intentClassification.kind !== "execute" && intentClassification.kind !== "refuse") {
+      const knowledgeGraph = queryJozKnowledgeGraph({
+        graph: loadPublishedJozKnowledgeGraph(),
+        query: latestUserMessage,
+        limit: 8,
+      });
+      retrievalMeta.knowledgeGraph = {
+        mode: knowledgeGraphMode,
+        shadow: knowledgeGraphMode === "shadow",
+        nodeCount: knowledgeGraph.nodeCount,
+        edgeCount: knowledgeGraph.edgeCount,
+        matchedNodeCount: knowledgeGraph.matchedNodeIds.length,
+        candidateDocumentCount: knowledgeGraph.documentSlugs.length,
+        candidateDocumentSlugs: knowledgeGraph.documentSlugs,
+        pathCount: knowledgeGraph.paths.length,
+      };
+    } else {
+      retrievalMeta.knowledgeGraph = {
+        mode: knowledgeGraphMode,
+        shadow: false,
+        nodeCount: 0,
+        edgeCount: 0,
+        matchedNodeCount: 0,
+        candidateDocumentCount: 0,
+        candidateDocumentSlugs: [],
+        pathCount: 0,
+      };
+    }
 
     const roleAwareContext = buildRoleAwareJozContext({
       buildJozLlmContext,
