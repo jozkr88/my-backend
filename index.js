@@ -1470,7 +1470,7 @@ app.post("/api/joz-llm", async (req, res) => {
     } else if (isJozPgvectorEnabled() && !hostedModelClient?.embeddings?.create) {
       retrievalMeta.semanticStatus = "embedding_client_unavailable";
     }
-    const retrievalContext = retrievedDocuments.map((doc) => ({
+    let retrievalContext = retrievedDocuments.map((doc) => ({
       title: doc.title,
       category: doc.category,
       summary: doc.summary,
@@ -1482,15 +1482,38 @@ app.post("/api/joz-llm", async (req, res) => {
     // records evidence paths, but it does not enter the model context unless
     // the deployment explicitly promotes it to augment mode.
     const knowledgeGraphMode = getJozKnowledgeGraphMode();
+    let knowledgeGraph = null;
     if (knowledgeGraphMode !== "disabled" && intentClassification.kind !== "execute" && intentClassification.kind !== "refuse") {
-      const knowledgeGraph = queryJozKnowledgeGraph({
+      knowledgeGraph = queryJozKnowledgeGraph({
         graph: loadPublishedJozKnowledgeGraph(),
         query: latestUserMessage,
         limit: 8,
       });
+      if (knowledgeGraphMode === "augment" && knowledgeGraph.documents.length) {
+        const graphEvidenceBySlug = new Map(
+          knowledgeGraph.documents.map((document) => [document.slug, document])
+        );
+        retrievalContext = retrievalContext.map((document) => {
+          const slug = String(document?.metadata?.slug || "").trim();
+          const graphEvidence = graphEvidenceBySlug.get(slug);
+          if (!graphEvidence) return document;
+          return {
+            ...document,
+            metadata: {
+              ...(document.metadata || {}),
+              graphEvidence: {
+                score: graphEvidence.score,
+                path: graphEvidence.path,
+                edgeTypes: graphEvidence.edgeTypes,
+              },
+            },
+          };
+        });
+      }
       retrievalMeta.knowledgeGraph = {
         mode: knowledgeGraphMode,
-        shadow: knowledgeGraphMode === "shadow",
+        shadow: knowledgeGraphMode !== "augment",
+        activeInContext: knowledgeGraphMode === "augment" && retrievalContext.some((document) => document?.metadata?.graphEvidence),
         nodeCount: knowledgeGraph.nodeCount,
         edgeCount: knowledgeGraph.edgeCount,
         matchedNodeCount: knowledgeGraph.matchedNodeIds.length,
@@ -1502,6 +1525,7 @@ app.post("/api/joz-llm", async (req, res) => {
       retrievalMeta.knowledgeGraph = {
         mode: knowledgeGraphMode,
         shadow: false,
+        activeInContext: false,
         nodeCount: 0,
         edgeCount: 0,
         matchedNodeCount: 0,
