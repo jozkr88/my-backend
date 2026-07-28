@@ -1896,7 +1896,7 @@ test("routes production-stupidity and approval-rollback phrasing to safer routes
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
   for (const [prompt, expectedRoute] of [
-    ["How would Joz stop an AI from doing something stupid in production?", "systems_mindset"],
+    ["How would Joz stop an AI from doing something stupid in production?", "skills"],
     ["How would Joz stop an AI from doing something stupid?", "systems_mindset"],
     ["How would Joz structure approvals, escalation, and rollback?", "skills"],
     ["Why not let agents just deploy code themselves?", "systems_mindset"],
@@ -2050,10 +2050,10 @@ test("systems safety prompts use direct technical answers instead of the generic
 test("operating mindset and complexity-reduction prompts resolve to systems mindset instead of fallback guards", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
-  for (const prompt of [
-    "What is Joz's operating mindset when building AI systems?",
-    "How does Joz reduce complexity without losing depth or rigor?",
-    "Explain how Joz thinks about intelligence, systems, and decision-making.",
+  for (const [prompt, expectedSubIntent] of [
+    ["What is Joz's operating mindset when building AI systems?", "operating_mindset"],
+    ["How does Joz reduce complexity without losing depth or rigor?", "complexity_reduction"],
+    ["Explain how Joz thinks about intelligence, systems, and decision-making.", "intelligence_decision_model"],
   ]) {
     const route = routeJozLlmQuery({
       input: prompt,
@@ -2068,7 +2068,7 @@ test("operating mindset and complexity-reduction prompts resolve to systems mind
     });
 
     assert.equal(route.selectedRoute, "systems_mindset");
-    assert.equal(route.detectedSubIntent, "thinking_model");
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
     assert.equal(resolution.fallbackUsed, false);
     assert.match(resolution.reply, /systems before features|signal from noise|feedback loops|human accountability/i);
     assert.doesNotMatch(resolution.reply, /not in the current Joz knowledge base|outside the current deterministic Joz answer set/i);
@@ -2583,7 +2583,7 @@ test("routes recruiter location queries to deterministic operational answer with
 
   assert.equal(route.detectedIntent, "recruiter_location");
   assert.equal(route.selectedRoute, "joz_knowledge");
-  assert.equal(resolution.reply, "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.");
+  assert.equal(resolution.reply, "Joz operates across Singapore, Dubai, Europe, and global markets.");
   assert.equal(resolution.selectedOperationalComposer, "composeLocationAnswer");
   assert.deepEqual(
     resolution.actions.map((action) => action.id),

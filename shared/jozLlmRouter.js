@@ -734,7 +734,7 @@ function validateOperationalReply(intent, reply = "", actions = []) {
   if (!hasRequiredActions) return false;
 
   if (intent === "recruiter_location") {
-    return ["dubai", "singapore", "zurich", "europe", "global markets"].every((term) =>
+    return ["singapore", "dubai", "europe", "global markets"].every((term) =>
       cleanReply.includes(term)
     );
   }
