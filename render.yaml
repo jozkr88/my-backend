@@ -23,6 +23,16 @@ services:
         value: "gpt-4o-mini"
       - key: JOZ_REQUIRE_DATABASE
         value: "true"
+      - key: JOZ_KNOWLEDGE_GRAPH_MODE
+        value: "shadow"
+      - key: NEO4J_URI
+        sync: false
+      - key: NEO4J_USERNAME
+        sync: false
+      - key: NEO4J_PASSWORD
+        sync: false
+      - key: NEO4J_DATABASE
+        value: "neo4j"
       - key: DISABLE_FILE_MEMORY
         value: "1"
       - key: STRIPE_SECRET_KEY
