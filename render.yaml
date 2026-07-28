@@ -35,7 +35,7 @@ services:
       - key: NEO4J_PASSWORD
         sync: false
       - key: NEO4J_DATABASE
-        value: "neo4j"
+        value: "6ec69dd8"
       - key: DISABLE_FILE_MEMORY
         value: "1"
       - key: STRIPE_SECRET_KEY
