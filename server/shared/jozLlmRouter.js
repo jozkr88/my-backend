@@ -16,6 +16,7 @@ function normalizeText(value = "") {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ")
+    .replace(/\b(?:tre|teh|th)\s+(?=skills\b)/g, "the ")
     .replace(/^waht does\b/g, "what does");
 }
 
@@ -2028,6 +2029,10 @@ function detectSkills(clean) {
     includesAny(clean, [
       "deep skills",
       "deepest skills",
+      "what are the skills of joz",
+      "what skills does joz have",
+      "what skills does he have",
+      "what are his skills",
       "joz's skills",
       "what are joz's skills",
       "what is joz good at",

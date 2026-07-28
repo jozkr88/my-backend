@@ -46,8 +46,18 @@ export const BLOCKED_GLB_FALLBACK_ACTIONS = new Set([
 export function normalizeVoiceAction(action) {
   const lower = String(action || "").toLowerCase().trim();
   if (!lower) return null;
-  if (lower === "flex") return "vibe";
-  if (lower === "ascend") return "discover";
-  if (lower === "mogg") return "skills";
+  if (["flex", "flax", "flecks", "flux", "plex"].includes(lower)) {
+    return "vibe";
+  }
+  if (
+    ["ascend", "ascent", "accent", "a send", "send", "offend", "assend"].includes(
+      lower
+    )
+  ) {
+    return "discover";
+  }
+  if (["mogg", "mgg", "mogs", "mog", "mark", "mug", "mocha", "moch"].includes(lower)) {
+    return "skills";
+  }
   return KNOWN_VOICE_ACTIONS.has(lower) ? lower : null;
 }
