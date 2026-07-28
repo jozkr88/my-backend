@@ -1,6 +1,6 @@
 # Render Backend Setup
 
-This backend is ready to run on Render as a Node web service from the [`server/`](</Users/jozzox/Downloads/xq/server>) directory.
+This backend is ready to run on Render as a Node web service from the repository root.
 
 ## Blueprint option
 
@@ -8,8 +8,8 @@ Use the root [`render.yaml`](</Users/jozzox/Downloads/xq/render.yaml>) file to c
 
 ## Manual Render settings
 
-- Root directory: `server`
-- Build command: `npm install`
+- Root directory: leave blank (repository root)
+- Build command: `npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality`
 - Start command: `npm start`
 - Health check path: `/api/hello`
 
