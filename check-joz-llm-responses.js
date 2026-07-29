@@ -122,6 +122,16 @@ const CASES = [
     includes: ["baseline", "target metrics", "governance"],
     excludes: ["For D2C", "outside the current deterministic Joz answer set"],
   },
+  {
+    name: "Financial AI Delivery Proof",
+    prompt: "What can prove Joz can deliver on financial AI?",
+    expectedRoute: "skills",
+    expectedSubIntent: "financial_ai_proof",
+    minWords: 35,
+    maxWords: 110,
+    includes: ["MarketClue", "financial AI agents"],
+    excludes: ["outside the current deterministic Joz answer set"],
+  },
 ];
 
 function runCase(testCase) {

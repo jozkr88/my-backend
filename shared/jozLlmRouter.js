@@ -3640,6 +3640,9 @@ function detectSkills(clean) {
       "what proves joz can build financial ai",
       "what proves joz can build financial intelligence",
       "proof joz can build financial ai",
+      "what can prove joz can deliver on financial ai",
+      "what proves joz can deliver on financial ai",
+      "proof joz can deliver on financial ai",
       "financial ai proof",
     ]) || (
       includesAny(clean, ["what proves", "proof of", "proof that"]) &&
