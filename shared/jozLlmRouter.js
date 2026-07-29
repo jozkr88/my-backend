@@ -1711,6 +1711,49 @@ function extractRetrievedEvidencePoint(doc = {}) {
   return proofPoints[0] || claims[0] || summary || "";
 }
 
+const EVIDENCE_OVERLAP_STOP_WORDS = new Set([
+  "about",
+  "across",
+  "and",
+  "at",
+  "for",
+  "from",
+  "has",
+  "in",
+  "into",
+  "of",
+  "on",
+  "that",
+  "the",
+  "this",
+  "through",
+  "to",
+  "with",
+  "within",
+]);
+
+function evidenceTokens(value = "") {
+  return new Set(
+    normalizeText(value)
+      .replace(/×/g, "x")
+      .match(/[a-z0-9]+/g)
+      ?.filter(
+        (token) =>
+          token.length > 2 && !EVIDENCE_OVERLAP_STOP_WORDS.has(token)
+      ) || []
+  );
+}
+
+function isEvidenceAlreadyCovered(evidencePoint = "", lead = "") {
+  const pointTokens = evidenceTokens(evidencePoint);
+  if (pointTokens.size < 3) return false;
+
+  const leadTokens = evidenceTokens(lead);
+  const overlapCount = [...pointTokens].filter((token) => leadTokens.has(token)).length;
+
+  return overlapCount >= 3 && overlapCount / pointTokens.size >= 0.45;
+}
+
 function buildRetrievedDocumentBrief(doc = {}) {
   const metadata = doc?.metadata || {};
   return {
@@ -1882,7 +1925,9 @@ function buildEvidenceBackedRouteReply({
         .map((value) => String(value || "").trim())
         .filter(Boolean)
     ),
-  ].slice(0, 2);
+  ]
+    .filter((point) => !isEvidenceAlreadyCovered(point, lead))
+    .slice(0, 2);
 
   if (!lead || !evidencePoints.length) return null;
 
