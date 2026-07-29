@@ -1,7 +1,7 @@
 {
   "schema": "joz.knowledge-graph.v1",
   "version": 1,
-  "generatedAt": "2026-07-28T18:36:31.653Z",
+  "generatedAt": "2026-07-29T06:38:16.331Z",
   "source": {
     "ontology": "data/joz/published/joz-ontology.generated.json",
     "documents": "data/joz/published/joz-documents.generated.json"
@@ -333,7 +333,13 @@
       "category": "skills",
       "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
       "verification": "verified",
-      "impactScore": 84
+      "impactScore": 84,
+      "sourceFilename": "2026-07-11-agentic-ai-architecture-proof.md",
+      "sourceMetaFilename": "2026-07-11-agentic-ai-architecture-proof.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-agentic-ai-architecture-proof.md",
+      "sourceChecksum": "8a5bc6ec893ee51559931a76a7af7f82b2cce4a69434b8d457d29ba1ee775e44",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_agentic_ux_orchestration_proof",
@@ -343,7 +349,13 @@
       "category": "skills",
       "summary": "Focused proof of Joz's multimodal, spatial, and agentic UX orchestration capability in enterprise and high-visibility delivery contexts.",
       "verification": "verified",
-      "impactScore": 80
+      "impactScore": 80,
+      "sourceFilename": "2026-07-11-agentic-ux-orchestration-proof.md",
+      "sourceMetaFilename": "2026-07-11-agentic-ux-orchestration-proof.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-agentic-ux-orchestration-proof.md",
+      "sourceChecksum": "27424cfa3750e21b3a7d1b4820052def78639e87be6b834d8ae6023fa7e3013b",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_compensation_and_process_faq",
@@ -353,7 +365,13 @@
       "category": "faq",
       "summary": "Safe recruiter guidance for compensation, package, and hiring-process questions without inventing salary ranges or commercial terms.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "2026-07-11-compensation-and-process-faq.md",
+      "sourceMetaFilename": "2026-07-11-compensation-and-process-faq.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-compensation-and-process-faq.md",
+      "sourceChecksum": "ee19972d04d287e6b84aa56ef5bb8d7287824e239fc1360e8e286c26c4c572b1",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_current_agentic_ai_cv",
@@ -363,7 +381,13 @@
       "category": "skills",
       "summary": "Current user-provided CV positioning Joz as an Agentic AI Engineer, AI Product Engineer, and Multimodal AI leader, with a production-oriented technical stack, Fortune 500 experience, measurable outcomes, and global operating coverage.",
       "verification": "verified",
-      "impactScore": 94
+      "impactScore": 94,
+      "sourceFilename": "2026-07-11-current-agentic-ai-cv.md",
+      "sourceMetaFilename": "2026-07-11-current-agentic-ai-cv.meta.json",
+      "sourceUri": "source://joz/2026-07-11-current-agentic-ai-cv.md",
+      "sourcePath": "source://joz/2026-07-11-current-agentic-ai-cv.md",
+      "sourceChecksum": "6b2d58812cb50350da0e03e8baac68a3ec17dd56d2d18cb617af46d018b5200b",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_enterprise_scale_proof",
@@ -373,7 +397,13 @@
       "category": "skills",
       "summary": "Highest-priority proof record for brand strength, user scale, enterprise complexity, and measurable impact across Joz's strongest work.",
       "verification": "verified",
-      "impactScore": 100
+      "impactScore": 100,
+      "sourceFilename": "2026-07-11-enterprise-scale-proof.md",
+      "sourceMetaFilename": "2026-07-11-enterprise-scale-proof.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-enterprise-scale-proof.md",
+      "sourceChecksum": "59475e63f06b388e2e3179091cd65298daeb8f4cb83a10894c84ac0cd4c5eac3",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_location_and_working_model_faq",
@@ -383,7 +413,13 @@
       "category": "faq",
       "summary": "Verified recruiter guidance for location, regional fit, relocation handling, and remote or hybrid working-model questions.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "2026-07-11-location-and-working-model-faq.md",
+      "sourceMetaFilename": "2026-07-11-location-and-working-model-faq.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-location-and-working-model-faq.md",
+      "sourceChecksum": "b386f2b35ac1aef1edf0f1e22fb8d930d168f08cfd1005e3cddd9f5e6f096820",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_recruiter_screening_faq",
@@ -393,7 +429,13 @@
       "category": "faq",
       "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "2026-07-11-recruiter-screening-faq.md",
+      "sourceMetaFilename": "2026-07-11-recruiter-screening-faq.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-recruiter-screening-faq.md",
+      "sourceChecksum": "a0e66b899978cf68d684cc0df4cf7bfe8b4c2a835eb75028e02ec79559d29f87",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_11_why_joz_screening_answer",
@@ -403,7 +445,13 @@
       "category": "faq",
       "summary": "Concise recruiter-facing answer explaining why Joz stands out for serious AI, product, and systems roles.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "2026-07-11-why-joz-screening-answer.md",
+      "sourceMetaFilename": "2026-07-11-why-joz-screening-answer.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-11-why-joz-screening-answer.md",
+      "sourceChecksum": "e991990e230ae261b7be3a66903ea17c0f9ccfad4543690144c9606fba3262ec",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:2026_07_14_recruiter_benchmark_faq",
@@ -413,7 +461,13 @@
       "category": "faq",
       "summary": "Recruiter benchmark guidance for keeping answers generic by default while using Singapore-first proof and phrasing when Singapore is explicitly asked.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "2026-07-14-recruiter-benchmark-faq.md",
+      "sourceMetaFilename": "2026-07-14-recruiter-benchmark-faq.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/2026-07-14-recruiter-benchmark-faq.md",
+      "sourceChecksum": "8503bb741d801e8b1b44d270c3582c74023183370d3fbcdb96aada422d9946b4",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:business_need_ai_adoption_governance",
@@ -423,7 +477,13 @@
       "category": "governance",
       "summary": "How Joz connects governance, usability, trust, and workflow fit to improve enterprise AI adoption.",
       "verification": "capability_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "business-need-ai-adoption-governance.md",
+      "sourceMetaFilename": "business-need-ai-adoption-governance.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-ai-adoption-governance.md",
+      "sourceChecksum": "7392ca2fa9f4126f40fc99bbaf839d8b0e3d9eeb6cf549aa95c6b07b4d6ea3f3",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_ai_by_function",
@@ -433,7 +493,13 @@
       "category": "business_answer",
       "summary": "Maps Joz business-value opportunities by function across finance, ERP, HR, marketing, sales, and leadership rather than abstract AI categories.",
       "verification": "framework_supported",
-      "impactScore": 96
+      "impactScore": 96,
+      "sourceFilename": "business-need-ai-by-function.md",
+      "sourceMetaFilename": "business-need-ai-by-function.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-ai-by-function.md",
+      "sourceChecksum": "56639b6a16b5f3560e7aa55ce1901acf3f029650b6e9510dacaad4dd16795427",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_architecture_scalability",
@@ -443,7 +509,13 @@
       "category": "delivery",
       "summary": "Clarifies that the current architecture scales well for curated knowledge and retrieval, but not yet as a full enterprise operational intelligence platform.",
       "verification": "framework_supported",
-      "impactScore": 90
+      "impactScore": 90,
+      "sourceFilename": "business-need-architecture-scalability.md",
+      "sourceMetaFilename": "business-need-architecture-scalability.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-architecture-scalability.md",
+      "sourceChecksum": "e2c171a34d1cd115a4ed9c00758601c6778840e08102eb020b0e74eb0eb03e43",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_buyer_faq",
@@ -453,7 +525,13 @@
       "category": "faq",
       "summary": "Compact buyer and recruiter answers for value, ROI, differentiation, delivery, and fit questions.",
       "verification": "positioning_supported",
-      "impactScore": 91
+      "impactScore": 91,
+      "sourceFilename": "business-need-buyer-faq.md",
+      "sourceMetaFilename": "business-need-buyer-faq.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-buyer-faq.md",
+      "sourceChecksum": "376b47e3d33057e69dcb70bab709373f8b84578b2895b70a1cb5a81529b5d5f5",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_current_data_architecture",
@@ -463,7 +541,13 @@
       "category": "business_answer",
       "summary": "Explains the current Joz data architecture as a governed knowledge pipeline with source, normalization, ontology, publish, and retrieval layers.",
       "verification": "framework_supported",
-      "impactScore": 88
+      "impactScore": 88,
+      "sourceFilename": "business-need-current-data-architecture.md",
+      "sourceMetaFilename": "business-need-current-data-architecture.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-current-data-architecture.md",
+      "sourceChecksum": "66da74971d2779dfc10c852a8f1dbd09bc6517c4e3e8f0caa97664f6ef3a8cc6",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_dataset_extension_framework",
@@ -473,7 +557,13 @@
       "category": "delivery",
       "summary": "Defines how to extend current datasets toward business value by adding context, outcomes, process visibility, cross-system linkage, and business meaning.",
       "verification": "framework_supported",
-      "impactScore": 93
+      "impactScore": 93,
+      "sourceFilename": "business-need-dataset-extension-framework.md",
+      "sourceMetaFilename": "business-need-dataset-extension-framework.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-dataset-extension-framework.md",
+      "sourceChecksum": "1d2dfa25695b9d500f12f444bef70020af489e6d2a233a28e3b1565064301405",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_decision_intelligence",
@@ -483,7 +573,13 @@
       "category": "capability",
       "summary": "How Joz turns data, knowledge, and operational signals into clearer priorities and faster decisions.",
       "verification": "capability_supported",
-      "impactScore": 96
+      "impactScore": 96,
+      "sourceFilename": "business-need-decision-intelligence.md",
+      "sourceMetaFilename": "business-need-decision-intelligence.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-decision-intelligence.md",
+      "sourceChecksum": "9fd6dea4710db2d5fc4f27801eefcb62e8fcff474abca4026077bd1b6ea1a6e5",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_department_profit_use_cases",
@@ -493,7 +589,13 @@
       "category": "business_answer",
       "summary": "Maps department-specific AI use cases to profit impact across finance, ERP, HR, marketing, sales, and leadership.",
       "verification": "framework_supported",
-      "impactScore": 97
+      "impactScore": 97,
+      "sourceFilename": "business-need-department-profit-use-cases.md",
+      "sourceMetaFilename": "business-need-department-profit-use-cases.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-department-profit-use-cases.md",
+      "sourceChecksum": "e83802dc54a0b444c224c52e9eab48ae1cd39a4524df43308ea50d4656c26922",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_efficiency_vs_growth",
@@ -503,7 +605,13 @@
       "category": "business_answer",
       "summary": "Separates AI business value into efficiency effects and growth effects so the operating model and ROI case stay clear.",
       "verification": "framework_supported",
-      "impactScore": 94
+      "impactScore": 94,
+      "sourceFilename": "business-need-efficiency-vs-growth.md",
+      "sourceMetaFilename": "business-need-efficiency-vs-growth.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-efficiency-vs-growth.md",
+      "sourceChecksum": "06c2e0e2b2eeb14952b0722a9069278c30942af81354924a2b4bb9e47d390be6",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_enterprise_knowledge",
@@ -513,7 +621,13 @@
       "category": "capability",
       "summary": "Business value of turning scattered enterprise knowledge into permission-aware, source-grounded, reusable intelligence.",
       "verification": "capability_supported",
-      "impactScore": 94
+      "impactScore": 94,
+      "sourceFilename": "business-need-enterprise-knowledge.md",
+      "sourceMetaFilename": "business-need-enterprise-knowledge.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-enterprise-knowledge.md",
+      "sourceChecksum": "7dbd174b112339e90299b6aef94af8c476ad69ff3fa54d387249349e208d342f",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_enterprise_proof",
@@ -523,7 +637,13 @@
       "category": "proof",
       "summary": "Largest and most measurable evidence supporting Joz's business-value positioning.",
       "verification": "cv_supported",
-      "impactScore": 99
+      "impactScore": 99,
+      "sourceFilename": "business-need-enterprise-proof.md",
+      "sourceMetaFilename": "business-need-enterprise-proof.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-enterprise-proof.md",
+      "sourceChecksum": "3df7a7658ad126284f5182b4c1987280d11d2bc7dfec0cd7def9634ed258b11e",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_erp_finance_hr_marketing_opportunity_map",
@@ -533,7 +653,13 @@
       "category": "business_answer",
       "summary": "Provides a cross-functional Business Value map across ERP, finance, HR, marketing, growth, and leadership so Joz can explain AI opportunities in operational terms.",
       "verification": "framework_supported",
-      "impactScore": 97
+      "impactScore": 97,
+      "sourceFilename": "business-need-erp-finance-hr-marketing-opportunity-map.md",
+      "sourceMetaFilename": "business-need-erp-finance-hr-marketing-opportunity-map.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-erp-finance-hr-marketing-opportunity-map.md",
+      "sourceChecksum": "59b43edf2671ab0a361b2581f3559aa56cbd0e97ea9f6cb72f2e1ccf9a0aa138",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_hero_value",
@@ -543,7 +669,13 @@
       "category": "business_need",
       "summary": "Primary Business Need positioning: Joz turns noisy systems, fragmented knowledge, and disconnected AI initiatives into usable intelligence, faster decisions, and measurable operational value.",
       "verification": "positioning_supported",
-      "impactScore": 100
+      "impactScore": 100,
+      "sourceFilename": "business-need-hero-value.md",
+      "sourceMetaFilename": "business-need-hero-value.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-hero-value.md",
+      "sourceChecksum": "5f525abe2b09ef9c67a0a20134adf36e6ada3f15150f4506e5fc6ad8ed3b7c94",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_high_stakes_ai_execution_controls",
@@ -553,7 +685,13 @@
       "category": "business_need",
       "summary": "Explains why the real challenge in serious AI systems is controlled execution, verification, auditability, and failure recovery rather than intelligence alone.",
       "verification": "framework_supported",
-      "impactScore": 88
+      "impactScore": 88,
+      "sourceFilename": "business-need-high-stakes-ai-execution-controls.md",
+      "sourceMetaFilename": "business-need-high-stakes-ai-execution-controls.meta.json",
+      "sourceUri": "source://joz/business-need-high-stakes-ai-execution-controls.md",
+      "sourcePath": "source://joz/business-need-high-stakes-ai-execution-controls.md",
+      "sourceChecksum": "553eb9dde1ce08b5bede85e18103c31eadbc073e2643fa39f901eb378cc7328f",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_operating_model_blueprint",
@@ -563,7 +701,13 @@
       "category": "delivery",
       "summary": "Defines the structure of a serious AI business value operating model, including profit levers, opportunities, process redesign, governance, KPIs, quick wins, and a scaling roadmap.",
       "verification": "framework_supported",
-      "impactScore": 98
+      "impactScore": 98,
+      "sourceFilename": "business-need-operating-model-blueprint.md",
+      "sourceMetaFilename": "business-need-operating-model-blueprint.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-operating-model-blueprint.md",
+      "sourceChecksum": "fa1150d3ea356eb7f51c9e4f8ed42456b8b0d30b983c24e108e035ae12cf2db9",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_problems_joz_solves",
@@ -573,7 +717,13 @@
       "category": "business_answer",
       "summary": "Core enterprise problems Joz can address through Agentic AI, decision intelligence, context engineering, governance, and transformation.",
       "verification": "capability_supported",
-      "impactScore": 97
+      "impactScore": 97,
+      "sourceFilename": "business-need-problems-joz-solves.md",
+      "sourceMetaFilename": "business-need-problems-joz-solves.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-problems-joz-solves.md",
+      "sourceChecksum": "c3b23c31816215691f3da05098b41f42eaec40298978f1b1c50da17fd2ed450d",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_process_redesign_framework",
@@ -583,7 +733,13 @@
       "category": "delivery",
       "summary": "Defines the practical framework for redesigning business processes around AI, with current process, friction, cost, intervention, human role, systems, KPIs, and controls.",
       "verification": "framework_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "business-need-process-redesign-framework.md",
+      "sourceMetaFilename": "business-need-process-redesign-framework.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-process-redesign-framework.md",
+      "sourceChecksum": "56bea4939cc7430d1b78327bfe6b0cb71143f5cb38e0996750b0007d4bb32c2f",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_profit_levers",
@@ -593,7 +749,13 @@
       "category": "roi",
       "summary": "Defines the main profit levers through which AI creates commercial value: revenue, margin, cost, working capital, error reduction, and management leverage.",
       "verification": "framework_supported",
-      "impactScore": 98
+      "impactScore": 98,
+      "sourceFilename": "business-need-profit-levers.md",
+      "sourceMetaFilename": "business-need-profit-levers.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-profit-levers.md",
+      "sourceChecksum": "ac4188b36c3deebdaf9401d3d6fe8cdf04cc3641c5fc3d9699aebc5005590a78",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_roi_model",
@@ -603,7 +765,13 @@
       "category": "roi",
       "summary": "Defines the principal ROI levers for Joz's work: revenue growth, productivity, cost reduction, risk reduction, faster decisions, and improved adoption.",
       "verification": "framework_supported",
-      "impactScore": 97
+      "impactScore": 97,
+      "sourceFilename": "business-need-roi-model.md",
+      "sourceMetaFilename": "business-need-roi-model.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-roi-model.md",
+      "sourceChecksum": "9d5b0541df92967062e08f59abb21d5238cd8d0155a6996fb4f1b3e93f8a5162",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_skills_mindset_agentic_architecture_infrastructure",
@@ -613,7 +781,13 @@
       "category": "business_answer",
       "summary": "Separates skills, mindset, agentic architecture, and infrastructure so Joz can explain the stack without conceptual muddle.",
       "verification": "framework_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
+      "sourceMetaFilename": "business-need-skills-mindset-agentic-architecture-infrastructure.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-skills-mindset-agentic-architecture-infrastructure.md",
+      "sourceChecksum": "4e3a56183c729297f0463f21a1eadcfa2acd72fcd1005490c10ce16943439886",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_transformation_method",
@@ -623,7 +797,13 @@
       "category": "delivery",
       "summary": "Repeatable method for identifying, designing, testing, and scaling high-value Agentic AI opportunities.",
       "verification": "framework_supported",
-      "impactScore": 93
+      "impactScore": 93,
+      "sourceFilename": "business-need-transformation-method.md",
+      "sourceMetaFilename": "business-need-transformation-method.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-transformation-method.md",
+      "sourceChecksum": "eb3ecdbd3914ddd455ad60c8f44dc0f6ab782f0998b50bdcc0ad5616e4704af3",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:business_need_why_hire_joz_now",
@@ -633,7 +813,13 @@
       "category": "business_answer",
       "summary": "Explains the immediate market and organisational need for Joz's combination of Agentic AI, enterprise transformation, governance, and measurable delivery.",
       "verification": "positioning_supported",
-      "impactScore": 98
+      "impactScore": 98,
+      "sourceFilename": "business-need-why-hire-joz-now.md",
+      "sourceMetaFilename": "business-need-why-hire-joz-now.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-why-hire-joz-now.md",
+      "sourceChecksum": "456a9c9cff87a27ae441a26c705c733339898f9433a6244d0aa99154915211f7",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:business_need_why_joz_is_irreplaceable",
@@ -643,7 +829,13 @@
       "category": "business_answer",
       "summary": "Explains that Joz becomes hard to replace through context, workflows, decision logic, governance, and feedback loops rather than generic AI usage.",
       "verification": "framework_supported",
-      "impactScore": 99
+      "impactScore": 99,
+      "sourceFilename": "business-need-why-joz-is-irreplaceable.md",
+      "sourceMetaFilename": "business-need-why-joz-is-irreplaceable.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/business-need-why-joz-is-irreplaceable.md",
+      "sourceChecksum": "1414c27648b03caa1caa61f6eea3266e8def4499d6ea5751440e6a105b627dc2",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_acl_aware_retrieval",
@@ -653,7 +845,13 @@
       "category": "skills",
       "summary": "Permissions must be enforced before retrieval.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_028",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_028",
+      "sourceChecksum": "734b811fddfc6310b3bbb8ecbd6d2baeec5d3b17996cfd4e4ab0d031a17a4017",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_agent_definition",
@@ -663,7 +861,13 @@
       "category": "skills",
       "summary": "Agent = LLM + instructions + tools + memory + reasoning loop.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_003",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_003",
+      "sourceChecksum": "0e2db22e7b74152c5d7b75761d18e2af213c5d48a41406e45651c122322133c3",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_ai_and_blockchain",
@@ -673,7 +877,13 @@
       "category": "skills",
       "summary": "AI should never directly control unrestricted private keys.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_018",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_018",
+      "sourceChecksum": "235a237746ae886619d86cae73f24e1e0a4c8ce59cc13a890a6f806eccd6a755",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_autonomous_code_verification",
@@ -683,7 +893,13 @@
       "category": "systems_mindset",
       "summary": "Every autonomous code change should pass:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_033",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_033",
+      "sourceChecksum": "076c96ea9a500a0ef57875c5da6107312b2c1adbd2ef4acdaf073b1201775946",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_autonomous_execution_layer",
@@ -693,7 +909,13 @@
       "category": "business_need",
       "summary": "The Autonomous Execution Layer transforms organisational awareness into governed action.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_032",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_032",
+      "sourceChecksum": "4ea5d472e0d7d6313d7bf881a0f2dde034a2a7b4b0565e16c248a9e40e0d1058",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_blockchain",
@@ -703,7 +925,13 @@
       "category": "systems_mindset",
       "summary": "Blockchain is a distributed ledger for transaction ordering, state, ownership, and settlement.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_017",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_017",
+      "sourceChecksum": "8ceef8332f4e446bae4a9c24583905f24d7b68d4af9e9f457d4db37171458c00",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_canonical_architecture_principle",
@@ -713,7 +941,13 @@
       "category": "systems_mindset",
       "summary": "AI reasons → Policy validates → Execution acts → Verification confirms.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_024",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_024",
+      "sourceChecksum": "6d97d4c56cec2e15e0a143f8addf04164d814d8b6d6e7687ff4c9291a8df6dd1",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_canonical_positioning",
@@ -723,7 +957,13 @@
       "category": "business_need",
       "summary": "Joz designs AI-native intelligence and execution platforms that combine trusted context, specialist agents, secure tool use, deterministic policy controls, governed execution, and verifiable outcomes.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_001",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_001",
+      "sourceChecksum": "0dca3d47a190e3c381059b85dbc809842045166b0a6de889d45036e4c6009f27",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_core_agentic_architecture",
@@ -733,7 +973,13 @@
       "category": "skills",
       "summary": "User Intent → API Layer → Orchestrator → Specialist Agents → Tools → Risk and Policy → Execution → Verification",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_002",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_002",
+      "sourceChecksum": "6a307589de8fbad17e837ee3558d56dd0e707ba8c5fd3800da3b005309d7b565",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_core_trust_principle",
@@ -743,7 +989,13 @@
       "category": "systems_mindset",
       "summary": "The largest risk is not code generation itself. The largest risk is inaccurate context, misunderstood business intent, weak verification, and loss of trust in autonomous decision-making.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_037",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_037",
+      "sourceChecksum": "e4e59e324899e3b45a05ec02a2e73145f26736f375eb0c01dbf2e5853fdf7d62",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_execution_guardrails",
@@ -753,7 +1005,13 @@
       "category": "skills",
       "summary": "Autonomous agents must not:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_034",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_034",
+      "sourceChecksum": "9eae3ee557d72450e753731778d5626af3792f845abe59d9668f44dbba676242",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_fastapi",
@@ -763,7 +1021,13 @@
       "category": "skills",
       "summary": "FastAPI is a Python framework used to build backend APIs and services.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_008",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_008",
+      "sourceChecksum": "b5a3f4ca17488bff13084ad6c32c7f6676c9b7f355555e4dd3725cac09631aa9",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_financial_platform_architecture",
@@ -773,7 +1037,13 @@
       "category": "skills",
       "summary": "A modern financial intelligence platform can combine: Market data Portfolio data News and research Risk analytics Prediction models Natural-language interaction Alerts Execution Verification",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_019",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_019",
+      "sourceChecksum": "3f82eafc9524a238bf44d45593bbd361676bc6a2b3b0cb617c5000327c65596b",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_golang_and_python",
@@ -783,7 +1053,13 @@
       "category": "skills",
       "summary": "Python is suited to AI, machine learning, retrieval, agent orchestration, FastAPI, data science, and rapid experimentation.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_016",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_016",
+      "sourceChecksum": "053c117eefd7f8c65f341dc4307a5c2af82141bcdd164048fdfd95e6dacbef33",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_how_joz_builds",
@@ -793,7 +1069,13 @@
       "category": "skills",
       "summary": "Joz starts with user intent, defines architecture boundaries, exposes capabilities through tools, adds security and policy controls, implements deterministic execution, verifies outcomes, and improves the system through…",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_025",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_025",
+      "sourceChecksum": "45cef6b1d7b8794a8e87ca6c0ad36ba4432ea48664651cca9e579dd490b3e5a9",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_implementation_approach",
@@ -803,7 +1085,13 @@
       "category": "skills",
       "summary": "Start with one narrow, read-only workflow.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_023",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_023",
+      "sourceChecksum": "7dcc96e352855de55efe559a07b6e327492ddb050f94366a744aaa5b45d05fc8",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_infrastructure",
@@ -813,7 +1101,13 @@
       "category": "skills",
       "summary": "Cloud = where the platform runs. Docker = packages services. Kubernetes = deploys, restarts, and scales containers. Load balancer = distributes traffic. PostgreSQL = persistent state and audits. Redis = cache and short-…",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_021",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_021",
+      "sourceChecksum": "7744fe22911e3dc479359e16b525f4923dac85b2cc51565e15e3c48f49e4a672",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_mcp",
@@ -823,7 +1117,13 @@
       "category": "skills",
       "summary": "MCP means Model Context Protocol.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_007",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_007",
+      "sourceChecksum": "a659957b617e48655c8e86310132fa736a82c9ed9e3113142bf5e6e783377bf5",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_memory",
@@ -833,7 +1133,13 @@
       "category": "skills",
       "summary": "Memory types: Session memory = current conversation User memory = long-term preferences Task memory = workflow state Knowledge memory = retrieved information Audit memory = immutable action history",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_014",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_014",
+      "sourceChecksum": "b44f292c2798985da4c698c4c2bfbf34a7563fffe644e1ccc7030644aeecb100",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_models",
@@ -843,7 +1149,13 @@
       "category": "skills",
       "summary": "LLMs such as GPT, Claude, Gemini, Llama, and Qwen handle language reasoning and tool selection.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_015",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_015",
+      "sourceChecksum": "9ee2c63adc98178b84ed22958a49324da78626d9a96f490f3effeb341ce35332",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_multi_layer_verification_framework",
@@ -853,7 +1165,13 @@
       "category": "business_need",
       "summary": "Verification should operate across multiple layers:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_035",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_035",
+      "sourceChecksum": "547137133a0ed8c5c1a900b527bf2d4f4d8cdc55a9528e5c601be59de5a52f25",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_observability",
@@ -863,7 +1181,13 @@
       "category": "skills",
       "summary": "Observability means tracing prompts, agent decisions, tool calls, model usage, latency, cost, errors, retries, policy decisions, and final outcomes.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_022",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_022",
+      "sourceChecksum": "a1cbb2fbe8d30090493cb92d15163e9135245955ce9cf8dc27f24734f3790ae7",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_orchestration",
@@ -873,7 +1197,13 @@
       "category": "skills",
       "summary": "Agent orchestration coordinates agents, tools, memory, and workflow state.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_004",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_004",
+      "sourceChecksum": "055d0a95489d070ce14aff33805dd9c1149d9d3e12180e347d8441a21f9dfd63",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_organisational_awareness_challenges",
@@ -883,7 +1213,13 @@
       "category": "skills",
       "summary": "The primary challenges are:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_031",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_031",
+      "sourceChecksum": "d17be517bce16011b373edef9b1ec4a47494c4bd23fd90e3173f91d011d18363",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_organisational_awareness_layer",
@@ -893,7 +1229,13 @@
       "category": "skills",
       "summary": "The Organisational Awareness Layer transforms fragmented company information into trusted collective intelligence.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_026",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_026",
+      "sourceChecksum": "6e8ca2da9c0bb065db8a2a6c80c8a79e6758119bbdff8ed96b553339dd13a8ca",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_organisational_intelligence_integration",
@@ -903,7 +1245,13 @@
       "category": "business_need",
       "summary": "The Organisational Awareness Layer is the knowledge foundation for the Autonomous Execution Layer.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_036",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_036",
+      "sourceChecksum": "754843f6d2d4d171ef2e1b8655e41e99dcbe1d05519e66e7c843b30cf760b6a5",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_organisational_knowledge_layer",
@@ -913,7 +1261,13 @@
       "category": "skills",
       "summary": "The Organisational Knowledge Layer can combine:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_027",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_027",
+      "sourceChecksum": "b8d32a59090e15ab6b410ac7c106d1f1b9a0d18f19230f4289e28722f4f9316f",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_organisational_retrieval_strategy",
@@ -923,7 +1277,13 @@
       "category": "skills",
       "summary": "Use hybrid retrieval:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_029",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_029",
+      "sourceChecksum": "ec48ce332f086263b5da6b1a5d0b8d8c42c04bf069a9114bca34b6e7ef7474db",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_prompt_injection_defense",
@@ -933,7 +1293,13 @@
       "category": "systems_mindset",
       "summary": "Treat all external content as untrusted data.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_012",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_012",
+      "sourceChecksum": "5e2d6cad474d88649bbb40128f6e889b09f8f6874703fb7ee6feb42de06bdffc",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_rag_and_knowledge",
@@ -943,7 +1309,13 @@
       "category": "skills",
       "summary": "RAG retrieves relevant information before generation.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_013",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_013",
+      "sourceChecksum": "49164fd0f1f4fdb30bde149b070a2b5b11c498fe93158feea1427c2a0e5cf2f1",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_risk_architecture",
@@ -953,7 +1325,13 @@
       "category": "skills",
       "summary": "Risk is evaluated before execution.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_009",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_009",
+      "sourceChecksum": "e7a82ead0fb6a0f96131544085f5ca614f5a74b6ad8d729fce2eb13c10a7042d",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_scalability",
@@ -963,7 +1341,13 @@
       "category": "skills",
       "summary": "Scale by separating reasoning, policy, execution, and verification into independently deployable services.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_020",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_020",
+      "sourceChecksum": "b13e2486a089e1ead653262b3eeb0bf75b137223e9d20e52ca74e0f7a7c8fcc7",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_security",
@@ -973,7 +1357,13 @@
       "category": "skills",
       "summary": "The hardest problem is safely turning intelligence into action.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_011",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_011",
+      "sourceChecksum": "4d836b489e56d1b7fff860d1dc4832655c6e605e51d168e6d7934726dc5eb15b",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_sensitive_data_boundaries",
@@ -983,7 +1373,13 @@
       "category": "systems_mindset",
       "summary": "Do not ingest or expose highly sensitive sources by default, including:",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_030",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_030",
+      "sourceChecksum": "bec3ff65eaeb0dc26d549e7af4b9ee77113e41299d382839c0c2f04fcbc5a2ae",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_single_agent_and_multi_agent",
@@ -993,7 +1389,13 @@
       "category": "systems_mindset",
       "summary": "Start with one orchestrator agent. Use multiple agents only when responsibilities are clearly separable.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_005",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_005",
+      "sourceChecksum": "80b95c81e6f5c65acf89b21abd27c6e5859f4ce7c270800c98b222022a8607b3",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_tooling",
@@ -1003,7 +1405,13 @@
       "category": "skills",
       "summary": "Tools are functions, APIs, services, databases, models, or external systems that agents can call.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_006",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_006",
+      "sourceChecksum": "9fe4583190669930137e603f47501f7e7209bcc9aa9a9a6a3215120301f547db",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_agentic_ai_complete_knowledge_base_jsonl_verification_architecture",
@@ -1013,7 +1421,13 @@
       "category": "systems_mindset",
       "summary": "Verification happens after execution.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-agentic-ai-complete-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_010",
+      "sourcePath": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_010",
+      "sourceChecksum": "35b915660398abbf930f25a94d8c94cc3f0713eec3630fb8972fc5ad1398c361",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_agent_infrastructure_scaling",
@@ -1023,7 +1437,13 @@
       "category": "skills",
       "summary": "Scale agent systems by separating: API intake Reasoning workers Tool services Embedding workers Evaluation workers Execution services Verification services",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_045",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_045",
+      "sourceChecksum": "00ed673336bc3886dd1154bef32143302b8f7d1e13875ee293ee0da601eb52b5",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_autoscaling",
@@ -1033,7 +1453,13 @@
       "category": "skills",
       "summary": "Autoscaling adjusts compute capacity based on demand.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_012",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_012",
+      "sourceChecksum": "6192ef349f6dcd923eb4578e2bb6782530c620ee72fb8c3b7641f70893b3801c",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_backpressure",
@@ -1043,7 +1469,13 @@
       "category": "skills",
       "summary": "Backpressure prevents the system from accepting more work than it can safely process.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_039",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_039",
+      "sourceChecksum": "1be60ce7de9eb9dfd053316ee7da59e7dc3a8f9905dde5389aebfca932ca8979",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_blue_green_and_canary_deployment",
@@ -1053,7 +1485,13 @@
       "category": "skills",
       "summary": "Blue-green deployment switches traffic between old and new environments. Canary deployment sends a small percentage of traffic to the new version first.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_034",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_034",
+      "sourceChecksum": "63d9e3caf38f9a400c240d26c88b0dd974bcde065236596c1404303c658c1977",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_caching",
@@ -1063,7 +1501,13 @@
       "category": "skills",
       "summary": "Caching stores frequently used data closer to the application.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_017",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_017",
+      "sourceChecksum": "c3a19516f2441e2f504db15f1d907c6d865f327fa7290e27a81239ea9a2d0914",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_canonical_infrastructure_principle",
@@ -1073,7 +1517,13 @@
       "category": "skills",
       "summary": "Containers package services. Kubernetes runs and scales them. Cloud provides the environment. Databases store durable state. Queues and events coordinate work. Secrets systems protect credentials. Observability explains…",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_048",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_048",
+      "sourceChecksum": "ec3d71fa31a5bc1037305c239ec7b49deefe4d75ebe1ca94901158ecb632db55",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_ci_cd",
@@ -1083,7 +1533,13 @@
       "category": "skills",
       "summary": "CI/CD automates software integration, testing, security checks, packaging, and deployment.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_030",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_030",
+      "sourceChecksum": "ef20a534986a5de5764e109453b8c37d1b9f189e85f236cb07cf95b5be35bb39",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_ci_cd_tools",
@@ -1093,7 +1549,13 @@
       "category": "skills",
       "summary": "Common CI/CD tools: GitHub Actions GitLab CI Jenkins CircleCI Azure DevOps Argo CD",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_031",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_031",
+      "sourceChecksum": "ed282662bd5b04bca77db07da3307a6910f3933f55d753d50bd2377110291ea8",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_circuit_breaker",
@@ -1103,7 +1565,13 @@
       "category": "skills",
       "summary": "A circuit breaker stops repeated calls to an unhealthy dependency.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_037",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_037",
+      "sourceChecksum": "c6bfe0ac578c630568dbed3526d96013d9e0cd25735f432a952a37d51426486a",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_cloud",
@@ -1113,7 +1581,13 @@
       "category": "skills",
       "summary": "Cloud provides compute, networking, storage, managed databases, queues, identity, observability, and deployment services.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_003",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_003",
+      "sourceChecksum": "a35204e24b63a32aaff51ee01832a3282e3f4824f298377656d2dacd032baf9e",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_core_infrastructure_architecture",
@@ -1123,7 +1597,13 @@
       "category": "skills",
       "summary": "User → DNS/CDN → Load Balancer or API Gateway → FastAPI/API Services → Agent Workers → Tools and Domain Services → Databases and External Systems",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_002",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_002",
+      "sourceChecksum": "3bed866de82b2eb0d9841efb8298ce461989942f6788fa8afcf43fa6024b70f1",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_cost_management",
@@ -1133,7 +1613,13 @@
       "category": "skills",
       "summary": "Infrastructure must be cost-aware.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_043",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_043",
+      "sourceChecksum": "08fc22d8aeefd2353c7f34b7c1c73dcfb44b37bab1af406f056e21166fd16c22",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_disaster_recovery",
@@ -1143,7 +1629,13 @@
       "category": "skills",
       "summary": "Disaster recovery prepares the platform for major failures.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_041",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_041",
+      "sourceChecksum": "bd19b10f1f2fcee8093a8cf8c4114fb8f020c7c10df75ec0173ceb39936b2d58",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_docker",
@@ -1153,7 +1645,13 @@
       "category": "skills",
       "summary": "Docker packages an application and its dependencies into a portable container image.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_004",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_004",
+      "sourceChecksum": "2c01d68a3d6d9a0e4c4cda7cb31234c366b8107c7aa7a8a96918e2856bc70b0a",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_environment_strategy",
@@ -1163,7 +1661,13 @@
       "category": "skills",
       "summary": "Use separate environments: Local Development Testing Staging Production",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_044",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_044",
+      "sourceChecksum": "4191a6b4ee0031ec1303973d89f1e38daf7b32899b3f57495a7a870b1ac13b78",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_event_driven_architecture",
@@ -1173,7 +1677,13 @@
       "category": "skills",
       "summary": "Event-driven architecture lets services publish events instead of calling every downstream service directly.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_019",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_019",
+      "sourceChecksum": "7be8b5e72ab539fcd9d2985bafd8bc880e6998f24604624026885b634770b6cd",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_gitops",
@@ -1183,7 +1693,13 @@
       "category": "skills",
       "summary": "GitOps uses Git as the source of truth for infrastructure and deployment state.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_033",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_033",
+      "sourceChecksum": "2023178f50d34583c73e88ab9bb73e36829a347e1a3ed4b4733159acb0e36f4a",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_health_checks",
@@ -1193,7 +1709,13 @@
       "category": "skills",
       "summary": "Health checks tell the platform whether a service is alive and ready.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_035",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_035",
+      "sourceChecksum": "30477c8165869b846f7374df81be2cb74dd23f930a119add46def3c6d509bf8c",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_high_availability",
@@ -1203,7 +1725,13 @@
       "category": "skills",
       "summary": "High availability reduces downtime through redundancy and failure isolation.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_042",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_042",
+      "sourceChecksum": "b1d97e1364e2469d92239544733a159c4a4885c47235edb49e035dd67f883c35",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_horizontal_and_vertical_scaling",
@@ -1213,7 +1741,13 @@
       "category": "skills",
       "summary": "Horizontal scaling = add more service instances. Vertical scaling = add more CPU or memory to one machine.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_011",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_011",
+      "sourceChecksum": "e2a3d789ec8a64253d8b6b336bfa12a3a85001ebeef8fccc23c256ab566d38ac",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_how_joz_approaches_infrastructure",
@@ -1223,7 +1757,13 @@
       "category": "skills",
       "summary": "Joz designs infrastructure around clear boundaries, independent scaling, secure identities, durable state, controlled deployment, and measurable reliability.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049",
+      "sourceChecksum": "9d4521c7c830b33d6fa99d91c5bbcfe71acde2a9bf5b922589088d7fff2789d0",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_idempotency",
@@ -1233,7 +1773,13 @@
       "category": "skills",
       "summary": "Idempotency ensures repeated execution of the same request produces one logical result.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_038",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_038",
+      "sourceChecksum": "63510ad69432cdfa02e151c9cf0cc7734af141f36c5c5aa80d8b8bc8c3b6761a",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_infrastructure_as_code",
@@ -1243,7 +1789,13 @@
       "category": "skills",
       "summary": "Infrastructure as Code defines cloud resources through version-controlled code.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_032",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_032",
+      "sourceChecksum": "0264c0037a3365d721618d9eb4693cf4843bdd5694f05b458fb839a16fbb1d17",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_infrastructure_positioning",
@@ -1253,7 +1805,13 @@
       "category": "skills",
       "summary": "Joz approaches infrastructure as the production foundation that makes AI and agentic systems scalable, secure, observable, resilient, and repeatable.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_001",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_001",
+      "sourceChecksum": "54c2e74b2a6da384dfb5339b238e99b300070b9907a2dcd3e5a08406f6ae2d19",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_infrastructure_security_principle",
@@ -1263,7 +1821,13 @@
       "category": "skills",
       "summary": "Infrastructure should assume every network, service, credential, tool, and workload may be compromised.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_047",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_047",
+      "sourceChecksum": "92e1ce360526a68eb3a585ebd856b68ee98d8e8fe67485fa1c8518081c2f3d57",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_ingress_and_api_gateway",
@@ -1273,7 +1837,13 @@
       "category": "skills",
       "summary": "Ingress routes external HTTP traffic into Kubernetes services.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_009",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_009",
+      "sourceChecksum": "a3d0661ee158b90a7108b04838cbca0b2ba1cb104993cda7c60f5d91f6648b5f",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_kafka_and_nats",
@@ -1283,7 +1853,13 @@
       "category": "skills",
       "summary": "Kafka and NATS move events between services asynchronously.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_018",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_018",
+      "sourceChecksum": "1585d5121309df76e940d0af0e665eb31f7e3a57c737c23a176f37fc03b08d46",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_kubernetes",
@@ -1293,7 +1869,13 @@
       "category": "skills",
       "summary": "Kubernetes deploys, schedules, scales, restarts, and manages containers across multiple machines.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_005",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_005",
+      "sourceChecksum": "2078e63ef99ebc9ca99451ccc5a1fcacaefeb528c1d0ba361ccc2eee216bb81e",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_kubernetes_deployment",
@@ -1303,7 +1885,13 @@
       "category": "skills",
       "summary": "A Kubernetes Deployment defines how many copies of a service should run and how updates should be rolled out.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_007",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_007",
+      "sourceChecksum": "67c0287a284630033c902821c7b109f2012fe08df6b11777f32e66c6a9d1a8f2",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_kubernetes_pods",
@@ -1313,7 +1901,13 @@
       "category": "skills",
       "summary": "A Kubernetes Pod is the smallest deployable unit in Kubernetes.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_006",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_006",
+      "sourceChecksum": "0756b3714f154fe437286573bbeb3e536235eb1aa6b191371abd41802b971f86",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_kubernetes_service",
@@ -1323,7 +1917,13 @@
       "category": "skills",
       "summary": "A Kubernetes Service gives a stable network address to a changing group of pods.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_008",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_008",
+      "sourceChecksum": "c90bf6d2a6c662834468c1c33727792820cd9149702563298057fd5ba1825bb3",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_langsmith",
@@ -1333,7 +1933,13 @@
       "category": "skills",
       "summary": "LangSmith provides tracing, evaluation, and debugging for LLM and agent workflows.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_029",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_029",
+      "sourceChecksum": "45fd157180d541c28859287208837f51fc465fa647ff3321743ebbc1c9aacb6e",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_load_balancer",
@@ -1343,7 +1949,13 @@
       "category": "skills",
       "summary": "A load balancer distributes incoming traffic across multiple service instances.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_010",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_010",
+      "sourceChecksum": "fc78114eab0894d57199882cfbbeda060d687bbbcf47441ee4e4dd84f95224aa",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_network_security",
@@ -1353,7 +1965,13 @@
       "category": "skills",
       "summary": "Network security should use: Private subnets Firewalls and security groups TLS everywhere Service-to-service authentication Network policies Restricted egress DDoS protection Zero-trust assumptions",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_024",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_024",
+      "sourceChecksum": "d9b2cbd6a95d53baaa2533388ce85dee8ef7340ae75bd16a0413c56c0c53d739",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_observability",
@@ -1363,7 +1981,13 @@
       "category": "skills",
       "summary": "Observability combines logs, metrics, and traces.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_026",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_026",
+      "sourceChecksum": "324b452ea142b87566e49c92f32a7f404f61566cc5b32efb231a2438060b2960",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_opentelemetry",
@@ -1373,7 +1997,13 @@
       "category": "skills",
       "summary": "OpenTelemetry is an open standard for collecting traces, metrics, and logs.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_027",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_027",
+      "sourceChecksum": "12804b81774d6f45b02f6415171224b903e68df832ac2b8e7069cc539f607c3f",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_postgresql",
@@ -1383,7 +2013,13 @@
       "category": "skills",
       "summary": "PostgreSQL is the primary relational database for durable application state.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_014",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_014",
+      "sourceChecksum": "0774a8d99fa033a570e042d681c0c65dc0a354efb8112d8e980bcc9791910d53",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_postgresql_high_availability",
@@ -1393,7 +2029,13 @@
       "category": "skills",
       "summary": "Production PostgreSQL should use: Replication Automated backups Point-in-time recovery Failover Connection pooling Read replicas where needed Schema migrations Monitoring",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_015",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_015",
+      "sourceChecksum": "b174f04d3ac7a314fca932c1c2096a426d4ebe059d1263e0e463cd3c9690d467",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_production_ai_infrastructure",
@@ -1403,7 +2045,13 @@
       "category": "skills",
       "summary": "A production AI platform needs more than an LLM API.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_046",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_046",
+      "sourceChecksum": "5e2d60851301cfa5ff56dedcc5015b94e033fbb2181b0d07894d1172e4b5e68b",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_prometheus_and_grafana",
@@ -1413,7 +2061,13 @@
       "category": "skills",
       "summary": "Prometheus collects time-series metrics. Grafana visualizes dashboards and alerts.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_028",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_028",
+      "sourceChecksum": "7b4eb1091c795c32ea02ef6efea0534e0923dc94fef0521117a7d0d7f515f757",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_queues_and_workers",
@@ -1423,7 +2077,13 @@
       "category": "skills",
       "summary": "Queues separate request intake from background processing.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_020",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_020",
+      "sourceChecksum": "21cbfd9e010699b34c64e1fdf8021a7fcf17103f02d0a1daad0dc8939c5f3002",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_rate_limiting",
@@ -1433,7 +2093,13 @@
       "category": "skills",
       "summary": "Rate limiting controls how many requests a user, service, or agent can make.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_040",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_040",
+      "sourceChecksum": "50beca71aeec9fc6e4e82720fdee83a688f87d5ff14cd1fefec0985d36159783",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_redis",
@@ -1443,7 +2109,13 @@
       "category": "skills",
       "summary": "Redis is an in-memory data store used for low-latency access.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_016",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_016",
+      "sourceChecksum": "533c7fa01ef162e5855149de5f54fd17050a58346ea1fdaf0cd9843638d0c7a1",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_retries_and_backoff",
@@ -1453,7 +2125,13 @@
       "category": "skills",
       "summary": "Retries should use bounded attempts, exponential backoff, and jitter.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_036",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_036",
+      "sourceChecksum": "cfbf3a27c9dcf028e18e51b1eac380ec8f6e11e9382f57af166e4782be4a344b",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_secrets_management",
@@ -1463,7 +2141,13 @@
       "category": "skills",
       "summary": "Secrets must not be stored in source code, Docker images, logs, or plain environment files.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_022",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_022",
+      "sourceChecksum": "843ccd0e5a3508dd98cadfc4ad3e0e0d55fa608ba78f3e486f060b47a5b9b49a",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_service_mesh",
@@ -1473,7 +2157,13 @@
       "category": "skills",
       "summary": "A service mesh manages service-to-service communication.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_025",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_025",
+      "sourceChecksum": "94ab2abbeacb92e75a6be102f4fcb49d319684466d0f37ca2c9b13a656d5fa35",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_stateless_services",
@@ -1483,7 +2173,13 @@
       "category": "skills",
       "summary": "A stateless service does not depend on local machine memory between requests.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_013",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_013",
+      "sourceChecksum": "89da561cf146c408e3f2f75e4ab80656047a3a22efebf0196d73f74366a1639f",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_temporal",
@@ -1493,7 +2189,13 @@
       "category": "skills",
       "summary": "Temporal provides durable workflow execution.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_021",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_021",
+      "sourceChecksum": "f761774753eb72ed3d13e16f3cfe306b197889018e6a4d5e9521b48c304791c4",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:canonical_joz_infrastructure_platform_engineering_knowledge_base_jsonl_workload_identity",
@@ -1503,7 +2205,13 @@
       "category": "skills",
       "summary": "Workload identity lets services prove who they are without sharing long-lived static credentials.",
       "verification": "framework_supported",
-      "impactScore": 82
+      "impactScore": 82,
+      "sourceFilename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
+      "sourceMetaFilename": null,
+      "sourceUri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_023",
+      "sourcePath": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_023",
+      "sourceChecksum": "6c64f5020a9b983e6903aaf5154ae157d90cdec2493efb18080a0c961c421cc2",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:dubai_future_foundation_inclusive_design",
@@ -1513,7 +2221,13 @@
       "category": "project",
       "summary": "Inclusive public-service and innovation experience work for Dubai Future Foundation, connecting human-centred design, accessibility, government transformation, and rapid innovation.",
       "verification": "cv_supported",
-      "impactScore": 85
+      "impactScore": 85,
+      "sourceFilename": "dubai-future-foundation-inclusive-design.md",
+      "sourceMetaFilename": "dubai-future-foundation-inclusive-design.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/dubai-future-foundation-inclusive-design.md",
+      "sourceChecksum": "e054b37b46f8a5432c29d91263d66f0d477d6478fc183cbc2dc6c2a4227413cf",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:erste_accessibility_aem",
@@ -1523,7 +2237,13 @@
       "category": "project",
       "summary": "Enterprise accessibility guidance and Adobe Experience Manager experience work for Erste Bank in Vienna.",
       "verification": "cv_supported",
-      "impactScore": 88
+      "impactScore": 88,
+      "sourceFilename": "erste-accessibility-aem.md",
+      "sourceMetaFilename": "erste-accessibility-aem.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/erste-accessibility-aem.md",
+      "sourceChecksum": "694c5e9e036527602900131414b729ddb624833fc8324d5e4fb538021a0a43e2",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:hub71_tokenised_knowledge",
@@ -1533,7 +2253,13 @@
       "category": "project",
       "summary": "UX and product strategy for tokenised knowledge concepts in the Abu Dhabi innovation ecosystem.",
       "verification": "project_supported",
-      "impactScore": 81
+      "impactScore": 81,
+      "sourceFilename": "hub71-tokenised-knowledge.md",
+      "sourceMetaFilename": "hub71-tokenised-knowledge.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/hub71-tokenised-knowledge.md",
+      "sourceChecksum": "5773aeee1e0bf59af5cef2d7f480f5f51091b904c1cde7a6acda126659e01537",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:joz_identity_background",
@@ -1543,7 +2269,13 @@
       "category": "bio",
       "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
       "verification": "verified",
-      "impactScore": 86
+      "impactScore": 86,
+      "sourceFilename": "joz-identity-background.md",
+      "sourceMetaFilename": "joz-identity-background.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/joz-identity-background.md",
+      "sourceChecksum": "7df6c55b2cca69684e582dfadb3f8dc5e547de2edab07fbf7345864a08e2debd",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:leo_burnett_commerce_platforms",
@@ -1553,7 +2285,13 @@
       "category": "project",
       "summary": "Luxury e-commerce, consumer-platform, CMS, and activation work across the USA and Asia Pacific.",
       "verification": "cv_supported",
-      "impactScore": 85
+      "impactScore": 85,
+      "sourceFilename": "leo-burnett-commerce-platforms.md",
+      "sourceMetaFilename": "leo-burnett-commerce-platforms.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/leo-burnett-commerce-platforms.md",
+      "sourceChecksum": "c84a595c2754e561f552b52340a81879f2db9cb2635f904dfdd189f4e0bf8621",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:manulife_innovation_labs",
@@ -1563,7 +2301,13 @@
       "category": "project",
       "summary": "Innovation-lab, machine-learning, investment, field-research, internal-platform, and 3D experience work across Singapore and Asia Pacific.",
       "verification": "cv_supported",
-      "impactScore": 92
+      "impactScore": 92,
+      "sourceFilename": "manulife-innovation-labs.md",
+      "sourceMetaFilename": "manulife-innovation-labs.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/manulife-innovation-labs.md",
+      "sourceChecksum": "4f878947f70a136c725c40473614bc9aa2b2581c7b1080f3f08a7da52eced3bb",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:maybank_private_banking_digital",
@@ -1573,7 +2317,13 @@
       "category": "project",
       "summary": "Private banking, wealth, HNW, design-system, CMS, and conversational-AI work across Singapore and Asia Pacific.",
       "verification": "cv_supported",
-      "impactScore": 93
+      "impactScore": 93,
+      "sourceFilename": "maybank-private-banking-digital.md",
+      "sourceMetaFilename": "maybank-private-banking-digital.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/maybank-private-banking-digital.md",
+      "sourceChecksum": "f96201bc4db937789162f3c3e7a394c70f18fc699b4cc69691adda71a36491c4",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:mediacorp_digital_platforms",
@@ -1583,7 +2333,13 @@
       "category": "project",
       "summary": "National-scale media, election, news, streaming, CMS, mobile, Apple Watch, and corporate experience architecture across Mediacorp.",
       "verification": "cv_supported",
-      "impactScore": 92
+      "impactScore": 92,
+      "sourceFilename": "mediacorp-digital-platforms.md",
+      "sourceMetaFilename": "mediacorp-digital-platforms.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/mediacorp-digital-platforms.md",
+      "sourceChecksum": "990de96c7bb92d5443414c6c8683757a372ae51100942b3669cfc81abfbece39",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:ogilvy_enterprise_platforms",
@@ -1593,7 +2349,13 @@
       "category": "project",
       "summary": "Exchange, hospitality, e-commerce, CMS, and recurring UX campaign work across Singapore, Asia Pacific, and global markets.",
       "verification": "cv_supported",
-      "impactScore": 84
+      "impactScore": 84,
+      "sourceFilename": "ogilvy-enterprise-platforms.md",
+      "sourceMetaFilename": "ogilvy-enterprise-platforms.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/ogilvy-enterprise-platforms.md",
+      "sourceChecksum": "d11a3cd2d4f43d57f8e8ab18066d3ba65d9c52855dd62d84fd94793116b7e10c",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:recruiter_agentic_ai_depth_questions",
@@ -1603,7 +2365,13 @@
       "category": "skills",
       "summary": "Recruiter-oriented question set for testing Joz's technical depth in agentic AI architecture and production AI systems.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-agentic-ai-depth-questions.md",
+      "sourceMetaFilename": "recruiter-agentic-ai-depth-questions.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-agentic-ai-depth-questions.md",
+      "sourceChecksum": "246496654f994221d6c828ffedd35bd7533f2ff69f21f215eef8a5eb635c823f",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:recruiter_compensation_process_questions",
@@ -1613,7 +2381,13 @@
       "category": "faq",
       "summary": "Recruiter-safe handling for compensation, package expectations, working model, relocation, and hiring-process questions.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-compensation-process-questions.md",
+      "sourceMetaFilename": "recruiter-compensation-process-questions.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-compensation-process-questions.md",
+      "sourceChecksum": "0c7bb87e9186e9a8556dd31e4b67c7fcc8cf167d22b795e0f06c983cf616024b",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:recruiter_core_screening_questions",
@@ -1623,7 +2397,13 @@
       "category": "faq",
       "summary": "First-pass recruiter screening questions covering positioning, experience, nationality, location, contact, availability, and notice-period handling.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-core-screening-questions.md",
+      "sourceMetaFilename": "recruiter-core-screening-questions.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-core-screening-questions.md",
+      "sourceChecksum": "db10282737efb1bcba6e18dab188d3716f5f944ff0332da2889f54c364b30c6b",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:recruiter_leadership_stakeholder_questions",
@@ -1633,7 +2413,13 @@
       "category": "faq",
       "summary": "Recruiter-safe guidance for questions about leadership, stakeholder management, seniority, and enterprise transformation credibility.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-leadership-stakeholder-questions.md",
+      "sourceMetaFilename": "recruiter-leadership-stakeholder-questions.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-leadership-stakeholder-questions.md",
+      "sourceChecksum": "972a3bc656d24f3b1f60df101fc086a4fbf55aec7371a6036a8d37d3d58dc925",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:recruiter_product_ui_ux_accessibility_questions",
@@ -1643,7 +2429,13 @@
       "category": "skills",
       "summary": "Recruiter-oriented question set covering UI, UX, CSS, design systems, motion, frontend implementation, and accessibility proof.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-product-ui-ux-accessibility-questions.md",
+      "sourceMetaFilename": "recruiter-product-ui-ux-accessibility-questions.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-product-ui-ux-accessibility-questions.md",
+      "sourceChecksum": "45345578471d6c9230d08ae3f177e7f572bdcd49f47af2aebabd1b8230d049a8",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:recruiter_singapore_explicit_followups",
@@ -1653,7 +2445,13 @@
       "category": "faq",
       "summary": "Singapore-specific recruiter follow-up question set for market fit, proof, compensation context, work authorization handling, and relocation when Singapore is explicitly asked.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-singapore-explicit-followups.md",
+      "sourceMetaFilename": "recruiter-singapore-explicit-followups.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-singapore-explicit-followups.md",
+      "sourceChecksum": "d62df96c80a5f12a8e1b7e0da8df56c76705bae76f6f8838353679073b2710ec",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:recruiter_strengths_and_skills_questions",
@@ -1663,7 +2461,13 @@
       "category": "skills",
       "summary": "Recruiter-safe framing for Joz's strongest skills, differentiators, and proof-backed strengths.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "recruiter-strengths-and-skills-questions.md",
+      "sourceMetaFilename": "recruiter-strengths-and-skills-questions.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/recruiter-strengths-and-skills-questions.md",
+      "sourceChecksum": "1f0879715cae57a7e6095c52e4dda1cc45aea8841a8456cd418f2d6f02587b66",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:skills_agent_model_tool_distinction",
@@ -1673,7 +2477,13 @@
       "category": "skills",
       "summary": "Clarifies the distinction between agents, prediction models, and tools so architecture decisions stay coherent and debuggable.",
       "verification": "framework_supported",
-      "impactScore": 74
+      "impactScore": 74,
+      "sourceFilename": "skills-agent-model-tool-distinction.md",
+      "sourceMetaFilename": "skills-agent-model-tool-distinction.meta.json",
+      "sourceUri": "source://joz/skills-agent-model-tool-distinction.md",
+      "sourcePath": "source://joz/skills-agent-model-tool-distinction.md",
+      "sourceChecksum": "abb8e50e1e3316c2acd386a79cfabd1b57c449b58912b39edea6278b82d15a29",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:skills_agent_runtime_stack",
@@ -1683,7 +2493,13 @@
       "category": "skills",
       "summary": "Explains the runtime stack behind a serious agent system, including model, tools, memory, orchestration, durable execution, state, and observability.",
       "verification": "framework_supported",
-      "impactScore": 78
+      "impactScore": 78,
+      "sourceFilename": "skills-agent-runtime-stack.md",
+      "sourceMetaFilename": "skills-agent-runtime-stack.meta.json",
+      "sourceUri": "source://joz/skills-agent-runtime-stack.md",
+      "sourcePath": "source://joz/skills-agent-runtime-stack.md",
+      "sourceChecksum": "dfce129966d7ea31e6bfcc0a35fd2d582e59751d8ab87d00202cb50b8c9f6d81",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:skills_agentic_ai_architecture",
@@ -1693,7 +2509,13 @@
       "category": "skills",
       "summary": "Detailed technical proof for Joz's Agentic AI architecture capability.",
       "verification": "cv_supported",
-      "impactScore": 96
+      "impactScore": 96,
+      "sourceFilename": "skills-agentic-ai-architecture.md",
+      "sourceMetaFilename": "skills-agentic-ai-architecture.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-agentic-ai-architecture.md",
+      "sourceChecksum": "fc7fcbe44abfd07bb9de1684df2202334c8718a30e4e0aaf590efd79ae170987",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_agentic_ai_ux_orchestration",
@@ -1703,7 +2525,13 @@
       "category": "skills",
       "summary": "Human-agent interaction, multimodal systems, spatial AI, behavioural signals, and decision-oriented AI experience design.",
       "verification": "cv_supported",
-      "impactScore": 92
+      "impactScore": 92,
+      "sourceFilename": "skills-agentic-ai-ux-orchestration.md",
+      "sourceMetaFilename": "skills-agentic-ai-ux-orchestration.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-agentic-ai-ux-orchestration.md",
+      "sourceChecksum": "000d44f34c177ffeb1151263029b4938eba8dfef34e50828106d760b83f25782",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_career_transition_to_agentic_ai",
@@ -1713,7 +2541,13 @@
       "category": "narrative",
       "summary": "Explains the credible progression from interaction engineering and digital transformation into ML-enabled systems and Agentic AI.",
       "verification": "cv_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "skills-career-transition-to-agentic-ai.md",
+      "sourceMetaFilename": "skills-career-transition-to-agentic-ai.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-career-transition-to-agentic-ai.md",
+      "sourceChecksum": "15fb3b610f203235aced44726dd4b45a1a116549f230e96221172b57dc240e23",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_financial_services_ai",
@@ -1723,7 +2557,13 @@
       "category": "domain",
       "summary": "Banking, wealth, insurance, financial AI agents, portfolios, customer intelligence, and regulated enterprise systems.",
       "verification": "cv_supported",
-      "impactScore": 93
+      "impactScore": 93,
+      "sourceFilename": "skills-financial-services-ai.md",
+      "sourceMetaFilename": "skills-financial-services-ai.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-financial-services-ai.md",
+      "sourceChecksum": "be775e2a56a5a7da754dbc1bb8ee5726a99330e00ebbe6b69e33e5f0323c9513",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_full_app_product_engineering",
@@ -1733,7 +2573,13 @@
       "category": "skills",
       "summary": "Comprehensive proof for Joz's ability to integrate frontend, backend, AI, voice, retrieval, world modeling, testing, and product architecture into one coherent shipped application.",
       "verification": "project_supported",
-      "impactScore": 96
+      "impactScore": 96,
+      "sourceFilename": "skills-full-app-product-engineering.md",
+      "sourceMetaFilename": "skills-full-app-product-engineering.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-full-app-product-engineering.md",
+      "sourceChecksum": "798e3912228489385f1806e72ac4af32ecdf20585763a54603e74838f28decd4",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_hero_agentic_ai",
@@ -1743,7 +2589,13 @@
       "category": "skills",
       "summary": "Primary Skills-lane positioning: Agentic AI architecture, enterprise intelligence, governance, context engineering, and multimodal AI orchestration.",
       "verification": "cv_supported",
-      "impactScore": 100
+      "impactScore": 100,
+      "sourceFilename": "skills-hero-agentic-ai.md",
+      "sourceMetaFilename": "skills-hero-agentic-ai.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-hero-agentic-ai.md",
+      "sourceChecksum": "b099f2d35979976e51099162f2a8909a78c2630fa071896c9d3f53d8b8d5fa7a",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_largest_enterprise_scale_proof",
@@ -1753,7 +2605,13 @@
       "category": "proof",
       "summary": "Fast credibility record prioritising Mediacorp, Erste, Maybank, and Manulife by scale, complexity, and measurable impact.",
       "verification": "cv_supported",
-      "impactScore": 99
+      "impactScore": 99,
+      "sourceFilename": "skills-largest-enterprise-scale-proof.md",
+      "sourceMetaFilename": "skills-largest-enterprise-scale-proof.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-largest-enterprise-scale-proof.md",
+      "sourceChecksum": "1425be86060d91724331644a01ed16b44fa4c60521e78fdaaa29818541ce5c1f",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_quantified_business_outcomes",
@@ -1763,7 +2621,13 @@
       "category": "proof",
       "summary": "Measured impact across sales, audience growth, customer scale, delivery efficiency, and enterprise transformation.",
       "verification": "cv_supported",
-      "impactScore": 94
+      "impactScore": 94,
+      "sourceFilename": "skills-quantified-business-outcomes.md",
+      "sourceMetaFilename": "skills-quantified-business-outcomes.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-quantified-business-outcomes.md",
+      "sourceChecksum": "f1d889ccf9e0a25903cdcb2defb48ef765e1b4536fff497f4cef4c9903b1efb1",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_singapore_market_proof",
@@ -1773,7 +2637,13 @@
       "category": "skills",
       "summary": "Evidence set for explaining why Joz is strong for Singapore-market roles across AI, UX systems, enterprise delivery, and spatial computing.",
       "verification": "verified",
-      "impactScore": 0
+      "impactScore": 0,
+      "sourceFilename": "skills-singapore-market-proof.md",
+      "sourceMetaFilename": "skills-singapore-market-proof.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-singapore-market-proof.md",
+      "sourceChecksum": "a1b22b938f891ebf18e9a4d51d481017ba343c5b18df2468d0048446d3b5594c",
+      "evidenceTier": "verified_fact"
     },
     {
       "id": "document:skills_spatial_3d_xr_ar_platforms",
@@ -1783,7 +2653,13 @@
       "category": "skills",
       "summary": "Comprehensive proof for Joz's spatial computing capability across 3D web, XR/AR, volumetric UI, asset workflows, and immersive product delivery.",
       "verification": "cv_and_project_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "skills-spatial-3d-xr-ar-platforms.md",
+      "sourceMetaFilename": "skills-spatial-3d-xr-ar-platforms.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-spatial-3d-xr-ar-platforms.md",
+      "sourceChecksum": "db3f84100700bad7902b75c56dab04d7bd743c183b23c1519961e5f514a43c08",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_technical_platform_stack",
@@ -1793,7 +2669,13 @@
       "category": "skills",
       "summary": "Backend AI stack, frontend engineering, spatial computing, prototyping, accessibility, and production integration.",
       "verification": "cv_and_project_supported",
-      "impactScore": 86
+      "impactScore": 86,
+      "sourceFilename": "skills-technical-platform-stack.md",
+      "sourceMetaFilename": "skills-technical-platform-stack.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-technical-platform-stack.md",
+      "sourceChecksum": "63271fcafc1412b3e31d9307da3a228646c9f2e153e68aedf2a616b79f588433",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:skills_ui_ux_css_product_systems",
@@ -1803,7 +2685,13 @@
       "category": "skills",
       "summary": "Comprehensive proof for Joz's interface capability across UI, UX, CSS, design systems, accessibility, motion, voice UX, and production-grade frontend experience design.",
       "verification": "cv_and_project_supported",
-      "impactScore": 94
+      "impactScore": 94,
+      "sourceFilename": "skills-ui-ux-css-product-systems.md",
+      "sourceMetaFilename": "skills-ui-ux-css-product-systems.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/skills-ui-ux-css-product-systems.md",
+      "sourceChecksum": "f32cc0d33af5afaad06727e000dcf73c8a0b5c4baa866ddf9d263369fd5fe4df",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_agent_control_loop",
@@ -1813,7 +2701,13 @@
       "category": "systems_principle",
       "summary": "Defines the safest control loop for high-stakes agent systems: propose, validate, execute through secure services, and verify against real systems.",
       "verification": "framework_supported",
-      "impactScore": 92
+      "impactScore": 92,
+      "sourceFilename": "systems-agent-control-loop.md",
+      "sourceMetaFilename": "systems-agent-control-loop.meta.json",
+      "sourceUri": "source://joz/systems-agent-control-loop.md",
+      "sourcePath": "source://joz/systems-agent-control-loop.md",
+      "sourceChecksum": "92a8e6d62689201ed4a2f0b2f9c19af3fef04a2785fabd27ee41bece8394a6a2",
+      "evidenceTier": "framework_guidance"
     },
     {
       "id": "document:systems_agentic_ai_judgment",
@@ -1823,7 +2717,13 @@
       "category": "governance_principle",
       "summary": "Agentic AI success depends on judgment, boundaries, and accountability.",
       "verification": "positioning_supported",
-      "impactScore": 98
+      "impactScore": 98,
+      "sourceFilename": "systems-agentic-ai-judgment.md",
+      "sourceMetaFilename": "systems-agentic-ai-judgment.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-agentic-ai-judgment.md",
+      "sourceChecksum": "195779e825919242ec42843399c589f533b3705bb6275028e2b53c2e4f02329e",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_decision_thinking",
@@ -1833,7 +2733,13 @@
       "category": "decision_pattern",
       "summary": "Decision quality matters more than information volume.",
       "verification": "positioning_supported",
-      "impactScore": 96
+      "impactScore": 96,
+      "sourceFilename": "systems-decision-thinking.md",
+      "sourceMetaFilename": "systems-decision-thinking.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-decision-thinking.md",
+      "sourceChecksum": "8ad111d443bce57595d38bfcb9a0904cf7dcf3ac607d49ea7d486f0b0a6960be",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_feedback_loops",
@@ -1843,7 +2749,13 @@
       "category": "feedback_loop",
       "summary": "Healthy systems learn from outcomes and adjust behavior.",
       "verification": "positioning_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "systems-feedback-loops.md",
+      "sourceMetaFilename": "systems-feedback-loops.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-feedback-loops.md",
+      "sourceChecksum": "26c6ae467f2032c49da3fe37b7ebed55076fbdff1eb99f05928bb40d8e22dcb3",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_governance_mindset",
@@ -1853,7 +2765,13 @@
       "category": "governance_principle",
       "summary": "Governance is an enabling mechanism, not merely compliance.",
       "verification": "positioning_supported",
-      "impactScore": 95
+      "impactScore": 95,
+      "sourceFilename": "systems-governance-mindset.md",
+      "sourceMetaFilename": "systems-governance-mindset.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-governance-mindset.md",
+      "sourceChecksum": "09b07ac60304d8a167061f71d0c4fcf182cdf6c140d65ffbd2cb3cd7bca0f388",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_human_behavior",
@@ -1863,7 +2781,13 @@
       "category": "systems_principle",
       "summary": "Systems are ultimately driven by human incentives and behavior.",
       "verification": "positioning_supported",
-      "impactScore": 93
+      "impactScore": 93,
+      "sourceFilename": "systems-human-behavior.md",
+      "sourceMetaFilename": "systems-human-behavior.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-human-behavior.md",
+      "sourceChecksum": "62d83d6804495076f7d3f13e9ce33a73a3e3a1d2fdc9ddb24ce3627ea6af64b0",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_mindset_hero",
@@ -1873,7 +2797,13 @@
       "category": "systems_mindset",
       "summary": "Organizations are living systems of people, incentives, decisions, workflows, data, and feedback loops.",
       "verification": "positioning_supported",
-      "impactScore": 100
+      "impactScore": 100,
+      "sourceFilename": "systems-mindset-hero.md",
+      "sourceMetaFilename": "systems-mindset-hero.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-mindset-hero.md",
+      "sourceChecksum": "92a8dc46844867fac608703585bd74afe63f3c151a9c51b8a2dd3a52c31ed41b",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_organizational_failure_patterns",
@@ -1883,7 +2813,13 @@
       "category": "failure_pattern",
       "summary": "Many failures repeat across industries regardless of technology.",
       "verification": "positioning_supported",
-      "impactScore": 94
+      "impactScore": 94,
+      "sourceFilename": "systems-organizational-failure-patterns.md",
+      "sourceMetaFilename": "systems-organizational-failure-patterns.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-organizational-failure-patterns.md",
+      "sourceChecksum": "f8ed212472829567b26d14d68abf8d1502bfa0c1a831af471d5fbb3f8dc9bead",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_principle_context_creates_intelligence",
@@ -1893,7 +2829,13 @@
       "category": "systems_principle",
       "summary": "Data without context rarely creates usable intelligence.",
       "verification": "positioning_supported",
-      "impactScore": 98
+      "impactScore": 98,
+      "sourceFilename": "systems-principle-context-creates-intelligence.md",
+      "sourceMetaFilename": "systems-principle-context-creates-intelligence.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-principle-context-creates-intelligence.md",
+      "sourceChecksum": "40006324b007c740c939b7043a3317e3f8e8131d82bc0c578d2d062e771d5080",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_principle_signal_over_noise",
@@ -1903,7 +2845,13 @@
       "category": "systems_principle",
       "summary": "More information does not automatically create better decisions.",
       "verification": "positioning_supported",
-      "impactScore": 99
+      "impactScore": 99,
+      "sourceFilename": "systems-principle-signal-over-noise.md",
+      "sourceMetaFilename": "systems-principle-signal-over-noise.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-principle-signal-over-noise.md",
+      "sourceChecksum": "f2f315c4664429487ee5ee549728516f163b44b53caee86acaaa1370c92da62f",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:systems_principle_systems_before_features",
@@ -1913,7 +2861,13 @@
       "category": "systems_principle",
       "summary": "Understand the system before adding technology.",
       "verification": "positioning_supported",
-      "impactScore": 97
+      "impactScore": 97,
+      "sourceFilename": "systems-principle-systems-before-features.md",
+      "sourceMetaFilename": "systems-principle-systems-before-features.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/systems-principle-systems-before-features.md",
+      "sourceChecksum": "a432e2b8fb1039c41b894649cc2a7f06968778ef29f510f597718eb97d3d8f79",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "document:uk_healthcare_digital_platforms",
@@ -1923,7 +2877,13 @@
       "category": "project",
       "summary": "Healthcare communications, portal, CMS, webcast, and mobile-first platform work in the United Kingdom.",
       "verification": "project_supported",
-      "impactScore": 77
+      "impactScore": 77,
+      "sourceFilename": "uk-healthcare-digital-platforms.md",
+      "sourceMetaFilename": "uk-healthcare-digital-platforms.meta.json",
+      "sourceUri": null,
+      "sourcePath": "data/joz/inbox/uk-healthcare-digital-platforms.md",
+      "sourceChecksum": "7f0122750747c1df1f514c970a4bcb1197767ba4c804e8696af751e47e52a895",
+      "evidenceTier": "supported_claim"
     },
     {
       "id": "governance:access_control",

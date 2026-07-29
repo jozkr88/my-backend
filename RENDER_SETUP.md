@@ -24,6 +24,11 @@ SUPABASE_URL=https://your-project.supabase.co
 JOZ_REQUIRE_AUTH=true
 JOZ_REQUIRE_DATABASE=true
 DISABLE_FILE_MEMORY=1
+NEO4J_URI=neo4j+s://your-instance.databases.neo4j.io
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=...
+NEO4J_DATABASE=neo4j
+JOZ_KNOWLEDGE_GRAPH_MODE=augment
 STRIPE_SECRET_KEY=sk_test_... # use the live key in production
 JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS=250000
 JOZ_ARCHITECTURE_REVIEW_CURRENCY=usd
@@ -37,6 +42,7 @@ Notes:
 - `SUPABASE_URL` enables Supabase Auth JWT verification through the project's JWKS endpoint. The backend requires a valid JWT for proposal approval and execution when `JOZ_REQUIRE_AUTH=true`.
 - `JOZ_REQUIRE_DATABASE=true` makes Supabase/Postgres mandatory. The service fails during startup if the database is unavailable or not configured, and it does not fall back to local JSON or process memory for runtime data.
 - `DISABLE_FILE_MEMORY=1` disables `worldMemory.json` writes because Render web services do not provide durable local disk storage across restarts/deploys.
+- `NEO4J_URI`, `NEO4J_USERNAME`, and `NEO4J_PASSWORD` are Render secrets. `NEO4J_DATABASE` defaults to `neo4j`; `augment` adds reviewed graph evidence to documents already selected by the existing retrieval path.
 - The checked-in `data/joz/published/` files are build and publishing artifacts. They are visible in the data-control overview, but production retrieval is database-backed when `JOZ_REQUIRE_DATABASE=true`.
 - The paid architecture flow is chat-native: it collects the brief, shows the draft scope, and starts Stripe Checkout from the chat. Keep `STRIPE_SECRET_KEY` server-side; the price is configured in minor currency units (for example, `250000` is USD 2,500.00). `JOZ_PUBLIC_APP_URL` is used for the success and cancellation return paths.
 - If Stripe is not configured, the chat keeps the draft brief but returns a safe payment-configuration message instead of exposing a fake checkout link.
