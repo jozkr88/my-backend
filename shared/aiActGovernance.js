@@ -13,13 +13,12 @@ export const AI_MACHINE_READABLE_DISCLOSURE = {
 export const JOZ_AI_SYSTEM_CARD = {
   schema: "joz.ai_system_card.v1",
   version: AI_ACT_GOVERNANCE_VERSION,
-  name: "Joz LLM and Business Value Diagnostic",
+  name: "Joz LLM",
   providerRole:
     "Joz / Jozef Krupa operates the application-level AI system. Model and infrastructure providers are third-party processors or upstream model providers where configured.",
   intendedPurpose: [
     "Explain Joz's experience and capabilities.",
-    "Help users frame organizational AI, data, governance, oversight, and adoption problems.",
-    "Produce bounded working hypotheses and evidence requests for a human-led business diagnostic.",
+    "Help users understand organizational AI, data, governance, oversight, and adoption concepts.",
   ],
   notIntendedFor: [
     "Making or recommending decisions about an identifiable person's employment, hiring, promotion, dismissal, pay, credit, insurance, healthcare, education, benefits, immigration, law enforcement, or biometric status.",
@@ -27,9 +26,9 @@ export const JOZ_AI_SYSTEM_CARD = {
     "Replacing legal, regulatory, security, clinical, financial, HR, or other professional judgment.",
   ],
   modelBehavior: {
-    outputs: "Generated text, structured diagnostic state, evidence candidates, and interface actions.",
-    uncertainty: "The system labels hypotheses, confidence, missing evidence, and unverified evidence; confidence is not proof.",
-    humanOversight: "A human must review evidence and explicitly confirm a diagnosis before it can be marked verified. Consequential actions require separate approval gates.",
+    outputs: "Generated text and structured interaction metadata.",
+    uncertainty: "The system can be wrong or incomplete; confidence is not proof.",
+    humanOversight: "A human must review outputs before consequential decisions or actions. Consequential actions require separate approval gates.",
   },
   data: {
     inputs: ["Chat messages", "Optional voice transcripts", "User-submitted company evidence", "Technical and security metadata"],
@@ -40,7 +39,6 @@ export const JOZ_AI_SYSTEM_CARD = {
     "AI interaction disclosure in chat and voice surfaces.",
     "Deterministic routing and policy boundaries outside the model.",
     "High-impact-use guardrails and human review requirements.",
-    "Evidence verification before a diagnostic can become verified.",
     "Request, decision, approval, and incident auditability.",
     "Evaluation and adversarial regression tests.",
   ],

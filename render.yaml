@@ -2,6 +2,7 @@ services:
   - type: web
     name: xq-backend
     runtime: node
+    rootDir: server
     buildCommand: npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality
     startCommand: npm start
     healthCheckPath: /api/hello
@@ -12,60 +13,5 @@ services:
         sync: false
       - key: DATABASE_URL
         sync: false
-      - key: SUPABASE_URL
-        sync: false
-      - key: JOZ_REQUIRE_AUTH
-        value: "true"
-      - key: JOZ_MODEL_PROVIDER
-        value: "openai"
-      - key: JOZ_MODEL
-        value: "gpt-4o-mini"
-      - key: JOZ_REQUIRE_DATABASE
-        value: "true"
-      - key: JOZ_KNOWLEDGE_GRAPH_MODE
-        value: "shadow"
-      - key: NEO4J_URI
-        sync: false
-      - key: NEO4J_USERNAME
-        sync: false
-      - key: NEO4J_PASSWORD
-        sync: false
-      - key: NEO4J_DATABASE
-        value: "6ec69dd8"
       - key: DISABLE_FILE_MEMORY
         value: "1"
-      - key: STRIPE_SECRET_KEY
-        sync: false
-      - key: JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS
-        sync: false
-      - key: JOZ_ARCHITECTURE_REVIEW_CURRENCY
-        value: usd
-      - key: JOZ_PUBLIC_APP_URL
-        sync: false
-      - key: BUSINESS_VALUE_WORKER_URL
-        fromService:
-          type: web
-          name: joz-business-value-worker
-          property: hostport
-      - key: BUSINESS_VALUE_WORKER_TOKEN
-        fromService:
-          type: web
-          name: joz-business-value-worker
-          envVarKey: BUSINESS_VALUE_WORKER_TOKEN
-
-  - type: web
-    name: joz-business-value-worker
-    runtime: python
-    rootDir: services/business-value-worker
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /health
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.0
-      - key: BUSINESS_VALUE_DATABASE_URL
-        sync: false
-      - key: BUSINESS_VALUE_WORKER_TOKEN
-        generateValue: true
-      - key: BUSINESS_VALUE_REQUIRE_DATABASE
-        value: "true"

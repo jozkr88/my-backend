@@ -188,7 +188,7 @@ function isRagEvaluationPrompt(input = "") {
 
 function verifyAudienceRelevance({ input = "", route = {}, trace = {}, reply = "" }) {
   const knowledgeLevel = trace?.audienceProfile?.aiKnowledge?.id;
-  const genericBoundary = /not in the current joz knowledge base|outside the current deterministic joz answer set/i.test(reply);
+  const genericBoundary = /not in the current joz (?:knowledge base|knowledge graph)|outside the current deterministic joz answer set/i.test(reply);
   const isSpecialistRagQuestion = knowledgeLevel === "ai_specialist" && isRagEvaluationPrompt(input);
   const relevantAnswer = /retrieval|recall|precision|faithful|citation|grounded|relevance|completeness|latency|regression/i.test(reply);
 

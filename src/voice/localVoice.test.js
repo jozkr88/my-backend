@@ -1,0 +1,29 @@
+import { resolveLocalVoiceCommand } from "./localVoice";
+
+test("cross-jumps from maxx to ascend in meet-joz", () => {
+  expect(resolveLocalVoiceCommand("ascend", "maxx", null, null)).toEqual({
+    action: "discover",
+    target: "/neo/meet-joz",
+    awareness: "Cross-jumping to Ascend.",
+  });
+});
+
+test("cross-jumps from maxx to flex in meet-joz", () => {
+  expect(resolveLocalVoiceCommand("flex", "maxx", null, null)).toEqual({
+    action: "vibe",
+    target: "/neo/meet-joz",
+    awareness: "Cross-jumping to Flex.",
+  });
+});
+
+test("cross-jumps from maxx to mogg in meet-joz", () => {
+  expect(resolveLocalVoiceCommand("mogg", "maxx", null, null)).toEqual({
+    action: "skills",
+    target: "/neo/meet-joz",
+    awareness: "Cross-jumping to Mogg.",
+  });
+});
+
+test("does not misclassify why-questions as brain navigation", () => {
+  expect(resolveLocalVoiceCommand("Why should we hire Joz?", "root", null, null)).toBeNull();
+});

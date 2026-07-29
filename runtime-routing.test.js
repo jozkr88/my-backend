@@ -111,7 +111,7 @@ test("POST /api/joz-llm verifies business value definition replies deterministic
   assert.match(String(payload.reply || ""), /business value is|measurable improvement/i);
 });
 
-test("POST /api/joz-llm returns a conservative diagnostic state inside Business Value", async () => {
+test("POST /api/joz-llm keeps the Business Value diagnostic disabled", async () => {
   const { status, payload } = await postJson("/api/joz-llm", {
     sessionKey: "runtime-business-value-diagnostic",
     messages: [{ role: "user", content: "Our AI outputs are too generic and users do not trust them." }],
@@ -123,12 +123,7 @@ test("POST /api/joz-llm returns a conservative diagnostic state inside Business 
   });
 
   assert.equal(status, 200);
-  assert.equal(payload.businessValueAgent?.schema, "business_value_diagnostic.v1");
-  assert.equal(payload.businessValueAgent?.activeNode, "adoption");
-  assert.equal(payload.businessValueAgent?.diagnosis?.type, "working_hypothesis");
-  assert.equal(payload.businessValueAgent?.diagnosis?.notYetVerified, true);
-  assert.equal(payload.businessValueAgent?.approval?.status, "pending");
-  assert.ok(Array.isArray(payload.businessValueAgent?.missingEvidence));
+  assert.equal(payload.businessValueAgent, null);
 });
 
 test("POST /api/joz-llm does not let Root world context hijack operating model questions", async () => {

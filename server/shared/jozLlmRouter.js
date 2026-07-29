@@ -615,7 +615,7 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "functions") {
-    return "Joz creates business value across functions by mapping AI into real operating areas, not abstract categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on. The point is function-specific leverage, not one broad AI layer imposed on everyone the same way.";
+    return "Joz creates business value across functions by mapping AI into real operating areas, not categories. In finance and accounting that includes AP, AR, close support, forecasting, and anomaly detection. In ERP and operations it includes planning and exception handling. In HR, marketing, sales, and leadership it improves knowledge reuse, reporting clarity, workflow support, and decision signal leaders can act on. The point is function-specific leverage, not one broad AI layer imposed equally.";
   }
 
   if (subIntent === "operating_model") {
@@ -623,7 +623,7 @@ function composeBusinessNeedReply(subIntent = "hire_value") {
   }
 
   if (subIntent === "decision_support") {
-    return "Joz creates business value through decision support by improving signal, prioritization, and executive clarity in noisy environments. That means helping teams see what changed, why it matters, what action is recommended, and what outcome should be measured. The value is not just automation. It is better judgment, faster alignment, and more accountable execution across leadership and operating teams when complexity is high. The strongest proof is commercial and operational: 20x digital sales growth at Maybank-Ageas Etiqa, 30x audience growth at Mediacorp, and Lean ML execution across 11 APAC markets at Manulife all depended on clearer signal and better decisions, not just more tooling.";
+    return "Joz improves decision support by turning noisy inputs into usable signal, clear prioritization, and executive clarity. The system helps teams see what changed, why it matters, which action is recommended, and how to measure the outcome. The value is better judgment, faster alignment, and accountable execution—not automation for its own sake. That gives leaders a clearer path from evidence to action when complexity is high.";
   }
 
   return "Joz is worth hiring because the proof is enterprise-scale and measurable: 20x digital sales growth at Maybank-Ageas Etiqa, Lean ML transformation across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and 16M+ customer-scale engineering at Erste Bank. Under that proof layer, Joz brings agentic AI architecture, decision intelligence, context engineering, and governance-minded delivery.";
@@ -726,11 +726,11 @@ function detectProgrammeQuery(clean = "") {
 function buildUnknownDefinitionGapReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (normalized === "what is not in joz's knowledge base" || normalized === "what is not in jozs knowledge base") {
-    return "The current Joz knowledge base does not define arbitrary external entities. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+    return "The current Joz Knowledge Graph does not define arbitrary external entities. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
   }
   const term = extractDefinitionTerm(clean);
   if (!term) return null;
-  return `${term} is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
+  return `${term} is not in the current Joz Knowledge Graph. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
 }
 
 function buildAmbiguousFollowUpReply(clean = "") {

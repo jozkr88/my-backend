@@ -1190,7 +1190,7 @@ test("unknown definition prompts return a knowledge-gap reply instead of the Joz
     assert.equal(resolution.answerSource, "knowledge_gap");
     assert.match(
       resolution.reply,
-      new RegExp(`^${expectedTerm} is not in the current Joz knowledge base\\.`, "i")
+      new RegExp(`^${expectedTerm} is not in the current Joz Knowledge Graph\\.`, "i")
     );
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
@@ -1244,7 +1244,7 @@ test("unknown definition prompts ignore unrelated retrieved docs and still retur
     assert.equal(resolution.answerSource, "knowledge_gap");
     assert.match(
       resolution.reply,
-      new RegExp(`^${expectedTerm} is not in the current Joz knowledge base\\.`, "i")
+      new RegExp(`^${expectedTerm} is not in the current Joz Knowledge Graph\\.`, "i")
     );
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
@@ -1280,7 +1280,7 @@ test("common first-word typos still resolve unknown definition prompts to the kn
   assert.equal(resolution.answerSource, "knowledge_gap");
   assert.match(
     resolution.reply,
-    /^Paradex is not in the current Joz knowledge base\./i
+    /^Paradex is not in the current Joz Knowledge Graph\./i
   );
   assert.doesNotMatch(resolution.reply, /^Tools are functions/i);
 });

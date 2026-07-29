@@ -170,6 +170,7 @@ const JOZ_CHAT_DUPLICATE_WINDOW_MS = 10_000;
 const DEFAULT_JOZ_CONVERSATION_RETENTION_DAYS = 30;
 const DEFAULT_JOZ_CALLBACK_RETENTION_DAYS = 30;
 const DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS = 365;
+const BUSINESS_VALUE_DIAGNOSTIC_ENABLED = false;
 const jozChatSessionLog = new Map();
 const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
@@ -1799,8 +1800,9 @@ app.post("/api/joz-llm", async (req, res) => {
       return !actionId.includes("architecture_review") && !actionId.includes("paid_architecture");
     });
     const shouldRunBusinessValueDiagnostic =
-      legacyRuntimeContext.currentPortal === "business-value" ||
-      effectiveRoute.selectedRoute === "business_need";
+      BUSINESS_VALUE_DIAGNOSTIC_ENABLED &&
+      (legacyRuntimeContext.currentPortal === "business-value" ||
+        effectiveRoute.selectedRoute === "business_need");
     const businessValueCaseRecord =
       shouldRunBusinessValueDiagnostic
         ? await (async () => {
@@ -1974,6 +1976,10 @@ app.post("/api/joz-llm", async (req, res) => {
 });
 
 app.get("/api/business-value/cases/:caseId", requireJozAuth, async (req, res) => {
+  if (!BUSINESS_VALUE_DIAGNOSTIC_ENABLED) {
+    return res.status(410).json({ error: "Business Value diagnostic is disabled." });
+  }
+
   try {
     const caseId = String(req.params?.caseId || "").trim();
     if (!caseId) return res.status(400).json({ error: "Missing caseId" });
@@ -2007,6 +2013,10 @@ app.get("/api/business-value/cases/:caseId", requireJozAuth, async (req, res) =>
 });
 
 app.post("/api/business-value/cases/:caseId/evidence", requireJozAuth, async (req, res) => {
+  if (!BUSINESS_VALUE_DIAGNOSTIC_ENABLED) {
+    return res.status(410).json({ error: "Business Value diagnostic is disabled." });
+  }
+
   try {
     const caseId = String(req.params?.caseId || "").trim();
     if (!caseId) return res.status(400).json({ error: "Missing caseId" });
@@ -2145,6 +2155,10 @@ app.post("/api/business-value/cases/:caseId/evidence", requireJozAuth, async (re
 });
 
 app.post("/api/business-value/cases/:caseId/evidence/:evidenceKey/review", requireJozAuth, async (req, res) => {
+  if (!BUSINESS_VALUE_DIAGNOSTIC_ENABLED) {
+    return res.status(410).json({ error: "Business Value diagnostic is disabled." });
+  }
+
   try {
     const caseId = String(req.params?.caseId || "").trim();
     const evidenceKey = decodeURIComponent(String(req.params?.evidenceKey || "").trim());

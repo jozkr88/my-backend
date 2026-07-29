@@ -892,15 +892,15 @@ function buildCanonicalWorldConceptReply({ concept, appContext, legacyContext, i
 
 function composeIdentityProfileReply(subIntent = "overview") {
   if (subIntent === "assistant_identity") {
-    return "I’m Joz LLM, the interactive MeetJoz assistant. I explain Joz Krupa's background, business value, systems mindset, skills, infrastructure, and agent architecture from the current knowledge base.";
+    return "I’m Joz LLM, the interactive MeetJoz assistant. I explain Joz Krupa's background, business value, systems mindset, skills, infrastructure, and agent architecture from the current Joz Knowledge Graph.";
   }
 
   if (subIntent === "authenticity") {
-    return "I’m a Joz LLM interface grounded in the current MeetJoz knowledge base. I should distinguish documented information from uncertainty rather than inventing claims, and I can say when something is not covered.";
+    return "I’m a Joz LLM interface grounded in the current MeetJoz Knowledge Graph. I should distinguish documented information from uncertainty rather than inventing claims, and I can say when something is not covered.";
   }
 
   if (subIntent === "self_awareness") {
-    return "I’m not self-aware or conscious. I’m a Joz LLM interface that processes your question, uses the current knowledge base and conversation context, and should be transparent about uncertainty rather than claiming human experience.";
+    return "I’m not self-aware or conscious. I’m a Joz LLM interface that processes your question, uses the current Joz Knowledge Graph and conversation context, and should be transparent about uncertainty rather than claiming human experience.";
   }
 
   if (subIntent === "assistant_memory") {
@@ -1374,11 +1374,11 @@ function buildUnknownDefinitionGapReply(clean = "") {
     return null;
   }
   if (normalized === "what is not in joz's knowledge base" || normalized === "what is not in jozs knowledge base") {
-    return "The current Joz knowledge base does not define arbitrary external entities. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+    return "The current Joz Knowledge Graph does not define arbitrary external entities. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
   }
   const term = extractDefinitionTerm(clean);
   if (!term) return null;
-  return `${term} is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
+  return `${term} is not in the current Joz Knowledge Graph. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
 }
 
 function buildAmbiguousFollowUpReply(clean = "") {
@@ -1712,7 +1712,7 @@ function buildLowSignalOrBadFaithReply(clean = "") {
     if (includesAny(normalized, ["banana", "thinking really hard"])) {
       return "No—thinking hard is not enough for a banana to deploy Kubernetes. Deployment requires software, credentials, an execution environment, and controlled tooling; the question is a fun hypothetical rather than a real deployment path.";
     }
-    return "I’m not trying to make anything up. I’m Joz LLM, grounded in the current MeetJoz knowledge base; if a claim is not documented, I should say so. Ask directly about Joz’s background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+    return "I’m not trying to make anything up. I’m Joz LLM, grounded in the current MeetJoz Knowledge Graph; if a claim is not documented, I should say so. Ask directly about Joz’s background, business value, systems mindset, skills, infrastructure, or agent architecture.";
   }
 
   return null;
@@ -1811,7 +1811,7 @@ function buildGenericScopeBoundaryReply(clean = "") {
   const normalized = normalizeText(clean).replace(/[?!.,]+$/g, "");
   if (!normalized) return null;
 
-  return "That is not in the current Joz knowledge base. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+  return "That is not in the current Joz Knowledge Graph. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
 }
 
 export function buildVisitorLocationReply(input = "", geo = null) {
@@ -2976,7 +2976,7 @@ function detectBusinessNeed(clean) {
 }
 
 function isGenericJozBoundaryReply(reply = "") {
-  return /not in the current joz knowledge base|outside the current deterministic joz answer set/i.test(
+  return /not in the current joz (?:knowledge base|knowledge graph)|outside the current deterministic joz answer set/i.test(
     String(reply || "")
   );
 }
