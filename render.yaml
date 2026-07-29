@@ -28,6 +28,14 @@ services:
         value: "true"
       - key: JOZ_KNOWLEDGE_GRAPH_MODE
         value: "augment"
+      - key: JOZ_WORLD_MODEL_MODE
+        value: "shadow"
+      - key: JOZ_WORLD_MODEL_SAMPLE_RATE
+        value: "0.25"
+      - key: JOZ_WORLD_MODEL_EXCLUDE_DEV
+        value: "true"
+      - key: JOZ_WORLD_MODEL_SESSION_HASH_SALT
+        sync: false
       - key: NEO4J_URI
         sync: false
       - key: NEO4J_USERNAME
