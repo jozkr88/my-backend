@@ -1947,6 +1947,15 @@ function isEvidenceAlreadyCovered(evidencePoint = "", lead = "") {
   return overlapCount >= 3 && overlapCount / pointTokens.size >= 0.45;
 }
 
+function hasSpecificProofSignal(evidencePoint = "") {
+  return (
+    /\d/.test(String(evidencePoint)) ||
+    /\b(?:Maybank|Manulife|Mediacorp|Erste|MarketClue|Publicis|Leo Burnett|SGX|Dubai Future Foundation)\b/i.test(
+      evidencePoint
+    )
+  );
+}
+
 function buildRetrievedDocumentBrief(doc = {}) {
   const metadata = doc?.metadata || {};
   return {
@@ -2120,6 +2129,14 @@ function buildEvidenceBackedRouteReply({
     ),
   ]
     .filter((point) => !isEvidenceAlreadyCovered(point, lead))
+    .filter(
+      (point) =>
+        !(
+          route.selectedRoute === "business_need" &&
+          route.detectedSubIntent === "hire_value" &&
+          !hasSpecificProofSignal(point)
+        )
+    )
     .slice(0, 2);
 
   if (!lead || !evidencePoints.length) return null;
