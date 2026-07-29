@@ -258,6 +258,8 @@ export function WorldModelTraceCard({ telemetry, onOpen }) {
 export function WorldModelInspectorView({ telemetry, history = [], mode, onBack }) {
   const prediction = telemetry?.prediction || null;
   const observation = telemetry?.observation || null;
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simulationError, setSimulationError] = useState("");
   const observedState = stateFromObservation(observation, prediction);
   const candidates = Array.isArray(prediction?.candidates) ? prediction.candidates : [];
   const probabilisticCandidates = prediction?.probabilistic?.candidates || [];
@@ -277,6 +279,46 @@ export function WorldModelInspectorView({ telemetry, history = [], mode, onBack 
 
   const historyItems = useMemo(() => history.slice(0, 12), [history]);
 
+  const simulateNextGovernedAction = async () => {
+    if (isSimulating || typeof window === "undefined") return;
+    setIsSimulating(true);
+    setSimulationError("");
+    try {
+      const appState = window.__appState || {};
+      const result = await fetchJson(apiUrl("/api/agentic"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          input: "mogg",
+          context: {
+            ...appState,
+            currentPortal: appState.currentPortal || window.location.pathname,
+            worldObservation: window.__lastWorldObservation || null,
+          },
+        }),
+      });
+      if (!result?.prediction?.trajectoryId) {
+        throw new Error("No shadow prediction was returned");
+      }
+      window.__lastWorldPrediction = {
+        ...result.prediction,
+        recordedAt: result.prediction.recordedAt || new Date().toISOString(),
+      };
+      window.dispatchEvent(
+        new CustomEvent("world-prediction-observed", {
+          detail: {
+            prediction: window.__lastWorldPrediction,
+            observation: window.__lastWorldObservation || null,
+          },
+        })
+      );
+    } catch (error) {
+      setSimulationError(error?.message || "Shadow simulation unavailable");
+    } finally {
+      setIsSimulating(false);
+    }
+  };
+
   return (
     <div className="joz-world-inspector" aria-label="World Model Inspector">
       <div className="joz-world-inspector__header">
@@ -294,7 +336,16 @@ export function WorldModelInspectorView({ telemetry, history = [], mode, onBack 
 
       {!prediction ? (
         <div className="joz-world-inspector__empty" role="status">
-          {mode === "developer" ? "No world-model telemetry yet." : "Ask Joz or navigate to create a shadow trace."}
+          <p>{mode === "developer" ? "No world-model telemetry yet." : "Ask Joz or navigate to create a shadow trace."}</p>
+          <button
+            type="button"
+            className="joz-world-inspector__simulate-button"
+            onClick={simulateNextGovernedAction}
+            disabled={isSimulating}
+          >
+            {isSimulating ? "Simulating…" : "Simulate next governed action"}
+          </button>
+          {simulationError && <p className="joz-world-inspector__error">{simulationError}</p>}
         </div>
       ) : (
         <>
