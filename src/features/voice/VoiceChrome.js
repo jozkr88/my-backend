@@ -963,21 +963,19 @@ export function VoiceChrome({
                     {bookJozAction.label}
                   </button>
                 ) : null}
-                {worldModelInspectorMode !== "off" && (
-                  <button
-                    type="button"
-                    className="joz-llm-panel__action joz-llm-panel__action--header joz-llm-panel__action--world-model"
-                    data-glow="world-model"
-                    aria-current={jozLlmPanelView === "world" ? "true" : undefined}
-                    onClick={() => {
-                      setIsPrivacyPolicyOpen(false);
-                      setTrustPanelTab("overview");
-                      setJozLlmPanelView("world");
-                    }}
-                  >
-                    World Model
-                  </button>
-                )}
+                <button
+                  type="button"
+                  className="joz-llm-panel__action joz-llm-panel__action--header joz-llm-panel__action--world-model"
+                  data-glow="world-model"
+                  aria-current={jozLlmPanelView === "world" ? "true" : undefined}
+                  onClick={() => {
+                    setIsPrivacyPolicyOpen(false);
+                    setTrustPanelTab("overview");
+                    setJozLlmPanelView("world");
+                  }}
+                >
+                  World Model
+                </button>
               </div>
               <div className="joz-llm-panel__header-controls">
                 <span className="joz-llm-panel__header-tag">Alpha</span>
