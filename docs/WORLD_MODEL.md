@@ -148,9 +148,9 @@ No production path currently allows the probabilistic layer to replace determini
 
 ## Popup inspector
 
-The inspector is integrated into the existing Joz MAXX popup rather than exposed as a second route or dashboard. It is disabled when the frontend flag is `off`. In `developer` mode it is available only in non-production builds and provides collapsed, redacted diagnostics; `showcase` mode presents only curated privacy-safe fields. Neither mode renders controls when the flag is `off`.
+The inspector is integrated into the existing Joz MAXX popup rather than exposed as a second route or dashboard. It defaults to `showcase`, a privacy-safe view, and can be explicitly disabled with the frontend flag `off`. In `developer` mode it is available only in non-production builds and provides collapsed, redacted diagnostics; `showcase` mode presents only curated privacy-safe fields. The World Model view includes a read-only simulation entry point; it does not execute the selected action.
 
-The popup reuses the existing `world-prediction-observed` browser event and the compatibility globals `window.__lastWorldObservation` and `window.__lastWorldPrediction`. The inspector maintains at most 12 in-memory safe snapshots for the current browser session. It does not poll, trigger predictions, post trajectories, execute actions, alter the chat pipeline, or read persisted database history.
+The popup reuses the existing `world-prediction-observed` browser event and the compatibility globals `window.__lastWorldObservation` and `window.__lastWorldPrediction`. The inspector maintains at most 12 in-memory safe snapshots for the current browser session. It polls only for completion of the read-only shadow prediction, does not execute actions, alter the chat pipeline, or read persisted database history.
 
 The displayed progression is `Observed → Simulated → Selected → Executed → Verified`. Shadow preference and deterministic approved action are shown separately, and verification is only reported after the existing predicted-versus-observed reconciliation is present. Missing or unsupported fields are rendered as `Unknown`, `Not observed`, or `Pending`; they are never converted to zero or treated as success.
 

@@ -3,8 +3,8 @@ import {
   redactWorldModelTelemetry,
 } from "./worldModelInspector";
 
-test("inspector is disabled by default and in production developer mode", () => {
-  expect(getWorldModelInspectorMode({})).toBe("off");
+test("inspector defaults to privacy-safe showcase and restricts production developer mode", () => {
+  expect(getWorldModelInspectorMode({})).toBe("showcase");
   expect(getWorldModelInspectorMode({
     REACT_APP_JOZ_WORLD_MODEL_INSPECTOR: "developer",
     NODE_ENV: "development",

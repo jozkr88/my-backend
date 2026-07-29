@@ -7,10 +7,10 @@ const SENSITIVE_KEYS = /^(input|prompt|messages|content|token|authorization|cook
 const ID_KEYS = /^(session(id)?|conversation(id)?|database(id)?|request(id)?|user(id)?|visitor(id)?)$/i;
 
 export function getWorldModelInspectorMode(env = typeof process !== "undefined" ? process.env : {}) {
-  const configured = String(env?.REACT_APP_JOZ_WORLD_MODEL_INSPECTOR || "off")
+  const configured = String(env?.REACT_APP_JOZ_WORLD_MODEL_INSPECTOR || "showcase")
     .trim()
     .toLowerCase();
-  if (!INSPECTOR_MODES.has(configured)) return "off";
+  if (!INSPECTOR_MODES.has(configured)) return "showcase";
   if (configured === "developer" && env?.NODE_ENV === "production") return "off";
   return configured;
 }
