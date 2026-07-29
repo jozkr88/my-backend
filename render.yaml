@@ -15,3 +15,13 @@ services:
         sync: false
       - key: DISABLE_FILE_MEMORY
         value: "1"
+      - key: NEO4J_URI
+        sync: false
+      - key: NEO4J_USERNAME
+        sync: false
+      - key: NEO4J_PASSWORD
+        sync: false
+      - key: NEO4J_DATABASE
+        value: "neo4j"
+      - key: JOZ_KNOWLEDGE_GRAPH_MODE
+        value: "augment"

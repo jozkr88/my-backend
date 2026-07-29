@@ -42,4 +42,3 @@ test("runtime falls back to the published graph artifact when Neo4j is not confi
   assert.equal(result.backend, "artifact");
   assert.ok(result.documentSlugs.length > 0);
 });
-

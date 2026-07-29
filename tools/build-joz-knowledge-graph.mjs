@@ -5,7 +5,7 @@ import { buildJozKnowledgeGraph } from "../shared/jozKnowledgeGraph.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const repoRoot = path.resolve(__dirname, "..", "..");
+const repoRoot = path.resolve(__dirname, "..");
 const publishedRoot = path.join(repoRoot, "data", "joz", "published");
 const ontologyPath = path.join(publishedRoot, "joz-ontology.generated.json");
 const documentsPath = path.join(publishedRoot, "joz-documents.generated.json");
@@ -18,4 +18,3 @@ const graph = buildJozKnowledgeGraph({ documents, ontology });
 
 fs.writeFileSync(outputPath, `${JSON.stringify(graph, null, 2)}\n`);
 console.log(JSON.stringify({ outputPath, nodes: graph.nodes.length, edges: graph.edges.length }, null, 2));
-

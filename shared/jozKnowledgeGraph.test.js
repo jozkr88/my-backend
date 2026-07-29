@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   buildJozKnowledgeGraph,
   getJozKnowledgeGraphMode,
+  loadPublishedJozKnowledgeGraph,
   queryJozKnowledgeGraph,
 } from "./jozKnowledgeGraph.js";
 
@@ -58,6 +59,61 @@ test("knowledge graph builder preserves evidence relationships", () => {
   assert.ok(graph.edges.some((edge) => edge.type === "supports"));
 });
 
+test("document nodes retain resolvable source provenance", () => {
+  const graph = buildJozKnowledgeGraph({
+    documents: [{
+      ...documents[0],
+      source_uri: "data/joz/canonical/example.jsonl#record-1",
+      metadata: {
+        ...documents[0].metadata,
+        source_filename: "example.jsonl",
+        source_meta_filename: "example.meta.json",
+        source_checksum: "checksum-1",
+        evidence_tier: "verified_fact",
+      },
+    }, documents[1]],
+    ontology,
+  });
+  const canonical = graph.nodes.find((node) => node.slug === "marketclue-proof");
+  const inbox = graph.nodes.find((node) => node.slug === "knowledge-graph-architecture");
+
+  assert.deepEqual(
+    {
+      sourceFilename: canonical.sourceFilename,
+      sourceMetaFilename: canonical.sourceMetaFilename,
+      sourceUri: canonical.sourceUri,
+      sourcePath: canonical.sourcePath,
+      sourceChecksum: canonical.sourceChecksum,
+      evidenceTier: canonical.evidenceTier,
+    },
+    {
+      sourceFilename: "example.jsonl",
+      sourceMetaFilename: "example.meta.json",
+      sourceUri: "data/joz/canonical/example.jsonl#record-1",
+      sourcePath: "data/joz/canonical/example.jsonl#record-1",
+      sourceChecksum: "checksum-1",
+      evidenceTier: "verified_fact",
+    }
+  );
+  assert.equal(inbox.sourcePath, null);
+});
+
+test("published graph has source-backed proof evidence paths", () => {
+  const published = loadPublishedJozKnowledgeGraph();
+  const nodes = new Map(published.nodes.map((node) => [node.id, node]));
+  const documents = published.nodes.filter((node) => node.type === "document");
+  const supportedBy = published.edges.filter((edge) => edge.type === "supported_by");
+
+  assert.equal(documents.length, 160);
+  assert.ok(documents.every((document) => document.sourcePath && document.sourceChecksum));
+  assert.equal(supportedBy.length, 29);
+  assert.ok(supportedBy.every((edge) => {
+    const proof = nodes.get(edge.from);
+    const document = nodes.get(edge.to);
+    return proof?.type === "proof" && document?.type === "document" && document.sourcePath;
+  }));
+});
+
 test("knowledge graph traversal returns source documents without changing answer routing", () => {
   const graph = buildJozKnowledgeGraph({ documents, ontology });
   const result = queryJozKnowledgeGraph({
@@ -75,4 +131,3 @@ test("knowledge graph defaults to shadow mode and can be disabled or promoted ex
   assert.equal(getJozKnowledgeGraphMode({ JOZ_KNOWLEDGE_GRAPH_ENABLED: "false" }), "disabled");
   assert.equal(getJozKnowledgeGraphMode({ JOZ_KNOWLEDGE_GRAPH_MODE: "augment" }), "augment");
 });
-

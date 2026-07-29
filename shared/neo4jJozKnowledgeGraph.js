@@ -97,6 +97,12 @@ export async function importJozKnowledgeGraphToNeo4j({ graph, env = process.env,
       verification: node.verification,
       impactScore: node.impactScore,
       company: node.company,
+      sourceFilename: node.sourceFilename,
+      sourceMetaFilename: node.sourceMetaFilename,
+      sourceUri: node.sourceUri,
+      sourcePath: node.sourcePath,
+      sourceChecksum: node.sourceChecksum,
+      evidenceTier: node.evidenceTier,
     }),
   }));
   const edges = (graph?.edges || []).map((edge) => ({
@@ -177,6 +183,7 @@ export async function queryNeo4jJozKnowledgeGraph({ query = "", limit = 8, env =
        RETURN document.id AS id,
               document.slug AS slug,
               document.label AS title,
+              document.sourcePath AS sourcePath,
               edgeTypes,
               distance
        ORDER BY distance ASC, document.id ASC
@@ -193,6 +200,7 @@ export async function queryNeo4jJozKnowledgeGraph({ query = "", limit = 8, env =
       candidates.set(slug, {
         slug,
         title: record.get("title") || slug,
+        sourcePath: record.get("sourcePath") || null,
         score: Math.max(0, 20 - distance * 4),
         path: ["neo4j", ...edgeTypes],
         edgeTypes,
@@ -240,4 +248,3 @@ export async function queryJozKnowledgeGraphRuntime({ query = "", limit = 8, env
 
   return { backend: "artifact", ...queryJozKnowledgeGraph({ graph: artifact, query, limit }) };
 }
-

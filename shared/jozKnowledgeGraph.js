@@ -301,6 +301,8 @@ export function buildJozKnowledgeGraph({ documents = [], ontology = {} } = {}) {
     const metadata = document?.metadata || {};
     const slug = cleanText(document.slug || metadata.slug || document.title);
     if (!slug) continue;
+    const sourceUri = cleanText(document.source_uri || metadata.source_uri);
+    const sourceFilename = cleanText(metadata.source_filename);
     const documentId = addNode(nodes, "document", slug, {
       label: document.title || slug,
       slug,
@@ -308,6 +310,12 @@ export function buildJozKnowledgeGraph({ documents = [], ontology = {} } = {}) {
       summary: document.summary || null,
       verification: metadata.verification_status || metadata.verification?.status || null,
       impactScore: Number(metadata.impact_score || 0),
+      sourceFilename: sourceFilename || null,
+      sourceMetaFilename: cleanText(metadata.source_meta_filename) || null,
+      sourceUri: sourceUri || null,
+      sourcePath: sourceUri || (sourceFilename ? `data/joz/inbox/${sourceFilename}` : null),
+      sourceChecksum: cleanText(metadata.source_checksum) || null,
+      evidenceTier: cleanText(metadata.evidence_tier) || null,
     });
 
     for (const field of GRAPH_FIELDS) {
