@@ -17,11 +17,12 @@ export function normalizeWorldModelControls(env = {}, { production = false } = {
   const excludeDevelopment = String(
     env.JOZ_WORLD_MODEL_EXCLUDE_DEV ?? (production ? "true" : "false")
   ).trim().toLowerCase() === "true";
+  const defaultSampleRate = production ? WORLD_MODEL_DEFAULTS.sampleRate : 1;
 
   return {
     sampleRate: boundedNumber(
       env.JOZ_WORLD_MODEL_SAMPLE_RATE,
-      WORLD_MODEL_DEFAULTS.sampleRate,
+      defaultSampleRate,
       { min: 0, max: 1 }
     ),
     maxTrajectoryBytes: Math.round(boundedNumber(

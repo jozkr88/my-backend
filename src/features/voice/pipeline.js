@@ -1,3 +1,40 @@
+import { isWorldModelShadowEnabled } from "../../world-model/mode";
+
+async function attachShadowPrediction({
+  rawInput,
+  context,
+  fetchJson,
+  apiUrl,
+  localResult,
+}) {
+  if (
+    !isWorldModelShadowEnabled() ||
+    typeof fetchJson !== "function" ||
+    typeof apiUrl !== "function"
+  ) {
+    return localResult;
+  }
+
+  try {
+    const agenticResult = await fetchJson(apiUrl("/api/agentic"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: rawInput,
+        context,
+      }),
+    });
+
+    return {
+      ...localResult,
+      prediction: agenticResult?.prediction || null,
+    };
+  } catch (error) {
+    console.warn("⚠️ Shadow prediction enrichment unavailable; continuing locally:", error?.message || error);
+    return localResult;
+  }
+}
+
 export async function resolveVoicePipeline({
   rawInput,
   isMobile,
@@ -33,12 +70,19 @@ export async function resolveVoicePipeline({
   );
 
   if (localResult) {
+    const enrichedLocalResult = await attachShadowPrediction({
+      rawInput: spoken,
+      context,
+      fetchJson,
+      apiUrl,
+      localResult,
+    });
     return {
       rawLower,
       mobileShortcut,
       spoken,
       source: "local",
-      result: localResult,
+      result: enrichedLocalResult,
       backendMode: null,
     };
   }

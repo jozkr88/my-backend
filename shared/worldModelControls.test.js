@@ -19,6 +19,11 @@ test("world-model controls clamp production values", () => {
   assert.equal(controls.excludeDevelopment, true);
 });
 
+test("local shadow mode samples every trajectory unless overridden", () => {
+  assert.equal(normalizeWorldModelControls({}).sampleRate, 1);
+  assert.equal(normalizeWorldModelControls({}, { production: true }).sampleRate, 0.25);
+});
+
 test("trajectory sampling is deterministic per trace", () => {
   assert.equal(shouldSampleWorldTrajectory("trace-1", 1), true);
   assert.equal(shouldSampleWorldTrajectory("trace-1", 0), false);

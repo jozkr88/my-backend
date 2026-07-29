@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
+import { apiUrl, fetchJson } from "../../utils/api";
+
 const INSPECTOR_MODES = new Set(["off", "developer", "showcase"]);
 const SENSITIVE_KEYS = /^(input|prompt|messages|content|token|authorization|cookie|headers?|rawheaders?|session(id)?|conversation(id)?|database(id)?|userContext|cameraState|cameraFrame|arMetadata|email|phone|name|audio|image|frame|biometric|physical(room)?|private|secret|system(prompt)?|connection(string|details)?|security(rules?)?)$/i;
 const ID_KEYS = /^(session(id)?|conversation(id)?|database(id)?|request(id)?|user(id)?|visitor(id)?)$/i;
@@ -99,6 +101,47 @@ export function useWorldModelTelemetry(mode) {
     const handleObserved = (event) => update(event.detail);
     window.addEventListener("world-prediction-observed", handleObserved);
     return () => window.removeEventListener("world-prediction-observed", handleObserved);
+  }, [mode]);
+
+  useEffect(() => {
+    if (mode === "off" || typeof window === "undefined") return undefined;
+    let cancelled = false;
+
+    const pollCompletedPrediction = async () => {
+      const current = readTelemetryFromWindow(mode);
+      const trajectoryId = current?.prediction?.trajectoryId;
+      if (!trajectoryId || current?.prediction?.pending !== true) return;
+
+      try {
+        const result = await fetchJson(
+          apiUrl(`/api/world-model/predictions/${encodeURIComponent(trajectoryId)}`)
+        );
+        if (cancelled || result?.ready !== true || !result.prediction) return;
+
+        window.__lastWorldPrediction = {
+          ...window.__lastWorldPrediction,
+          ...result.prediction,
+          pending: false,
+        };
+        window.dispatchEvent(
+          new CustomEvent("world-prediction-observed", {
+            detail: {
+              prediction: window.__lastWorldPrediction,
+              observation: window.__lastWorldObservation || null,
+            },
+          })
+        );
+      } catch {
+        // Shadow telemetry is optional; keep the live interaction unaffected.
+      }
+    };
+
+    const interval = window.setInterval(pollCompletedPrediction, 250);
+    void pollCompletedPrediction();
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
   }, [mode]);
 
   return { telemetry, history };

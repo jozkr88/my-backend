@@ -215,6 +215,7 @@ const jozCallbackFallbackStore = [];
 const jozObservabilityFallbackStore = [];
 const worldModelTrajectoryFallbackStore = [];
 const worldTransitionExperienceFallbackStore = [];
+const worldModelPredictionFallbackStore = new Map();
 const jozRecentSessionMessagesFallbackStore = new Map();
 const jozBusinessValueCaseFallbackStore = new Map();
 const isNodeTestRuntime =
@@ -1076,6 +1077,10 @@ app.post("/api/agentic", async (req, res) => {
     void shadowPredictionPromise
       .then((completedPrediction) => {
         if (!completedPrediction) return null;
+        rememberCompletedWorldModelPrediction({
+          prediction: completedPrediction,
+          approved,
+        });
         return persistCompletedWorldModelPrediction({
           prediction: completedPrediction,
           approved,
@@ -1090,6 +1095,15 @@ app.post("/api/agentic", async (req, res) => {
     console.error("❌ /api/agentic failed:", error);
     return res.status(500).json({ error: error.message });
   }
+});
+
+app.get("/api/world-model/predictions/:trajectoryId", (req, res) => {
+  const trajectoryId = String(req.params.trajectoryId || "").trim();
+  const prediction = worldModelPredictionFallbackStore.get(trajectoryId);
+  if (!prediction) {
+    return res.status(202).json({ ready: false, trajectoryId });
+  }
+  return res.json({ ready: true, prediction });
 });
 
 app.post("/api/world-model/trajectories", async (req, res) => {
@@ -1291,6 +1305,24 @@ async function persistCompletedWorldModelPrediction({ prediction, approved, samp
   }
   rememberWorldModelTrajectory({ ...record, persistenceStatus: "memory_fallback" });
   return { trajectoryId: record.trajectoryId, persisted: false, mode: "memory_fallback" };
+}
+
+function rememberCompletedWorldModelPrediction({ prediction, approved } = {}) {
+  if (!prediction?.trajectoryId) return;
+  const safePrediction = {
+    ...prediction,
+    input: "",
+    sessionId: null,
+    pending: false,
+    mode: "shadow",
+    approvedAction: approved?.action || prediction.approvedAction || null,
+    approvedTarget: approved?.target || prediction.approvedTarget || null,
+  };
+  worldModelPredictionFallbackStore.set(prediction.trajectoryId, safePrediction);
+  while (worldModelPredictionFallbackStore.size > 100) {
+    const oldest = worldModelPredictionFallbackStore.keys().next().value;
+    worldModelPredictionFallbackStore.delete(oldest);
+  }
 }
 
 function rememberWorldModelTrajectory(record) {
