@@ -1,0 +1,68 @@
+{
+  "slug": "business-need-agentic-operating-model-best-practice",
+  "title": "Agentic Operating Model Best Practice",
+  "category": "business_answer",
+  "lane": "business_need",
+  "summary": "Defines best-in-class agentic AI as a governed operating model with retrieval, planning, tools, verification, human control, and feedback loops.",
+  "tags": [
+    "agentic-ai",
+    "best-practice",
+    "governance",
+    "operating-model",
+    "tools"
+  ],
+  "impact_score": 97,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "Best-in-class agentic AI is an operating model, not just a model connected to tools.",
+    "The critical layers are intent framing, context retrieval, reasoning and planning, tool execution, verification, human control, and feedback loops.",
+    "Retrieval before fluency, verification before autonomy, workflow before feature, and governance before scale are the core operating rules."
+  ],
+  "proof_points": [
+    "This structure matches the retrieval-first, validation-aware direction already used in the Joz backend.",
+    "It aligns with Joz's broader principles of systems before features, decision quality, and appropriate autonomy.",
+    "It gives a business-safe explanation for how agentic AI becomes operationally credible."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "governance_gaps",
+    "knowledge_fragmentation",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "decision_quality",
+    "systems_before_features",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "ai_governance",
+    "decision_intelligence",
+    "verification",
+    "workflow_redesign"
+  ],
+  "outcomes": [
+    "faster_decisions",
+    "higher_data_trust",
+    "stronger_governance"
+  ],
+  "governance": [
+    "auditability",
+    "clear_ownership",
+    "confidence_handling",
+    "evaluation",
+    "human_approval",
+    "source_provenance"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

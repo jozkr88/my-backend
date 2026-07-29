@@ -1,0 +1,183 @@
+{
+  "portal": "the-vibe-energy",
+  "title": "MAXX Portal",
+  "summary": "Nebula-like inside-the-brain portal centered on two neurons forming a synapse, transmitting signals, and building new pathways through neuroplasticity and neurogenesis.",
+  "scene": {
+    "id": "maxx_scene",
+    "title": "Inside the Brain",
+    "environment": "nebula_brain_environment",
+    "meaning": [
+      "MAXX is the abstract cognitive portal.",
+      "It explains intelligence, signal, adaptation, and new pathway formation through a stylized neural world.",
+      "The experience is not outer space; it is a semantic interior-brain environment rendered with nebula-like atmosphere."
+    ],
+    "phases": [
+      {
+        "id": "brain_entry",
+        "title": "Brain Entry",
+        "summary": "The user is entering the abstract brain world."
+      },
+      {
+        "id": "signal_flow",
+        "title": "Signal Flow",
+        "summary": "Two neurons connect, form their synapse, and begin transmitting electrical and chemical signal."
+      },
+      {
+        "id": "new_pathways",
+        "title": "New Pathways",
+        "summary": "Experience quality scales through connections and establishes new neural pathways."
+      },
+      {
+        "id": "memory_building",
+        "title": "Memory Building",
+        "summary": "The neural explanation resolves into neuroplasticity and neurogenesis as the portal's core idea."
+      },
+      {
+        "id": "inside_the_brain",
+        "title": "Inside the Brain",
+        "summary": "Deeper abstract layer inside MAXX after the initial neuron explanation."
+      }
+    ]
+  },
+  "objects": [
+    {
+      "id": "maxx_n2x",
+      "mesh": "neurotransmitters",
+      "asset": "n2x.glb",
+      "role": "primary_animation",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["neurotransmitters", "n2x", "neurons"],
+      "voiceAliases": [
+        "human neuron",
+        "ai neuron",
+        "neurons",
+        "synapse",
+        "signals",
+        "neuroplasticity",
+        "neurogenesis"
+      ],
+      "summary": "Primary two-neuron animation showing synapse formation, signal transmission, and pathway creation.",
+      "meaning": [
+        "The Human Neuron and AI Neuron connect and form their synapse.",
+        "Transmitters then send signals between the neurons.",
+        "New Experience is created.",
+        "The quality of Experience is shaped by neural connections.",
+        "These connections scale and establish new neural pathways.",
+        "The sequence culminates in neuroplasticity and neurogenesis."
+      ],
+      "arCapable": true,
+      "interactions": {
+        "desktop": {
+          "trigger": "click",
+          "effect": "pause_sequence_and_reveal_neurodesign",
+          "reveals": "maxx_neurodesign_explainer"
+        },
+        "mobile": {
+          "trigger": "click",
+          "effect": "launch_camera_ar"
+        }
+      }
+    },
+    {
+      "id": "maxx_human_neuron",
+      "mesh": "human neuron",
+      "asset": "n2x.glb",
+      "role": "semantic_actor",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["human neuron"],
+      "voiceAliases": ["human neuron"],
+      "summary": "Human-side neuron in the MAXX explainer animation.",
+      "meaning": [
+        "Represents the human side of intelligence and lived experience."
+      ]
+    },
+    {
+      "id": "maxx_ai_neuron",
+      "mesh": "ai neuron",
+      "asset": "n2x.glb",
+      "role": "semantic_actor",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["ai neuron"],
+      "voiceAliases": ["ai neuron"],
+      "summary": "AI-side neuron in the MAXX explainer animation.",
+      "meaning": [
+        "Represents machine-side intelligence entering the same signal and pathway metaphor."
+      ]
+    },
+    {
+      "id": "maxx_receptors",
+      "mesh": "receptors",
+      "asset": "n3.glb",
+      "role": "supporting_animation",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["receptors", "n3"],
+      "voiceAliases": ["receptors", "synaptic receptors"],
+      "summary": "Supporting receptor animation showing movement between synapses.",
+      "meaning": [
+        "Adds a second explanatory layer around how receptor-like structures move between synaptic spaces.",
+        "Supports the broader story of signal transfer and adaptive connection."
+      ]
+    },
+    {
+      "id": "maxx_neurodesign_explainer",
+      "mesh": "elite beauty",
+      "asset": "neurodesign.glb",
+      "role": "desktop_explainer",
+      "interactive": false,
+      "target": null,
+      "meshAliases": [
+        "elite beauty",
+        "neurodesign",
+        "ascension",
+        "frame mogg"
+      ],
+      "voiceAliases": [
+        "elite beauty",
+        "ascension",
+        "10 out of 10 frame mogg",
+        "frame mogg"
+      ],
+      "summary": "Desktop-only gold pill explainer revealed after clicking the neurons in MAXX.",
+      "meaning": [
+        "This explainer appears after the neuron interaction on desktop.",
+        "It uses a gold pill composition to extend the neural metaphor into a designed conceptual layer."
+      ],
+      "content": {
+        "heading": "The Elite Beauty",
+        "panels": [
+          {
+            "title": "Ascension",
+            "body": "Consistency, Precision, Discipline, Conditioning, and Dominance."
+          },
+          {
+            "title": "10/10 Frame Mogg",
+            "body": "Structure, Proportion, Symmetry, Style, and Aura."
+          }
+        ]
+      },
+      "display": {
+        "desktopOnly": true,
+        "trigger": "click_neurons"
+      }
+    },
+    {
+      "id": "maxx_nebula_environment",
+      "mesh": "nebula_brain_environment",
+      "asset": null,
+      "role": "environment",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["nebula_brain_environment", "inside_the_brain", "brain_environment"],
+      "voiceAliases": ["inside the brain", "brain environment", "nebula"],
+      "summary": "Nebula-like inside-the-brain environment around the neuron explainer.",
+      "meaning": [
+        "This environment expresses the cognitive and atmospheric dimension of MAXX.",
+        "It is the abstract interior-brain setting for the neural storytelling."
+      ]
+    }
+  ]
+}

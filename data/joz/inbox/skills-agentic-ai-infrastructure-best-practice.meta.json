@@ -1,0 +1,70 @@
+{
+  "slug": "skills-agentic-ai-infrastructure-best-practice",
+  "title": "Agentic AI Infrastructure Best Practice",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Explains best-in-class agentic AI infrastructure as the control plane for routing, retrieval, runtime safety, governance, and observability.",
+  "tags": [
+    "agentic-ai",
+    "control-plane",
+    "infrastructure",
+    "observability",
+    "runtime"
+  ],
+  "impact_score": 95,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "Agentic AI infrastructure is the control plane that makes orchestration safe, observable, and scalable.",
+    "The core layers are model routing, retrieval and data, runtime workflow, trust and governance, and observability and operations.",
+    "Without strong infrastructure, agentic AI remains brittle, hard to trust, and difficult to operate at enterprise scale."
+  ],
+  "proof_points": [
+    "The structure matches Joz's existing focus on ACL-aware retrieval, verification, observability, and governance.",
+    "It extends the current technical-stack record from tools into operating reliability and control.",
+    "It gives a recruiter-safe but technically credible explanation of infrastructure beyond buzzwords."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "data_silos",
+    "governance_gaps",
+    "knowledge_fragmentation",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "context_creates_intelligence",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "acl_aware_retrieval",
+    "agent_memory",
+    "agentic_ai",
+    "ai_governance",
+    "enterprise_architecture",
+    "observability",
+    "verification"
+  ],
+  "outcomes": [
+    "higher_data_trust",
+    "lower_risk",
+    "stronger_governance"
+  ],
+  "governance": [
+    "access_control",
+    "auditability",
+    "confidence_handling",
+    "data_boundaries",
+    "evaluation",
+    "observability_control"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

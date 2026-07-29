@@ -1,0 +1,68 @@
+{
+  "slug": "skills-agentic-ai-tools-best-practice",
+  "title": "Agentic AI Tools Best Practice",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Explains best-in-class tool use in agentic systems through tool selection, contracts, permissions, observability, verification, and fallback behavior.",
+  "tags": [
+    "agentic-ai",
+    "best-practice",
+    "tool-use",
+    "tools",
+    "verification"
+  ],
+  "impact_score": 94,
+  "priority_label": "high",
+  "verification": "framework_supported",
+  "claims": [
+    "Best-in-class agentic tool use depends on selection, contracts, permission boundaries, observability, verification, and safe fallback behavior.",
+    "The number of tools matters less than whether tools are governed and trusted in execution.",
+    "Tool use becomes enterprise-capable when every meaningful action is explicit, logged, and checked."
+  ],
+  "proof_points": [
+    "This record complements the existing Joz architecture capability by making tool execution quality explicit.",
+    "It matches the backend direction of tool routing, traceability, and validation rather than blind autonomy.",
+    "It provides a safer explanation of tool use than generic agent demos or prompt-only positioning."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [
+    "MeetJoz"
+  ],
+  "problems": [
+    "governance_gaps",
+    "low_trust",
+    "slow_decision_making"
+  ],
+  "principles": [
+    "appropriate_autonomy",
+    "decision_quality",
+    "human_accountability",
+    "trust_before_autonomy"
+  ],
+  "capabilities": [
+    "agentic_ai",
+    "ai_governance",
+    "context_engineering",
+    "decision_intelligence",
+    "verification"
+  ],
+  "outcomes": [
+    "higher_data_trust",
+    "lower_risk",
+    "stronger_governance"
+  ],
+  "governance": [
+    "access_control",
+    "auditability",
+    "confidence_handling",
+    "escalation",
+    "evaluation",
+    "human_approval"
+  ],
+  "industries": [
+    "technology"
+  ],
+  "proofs": []
+}

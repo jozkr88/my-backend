@@ -1,0 +1,396 @@
+{
+  "portal": "meet-joz",
+  "title": "Meet Joz Portal",
+  "summary": "Sequential portal that progresses through Flex, Ascend, Mogg, and the later work/skills layer.",
+  "scene": {
+    "id": "meet_joz_scene",
+    "title": "Meet Joz",
+    "environment": "worldx_environment",
+    "meaning": [
+      "Meet Joz is a staged identity and capability portal.",
+      "It plays as a sequence rather than as isolated static pages.",
+      "The progression moves from entry and atmosphere into prestige, then into the Mogg digital twin, and then into the work skills layer."
+    ],
+    "runtime": {
+      "driver": "ControlledGLB",
+      "primaryAsset": "model1.glb"
+    },
+    "phases": [
+      {
+        "id": "flex_stop",
+        "title": "Flex",
+        "summary": "Entry layer of Meet Joz."
+      },
+      {
+        "id": "ascend_opening",
+        "title": "Ascend Opening",
+        "summary": "Transition into the Ascend layer."
+      },
+      {
+        "id": "ascend_stop",
+        "title": "Ascend",
+        "summary": "Prestige, aura, and scale layer."
+      },
+      {
+        "id": "skills_opening",
+        "title": "Mogg Opening",
+        "summary": "Transition through Mogg into the deeper work layer."
+      },
+      {
+        "id": "skills_stop",
+        "title": "Mogg",
+        "summary": "Joz's digital twin layer inside the sequence."
+      },
+      {
+        "id": "vibe_back",
+        "title": "Returning",
+        "summary": "Rewinding back through the portal sequence."
+      },
+      {
+        "id": "vibe_back1",
+        "title": "Stepping Back",
+        "summary": "Stepping back from the deep work layer toward Ascend."
+      }
+    ]
+  },
+  "sequence": [
+    {
+      "step": 1,
+      "mesh": "vibe",
+      "title": "Flex",
+      "asset": "model1.glb",
+      "meaning": "Entry layer that opens the Meet Joz world."
+    },
+    {
+      "step": 2,
+      "mesh": "discover",
+      "title": "Ascend",
+      "asset": "model1.glb",
+      "meaning": "Prestige, aura, clout, and scale layer."
+    },
+    {
+      "step": 3,
+      "mesh": "skills",
+      "title": "Mogg",
+      "asset": "model1.glb",
+      "meaning": "Joz's digital twin appears as the Mogg layer inside the main sequence."
+    },
+    {
+      "step": 4,
+      "mesh": "workf",
+      "title": "Skills",
+      "asset": "workf.glb",
+      "meaning": "Later work and skills layer that opens after the digital twin step."
+    }
+  ],
+  "objects": [
+    {
+      "id": "meet_joz_worldx",
+      "mesh": "worldx_environment",
+      "asset": "worldx.glb",
+      "role": "environment",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["worldx_environment", "worldx", "worldx_desktop", "golden_environment_mobile"],
+      "voiceAliases": ["worldx", "meet joz environment"],
+      "summary": "Primary surrounding environment of Meet Joz.",
+      "meaning": [
+        "This is the chamber-like environment around the sequence.",
+        "It reads as an abstract gold city built from reflective forms and semantic landmarks.",
+        "It is the semantic world, not the main trigger object.",
+        "It acts like a 360 set of branded proof, aura, and capability meshes surrounding the Meet Joz sequence."
+      ]
+    },
+    {
+      "id": "meet_joz_heart",
+      "mesh": "heart",
+      "asset": "worldx.glb",
+      "role": "ascend_anchor",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["heart"],
+      "voiceAliases": ["heart"],
+      "summary": "Neon heart anchor in the Ascend layer.",
+      "meaning": [
+        "Acts as the emotional and attraction anchor of Ascend.",
+        "Sits at the center of the prestige and aura composition."
+      ]
+    },
+    {
+      "id": "meet_joz_scale_maxx",
+      "mesh": "scale_maxx",
+      "asset": "worldx.glb",
+      "role": "semantic_text_cluster",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["scale_maxx"],
+      "voiceAliases": ["scale maxx", "scale"],
+      "summary": "Scale MAXX semantic cluster.",
+      "meaning": [
+        "Represents scale, reach, and magnitude in the Meet Joz world."
+      ]
+    },
+    {
+      "id": "meet_joz_clout_maxx",
+      "mesh": "clout_maxx",
+      "asset": "worldx.glb",
+      "role": "semantic_text_cluster",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["clout_maxx"],
+      "voiceAliases": ["clout maxx", "clout"],
+      "summary": "Clout MAXX semantic cluster.",
+      "meaning": [
+        "Represents recognition, pull, and social/professional signal."
+      ]
+    },
+    {
+      "id": "meet_joz_world_class",
+      "mesh": "world_class",
+      "asset": "worldx.glb",
+      "role": "proof_panel",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["world_class"],
+      "voiceAliases": ["world class", "singapore"],
+      "summary": "World-Class Singapore proof panel.",
+      "meaning": [
+        "Represents global quality and international proof.",
+        "Anchors the Singapore panel inside the Ascend layer."
+      ]
+    },
+    {
+      "id": "meet_joz_alpha_psl",
+      "mesh": "alpha_psl",
+      "asset": "worldx.glb",
+      "role": "proof_panel",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["alpha_psl"],
+      "voiceAliases": ["alpha psl", "dubai"],
+      "summary": "Alpha PSL Dubai proof panel.",
+      "meaning": [
+        "Represents prestige, execution, and regional proof in Dubai."
+      ]
+    },
+    {
+      "id": "meet_joz_atmos_maxx",
+      "mesh": "atmos_maxx",
+      "asset": "worldx.glb",
+      "role": "environmental_panel",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["atmos_maxx"],
+      "voiceAliases": ["atmos maxx", "atmos"],
+      "summary": "Atmos MAXX semantic environment panel.",
+      "meaning": [
+        "Represents atmosphere as a deliberate design and world-building variable."
+      ]
+    },
+    {
+      "id": "meet_joz_cross_sensory_aura_engineering",
+      "mesh": "cross_sensory_aura_engineering",
+      "asset": "worldx.glb",
+      "role": "semantic_concept",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["cross_sensory_aura_engineering"],
+      "voiceAliases": ["cross sensory aura engineering", "aura engineering"],
+      "summary": "Cross-Sensory Aura Engineering concept cluster.",
+      "meaning": [
+        "Represents deliberate engineering of aura through cross-sensory composition."
+      ]
+    },
+    {
+      "id": "meet_joz_maximize_beauty_change_reality",
+      "mesh": "maximize_beauty_change_reality",
+      "asset": "worldx.glb",
+      "role": "semantic_concept",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["maximize_beauty_change_reality"],
+      "voiceAliases": ["maximize beauty change reality", "beauty change reality"],
+      "summary": "Maximize Beauty Change Reality concept cluster.",
+      "meaning": [
+        "Frames beauty as an operational lever that changes energy, experience, and reality."
+      ]
+    },
+    {
+      "id": "meet_joz_ai_synthesis",
+      "mesh": "ai_synthesis",
+      "asset": "worldx.glb",
+      "role": "semantic_cluster",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["ai_synthesis"],
+      "voiceAliases": ["ai synthesis"],
+      "summary": "AI Synthesis cluster.",
+      "meaning": [
+        "Represents connection-making and synthesis as a form of intelligence."
+      ]
+    },
+    {
+      "id": "meet_joz_ai_analysis",
+      "mesh": "ai_analysis",
+      "asset": "worldx.glb",
+      "role": "semantic_cluster",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["ai_analysis"],
+      "voiceAliases": ["ai analysis"],
+      "summary": "AI Analysis cluster.",
+      "meaning": [
+        "Represents analysis and connection-making as an intelligence motif."
+      ]
+    },
+    {
+      "id": "meet_joz_capsule",
+      "mesh": "capsule",
+      "asset": "worldx.glb",
+      "role": "central_object",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["capsule"],
+      "voiceAliases": ["capsule", "pill"],
+      "summary": "Gold-and-white capsule object in the worldx environment.",
+      "meaning": [
+        "Acts as a central symbolic object inside the 360 environment."
+      ]
+    },
+    {
+      "id": "meet_joz_model1",
+      "mesh": "model1_sequence",
+      "asset": "model1.glb",
+      "role": "primary_sequence",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["model1_sequence", "model1"],
+      "voiceAliases": ["meet joz sequence"],
+      "summary": "Primary staged sequence object for Meet Joz.",
+      "meaning": [
+        "This object contains the main staged progression of the portal.",
+        "Flex, Ascend, and Mogg are all part of this sequence."
+      ],
+      "runtime": {
+        "driver": "ControlledGLB"
+      }
+    },
+    {
+      "id": "meet_joz_flex",
+      "mesh": "vibe",
+      "asset": "model1.glb",
+      "role": "sequence_layer",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["vibe", "flex"],
+      "voiceAliases": ["vibe", "flex"],
+      "summary": "Flex entry layer in Meet Joz.",
+      "meaning": [
+        "First step of the Meet Joz sequence.",
+        "Opens the portal and establishes the entry atmosphere."
+      ]
+    },
+    {
+      "id": "meet_joz_ascend",
+      "mesh": "discover",
+      "asset": "model1.glb",
+      "role": "sequence_layer",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["discover", "ascend"],
+      "voiceAliases": ["discover", "ascend"],
+      "summary": "Ascend layer in Meet Joz.",
+      "meaning": [
+        "Second step of the sequence.",
+        "Carries prestige, aura, clout, and scale."
+      ]
+    },
+    {
+      "id": "meet_joz_mogg",
+      "mesh": "skills",
+      "asset": "model1.glb",
+      "role": "sequence_layer",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["skills", "mogg", "mogg1"],
+      "voiceAliases": ["mogg", "skills"],
+      "summary": "Mogg digital twin layer inside the main Meet Joz sequence.",
+      "meaning": [
+        "Third step of the sequence.",
+        "Represents Joz's digital twin rather than the later workf skills model."
+      ]
+    },
+    {
+      "id": "meet_joz_workf",
+      "mesh": "workf",
+      "asset": "workf.glb",
+      "role": "deep_skills_layer",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["workf", "skills_layer", "workf_layer"],
+      "voiceAliases": ["workf", "skills layer"],
+      "summary": "Deep work and skills layer after the Mogg digital twin step.",
+      "meaning": [
+        "This is a later layer than Mogg.",
+        "It contains the work and deeper skills presentation after the digital twin appears."
+      ],
+      "interactions": {
+        "click": {
+          "effect": "toggle_skills_text_panel",
+          "reveals": "meet_joz_digital_twin_toggle"
+        },
+        "mobile": {
+          "trigger": "click",
+          "effect": "place_skills_in_reality"
+        },
+        "spatial": {
+          "trigger": "click",
+          "effect": "place_skills_in_reality"
+        }
+      }
+    },
+    {
+      "id": "meet_joz_skills_text_panel",
+      "mesh": "jkx_skills_panel",
+      "asset": "jkx-d.glb",
+      "role": "skills_text_panel",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["jkx_skills_panel", "jkxd", "jkx-d", "skills panel"],
+      "voiceAliases": ["skills panel", "jkx", "jkxd"],
+      "summary": "Skills text panel revealed from the workf layer.",
+      "meaning": [
+        "This text-heavy panel appears when interacting with workf.glb.",
+        "It exposes the deeper skills/capability reading layer inside Meet Joz."
+      ]
+    },
+    {
+      "id": "meet_joz_digital_twin_toggle",
+      "mesh": "jkx",
+      "asset": "jkx-d.glb",
+      "role": "digital_twin_variant",
+      "interactive": true,
+      "target": null,
+      "meshAliases": ["jkx", "digital_twin"],
+      "voiceAliases": ["digital twin", "jkx"],
+      "summary": "Digital twin variant toggled from the work layer.",
+      "meaning": [
+        "Represents the explicit digital twin or skills-text variant once the deep work layer is active."
+      ]
+    },
+    {
+      "id": "meet_joz_aurx",
+      "mesh": "aurx",
+      "asset": "aurx.glb",
+      "role": "supporting_layer",
+      "interactive": false,
+      "target": null,
+      "meshAliases": ["aurx"],
+      "voiceAliases": ["aurx"],
+      "summary": "Supporting animated layer around the Meet Joz sequence.",
+      "meaning": [
+        "Supports visual transition and atmosphere between sequence states."
+      ]
+    }
+  ]
+}

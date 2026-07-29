@@ -1,0 +1,133 @@
+{
+  "slug": "business-need-business-help-question-bank",
+  "title": "Business Help Question Bank",
+  "category": "faq",
+  "source_type": "paste",
+  "source_uri": null,
+  "summary": "Natural business questions and grounded answers explaining how Joz creates measurable value across customer experience, operations, decisions, and growth.",
+  "body": "# Business Help Question Bank\n\nThis record covers the questions a business user is most likely to ask after arriving at MeetJoz. Answers should begin with the business problem and outcome, then explain the AI, data, workflow, and governance needed to deliver it.\n\nQ: How can Joz help my business?\nA: Joz helps a business find where intelligence can improve customer experience, operations, decisions, and growth. He connects the business priority to the relevant data, knowledge, workflow, AI capability, ownership, controls, and success metrics. The starting point is a real bottleneck and a measurable baseline—not an AI feature chosen in isolation.\n\nQ: What business problems can Joz solve?\nA: Joz is useful for fragmented knowledge, slow decisions, repeated manual analysis, disconnected customer or operational signals, weak AI adoption, unclear ownership, governance gaps, and poor translation between strategy and implementation. He frames the real problem, designs the intervention, and links it to a measurable operational or commercial outcome.\n\nQ: How can Joz help a D2C or e-commerce business?\nA: For D2C, Joz can help improve customer journeys, support, product discovery, conversion, retention, campaign operations, and coordination between marketing, sales, service, and fulfilment. The right opportunity depends on the journey friction and baseline data. A useful first step is to identify where customers drop out, teams repeat work, or decisions arrive too late.\n\nQ: How can Joz help increase revenue?\nA: Joz looks for revenue levers such as better customer journeys, lead qualification, next-best action, sales enablement, retention signals, faster campaign learning, and clearer product decisions. He connects the intervention to a baseline such as conversion, revenue per customer, renewal, response time, or pipeline quality, then verifies whether the change created value.\n\nQ: How can Joz reduce costs or improve efficiency?\nA: Joz identifies repeated manual work, handoff friction, slow approvals, reconciliation effort, and avoidable exception handling. Retrieval, classification, summarisation, workflow orchestration, and decision support can reduce effort when they are placed inside the real operating process. Critical decisions remain owned and approved by people.\n\nQ: How can Joz help customer service?\nA: Joz can ground support teams and customer-facing assistants in approved knowledge, route requests, surface relevant context, identify recurring issues, and escalate cases that need human judgement. The outcome should be measured through resolution time, first-contact resolution, customer satisfaction, deflection quality, escalation rate, and answer accuracy—not automation volume alone.\n\nQ: How can Joz help finance, operations, HR, marketing, or sales?\nA: He maps AI opportunities to the function's actual workflow. Finance may benefit from invoice, close, spend, or forecasting support; operations from procurement, exceptions, inventory, and planning; HR from policy and workforce workflows; marketing from campaign and attribution intelligence; and sales from qualification, CRM hygiene, forecasting, renewal, and next-best-action support.\n\nQ: Where is the ROI?\nA: ROI can come from revenue growth, margin improvement, lower cost, faster cycle time, better decisions, lower risk, higher adoption, or stronger customer experience. Joz does not claim ROI before discovery. He defines the baseline, target metric, assumptions, ownership, and verification method so the value case can be tested rather than guessed.\n\nQ: What should a business do first?\nA: Start with one consequential problem: a blocked decision, expensive workflow, customer friction point, or operational risk. Establish the current baseline, identify the data and permissions needed, define the human and system roles, prototype the highest-risk assumption, and evaluate quality, adoption, latency, cost, reliability, and business impact before scaling.\n\nQ: What data does Joz need?\nA: The required data depends on the problem. It may include process events, customer interactions, product or operational records, documents, policies, performance measures, and feedback. Joz first checks data quality, ownership, access, provenance, and sensitivity. The system should use only the context needed for the job and keep authoritative business state in the appropriate source system.\n\nQ: How does Joz keep business AI safe?\nA: Joz separates retrieval, reasoning, policy, execution, and verification. Access controls limit what each user or agent can see and do; high-risk actions require approval; outputs are evaluated and observed; actions are logged; and results are checked against authoritative systems. Governance is part of the operating model, not a final compliance step.\n\nQ: Is Joz a consultant or a builder?\nA: Joz can work across both. He frames the business problem, shapes the operating model, designs the architecture, prototypes the experience, aligns stakeholders, guides implementation, and defines evaluation. The emphasis is on carrying a credible value case from ambiguity toward an adopted and measurable capability.\n\nQ: How quickly can a business see value?\nA: A focused prototype can test a value hypothesis early, but the timing depends on data access, workflow complexity, integrations, risk, and governance. The fastest route is usually a narrow use case with a clear owner, representative data, a baseline, and an explicit decision about what success means.\n\nQ: Why use Joz instead of a generic AI tool?\nA: A generic tool can produce output, but business value depends on the surrounding system: the right problem, trusted context, workflow fit, permissions, human accountability, evaluation, and measurable outcomes. Joz combines agentic AI architecture with enterprise product, engineering, transformation, governance, and human-centred adoption experience.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "business-help",
+      "buyer",
+      "customer-experience",
+      "d2c",
+      "governance",
+      "operations",
+      "question-bank",
+      "roi"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "notes": ""
+    },
+    "verification_status": "positioning_supported",
+    "claims": [
+      "Business answers should begin with the problem and measurable outcome before discussing technology.",
+      "Joz connects business priorities, data, knowledge, workflows, AI architecture, governance, and human accountability.",
+      "ROI should be defined through a baseline, target metrics, assumptions, ownership, and verification rather than guaranteed in advance."
+    ],
+    "proof_points": [
+      "20x digital sales growth at Maybank-Ageas Etiqa.",
+      "Lean ML transformation across 11 APAC markets at Manulife.",
+      "30x audience growth at Mediacorp.",
+      "16M+ customer-scale engineering at Erste Bank.",
+      "70% lower agency-wide handoff friction at Leo Burnett/Publicis."
+    ],
+    "regions": [
+      "Global"
+    ],
+    "companies": [
+      "Dubai Future Foundation",
+      "Erste Bank",
+      "Leo Burnett",
+      "Manulife",
+      "Maybank",
+      "Mediacorp",
+      "Publicis"
+    ],
+    "projects": [],
+    "intent_families": [],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "business-need-business-help-question-bank.md",
+    "source_meta_filename": "business-need-business-help-question-bank.meta.json",
+    "reviewed_at": "",
+    "problems": [
+      "ai_adoption_failure",
+      "data_silos",
+      "governance_gaps",
+      "knowledge_fragmentation",
+      "manual_knowledge_work",
+      "operational_friction",
+      "slow_decision_making",
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence",
+      "decision_quality",
+      "human_accountability",
+      "systems_before_features",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "ai_governance",
+      "decision_intelligence",
+      "rag",
+      "rapid_prototyping",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "cost_reduction",
+      "faster_decisions",
+      "faster_time_to_value",
+      "higher_adoption",
+      "lower_risk",
+      "productivity_gains",
+      "revenue_growth"
+    ],
+    "governance": [
+      "access_control",
+      "clear_ownership",
+      "evaluation",
+      "human_approval",
+      "observability_control",
+      "source_provenance"
+    ],
+    "industries": [
+      "financial_services",
+      "government",
+      "healthcare",
+      "media",
+      "retail",
+      "technology"
+    ],
+    "proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "related_proofs": [
+      "erste_customer_scale",
+      "manulife_lean_ml_ux",
+      "maybank_digital_sales_growth",
+      "mediacorp_audience_growth",
+      "publicis_handoff_reduction"
+    ],
+    "enterprise_scale_score": 100,
+    "measurable_outcome_count": 7
+  }
+}

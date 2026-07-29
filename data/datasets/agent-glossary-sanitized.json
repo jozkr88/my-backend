@@ -1,0 +1,973 @@
+{
+  "dataset_name": "agent-glossary-sanitized",
+  "source_file": "/Users/jozzox/.codex/attachments/f16f0caf-26b0-4bc7-bf8d-156fd5d88f3b/pasted-text.txt",
+  "created_at": "2026-07-15T19:57:13.949Z",
+  "record_count": 120,
+  "sanitization": {
+    "remove_company_names": true,
+    "remove_crypto_references": true,
+    "notes": "Company, vendor, and crypto-specific references were replaced with neutral placeholders while preserving the technical meaning."
+  },
+  "records": [
+    {
+      "id": "agent",
+      "term": "Agent",
+      "definition": "LLM + Instructions/Prompt + Tools + Memory + Reasoning Loop",
+      "prompt": "Define Agent.",
+      "completion": "LLM + Instructions/Prompt + Tools + Memory + Reasoning Loop",
+      "source_line": 1
+    },
+    {
+      "id": "research-agent",
+      "term": "Research Agent",
+      "definition": "LLM + Search Tools + RAG + Research Instructions",
+      "prompt": "Define Research Agent.",
+      "completion": "LLM + Search Tools + RAG + Research Instructions",
+      "source_line": 3
+    },
+    {
+      "id": "risk-agent",
+      "term": "Risk Agent",
+      "definition": "LLM + Portfolio Tools + Market Data + Risk Instructions",
+      "prompt": "Define Risk Agent.",
+      "completion": "LLM + Portfolio Tools + Market Data + Risk Instructions",
+      "source_line": 5
+    },
+    {
+      "id": "trading-agent",
+      "term": "Trading Agent",
+      "definition": "LLM + Trading Tools + Portfolio Data + Trading Instructions",
+      "prompt": "Define Trading Agent.",
+      "completion": "LLM + Trading Tools + Portfolio Data + Trading Instructions",
+      "source_line": 7
+    },
+    {
+      "id": "supervisor-agent",
+      "term": "Supervisor Agent",
+      "definition": "LLM + Specialist Agents + Workflow Instructions",
+      "prompt": "Define Supervisor Agent.",
+      "completion": "LLM + Specialist Agents + Workflow Instructions",
+      "source_line": 9
+    },
+    {
+      "id": "single-agent",
+      "term": "Single Agent",
+      "definition": "LLM + Tools + Memory + One Responsibility",
+      "prompt": "Define Single Agent.",
+      "completion": "LLM + Tools + Memory + One Responsibility",
+      "source_line": 11
+    },
+    {
+      "id": "multi-agent-system",
+      "term": "Multi-Agent System",
+      "definition": "Supervisor Agent + Specialist Agents + Shared State",
+      "prompt": "Define Multi-Agent System.",
+      "completion": "Supervisor Agent + Specialist Agents + Shared State",
+      "source_line": 13
+    },
+    {
+      "id": "orchestrator",
+      "term": "Orchestrator",
+      "definition": "Workflow Engine + State Management + Execution Control",
+      "prompt": "Define Orchestrator.",
+      "completion": "Workflow Engine + State Management + Execution Control",
+      "source_line": 15
+    },
+    {
+      "id": "agentic-architecture",
+      "term": "Agentic Architecture",
+      "definition": "Agents + Tools + Memory + Orchestration + Verification",
+      "prompt": "Define Agentic Architecture.",
+      "completion": "Agents + Tools + Memory + Orchestration + Verification",
+      "source_line": 17
+    },
+    {
+      "id": "agent-orchestration",
+      "term": "Agent Orchestration",
+      "definition": "Managing how agents execute, communicate and share state",
+      "prompt": "Define Agent Orchestration.",
+      "completion": "Managing how agents execute, communicate and share state",
+      "source_line": 20
+    },
+    {
+      "id": "langgraph",
+      "term": "LangGraph",
+      "definition": "AI workflow / graph orchestration (most popular)",
+      "prompt": "Define LangGraph.",
+      "completion": "AI workflow / graph orchestration (most popular)",
+      "source_line": 23
+    },
+    {
+      "id": "temporal",
+      "term": "Temporal",
+      "definition": "Enterprise durable workflows, retries, approvals",
+      "prompt": "Define Temporal.",
+      "completion": "Enterprise durable workflows, retries, approvals",
+      "source_line": 24
+    },
+    {
+      "id": "crewai",
+      "term": "CrewAI",
+      "definition": "Multi-agent orchestration framework",
+      "prompt": "Define CrewAI.",
+      "completion": "Multi-agent orchestration framework",
+      "source_line": 25
+    },
+    {
+      "id": "vendor-agents-sdk",
+      "term": "Vendor Agents SDK",
+      "definition": "Model Vendor-native agents, tools, handoffs",
+      "prompt": "Define Vendor Agents SDK.",
+      "completion": "Model Vendor-native agents, tools, handoffs",
+      "source_line": 26
+    },
+    {
+      "id": "cloud-workflow-service",
+      "term": "Cloud Workflow Service",
+      "definition": "Cloud workflow orchestration on Cloud Vendor",
+      "prompt": "Define Cloud Workflow Service.",
+      "completion": "Cloud workflow orchestration on Cloud Vendor",
+      "source_line": 27
+    },
+    {
+      "id": "custom-python",
+      "term": "Custom Python",
+      "definition": "Bespoke orchestration via state machines and code",
+      "prompt": "Define Custom Python.",
+      "completion": "Bespoke orchestration via state machines and code",
+      "source_line": 28
+    },
+    {
+      "id": "langgraph-temporal",
+      "term": "LangGraph + Temporal",
+      "definition": "Current best-practice production stack",
+      "prompt": "Define LangGraph + Temporal.",
+      "completion": "Current best-practice production stack",
+      "source_line": 31
+    },
+    {
+      "id": "memory",
+      "term": "Memory",
+      "definition": "Information preserved across interactions and workflows.",
+      "prompt": "Define Memory.",
+      "completion": "Information preserved across interactions and workflows.",
+      "source_line": 39
+    },
+    {
+      "id": "session-memory",
+      "term": "Session Memory",
+      "definition": "Current conversation",
+      "prompt": "Define Session Memory.",
+      "completion": "Current conversation",
+      "source_line": 42
+    },
+    {
+      "id": "user-memory",
+      "term": "User Memory",
+      "definition": "Preferences and profile",
+      "prompt": "Define User Memory.",
+      "completion": "Preferences and profile",
+      "source_line": 43
+    },
+    {
+      "id": "task-memory",
+      "term": "Task Memory",
+      "definition": "Workflow state",
+      "prompt": "Define Task Memory.",
+      "completion": "Workflow state",
+      "source_line": 44
+    },
+    {
+      "id": "knowledge-memory",
+      "term": "Knowledge Memory",
+      "definition": "Retrieved documents",
+      "prompt": "Define Knowledge Memory.",
+      "completion": "Retrieved documents",
+      "source_line": 45
+    },
+    {
+      "id": "audit-memory",
+      "term": "Audit Memory",
+      "definition": "Action history",
+      "prompt": "Define Audit Memory.",
+      "completion": "Action history",
+      "source_line": 46
+    },
+    {
+      "id": "observability",
+      "term": "Observability",
+      "definition": "Tracing agent decisions, tool calls, costs and failures.",
+      "prompt": "Define Observability.",
+      "completion": "Tracing agent decisions, tool calls, costs and failures.",
+      "source_line": 50
+    },
+    {
+      "id": "audit-trail",
+      "term": "Audit Trail",
+      "definition": "Permanent record of actions, decisions and executions.",
+      "prompt": "Define Audit Trail.",
+      "completion": "Permanent record of actions, decisions and executions.",
+      "source_line": 51
+    },
+    {
+      "id": "idempotency",
+      "term": "Idempotency",
+      "definition": "Same request executed multiple times produces one result.",
+      "prompt": "Define Idempotency.",
+      "completion": "Same request executed multiple times produces one result.",
+      "source_line": 52
+    },
+    {
+      "id": "event-driven-arch",
+      "term": "Event-Driven Arch",
+      "definition": "Systems communicate through events instead of direct calls.",
+      "prompt": "Define Event-Driven Arch.",
+      "completion": "Systems communicate through events instead of direct calls.",
+      "source_line": 53
+    },
+    {
+      "id": "shared-state",
+      "term": "Shared State",
+      "definition": "Structured data shared between agents.",
+      "prompt": "Define Shared State.",
+      "completion": "Structured data shared between agents.",
+      "source_line": 55
+    },
+    {
+      "id": "tool-calling",
+      "term": "Tool Calling",
+      "definition": "LLM invoking functions, APIs or services.",
+      "prompt": "Define Tool Calling.",
+      "completion": "LLM invoking functions, APIs or services.",
+      "source_line": 56
+    },
+    {
+      "id": "rag",
+      "term": "RAG",
+      "definition": "Retrieving relevant data before generation.",
+      "prompt": "Define RAG.",
+      "completion": "Retrieving relevant data before generation.",
+      "source_line": 57
+    },
+    {
+      "id": "verification",
+      "term": "Verification",
+      "definition": "Confirming outcomes using authoritative systems.",
+      "prompt": "Define Verification.",
+      "completion": "Confirming outcomes using authoritative systems.",
+      "source_line": 63
+    },
+    {
+      "id": "policy-layer",
+      "term": "Policy Layer",
+      "definition": "Rules controlling permissions, limits and approvals.",
+      "prompt": "Define Policy Layer.",
+      "completion": "Rules controlling permissions, limits and approvals.",
+      "source_line": 64
+    },
+    {
+      "id": "risk-engine",
+      "term": "Risk Engine",
+      "definition": "Validates exposure, leverage and collateral.",
+      "prompt": "Define Risk Engine.",
+      "completion": "Validates exposure, leverage and collateral.",
+      "source_line": 65
+    },
+    {
+      "id": "prompt-injection",
+      "term": "Prompt Injection",
+      "definition": "Malicious instructions targeting agent behavior.",
+      "prompt": "Define Prompt Injection.",
+      "completion": "Malicious instructions targeting agent behavior.",
+      "source_line": 66
+    },
+    {
+      "id": "zero-trust",
+      "term": "Zero Trust",
+      "definition": "Assume every component may be compromised.",
+      "prompt": "Define Zero Trust.",
+      "completion": "Assume every component may be compromised.",
+      "source_line": 67
+    },
+    {
+      "id": "multi-agent",
+      "term": "Multi-Agent",
+      "definition": "Multiple specialist agents working together.",
+      "prompt": "Define Multi-Agent.",
+      "completion": "Multiple specialist agents working together.",
+      "source_line": 68
+    },
+    {
+      "id": "tools",
+      "term": "Tools",
+      "definition": "Functions, APIs, databases or external services.",
+      "prompt": "Define Tools.",
+      "completion": "Functions, APIs, databases or external services.",
+      "source_line": 71
+    },
+    {
+      "id": "vector-db",
+      "term": "Vector DB",
+      "definition": "Database storing embeddings for semantic search.",
+      "prompt": "Define Vector DB.",
+      "completion": "Database storing embeddings for semantic search.",
+      "source_line": 72
+    },
+    {
+      "id": "embedding",
+      "term": "Embedding",
+      "definition": "Numerical representation of data for similarity search.",
+      "prompt": "Define Embedding.",
+      "completion": "Numerical representation of data for similarity search.",
+      "source_line": 73
+    },
+    {
+      "id": "semantic-search",
+      "term": "Semantic Search",
+      "definition": "Search by meaning rather than keywords.",
+      "prompt": "Define Semantic Search.",
+      "completion": "Search by meaning rather than keywords.",
+      "source_line": 74
+    },
+    {
+      "id": "context-window",
+      "term": "Context Window",
+      "definition": "Information visible to the LLM at runtime.",
+      "prompt": "Define Context Window.",
+      "completion": "Information visible to the LLM at runtime.",
+      "source_line": 75
+    },
+    {
+      "id": "reasoning-loop",
+      "term": "Reasoning Loop",
+      "definition": "Understand → Plan → Act → Verify → Repeat.",
+      "prompt": "Define Reasoning Loop.",
+      "completion": "Understand → Plan → Act → Verify → Repeat.",
+      "source_line": 76
+    },
+    {
+      "id": "1-user-intent",
+      "term": "1. User Intent",
+      "definition": "“Reduce my target asset risk.”",
+      "prompt": "Define 1. User Intent.",
+      "completion": "“Reduce my target asset risk.”",
+      "source_line": 84
+    },
+    {
+      "id": "2-orchestrator",
+      "term": "2. Orchestrator",
+      "definition": "Breaks the goal into steps.",
+      "prompt": "Define 2. Orchestrator.",
+      "completion": "Breaks the goal into steps.",
+      "source_line": 85
+    },
+    {
+      "id": "3-agents",
+      "term": "3. Agents",
+      "definition": "Research, Risk, Execution, Verification.",
+      "prompt": "Define 3. Agents.",
+      "completion": "Research, Risk, Execution, Verification.",
+      "source_line": 86
+    },
+    {
+      "id": "4-tools",
+      "term": "4. Tools",
+      "definition": "Market APIs, portfolio APIs, order APIs, databases.",
+      "prompt": "Define 4. Tools.",
+      "completion": "Market APIs, portfolio APIs, order APIs, databases.",
+      "source_line": 87
+    },
+    {
+      "id": "5-shared-state",
+      "term": "5. Shared State",
+      "definition": "Stores workflow progress and agent outputs.",
+      "prompt": "Define 5. Shared State.",
+      "completion": "Stores workflow progress and agent outputs.",
+      "source_line": 88
+    },
+    {
+      "id": "6-policy-layer",
+      "term": "6. Policy Layer",
+      "definition": "Checks permissions, limits, leverage and approvals.",
+      "prompt": "Define 6. Policy Layer.",
+      "completion": "Checks permissions, limits, leverage and approvals.",
+      "source_line": 89
+    },
+    {
+      "id": "7-execution-service",
+      "term": "7. Execution Service",
+      "definition": "Submits the approved order.",
+      "prompt": "Define 7. Execution Service.",
+      "completion": "Submits the approved order.",
+      "source_line": 90
+    },
+    {
+      "id": "8-verification",
+      "term": "8. Verification",
+      "definition": "Confirms fills, balances and final portfolio state.",
+      "prompt": "Define 8. Verification.",
+      "completion": "Confirms fills, balances and final portfolio state.",
+      "source_line": 91
+    },
+    {
+      "id": "9-memory",
+      "term": "9. Memory",
+      "definition": "Stores preferences, task state and audit history.",
+      "prompt": "Define 9. Memory.",
+      "completion": "Stores preferences, task state and audit history.",
+      "source_line": 92
+    },
+    {
+      "id": "10-observability",
+      "term": "10. Observability",
+      "definition": "Traces decisions, tool calls, latency, cost and failures.",
+      "prompt": "Define 10. Observability.",
+      "completion": "Traces decisions, tool calls, latency, cost and failures.",
+      "source_line": 93
+    },
+    {
+      "id": "fastapi",
+      "term": "FastAPI",
+      "definition": "Agent/API gateway",
+      "prompt": "Define FastAPI.",
+      "completion": "Agent/API gateway",
+      "source_line": 98
+    },
+    {
+      "id": "postgresql",
+      "term": "PostgreSQL",
+      "definition": "State and audit records",
+      "prompt": "Define PostgreSQL.",
+      "completion": "State and audit records",
+      "source_line": 101
+    },
+    {
+      "id": "redis",
+      "term": "Redis",
+      "definition": "Cache and short-lived coordination",
+      "prompt": "Define Redis.",
+      "completion": "Cache and short-lived coordination",
+      "source_line": 102
+    },
+    {
+      "id": "kafka-nats",
+      "term": "Kafka/NATS",
+      "definition": "Events between services",
+      "prompt": "Define Kafka/NATS.",
+      "completion": "Events between services",
+      "source_line": 103
+    },
+    {
+      "id": "vault-kms",
+      "term": "Vault/KMS",
+      "definition": "Secrets and signing keys",
+      "prompt": "Define Vault/KMS.",
+      "completion": "Secrets and signing keys",
+      "source_line": 104
+    },
+    {
+      "id": "opentelemetry",
+      "term": "OpenTelemetry",
+      "definition": "Traces, metrics and logs",
+      "prompt": "Define OpenTelemetry.",
+      "completion": "Traces, metrics and logs",
+      "source_line": 105
+    },
+    {
+      "id": "mcp",
+      "term": "MCP",
+      "definition": "Connects",
+      "prompt": "Define MCP.",
+      "completion": "Connects",
+      "source_line": 132
+    },
+    {
+      "id": "tool",
+      "term": "Tool",
+      "definition": "Acts",
+      "prompt": "Define Tool.",
+      "completion": "Acts",
+      "source_line": 133
+    },
+    {
+      "id": "langchain",
+      "term": "LangChain",
+      "definition": "Build agents",
+      "prompt": "Define LangChain.",
+      "completion": "Build agents",
+      "source_line": 183
+    },
+    {
+      "id": "agent-monitoring-platform",
+      "term": "Agent Monitoring Platform",
+      "definition": "Monitor agents",
+      "prompt": "Define Agent Monitoring Platform.",
+      "completion": "Monitor agents",
+      "source_line": 185
+    },
+    {
+      "id": "user",
+      "term": "User",
+      "definition": "Customer",
+      "prompt": "Define User.",
+      "completion": "Customer",
+      "source_line": 272
+    },
+    {
+      "id": "agents",
+      "term": "Agents",
+      "definition": "Specialists",
+      "prompt": "Define Agents.",
+      "completion": "Specialists",
+      "source_line": 275
+    },
+    {
+      "id": "execution",
+      "term": "Execution",
+      "definition": "Trading Desk",
+      "prompt": "Define Execution.",
+      "completion": "Trading Desk",
+      "source_line": 279
+    },
+    {
+      "id": "passenger",
+      "term": "Passenger",
+      "definition": "User",
+      "prompt": "Define Passenger.",
+      "completion": "User",
+      "source_line": 283
+    },
+    {
+      "id": "check-in-counter",
+      "term": "Check-in Counter",
+      "definition": "FastAPI",
+      "prompt": "Define Check-in Counter.",
+      "completion": "FastAPI",
+      "source_line": 284
+    },
+    {
+      "id": "airport-control-tower",
+      "term": "Airport Control Tower",
+      "definition": "LangGraph",
+      "prompt": "Define Airport Control Tower.",
+      "completion": "LangGraph",
+      "source_line": 285
+    },
+    {
+      "id": "pilots",
+      "term": "Pilots",
+      "definition": "Agents",
+      "prompt": "Define Pilots.",
+      "completion": "Agents",
+      "source_line": 286
+    },
+    {
+      "id": "airport-systems",
+      "term": "Airport Systems",
+      "definition": "Tools",
+      "prompt": "Define Airport Systems.",
+      "completion": "Tools",
+      "source_line": 287
+    },
+    {
+      "id": "security",
+      "term": "Security",
+      "definition": "Policy Layer",
+      "prompt": "Define Security.",
+      "completion": "Policy Layer",
+      "source_line": 288
+    },
+    {
+      "id": "aircraft",
+      "term": "Aircraft",
+      "definition": "Execution",
+      "prompt": "Define Aircraft.",
+      "completion": "Execution",
+      "source_line": 289
+    },
+    {
+      "id": "control-tower-confirmation",
+      "term": "Control Tower Confirmation",
+      "definition": "Verification",
+      "prompt": "Define Control Tower Confirmation.",
+      "completion": "Verification",
+      "source_line": 290
+    },
+    {
+      "id": "portfolio-api",
+      "term": "Portfolio API",
+      "definition": "Get portfolio",
+      "prompt": "Define Portfolio API.",
+      "completion": "Get portfolio",
+      "source_line": 326
+    },
+    {
+      "id": "market-data-api",
+      "term": "Market Data API",
+      "definition": "Get prices",
+      "prompt": "Define Market Data API.",
+      "completion": "Get prices",
+      "source_line": 327
+    },
+    {
+      "id": "transaction-api",
+      "term": "Transaction API",
+      "definition": "Create transaction",
+      "prompt": "Define Transaction API.",
+      "completion": "Create transaction",
+      "source_line": 328
+    },
+    {
+      "id": "alert-api",
+      "term": "Alert API",
+      "definition": "Send alert",
+      "prompt": "Define Alert API.",
+      "completion": "Send alert",
+      "source_line": 329
+    },
+    {
+      "id": "expected-return",
+      "term": "Expected return",
+      "definition": "7%",
+      "prompt": "Define Expected return.",
+      "completion": "7%",
+      "source_line": 396
+    },
+    {
+      "id": "model",
+      "term": "Model",
+      "definition": "generates the prediction.",
+      "prompt": "Define Model.",
+      "completion": "generates the prediction.",
+      "source_line": 413
+    },
+    {
+      "id": "ml-model",
+      "term": "ML Model",
+      "definition": "Produces prediction",
+      "prompt": "Define ML Model.",
+      "completion": "Produces prediction",
+      "source_line": 421
+    },
+    {
+      "id": "xgboost",
+      "term": "XGBoost",
+      "definition": "Predictor",
+      "prompt": "Define XGBoost.",
+      "completion": "Predictor",
+      "source_line": 428
+    },
+    {
+      "id": "custom-llm-from-scratch",
+      "term": "Custom LLM from scratch",
+      "definition": "Unlikely",
+      "prompt": "Define Custom LLM from scratch.",
+      "completion": "Unlikely",
+      "source_line": 434
+    },
+    {
+      "id": "custom-finance-models",
+      "term": "Custom finance models",
+      "definition": "Very possible",
+      "prompt": "Define Custom finance models.",
+      "completion": "Very possible",
+      "source_line": 435
+    },
+    {
+      "id": "custom-risk-models",
+      "term": "Custom risk models",
+      "definition": "Very likely",
+      "prompt": "Define Custom risk models.",
+      "completion": "Very likely",
+      "source_line": 436
+    },
+    {
+      "id": "custom-liquidation-models",
+      "term": "Custom liquidation models",
+      "definition": "Very likely",
+      "prompt": "Define Custom liquidation models.",
+      "completion": "Very likely",
+      "source_line": 437
+    },
+    {
+      "id": "custom-fraud-anomaly-models",
+      "term": "Custom fraud/anomaly models",
+      "definition": "Possible",
+      "prompt": "Define Custom fraud/anomaly models.",
+      "completion": "Possible",
+      "source_line": 438
+    },
+    {
+      "id": "llm",
+      "term": "LLM",
+      "definition": "Language and reasoning model.",
+      "prompt": "Define LLM.",
+      "completion": "Language and reasoning model.",
+      "source_line": 462
+    },
+    {
+      "id": "transformer",
+      "term": "Transformer",
+      "definition": "Neural network architecture for sequences and time series.",
+      "prompt": "Define Transformer.",
+      "completion": "Neural network architecture for sequences and time series.",
+      "source_line": 464
+    },
+    {
+      "id": "general-reasoning-model",
+      "term": "General reasoning model",
+      "definition": "General reasoning and agent workflows.",
+      "prompt": "Define General reasoning model.",
+      "completion": "General reasoning and agent workflows.",
+      "source_line": 476
+    },
+    {
+      "id": "long-context-reasoning-model",
+      "term": "Long-context reasoning model",
+      "definition": "Long-context reasoning and coding.",
+      "prompt": "Define Long-context reasoning model.",
+      "completion": "Long-context reasoning and coding.",
+      "source_line": 477
+    },
+    {
+      "id": "fast-production-reasoning-model",
+      "term": "Fast production reasoning model",
+      "definition": "Fast production reasoning.",
+      "prompt": "Define Fast production reasoning model.",
+      "completion": "Fast production reasoning.",
+      "source_line": 478
+    },
+    {
+      "id": "multimodal-reasoning-model",
+      "term": "Multimodal reasoning model",
+      "definition": "Multimodal reasoning.",
+      "prompt": "Define Multimodal reasoning model.",
+      "completion": "Multimodal reasoning.",
+      "source_line": 479
+    },
+    {
+      "id": "open-source-foundation-model",
+      "term": "Open-source foundation model",
+      "definition": "Open-source foundation model.",
+      "prompt": "Define Open-source foundation model.",
+      "completion": "Open-source foundation model.",
+      "source_line": 480
+    },
+    {
+      "id": "open-source-reasoning-model",
+      "term": "Open-source reasoning model",
+      "definition": "Strong open-source reasoning model.",
+      "prompt": "Define Open-source reasoning model.",
+      "completion": "Strong open-source reasoning model.",
+      "source_line": 481
+    },
+    {
+      "id": "lightgbm",
+      "term": "LightGBM",
+      "definition": "Faster gradient boosting model.",
+      "prompt": "Define LightGBM.",
+      "completion": "Faster gradient boosting model.",
+      "source_line": 484
+    },
+    {
+      "id": "random-forest",
+      "term": "Random Forest",
+      "definition": "Ensemble classification and prediction.",
+      "prompt": "Define Random Forest.",
+      "completion": "Ensemble classification and prediction.",
+      "source_line": 485
+    },
+    {
+      "id": "logistic-reg",
+      "term": "Logistic Reg.",
+      "definition": "Probability and risk scoring.",
+      "prompt": "Define Logistic Reg..",
+      "completion": "Probability and risk scoring.",
+      "source_line": 486
+    },
+    {
+      "id": "arima",
+      "term": "ARIMA",
+      "definition": "Classical forecasting.",
+      "prompt": "Define ARIMA.",
+      "completion": "Classical forecasting.",
+      "source_line": 491
+    },
+    {
+      "id": "lstm",
+      "term": "LSTM",
+      "definition": "Neural network for time series.",
+      "prompt": "Define LSTM.",
+      "completion": "Neural network for time series.",
+      "source_line": 492
+    },
+    {
+      "id": "tft",
+      "term": "TFT",
+      "definition": "Temporal Fusion Transformer.",
+      "prompt": "Define TFT.",
+      "completion": "Temporal Fusion Transformer.",
+      "source_line": 494
+    },
+    {
+      "id": "monte-carlo",
+      "term": "Monte Carlo",
+      "definition": "Risk and scenario simulation.",
+      "prompt": "Define Monte Carlo.",
+      "completion": "Risk and scenario simulation.",
+      "source_line": 496
+    },
+    {
+      "id": "garch",
+      "term": "GARCH",
+      "definition": "Volatility forecasting.",
+      "prompt": "Define GARCH.",
+      "completion": "Volatility forecasting.",
+      "source_line": 497
+    },
+    {
+      "id": "var",
+      "term": "VaR",
+      "definition": "Value at Risk estimation.",
+      "prompt": "Define VaR.",
+      "completion": "Value at Risk estimation.",
+      "source_line": 498
+    },
+    {
+      "id": "cvar",
+      "term": "CVaR",
+      "definition": "Tail-risk estimation.",
+      "prompt": "Define CVaR.",
+      "completion": "Tail-risk estimation.",
+      "source_line": 499
+    },
+    {
+      "id": "isolation-forest",
+      "term": "Isolation Forest",
+      "definition": "Anomaly detection.",
+      "prompt": "Define Isolation Forest.",
+      "completion": "Anomaly detection.",
+      "source_line": 504
+    },
+    {
+      "id": "autoencoders",
+      "term": "Autoencoders",
+      "definition": "Anomaly detection.",
+      "prompt": "Define Autoencoders.",
+      "completion": "Anomaly detection.",
+      "source_line": 505
+    },
+    {
+      "id": "dqn",
+      "term": "DQN",
+      "definition": "Reinforcement learning.",
+      "prompt": "Define DQN.",
+      "completion": "Reinforcement learning.",
+      "source_line": 508
+    },
+    {
+      "id": "ppo",
+      "term": "PPO",
+      "definition": "Most popular RL algorithm.",
+      "prompt": "Define PPO.",
+      "completion": "Most popular RL algorithm.",
+      "source_line": 509
+    },
+    {
+      "id": "embedding-model",
+      "term": "Embedding Model",
+      "definition": "Creates vectors for semantic search.",
+      "prompt": "Define Embedding Model.",
+      "completion": "Creates vectors for semantic search.",
+      "source_line": 515
+    },
+    {
+      "id": "cross-encoder",
+      "term": "Cross Encoder",
+      "definition": "Reranks retrieved results.",
+      "prompt": "Define Cross Encoder.",
+      "completion": "Reranks retrieved results.",
+      "source_line": 516
+    },
+    {
+      "id": "reasoning-model-proprietary-reasoning-model",
+      "term": "Reasoning model/Proprietary reasoning model",
+      "definition": "Reasoning",
+      "prompt": "Define Reasoning model/Proprietary reasoning model.",
+      "completion": "Reasoning",
+      "source_line": 521
+    },
+    {
+      "id": "embeddings",
+      "term": "Embeddings",
+      "definition": "Semantic retrieval",
+      "prompt": "Define Embeddings.",
+      "completion": "Semantic retrieval",
+      "source_line": 525
+    },
+    {
+      "id": "cloud",
+      "term": "Cloud",
+      "definition": "Where the platform runs.",
+      "prompt": "Define Cloud.",
+      "completion": "Where the platform runs.",
+      "source_line": 535
+    },
+    {
+      "id": "docker",
+      "term": "Docker",
+      "definition": "Packages each service.",
+      "prompt": "Define Docker.",
+      "completion": "Packages each service.",
+      "source_line": 536
+    },
+    {
+      "id": "kubernetes",
+      "term": "Kubernetes",
+      "definition": "Runs and scales containers.",
+      "prompt": "Define Kubernetes.",
+      "completion": "Runs and scales containers.",
+      "source_line": 537
+    },
+    {
+      "id": "load-balancer",
+      "term": "Load Balancer",
+      "definition": "Distributes traffic.",
+      "prompt": "Define Load Balancer.",
+      "completion": "Distributes traffic.",
+      "source_line": 538
+    },
+    {
+      "id": "ci-cd",
+      "term": "CI/CD",
+      "definition": "Tests and deploys changes.",
+      "prompt": "Define CI/CD.",
+      "completion": "Tests and deploys changes.",
+      "source_line": 547
+    },
+    {
+      "id": "ci",
+      "term": "CI",
+      "definition": "Continuous Integration",
+      "prompt": "Define CI.",
+      "completion": "Continuous Integration",
+      "source_line": 578
+    },
+    {
+      "id": "cd",
+      "term": "CD",
+      "definition": "Continuous Delivery / Deployment",
+      "prompt": "Define CD.",
+      "completion": "Continuous Delivery / Deployment",
+      "source_line": 579
+    },
+    {
+      "id": "risk",
+      "term": "Risk",
+      "definition": "check before execution. Verification = check after execution.",
+      "prompt": "Define Risk.",
+      "completion": "check before execution. Verification = check after execution.",
+      "source_line": 599
+    }
+  ]
+}
