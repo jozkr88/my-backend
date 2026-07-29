@@ -2,8 +2,8 @@ services:
   - type: web
     name: xq-backend
     runtime: node
-    buildCommand: npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi
-    startCommand: npm start
+    buildCommand: npm install --legacy-peer-deps && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi
+    startCommand: node index.js
     healthCheckPath: /api/hello
     envVars:
       - key: NODE_VERSION
