@@ -9,7 +9,7 @@ Use the root [`render.yaml`](</Users/jozzox/Downloads/xq/render.yaml>) file to c
 ## Manual Render settings
 
 - Root directory: leave blank (repository root)
-- Build command: `npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality`
+- Build command: `npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi`
 - Start command: `npm start`
 - Health check path: `/api/hello`
 
@@ -45,6 +45,7 @@ Notes:
 - `JOZ_REQUIRE_DATABASE=true` makes Supabase/Postgres mandatory. The service fails during startup if the database is unavailable or not configured, and it does not fall back to local JSON or process memory for runtime data.
 - `DISABLE_FILE_MEMORY=1` disables `worldMemory.json` writes because Render web services do not provide durable local disk storage across restarts/deploys.
 - `NEO4J_URI`, `NEO4J_USERNAME`, and `NEO4J_PASSWORD` are Render secrets. `NEO4J_DATABASE` defaults to `neo4j`; `augment` adds reviewed graph evidence to documents already selected by the existing retrieval path.
+- The Render build refreshes the published graph and idempotently imports it into Neo4j when the Neo4j secrets are present. If they are absent, the existing artifact fallback remains available.
 - The checked-in `data/joz/published/` files are build and publishing artifacts. They are visible in the data-control overview, but production retrieval is database-backed when `JOZ_REQUIRE_DATABASE=true`.
 - The paid architecture flow is chat-native: it collects the brief, shows the draft scope, and starts Stripe Checkout from the chat. Keep `STRIPE_SECRET_KEY` server-side; the price is configured in minor currency units (for example, `250000` is USD 2,500.00). `JOZ_PUBLIC_APP_URL` is used for the success and cancellation return paths.
 - If Stripe is not configured, the chat keeps the draft brief but returns a safe payment-configuration message instead of exposing a fake checkout link.
