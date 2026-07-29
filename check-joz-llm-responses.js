@@ -102,6 +102,26 @@ const CASES = [
     includes: ["Maybank-Ageas Etiqa", "Manulife", "Mediacorp", "Erste Bank"],
     excludes: ["What is business value"],
   },
+  {
+    name: "Business and Operational Problems",
+    prompt: "What business and operational problems is Joz best positioned to solve?",
+    expectedRoute: "business_need",
+    expectedSubIntent: "business_help",
+    minWords: 35,
+    maxWords: 90,
+    includes: ["businesses", "operations", "governance"],
+    excludes: ["outside the current deterministic Joz answer set"],
+  },
+  {
+    name: "Most Business Value and ROI",
+    prompt: "Where does Joz create the most business value and ROI in AI systems?",
+    expectedRoute: "business_need",
+    expectedSubIntent: "roi",
+    minWords: 45,
+    maxWords: 90,
+    includes: ["baseline", "target metrics", "governance"],
+    excludes: ["For D2C", "outside the current deterministic Joz answer set"],
+  },
 ];
 
 function runCase(testCase) {

@@ -307,6 +307,7 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["How can AI help my retail business?", "business_need", "business_help", /measurable improvements/i],
     ["How can Joz help an insurance company reduce claims delays?", "business_need", "business_help", /faster claims/i],
     ["We are ready to use agents in our logistics business. What should we do?", "business_need", "business_help", /Agentic operations|verified agents/i],
+    ["What business and operational problems is Joz best positioned to solve?", "business_need", "business_help", /helps businesses turn AI|measurable improvements/i],
     ["Is Joz a consultant or a builder?", "business_need", "consultant_builder", /both a consultant and a builder/i],
   ];
 
@@ -342,6 +343,7 @@ test("covers aligned recruiter-facing business, architecture, and conversational
     ["What can Joz do for a manufacturing company with downtime?", "business_need", "business_help", /For Manufacturing|predictive maintenance/i],
     ["Can Joz improve warehouse and route operations?", "business_need", "business_help", /For Logistics|route optimisation/i],
     ["Where is the ROI in hiring Joz?", "business_need", "roi", /ROI|cost reduction/i],
+    ["Where does Joz create the most business value and ROI in AI systems?", "business_need", "roi", /baseline|target metrics|profit|ROI/i],
     ["Can Joz reduce manual work and process cost?", "business_need", "efficiency", /manual work|process cost/i],
     ["We are ready to use agents. What is the next AI maturity step?", "business_need", "ai_maturity", /four-step maturity|AI readiness/i],
     ["What is the difference between an agent, a model, and a tool?", "skills", "agent_model_tool_distinction", /model predicts|bounded capability/i],
