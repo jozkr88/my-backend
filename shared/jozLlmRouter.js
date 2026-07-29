@@ -2674,6 +2674,15 @@ function detectBusinessNeed(clean) {
 
   if (
     includesAny(clean, [
+      "where does joz create the most business value and roi in ai systems",
+      "where does joz create the most business value and roi",
+    ])
+  ) {
+    return { detectedSubIntent: "roi", detectedConcept: "business_value" };
+  }
+
+  if (
+    includesAny(clean, [
       /^how can joz help\b/,
       /^how could joz help\b/,
       "how can joz help me",
@@ -2695,6 +2704,8 @@ function detectBusinessNeed(clean) {
       "what can joz do for a healthcare organization",
       "what can joz do for our business",
       "what business problems can joz solve",
+      "what business and operational problems is joz best positioned to solve",
+      "what operational problems can joz solve",
       "how can he help me",
       "how can he help us",
       "i am a business",
