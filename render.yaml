@@ -2,7 +2,6 @@ services:
   - type: web
     name: xq-backend
     runtime: node
-    rootDir: .
     buildCommand: npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi
     startCommand: npm start
     healthCheckPath: /api/hello
@@ -13,8 +12,22 @@ services:
         sync: false
       - key: DATABASE_URL
         sync: false
-      - key: DISABLE_FILE_MEMORY
-        value: "1"
+      - key: SUPABASE_URL
+        sync: false
+      - key: JOZ_REQUIRE_AUTH
+        value: "true"
+      - key: JOZ_MODEL_PROVIDER
+        value: "openai"
+      - key: JOZ_MODEL
+        value: "gpt-4o-mini"
+      - key: JOZ_PGVECTOR_ENABLED
+        value: "true"
+      - key: JOZ_EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: JOZ_REQUIRE_DATABASE
+        value: "true"
+      - key: JOZ_KNOWLEDGE_GRAPH_MODE
+        value: "augment"
       - key: NEO4J_URI
         sync: false
       - key: NEO4J_USERNAME
@@ -22,14 +35,14 @@ services:
       - key: NEO4J_PASSWORD
         sync: false
       - key: NEO4J_DATABASE
-        value: "neo4j"
-      - key: JOZ_KNOWLEDGE_GRAPH_MODE
-        value: "augment"
-      - key: JOZ_WORLD_MODEL_MODE
-        value: "shadow"
-      - key: JOZ_WORLD_MODEL_SAMPLE_RATE
-        value: "0.25"
-      - key: JOZ_WORLD_MODEL_EXCLUDE_DEV
-        value: "true"
-      - key: JOZ_WORLD_MODEL_SESSION_HASH_SALT
+        value: "6ec69dd8"
+      - key: DISABLE_FILE_MEMORY
+        value: "1"
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS
+        sync: false
+      - key: JOZ_ARCHITECTURE_REVIEW_CURRENCY
+        value: usd
+      - key: JOZ_PUBLIC_APP_URL
         sync: false
