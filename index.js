@@ -176,7 +176,13 @@ const JOZ_BUILD_ID = String(
   "local"
 ).trim();
 const JOZ_ROUTER_VERSION = "2026-07-24-intake-hardening-1";
-const WORLD_MODEL_MODE = String(process.env.JOZ_WORLD_MODEL_MODE || "off").trim().toLowerCase();
+// Production deployments opt into the predictive layer in shadow mode. An
+// explicit JOZ_WORLD_MODEL_MODE=off still disables it for rollback or local
+// baseline comparisons; shadow prediction never authorises live actions.
+const WORLD_MODEL_MODE = String(
+  process.env.JOZ_WORLD_MODEL_MODE ||
+    (process.env.RENDER || process.env.NODE_ENV === "production" ? "shadow" : "off")
+).trim().toLowerCase();
 const WORLD_MODEL_SHADOW_ENABLED = !["off", "disabled"].includes(WORLD_MODEL_MODE);
 const WORLD_MODEL_CONTROLS = normalizeWorldModelControls(process.env, {
   production: Boolean(process.env.RENDER || process.env.NODE_ENV === "production"),
@@ -493,6 +499,37 @@ app.get("/api/hello", (req, res) => {
     buildId: JOZ_BUILD_ID,
     routerVersion: JOZ_ROUTER_VERSION,
     modelRuntime,
+    worldModel: {
+      mode: WORLD_MODEL_MODE,
+      enabled: WORLD_MODEL_SHADOW_ENABLED,
+      modelVersion: WORLD_MODEL_VERSION,
+      transitionRuleVersion: WORLD_TRANSITION_RULE_VERSION,
+      executionPolicy: "existing_guardrails_execute_approved_action",
+    },
+  });
+});
+
+app.get("/api/world-model/status", (_req, res) => {
+  res.json({
+    ok: true,
+    enabled: WORLD_MODEL_SHADOW_ENABLED,
+    mode: WORLD_MODEL_MODE,
+    modelVersion: WORLD_MODEL_VERSION,
+    transitionRuleVersion: WORLD_TRANSITION_RULE_VERSION,
+    sampling: {
+      rate: WORLD_MODEL_CONTROLS.sampleRate,
+      excludeDevelopment: WORLD_MODEL_CONTROLS.excludeDevelopment,
+    },
+    controls: {
+      maxCandidates: WORLD_MODEL_CONTROLS.maxCandidates,
+      maxRolloutDepth: WORLD_MODEL_CONTROLS.maxRolloutDepth,
+      maxTrajectoryBytes: WORLD_MODEL_CONTROLS.maxTrajectoryBytes,
+      persistenceTimeoutMs: WORLD_MODEL_CONTROLS.persistenceTimeoutMs,
+      retentionDays: WORLD_MODEL_CONTROLS.retentionDays,
+    },
+    executionPolicy: "shadow_predictions_do_not_control_live_actions",
+    observationBoundary: "structured_application_scene_state; no_continuous_camera_audio_or_biometrics",
+    persistence: isDatabaseEnabled() ? "postgresql" : "memory_fallback",
   });
 });
 

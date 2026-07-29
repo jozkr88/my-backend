@@ -34,6 +34,10 @@ JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS=250000
 JOZ_ARCHITECTURE_REVIEW_CURRENCY=usd
 JOZ_PUBLIC_APP_URL=https://your-public-app.example
 JOZ_ALLOWED_ORIGINS=https://meetjoz.com,https://www.meetjoz.com
+JOZ_WORLD_MODEL_MODE=shadow
+JOZ_WORLD_MODEL_SAMPLE_RATE=0.25
+JOZ_WORLD_MODEL_EXCLUDE_DEV=true
+JOZ_WORLD_MODEL_SESSION_HASH_SALT=<stable-secret>
 ```
 
 Notes:
@@ -45,6 +49,7 @@ Notes:
 - `JOZ_REQUIRE_DATABASE=true` makes Supabase/Postgres mandatory. The service fails during startup if the database is unavailable or not configured, and it does not fall back to local JSON or process memory for runtime data.
 - `DISABLE_FILE_MEMORY=1` disables `worldMemory.json` writes because Render web services do not provide durable local disk storage across restarts/deploys.
 - `NEO4J_URI`, `NEO4J_USERNAME`, and `NEO4J_PASSWORD` are Render secrets. `NEO4J_DATABASE` defaults to `neo4j`; `augment` adds reviewed graph evidence to documents already selected by the existing retrieval path.
+- `JOZ_WORLD_MODEL_MODE=shadow` enables the predictive application-world layer without giving it authority over live actions. Check `/api/world-model/status` after deploy; set it to `off` for rollback.
 - The Render build refreshes the published graph and idempotently imports it into Neo4j when the Neo4j secrets are present. If they are absent, the existing artifact fallback remains available.
 - The checked-in `data/joz/published/` files are build and publishing artifacts. They are visible in the data-control overview, but production retrieval is database-backed when `JOZ_REQUIRE_DATABASE=true`.
 - The paid architecture flow is chat-native: it collects the brief, shows the draft scope, and starts Stripe Checkout from the chat. Keep `STRIPE_SECRET_KEY` server-side; the price is configured in minor currency units (for example, `250000` is USD 2,500.00). `JOZ_PUBLIC_APP_URL` is used for the success and cancellation return paths.

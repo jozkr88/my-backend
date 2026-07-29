@@ -70,7 +70,7 @@ The trajectory schema is extended additively with `observationBefore`, `predicte
 
 ## Production controls
 
-Conservative defaults are applied in the backend. Override them explicitly in the deployment environment:
+Conservative defaults are applied in the backend. Local development remains off unless `.env.local` opts into shadow mode. Render/production defaults to shadow mode, and the checked-in Render blueprint sets it explicitly; `JOZ_WORLD_MODEL_MODE=off` remains the rollback switch. Override the controls explicitly in the deployment environment:
 
 ```text
 JOZ_WORLD_MODEL_MODE=off|shadow
@@ -86,6 +86,14 @@ JOZ_WORLD_MODEL_SESSION_HASH_SALT=<stable-secret>
 REACT_APP_JOZ_WORLD_MODEL_MODE=off|shadow
 REACT_APP_JOZ_WORLD_MODEL_INSPECTOR=off|developer|showcase
 ```
+
+Verify the deployed runtime without a shell:
+
+```text
+GET https://<backend-host>/api/world-model/status
+```
+
+The response reports mode, model and transition-rule versions, sampling, persistence, observation boundaries, and the execution policy.
 
 Health-check, crawler, bot, preview, and development traffic can be excluded. Session keys are hashed before storage; raw prompts, headers, tokens, email addresses, phone numbers, imagery, audio, biometric data, and camera frames are not trajectory fields. Retention cleanup removes expired trajectories and transition experience rows through the existing maintenance path. `isTest`, `isSynthetic`, unsupported fields, and failed observations remain explicitly classified; unsupported is not treated as model error.
 
@@ -124,7 +132,7 @@ In off mode the observer, prediction computation, trajectory endpoint, and new p
 
 ## Configuration
 
-The production-safe default is off; shadow mode must be explicitly enabled after baseline verification:
+The production execution policy is shadow-only: prediction and plan scoring may run, but deterministic guardrails still approve and execute the live action. To disable it:
 
 ```text
 JOZ_WORLD_MODEL_MODE=off
@@ -140,7 +148,7 @@ No production path currently allows the probabilistic layer to replace determini
 
 ## Popup inspector
 
-The inspector is integrated into the existing Joz MAXX popup rather than exposed as a second route or dashboard. It is disabled by default. In `developer` mode it is available only in non-production builds and provides collapsed, redacted diagnostics; `showcase` mode presents only curated privacy-safe fields. Neither mode subscribes to telemetry or renders controls when the flag is `off`.
+The inspector is integrated into the existing Joz MAXX popup rather than exposed as a second route or dashboard. It is disabled when the frontend flag is `off`. In `developer` mode it is available only in non-production builds and provides collapsed, redacted diagnostics; `showcase` mode presents only curated privacy-safe fields. Neither mode renders controls when the flag is `off`.
 
 The popup reuses the existing `world-prediction-observed` browser event and the compatibility globals `window.__lastWorldObservation` and `window.__lastWorldPrediction`. The inspector maintains at most 12 in-memory safe snapshots for the current browser session. It does not poll, trigger predictions, post trajectories, execute actions, alter the chat pipeline, or read persisted database history.
 
@@ -159,8 +167,8 @@ Open the existing Joz MAXX popup at `http://localhost:3000`, trigger a governed 
 
 1. Apply the additive schema through the normal application startup migration or `render-postgres-schema.sql`; verify the new columns and indexes before collection.
 2. Set the stable session-hash salt, retention, payload, sampling, timeout, and exclusion environment variables. Do not put secrets in source or frontend variables.
-3. Deploy with `JOZ_WORLD_MODEL_MODE=off` and run baseline health, response, navigation, animation, and AR checks.
-4. Enable `shadow` only after the off-mode comparison is clean. Confirm trajectory `persistence_status`, classifications, payload sizes, and latency from logs/database.
+3. Run baseline health, response, navigation, animation, and AR checks with the deterministic path; use `JOZ_WORLD_MODEL_MODE=off` for a strict baseline comparison.
+4. Keep Render in `shadow` mode after the baseline is clean. Confirm `/api/world-model/status`, trajectory `persistence_status`, classifications, payload sizes, and latency from logs/database.
 5. Run the read-only export and persisted evaluation. Check that no exported record contains direct identifiers, prompts, tokens, or raw media.
 6. Release only if baseline behavior is unchanged, persistence is within the timeout budget, payload/retention limits are active, and the evaluation report has sufficient valid coverage. No neural model or online planner activation is a release gate here.
 

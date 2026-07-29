@@ -2,7 +2,7 @@ services:
   - type: web
     name: xq-backend
     runtime: node
-    rootDir: server
+    rootDir: .
     buildCommand: npm install && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi
     startCommand: npm start
     healthCheckPath: /api/hello
@@ -25,3 +25,11 @@ services:
         value: "neo4j"
       - key: JOZ_KNOWLEDGE_GRAPH_MODE
         value: "augment"
+      - key: JOZ_WORLD_MODEL_MODE
+        value: "shadow"
+      - key: JOZ_WORLD_MODEL_SAMPLE_RATE
+        value: "0.25"
+      - key: JOZ_WORLD_MODEL_EXCLUDE_DEV
+        value: "true"
+      - key: JOZ_WORLD_MODEL_SESSION_HASH_SALT
+        sync: false
