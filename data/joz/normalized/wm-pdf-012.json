@@ -1,0 +1,105 @@
+{
+  "slug": "wm-pdf-012",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (pp. 15–16)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language Disclaimer Stanford HAI has received financial support from several companies referenced in this brief, including Nvidia and Google. In addition, brief co-author Fei-Fei Li is currently on partial leave from Stanford University and serves as the co-founder and chief executive officer of World Labs. Consistent with Stanford HAI's fundraising an",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nDisclaimer\nStanford HAI has received financial support from several companies referenced in this brief, including Nvidia and\nGoogle. In addition, brief co-author Fei-Fei Li is currently on partial leave from Stanford University and serves as the\nco-founder and chief executive officer of World Labs.\nConsistent with Stanford HAI's fundraising and research policies, no outside entity sets the institute's research\nagenda or determines the outcome or dissemination of its research. The authors conducted this research\nindependently and retained full authority over the analysis, findings, recommendations, and editorial decisions\npresented in this brief.\nAcknowledgment\nThe authors thank Alberto Tono for research assistance and Wenlong Huang for reviewing an early version of this\nbrief.\nStanford University’s Institute on Human-Centered Artificial Intelligence (HAI) applies rigorous analysis and\nresearch to pressing policy questions on artificial intelligence. A pillar of HAI is to inform policymakers, industry\nleaders, and civil society by disseminating scholarship to a wide audience. HAI is a nonpartisan research institute,\nrepresenting a range of voices. The views expressed in this policy brief reflect the views of the authors. For further\ninformation, please contact HAI-Policy@stanford.edu.\n\nDaniel Zhang is the chief of staff at the Stanford Institute for Human-Centered Artificial\nIntelligence (HAI).\nRussell Wald is the executive director at Stanford HAI.\nEhsan Adeli is an assistant professor (research) of psychiatry and behavioral sciences, of\ncomputer science (by courtesy), and of biomedical data science (by courtesy) at Stanford\nUniversity, and a faculty affiliate of Stanford HAI.\nElena Cryst is the director of policy and society at Stanford HAI.\nDaniel E. Ho is the William Benjamin Scott and Luna M. Scott Professor of Law, professor of\npolitical science and of computer science (by courtesy), senior fellow and associate director at\nStanford HAI, senior fellow at the Institute for Economic Policy Research, and director at the\nRegulation, Evaluation, and Governance Lab.\nCaroline Meinhardt is the policy research manager at Stanford HAI.\nJiajun Wu is an assistant professor of computer science and of psychology (by courtesy) at\nStanford University and a faculty affiliate at Stanford HAI.\nAmy Zegart is the Morris Arnold and Nona Jean Cox Senior Fellow at the Hoover Institution,\nprofessor of political science (by courtesy), senior fellow at the Freeman Spogli Institute for\nInternational Studies, senior fellow and associate director at Stanford HAI, and founding director\nat the Hoover Institution’s Tech Policy Accelerator.\nFei-Fei Li is the Sequoia Professor of Computer Science at Stanford University and the founding\ndirector and a senior fellow at Stanford HAI.\nStanford HAI: 353 Jane Stanford Way, Stanford, CA 94305-5008\nT 650.725.4537 F 650.123.4567 E HAI-Policy@stanford.edu hai.stanford.edu",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; pp. 15–16",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nDisclaimer\nStanford HAI has received financial support from several companies referenced in this brief, including Nvidia and\nGoogle. In addition, brief co-author Fei-Fei Li is currently on partial leave from Stanford University and serves as the\nco-founder and chief executive officer of World Labs.\nConsistent with Stanford HAI's fundraising and research policies, no outside entity sets the institute's research\nagenda or determines the outcome or dissemination of its research. The authors conducted this research\nindependently and retained full authority over the analysis, findings, recommendations, and editorial decisions\npresented in this brief.\nAcknowledgment\nThe authors thank Alberto Tono for research assistance and Wenlong Huang for reviewing an early version of this\nbrief.\nStanford University’s Institute on Human-Centered Artificial Intelligence (HAI) applies rigorous analysis and\nresearch to pressing policy questions on artificial intelligence. A pillar of HAI is to inform policymakers, industry\nleaders, and civil society by disseminating scholarship to a wide audience. HAI is a nonpartisan research institute,\nrepresenting a range of voices. The views expressed in this policy brief reflect the views of the authors. For further\ninformation, please contact HAI-Policy@stanford.edu.\n\nDaniel Zhang is the chief of staff at the Stanford Institute for Human-Centered Artificial\nIntelligence (HAI).\nRussell Wald is the executive director at Stanford HAI.\nEhsan Adeli is an assistant professor (research) of psychiatry and behavioral sciences, of\ncomputer science (by courtesy), and of biomedical data science (by courtesy) at Stanford\nUniversity, and a faculty affiliate of Stanford HAI.\nElena Cryst is the director of policy and society at Stanford HAI.\nDaniel E. Ho is the William Benjamin Scott and Luna M. Scott Professor of Law, professor of\npolitical science and of computer science (by courtesy), senior fellow and associate director at\nStanford HAI, senior fellow at the Institute for Economic Policy Research, and director at the\nRegulation, Evaluation, and Governance Lab.\nCaroline Meinhardt is the policy research manager at Stanford HAI.\nJiajun Wu is an assistant professor of computer science and of psychology (by courtesy) at\nStanford University and a faculty affiliate at Stanford HAI.\nAmy Zegart is the Morris Arnold and Nona Jean Cox Senior Fellow at the Hoover Institution,\nprofessor of political science (by courtesy), senior fellow at the Freeman Spogli Institute for\nInternational Studies, senior fellow and associate director at Stanford HAI, and founding director\nat the Hoover Institution’s Tech Policy Accelerator.\nFei-Fei Li is the Sequoia Professor of Computer Science at Stanford University and the founding\ndirector and a senior fellow at Stanford HAI.\nStanford HAI: 353 Jane Stanford Way, Stanford, CA 94305-5008\nT 650.725.4537 F 650.123.4567 E HAI-Policy@stanford.edu hai.stanford.edu",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-012",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-012",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      15,
+      16
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, pp. 15–16",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-012"
+  }
+}

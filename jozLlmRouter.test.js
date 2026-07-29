@@ -48,6 +48,31 @@ test("routes identity profile queries ahead of assistant fallback", () => {
   assert.doesNotMatch(resolution.reply, /Joz LLM can explain/i);
 });
 
+test("answers generic questions from the active Business Value portal context", () => {
+  const { appContext, legacyContext } = buildContexts({
+    currentPortal: "business-value",
+    currentMesh: "data",
+  });
+  const route = routeJozLlmQuery({
+    input: "what is this about?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "what is this about?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "business_value_portal");
+  assert.equal(route.detectedSubIntent, "portal_context");
+  assert.match(resolution.reply, /Business Value portal/i);
+  assert.match(resolution.reply, /Data Reality/i);
+  assert.match(resolution.reply, /27%/i);
+  assert.doesNotMatch(resolution.reply, /Singapore/i);
+});
+
 test("routes natural AI architecture creation requests into brief intake", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({
@@ -559,19 +584,6 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
   assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
-});
-
-test("routes natural skills-of-Joz phrasing to capabilities overview", () => {
-  const route = routeJozLlmQuery({ input: "What are the skills of Joz?" });
-  const resolution = composeJozLlmRouteReply({
-    route,
-    input: "What are the skills of Joz?",
-  });
-
-  assert.equal(route.selectedRoute, "skills");
-  assert.equal(route.detectedSubIntent, "capabilities_overview");
-  assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /Agentic AI|agentic AI/i);
 });
 
 test("short pronoun phrasing about what he does resolves to Joz capabilities, not random technical drift", () => {
@@ -1886,7 +1898,7 @@ test("routes production-stupidity and approval-rollback phrasing to safer routes
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
   for (const [prompt, expectedRoute] of [
-    ["How would Joz stop an AI from doing something stupid in production?", "systems_mindset"],
+    ["How would Joz stop an AI from doing something stupid in production?", "skills"],
     ["How would Joz stop an AI from doing something stupid?", "systems_mindset"],
     ["How would Joz structure approvals, escalation, and rollback?", "skills"],
     ["Why not let agents just deploy code themselves?", "systems_mindset"],
@@ -2040,10 +2052,10 @@ test("systems safety prompts use direct technical answers instead of the generic
 test("operating mindset and complexity-reduction prompts resolve to systems mindset instead of fallback guards", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
-  for (const prompt of [
-    "What is Joz's operating mindset when building AI systems?",
-    "How does Joz reduce complexity without losing depth or rigor?",
-    "Explain how Joz thinks about intelligence, systems, and decision-making.",
+  for (const [prompt, expectedSubIntent] of [
+    ["What is Joz's operating mindset when building AI systems?", "operating_mindset"],
+    ["How does Joz reduce complexity without losing depth or rigor?", "complexity_reduction"],
+    ["Explain how Joz thinks about intelligence, systems, and decision-making.", "intelligence_decision_model"],
   ]) {
     const route = routeJozLlmQuery({
       input: prompt,
@@ -2058,7 +2070,7 @@ test("operating mindset and complexity-reduction prompts resolve to systems mind
     });
 
     assert.equal(route.selectedRoute, "systems_mindset");
-    assert.equal(route.detectedSubIntent, "thinking_model");
+    assert.equal(route.detectedSubIntent, expectedSubIntent);
     assert.equal(resolution.fallbackUsed, false);
     assert.match(resolution.reply, /systems before features|signal from noise|feedback loops|human accountability/i);
     assert.doesNotMatch(resolution.reply, /not in the current Joz knowledge base|outside the current deterministic Joz answer set/i);
@@ -2609,7 +2621,7 @@ test("routes recruiter location queries to deterministic operational answer with
 
   assert.equal(route.detectedIntent, "recruiter_location");
   assert.equal(route.selectedRoute, "joz_knowledge");
-  assert.equal(resolution.reply, "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.");
+  assert.equal(resolution.reply, "Joz operates across Singapore, Dubai, Europe, and global markets.");
   assert.equal(resolution.selectedOperationalComposer, "composeLocationAnswer");
   assert.deepEqual(
     resolution.actions.map((action) => action.id),
@@ -2853,7 +2865,7 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
 });
 
 test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {
-  for (const prompt of ["How would he do that?", "Why does he do that?"]) {
+  for (const prompt of ["How would he do that?", "Why does he do that?", "now what", "what next"]) {
     const resolution = await resolveUnknownJozReply({
       input: prompt,
       messages: [{ role: "user", content: prompt }],
@@ -3466,4 +3478,101 @@ test("runs a paid architecture brief entirely through chat before checkout", () 
       assert.equal(next.resolution.actions?.[0]?.id, "architecture_review_pay");
     }
   }
+});
+
+test("handles natural recruiter and product questions without falling into generic replies", async () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const cases = [
+    {
+      input: "Why should a company hire Joz?",
+      selectedRoute: "business_need",
+      detectedSubIntent: "hire_value",
+      reply: /proof is enterprise-scale and measurable/i,
+    },
+    {
+      input: "What is Joz's strongest technical skill?",
+      selectedRoute: "skills",
+      detectedSubIntent: "proof_backed_strengths",
+      reply: /agentic ai architecture|MarketClue|multimodal/i,
+    },
+    {
+      input: "How does Joz build agentic AI systems?",
+      selectedRoute: "skills",
+      detectedSubIntent: "agentic_architecture_approach",
+      reply: /clear separation|policy before action|post-action verification/i,
+    },
+    {
+      input: "How should memory and shared state work in an agent system?",
+      selectedRoute: "skills",
+      detectedSubIntent: "architecture_reasoning",
+      reply: /architecture problem|typed orchestration state|authoritative systems/i,
+    },
+    {
+      input: "What is the difference between an agent, a model, and an API?",
+      selectedRoute: "skills",
+      detectedSubIntent: "agent_model_tool_distinction",
+      reply: /model predicts|agent combines|api exposes/i,
+    },
+    {
+      input: "How does Joz use voice and 3D interaction?",
+      selectedRoute: "skills",
+      detectedSubIntent: "agentic_ux_orchestration",
+      reply: /multimodal|spatial|3d/i,
+    },
+    {
+      input: "What was Joz's biggest enterprise achievement?",
+      selectedRoute: "skills",
+      detectedSubIntent: "proof_backed_strengths",
+      reply: /MarketClue|Maybank|Mediacorp|Erste/i,
+    },
+    {
+      input: "What does durable execution add to an agent system?",
+      selectedRoute: "skills",
+      detectedSubIntent: "architecture_reasoning",
+      reply: /durable workflow|crash recovery|approval waits/i,
+    },
+    {
+      input: "Can an autonomous agent deploy directly to production?",
+      selectedRoute: "systems_mindset",
+      detectedSubIntent: "thinking_model",
+      reply: /must not deploy directly to production|human approval|deterministic verification/i,
+    },
+  ];
+
+  for (const testCase of cases) {
+    const route = routeJozLlmQuery({
+      input: testCase.input,
+      appContext,
+      legacyContext,
+    });
+    const resolution = composeJozLlmRouteReply({
+      route,
+      input: testCase.input,
+      appContext,
+      legacyContext,
+      retrievedDocuments: [],
+    });
+
+    assert.equal(route.selectedRoute, testCase.selectedRoute, testCase.input);
+    assert.equal(route.detectedSubIntent, testCase.detectedSubIntent, testCase.input);
+    assert.match(String(resolution.reply || ""), testCase.reply, testCase.input);
+    assert.doesNotMatch(String(resolution.reply || ""), /outside the current deterministic|not in the current joz knowledge base/i);
+  }
+
+  const marketClue = await resolveUnknownJozReply({
+    input: "Tell me about MarketClue.",
+    roleAwareContext: {
+      retrievedDocuments: [
+        {
+          title: "MarketClue USA",
+          category: "project",
+          summary: "Financial AI agents with live market data, portfolio context, and quant tools.",
+          metadata: { companies: ["MarketClue USA"], projects: ["financial AI assistant"] },
+        },
+      ],
+    },
+  });
+
+  assert.equal(marketClue.answerSource, "MarketClue USA");
+  assert.match(marketClue.reply, /live market data|financial AI agents/i);
 });

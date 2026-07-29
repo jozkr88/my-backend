@@ -111,6 +111,21 @@ test("POST /api/joz-llm verifies business value definition replies deterministic
   assert.match(String(payload.reply || ""), /business value is|measurable improvement/i);
 });
 
+test("POST /api/joz-llm keeps the Business Value diagnostic disabled", async () => {
+  const { status, payload } = await postJson("/api/joz-llm", {
+    sessionKey: "runtime-business-value-diagnostic",
+    messages: [{ role: "user", content: "Our AI outputs are too generic and users do not trust them." }],
+    context: {
+      currentPortal: "business-value",
+      currentMesh: "adoption",
+      currentMeshStage: null,
+    },
+  });
+
+  assert.equal(status, 200);
+  assert.equal(payload.businessValueAgent, null);
+});
+
 test("POST /api/joz-llm does not let Root world context hijack operating model questions", async () => {
   const question =
     "How should a company design its operating model to embed Joz and AI systems across workflows, ownership, governance, and execution?";
@@ -402,6 +417,7 @@ test("POST /api/joz-llm/callback-request stores callback requests and returns de
     name: "Casey Example",
     phone: "+1 415 555 0100",
     time: "Tomorrow 3pm",
+    privacyConsent: true,
     context: {
       currentPortal: "meet-joz",
       currentMesh: "skills",
@@ -414,6 +430,17 @@ test("POST /api/joz-llm/callback-request stores callback requests and returns de
   assert.match(String(payload.delivery?.status || ""), /^(delivered|stored_only|delivery_failed)$/);
   assert.ok(Array.isArray(payload.delivery?.channels));
   assert.match(String(payload.persistedTo || ""), /^(database|memory)$/);
+});
+
+test("POST /api/joz-llm/callback-request requires explicit privacy consent", async () => {
+  const { status, payload } = await postJson("/api/joz-llm/callback-request", {
+    name: "Casey Example",
+    phone: "+1 415 555 0100",
+    time: "Tomorrow 3pm",
+  });
+
+  assert.equal(status, 400);
+  assert.match(String(payload.error || ""), /privacy consent is required/i);
 });
 
 test("POST /api/joz-llm/callback-request validates required fields", async () => {
@@ -478,6 +505,7 @@ test("POST /api/privacy/export returns matching fallback callback request data",
     phone: uniquePhone,
     email: uniqueEmail,
     time: "Monday 10:00",
+    privacyConsent: true,
     context: {
       currentPortal: "meet-joz",
       currentMesh: "skills",
@@ -534,6 +562,7 @@ test("POST /api/privacy/delete removes matching fallback callback request data",
     phone: uniquePhone,
     email: uniqueEmail,
     time: "Friday 16:00",
+    privacyConsent: true,
     context: {
       currentPortal: "meet-joz",
       currentMesh: "discover",
@@ -651,8 +680,8 @@ const JOZ_ROUTER_GATE_CASES = [
       detectedSubIntent: "thinking_model",
       detectedConcept: "systems_mindset",
       selectedRoute: "systems_mindset",
-      answerSource: "retrieved_knowledge",
-      composer: "buildRetrievedKnowledgeReply",
+      answerSource: "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
+      composer: "composeSystemsMindsetReply",
       fallbackUsed: false,
     },
     text: [/systems before features|signal from noise|interconnected systems|technology is rarely the root problem/i],
@@ -907,7 +936,7 @@ const RECRUITER_OPERATIONAL_CASES = [
     name: "location",
     query: "Where is Joz located?",
     expectedReply:
-      "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.",
+      "Joz operates across Singapore, Dubai, Europe, and global markets.",
     expectedIntent: "recruiter_location",
     expectedComposer: "composeLocationAnswer",
     forbidden: [/Slovakia/i, /Bratislava/i, /\bEP\b/i, /\bPEP\b/i],

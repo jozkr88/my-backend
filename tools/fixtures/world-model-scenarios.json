@@ -1,0 +1,17 @@
+[
+  {"id":"root-ball","kind":"synthetic","initialState":{"portal":"root","currentStateKey":"root"},"action":"ball","expected":{"portal":"meet-joz","stage":"vibe"}},
+  {"id":"root-brain","kind":"synthetic","initialState":{"portal":"root","currentStateKey":"root"},"action":"brain","expected":{"portal":"maxx"}},
+  {"id":"meet-vibe-discover","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"vibe"},"action":"discover","expected":{"portal":"meet-joz","stage":"discover"}},
+  {"id":"meet-discover-skills","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"discover"},"action":"skills","expected":{"portal":"meet-joz","stage":"skills"}},
+  {"id":"meet-skills-back","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"skills"},"action":"back","expected":{"portal":"root"}},
+  {"id":"invalid-action","kind":"synthetic","initialState":{"portal":"root","currentStateKey":"root"},"action":"not-allowed","expected":{"valid":false}},
+  {"id":"pause-neurons","kind":"synthetic","initialState":{"portal":"maxx","currentStateKey":"maxx"},"action":"pause_neurons","expected":{"paused":true}},
+  {"id":"resume-neurons","kind":"synthetic","initialState":{"portal":"maxx","currentStateKey":"maxx"},"action":"resume_neurons","expected":{"paused":false}},
+  {"id":"launch-ar","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"vibe"},"action":"launch_in_space_n2x","expected":{"overlay":"ar"}},
+  {"id":"show-flex","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"vibe"},"action":"show_flex","expected":{"stage":"vibe"}},
+  {"id":"show-ascend","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"vibe"},"action":"show_ascend","expected":{"stage":"discover"}},
+  {"id":"show-mogg","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"discover"},"action":"show_mogg","expected":{"stage":"skills"}},
+  {"id":"target-mismatch","kind":"synthetic","initialState":{"portal":"root","currentStateKey":"root"},"action":{"type":"ball","target":"/wrong"},"expected":{"valid":false}},
+  {"id":"camera-unsupported","kind":"synthetic","initialState":{"portal":"root","currentStateKey":"root"},"action":"ball","expected":{"unsupported":"camera.frame"}},
+  {"id":"ar-frame-excluded","kind":"synthetic","initialState":{"portal":"meet-joz","stage":"vibe"},"action":"launch_ar","expected":{"excluded":"cameraFrame"}}
+]

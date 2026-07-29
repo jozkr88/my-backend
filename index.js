@@ -5,22 +5,28 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import { execFile } from "node:child_process";
+import { createHash, randomUUID } from "node:crypto";
 import { promisify } from "node:util";
 import { fileURLToPath } from "url";
 import {
   appendJozMessage,
+  appendBusinessValueCaseEvent,
+  upsertBusinessValueEvidence,
   cleanupExpiredJozData,
   createJozPrivacyRequest,
+  createJozAIComplianceIncident,
   createJozCallbackRequest,
   createJozConversation,
   deleteJozPrivacyBundle,
   exportJozPrivacyBundle,
   getPortalTransition,
+  getBusinessValueCase,
   getPrimaryJozProfile,
   getJozDataControlOverview,
   getJozDocumentsByIntent,
   getJozSemanticDocumentsByQuery,
   getStructuredWorldState,
+  getWorldTransitionExperience,
   initDatabase,
   isDatabaseEnabled,
   isDatabaseRequired,
@@ -32,6 +38,9 @@ import {
   updateJozActionProposal,
   logReasoningEvent,
   logJozLlmRequestEvent,
+  recordWorldModelTrajectory,
+  upsertBusinessValueCase,
+  reviewBusinessValueEvidence,
   reviewJozLlmRepairCandidate,
   reviewJozLlmRequestEvent,
 } from "./db.js";
@@ -63,6 +72,28 @@ import {
   validateAppContext,
 } from "./shared/meetJozWorld.js";
 import {
+  buildCanonicalWorldState,
+  buildPredictionTrace,
+  chooseWorldPlan,
+  evaluateWorldPlans,
+} from "./shared/worldSimulator.js";
+import { evaluateProbabilisticPlans } from "./shared/worldExperience.js";
+import {
+  WORLD_MODEL_VERSION,
+  WORLD_TRANSITION_RULE_VERSION,
+  buildWorldTrajectoryRecord,
+} from "./shared/worldTrajectory.js";
+import {
+  observeWorld,
+  predictObservation,
+} from "./shared/worldObservation.js";
+import {
+  classifyWorldTrajectory,
+  isLikelyWorldModelBot,
+  normalizeWorldModelControls,
+  shouldSampleWorldTrajectory,
+} from "./shared/worldModelControls.js";
+import {
   buildJozLlmContext,
   enforceJozLlmReplyLimit,
 } from "./shared/jozLlmProfile.js";
@@ -79,6 +110,22 @@ import {
   routeJozLlmQuery,
 } from "./shared/jozLlmRouter.js";
 import { buildJozResponseVerification } from "./shared/jozLlmObservability.js";
+import { buildBusinessValueDiagnosticState } from "./shared/businessValueDiagnostic.js";
+import {
+  AI_ACT_GOVERNANCE_VERSION,
+  AI_DISCLOSURE_TEXT,
+  AI_MACHINE_READABLE_DISCLOSURE,
+  JOZ_AI_SYSTEM_CARD,
+  applyBusinessValueGovernance,
+  assessAIActUse,
+  buildAIActRestrictedReply,
+} from "./shared/aiActGovernance.js";
+import {
+  dedupeBusinessValueEvidence,
+  ingestBusinessValueDocument,
+} from "./shared/businessValueEvidence.js";
+import { extractBusinessValueFile } from "./shared/businessValueFileExtraction.js";
+import { runBusinessValueWorkerDiagnostic } from "./shared/businessValueWorker.js";
 import {
   createJozQueryEmbedding,
   getJozEmbeddingModel,
@@ -128,7 +175,20 @@ const JOZ_BUILD_ID = String(
   process.env.JOZ_BUILD_ID ||
   "local"
 ).trim();
-const JOZ_ROUTER_VERSION = "2026-07-28-neo4j-augment-1";
+const JOZ_ROUTER_VERSION = "2026-07-24-intake-hardening-1";
+// Production deployments opt into the predictive layer in shadow mode. An
+// explicit JOZ_WORLD_MODEL_MODE=off still disables it for rollback or local
+// baseline comparisons; shadow prediction never authorises live actions.
+const WORLD_MODEL_MODE = String(
+  process.env.JOZ_WORLD_MODEL_MODE ||
+    (process.env.RENDER || process.env.NODE_ENV === "production" ? "shadow" : "off")
+).trim().toLowerCase();
+const WORLD_MODEL_SHADOW_ENABLED = !["off", "disabled"].includes(WORLD_MODEL_MODE);
+const WORLD_MODEL_CONTROLS = normalizeWorldModelControls(process.env, {
+  production: Boolean(process.env.RENDER || process.env.NODE_ENV === "production"),
+});
+const WORLD_MODEL_EXPERIENCE_TIMEOUT_MS = Math.min(50, WORLD_MODEL_CONTROLS.persistenceTimeoutMs);
+const WORLD_MODEL_SESSION_HASH_SALT = String(process.env.JOZ_WORLD_MODEL_SESSION_HASH_SALT || "public-world-model");
 
 const app = express();
 app.set("trust proxy", 2);
@@ -147,12 +207,17 @@ const JOZ_CHAT_DUPLICATE_WINDOW_MS = 10_000;
 const DEFAULT_JOZ_CONVERSATION_RETENTION_DAYS = 30;
 const DEFAULT_JOZ_CALLBACK_RETENTION_DAYS = 30;
 const DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS = 365;
+const BUSINESS_VALUE_DIAGNOSTIC_ENABLED = false;
 const jozChatSessionLog = new Map();
 const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
 const jozCallbackFallbackStore = [];
 const jozObservabilityFallbackStore = [];
+const worldModelTrajectoryFallbackStore = [];
+const worldTransitionExperienceFallbackStore = [];
+const worldModelPredictionFallbackStore = new Map();
 const jozRecentSessionMessagesFallbackStore = new Map();
+const jozBusinessValueCaseFallbackStore = new Map();
 const isNodeTestRuntime =
   process.argv.includes("--test") || process.execArgv.includes("--test");
 
@@ -173,6 +238,27 @@ const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
   process.env.JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
   DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS
 );
+const JOZ_WORLD_MODEL_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_WORLD_MODEL_RETENTION_DAYS,
+  WORLD_MODEL_CONTROLS.retentionDays
+);
+
+function pseudonymizeWorldModelSession(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return null;
+  return createHash("sha256")
+    .update(`${WORLD_MODEL_SESSION_HASH_SALT}:${raw}`)
+    .digest("hex")
+    .slice(0, 32);
+}
+
+function withWorldModelTimeout(promise, timeoutMs) {
+  let timer;
+  const timeout = new Promise((resolve) => {
+    timer = setTimeout(() => resolve(null), timeoutMs);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
@@ -209,6 +295,87 @@ function appendFallbackRecentJozSessionMessage({
     metadata: metadata && typeof metadata === "object" ? metadata : {},
   });
   jozRecentSessionMessagesFallbackStore.set(key, existing.slice(-24));
+}
+
+function getBusinessValueCaseFallbackKey({ sessionKey = null, conversationId = null } = {}) {
+  return String(sessionKey || conversationId || "anonymous").trim() || "anonymous";
+}
+
+function inferBusinessValueCaseEventType(previousState = null, nextState = {}) {
+  if (!previousState) return "case_opened";
+  if (nextState.status === "verified" && previousState.status !== "verified") {
+    return "diagnosis_verified";
+  }
+  if (
+    nextState.approval?.status === "approved" &&
+    previousState.approval?.status !== "approved"
+  ) {
+    return "approval_received";
+  }
+  if (Number(nextState.evidenceCoverage || 0) > Number(previousState.evidenceCoverage || 0)) {
+    return "evidence_added";
+  }
+  return "diagnosis_updated";
+}
+
+async function persistBusinessValueDiagnosticCase({
+  state,
+  conversationId = null,
+  sessionKey = null,
+  companyKey = null,
+  evidenceRecords = [],
+} = {}) {
+  if (!state) return null;
+
+  const fallbackKey = getBusinessValueCaseFallbackKey({ sessionKey, conversationId });
+  const previous = jozBusinessValueCaseFallbackStore.get(fallbackKey) || null;
+  const persisted = await upsertBusinessValueCase({
+    caseId: previous?.caseId || null,
+    conversationId,
+    sessionKey,
+    companyKey,
+    state,
+  });
+  const caseId =
+    persisted?.id ||
+    previous?.caseId ||
+    `memory-business-value-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const eventType = inferBusinessValueCaseEventType(previous?.state || null, state);
+  const event = {
+    id: `memory-business-value-event-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    case_id: caseId,
+    event_type: eventType,
+    actor: "joz_llm",
+    payload: {
+      activeNode: state.activeNode,
+      status: state.status,
+      evidenceCoverage: state.evidenceCoverage,
+    },
+    created_at: new Date().toISOString(),
+  };
+  const events = [...(previous?.events || []), event].slice(-100);
+  if (persisted?.id) {
+    const databaseEvent = await appendBusinessValueCaseEvent({
+      caseId: persisted.id,
+      eventType,
+      payload: event.payload,
+    });
+    if (databaseEvent) events[events.length - 1] = databaseEvent;
+  }
+
+  const record = {
+    caseId,
+    conversationId,
+    sessionKey,
+    companyKey,
+    state: { ...state, caseId },
+    evidenceRecords: dedupeBusinessValueEvidence(evidenceRecords),
+    events,
+    storage: persisted?.id ? "database" : "memory",
+    updatedAt: new Date().toISOString(),
+  };
+  jozBusinessValueCaseFallbackStore.set(fallbackKey, record);
+  return record;
 }
 
 function pruneRecentTimestamps(timestamps = [], windowMs, now) {
@@ -288,22 +455,43 @@ function enforceJozChatRateLimit(req, sessionKey, latestUserMessage) {
   return null;
 }
 
-// ✅ Universal CORS setup — works for DreamHost frontend + Vercel backend
+const configuredAllowedOrigins = String(process.env.JOZ_ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+const allowedOrigins = new Set([
+  "https://meetjoz.com",
+  "https://www.meetjoz.com",
+  ...configuredAllowedOrigins,
+  ...(process.env.NODE_ENV === "production"
+    ? []
+    : ["http://localhost:3000", "http://127.0.0.1:3000"]),
+]);
+
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // or "https://meetjoz.com"
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  // respond immediately to preflight (OPTIONS) requests
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), geolocation=(), microphone=(self)");
+  if (req.path.startsWith("/api/")) res.setHeader("Cache-Control", "no-store");
+  if (process.env.NODE_ENV === "production") {
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   }
-
   next();
 });
 
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.has(origin)) return callback(null, true);
+      return callback(new Error("Origin is not allowed"));
+    },
+    methods: ["GET", "POST", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID"],
+    exposedHeaders: ["X-Request-ID", "X-AI-Interaction", "X-AI-System-Card"],
+    credentials: false,
+  })
+);
+app.use(express.json({ limit: "12mb" }));
 
 // --- Test route ---
 app.get("/api/hello", (req, res) => {
@@ -312,6 +500,37 @@ app.get("/api/hello", (req, res) => {
     buildId: JOZ_BUILD_ID,
     routerVersion: JOZ_ROUTER_VERSION,
     modelRuntime,
+    worldModel: {
+      mode: WORLD_MODEL_MODE,
+      enabled: WORLD_MODEL_SHADOW_ENABLED,
+      modelVersion: WORLD_MODEL_VERSION,
+      transitionRuleVersion: WORLD_TRANSITION_RULE_VERSION,
+      executionPolicy: "existing_guardrails_execute_approved_action",
+    },
+  });
+});
+
+app.get("/api/world-model/status", (_req, res) => {
+  res.json({
+    ok: true,
+    enabled: WORLD_MODEL_SHADOW_ENABLED,
+    mode: WORLD_MODEL_MODE,
+    modelVersion: WORLD_MODEL_VERSION,
+    transitionRuleVersion: WORLD_TRANSITION_RULE_VERSION,
+    sampling: {
+      rate: WORLD_MODEL_CONTROLS.sampleRate,
+      excludeDevelopment: WORLD_MODEL_CONTROLS.excludeDevelopment,
+    },
+    controls: {
+      maxCandidates: WORLD_MODEL_CONTROLS.maxCandidates,
+      maxRolloutDepth: WORLD_MODEL_CONTROLS.maxRolloutDepth,
+      maxTrajectoryBytes: WORLD_MODEL_CONTROLS.maxTrajectoryBytes,
+      persistenceTimeoutMs: WORLD_MODEL_CONTROLS.persistenceTimeoutMs,
+      retentionDays: WORLD_MODEL_CONTROLS.retentionDays,
+    },
+    executionPolicy: "shadow_predictions_do_not_control_live_actions",
+    observationBoundary: "structured_application_scene_state; no_continuous_camera_audio_or_biometrics",
+    persistence: isDatabaseEnabled() ? "postgresql" : "memory_fallback",
   });
 });
 
@@ -322,6 +541,56 @@ app.get("/api/version", (req, res) => {
     environment: process.env.NODE_ENV || "development",
     modelRuntime,
   });
+});
+
+app.get("/api/ai-system-card", (_req, res) => {
+  res.json({
+    ok: true,
+    ...JOZ_AI_SYSTEM_CARD,
+    aiDisclosure: AI_MACHINE_READABLE_DISCLOSURE,
+    aiDisclosureText: AI_DISCLOSURE_TEXT,
+    governanceVersion: AI_ACT_GOVERNANCE_VERSION,
+    aiActReadiness: "engineering-safeguards-implemented-legal-review-required",
+  });
+});
+
+app.post("/api/ai-compliance/incidents", requireJozAuth, async (req, res) => {
+  const category = String(req.body?.category || "safety_or_compliance_concern").trim().slice(0, 120);
+  const severity = String(req.body?.severity || "medium").trim().toLowerCase();
+  const description = redactJozFixtureText(req.body?.description || "");
+  const containment = redactJozFixtureText(req.body?.containment || "");
+  if (!description || description.length < 10) {
+    return res.status(400).json({ error: "Please provide a description of at least 10 characters." });
+  }
+  if (!["low", "medium", "high", "critical"].includes(severity)) {
+    return res.status(400).json({ error: "Unsupported incident severity." });
+  }
+
+  try {
+    const incident = await createJozAIComplianceIncident({
+      companyKey: req.jozAuth?.companyKey || null,
+      reporterId: req.jozAuth?.userId || "authenticated_user",
+      category,
+      severity,
+      description,
+      containment: containment || null,
+    });
+    return res.status(201).json({
+      ok: true,
+      incident: incident || {
+        status: "open",
+        category,
+        severity,
+        description,
+        containment: containment || null,
+        storage: "database_unavailable",
+      },
+      nextStep: "Stop relying on the affected output, preserve relevant evidence, and contact joz@meetjoz.com for triage.",
+    });
+  } catch (error) {
+    console.error("❌ AI compliance incident creation failed:", error);
+    return res.status(500).json({ error: "Could not register the compliance incident." });
+  }
 });
 
 app.get("/api/joz-data/overview", async (req, res) => {
@@ -503,6 +772,53 @@ app.post("/api/agentic", async (req, res) => {
         [],
     };
     const snapshot = buildAgentSnapshot({ input, context: enrichedContext, worldMap, worldMemory });
+    const initialWorldState = WORLD_MODEL_SHADOW_ENABLED
+      ? buildCanonicalWorldState({
+          appContext: snapshot.validatedAppContext,
+          legacyContext: enrichedContext,
+          structuredState,
+          userContext: context?.userContext || context?.user_context || {},
+        })
+      : null;
+    const initialObservation = WORLD_MODEL_SHADOW_ENABLED
+      ? context?.worldObservation
+        ? observeWorld(context.worldObservation)
+        : observeWorld({
+            symbolicState: initialWorldState,
+            sceneState: {
+              sceneId: initialWorldState.portal,
+              activePortal: initialWorldState.portal,
+              activeStage: initialWorldState.stage,
+              focusedEntityId: initialWorldState.focusedEntityId,
+              visibleObjectIds: initialWorldState.visibleEntityIds,
+              visibleMeshIds: initialWorldState.visibleEntityIds,
+            },
+            cameraState: initialWorldState.environment?.camera,
+            overlays: { activeIds: initialWorldState.environment?.activeOverlays },
+            missingFields: [
+              "sceneState.objectTransforms",
+              "cameraState.projection",
+              "spatialRelationships",
+              "arMetadata.anchorIds",
+            ],
+            fieldSupport: {
+              sceneState: "derived",
+              visibleObjectIds: initialWorldState.visibleEntityIds?.length ? "derived" : "unknown",
+              objectTransforms: "unknown",
+              cameraState: "unknown",
+              spatialRelationships: "unknown",
+              arMetadata: "unknown",
+            },
+          })
+      : null;
+    const predictionTraceId = randomUUID();
+    const rawPredictionSessionId =
+      String(context?.sessionKey || context?.session_key || context?.conversationId || "").trim() || null;
+    const predictionSessionId = pseudonymizeWorldModelSession(rawPredictionSessionId);
+    const worldModelSampled = WORLD_MODEL_SHADOW_ENABLED &&
+      !WORLD_MODEL_CONTROLS.excludeDevelopment &&
+      !isLikelyWorldModelBot(req.headers["user-agent"]) &&
+      shouldSampleWorldTrajectory(predictionTraceId, WORLD_MODEL_CONTROLS.sampleRate);
     const canonicalWorldReply = buildMeetJozWorldAwarenessReply({
       input,
       appContext: snapshot.validatedAppContext,
@@ -538,6 +854,158 @@ app.post("/api/agentic", async (req, res) => {
 
     const clean = snapshot.normalizedInput;
     const approved = approveAgentProposal({ clean, context: snapshot, worldMap, worldMemory, proposal });
+    let predictionTrace = null;
+    const shadowPredictionPromise = new Promise((resolve) => {
+      setImmediate(() => {
+        (async () => {
+    try {
+    if (WORLD_MODEL_SHADOW_ENABLED && worldModelSampled) {
+    const predictionStartedAt = Date.now();
+    const predictiveActions = [
+      ...new Set([
+        ...snapshot.allowedActions,
+        ...snapshot.validatedAppContext.available_actions,
+        ...(snapshot.structuredState?.availableActions || []),
+        approved?.action || null,
+      ].map((value) => String(value || "").trim()).filter(Boolean)),
+    ].slice(0, WORLD_MODEL_CONTROLS.maxCandidates);
+    const predictionCandidates = predictiveActions.map((action) => ({
+      actions: [
+        approved?.action === action && approved?.target
+          ? { type: action, target: approved.target }
+          : action,
+      ],
+      transitions: snapshot.structuredState?.transitions || [],
+    }));
+    const experienceByAction = {};
+    if (WORLD_MODEL_SHADOW_ENABLED && worldModelSampled) {
+      await Promise.all(predictiveActions.map(async (action) => {
+        try {
+          const lookup = isDatabaseEnabled()
+            ? getWorldTransitionExperience({
+                stateKey: initialWorldState.currentStateKey,
+                actionKey: action,
+              })
+            : Promise.resolve(getFallbackWorldTransitionExperience({
+                stateKey: initialWorldState.currentStateKey,
+                actionKey: action,
+              }));
+          experienceByAction[action] = await Promise.race([
+            lookup,
+            new Promise((resolve) => setTimeout(() => resolve([]), WORLD_MODEL_EXPERIENCE_TIMEOUT_MS)),
+          ]);
+        } catch (error) {
+          console.warn("⚠️ World experience lookup failed; using symbolic fallback:", error?.message || error);
+          experienceByAction[action] = [];
+        }
+      }));
+    }
+    const evaluatedPredictionCandidates = evaluateWorldPlans(
+      initialWorldState,
+      predictionCandidates,
+      input,
+    );
+    for (const candidate of evaluatedPredictionCandidates) {
+      const action = candidate.plan?.actions?.[0] || null;
+      candidate.predictedObservation = predictObservation(
+        initialObservation,
+        action,
+        candidate.simulation.predictedState,
+        {
+          expectedEffects: candidate.simulation.trajectory?.flatMap((step) => step.expectedEffects || []) || [],
+          confidence: candidate.score?.confidence,
+          portalSceneManifest: context?.portalSceneManifest || structuredState?.portalSceneManifest,
+          sourceVersions: initialObservation.sourceVersions,
+        },
+      );
+    }
+    const plannerSelectedPrediction = chooseWorldPlan(
+      initialWorldState,
+      predictionCandidates,
+      input,
+    );
+    const evaluatedProbabilisticCandidates = WORLD_MODEL_SHADOW_ENABLED
+      ? evaluateProbabilisticPlans(
+          initialWorldState,
+          predictionCandidates,
+          input,
+          {
+            transitions: snapshot.structuredState?.transitions || [],
+            experienceByAction,
+        maxDepth: WORLD_MODEL_CONTROLS.maxRolloutDepth,
+          },
+        )
+      : [];
+    for (const candidate of evaluatedProbabilisticCandidates) {
+      const action = candidate.plan?.actions?.[0] || null;
+      candidate.predictedObservation = predictObservation(
+        initialObservation,
+        action,
+        candidate.probabilisticSimulation.predictedState,
+        {
+          expectedEffects: candidate.probabilisticSimulation.trajectory?.flatMap((step) => step.expectedEffects || []) || [],
+          confidence: candidate.probabilisticSimulation.trajectory?.[0]?.confidence,
+          successProbability: candidate.probabilisticSimulation.successProbability,
+          portalSceneManifest: context?.portalSceneManifest || structuredState?.portalSceneManifest,
+          sourceVersions: initialObservation.sourceVersions,
+        },
+      );
+    }
+    const approvedPrediction = approved?.action
+      ? evaluatedPredictionCandidates.find((candidate) => {
+          const candidateAction = candidate.plan?.actions?.[0];
+          const candidateType = typeof candidateAction === "string"
+            ? candidateAction
+            : candidateAction?.type || candidateAction?.action;
+          return String(candidateType || "").trim() === String(approved.action).trim();
+        })
+      : null;
+    const selectedPrediction = approvedPrediction || evaluatedPredictionCandidates
+      .filter((candidate) => candidate.simulation.valid)
+      .sort((left, right) => right.score.total - left.score.total)[0] || null;
+    const approvedProbabilisticPrediction = approved?.action
+      ? evaluatedProbabilisticCandidates.find((candidate) => {
+          const candidateAction = candidate.plan?.actions?.[0];
+          const candidateType = typeof candidateAction === "string"
+            ? candidateAction
+            : candidateAction?.type || candidateAction?.action;
+          return String(candidateType || "").trim() === String(approved.action).trim();
+        })
+      : null;
+    const selectedProbabilisticPrediction = approvedProbabilisticPrediction || evaluatedProbabilisticCandidates
+      .filter((candidate) => candidate.probabilisticSimulation.valid)
+      .sort((left, right) => right.score.total - left.score.total)[0] || null;
+    const plannerSelectedProbabilisticPrediction = evaluatedProbabilisticCandidates
+      .filter((candidate) => candidate.probabilisticSimulation.valid)
+      .sort((left, right) => right.score.total - left.score.total)[0] || null;
+    predictionTrace = buildPredictionTrace({
+      input,
+      trajectoryId: predictionTraceId,
+      sessionId: predictionSessionId,
+      traceId: predictionTraceId,
+      interactionChannel: "voice",
+      goal: "world_navigation",
+      modelVersion: WORLD_MODEL_VERSION,
+      transitionRuleVersion: WORLD_TRANSITION_RULE_VERSION,
+      initialState: initialWorldState,
+      candidatePlans: evaluatedPredictionCandidates,
+      selectedPlan: selectedPrediction,
+      plannerSelectedPlan: plannerSelectedPrediction,
+      probabilisticCandidates: evaluatedProbabilisticCandidates,
+      probabilisticSelected: selectedProbabilisticPrediction,
+      probabilisticPlannerSelected: plannerSelectedProbabilisticPrediction,
+      observationBefore: initialObservation,
+      shadowLatencyMs: Date.now() - predictionStartedAt,
+    });
+    }
+    } catch (error) {
+      console.warn("⚠️ Shadow world-model prediction failed; continuing with approved action:", error?.message || error);
+      predictionTrace = null;
+    }
+    return predictionTrace;
+        })().then(resolve);
+      });
+    });
     const reply =
       canonicalWorldReply ||
       approved?.awareness ||
@@ -555,9 +1023,18 @@ app.post("/api/agentic", async (req, res) => {
             ? "llm_proposal"
             : "llm_fallback",
     });
-    logWorldAwarenessTrace("/api/agentic", trace);
+    logWorldAwarenessTrace("/api/agentic", {
+      ...trace,
+      prediction: {
+        mode: WORLD_MODEL_SHADOW_ENABLED ? "shadow" : "disabled",
+        sampled: worldModelSampled,
+        candidateCount: predictionTrace?.candidateCount || 0,
+        selectedActions: predictionTrace?.selected?.actions || [],
+        predictionError: predictionTrace?.predictionError || null,
+      },
+    });
 
-    return res.json({
+    const response = res.json({
       intent:
         String(
           canonicalWorldReply
@@ -577,12 +1054,166 @@ app.post("/api/agentic", async (req, res) => {
       approvedAction: approved?.action || null,
       approvedTarget: approved?.target || null,
       approvedAwareness: canonicalWorldReply || approved?.awareness || null,
+      prediction: {
+        ...(predictionTrace || {}),
+        trajectoryId: predictionTrace?.trajectoryId || predictionTraceId,
+        traceId: predictionTrace?.traceId || predictionTraceId,
+        sessionId: predictionTrace?.sessionId || predictionSessionId,
+        initialState: predictionTrace?.initialState || initialWorldState,
+        observationBefore: predictionTrace?.observationBefore || initialObservation,
+        goal: predictionTrace?.goal || "world_navigation",
+        interactionChannel: predictionTrace?.interactionChannel || "voice",
+        recordedAt: new Date().toISOString(),
+        pending: WORLD_MODEL_SHADOW_ENABLED && worldModelSampled && !predictionTrace,
+        mode: WORLD_MODEL_SHADOW_ENABLED ? "shadow" : "disabled",
+        sampled: worldModelSampled,
+        approvedAction: approved?.action || null,
+        approvedTarget: approved?.target || null,
+        executionPolicy: "existing_guardrails_execute_approved_action",
+      },
       snapshot,
       trace,
     });
+    void shadowPredictionPromise
+      .then((completedPrediction) => {
+        if (!completedPrediction) return null;
+        rememberCompletedWorldModelPrediction({
+          prediction: completedPrediction,
+          approved,
+        });
+        return persistCompletedWorldModelPrediction({
+          prediction: completedPrediction,
+          approved,
+          sampleRate: WORLD_MODEL_CONTROLS.sampleRate,
+        });
+      })
+      .catch((error) => {
+        console.warn("⚠️ Deferred shadow persistence failed:", error?.message || error);
+      });
+    return response;
   } catch (error) {
     console.error("❌ /api/agentic failed:", error);
     return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/world-model/predictions/:trajectoryId", (req, res) => {
+  const trajectoryId = String(req.params.trajectoryId || "").trim();
+  const prediction = worldModelPredictionFallbackStore.get(trajectoryId);
+  if (!prediction) {
+    return res.status(202).json({ ready: false, trajectoryId });
+  }
+  return res.json({ ready: true, prediction });
+});
+
+app.post("/api/world-model/trajectories", async (req, res) => {
+  try {
+    if (!WORLD_MODEL_SHADOW_ENABLED) {
+      return res.status(204).end();
+    }
+    const body = req.body || {};
+    if (Buffer.byteLength(JSON.stringify(body)) > WORLD_MODEL_CONTROLS.maxTrajectoryBytes) {
+      return res.status(413).json({ error: "World-model trajectory payload exceeds shadow limit" });
+    }
+    const classification = classifyWorldTrajectory({
+      hasPrediction: Boolean(body.symbolicPrediction || body.predictedObservation),
+      hasObservation: Boolean(body.observedObservation || body.observedState),
+      observationCaptureFailed: body.observationCaptureFailed === true,
+      predictionFailed: body.predictionFailed === true,
+      invalidAction: Boolean(body.symbolicPrediction?.violations?.length),
+      unsupportedOnly: Boolean(
+        body.observationDifference?.metrics?.unknownFieldCount > 0 &&
+        !body.observationDifference?.metrics?.criticalMismatchCount
+      ),
+      interrupted: body.interrupted === true,
+      isTest: body.isTest === true,
+      isSynthetic: body.isSynthetic === true,
+    });
+    const record = buildWorldTrajectoryRecord({
+      trajectoryId: body.trajectoryId || randomUUID(),
+      sessionId: pseudonymizeWorldModelSession(body.sessionId),
+      traceId: body.traceId || body.trajectoryId || null,
+      stateBefore: body.stateBefore || {},
+      stateHistory: body.stateHistory || [],
+      proposedAction: body.proposedAction || null,
+      symbolicPrediction: body.symbolicPrediction || null,
+      probabilisticPrediction: body.probabilisticPrediction || null,
+      expectedEffects: body.expectedEffects || [],
+      observationBefore: body.observationBefore || null,
+      predictedObservation: body.predictedObservation || null,
+      observedObservation: body.observedObservation || null,
+      observationDifference: body.observationDifference || null,
+      observationSourceVersions: body.observationSourceVersions || {},
+      observedState: body.observedState || null,
+      observedEffects: body.observedEffects || [],
+      intent: body.intent || "spatial_navigation",
+      goal: body.goal || "world_navigation",
+      interactionChannel: body.interactionChannel || "unknown",
+      transitionDurationMs: body.transitionDurationMs,
+      success: body.success,
+      predictionDifferences: body.predictionDifferences || null,
+      confidenceBeforeAction: body.confidenceBeforeAction,
+      outcomeScores: body.outcomeScores || {},
+      modelVersion: body.modelVersion || WORLD_MODEL_VERSION,
+      transitionRuleVersion: body.transitionRuleVersion || WORLD_TRANSITION_RULE_VERSION,
+      shadowLatencyMs: body.shadowLatencyMs,
+      worldModelMode: WORLD_MODEL_MODE,
+      plannerSelectedAction: body.plannerSelectedAction || body.plannerSelected?.actions?.[0] || null,
+      deterministicApprovedAction: body.deterministicApprovedAction || null,
+      candidatePlans: body.candidatePlans || body.candidates || [],
+      expectedObservedEffects: body.expectedObservedEffects || null,
+      fieldSupport: body.fieldSupport || body.observedObservation?.fieldSupport || {},
+      classification: classification.classification,
+      failureCategory: classification.failureCategory,
+      persistenceStatus: "pending",
+      predictionLatencyMs: body.predictionLatencyMs || body.shadowLatencyMs,
+      observationLatencyMs: body.observationLatencyMs,
+      sampleRate: WORLD_MODEL_CONTROLS.sampleRate,
+      sampled: body.sampled !== false,
+      consentCompatible: body.consentCompatible !== false,
+      isTest: body.isTest === true,
+      isSynthetic: body.isSynthetic === true,
+      exclusionReason: body.exclusionReason || null,
+      createdAt: body.createdAt || new Date().toISOString(),
+      observedAt: body.observedAt || new Date().toISOString(),
+    });
+
+    if (isDatabaseEnabled()) {
+      try {
+        const persisted = await withWorldModelTimeout(
+          recordWorldModelTrajectory({ ...record, persistenceStatus: "persisted" }),
+          WORLD_MODEL_CONTROLS.persistenceTimeoutMs
+        );
+        if (persisted) {
+          return res.status(201).json({ ok: true, ...persisted, mode: "database" });
+        }
+        console.warn("⚠️ World trajectory persistence exceeded shadow timeout; retaining memory fallback");
+      } catch (error) {
+        console.error("⚠️ World trajectory persistence failed; retaining memory fallback:", error?.message || error);
+      }
+    }
+
+    rememberWorldModelTrajectory({
+      ...record,
+      persistenceStatus: isDatabaseEnabled() ? "memory_fallback" : "memory_only",
+      classification: classifyWorldTrajectory({
+        hasPrediction: Boolean(record.symbolicPrediction || record.predictedObservation),
+        hasObservation: Boolean(record.observedObservation || record.observedState),
+        persistenceFailed: isDatabaseEnabled(),
+        invalidAction: Boolean(record.symbolicPrediction?.violations?.length),
+        isTest: record.isTest,
+        isSynthetic: record.isSynthetic,
+      }).classification,
+    });
+    return res.status(202).json({
+      ok: true,
+      trajectoryId: record.trajectoryId,
+      persisted: false,
+      mode: "memory_fallback",
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/trajectories failed:", error);
+    return res.status(error.status || 400).json({ error: error.message });
   }
 });
 
@@ -629,6 +1260,119 @@ function rememberJozObservabilityEvent(event) {
   }
 }
 
+function getFallbackWorldTransitionExperience({ stateKey = "", actionKey = "" } = {}) {
+  return worldTransitionExperienceFallbackStore.filter(
+    (row) => row.state_key === stateKey && row.action_key === actionKey
+  );
+}
+
+async function persistCompletedWorldModelPrediction({ prediction, approved, sampleRate } = {}) {
+  if (!prediction?.trajectoryId) return null;
+  const selectedAction = prediction.selected?.actions?.[0] || null;
+  const record = buildWorldTrajectoryRecord({
+    trajectoryId: prediction.trajectoryId,
+    sessionId: prediction.sessionId,
+    traceId: prediction.traceId,
+    stateBefore: prediction.initialState || {},
+    stateHistory: [],
+    proposedAction: selectedAction,
+    symbolicPrediction: prediction.selected || null,
+    probabilisticPrediction: prediction.probabilistic?.selected || null,
+    expectedEffects: prediction.selected?.expectedEffects || [],
+    observationBefore: prediction.observationBefore || null,
+    predictedObservation: prediction.selected?.predictedObservation || prediction.probabilistic?.selected?.predictedObservation || null,
+    plannerSelectedAction: prediction.plannerSelected?.actions?.[0] || null,
+    deterministicApprovedAction: approved?.action || null,
+    candidatePlans: prediction.candidates || [],
+    classification: "partial",
+    failureCategory: null,
+    persistenceStatus: "persisted",
+    sampleRate,
+    sampled: true,
+    modelVersion: prediction.modelVersion,
+    transitionRuleVersion: prediction.transitionRuleVersion,
+    shadowLatencyMs: prediction.shadowLatencyMs,
+    predictionLatencyMs: prediction.shadowLatencyMs,
+    createdAt: prediction.recordedAt || new Date().toISOString(),
+  });
+
+  if (isDatabaseEnabled()) {
+    const persisted = await withWorldModelTimeout(
+      recordWorldModelTrajectory(record),
+      WORLD_MODEL_CONTROLS.persistenceTimeoutMs
+    );
+    if (persisted) return persisted;
+  }
+  rememberWorldModelTrajectory({ ...record, persistenceStatus: "memory_fallback" });
+  return { trajectoryId: record.trajectoryId, persisted: false, mode: "memory_fallback" };
+}
+
+function rememberCompletedWorldModelPrediction({ prediction, approved } = {}) {
+  if (!prediction?.trajectoryId) return;
+  const safePrediction = {
+    ...prediction,
+    input: "",
+    sessionId: null,
+    pending: false,
+    mode: "shadow",
+    approvedAction: approved?.action || prediction.approvedAction || null,
+    approvedTarget: approved?.target || prediction.approvedTarget || null,
+  };
+  worldModelPredictionFallbackStore.set(prediction.trajectoryId, safePrediction);
+  while (worldModelPredictionFallbackStore.size > 100) {
+    const oldest = worldModelPredictionFallbackStore.keys().next().value;
+    worldModelPredictionFallbackStore.delete(oldest);
+  }
+}
+
+function rememberWorldModelTrajectory(record) {
+  worldModelTrajectoryFallbackStore.unshift(record);
+  if (worldModelTrajectoryFallbackStore.length > 200) {
+    worldModelTrajectoryFallbackStore.length = 200;
+  }
+
+  const stateBefore = record.stateBefore || {};
+  const observedState = record.observedState || {};
+  const stateKey = String(stateBefore.currentStateKey || stateBefore.portal || "unknown");
+  const actionKey = String(
+    record.proposedAction?.type || record.proposedAction?.action || record.proposedAction || "unknown"
+  );
+  const nextStateKey = String(observedState.currentStateKey || observedState.portal || "unknown");
+  const nextPortal = String(observedState.portal || "");
+  const nextStage = String(observedState.stage || "");
+  const existing = worldTransitionExperienceFallbackStore.find(
+    (row) =>
+      row.state_key === stateKey &&
+      row.action_key === actionKey &&
+      row.next_state_key === nextStateKey &&
+      row.next_portal === nextPortal &&
+      row.next_stage === nextStage
+  );
+  const row = existing || {
+    state_key: stateKey,
+    action_key: actionKey,
+    next_state_key: nextStateKey,
+    next_portal: nextPortal,
+    next_stage: nextStage,
+    target_route: String(observedState.targetRoute || ""),
+    attempts: 0,
+    successes: 0,
+    average_duration_ms: 0,
+    average_prediction_error: 0,
+  };
+  row.attempts += 1;
+  row.successes += record.success === true ? 1 : 0;
+  row.average_duration_ms =
+    ((row.average_duration_ms * (row.attempts - 1)) + Number(record.transitionDurationMs || 0)) /
+    row.attempts;
+  row.average_prediction_error =
+    ((row.average_prediction_error * (row.attempts - 1)) +
+      Number(record.predictionDifferences?.metrics?.mismatchCount || 0)) /
+    row.attempts;
+  row.last_observed_at = record.observedAt || new Date().toISOString();
+  if (!existing) worldTransitionExperienceFallbackStore.push(row);
+}
+
 function normalizeCallbackField(value = "", maxLength = 160) {
   return String(value || "")
     .trim()
@@ -652,24 +1396,26 @@ function normalizePrivacyRequestType(value = "") {
 function hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone }) {
   return Boolean(
     (conversationId && sessionKey) ||
-      (callbackRequestId && (email || phone)) ||
-      email ||
-      phone
+      (callbackRequestId && (email || phone))
   );
 }
 
 function getPrivacyRuntimeInfo() {
+  const processors = [];
+  if (isDatabaseEnabled() || process.env.SUPABASE_URL) processors.push("Supabase");
+  if (process.env.OPENAI_API_KEY || process.env.JOZ_MODEL_PROVIDER === "openai") {
+    processors.push("OpenAI");
+  }
+  if (process.env.RESEND_API_KEY) processors.push("Resend");
+  if (!processors.length) processors.push("Configured application hosting");
+
   return {
     retentionDays: {
       conversations: JOZ_CONVERSATION_RETENTION_DAYS,
       callbackRequests: JOZ_CALLBACK_RETENTION_DAYS,
       privacyRequests: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
     },
-    processors: [
-      "Supabase",
-      "OpenAI",
-      "Resend",
-    ],
+    processors,
   };
 }
 
@@ -772,6 +1518,7 @@ async function applyPrivacyRetentionPolicy() {
     conversationRetentionDays: JOZ_CONVERSATION_RETENTION_DAYS,
     callbackRetentionDays: JOZ_CALLBACK_RETENTION_DAYS,
     privacyRequestRetentionDays: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+    worldModelRetentionDays: JOZ_WORLD_MODEL_RETENTION_DAYS,
   });
   const removedFallbackCallbacks = pruneFallbackCallbackStore();
 
@@ -873,7 +1620,7 @@ app.post("/api/privacy/export", async (req, res) => {
     if (!hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone })) {
       return res.status(400).json({
         error:
-          "Provide conversationId and sessionKey, or callbackRequestId plus email/phone, or a matching email/phone.",
+          "Provide conversationId plus sessionKey, or callbackRequestId plus the matching email or phone.",
       });
     }
 
@@ -933,7 +1680,7 @@ app.post("/api/privacy/delete", async (req, res) => {
     if (!hasVerifiedPrivacyLookup({ conversationId, sessionKey, callbackRequestId, email, phone })) {
       return res.status(400).json({
         error:
-          "Provide conversationId and sessionKey, or callbackRequestId plus email/phone, or a matching email/phone.",
+          "Provide conversationId plus sessionKey, or callbackRequestId plus the matching email or phone.",
       });
     }
 
@@ -1032,6 +1779,11 @@ app.post("/api/privacy/request", async (req, res) => {
 app.post("/api/joz-llm", async (req, res) => {
   try {
     const requestStartedAt = Date.now();
+    const requestId =
+      String(req.headers["x-request-id"] || "").trim().slice(0, 120) || randomUUID();
+    res.setHeader("X-Request-ID", requestId);
+    res.setHeader("X-AI-Interaction", "Joz LLM");
+    res.setHeader("X-AI-System-Card", "/api/ai-system-card");
     const requestGeoPromise = isNodeTestRuntime
       ? Promise.resolve(null)
       : resolveJozRequestGeo(getClientIp(req));
@@ -1063,6 +1815,109 @@ app.post("/api/joz-llm", async (req, res) => {
       return res.status(rateLimitResult.status).json(rateLimitResult);
     }
 
+    const governanceAssessment = assessAIActUse({
+      input: latestUserMessage,
+      messages,
+    });
+    if (!governanceAssessment.allowedForDiagnostic) {
+      const profile = await getPrimaryJozProfile();
+      const conversationId = await createJozConversation({
+        profileId: profile?.id,
+        sessionKey,
+        intentMode: "governance_review",
+        context: legacyRuntimeContext,
+      });
+      const reply = buildAIActRestrictedReply(governanceAssessment);
+      const trace = {
+        requestId,
+        selectedRoute: "governance_review",
+        governance: governanceAssessment,
+        validationPassed: true,
+        answerSource: "deterministic_governance_guard",
+        modelRuntime,
+      };
+      const verification = {
+        status: "blocked",
+        governance: governanceAssessment,
+        checks: [
+          {
+            id: "ai_act_intended_use_gate",
+            status: "blocked",
+            detail: governanceAssessment.reason,
+          },
+        ],
+      };
+      const review = {
+        required: true,
+        reasons: ["ai_act_intended_use_review"],
+        status: "unreviewed",
+      };
+      if (conversationId) {
+        await appendJozMessage({
+          conversationId,
+          role: "user",
+          content: latestUserMessage,
+          metadata: { route: "governance_review", requestId, governance: governanceAssessment },
+        });
+        await appendJozMessage({
+          conversationId,
+          role: "assistant",
+          content: reply,
+          metadata: { route: "governance_review", requestId, governance: governanceAssessment },
+        });
+      }
+      const observabilityEvent = {
+        conversationId,
+        sessionKey,
+        route: "governance_review",
+        intentMode: "governance_review",
+        userMessage: latestUserMessage,
+        assistantReply: reply,
+        requestContext: legacyRuntimeContext,
+        trace,
+        verification,
+        review,
+        retrievedCategories: [],
+        retrievedDocuments: [],
+        latencyMs: Date.now() - requestStartedAt,
+        responseStatus: "governance_blocked",
+      };
+      if (isDatabaseEnabled()) {
+        await logJozLlmRequestEvent(observabilityEvent);
+      } else {
+        rememberJozObservabilityEvent(observabilityEvent);
+      }
+      return res.json({
+        reply,
+        aiDisclosure: AI_MACHINE_READABLE_DISCLOSURE,
+        aiDisclosureText: AI_DISCLOSURE_TEXT,
+        buildId: JOZ_BUILD_ID,
+        routerVersion: JOZ_ROUTER_VERSION,
+        modelRuntime,
+        conversationId,
+        requestId,
+        intentMode: "governance_review",
+        mode: "governance_review",
+        actions: [],
+        citations: [],
+        retrievedCategories: [],
+        trace,
+        intent: { kind: "refuse", risk: "high", confidence: 1 },
+        agentPlan: null,
+        risk: "high",
+        execution: { status: "approval_required", proposed: false, executed: false },
+        proposal: null,
+        approval: null,
+        businessValueCaseId: null,
+        businessValueAgent: null,
+        governance: governanceAssessment,
+        verification,
+        review,
+        verificationFlow: { corrected: false, initial: { verificationStatus: "blocked" }, final: { verificationStatus: "blocked" } },
+        observability: { latencyMs: Date.now() - requestStartedAt, retrievedDocumentCount: 0, logged: true },
+      });
+    }
+
     const requestGeo = await requestGeoPromise;
     const answerContext = requestGeo
       ? { ...context, visitorGeo: requestGeo }
@@ -1085,6 +1940,16 @@ app.post("/api/joz-llm", async (req, res) => {
       legacyContext: legacyRuntimeContext,
       recentMessages: recentSessionMessages,
     });
+    const architectureOfferDisabled =
+      [
+        "paid_architecture_boundary",
+        "paid_architecture_intake_start",
+        "paid_architecture_intake",
+        "paid_architecture_spec",
+      ].includes(route.detectedSubIntent) ||
+      /\b(?:paid\s+architecture\s+brief|architecture\s+review|pay\s+and\s+start|start\s+(?:the\s+)?brief)\b/i.test(
+        latestUserMessage
+      );
     const intentClassification = await classifyJozIntent({
       openai,
       input: latestUserMessage,
@@ -1275,6 +2140,20 @@ app.post("/api/joz-llm", async (req, res) => {
     const rawResolution =
       safetyRefusalResolution ||
       riskGateResolution ||
+      (architectureOfferDisabled
+        ? {
+            reply:
+              "Company-specific briefings and checkout are not enabled in this version of Joz LLM. Ask Joz about the architecture, governance, or diagnostic approach instead.",
+            answerSource: "feature_disabled",
+            composer: "disabledArchitectureOffer",
+            fallbackUsed: false,
+            intentMode: "skills",
+            retrievedCategories: [],
+            answerClass: "feature_disabled",
+            confidence: "high",
+            actions: [],
+          }
+        : null) ||
       ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
@@ -1283,7 +2162,9 @@ app.post("/api/joz-llm", async (req, res) => {
         roleAwareContext,
         intentClassification,
       }));
-    const resolution = enforceJozCommercialBoundaryResolution(route, rawResolution);
+    const resolution = architectureOfferDisabled
+      ? rawResolution
+      : enforceJozCommercialBoundaryResolution(route, rawResolution);
     const responseRetrievedDocuments =
       route.detectedSubIntent === "paid_architecture_boundary" ? [] : retrievedDocuments;
 
@@ -1482,7 +2363,50 @@ app.post("/api/joz-llm", async (req, res) => {
         type: "mailto",
         href: "mailto:joz@meetjoz.com?subject=Paid%20architecture%20review",
       };
+    }).filter((action) => {
+      const actionId = String(action?.id || "").toLowerCase();
+      return !actionId.includes("architecture_review") && !actionId.includes("paid_architecture");
     });
+    const shouldRunBusinessValueDiagnostic =
+      BUSINESS_VALUE_DIAGNOSTIC_ENABLED &&
+      (legacyRuntimeContext.currentPortal === "business-value" ||
+        effectiveRoute.selectedRoute === "business_need");
+    const businessValueCaseRecord =
+      shouldRunBusinessValueDiagnostic
+        ? await (async () => {
+            const fallbackKey = getBusinessValueCaseFallbackKey({ sessionKey, conversationId });
+            const previousCase = jozBusinessValueCaseFallbackStore.get(fallbackKey) || null;
+            const evidenceRecords = previousCase?.evidenceRecords || [];
+            const localState = buildBusinessValueDiagnosticState({
+              input: latestUserMessage,
+              messages: recentSessionMessages,
+              currentMesh: legacyRuntimeContext.currentMesh,
+              evidenceRecords,
+              priorState: previousCase?.state || null,
+            });
+            const workerState = await runBusinessValueWorkerDiagnostic({
+              caseId: conversationId || sessionKey || fallbackKey,
+              input: latestUserMessage,
+              messages: recentSessionMessages,
+              currentMesh: legacyRuntimeContext.currentMesh,
+              evidenceRecords,
+              priorState: previousCase?.state || null,
+            });
+            return persistBusinessValueDiagnosticCase({
+              state: applyBusinessValueGovernance({
+                state: workerState || localState,
+                input: latestUserMessage,
+                messages: recentSessionMessages,
+                evidenceText: evidenceRecords.map((record) => JSON.stringify(record?.value || {})).join("\n"),
+              }),
+              conversationId,
+              sessionKey,
+              companyKey: context?.companyKey || context?.company_key || null,
+              evidenceRecords,
+            });
+          })()
+        : null;
+    const businessValueAgent = businessValueCaseRecord?.state || null;
     const retrievedCategories =
       effectiveRoute.detectedSubIntent === "paid_architecture_boundary"
         ? []
@@ -1507,6 +2431,7 @@ app.post("/api/joz-llm", async (req, res) => {
           route: effectiveRoute.selectedRoute,
           retrievedCategories,
           actions: responseActions,
+          businessValueAgent,
           trace,
           verification,
           review,
@@ -1528,6 +2453,7 @@ app.post("/api/joz-llm", async (req, res) => {
         intentMode: effectiveRoute.selectedRoute,
         route: effectiveRoute.selectedRoute,
         retrievedCategories,
+        businessValueAgent,
         trace,
         verification,
         review,
@@ -1576,6 +2502,8 @@ app.post("/api/joz-llm", async (req, res) => {
 
     return res.json({
       reply,
+      aiDisclosure: AI_MACHINE_READABLE_DISCLOSURE,
+      aiDisclosureText: AI_DISCLOSURE_TEXT,
       buildId: JOZ_BUILD_ID,
       routerVersion: JOZ_ROUTER_VERSION,
       modelRuntime,
@@ -1590,9 +2518,16 @@ app.post("/api/joz-llm", async (req, res) => {
       intent: intentClassification,
       agentPlan,
       risk: intentClassification.risk,
+      governance: assessAIActUse({
+        input: latestUserMessage,
+        messages: recentSessionMessages,
+        evidenceText: businessValueAgent ? JSON.stringify(businessValueAgent) : "",
+      }),
       execution,
       proposal: effectiveResolution?.proposal || null,
       approval,
+      businessValueCaseId: businessValueCaseRecord?.caseId || null,
+      businessValueAgent,
       verification,
       review,
       verificationFlow,
@@ -1604,6 +2539,308 @@ app.post("/api/joz-llm", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ /api/joz-llm failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/business-value/cases/:caseId", requireJozAuth, async (req, res) => {
+  if (!BUSINESS_VALUE_DIAGNOSTIC_ENABLED) {
+    return res.status(410).json({ error: "Business Value diagnostic is disabled." });
+  }
+
+  try {
+    const caseId = String(req.params?.caseId || "").trim();
+    if (!caseId) return res.status(400).json({ error: "Missing caseId" });
+
+    let record = null;
+    if (isDatabaseEnabled()) {
+      record = await getBusinessValueCase(caseId);
+    }
+    if (!record) {
+      record = [...jozBusinessValueCaseFallbackStore.values()].find(
+        (candidate) => candidate.caseId === caseId
+      ) || null;
+    }
+    if (!record) return res.status(404).json({ error: "Business Value case not found" });
+
+    const recordCompanyKey = record.company_key || record.companyKey || null;
+    const authenticatedCompanyKey = req.jozAuth?.companyKey || null;
+    if (recordCompanyKey && recordCompanyKey !== authenticatedCompanyKey) {
+      return res.status(403).json({ error: "Business Value case belongs to another company" });
+    }
+
+    return res.json({
+      ok: true,
+      case: record,
+      storage: record.storage || (isDatabaseEnabled() ? "database" : "memory"),
+    });
+  } catch (error) {
+    console.error("❌ Business Value case lookup failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/business-value/cases/:caseId/evidence", requireJozAuth, async (req, res) => {
+  if (!BUSINESS_VALUE_DIAGNOSTIC_ENABLED) {
+    return res.status(410).json({ error: "Business Value diagnostic is disabled." });
+  }
+
+  try {
+    const caseId = String(req.params?.caseId || "").trim();
+    if (!caseId) return res.status(400).json({ error: "Missing caseId" });
+
+    let record = null;
+    if (isDatabaseEnabled()) record = await getBusinessValueCase(caseId);
+    if (!record) {
+      record = [...jozBusinessValueCaseFallbackStore.values()].find(
+        (candidate) => candidate.caseId === caseId
+      ) || null;
+    }
+    if (!record) return res.status(404).json({ error: "Business Value case not found" });
+
+    const bodyCompanyKey = String(req.body?.companyKey || "").trim() || null;
+    const authenticatedCompanyKey = req.jozAuth?.companyKey || null;
+    if (authenticatedCompanyKey && bodyCompanyKey && authenticatedCompanyKey !== bodyCompanyKey) {
+      return res.status(403).json({ error: "Company key does not match authenticated tenant" });
+    }
+    const requestedCompanyKey = authenticatedCompanyKey || bodyCompanyKey;
+    const recordCompanyKey = record.company_key || record.companyKey || null;
+    if (recordCompanyKey && recordCompanyKey !== requestedCompanyKey) {
+      return res.status(403).json({ error: "Business Value case belongs to another company" });
+    }
+
+    let ingestion;
+    try {
+      let documentContent = String(req.body?.content || "").trim();
+      let documentTitle = req.body?.title;
+      let documentSourceType = req.body?.sourceType;
+      let documentSourceRef = req.body?.sourceRef;
+      if (!documentContent && req.body?.data) {
+        const extractedFile = extractBusinessValueFile({
+          fileName: req.body?.fileName,
+          mimeType: req.body?.mimeType,
+          data: req.body?.data,
+        });
+        documentContent = extractedFile.content;
+        documentTitle = documentTitle || extractedFile.fileName;
+        documentSourceType = documentSourceType || `uploaded_${extractedFile.format}`;
+        documentSourceRef = documentSourceRef || extractedFile.fileName;
+      }
+      ingestion = ingestBusinessValueDocument({
+        title: documentTitle,
+        content: documentContent,
+        sourceType: documentSourceType,
+        sourceRef: documentSourceRef,
+        companyKey: requestedCompanyKey || recordCompanyKey,
+      });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    const existingEvidence = Array.isArray(record.evidenceRecords)
+      ? record.evidenceRecords
+      : Array.isArray(record.evidence_records)
+        ? record.evidence_records.map((item) => ({
+            evidenceKey: item.evidence_key,
+            node: item.node,
+            value: item.value,
+            sourceType: item.source_type,
+            sourceRef: item.source_ref,
+            verificationStatus: item.verification_status,
+            collectedAt: item.collected_at,
+          }))
+        : [];
+    const evidenceRecords = dedupeBusinessValueEvidence([
+      ...existingEvidence,
+      ...ingestion.candidates,
+    ]);
+    const state = buildBusinessValueDiagnosticState({
+      currentMesh: record.state?.activeNode || record.active_node || "data",
+      evidenceRecords,
+    });
+    const persisted = isDatabaseEnabled()
+      ? await upsertBusinessValueEvidence({ caseId, records: ingestion.candidates })
+      : [];
+
+    if (isDatabaseEnabled()) {
+      await upsertBusinessValueCase({
+        caseId,
+        conversationId: record.conversation_id || record.conversationId || null,
+        sessionKey: record.session_key || record.sessionKey || null,
+        companyKey: recordCompanyKey || requestedCompanyKey,
+        state,
+      });
+      await appendBusinessValueCaseEvent({
+        caseId,
+        eventType: "evidence_added",
+        payload: {
+          documentId: ingestion.document.documentId,
+          candidateCount: ingestion.candidates.length,
+          verificationStatus: "unverified",
+        },
+      });
+    }
+
+    const fallbackRecord = [...jozBusinessValueCaseFallbackStore.entries()].find(
+      ([, candidate]) => candidate.caseId === caseId
+    );
+    if (fallbackRecord) {
+      const [fallbackKey, previous] = fallbackRecord;
+      const event = {
+        id: `memory-business-value-event-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        case_id: caseId,
+        event_type: "evidence_added",
+        actor: "company_user",
+        payload: {
+          documentId: ingestion.document.documentId,
+          candidateCount: ingestion.candidates.length,
+          verificationStatus: "unverified",
+        },
+        created_at: new Date().toISOString(),
+      };
+      jozBusinessValueCaseFallbackStore.set(fallbackKey, {
+        ...previous,
+        state: { ...state, caseId },
+        evidenceRecords,
+        events: [...(previous.events || []), event].slice(-100),
+        updatedAt: event.created_at,
+      });
+    }
+
+    return res.json({
+      ok: true,
+      caseId,
+      document: ingestion.document,
+      evidence: ingestion.candidates,
+      persistedEvidenceCount: persisted.length,
+      state: { ...state, caseId },
+      storage: isDatabaseEnabled() ? "database" : "memory",
+    });
+  } catch (error) {
+    console.error("❌ Business Value evidence ingestion failed:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/business-value/cases/:caseId/evidence/:evidenceKey/review", requireJozAuth, async (req, res) => {
+  if (!BUSINESS_VALUE_DIAGNOSTIC_ENABLED) {
+    return res.status(410).json({ error: "Business Value diagnostic is disabled." });
+  }
+
+  try {
+    const caseId = String(req.params?.caseId || "").trim();
+    const evidenceKey = decodeURIComponent(String(req.params?.evidenceKey || "").trim());
+    const verificationStatus = String(req.body?.verificationStatus || "verified").trim().toLowerCase();
+    if (!caseId || !evidenceKey) return res.status(400).json({ error: "Missing caseId or evidenceKey" });
+    if (!["claimed", "corroborated", "verified", "rejected"].includes(verificationStatus)) {
+      return res.status(400).json({ error: "Unsupported evidence review status" });
+    }
+
+    let record = null;
+    if (isDatabaseEnabled()) record = await getBusinessValueCase(caseId);
+    if (!record) {
+      record = [...jozBusinessValueCaseFallbackStore.values()].find(
+        (candidate) => candidate.caseId === caseId
+      ) || null;
+    }
+    if (!record) return res.status(404).json({ error: "Business Value case not found" });
+
+    const recordCompanyKey = record.company_key || record.companyKey || null;
+    const bodyCompanyKey = String(req.body?.companyKey || "").trim() || null;
+    const authenticatedCompanyKey = req.jozAuth?.companyKey || null;
+    if (authenticatedCompanyKey && bodyCompanyKey && authenticatedCompanyKey !== bodyCompanyKey) {
+      return res.status(403).json({ error: "Company key does not match authenticated tenant" });
+    }
+    const requestedCompanyKey = authenticatedCompanyKey || bodyCompanyKey;
+    if (recordCompanyKey && recordCompanyKey !== requestedCompanyKey) {
+      return res.status(403).json({ error: "Business Value case belongs to another company" });
+    }
+
+    const existingEvidence = Array.isArray(record.evidenceRecords)
+      ? record.evidenceRecords
+      : Array.isArray(record.evidence_records)
+        ? record.evidence_records.map((item) => ({
+            evidenceKey: item.evidence_key,
+            node: item.node,
+            value: item.value,
+            sourceType: item.source_type,
+            sourceRef: item.source_ref,
+            verificationStatus: item.verification_status,
+            collectedAt: item.collected_at,
+          }))
+        : [];
+    const reviewed = existingEvidence.find((item) => item.evidenceKey === evidenceKey);
+    if (!reviewed) return res.status(404).json({ error: "Evidence item not found" });
+
+    const evidenceRecords = existingEvidence.map((item) =>
+      item.evidenceKey === evidenceKey
+        ? {
+            ...item,
+            verificationStatus,
+            verifiedAt: verificationStatus === "verified" ? new Date().toISOString() : null,
+          }
+        : item
+    );
+    const state = buildBusinessValueDiagnosticState({
+      currentMesh: record.state?.activeNode || record.active_node || reviewed.node || "data",
+      evidenceRecords,
+      reviewApproved: verificationStatus === "verified",
+    });
+
+    if (isDatabaseEnabled()) {
+      await reviewBusinessValueEvidence({
+        caseId,
+        evidenceKey,
+        verificationStatus,
+        actor: req.jozAuth?.userId || "company_reviewer",
+      });
+      await upsertBusinessValueCase({
+        caseId,
+        conversationId: record.conversation_id || record.conversationId || null,
+        sessionKey: record.session_key || record.sessionKey || null,
+        companyKey: record.company_key || record.companyKey || null,
+        state,
+      });
+      await appendBusinessValueCaseEvent({
+        caseId,
+        eventType: state.status === "verified" ? "diagnosis_verified" : "diagnosis_updated",
+        actor: req.jozAuth?.userId || "company_reviewer",
+        payload: { evidenceKey, verificationStatus, status: state.status },
+      });
+    }
+
+    const fallbackRecord = [...jozBusinessValueCaseFallbackStore.entries()].find(
+      ([, candidate]) => candidate.caseId === caseId
+    );
+    if (fallbackRecord) {
+      const [fallbackKey, previous] = fallbackRecord;
+      const event = {
+        id: `memory-business-value-event-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        case_id: caseId,
+        event_type: state.status === "verified" ? "diagnosis_verified" : "diagnosis_updated",
+        actor: req.jozAuth?.userId || "company_reviewer",
+        payload: { evidenceKey, verificationStatus, status: state.status },
+        created_at: new Date().toISOString(),
+      };
+      jozBusinessValueCaseFallbackStore.set(fallbackKey, {
+        ...previous,
+        state: { ...state, caseId },
+        evidenceRecords,
+        events: [...(previous.events || []), event].slice(-100),
+        updatedAt: event.created_at,
+      });
+    }
+
+    return res.json({
+      ok: true,
+      caseId,
+      evidenceKey,
+      verificationStatus,
+      state: { ...state, caseId },
+      storage: isDatabaseEnabled() ? "database" : "memory",
+    });
+  } catch (error) {
+    console.error("❌ Business Value evidence review failed:", error);
     return res.status(500).json({ error: error.message });
   }
 });
@@ -1924,67 +3161,9 @@ app.post("/api/joz-llm/landing", async (req, res) => {
 });
 
 app.get("/api/joz-llm/architecture-checkout", async (req, res) => {
-  const conversationId = normalizeCallbackField(req.query?.conversationId, 120);
-  const configuredCheckoutUrl = String(process.env.JOZ_ARCHITECTURE_CHECKOUT_URL || "").trim();
-
-  if (configuredCheckoutUrl) {
-    return res.redirect(303, configuredCheckoutUrl);
-  }
-
-  const stripeSecretKey = String(process.env.STRIPE_SECRET_KEY || "").trim();
-  const priceCents = Number.parseInt(
-    String(process.env.JOZ_ARCHITECTURE_REVIEW_PRICE_CENTS || ""),
-    10
-  );
-  const currency = String(process.env.JOZ_ARCHITECTURE_REVIEW_CURRENCY || "usd")
-    .trim()
-    .toLowerCase();
-
-  if (!stripeSecretKey || !conversationId || !Number.isInteger(priceCents) || priceCents <= 0) {
-    return res
-      .status(503)
-      .type("html")
-      .send(
-        "<h1>Payment is not configured</h1><p>The architecture brief is saved in the chat. Joz still needs to configure the secure checkout before payment can start.</p>"
-      );
-  }
-
-  const configuredOrigin = String(process.env.JOZ_PUBLIC_APP_URL || "").trim().replace(/\/$/, "");
-  const requestOrigin = `${req.protocol}://${req.get("host")}`.replace(/\/$/, "");
-  const origin = configuredOrigin || requestOrigin;
-  const form = new URLSearchParams({
-    mode: "payment",
-    "success_url": `${origin}/?joz_payment=success&session_id={CHECKOUT_SESSION_ID}`,
-    "cancel_url": `${origin}/?joz_payment=cancelled`,
-    "line_items[0][price_data][currency]": currency,
-    "line_items[0][price_data][product_data][name]": "Joz paid architecture review",
-    "line_items[0][price_data][product_data][description]": "Company-specific AI architecture review and implementation scope.",
-    "line_items[0][price_data][unit_amount]": String(priceCents),
-    "line_items[0][quantity]": "1",
-    client_reference_id: conversationId,
-    "metadata[conversation_id]": conversationId,
-    "metadata[offer]": "paid_architecture_review",
+  return res.status(410).json({
+    error: "Architecture checkout is not enabled in this version of Joz LLM.",
   });
-
-  try {
-    const stripeResponse = await fetch("https://api.stripe.com/v1/checkout/sessions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${stripeSecretKey}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: form,
-    });
-    const session = await stripeResponse.json();
-    if (!stripeResponse.ok || !session?.url) {
-      console.error("❌ Stripe architecture checkout failed:", session?.error?.message || session);
-      return res.status(502).send("Payment could not be started. Please return to the chat and try again.");
-    }
-    return res.redirect(303, session.url);
-  } catch (error) {
-    console.error("❌ Architecture checkout request failed:", error);
-    return res.status(502).send("Payment could not be started. Please return to the chat and try again.");
-  }
 });
 
 app.post("/api/joz-llm/callback-request", async (req, res) => {
@@ -2003,8 +3182,9 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
       currentMesh: req.body?.context?.currentMesh || null,
       currentMeshStage: req.body?.context?.currentMeshStage || null,
     };
+    const consentGiven = req.body?.privacyConsent === true;
     const consent = {
-      submitted: req.body?.privacyConsent === false ? false : true,
+      submitted: consentGiven,
       policyVersion:
         normalizeCallbackField(req.body?.privacyPolicyVersion, 64) || "2026-07-12",
       capturedAt: new Date().toISOString(),
@@ -2017,7 +3197,7 @@ app.post("/api/joz-llm/callback-request", async (req, res) => {
       return res.status(400).json({ error: "Missing callback name, phone, or time" });
     }
 
-    if (!consent.submitted) {
+    if (!consentGiven) {
       return res.status(400).json({ error: "Privacy consent is required for callback requests" });
     }
 

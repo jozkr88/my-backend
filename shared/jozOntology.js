@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getWorldModelQueryProfile } from "./worldModelKnowledge.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -906,6 +907,7 @@ export function computeJozDocumentRankingData(doc, { intentMode = "skills", quer
     impactScore: metadata.impact_score,
     priorityScore: PRIORITY_WEIGHTS[metadata.priority_label] ?? 0,
     sourceAuthorityScore: metadata.source_authority || 0,
+    worldModelSourcePriorityScore: scoreWorldModelSourcePriority(metadata, query),
     enterpriseScaleScore,
     ontologyScore,
     proofScore,
@@ -923,9 +925,28 @@ function withIntentPrecision(ranking = {}) {
   };
 }
 
+function scoreWorldModelSourcePriority(metadata = {}, query = "") {
+  if (!metadata.world_model_record) return 0;
+  const profile = getWorldModelQueryProfile(query);
+  if (!profile.isWorldModel) return 0;
+  const scope = String(metadata.claim_scope || "").toLowerCase();
+  if (profile.isJozSpecific) {
+    if (scope === "mandatory_boundary" || metadata.boundary_record || metadata.policy_record) return 800;
+    if (scope === "joz_verified_report") return 700;
+    if (scope === "source_grounded") return 600;
+    if (scope === "joz_positioning") return 500;
+    return 400;
+  }
+  if (scope === "source_grounded") return 800;
+  if (scope === "joz_verified_report") return 100;
+  if (scope === "joz_positioning" || scope === "mandatory_boundary") return 50;
+  return 0;
+}
+
 export function compareJozDocumentRanking(a, b) {
   return (
     a.laneRank - b.laneRank ||
+    b.worldModelSourcePriorityScore - a.worldModelSourcePriorityScore ||
     b.intentPrecisionScore - a.intentPrecisionScore ||
     b.broadCredibilityScore - a.broadCredibilityScore ||
     b.capabilityEligibilityScore - a.capabilityEligibilityScore ||

@@ -293,7 +293,7 @@ function normalizeModelClassification(raw = {}, fallback = {}) {
 
 export function buildJozIntentClassifierPrompt() {
   return [
-    "Classify the latest user message for Joz LLM.",
+    "Classify the latest user message for Joz MAXX.",
     "Return only JSON with keys: kind, domain, goal, entities, confidence, intentCandidates, risk.",
     "kind must be answer, navigate, execute, clarify, or refuse.",
     "domain must be joz_profile, business, agentic_ai, systems_mindset, world_navigation, contact, general_knowledge, or other.",

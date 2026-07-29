@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-005",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 6)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language planning. A city could use such a model to examine how infrastructure disruptions might cascade across systems and compare response options before a crisis. Sector- specific crisis-modeling tools already simulate many of these risks but are difficult to combine into a coherent picture of a fast-moving event. World models could integrate these ",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nplanning. A city could use such a model to examine how\ninfrastructure disruptions might cascade across systems\nand compare response options before a crisis. Sector-\nspecific crisis-modeling tools already simulate many of\nthese risks but are difficult to combine into a coherent\npicture of a fast-moving event. World models could\nintegrate these risks into cross-domain simulations,\nproviding sharper foresight and better targeting of\nlimited public resources.\nLowering the Cost of Physical Experimentation\nBecause world models could lower the cost of creating\nhigh-fidelity simulation environments, they could also\nlower the cost of experimentation in physical industries.\nAn aerospace firm could test how a new wing performs\nunder various conditions before committing to a\nphysical prototype; a hospital could model patient and\nstaff flow through a redesigned emergency department\nduring periods of low and peak demand. As the\ntechnology matures, the same approach may open\nnew avenues for experimentation in less well-known\ndomains, including maritime and space operations. The\nresult is fewer costly real-world mistakes along the path\nto a workable design.\nTraining Grounds for Embodied AI\nAnother benefit is in embodied AI — systems that sense\nand act in the physical world, such as robots, drones,\nand self-driving vehicles. Because real-world testing\nis costly, dangerous, or too rare to capture in data,\ntraining robots in simulation before real deployment\nis already standard practice. The open challenge is\ntransferring that training to messy and dynamic real-\nworld environments.\nFor example, a robot in a chemical plant may need to\ncross a leak zone where visibility is poor and turning\nthe wrong valve would result in serious consequences.\nOr a maritime drone may need to navigate contested\nwaters, avoiding vessels and underwater hazards to\nrescue pilots after an aircraft goes down. In each case,\na machine that can model a changing environment and\npredict the effects of its actions accomplishes far more\nthan one that follows a script. World models’ long-term\nvalue lies in helping machines operate safely.\nA Broader Innovation Layer\nWorld models could become shared infrastructure\nthat smaller players build on. Currently, the cost of\nhigh-quality, domain-specific simulators can price out\nstartups and public sector organizations. A common\nworld-model layer could give those organizations\naccess to advanced simulation without requiring each\none to build the underlying models and infrastructure,\nmuch as cloud services provide computing capacity\nwithout requiring users to own data centers. This could\nput advanced simulation within reach of a university\nlab or a city agency. Broader access allows more\nentrepreneurs, researchers, and public institutions\nto develop competing applications — a potential\nadvantage for the United States rooted in its strengths in\nentrepreneurship and fundamental research.\nRisks and Policy Challenges\non the Horizon\nWorld models enter a policy landscape that earlier\nAI technologies have already shaped. Computer\nvision forced a reckoning over surveillance and facial\nrecognition; robotics and autonomous vehicles\nprompted regimes for physical safety, certification,\nand liability; foundation models surfaced risks from\ndiscriminatory outputs, deception, unauthorized use\nof copyrighted material, and malicious applications of\ndual-use capabilities.\nMuch of what world models raise is already familiar:\nMultimodal models cut across sectors, and agentic\nsystems act without a person deciding each step.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 6",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nplanning. A city could use such a model to examine how\ninfrastructure disruptions might cascade across systems\nand compare response options before a crisis. Sector-\nspecific crisis-modeling tools already simulate many of\nthese risks but are difficult to combine into a coherent\npicture of a fast-moving event. World models could\nintegrate these risks into cross-domain simulations,\nproviding sharper foresight and better targeting of\nlimited public resources.\nLowering the Cost of Physical Experimentation\nBecause world models could lower the cost of creating\nhigh-fidelity simulation environments, they could also\nlower the cost of experimentation in physical industries.\nAn aerospace firm could test how a new wing performs\nunder various conditions before committing to a\nphysical prototype; a hospital could model patient and\nstaff flow through a redesigned emergency department\nduring periods of low and peak demand. As the\ntechnology matures, the same approach may open\nnew avenues for experimentation in less well-known\ndomains, including maritime and space operations. The\nresult is fewer costly real-world mistakes along the path\nto a workable design.\nTraining Grounds for Embodied AI\nAnother benefit is in embodied AI — systems that sense\nand act in the physical world, such as robots, drones,\nand self-driving vehicles. Because real-world testing\nis costly, dangerous, or too rare to capture in data,\ntraining robots in simulation before real deployment\nis already standard practice. The open challenge is\ntransferring that training to messy and dynamic real-\nworld environments.\nFor example, a robot in a chemical plant may need to\ncross a leak zone where visibility is poor and turning\nthe wrong valve would result in serious consequences.\nOr a maritime drone may need to navigate contested\nwaters, avoiding vessels and underwater hazards to\nrescue pilots after an aircraft goes down. In each case,\na machine that can model a changing environment and\npredict the effects of its actions accomplishes far more\nthan one that follows a script. World models’ long-term\nvalue lies in helping machines operate safely.\nA Broader Innovation Layer\nWorld models could become shared infrastructure\nthat smaller players build on. Currently, the cost of\nhigh-quality, domain-specific simulators can price out\nstartups and public sector organizations. A common\nworld-model layer could give those organizations\naccess to advanced simulation without requiring each\none to build the underlying models and infrastructure,\nmuch as cloud services provide computing capacity\nwithout requiring users to own data centers. This could\nput advanced simulation within reach of a university\nlab or a city agency. Broader access allows more\nentrepreneurs, researchers, and public institutions\nto develop competing applications — a potential\nadvantage for the United States rooted in its strengths in\nentrepreneurship and fundamental research.\nRisks and Policy Challenges\non the Horizon\nWorld models enter a policy landscape that earlier\nAI technologies have already shaped. Computer\nvision forced a reckoning over surveillance and facial\nrecognition; robotics and autonomous vehicles\nprompted regimes for physical safety, certification,\nand liability; foundation models surfaced risks from\ndiscriminatory outputs, deception, unauthorized use\nof copyrighted material, and malicious applications of\ndual-use capabilities.\nMuch of what world models raise is already familiar:\nMultimodal models cut across sectors, and agentic\nsystems act without a person deciding each step.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-005",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-005",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      6
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 6",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-005"
+  }
+}

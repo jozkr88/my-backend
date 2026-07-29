@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-004",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 5)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language autonomous vehicles, and other systems that must operate in unstructured environments. In a disaster zone, a planner can guide a robot through a damaged building as debris and people shift around it, turning what it sees into real-time actions. Planners are the least mature of the three categories. Some autonomous vehicles and warehouse robots",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nautonomous vehicles, and other systems that must\noperate in unstructured environments. In a disaster\nzone, a planner can guide a robot through a damaged\nbuilding as debris and people shift around it, turning\nwhat it sees into real-time actions.\nPlanners are the least mature of the three categories.\nSome autonomous vehicles and warehouse robots can\noperate reliably within bounded domains, but most\ncontemporary robot demonstrations are confined to\nshort, narrow tasks in controlled labs. Generalizing these\ncapabilities to unstructured, dynamic environments\nremains an unsolved challenge.\nWhen these functions operate together in a real-time,\naction-conditioned loop, a further capability emerges:\ninteractivity. People and machines can act within a\nmodeled world and use the resulting feedback to\nguide action in the physical one. A surgeon in training\ncould rehearse procedures inside a simulated anatomy\nthat responds to each movement; a warehouse robot\ncould practice handling unfamiliar objects in a digital\ntwin before working in the facility itself; and military\nunits could rehearse remotely with allies and partners,\nlowering costs while limiting danger to personnel and\nexposure to adversary surveillance. Interactivity is thus\na natural consequence of a capable world model and\nwhere its most valuable uses lie.\nThe boundaries between these categories are already\nblurring as renderers become interactive, simulators\nmore generative, and planners more capable of\nreasoning. At the research frontier, unified models\nincreasingly combine rendering, simulation, and\ncontrol within a single network. For policy, this matters:\nCapability thresholds defined per category are easily\ngamed or outgrown; consequently, safeguards must\nattach to the deployment context rather than to the\nmodel class.\nWhy World Models Matter\nWidely available world models could have tremendous\nimpact on efficiency and innovation. With the\npotential to reduce the cost of and increase access\nto high-quality simulations, thereby enabling novel\nexperimentation by small and large firms, world models\ncould help improve infrastructure planning, crisis\nresponse, and scientific discovery.\nBetter Simulation and Public Planning\nThe most immediate public benefit is better simulation.\nHigh-quality simulation is already essential in\nengineering, logistics, and infrastructure planning, but\naccurate models remain expensive to build and update.\nModeling a factory, hospital, or city district can require\nsubstantial specialist work to encode its geometry, laws\nof physics, and changing conditions. World models\ncould lower that barrier, making simulations easier to\ncreate and adapt.\nFor the public sector, world models offer a digital\ntwin — a working approximation of a city or system\nthat can be used for infrastructure and emergency\nCapability thresholds defined\nper category are easily gamed\nor outgrown; consequently,\nsafeguards must attach to the\ndeployment context rather than\nto the model class.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 5",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nautonomous vehicles, and other systems that must\noperate in unstructured environments. In a disaster\nzone, a planner can guide a robot through a damaged\nbuilding as debris and people shift around it, turning\nwhat it sees into real-time actions.\nPlanners are the least mature of the three categories.\nSome autonomous vehicles and warehouse robots can\noperate reliably within bounded domains, but most\ncontemporary robot demonstrations are confined to\nshort, narrow tasks in controlled labs. Generalizing these\ncapabilities to unstructured, dynamic environments\nremains an unsolved challenge.\nWhen these functions operate together in a real-time,\naction-conditioned loop, a further capability emerges:\ninteractivity. People and machines can act within a\nmodeled world and use the resulting feedback to\nguide action in the physical one. A surgeon in training\ncould rehearse procedures inside a simulated anatomy\nthat responds to each movement; a warehouse robot\ncould practice handling unfamiliar objects in a digital\ntwin before working in the facility itself; and military\nunits could rehearse remotely with allies and partners,\nlowering costs while limiting danger to personnel and\nexposure to adversary surveillance. Interactivity is thus\na natural consequence of a capable world model and\nwhere its most valuable uses lie.\nThe boundaries between these categories are already\nblurring as renderers become interactive, simulators\nmore generative, and planners more capable of\nreasoning. At the research frontier, unified models\nincreasingly combine rendering, simulation, and\ncontrol within a single network. For policy, this matters:\nCapability thresholds defined per category are easily\ngamed or outgrown; consequently, safeguards must\nattach to the deployment context rather than to the\nmodel class.\nWhy World Models Matter\nWidely available world models could have tremendous\nimpact on efficiency and innovation. With the\npotential to reduce the cost of and increase access\nto high-quality simulations, thereby enabling novel\nexperimentation by small and large firms, world models\ncould help improve infrastructure planning, crisis\nresponse, and scientific discovery.\nBetter Simulation and Public Planning\nThe most immediate public benefit is better simulation.\nHigh-quality simulation is already essential in\nengineering, logistics, and infrastructure planning, but\naccurate models remain expensive to build and update.\nModeling a factory, hospital, or city district can require\nsubstantial specialist work to encode its geometry, laws\nof physics, and changing conditions. World models\ncould lower that barrier, making simulations easier to\ncreate and adapt.\nFor the public sector, world models offer a digital\ntwin — a working approximation of a city or system\nthat can be used for infrastructure and emergency\nCapability thresholds defined\nper category are easily gamed\nor outgrown; consequently,\nsafeguards must attach to the\ndeployment context rather than\nto the model class.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-004",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-004",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      5
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 5",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-004"
+  }
+}

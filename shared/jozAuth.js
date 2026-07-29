@@ -46,11 +46,20 @@ export async function verifyJozAccessToken(token) {
   });
 
   if (!payload.sub) throw new Error("JWT has no subject");
+  const claims = payload;
+  const companyKey =
+    claims.company_key ||
+    claims.companyKey ||
+    claims.tenant_id ||
+    claims.app_metadata?.company_key ||
+    claims.user_metadata?.company_key ||
+    null;
   return {
     userId: String(payload.sub),
     email: typeof payload.email === "string" ? payload.email : null,
     role: typeof payload.role === "string" ? payload.role : "authenticated",
-    claims: payload,
+    companyKey: companyKey ? String(companyKey) : null,
+    claims,
   };
 }
 

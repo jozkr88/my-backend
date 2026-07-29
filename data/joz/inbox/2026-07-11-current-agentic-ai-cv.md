@@ -1,61 +1,78 @@
 Jozef Krupa
-meetjoz.com
-joz@meetjoz.com
 +65 3107 2412
+joz@meetjoz.com
+Singapore • Dubai
 
-Agentic AI CV • meetjoz.com
+Agentic AI Engineering, AI Product Engineering and Multimodal AI
+500M monthly active users • APAC, Europe, US & Middle East • 30x growth, 15+ years
+[meejoz.com](http://meejoz.com)
 
-Global Scale
-Worldwide Impact
-North America, Europe/EEA, United Kingdom, UAE/MENA, Singapore, Japan, Greater China, Australia, and the wider Asia Pacific region
+Joz LLM Agentic AI CV — The 2026 Applied AI Skills Showcase
 
-Applied AI Skills
-Agentic AI Architecture: Agentic intelligence systems, autonomous reasoning, and orchestration • LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering • Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops • Event-driven production AI and asynchronous workflows • Data platforms, secure API ecosystems, and cloud-native platforms • Observability and AI governance
-Agentic AI UX Orchestration: Self-organising AI metamaterials • Context-aware multimodal interactions (voice, touch, gesture, gaze, and haptics) • Telemetry and behavioural data powering agentic feedback loops • Real-time signals mapped to human mental models • Volumetric AI interfaces • NLP/CV-driven personalisation with intent modelling and semantic retrieval • Anticipatory, predictive, assistive, and autonomous decision-making intelligence
+The Stack
+Python • FastAPI • PostgreSQL/pgvector • Redis • RabbitMQ • Data Ingestion • Data Cleaning • ETL/ELT • Chunking • Embeddings • Data Validation • Vector Search • Multi-Agent Orchestration • RAG • Context Engineering • Memory • Shared State • MCP Tooling • Tool Calling • Intent Routing • NLP/CV • Voice Agents • Camera/Sensor Fusion • Multimodal Systems • Event-Driven Architecture • Tool Allowlisting • Approval Tokens • Verification • Observability
 
-Professional Experience
-Agentic AI Architecture and Innovation Leader
-Singapore, Dubai, Zurich and Europe/EU/EEA 2018–Present
-MarketClue USA: Architected financial AI agents with live data/asset portfolios.
-ArtKorero: Pioneered spatial AI for world-class art exhibitions in Dubai.
-Versace/SOA: First in Dubai to design and launch spatial AI with volumetric 3D UI.
-Dubai Future Foundation: Rapid AI prototyping for UAE innovation initiatives.
-Erste Bank: Drove Engineering/EU Accessibility, serving 16M+ customers.
-20+ Dubai/Singapore FinTechs: Led HCD–AI, product, and data architectures.
-Apple/Pixar: First in Singapore to pioneer Python USD(z) and Computer Vision AI.
+Fortune 500 Global Experience
+Agentic AI Architecture and Multimodal AI Leader
+Singapore, Dubai and Europe/EU/EEA 2018–Present
+
+MarketClue USA — Agentic AI Financial Assistant
+Apps: AI market analyst with 50+ quant-modelling tools for portfolios, risk and alerts
+Python: FastAPI · SQLAlchemy async · PostgreSQL/pgvector · Redis · RabbitMQ
+AI/ML: Multi-agent orchestration · Real-time market data ingestion · Financial RAG
+
+Versace/SOA/ArtKorero Dubai — Agentic AI Spatial Commerce
+Apps: Vision Pro/web 3D exhibitions, VIP try-ons and spatial showrooms
+Python/C++: DCC pipelines · Pixar APIs · Procedural geometry · Scene-graph/DataViz
+AI/ML: Computer vision · GenAI 3D · Image-to-3D · Camera tracking · Multimodal AI
+
+Dubai Future Foundation — Applied AI Innovation (UAE Government)
+Apps: AI concepts for Area 2071 innovation initiatives and spatial-computing ventures
+Engineering: Rapid AI prototyping · Systems architecture · Data workflows
+AI/ML: NLP · Human-centred AI · Computer vision · Multimodal AI · Responsible AI
+
+Erste Group Europe — Accessible Banking Engineering
+Apps: 200+ banking portals across 7 European markets serving 16M customers
+Engineering: AEM · Platform architecture · Workflow automation · Systems integration
+Governance: WCAG 2.1 AA · EU Accessibility Act · Audit evidence · Compliance
+
+20+ Singapore/Dubai FinTechs — Agentic AI Product Engineering
+Apps: 30+ FinTech, ERP, blockchain and logistics products spanning 1,500+ features
+Python: FastAPI · REST APIs · PostgreSQL · Data pipelines · Event-driven workflows
+AI/ML: NLP · Multi-agent orchestration · Process automation · Blockchain intelligence
 
 Private Banking Experience Architecture Manager
 Maybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018
-Delivered 20× growth in digital sales within 12 months via conversational/ML UX.
-Designed 3,000+ wealth pilots and ML models for HNW/mass-market clients.
-Established an HCD–AI practice, training C-suite executives and regional teams.
+Apps: ML-enabled products driving 20× growth via 3,000+ HNW/mass-market pilots
+Engineering: Conversational architecture · Data integration · JavaScript decision logic
+AI/ML: Conversational AI · ML integration · Personalisation · Behavioural analytics · Evals
 
 Engineering Innovation Fellow
 Manulife — Singapore and Asia Pacific 2015–2016
-Established a Lean ML UX practice across 11 markets as a founding APAC hire.
-Launched first-in-market ML UX solutions in the USA, Canada, and Singapore.
-Advised APAC regional CEOs on digital growth strategies that scaled globally.
+Apps: Data-led InsurTech and investment products across APAC and North America
+Engineering: Full-stack development · API integration · Cross-platform testing
+AI/ML: Predictive modelling · Model-output interfaces · Financial data dashboards
 
 Global Engineering Architect
 Mediacorp — Singapore and Asia Pacific 2014–2015
-First in Asia to ship the CNA Apple Watch app, globally featured by Apple.
-Achieved 30× MAU audience growth through mobile-first transformation.
-Built a Global Experience Language standardising IxD across 30+ products.
+Apps: CNA, CH8News and Toggle/meWatch platforms driving 30× audience growth
+Engineering: Media-platform architecture · Content streaming · Cross-device delivery
+Impact: First Apple Watch news app in Asia · 40+ products · Featured globally by Apple
 
 Senior Engineer
 Leo Burnett/Publicis — Singapore and Asia Pacific 2014
-Delivered SK–II’s first luxury e-commerce in the USA and across 8 APAC markets.
-Developed mobile-first apps for P&G (SK–II, Braun, Gillette) and Samsung.
-Reduced agency-wide handoff friction by 70% through code-based prototyping.
+Apps: P&G (SK-II, Braun, Gillette) and Samsung across the USA and 8 APAC markets
+Engineering: Full-stack commerce · Transaction logic · Regional sales platforms
+Business Growth: Opened and scaled P&G sales channels across 8 APAC markets
 
 Senior Interaction Engineer
 Ogilvy/WPP — Singapore and Asia Pacific 2013–2014
-Built the prototype that won Banyan Tree’s multi-million-dollar agency pitch.
-Re-engineered the Singapore Stock Exchange’s responsive listings portals.
-Deployed cross-platform UGC apps for Danone across 8 APAC markets.
+Apps: Singapore Exchange portals, Danone UGC apps and Banyan Tree platforms
+Engineering: Backend–frontend integration · Financial-data integration · UGC pipelines
+Business Growth: Multimillion-dollar agency pitch wins · Scaled Danone across APAC
 
 Postgraduate Education
-MSc Strategy and Innovation 2008
+Master of Science (MSc) Strategy and Innovation 2008
 University of Lancashire, United Kingdom
 Innovation Strategist (University Appointment) 2008–2012
 University of Lancashire, United Kingdom
@@ -63,11 +80,8 @@ MIT/IDEO Design Thinking 2017–2018
 Certifications in Human–Centered Design and Innovation
 Apple Design Labs, Silicon Valley 2015–Present
 Ongoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino
-HPI d.school, Silicon Valley 2017–2018
+Stanford d.school, Silicon Valley 2017–2018
 Human–Centered Design Prototyping Labs
 
-Fortune 500 Expertise
-Hyperscale AI Ecosystems
-Fortune 500 FinTech/InsurTech, Fortune 50 Technology, Fortune 50 MedTech/HealthTech, Ogilvy, WPP Singapore/Asia Pacific, Leo Burnett, Publicis Singapore/Asia Pacific, Mediacorp Singapore, Dubai Future Foundation, Apple HQ, and Stanford d.school in Silicon Valley.
-
-Note from user: i have more data from my other cvs
+Applied AI Skills
+Kubernetes • Async Python • asyncpg • JWT/RBAC • Secure APIs • Data Privacy • Failure Recovery • Error Handling • Backfilling • Caching Strategies • Low-Latency Systems • Horizontal Scalability • Resilient Systems • Production AI • AI Governance • Human-in-the-Loop Controls • Model Monitoring • Drift Detection • Prompt Engineering • Structured Outputs • Schema Validation • Synthetic Testing • pytest/TDD • Risk Engines • Portfolio Analytics • Market Data Systems • Event Streaming • Time-Series Forecasting • Quantitative Models • XGBoost • VaR/CVaR • Anomaly Detection • Knowledge Graphs • Semantic Data Modelling • Data Lineage • Cloud Deployment

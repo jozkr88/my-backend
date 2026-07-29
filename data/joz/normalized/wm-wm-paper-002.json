@@ -1,0 +1,110 @@
+{
+  "slug": "wm-wm-paper-002",
+  "title": "How is a world model different from an LLM?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "LLMs predict language; world models predict environmental change and action consequences.",
+  "body": "An LLM primarily predicts what comes next in language. A world model predicts how an environment may change in response to an action. Language models organise linguistic patterns; world models aim to represent state, dynamics, actions and consequences.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "LLM",
+      "world model",
+      "next token",
+      "next state"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model source_grounded record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "verified_fact",
+    "claims": [
+      "LLMs predict language; world models predict environmental change and action consequences."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "world_models_vs_llms"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "How is a world model different from an LLM?\nLLMs predict language; world models predict environmental change and action consequences.\nLLM world model next token next state\nAn LLM primarily predicts what comes next in language. A world model predicts how an environment may change in response to an action. Language models organise linguistic patterns; world models aim to represent state, dynamics, actions and consequences.",
+    "keyword_terms": [
+      "how",
+      "is",
+      "world",
+      "model",
+      "different",
+      "from",
+      "an",
+      "llm",
+      "world model",
+      "next token",
+      "next state",
+      "world models vs llms"
+    ],
+    "exact_phrases": [
+      "How is a world model different from an LLM?",
+      "LLM",
+      "world model",
+      "next token",
+      "next state"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "wm-paper-002",
+    "record_type": "canonical_qa",
+    "topic": "world_models_vs_llms",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#wm-paper-002",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      2,
+      3
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 2, 3"
+  }
+}

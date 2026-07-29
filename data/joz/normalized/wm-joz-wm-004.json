@@ -1,0 +1,106 @@
+{
+  "slug": "wm-joz-wm-004",
+  "title": "What does shadow mode mean in Joz Exocortex?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "The model evaluates possible futures without controlling live behaviour.",
+  "body": "Shadow mode means the world model predicts, simulates and evaluates in parallel without controlling the live action. Existing deterministic validation, approval and guardrail logic remains authoritative. Shadow prediction runs after the live response and is isolated from failures.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "shadow mode",
+      "deterministic guardrails",
+      "non-regression"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_verified_report record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "The model evaluates possible futures without controlling live behaviour."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "joz_shadow_mode"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex implementation record",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 62,
+    "semantic_text": "What does shadow mode mean in Joz Exocortex?\nThe model evaluates possible futures without controlling live behaviour.\nshadow mode deterministic guardrails non-regression\nShadow mode means the world model predicts, simulates and evaluates in parallel without controlling the live action. Existing deterministic validation, approval and guardrail logic remains authoritative. Shadow prediction runs after the live response and is isolated from failures.",
+    "keyword_terms": [
+      "what",
+      "does",
+      "shadow",
+      "mode",
+      "mean",
+      "in",
+      "joz",
+      "exocortex",
+      "shadow mode",
+      "deterministic guardrails",
+      "non-regression",
+      "joz shadow mode"
+    ],
+    "exact_phrases": [
+      "What does shadow mode mean in Joz Exocortex?",
+      "shadow mode",
+      "deterministic guardrails",
+      "non-regression"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-004",
+    "record_type": "joz_implementation",
+    "topic": "joz_shadow_mode",
+    "claim_scope": "joz_verified_report",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-004",
+    "source_title": "Joz AI Exocortex implementation record",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 90,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex implementation record"
+  }
+}

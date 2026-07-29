@@ -1,0 +1,107 @@
+{
+  "slug": "wm-wm-paper-001",
+  "title": "What is a world model?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "An AI system that models an environment and predicts how actions may change it.",
+  "body": "A world model is an AI system that builds and maintains a working representation of an environment so it can predict how that environment may change, especially in response to an action.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "environment representation",
+      "prediction",
+      "action"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model source_grounded record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "verified_fact",
+    "claims": [
+      "An AI system that models an environment and predicts how actions may change it."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "world_model_definition"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "What is a world model?\nAn AI system that models an environment and predicts how actions may change it.\nworld model environment representation prediction action\nA world model is an AI system that builds and maintains a working representation of an environment so it can predict how that environment may change, especially in response to an action.",
+    "keyword_terms": [
+      "what",
+      "is",
+      "world",
+      "model",
+      "world model",
+      "environment representation",
+      "prediction",
+      "action",
+      "world model definition"
+    ],
+    "exact_phrases": [
+      "What is a world model?",
+      "world model",
+      "environment representation",
+      "prediction",
+      "action"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "wm-paper-001",
+    "record_type": "canonical_qa",
+    "topic": "world_model_definition",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#wm-paper-001",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      1,
+      2
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 1, 2"
+  }
+}

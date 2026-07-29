@@ -1,0 +1,108 @@
+{
+  "slug": "wm-joz-wm-005",
+  "title": "How does Joz Exocortex learn from experience?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "It recalibrates transition probabilities from predicted-versus-observed outcomes.",
+  "body": "It stores privacy-minimised transition trajectories, compares predicted and observed states and updates probabilistic transition experience. It uses symbolic fallback when historical evidence is sparse. This is experience-based transition learning, not autonomous neural-model retraining.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "transition learning",
+      "probability",
+      "trajectory",
+      "symbolic fallback"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_verified_report record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "It recalibrates transition probabilities from predicted-versus-observed outcomes."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "joz_transition_learning"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex implementation record",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 62,
+    "semantic_text": "How does Joz Exocortex learn from experience?\nIt recalibrates transition probabilities from predicted-versus-observed outcomes.\ntransition learning probability trajectory symbolic fallback\nIt stores privacy-minimised transition trajectories, compares predicted and observed states and updates probabilistic transition experience. It uses symbolic fallback when historical evidence is sparse. This is experience-based transition learning, not autonomous neural-model retraining.",
+    "keyword_terms": [
+      "how",
+      "does",
+      "joz",
+      "exocortex",
+      "learn",
+      "from",
+      "experience",
+      "transition learning",
+      "probability",
+      "trajectory",
+      "symbolic fallback",
+      "joz transition learning"
+    ],
+    "exact_phrases": [
+      "How does Joz Exocortex learn from experience?",
+      "transition learning",
+      "probability",
+      "trajectory",
+      "symbolic fallback"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-005",
+    "record_type": "joz_implementation",
+    "topic": "joz_transition_learning",
+    "claim_scope": "joz_verified_report",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-005",
+    "source_title": "Joz AI Exocortex implementation record",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 90,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex implementation record"
+  }
+}

@@ -5,7 +5,7 @@
   "source_type": "paste",
   "source_uri": null,
   "summary": "Recruiter-safe handling for compensation, package expectations, working model, relocation, and hiring-process questions.",
-  "body": "Recruiter Compensation And Process Questions\n\nPurpose\nThis record covers recruiter questions about compensation, working model, relocation, interview process, and close-stage logistics.\n\nQuestion set\n- What compensation is Joz looking for?\n- What salary range is Joz targeting?\n- What package does Joz expect?\n- Is Joz open to remote, hybrid, or on-site work?\n- Is Joz open to relocation?\n- How should we approach Joz about a role?\n- What is the best next step with Joz?\n\nAnswer guidance\n- Do not invent numbers, salary bands, currencies, day rates, or package specifics.\n- Explain that compensation depends on scope, seniority, location, responsibilities, and overall package.\n- Keep remote, hybrid, on-site, and relocation answers flexible and recruiter-safe.\n- When asked about process, route to direct contact with Joz by email or phone.\n- Keep this record generic by default. Country-specific compensation or visa questions should only become country-specific when the recruiter asks explicitly.\n\nProof anchors\n- Existing recruiter benchmark rules for compensation, working model, and relocation.\n- Existing operational contact details: joz@meetjoz.com and +65 3107 2412.",
+  "body": "Recruiter Compensation And Process Questions\n\nPurpose\nThis record covers recruiter questions about compensation, working model, relocation, interview process, and close-stage logistics.\n\nQuestion set\n- What compensation is Joz looking for?\n- What salary range is Joz targeting?\n- What package does Joz expect?\n- Is Joz open to remote, hybrid, or on-site work?\n- Is Joz open to relocation?\n- How should we approach Joz about a role?\n- What is the best next step with Joz?\n\nAnswer guidance\n- Do not invent numbers, salary bands, currencies, day rates, or package specifics.\n- Explain that compensation depends on scope, seniority, location, responsibilities, and overall package.\n- Keep remote, hybrid, on-site, and relocation answers flexible and recruiter-safe.\n- When asked about process, route to direct contact with Joz by email or phone.\n- Keep this record generic by default. Country-specific compensation or visa questions should only become country-specific when the recruiter asks explicitly.\n\nProof anchors\n- Existing recruiter benchmark rules for compensation, working model, and relocation.\n- Current operational contact details: joz@meetjoz.com and +65 3107 2412.",
   "metadata": {
     "lane": "skills",
     "original_lane": "skills",
@@ -67,7 +67,7 @@
     "visibility": "public",
     "retention_policy": "until_withdrawn",
     "evidence_tier": "verified_fact",
-    "source_checksum": "df281cd5bcd66b8acab2ac56016035e6d75f9816c7edeeafc622ef09781ce5ca",
+    "source_checksum": "0c7bb87e9186e9a8556dd31e4b67c7fcc8cf167d22b795e0f06c983cf616024b",
     "source_uri": null
   }
 }

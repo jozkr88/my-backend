@@ -1,0 +1,111 @@
+{
+  "slug": "wm-joz-wm-002",
+  "title": "What does the Joz world model observe?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "Structured application and scene state, not continuous physical-world camera data.",
+  "body": "It observes structured React and Three.js application state, including portal, stage, visible objects, transforms, parent-child links, focus, overlays, camera pose, projection, viewport and runtime status. AR metadata is launcher-only; it does not continuously capture camera images, audio, native anchors or biometric data.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "React",
+      "Three.js",
+      "scene observation",
+      "camera pose",
+      "privacy"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_verified_report record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "Structured application and scene state, not continuous physical-world camera data."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "joz_world_state"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex implementation record",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 62,
+    "semantic_text": "What does the Joz world model observe?\nStructured application and scene state, not continuous physical-world camera data.\nReact Three.js scene observation camera pose privacy\nIt observes structured React and Three.js application state, including portal, stage, visible objects, transforms, parent-child links, focus, overlays, camera pose, projection, viewport and runtime status. AR metadata is launcher-only; it does not continuously capture camera images, audio, native anchors or biometric data.",
+    "keyword_terms": [
+      "what",
+      "does",
+      "the",
+      "joz",
+      "world",
+      "model",
+      "observe",
+      "react",
+      "three.js",
+      "scene observation",
+      "camera pose",
+      "privacy",
+      "joz world state"
+    ],
+    "exact_phrases": [
+      "What does the Joz world model observe?",
+      "React",
+      "Three.js",
+      "scene observation",
+      "camera pose",
+      "privacy"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-002",
+    "record_type": "joz_implementation",
+    "topic": "joz_world_state",
+    "claim_scope": "joz_verified_report",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-002",
+    "source_title": "Joz AI Exocortex implementation record",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 90,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex implementation record"
+  }
+}

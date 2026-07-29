@@ -30,6 +30,7 @@ function resolveRepoRoot() {
 
 const repoRoot = resolveRepoRoot();
 const publishedPath = path.join(repoRoot, "data", "joz", "published", "joz-documents.generated.json");
+const worldModelOverlayPath = path.join(repoRoot, "data", "joz", "published", "joz-world-model.generated.json");
 const reportPath = path.join(repoRoot, "data", "joz", "published", "joz-knowledge-report.json");
 const manifestPath = path.join(repoRoot, "data", "joz", "published", "joz-dataset-manifest.json");
 const databaseUrl = process.env.SUPABASE_DB_URL || process.env.DATABASE_URL || "";
@@ -45,14 +46,18 @@ if (!fs.existsSync(publishedPath)) {
 }
 
 const published = JSON.parse(fs.readFileSync(publishedPath, "utf8"));
+const worldModelOverlay = fs.existsSync(worldModelOverlayPath)
+  ? JSON.parse(fs.readFileSync(worldModelOverlayPath, "utf8"))
+  : {};
 const report = fs.existsSync(reportPath) ? JSON.parse(fs.readFileSync(reportPath, "utf8")) : {};
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
 const sourceRegistry = Array.isArray(manifest?.sources) ? manifest.sources : [];
 const records = Array.isArray(published?.model_ready_records)
-  ? published.model_ready_records
-  : Array.isArray(published?.records)
-    ? published.records
-    : [];
+  ? [...published.model_ready_records, ...(worldModelOverlay.model_ready_records || [])]
+  : [
+      ...(Array.isArray(published?.records) ? published.records : []),
+      ...(worldModelOverlay.model_ready_records || worldModelOverlay.records || []),
+    ];
 const publishVersion =
   process.env.JOZ_PUBLISH_VERSION ||
   String(published?.generated_at || new Date().toISOString()).replace(/[:.]/g, "-");

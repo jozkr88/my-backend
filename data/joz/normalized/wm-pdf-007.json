@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-007",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 8)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language trained in that model may learn to drive too fast and still score well when the same flawed model is used to test it. The score would reflect an error in the model, not readiness for a real road. Policy must define how much real-world validation a system requires before deployment, regardless of its performance in simulation. Because even stro",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\ntrained in that model may learn to drive too fast and still\nscore well when the same flawed model is used to test\nit. The score would reflect an error in the model, not\nreadiness for a real road.\nPolicy must define how much real-world validation a\nsystem requires before deployment, regardless of its\nperformance in simulation. Because even strong tests\nwill inevitably miss certain rare conditions, oversight\nmust continue after deployment, through monitoring\nand incident reporting that feed failures back into the\nstandard.\nEvaluation and Standards\nWorld models require different evaluation questions, yet\nthere are no settled standards for answering them. For\nlanguage models, evaluators ask whether an answer is\naccurate, unbiased, safe, or useful. The same questions\nstill apply, alongside others: whether objects remain\nstable as the viewpoint moves, whether scenes change\nin physically plausible ways, and whether systems fail\nsafely when they encounter a rare event.\nEvaluation should match the system’s function. A\nrenderer used for concept art can be judged by how\nconvincing it looks. A simulator used for infrastructure\nplanning must meet a higher bar — whether its\ngeometry and physics are actually correct. A planner\nembedded in a robot must be tested repeatedly across\nvaried, real-world conditions. The closer a system\ncomes to real-world actions, the more its evaluation\nshould weigh physical validity, robustness, and transfer\nbeyond the test setting. Interactive systems add another\nquestion: Do skills practiced in simulation, by a person\nor a robot, transfer to the real task?\nCurrent benchmarks reflect this gap. Earlier video\nbenchmarks like VBench measure visual quality,\nprompt alignment, and temporal smoothness, but\nnot whether generated scenes obey physical laws.\nNewer benchmarks probe that physical understanding:\nVideoPhy and PhyGenBench test physical\ncommonsense in generated videos; WorldScore\nassesses controllability, quality, and dynamics in world\ngeneration; WorldModelBench judges video models as\nworld models; WorldArena evaluates perceptual quality\nand usefulness in training, testing, and planning robot\nbehavior; and the related robotics benchmark LIBERO\ntests how well robots complete simulated manipulation\ntasks.\nEven so, leading models still fail to maintain basic\nphysical consistency, and high benchmark scores can\nconceal weaknesses in physical reasoning or robustness\nto changing conditions. Evaluation of world models\nremains a research patchwork rather than a settled\nstandard — none gives policymakers an adequate basis\nto assess a world model for safety-critical deployment.\nPhysical Liability\nWorld models complicate liability because they sit\nbetween perception and action. A language model\nproduces words that a person decides how to use,\nwhereas a world model may guide action based on\nits reading of the environment, often with no human\nintervention. The problem is not unique: Agentic\nsystems raise the same question whenever AI can act\nwithout a human decision-maker. World models bring\nthat question into physical settings, where an agent\nmay act on a learned model’s mistaken interpretation or\nprediction of its environment.\nIf an autonomous vehicle misreads a construction zone,\nor a hospital logistics system blocks access to critical\nequipment, the failure could come from the same\nblack-box causes as a language model — training data,\nmodel design, and deployment choices. What world\nmodels add is a learned representation of the physical",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 8",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\ntrained in that model may learn to drive too fast and still\nscore well when the same flawed model is used to test\nit. The score would reflect an error in the model, not\nreadiness for a real road.\nPolicy must define how much real-world validation a\nsystem requires before deployment, regardless of its\nperformance in simulation. Because even strong tests\nwill inevitably miss certain rare conditions, oversight\nmust continue after deployment, through monitoring\nand incident reporting that feed failures back into the\nstandard.\nEvaluation and Standards\nWorld models require different evaluation questions, yet\nthere are no settled standards for answering them. For\nlanguage models, evaluators ask whether an answer is\naccurate, unbiased, safe, or useful. The same questions\nstill apply, alongside others: whether objects remain\nstable as the viewpoint moves, whether scenes change\nin physically plausible ways, and whether systems fail\nsafely when they encounter a rare event.\nEvaluation should match the system’s function. A\nrenderer used for concept art can be judged by how\nconvincing it looks. A simulator used for infrastructure\nplanning must meet a higher bar — whether its\ngeometry and physics are actually correct. A planner\nembedded in a robot must be tested repeatedly across\nvaried, real-world conditions. The closer a system\ncomes to real-world actions, the more its evaluation\nshould weigh physical validity, robustness, and transfer\nbeyond the test setting. Interactive systems add another\nquestion: Do skills practiced in simulation, by a person\nor a robot, transfer to the real task?\nCurrent benchmarks reflect this gap. Earlier video\nbenchmarks like VBench measure visual quality,\nprompt alignment, and temporal smoothness, but\nnot whether generated scenes obey physical laws.\nNewer benchmarks probe that physical understanding:\nVideoPhy and PhyGenBench test physical\ncommonsense in generated videos; WorldScore\nassesses controllability, quality, and dynamics in world\ngeneration; WorldModelBench judges video models as\nworld models; WorldArena evaluates perceptual quality\nand usefulness in training, testing, and planning robot\nbehavior; and the related robotics benchmark LIBERO\ntests how well robots complete simulated manipulation\ntasks.\nEven so, leading models still fail to maintain basic\nphysical consistency, and high benchmark scores can\nconceal weaknesses in physical reasoning or robustness\nto changing conditions. Evaluation of world models\nremains a research patchwork rather than a settled\nstandard — none gives policymakers an adequate basis\nto assess a world model for safety-critical deployment.\nPhysical Liability\nWorld models complicate liability because they sit\nbetween perception and action. A language model\nproduces words that a person decides how to use,\nwhereas a world model may guide action based on\nits reading of the environment, often with no human\nintervention. The problem is not unique: Agentic\nsystems raise the same question whenever AI can act\nwithout a human decision-maker. World models bring\nthat question into physical settings, where an agent\nmay act on a learned model’s mistaken interpretation or\nprediction of its environment.\nIf an autonomous vehicle misreads a construction zone,\nor a hospital logistics system blocks access to critical\nequipment, the failure could come from the same\nblack-box causes as a language model — training data,\nmodel design, and deployment choices. What world\nmodels add is a learned representation of the physical",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-007",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-007",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      8
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 8",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-007"
+  }
+}

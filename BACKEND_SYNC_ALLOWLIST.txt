@@ -1,5 +1,8 @@
 render.yaml
 server/index.js
+server/db.js
+server/*.js
+server/*.sql
 server/package.json
 server/package-lock.json
 server/RENDER_SETUP.md
@@ -11,3 +14,4 @@ server/content/
 server/*.test.js
 data/joz/
 data/meetjoz/
+services/business-value-worker/

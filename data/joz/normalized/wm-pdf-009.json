@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-009",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 10)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language For governments, this is not only a matter of market competition but also of strategic capacity — who owns, governs, and can audit the simulation infrastructure on which future autonomous systems may depend. An agency buying a self-driving shuttle or an inspection drone must verify its safety by testing rare and dangerous situations that canno",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nFor governments, this is not only a matter of market\ncompetition but also of strategic capacity —\nwho owns, governs, and can audit the simulation\ninfrastructure on which future autonomous systems\nmay depend. An agency buying a self-driving shuttle\nor an inspection drone must verify its safety by testing\nrare and dangerous situations that cannot easily be\nrepeated in reality. Simulation is often the only practical\nway to do that at scale. But the most useful system-\nspecific simulator is often the vendor’s own because\nit depends on proprietary details about the system’s\nsensors, architecture, operating data, and known failure\nmodes. The agency may be unable to distinguish a\nrobust system from one that performs well only under\nvendor-selected conditions. Independent evaluation is\ntherefore central to procurement. Without access to\nthe simulator or an independently validated alternative,\nthe agency then depends on the vendor both to build\nand validate the system.\nCountries that control leading world-model\ninfrastructure and data will shape how others access\nand use these systems. Governments without\ndomestic alternatives may become reliant on foreign\nproviders, limiting their ability to inspect, adapt, or\nreplace systems used in critical functions.\nLabor and Physical Work\nEarlier waves of AI primarily focused on knowledge\nwork such as writing, analysis, and software\ndevelopment. World models extend automation to\nphysical and operational work. Conventional robots\nalready handle repetitive tasks in controlled settings\nlike assembly lines. World models reach further, into\njobs that require judgment in unstructured, changing\nenvironments that have resisted automation, such\nas driving, warehousing, and construction. As world\nmodels mature, the impact on the workforce broadens\nbeyond the office and the factory floor.\nThat shift will also reshape the nature of expertise.\nAs physical operations are increasingly captured in\nsimulation — how a plant runs or how a crane operator\nexecutes a lift — that knowledge moves from the\nworkers who hold it toward the firms that build the\nmodels. An operator or an agency can gradually lose\nthe ability to perform the work without the system. The\npolicy question then becomes whether workers and\npublic institutions have a role in how these systems\nenter real workflows, rather than simply receiving them\nas finished tools.\nNational Security\nImplications\nWorld models carry major national security\nimplications. Like other general-purpose technologies,\nthey are dual use: A model that navigates aid through\na disaster zone can guide a weapon through the\nsame environment. Modern security competition\nincreasingly depends on the ability to model terrain,\nrehearse contingencies, and operate with limited\ncommunications or human control. The consequences\nof world models also become more acute in security\nThe consequences of world models also\nbecome more acute in security settings\nbecause adversaries could deceive,\ndisrupt, or defeat these systems at\nmachine speed, often under conditions\nwhere human oversight is either limited\nor too slow to matter.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 10",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nFor governments, this is not only a matter of market\ncompetition but also of strategic capacity —\nwho owns, governs, and can audit the simulation\ninfrastructure on which future autonomous systems\nmay depend. An agency buying a self-driving shuttle\nor an inspection drone must verify its safety by testing\nrare and dangerous situations that cannot easily be\nrepeated in reality. Simulation is often the only practical\nway to do that at scale. But the most useful system-\nspecific simulator is often the vendor’s own because\nit depends on proprietary details about the system’s\nsensors, architecture, operating data, and known failure\nmodes. The agency may be unable to distinguish a\nrobust system from one that performs well only under\nvendor-selected conditions. Independent evaluation is\ntherefore central to procurement. Without access to\nthe simulator or an independently validated alternative,\nthe agency then depends on the vendor both to build\nand validate the system.\nCountries that control leading world-model\ninfrastructure and data will shape how others access\nand use these systems. Governments without\ndomestic alternatives may become reliant on foreign\nproviders, limiting their ability to inspect, adapt, or\nreplace systems used in critical functions.\nLabor and Physical Work\nEarlier waves of AI primarily focused on knowledge\nwork such as writing, analysis, and software\ndevelopment. World models extend automation to\nphysical and operational work. Conventional robots\nalready handle repetitive tasks in controlled settings\nlike assembly lines. World models reach further, into\njobs that require judgment in unstructured, changing\nenvironments that have resisted automation, such\nas driving, warehousing, and construction. As world\nmodels mature, the impact on the workforce broadens\nbeyond the office and the factory floor.\nThat shift will also reshape the nature of expertise.\nAs physical operations are increasingly captured in\nsimulation — how a plant runs or how a crane operator\nexecutes a lift — that knowledge moves from the\nworkers who hold it toward the firms that build the\nmodels. An operator or an agency can gradually lose\nthe ability to perform the work without the system. The\npolicy question then becomes whether workers and\npublic institutions have a role in how these systems\nenter real workflows, rather than simply receiving them\nas finished tools.\nNational Security\nImplications\nWorld models carry major national security\nimplications. Like other general-purpose technologies,\nthey are dual use: A model that navigates aid through\na disaster zone can guide a weapon through the\nsame environment. Modern security competition\nincreasingly depends on the ability to model terrain,\nrehearse contingencies, and operate with limited\ncommunications or human control. The consequences\nof world models also become more acute in security\nThe consequences of world models also\nbecome more acute in security settings\nbecause adversaries could deceive,\ndisrupt, or defeat these systems at\nmachine speed, often under conditions\nwhere human oversight is either limited\nor too slow to matter.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-009",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-009",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      10
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 10",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-009"
+  }
+}

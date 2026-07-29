@@ -17,7 +17,7 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-24T07:07:27.006Z",
+      "reviewed_at": "2026-07-28T07:19:37.859Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
@@ -42,7 +42,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-24T07:07:27.006Z",
+    "reviewed_at": "2026-07-28T07:19:37.859Z",
     "problems": [
       "operational_friction",
       "organizational_complexity"

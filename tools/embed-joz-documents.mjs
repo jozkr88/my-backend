@@ -101,6 +101,7 @@ async function run() {
   `);
   console.log(JSON.stringify({ documents: documents.rows?.length || 0, chunks: chunkCount, model }, null, 2));
 }
+
 try {
   await run();
 } finally {

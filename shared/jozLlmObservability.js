@@ -188,7 +188,7 @@ function isRagEvaluationPrompt(input = "") {
 
 function verifyAudienceRelevance({ input = "", route = {}, trace = {}, reply = "" }) {
   const knowledgeLevel = trace?.audienceProfile?.aiKnowledge?.id;
-  const genericBoundary = /not in the current joz knowledge base|outside the current deterministic joz answer set/i.test(reply);
+  const genericBoundary = /not in the current joz (?:knowledge base|knowledge graph)|outside the current deterministic joz answer set/i.test(reply);
   const isSpecialistRagQuestion = knowledgeLevel === "ai_specialist" && isRagEvaluationPrompt(input);
   const relevantAnswer = /retrieval|recall|precision|faithful|citation|grounded|relevance|completeness|latency|regression/i.test(reply);
 
@@ -590,6 +590,14 @@ export function buildJozResponseVerification({
       datasetId: doc?.metadata?.dataset_id || null,
       sourceUri: doc?.metadata?.source_uri || doc?.source_uri || null,
       sourceChecksum: doc?.metadata?.source_checksum || null,
+      recordId: doc?.metadata?.record_id || null,
+      recordType: doc?.metadata?.record_type || null,
+      claimScope: doc?.metadata?.claim_scope || null,
+      sourceTitle: doc?.metadata?.source_title || null,
+      sourcePublisher: doc?.metadata?.source_publisher || null,
+      sourceDate: doc?.metadata?.source_date || null,
+      sourcePages: Array.isArray(doc?.metadata?.source_pages) ? doc.metadata.source_pages : [],
+      citationLabel: doc?.metadata?.citation_label || null,
       verificationStatus:
         doc?.metadata?.verification_status ||
         doc?.metadata?.verification?.status ||

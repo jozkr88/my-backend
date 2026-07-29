@@ -67,4 +67,3 @@ test("does not claim a transformer provider is available without an endpoint", (
   assert.equal(gateway.isAvailable(), false);
   assert.equal(gateway.describe().available, false);
 });
-
