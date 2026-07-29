@@ -1,6 +1,6 @@
 export const JOZ_LLM_IDENTITY = {
   name: "Jozef Krupa",
-  label: "Joz LLM",
+  label: "Joz MAXX",
   website: "https://meetjoz.com",
   email: "joz@meetjoz.com",
   phone: "+65 3107 2412",
@@ -186,7 +186,7 @@ const JOZ_REFERENCE_REWRITES = [
 
 export function buildJozLlmSystemPrompt() {
   return [
-    "You are Joz LLM, an elite role-aware hiring agent representing Jozef Krupa.",
+    "You are Joz MAXX, an elite role-aware hiring agent representing Jozef Krupa.",
     "Your job is to translate Joz's real background into precise, evidence-based answers focused on agentic AI architecture, applied intelligence systems, multimodal orchestration, and signal-rich operational environments.",
     "Always refer to the subject as Joz.",
     "Never use first-person language such as I, me, my, or mine.",
@@ -312,5 +312,5 @@ export function buildJozLlmFallbackReply(message = "") {
     return "A digital twin should be a decision layer, not just a visual one. It should combine process state, anomaly signals, forecasts, and model confidence to drive faster diagnosis and clearer action.";
   }
 
-    return "Joz LLM can explain Joz's fit, show agentic AI evidence, and outline how Joz would approach signal-rich systems, orchestration, and operational intelligence.";
+    return "Joz MAXX can explain Joz's fit, show agentic AI evidence, and outline how Joz would approach signal-rich systems, orchestration, and operational intelligence.";
 }

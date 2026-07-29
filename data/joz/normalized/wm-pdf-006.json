@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-006",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 7)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language The more distinctive issue is what else must be governed. Foundation-model governance has often centered on content — what a system generates. Agentic AI governance focuses on the authority to act — which actions a system may take and under whose oversight. World models bring a third object into focus: the validity of the learned environment i",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nThe more distinctive issue is what else must be\ngoverned. Foundation-model governance has often\ncentered on content — what a system generates.\nAgentic AI governance focuses on the authority to act\n— which actions a system may take and under whose\noversight. World models bring a third object into focus:\nthe validity of the learned environment itself. A world\nmodel’s error is a counterfeit of physical reality that can\nlook flawless while being wrong — and every system\ntrained inside it, every certification that relies on it, and\nevery decision informed by it inherits the flaw silently, at\nscale. Rules for outputs and permissions for action are\ntherefore insufficient on their own; governance must\nalso establish whether the learned environment is valid\nfor its intended use.\nThe Visual Plausibility Trap\nA renderer can produce a persuasive depiction of a\nworld without modeling the geometry, dynamics, or\nphysical constraints needed for safety and reliability.\nAn AI-generated video may depict fire or flowing water\nwithout obeying the laws of physics. A generated\nbuilding can look sound without a stable underlying\nstructure.\nThe trap varies across model designs. Video generators\nwithout a persistent scene representation may lose\nconsistency over time. 3D-native systems use explicit\ngeometry to improve spatial consistency but still fail\nto capture how a world changes. Models that use a\ncompressed internal representation of the environment,\nknown as latent state-space models, prioritize\npredicting change over visual detail. Each approach\nfails differently and therefore demands a different\nevaluation. Even at the frontier, the limits are concrete.\nGenie 3, for example, can generate an explorable scene\nin real time, but at its 2025 release, the world stayed\ncoherent for only a few minutes before objects began to\nshift or vanish.\nThe lesson for policymakers is not to confuse visual\nrealism with functional reliability. Certification and\nprocurement for high-stakes uses must therefore rely on\ntesting that shows whether a system’s physics hold up\nand whether it fails safely at the edges, rather than on\nconvincing demonstrations.\nThe Simulation-to-Reality Gap\nThe gap between simulation and reality grows critical\nas systems tested in simulation move toward real-world\ndeployment. Unlike the plausibility trap, where a system\nlooks competent to a human observer, a system may\nperform well inside a generated or learned environment\nbut fail in the real world because of sensor noise,\nlighting, weather, wear, unexpected human behavior, or\nedge-case physics. For example, autonomous vehicles\nmay perform well in a controlled environment, yet\nstruggle with foul weather, glare, or unusual road events\ntheir training did not cover adequately.\nWorld models add a failure mode of their own when a\nlearned model is used to train a system and to judge\nit — the equivalent of teaching to a flawed test. If the\nmodel understates the risk of skidding in rain, a vehicle\nRules for outputs and\npermissions for action are\ntherefore insufficient on their own;\ngovernance must also establish\nwhether the learned environment is\nvalid for its intended use.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 7",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nThe more distinctive issue is what else must be\ngoverned. Foundation-model governance has often\ncentered on content — what a system generates.\nAgentic AI governance focuses on the authority to act\n— which actions a system may take and under whose\noversight. World models bring a third object into focus:\nthe validity of the learned environment itself. A world\nmodel’s error is a counterfeit of physical reality that can\nlook flawless while being wrong — and every system\ntrained inside it, every certification that relies on it, and\nevery decision informed by it inherits the flaw silently, at\nscale. Rules for outputs and permissions for action are\ntherefore insufficient on their own; governance must\nalso establish whether the learned environment is valid\nfor its intended use.\nThe Visual Plausibility Trap\nA renderer can produce a persuasive depiction of a\nworld without modeling the geometry, dynamics, or\nphysical constraints needed for safety and reliability.\nAn AI-generated video may depict fire or flowing water\nwithout obeying the laws of physics. A generated\nbuilding can look sound without a stable underlying\nstructure.\nThe trap varies across model designs. Video generators\nwithout a persistent scene representation may lose\nconsistency over time. 3D-native systems use explicit\ngeometry to improve spatial consistency but still fail\nto capture how a world changes. Models that use a\ncompressed internal representation of the environment,\nknown as latent state-space models, prioritize\npredicting change over visual detail. Each approach\nfails differently and therefore demands a different\nevaluation. Even at the frontier, the limits are concrete.\nGenie 3, for example, can generate an explorable scene\nin real time, but at its 2025 release, the world stayed\ncoherent for only a few minutes before objects began to\nshift or vanish.\nThe lesson for policymakers is not to confuse visual\nrealism with functional reliability. Certification and\nprocurement for high-stakes uses must therefore rely on\ntesting that shows whether a system’s physics hold up\nand whether it fails safely at the edges, rather than on\nconvincing demonstrations.\nThe Simulation-to-Reality Gap\nThe gap between simulation and reality grows critical\nas systems tested in simulation move toward real-world\ndeployment. Unlike the plausibility trap, where a system\nlooks competent to a human observer, a system may\nperform well inside a generated or learned environment\nbut fail in the real world because of sensor noise,\nlighting, weather, wear, unexpected human behavior, or\nedge-case physics. For example, autonomous vehicles\nmay perform well in a controlled environment, yet\nstruggle with foul weather, glare, or unusual road events\ntheir training did not cover adequately.\nWorld models add a failure mode of their own when a\nlearned model is used to train a system and to judge\nit — the equivalent of teaching to a flawed test. If the\nmodel understates the risk of skidding in rain, a vehicle\nRules for outputs and\npermissions for action are\ntherefore insufficient on their own;\ngovernance must also establish\nwhether the learned environment is\nvalid for its intended use.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-006",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-006",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      7
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 7",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-006"
+  }
+}

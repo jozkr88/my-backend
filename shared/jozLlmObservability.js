@@ -590,6 +590,14 @@ export function buildJozResponseVerification({
       datasetId: doc?.metadata?.dataset_id || null,
       sourceUri: doc?.metadata?.source_uri || doc?.source_uri || null,
       sourceChecksum: doc?.metadata?.source_checksum || null,
+      recordId: doc?.metadata?.record_id || null,
+      recordType: doc?.metadata?.record_type || null,
+      claimScope: doc?.metadata?.claim_scope || null,
+      sourceTitle: doc?.metadata?.source_title || null,
+      sourcePublisher: doc?.metadata?.source_publisher || null,
+      sourceDate: doc?.metadata?.source_date || null,
+      sourcePages: Array.isArray(doc?.metadata?.source_pages) ? doc.metadata.source_pages : [],
+      citationLabel: doc?.metadata?.citation_label || null,
       verificationStatus:
         doc?.metadata?.verification_status ||
         doc?.metadata?.verification?.status ||

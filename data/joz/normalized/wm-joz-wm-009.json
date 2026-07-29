@@ -1,0 +1,110 @@
+{
+  "slug": "wm-joz-wm-009",
+  "title": "Is Joz Exocortex a frontier neural world foundation model?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "No; it is an application-level hybrid world model, not a universal neural simulator.",
+  "body": "No. It is a governed application-level hybrid symbolic-probabilistic predictive world model. It should not be described as a universal physical-world simulator, a frontier world foundation model or a continuously perceiving embodied system.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "claim boundary",
+      "neural world model",
+      "foundation model",
+      "accuracy"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model mandatory_boundary record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "No; it is an application-level hybrid world model, not a universal neural simulator."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "joz_not_neural_foundation_model"
+    ],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex claim boundary",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "data_boundaries",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 70,
+    "semantic_text": "Is Joz Exocortex a frontier neural world foundation model?\nNo; it is an application-level hybrid world model, not a universal neural simulator.\nclaim boundary neural world model foundation model accuracy\nNo. It is a governed application-level hybrid symbolic-probabilistic predictive world model. It should not be described as a universal physical-world simulator, a frontier world foundation model or a continuously perceiving embodied system.",
+    "keyword_terms": [
+      "is",
+      "joz",
+      "exocortex",
+      "frontier",
+      "neural",
+      "world",
+      "foundation",
+      "model",
+      "claim boundary",
+      "neural world model",
+      "foundation model",
+      "accuracy",
+      "joz not neural foundation model"
+    ],
+    "exact_phrases": [
+      "Is Joz Exocortex a frontier neural world foundation model?",
+      "claim boundary",
+      "neural world model",
+      "foundation model",
+      "accuracy"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-009",
+    "record_type": "claim_boundary",
+    "topic": "joz_not_neural_foundation_model",
+    "claim_scope": "mandatory_boundary",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-009",
+    "source_title": "Joz AI Exocortex claim boundary",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 100,
+    "boundary_record": true,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex claim boundary"
+  }
+}

@@ -813,7 +813,7 @@ export function JozLlmDashboardPage() {
       <header className="joz-dashboard-header">
         <div>
           <div className="joz-dashboard-kicker">Meet Joz Analytics</div>
-          <h1>Joz LLM Review Dashboard</h1>
+          <h1>Joz MAXX Review Dashboard</h1>
           <p>
             Review live question routing, pre-answer drafts, verification outcomes, repairs, and final answers.
           </p>

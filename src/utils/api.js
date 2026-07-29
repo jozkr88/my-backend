@@ -1,4 +1,5 @@
 const trimTrailingSlash = (value = "") => value.replace(/\/+$/, "");
+const LIVE_API_BASE = "https://my-backend-qxay.onrender.com";
 
 function isLocalDevHost() {
   if (typeof window === "undefined") return false;
@@ -26,7 +27,7 @@ export function getApiBaseCandidates() {
   );
 
   if (isLocalDevHost()) {
-    return dedupe([explicitBase, "http://127.0.0.1:3001"]);
+    return dedupe([explicitBase, "http://127.0.0.1:3001", LIVE_API_BASE]);
   }
 
   return dedupe([explicitBase]);

@@ -1,11 +1,11 @@
 export const AI_ACT_GOVERNANCE_VERSION = "2026-07-26";
 
 export const AI_DISCLOSURE_TEXT =
-  "You are interacting with Joz LLM, an AI system. Responses are generated with AI, may be wrong, and require human review before consequential decisions or actions.";
+  "You are interacting with Joz MAXX, an AI system. Responses are generated with AI, may be wrong, and require human review before consequential decisions or actions.";
 
 export const AI_MACHINE_READABLE_DISCLOSURE = {
   aiGenerated: true,
-  system: "Joz LLM",
+  system: "Joz MAXX",
   governanceVersion: AI_ACT_GOVERNANCE_VERSION,
   humanReviewRequiredForConsequentialUse: true,
 };
@@ -13,7 +13,7 @@ export const AI_MACHINE_READABLE_DISCLOSURE = {
 export const JOZ_AI_SYSTEM_CARD = {
   schema: "joz.ai_system_card.v1",
   version: AI_ACT_GOVERNANCE_VERSION,
-  name: "Joz LLM",
+  name: "Joz MAXX",
   providerRole:
     "Joz / Jozef Krupa operates the application-level AI system. Model and infrastructure providers are third-party processors or upstream model providers where configured.",
   intendedPurpose: [

@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-008",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 9)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language environment on which an autonomous system may act. That does not eliminate responsibility. It changes what responsibility depends on. Did the deployer use it outside the setting where it was tested? Did the operator have enough information to override it? Did the hardware provider build a sensor configuration that the model could not handle? E",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nenvironment on which an autonomous system may\nact. That does not eliminate responsibility. It changes\nwhat responsibility depends on. Did the deployer use\nit outside the setting where it was tested? Did the\noperator have enough information to override it? Did\nthe hardware provider build a sensor configuration\nthat the model could not handle? Existing frameworks\nhave been designed for complex products with several\ncontributors, but world models introduce a learned layer\nof environmental judgment that makes it more difficult\nto attribute harm to a particular action or cause.\nSpatial Privacy and Pervasive Sensing\nWorld models push AI toward continuous observation\nof physical environments: more cameras, microphones,\nmapping, and opportunities to collect data about\nwhere people are, how they move, and with whom they\ninteract. Building useful models of homes, workplaces,\nroads, hospitals, schools, and public spaces often\nrequires sensor-rich data about how those environments\nare arranged and how people move through them.\nThe harder problem is inference. A system trained\non multimodal spatial data may infer home routines,\nworkplace patterns, health-related behavior, social\nrelationships, or sensitive locations that were never\nexplicitly labeled. Fed by a building’s or a city’s sensors,\na world model can hold a continuously updated\npicture of who is where and how a space is used over\ntime. As a result, privacy law and procurement policy\nmust address not only raw sensor feeds, but also the\ndownstream creation of persistent spatial profiles and\ndigital representations of people, homes, workplaces,\nand public spaces. That concern is especially acute in\nauthoritarian regimes, where governments face fewer\nconstraints on surveillance and the uses of information\ngleaned from it.\nAt the same time, world models could bolster\nprivacy where simulation can substitute for real-\nworld monitoring. Autonomous vehicle developers,\nfor example, could rely more on simulated road\nenvironments for training and testing, reducing the\nneed to collect comparable footage from public roads.\nSimulators would still require real-world data to build\nand validate, but could reduce repeated collection as\ntesting scales.\nConcentration and Dependence\nWorld models may increase market dependence on a\nsmall number of firms that control the best multimodal\nspatial data, the largest compute budgets, and the most\nadvanced simulation infrastructure. Their advantage\nmay be durable: Passive visual data is abundant, but\naction-labeled interaction data — including robot\ntrajectories, teleoperation logs, and fleet sensor streams\npaired with control signals — is far more difficult to\nobtain at scale. Tech incumbents that already deploy\nwidely accumulate inputs unavailable to competitors\nand public institutions, with each deployment\ncompounding their advantage.\nEvaluation of world models\nremains a research patchwork\nrather than a settled standard\n— none gives policymakers\nan adequate basis to assess a\nworld model for safety-critical\ndeployment.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 9",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nenvironment on which an autonomous system may\nact. That does not eliminate responsibility. It changes\nwhat responsibility depends on. Did the deployer use\nit outside the setting where it was tested? Did the\noperator have enough information to override it? Did\nthe hardware provider build a sensor configuration\nthat the model could not handle? Existing frameworks\nhave been designed for complex products with several\ncontributors, but world models introduce a learned layer\nof environmental judgment that makes it more difficult\nto attribute harm to a particular action or cause.\nSpatial Privacy and Pervasive Sensing\nWorld models push AI toward continuous observation\nof physical environments: more cameras, microphones,\nmapping, and opportunities to collect data about\nwhere people are, how they move, and with whom they\ninteract. Building useful models of homes, workplaces,\nroads, hospitals, schools, and public spaces often\nrequires sensor-rich data about how those environments\nare arranged and how people move through them.\nThe harder problem is inference. A system trained\non multimodal spatial data may infer home routines,\nworkplace patterns, health-related behavior, social\nrelationships, or sensitive locations that were never\nexplicitly labeled. Fed by a building’s or a city’s sensors,\na world model can hold a continuously updated\npicture of who is where and how a space is used over\ntime. As a result, privacy law and procurement policy\nmust address not only raw sensor feeds, but also the\ndownstream creation of persistent spatial profiles and\ndigital representations of people, homes, workplaces,\nand public spaces. That concern is especially acute in\nauthoritarian regimes, where governments face fewer\nconstraints on surveillance and the uses of information\ngleaned from it.\nAt the same time, world models could bolster\nprivacy where simulation can substitute for real-\nworld monitoring. Autonomous vehicle developers,\nfor example, could rely more on simulated road\nenvironments for training and testing, reducing the\nneed to collect comparable footage from public roads.\nSimulators would still require real-world data to build\nand validate, but could reduce repeated collection as\ntesting scales.\nConcentration and Dependence\nWorld models may increase market dependence on a\nsmall number of firms that control the best multimodal\nspatial data, the largest compute budgets, and the most\nadvanced simulation infrastructure. Their advantage\nmay be durable: Passive visual data is abundant, but\naction-labeled interaction data — including robot\ntrajectories, teleoperation logs, and fleet sensor streams\npaired with control signals — is far more difficult to\nobtain at scale. Tech incumbents that already deploy\nwidely accumulate inputs unavailable to competitors\nand public institutions, with each deployment\ncompounding their advantage.\nEvaluation of world models\nremains a research patchwork\nrather than a settled standard\n— none gives policymakers\nan adequate basis to assess a\nworld model for safety-critical\ndeployment.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-008",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-008",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      9
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 9",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-008"
+  }
+}

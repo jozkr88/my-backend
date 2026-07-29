@@ -70,7 +70,7 @@ export const JOZ_LLM_LANES = {
     retrievalCategories: ["skills", "case_study", "proof", "bio", "faq"],
     actions: [
       {
-        label: "View CV",
+        label: "View PDF CV",
         href: "/documents/Joz_Krupa_CV.pdf",
       },
       {

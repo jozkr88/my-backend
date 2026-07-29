@@ -30,9 +30,18 @@ export function applyVoiceReasoningResult({
   isWorkStepVisible = false,
   isWorkStepActive = false,
 }) {
-  const { action, target, awareness, timing } = result || {};
+  const { action, target, awareness, timing, prediction } = result || {};
 
-  console.log("🎯 Reasoning result:", { action, target, awareness, timing, source });
+  if (typeof window !== "undefined" && prediction?.trajectoryId && prediction?.mode === "shadow") {
+    window.__lastWorldPrediction = {
+      ...prediction,
+      recordedAt: new Date().toISOString(),
+      observedState: null,
+      predictionError: null,
+    };
+  }
+
+  console.log("🎯 Reasoning result:", { action, target, awareness, timing, source, prediction });
   if (awareness) {
     window.__aiSay?.(awareness);
   }

@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import { execFile } from "node:child_process";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { promisify } from "node:util";
 import { fileURLToPath } from "url";
 import {
@@ -26,6 +26,7 @@ import {
   getJozDocumentsByIntent,
   getJozSemanticDocumentsByQuery,
   getStructuredWorldState,
+  getWorldTransitionExperience,
   initDatabase,
   isDatabaseEnabled,
   isDatabaseRequired,
@@ -37,6 +38,7 @@ import {
   updateJozActionProposal,
   logReasoningEvent,
   logJozLlmRequestEvent,
+  recordWorldModelTrajectory,
   upsertBusinessValueCase,
   reviewBusinessValueEvidence,
   reviewJozLlmRepairCandidate,
@@ -69,6 +71,28 @@ import {
   resolveMeetJozWorldEntity,
   validateAppContext,
 } from "./shared/meetJozWorld.js";
+import {
+  buildCanonicalWorldState,
+  buildPredictionTrace,
+  chooseWorldPlan,
+  evaluateWorldPlans,
+} from "./shared/worldSimulator.js";
+import { evaluateProbabilisticPlans } from "./shared/worldExperience.js";
+import {
+  WORLD_MODEL_VERSION,
+  WORLD_TRANSITION_RULE_VERSION,
+  buildWorldTrajectoryRecord,
+} from "./shared/worldTrajectory.js";
+import {
+  observeWorld,
+  predictObservation,
+} from "./shared/worldObservation.js";
+import {
+  classifyWorldTrajectory,
+  isLikelyWorldModelBot,
+  normalizeWorldModelControls,
+  shouldSampleWorldTrajectory,
+} from "./shared/worldModelControls.js";
 import {
   buildJozLlmContext,
   enforceJozLlmReplyLimit,
@@ -152,6 +176,13 @@ const JOZ_BUILD_ID = String(
   "local"
 ).trim();
 const JOZ_ROUTER_VERSION = "2026-07-24-intake-hardening-1";
+const WORLD_MODEL_MODE = String(process.env.JOZ_WORLD_MODEL_MODE || "off").trim().toLowerCase();
+const WORLD_MODEL_SHADOW_ENABLED = !["off", "disabled"].includes(WORLD_MODEL_MODE);
+const WORLD_MODEL_CONTROLS = normalizeWorldModelControls(process.env, {
+  production: Boolean(process.env.RENDER || process.env.NODE_ENV === "production"),
+});
+const WORLD_MODEL_EXPERIENCE_TIMEOUT_MS = Math.min(50, WORLD_MODEL_CONTROLS.persistenceTimeoutMs);
+const WORLD_MODEL_SESSION_HASH_SALT = String(process.env.JOZ_WORLD_MODEL_SESSION_HASH_SALT || "public-world-model");
 
 const app = express();
 app.set("trust proxy", 2);
@@ -176,6 +207,8 @@ const jozChatIpLog = new Map();
 const jozChatDuplicateLog = new Map();
 const jozCallbackFallbackStore = [];
 const jozObservabilityFallbackStore = [];
+const worldModelTrajectoryFallbackStore = [];
+const worldTransitionExperienceFallbackStore = [];
 const jozRecentSessionMessagesFallbackStore = new Map();
 const jozBusinessValueCaseFallbackStore = new Map();
 const isNodeTestRuntime =
@@ -198,6 +231,27 @@ const JOZ_PRIVACY_REQUEST_RETENTION_DAYS = parseRetentionDays(
   process.env.JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
   DEFAULT_JOZ_PRIVACY_REQUEST_RETENTION_DAYS
 );
+const JOZ_WORLD_MODEL_RETENTION_DAYS = parseRetentionDays(
+  process.env.JOZ_WORLD_MODEL_RETENTION_DAYS,
+  WORLD_MODEL_CONTROLS.retentionDays
+);
+
+function pseudonymizeWorldModelSession(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return null;
+  return createHash("sha256")
+    .update(`${WORLD_MODEL_SESSION_HASH_SALT}:${raw}`)
+    .digest("hex")
+    .slice(0, 32);
+}
+
+function withWorldModelTimeout(promise, timeoutMs) {
+  let timer;
+  const timeout = new Promise((resolve) => {
+    timer = setTimeout(() => resolve(null), timeoutMs);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
 
 function normalizeJozChatMessage(text = "") {
   return String(text || "")
@@ -680,6 +734,53 @@ app.post("/api/agentic", async (req, res) => {
         [],
     };
     const snapshot = buildAgentSnapshot({ input, context: enrichedContext, worldMap, worldMemory });
+    const initialWorldState = WORLD_MODEL_SHADOW_ENABLED
+      ? buildCanonicalWorldState({
+          appContext: snapshot.validatedAppContext,
+          legacyContext: enrichedContext,
+          structuredState,
+          userContext: context?.userContext || context?.user_context || {},
+        })
+      : null;
+    const initialObservation = WORLD_MODEL_SHADOW_ENABLED
+      ? context?.worldObservation
+        ? observeWorld(context.worldObservation)
+        : observeWorld({
+            symbolicState: initialWorldState,
+            sceneState: {
+              sceneId: initialWorldState.portal,
+              activePortal: initialWorldState.portal,
+              activeStage: initialWorldState.stage,
+              focusedEntityId: initialWorldState.focusedEntityId,
+              visibleObjectIds: initialWorldState.visibleEntityIds,
+              visibleMeshIds: initialWorldState.visibleEntityIds,
+            },
+            cameraState: initialWorldState.environment?.camera,
+            overlays: { activeIds: initialWorldState.environment?.activeOverlays },
+            missingFields: [
+              "sceneState.objectTransforms",
+              "cameraState.projection",
+              "spatialRelationships",
+              "arMetadata.anchorIds",
+            ],
+            fieldSupport: {
+              sceneState: "derived",
+              visibleObjectIds: initialWorldState.visibleEntityIds?.length ? "derived" : "unknown",
+              objectTransforms: "unknown",
+              cameraState: "unknown",
+              spatialRelationships: "unknown",
+              arMetadata: "unknown",
+            },
+          })
+      : null;
+    const predictionTraceId = randomUUID();
+    const rawPredictionSessionId =
+      String(context?.sessionKey || context?.session_key || context?.conversationId || "").trim() || null;
+    const predictionSessionId = pseudonymizeWorldModelSession(rawPredictionSessionId);
+    const worldModelSampled = WORLD_MODEL_SHADOW_ENABLED &&
+      !WORLD_MODEL_CONTROLS.excludeDevelopment &&
+      !isLikelyWorldModelBot(req.headers["user-agent"]) &&
+      shouldSampleWorldTrajectory(predictionTraceId, WORLD_MODEL_CONTROLS.sampleRate);
     const canonicalWorldReply = buildMeetJozWorldAwarenessReply({
       input,
       appContext: snapshot.validatedAppContext,
@@ -715,6 +816,158 @@ app.post("/api/agentic", async (req, res) => {
 
     const clean = snapshot.normalizedInput;
     const approved = approveAgentProposal({ clean, context: snapshot, worldMap, worldMemory, proposal });
+    let predictionTrace = null;
+    const shadowPredictionPromise = new Promise((resolve) => {
+      setImmediate(() => {
+        (async () => {
+    try {
+    if (WORLD_MODEL_SHADOW_ENABLED && worldModelSampled) {
+    const predictionStartedAt = Date.now();
+    const predictiveActions = [
+      ...new Set([
+        ...snapshot.allowedActions,
+        ...snapshot.validatedAppContext.available_actions,
+        ...(snapshot.structuredState?.availableActions || []),
+        approved?.action || null,
+      ].map((value) => String(value || "").trim()).filter(Boolean)),
+    ].slice(0, WORLD_MODEL_CONTROLS.maxCandidates);
+    const predictionCandidates = predictiveActions.map((action) => ({
+      actions: [
+        approved?.action === action && approved?.target
+          ? { type: action, target: approved.target }
+          : action,
+      ],
+      transitions: snapshot.structuredState?.transitions || [],
+    }));
+    const experienceByAction = {};
+    if (WORLD_MODEL_SHADOW_ENABLED && worldModelSampled) {
+      await Promise.all(predictiveActions.map(async (action) => {
+        try {
+          const lookup = isDatabaseEnabled()
+            ? getWorldTransitionExperience({
+                stateKey: initialWorldState.currentStateKey,
+                actionKey: action,
+              })
+            : Promise.resolve(getFallbackWorldTransitionExperience({
+                stateKey: initialWorldState.currentStateKey,
+                actionKey: action,
+              }));
+          experienceByAction[action] = await Promise.race([
+            lookup,
+            new Promise((resolve) => setTimeout(() => resolve([]), WORLD_MODEL_EXPERIENCE_TIMEOUT_MS)),
+          ]);
+        } catch (error) {
+          console.warn("⚠️ World experience lookup failed; using symbolic fallback:", error?.message || error);
+          experienceByAction[action] = [];
+        }
+      }));
+    }
+    const evaluatedPredictionCandidates = evaluateWorldPlans(
+      initialWorldState,
+      predictionCandidates,
+      input,
+    );
+    for (const candidate of evaluatedPredictionCandidates) {
+      const action = candidate.plan?.actions?.[0] || null;
+      candidate.predictedObservation = predictObservation(
+        initialObservation,
+        action,
+        candidate.simulation.predictedState,
+        {
+          expectedEffects: candidate.simulation.trajectory?.flatMap((step) => step.expectedEffects || []) || [],
+          confidence: candidate.score?.confidence,
+          portalSceneManifest: context?.portalSceneManifest || structuredState?.portalSceneManifest,
+          sourceVersions: initialObservation.sourceVersions,
+        },
+      );
+    }
+    const plannerSelectedPrediction = chooseWorldPlan(
+      initialWorldState,
+      predictionCandidates,
+      input,
+    );
+    const evaluatedProbabilisticCandidates = WORLD_MODEL_SHADOW_ENABLED
+      ? evaluateProbabilisticPlans(
+          initialWorldState,
+          predictionCandidates,
+          input,
+          {
+            transitions: snapshot.structuredState?.transitions || [],
+            experienceByAction,
+        maxDepth: WORLD_MODEL_CONTROLS.maxRolloutDepth,
+          },
+        )
+      : [];
+    for (const candidate of evaluatedProbabilisticCandidates) {
+      const action = candidate.plan?.actions?.[0] || null;
+      candidate.predictedObservation = predictObservation(
+        initialObservation,
+        action,
+        candidate.probabilisticSimulation.predictedState,
+        {
+          expectedEffects: candidate.probabilisticSimulation.trajectory?.flatMap((step) => step.expectedEffects || []) || [],
+          confidence: candidate.probabilisticSimulation.trajectory?.[0]?.confidence,
+          successProbability: candidate.probabilisticSimulation.successProbability,
+          portalSceneManifest: context?.portalSceneManifest || structuredState?.portalSceneManifest,
+          sourceVersions: initialObservation.sourceVersions,
+        },
+      );
+    }
+    const approvedPrediction = approved?.action
+      ? evaluatedPredictionCandidates.find((candidate) => {
+          const candidateAction = candidate.plan?.actions?.[0];
+          const candidateType = typeof candidateAction === "string"
+            ? candidateAction
+            : candidateAction?.type || candidateAction?.action;
+          return String(candidateType || "").trim() === String(approved.action).trim();
+        })
+      : null;
+    const selectedPrediction = approvedPrediction || evaluatedPredictionCandidates
+      .filter((candidate) => candidate.simulation.valid)
+      .sort((left, right) => right.score.total - left.score.total)[0] || null;
+    const approvedProbabilisticPrediction = approved?.action
+      ? evaluatedProbabilisticCandidates.find((candidate) => {
+          const candidateAction = candidate.plan?.actions?.[0];
+          const candidateType = typeof candidateAction === "string"
+            ? candidateAction
+            : candidateAction?.type || candidateAction?.action;
+          return String(candidateType || "").trim() === String(approved.action).trim();
+        })
+      : null;
+    const selectedProbabilisticPrediction = approvedProbabilisticPrediction || evaluatedProbabilisticCandidates
+      .filter((candidate) => candidate.probabilisticSimulation.valid)
+      .sort((left, right) => right.score.total - left.score.total)[0] || null;
+    const plannerSelectedProbabilisticPrediction = evaluatedProbabilisticCandidates
+      .filter((candidate) => candidate.probabilisticSimulation.valid)
+      .sort((left, right) => right.score.total - left.score.total)[0] || null;
+    predictionTrace = buildPredictionTrace({
+      input,
+      trajectoryId: predictionTraceId,
+      sessionId: predictionSessionId,
+      traceId: predictionTraceId,
+      interactionChannel: "voice",
+      goal: "world_navigation",
+      modelVersion: WORLD_MODEL_VERSION,
+      transitionRuleVersion: WORLD_TRANSITION_RULE_VERSION,
+      initialState: initialWorldState,
+      candidatePlans: evaluatedPredictionCandidates,
+      selectedPlan: selectedPrediction,
+      plannerSelectedPlan: plannerSelectedPrediction,
+      probabilisticCandidates: evaluatedProbabilisticCandidates,
+      probabilisticSelected: selectedProbabilisticPrediction,
+      probabilisticPlannerSelected: plannerSelectedProbabilisticPrediction,
+      observationBefore: initialObservation,
+      shadowLatencyMs: Date.now() - predictionStartedAt,
+    });
+    }
+    } catch (error) {
+      console.warn("⚠️ Shadow world-model prediction failed; continuing with approved action:", error?.message || error);
+      predictionTrace = null;
+    }
+    return predictionTrace;
+        })().then(resolve);
+      });
+    });
     const reply =
       canonicalWorldReply ||
       approved?.awareness ||
@@ -732,9 +985,18 @@ app.post("/api/agentic", async (req, res) => {
             ? "llm_proposal"
             : "llm_fallback",
     });
-    logWorldAwarenessTrace("/api/agentic", trace);
+    logWorldAwarenessTrace("/api/agentic", {
+      ...trace,
+      prediction: {
+        mode: WORLD_MODEL_SHADOW_ENABLED ? "shadow" : "disabled",
+        sampled: worldModelSampled,
+        candidateCount: predictionTrace?.candidateCount || 0,
+        selectedActions: predictionTrace?.selected?.actions || [],
+        predictionError: predictionTrace?.predictionError || null,
+      },
+    });
 
-    return res.json({
+    const response = res.json({
       intent:
         String(
           canonicalWorldReply
@@ -754,12 +1016,153 @@ app.post("/api/agentic", async (req, res) => {
       approvedAction: approved?.action || null,
       approvedTarget: approved?.target || null,
       approvedAwareness: canonicalWorldReply || approved?.awareness || null,
+      prediction: {
+        ...(predictionTrace || {}),
+        trajectoryId: predictionTrace?.trajectoryId || predictionTraceId,
+        traceId: predictionTrace?.traceId || predictionTraceId,
+        sessionId: predictionTrace?.sessionId || predictionSessionId,
+        initialState: predictionTrace?.initialState || initialWorldState,
+        observationBefore: predictionTrace?.observationBefore || initialObservation,
+        goal: predictionTrace?.goal || "world_navigation",
+        interactionChannel: predictionTrace?.interactionChannel || "voice",
+        recordedAt: new Date().toISOString(),
+        pending: WORLD_MODEL_SHADOW_ENABLED && worldModelSampled && !predictionTrace,
+        mode: WORLD_MODEL_SHADOW_ENABLED ? "shadow" : "disabled",
+        sampled: worldModelSampled,
+        approvedAction: approved?.action || null,
+        approvedTarget: approved?.target || null,
+        executionPolicy: "existing_guardrails_execute_approved_action",
+      },
       snapshot,
       trace,
     });
+    void shadowPredictionPromise
+      .then((completedPrediction) => {
+        if (!completedPrediction) return null;
+        return persistCompletedWorldModelPrediction({
+          prediction: completedPrediction,
+          approved,
+          sampleRate: WORLD_MODEL_CONTROLS.sampleRate,
+        });
+      })
+      .catch((error) => {
+        console.warn("⚠️ Deferred shadow persistence failed:", error?.message || error);
+      });
+    return response;
   } catch (error) {
     console.error("❌ /api/agentic failed:", error);
     return res.status(500).json({ error: error.message });
+  }
+});
+
+app.post("/api/world-model/trajectories", async (req, res) => {
+  try {
+    if (!WORLD_MODEL_SHADOW_ENABLED) {
+      return res.status(204).end();
+    }
+    const body = req.body || {};
+    if (Buffer.byteLength(JSON.stringify(body)) > WORLD_MODEL_CONTROLS.maxTrajectoryBytes) {
+      return res.status(413).json({ error: "World-model trajectory payload exceeds shadow limit" });
+    }
+    const classification = classifyWorldTrajectory({
+      hasPrediction: Boolean(body.symbolicPrediction || body.predictedObservation),
+      hasObservation: Boolean(body.observedObservation || body.observedState),
+      observationCaptureFailed: body.observationCaptureFailed === true,
+      predictionFailed: body.predictionFailed === true,
+      invalidAction: Boolean(body.symbolicPrediction?.violations?.length),
+      unsupportedOnly: Boolean(
+        body.observationDifference?.metrics?.unknownFieldCount > 0 &&
+        !body.observationDifference?.metrics?.criticalMismatchCount
+      ),
+      interrupted: body.interrupted === true,
+      isTest: body.isTest === true,
+      isSynthetic: body.isSynthetic === true,
+    });
+    const record = buildWorldTrajectoryRecord({
+      trajectoryId: body.trajectoryId || randomUUID(),
+      sessionId: pseudonymizeWorldModelSession(body.sessionId),
+      traceId: body.traceId || body.trajectoryId || null,
+      stateBefore: body.stateBefore || {},
+      stateHistory: body.stateHistory || [],
+      proposedAction: body.proposedAction || null,
+      symbolicPrediction: body.symbolicPrediction || null,
+      probabilisticPrediction: body.probabilisticPrediction || null,
+      expectedEffects: body.expectedEffects || [],
+      observationBefore: body.observationBefore || null,
+      predictedObservation: body.predictedObservation || null,
+      observedObservation: body.observedObservation || null,
+      observationDifference: body.observationDifference || null,
+      observationSourceVersions: body.observationSourceVersions || {},
+      observedState: body.observedState || null,
+      observedEffects: body.observedEffects || [],
+      intent: body.intent || "spatial_navigation",
+      goal: body.goal || "world_navigation",
+      interactionChannel: body.interactionChannel || "unknown",
+      transitionDurationMs: body.transitionDurationMs,
+      success: body.success,
+      predictionDifferences: body.predictionDifferences || null,
+      confidenceBeforeAction: body.confidenceBeforeAction,
+      outcomeScores: body.outcomeScores || {},
+      modelVersion: body.modelVersion || WORLD_MODEL_VERSION,
+      transitionRuleVersion: body.transitionRuleVersion || WORLD_TRANSITION_RULE_VERSION,
+      shadowLatencyMs: body.shadowLatencyMs,
+      worldModelMode: WORLD_MODEL_MODE,
+      plannerSelectedAction: body.plannerSelectedAction || body.plannerSelected?.actions?.[0] || null,
+      deterministicApprovedAction: body.deterministicApprovedAction || null,
+      candidatePlans: body.candidatePlans || body.candidates || [],
+      expectedObservedEffects: body.expectedObservedEffects || null,
+      fieldSupport: body.fieldSupport || body.observedObservation?.fieldSupport || {},
+      classification: classification.classification,
+      failureCategory: classification.failureCategory,
+      persistenceStatus: "pending",
+      predictionLatencyMs: body.predictionLatencyMs || body.shadowLatencyMs,
+      observationLatencyMs: body.observationLatencyMs,
+      sampleRate: WORLD_MODEL_CONTROLS.sampleRate,
+      sampled: body.sampled !== false,
+      consentCompatible: body.consentCompatible !== false,
+      isTest: body.isTest === true,
+      isSynthetic: body.isSynthetic === true,
+      exclusionReason: body.exclusionReason || null,
+      createdAt: body.createdAt || new Date().toISOString(),
+      observedAt: body.observedAt || new Date().toISOString(),
+    });
+
+    if (isDatabaseEnabled()) {
+      try {
+        const persisted = await withWorldModelTimeout(
+          recordWorldModelTrajectory({ ...record, persistenceStatus: "persisted" }),
+          WORLD_MODEL_CONTROLS.persistenceTimeoutMs
+        );
+        if (persisted) {
+          return res.status(201).json({ ok: true, ...persisted, mode: "database" });
+        }
+        console.warn("⚠️ World trajectory persistence exceeded shadow timeout; retaining memory fallback");
+      } catch (error) {
+        console.error("⚠️ World trajectory persistence failed; retaining memory fallback:", error?.message || error);
+      }
+    }
+
+    rememberWorldModelTrajectory({
+      ...record,
+      persistenceStatus: isDatabaseEnabled() ? "memory_fallback" : "memory_only",
+      classification: classifyWorldTrajectory({
+        hasPrediction: Boolean(record.symbolicPrediction || record.predictedObservation),
+        hasObservation: Boolean(record.observedObservation || record.observedState),
+        persistenceFailed: isDatabaseEnabled(),
+        invalidAction: Boolean(record.symbolicPrediction?.violations?.length),
+        isTest: record.isTest,
+        isSynthetic: record.isSynthetic,
+      }).classification,
+    });
+    return res.status(202).json({
+      ok: true,
+      trajectoryId: record.trajectoryId,
+      persisted: false,
+      mode: "memory_fallback",
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/trajectories failed:", error);
+    return res.status(error.status || 400).json({ error: error.message });
   }
 });
 
@@ -804,6 +1207,101 @@ function rememberJozObservabilityEvent(event) {
   if (jozObservabilityFallbackStore.length > 100) {
     jozObservabilityFallbackStore.length = 100;
   }
+}
+
+function getFallbackWorldTransitionExperience({ stateKey = "", actionKey = "" } = {}) {
+  return worldTransitionExperienceFallbackStore.filter(
+    (row) => row.state_key === stateKey && row.action_key === actionKey
+  );
+}
+
+async function persistCompletedWorldModelPrediction({ prediction, approved, sampleRate } = {}) {
+  if (!prediction?.trajectoryId) return null;
+  const selectedAction = prediction.selected?.actions?.[0] || null;
+  const record = buildWorldTrajectoryRecord({
+    trajectoryId: prediction.trajectoryId,
+    sessionId: prediction.sessionId,
+    traceId: prediction.traceId,
+    stateBefore: prediction.initialState || {},
+    stateHistory: [],
+    proposedAction: selectedAction,
+    symbolicPrediction: prediction.selected || null,
+    probabilisticPrediction: prediction.probabilistic?.selected || null,
+    expectedEffects: prediction.selected?.expectedEffects || [],
+    observationBefore: prediction.observationBefore || null,
+    predictedObservation: prediction.selected?.predictedObservation || prediction.probabilistic?.selected?.predictedObservation || null,
+    plannerSelectedAction: prediction.plannerSelected?.actions?.[0] || null,
+    deterministicApprovedAction: approved?.action || null,
+    candidatePlans: prediction.candidates || [],
+    classification: "partial",
+    failureCategory: null,
+    persistenceStatus: "persisted",
+    sampleRate,
+    sampled: true,
+    modelVersion: prediction.modelVersion,
+    transitionRuleVersion: prediction.transitionRuleVersion,
+    shadowLatencyMs: prediction.shadowLatencyMs,
+    predictionLatencyMs: prediction.shadowLatencyMs,
+    createdAt: prediction.recordedAt || new Date().toISOString(),
+  });
+
+  if (isDatabaseEnabled()) {
+    const persisted = await withWorldModelTimeout(
+      recordWorldModelTrajectory(record),
+      WORLD_MODEL_CONTROLS.persistenceTimeoutMs
+    );
+    if (persisted) return persisted;
+  }
+  rememberWorldModelTrajectory({ ...record, persistenceStatus: "memory_fallback" });
+  return { trajectoryId: record.trajectoryId, persisted: false, mode: "memory_fallback" };
+}
+
+function rememberWorldModelTrajectory(record) {
+  worldModelTrajectoryFallbackStore.unshift(record);
+  if (worldModelTrajectoryFallbackStore.length > 200) {
+    worldModelTrajectoryFallbackStore.length = 200;
+  }
+
+  const stateBefore = record.stateBefore || {};
+  const observedState = record.observedState || {};
+  const stateKey = String(stateBefore.currentStateKey || stateBefore.portal || "unknown");
+  const actionKey = String(
+    record.proposedAction?.type || record.proposedAction?.action || record.proposedAction || "unknown"
+  );
+  const nextStateKey = String(observedState.currentStateKey || observedState.portal || "unknown");
+  const nextPortal = String(observedState.portal || "");
+  const nextStage = String(observedState.stage || "");
+  const existing = worldTransitionExperienceFallbackStore.find(
+    (row) =>
+      row.state_key === stateKey &&
+      row.action_key === actionKey &&
+      row.next_state_key === nextStateKey &&
+      row.next_portal === nextPortal &&
+      row.next_stage === nextStage
+  );
+  const row = existing || {
+    state_key: stateKey,
+    action_key: actionKey,
+    next_state_key: nextStateKey,
+    next_portal: nextPortal,
+    next_stage: nextStage,
+    target_route: String(observedState.targetRoute || ""),
+    attempts: 0,
+    successes: 0,
+    average_duration_ms: 0,
+    average_prediction_error: 0,
+  };
+  row.attempts += 1;
+  row.successes += record.success === true ? 1 : 0;
+  row.average_duration_ms =
+    ((row.average_duration_ms * (row.attempts - 1)) + Number(record.transitionDurationMs || 0)) /
+    row.attempts;
+  row.average_prediction_error =
+    ((row.average_prediction_error * (row.attempts - 1)) +
+      Number(record.predictionDifferences?.metrics?.mismatchCount || 0)) /
+    row.attempts;
+  row.last_observed_at = record.observedAt || new Date().toISOString();
+  if (!existing) worldTransitionExperienceFallbackStore.push(row);
 }
 
 function normalizeCallbackField(value = "", maxLength = 160) {
@@ -951,6 +1449,7 @@ async function applyPrivacyRetentionPolicy() {
     conversationRetentionDays: JOZ_CONVERSATION_RETENTION_DAYS,
     callbackRetentionDays: JOZ_CALLBACK_RETENTION_DAYS,
     privacyRequestRetentionDays: JOZ_PRIVACY_REQUEST_RETENTION_DAYS,
+    worldModelRetentionDays: JOZ_WORLD_MODEL_RETENTION_DAYS,
   });
   const removedFallbackCallbacks = pruneFallbackCallbackStore();
 

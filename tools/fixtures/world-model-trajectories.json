@@ -1,0 +1,40 @@
+[
+  {
+    "trajectory_id": "fixture-valid-1",
+    "session_id": "session-fixture-a",
+    "schema_version": "1.0",
+    "state_before": {"portal": "root", "stage": null, "currentStateKey": "root"},
+    "proposed_action": "ball",
+    "symbolic_prediction": {"predictedState": {"portal": "meet-joz", "stage": "vibe", "currentStateKey": "meet_joz_flex_stage"}},
+    "planner_selected_action": "ball",
+    "deterministic_approved_action": "ball",
+    "observed_state": {"portal": "meet-joz", "stage": "vibe", "currentStateKey": "meet_joz_flex_stage"},
+    "classification": "valid",
+    "success": true,
+    "prediction_latency_ms": 5,
+    "observation_latency_ms": 24,
+    "created_at": "2026-07-29T10:00:00.000Z",
+    "observed_at": "2026-07-29T10:00:00.024Z"
+  },
+  {
+    "trajectory_id": "fixture-partial-1",
+    "session_id": "session-fixture-b",
+    "schema_version": "1.0",
+    "state_before": {"portal": "meet-joz", "stage": "vibe", "currentStateKey": "vibe"},
+    "proposed_action": "discover",
+    "symbolic_prediction": {"predictedState": {"portal": "meet-joz", "stage": "discover", "currentStateKey": "discover"}},
+    "classification": "partial",
+    "failure_category": "observation_capture",
+    "created_at": "2026-07-29T10:01:00.000Z"
+  },
+  {
+    "trajectory_id": "fixture-synthetic-1",
+    "session_id": "session-fixture-control",
+    "schema_version": "1.0",
+    "state_before": {"portal": "root", "currentStateKey": "root"},
+    "proposed_action": "ball",
+    "classification": "synthetic",
+    "is_synthetic": true,
+    "created_at": "2026-07-29T10:02:00.000Z"
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "slug": "wm-joz-wm-013",
+  "title": "How are world models beyond agentic AI?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "Agents act; world models help them anticipate consequences.",
+  "body": "Agentic AI provides goals, planning, tool use and action. A world model adds an environment model and predictive foresight: it estimates what different actions may cause before execution. Agents are not obsolete; world models can become the predictive intelligence behind safer, more capable agents.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic AI",
+      "world models",
+      "foresight",
+      "planning"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_positioning record"
+    },
+    "verification_status": "positioning_supported",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "Agents act; world models help them anticipate consequences."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_models_beyond_agents"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex positioning guide",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 40,
+    "semantic_text": "How are world models beyond agentic AI?\nAgents act; world models help them anticipate consequences.\nagentic AI world models foresight planning\nAgentic AI provides goals, planning, tool use and action. A world model adds an environment model and predictive foresight: it estimates what different actions may cause before execution. Agents are not obsolete; world models can become the predictive intelligence behind safer, more capable agents.",
+    "keyword_terms": [
+      "how",
+      "are",
+      "world",
+      "models",
+      "beyond",
+      "agentic",
+      "ai",
+      "agentic ai",
+      "world models",
+      "foresight",
+      "planning",
+      "world models beyond agents"
+    ],
+    "exact_phrases": [
+      "How are world models beyond agentic AI?",
+      "agentic AI",
+      "world models",
+      "foresight",
+      "planning"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-013",
+    "record_type": "positioning",
+    "topic": "world_models_beyond_agents",
+    "claim_scope": "joz_positioning",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-013",
+    "source_title": "Joz AI Exocortex positioning guide",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 60,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex positioning guide"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "slug": "wm-joz-wm-014",
+  "title": "Why is the system called an Exocortex?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "The world model supplies predictive intelligence; the Exocortex applies it as cognitive augmentation.",
+  "body": "Exocortex describes the human-facing vision: AI operating as an external cognitive layer that augments memory, context, anticipation and decision-making. The world model is the predictive architecture; the Exocortex is the human-AI symbiosis experience built on top of it.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "Exocortex",
+      "human-AI symbiosis",
+      "cognitive augmentation"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_positioning record"
+    },
+    "verification_status": "positioning_supported",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "The world model supplies predictive intelligence; the Exocortex applies it as cognitive augmentation."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "exocortex"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex positioning guide",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 40,
+    "semantic_text": "Why is the system called an Exocortex?\nThe world model supplies predictive intelligence; the Exocortex applies it as cognitive augmentation.\nExocortex human-AI symbiosis cognitive augmentation\nExocortex describes the human-facing vision: AI operating as an external cognitive layer that augments memory, context, anticipation and decision-making. The world model is the predictive architecture; the Exocortex is the human-AI symbiosis experience built on top of it.",
+    "keyword_terms": [
+      "why",
+      "is",
+      "the",
+      "system",
+      "called",
+      "an",
+      "exocortex",
+      "human-ai symbiosis",
+      "cognitive augmentation"
+    ],
+    "exact_phrases": [
+      "Why is the system called an Exocortex?",
+      "Exocortex",
+      "human-AI symbiosis",
+      "cognitive augmentation"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-014",
+    "record_type": "positioning",
+    "topic": "exocortex",
+    "claim_scope": "joz_positioning",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-014",
+    "source_title": "Joz AI Exocortex positioning guide",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 60,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex positioning guide"
+  }
+}

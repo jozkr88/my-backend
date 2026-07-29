@@ -89,6 +89,109 @@ CREATE TABLE IF NOT EXISTS world_transition_phrases (
   PRIMARY KEY (state_key, action_key, phrase)
 );
 
+CREATE TABLE IF NOT EXISTS world_model_trajectories (
+  trajectory_id TEXT PRIMARY KEY,
+  session_id TEXT,
+  trace_id TEXT,
+  schema_version TEXT NOT NULL DEFAULT '1.0',
+  interaction_channel TEXT NOT NULL DEFAULT 'unknown',
+  state_before JSONB NOT NULL DEFAULT '{}'::jsonb,
+  state_history JSONB NOT NULL DEFAULT '[]'::jsonb,
+  proposed_action JSONB NOT NULL DEFAULT '{}'::jsonb,
+  symbolic_prediction JSONB NOT NULL DEFAULT '{}'::jsonb,
+  probabilistic_prediction JSONB NOT NULL DEFAULT '{}'::jsonb,
+  expected_effects JSONB NOT NULL DEFAULT '[]'::jsonb,
+  observation_before JSONB,
+  predicted_observation JSONB,
+  observed_observation JSONB,
+  observation_difference JSONB,
+  observation_source_versions JSONB NOT NULL DEFAULT '{}'::jsonb,
+  observed_state JSONB,
+  observed_effects JSONB NOT NULL DEFAULT '[]'::jsonb,
+  intent TEXT,
+  goal TEXT,
+  transition_duration_ms INTEGER,
+  success BOOLEAN,
+  prediction_differences JSONB NOT NULL DEFAULT '{}'::jsonb,
+  confidence_before_action NUMERIC(5,4),
+  outcome_scores JSONB NOT NULL DEFAULT '{}'::jsonb,
+  model_version TEXT,
+  transition_rule_version TEXT,
+  shadow_latency_ms INTEGER,
+  world_model_mode TEXT NOT NULL DEFAULT 'shadow',
+  planner_selected_action JSONB,
+  deterministic_approved_action JSONB,
+  candidate_plans JSONB NOT NULL DEFAULT '[]'::jsonb,
+  expected_observed_effects JSONB,
+  field_support JSONB NOT NULL DEFAULT '{}'::jsonb,
+  classification TEXT NOT NULL DEFAULT 'partial',
+  failure_category TEXT,
+  persistence_status TEXT NOT NULL DEFAULT 'pending',
+  prediction_latency_ms INTEGER,
+  observation_latency_ms INTEGER,
+  sample_rate NUMERIC(5,4),
+  sampled BOOLEAN NOT NULL DEFAULT TRUE,
+  consent_compatible BOOLEAN NOT NULL DEFAULT TRUE,
+  is_test BOOLEAN NOT NULL DEFAULT FALSE,
+  is_synthetic BOOLEAN NOT NULL DEFAULT FALSE,
+  exclusion_reason TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  observed_at TIMESTAMPTZ
+);
+
+CREATE INDEX IF NOT EXISTS world_model_trajectories_created_idx
+  ON world_model_trajectories (created_at DESC);
+
+ALTER TABLE world_model_trajectories
+  ADD COLUMN IF NOT EXISTS observation_before JSONB,
+  ADD COLUMN IF NOT EXISTS predicted_observation JSONB,
+  ADD COLUMN IF NOT EXISTS observed_observation JSONB,
+  ADD COLUMN IF NOT EXISTS observation_difference JSONB,
+  ADD COLUMN IF NOT EXISTS observation_source_versions JSONB NOT NULL DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS shadow_latency_ms INTEGER,
+  ADD COLUMN IF NOT EXISTS world_model_mode TEXT NOT NULL DEFAULT 'shadow',
+  ADD COLUMN IF NOT EXISTS planner_selected_action JSONB,
+  ADD COLUMN IF NOT EXISTS deterministic_approved_action JSONB,
+  ADD COLUMN IF NOT EXISTS candidate_plans JSONB NOT NULL DEFAULT '[]'::jsonb,
+  ADD COLUMN IF NOT EXISTS expected_observed_effects JSONB,
+  ADD COLUMN IF NOT EXISTS field_support JSONB NOT NULL DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS classification TEXT NOT NULL DEFAULT 'partial',
+  ADD COLUMN IF NOT EXISTS failure_category TEXT,
+  ADD COLUMN IF NOT EXISTS persistence_status TEXT NOT NULL DEFAULT 'pending',
+  ADD COLUMN IF NOT EXISTS prediction_latency_ms INTEGER,
+  ADD COLUMN IF NOT EXISTS observation_latency_ms INTEGER,
+  ADD COLUMN IF NOT EXISTS sample_rate NUMERIC(5,4),
+  ADD COLUMN IF NOT EXISTS sampled BOOLEAN NOT NULL DEFAULT TRUE,
+  ADD COLUMN IF NOT EXISTS consent_compatible BOOLEAN NOT NULL DEFAULT TRUE,
+  ADD COLUMN IF NOT EXISTS is_test BOOLEAN NOT NULL DEFAULT FALSE,
+  ADD COLUMN IF NOT EXISTS is_synthetic BOOLEAN NOT NULL DEFAULT FALSE,
+  ADD COLUMN IF NOT EXISTS exclusion_reason TEXT;
+
+CREATE INDEX IF NOT EXISTS world_model_trajectories_classification_idx
+  ON world_model_trajectories (classification, created_at DESC);
+
+CREATE INDEX IF NOT EXISTS world_model_trajectories_session_idx
+  ON world_model_trajectories (session_id, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS world_transition_experience (
+  state_key TEXT NOT NULL,
+  action_key TEXT NOT NULL,
+  next_state_key TEXT NOT NULL DEFAULT '',
+  next_portal TEXT NOT NULL DEFAULT '',
+  next_stage TEXT NOT NULL DEFAULT '',
+  target_route TEXT,
+  attempts INTEGER NOT NULL DEFAULT 0,
+  successes INTEGER NOT NULL DEFAULT 0,
+  total_duration_ms BIGINT NOT NULL DEFAULT 0,
+  total_prediction_error NUMERIC(12,4) NOT NULL DEFAULT 0,
+  last_observed_at TIMESTAMPTZ,
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  PRIMARY KEY (state_key, action_key, next_state_key, next_portal, next_stage)
+);
+
+CREATE INDEX IF NOT EXISTS world_transition_experience_action_idx
+  ON world_transition_experience (state_key, action_key);
+
 INSERT INTO portal_transitions (portal_key, current_state, command_key, action, target, awareness)
 VALUES
   ('meet-joz', 'vibe', 'flex', 'vibe', NULL, 'Opening Ascend.'),

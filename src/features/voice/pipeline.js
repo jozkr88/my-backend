@@ -70,6 +70,7 @@ export async function resolveVoicePipeline({
         target: agenticParams.target || null,
         awareness: agenticParams.awareness || agenticResult?.response || null,
         source: agenticParams.source || "agentic",
+        prediction: agenticResult?.prediction || null,
       },
     };
   }

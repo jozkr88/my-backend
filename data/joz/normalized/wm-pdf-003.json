@@ -1,0 +1,105 @@
+{
+  "slug": "wm-pdf-003",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (pp. 3–4)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language their reliance on costly real-world trial and error. Second, the rise of multimodal AI made it possible to build AI systems grounded in how the physical world actually looks, moves, and sounds. Together, these advances paved the way for modern world models. A world model learns how an environment behaves from large amounts of perceptual and in",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\ntheir reliance on costly real-world trial and error.\nSecond, the rise of multimodal AI made it possible to\nbuild AI systems grounded in how the physical world\nactually looks, moves, and sounds. Together, these\nadvances paved the way for modern world models.\nA world model learns how an environment behaves\nfrom large amounts of perceptual and interaction data\n— images, video, sound, sensor recordings, and records\nof actions and their outcomes — just as a person learns\nhow the world works by observing it closely. A central\ngoal of world models is counterfactual reasoning:\npredicting the consequences of an action, including\nactions the model was never explicitly trained on. This is\na key distinction between a world model and a language\nmodel. A language model predicts what comes next\nin text; a world model predicts how an environment\nmay change in response to an action, simulating what\nhappens if an object is moved or a door opened.\nIn practice, the ability to generate coherent\nenvironments that respond to action remains at an\nearly stage, but it is advancing quickly. Early models\ncould generate short, realistic clips but soon lost\ntrack of the scene, as objects flickered, drifted, or\ndisappeared. Some newer models maintain consistency\nfor longer and allow users to act within the generated\nenvironment. One test of further progress is whether an\nagent can move an object, leave the scene, and return\nto find it where it was left. This consistency, when it\nholds, is learned from observation rather than built in\nby hand, rule by rule, as in conventional simulation and\nvideo games, where every object is placed in advance.\nThe field is moving toward models that generate more\ninteractive worlds, maintain coherence over longer\nstretches, and generalize to environments not seen\nduring training. Progress depends on both computing\npower and data that captures how the physical world\nresponds to action, which is far scarcer than the text\nand images that trained earlier systems.\nWith growing funding in this space, tech incumbents on\nboth sides of the Pacific, including Google DeepMind,\nNvidia, Alibaba, and Tencent, as well as newer startups\nsuch as World Labs,1 AMI Labs, and Odyssey, are\nleading this world-model push. Recent commercial\nsystems can now produce narrow, interactive 3D\nenvironments from text or images. However, a general-\npurpose world model capable of predicting physical\nconsequences and supporting reliable planning and\naction across diverse real-world environments remains\nan active research frontier.\nA Functional Taxonomy of\nWorld Models\nDiverse approaches are important for advancing the\nfield. Researchers are building world models using a\nrange of technical architectures (see examples of labs\nexploring different approaches), but for the purposes of\nthis brief, policymakers can better understand them by\nthe role they play in the broader context of perceiving,\nunderstanding, and acting in the physical world. Brief\nco-author and Stanford Professor Fei-Fei Li proposed\na functional taxonomy of three categories: renderers\nto help us see, simulators to help us understand, and\nplanners to help machines act. This approach views\na world model as a stack of capabilities — rendering\nwhat a world looks like, simulating how it behaves, and\nplanning how to act within it.\n1 Fei-Fei Li is currently on partial leave from Stanford University and\nserves as the co-founder and chief executive officer of World Labs\n\nThe World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nRenderers generate observations, typically images or\nvideo, from a particular viewpoint or prompt. This makes\nrenderers valuable for design, architecture, immersive\nmedia, and visualization. A renderer can generate a\nphotorealistic image of a new hospital wing to help\narchitects visualize the space before construction\nbegins. However, renderers are optimized for plausibility\nrather than underlying truth. Their output may look\nconvincing without preserving stable geometry or\nphysical consistency. In the hospital example, the model\nmay not capture how people, materials, or infrastructure\nwould behave within that environment.\nOf the three categories, renderers are the most\ncommercially mature: Interactive generators like\nWorld Labs’ Marble and Tencent’s HY-World 2.0 already\nproduce explorable scenes from text or image prompts.\nSimulators model the underlying state of the world\n— its geometry, physics, material properties, and\ndynamics. Beyond making a world appear realistic, a\nsimulator makes it behave in ways that are structurally\nconsistent and computationally useful — qualities that\nmake simulation valuable for engineering, robotics,\ndigital twins, scientific research, and industrial design.\nA simulator can test how a robot behaves in a\nwarehouse, how a molecular system evolves, or\nwhether a bridge could bear the weight of a military\nconvoy. Explicit simulation may be an important path\nto physical validity, but it is not the only one: Recent\nunified world-action models learn rendering, dynamics,\nand control jointly, with planning capability emerging\ndirectly from learned visual dynamics rather than from\nan intermediate simulator.\nConventional simulation is already mature: Factory and\ncity models run on platforms like Nvidia’s Omniverse,\nbut building each environment is slow, specialist work.\nBecause a world model learns its simulation from data,\nnew environments can be created more quickly and\nupdated as conditions change. This approach is still\nearly, limited by scarce physical data.\nPlanners generate actions. Given an observation and\na goal, they determine what an agent should do next\nand what the effect of that action will be — making\nplanners the bridge from world understanding to\nworld intervention. They are essential for robotics,\nCATEGORY CORE TASK PRIMARY OUTPUTS EXAMPLE APPLICATION AREAS\nRenderer Generate observations of\na world from a viewpoint,\nprompt, or scene\ndescriptions.\nImages, video, visual\nsequences, interactive\nviews.\nArchitecture and design visualization;\nanimated film production; digital\ncontent production.\nSimulator Model the underlying state,\ngeometry, and dynamics\nof a world; show the effect\nof changes in a given\nenvironment.\nDigital environments\nthat behave according\nto physics and\nbiological properties.\nCrash test simulator; digital twins;\npractice environment for medical\nsurgery; military training in air, land,\nsea, and space domains.\nPlanner Determine what action an\nagent should take given a\nstate or goal.\nActions, trajectories,\npolicies, intervention\nchoices.\nRobotics, autonomous vehicles,\nwarehouse systems, healthcare\nlogistics, disaster response, defense\nand security applications.\nNote: This framework is borrowed from a blog post titled “A Functional Taxonomy of World Models,” written by brief coauthor Fei-Fei Li\nand published on the World Labs Substack on June 3, 2026.\nTable 1. Core functional categories of world models",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; pp. 3–4",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\ntheir reliance on costly real-world trial and error.\nSecond, the rise of multimodal AI made it possible to\nbuild AI systems grounded in how the physical world\nactually looks, moves, and sounds. Together, these\nadvances paved the way for modern world models.\nA world model learns how an environment behaves\nfrom large amounts of perceptual and interaction data\n— images, video, sound, sensor recordings, and records\nof actions and their outcomes — just as a person learns\nhow the world works by observing it closely. A central\ngoal of world models is counterfactual reasoning:\npredicting the consequences of an action, including\nactions the model was never explicitly trained on. This is\na key distinction between a world model and a language\nmodel. A language model predicts what comes next\nin text; a world model predicts how an environment\nmay change in response to an action, simulating what\nhappens if an object is moved or a door opened.\nIn practice, the ability to generate coherent\nenvironments that respond to action remains at an\nearly stage, but it is advancing quickly. Early models\ncould generate short, realistic clips but soon lost\ntrack of the scene, as objects flickered, drifted, or\ndisappeared. Some newer models maintain consistency\nfor longer and allow users to act within the generated\nenvironment. One test of further progress is whether an\nagent can move an object, leave the scene, and return\nto find it where it was left. This consistency, when it\nholds, is learned from observation rather than built in\nby hand, rule by rule, as in conventional simulation and\nvideo games, where every object is placed in advance.\nThe field is moving toward models that generate more\ninteractive worlds, maintain coherence over longer\nstretches, and generalize to environments not seen\nduring training. Progress depends on both computing\npower and data that captures how the physical world\nresponds to action, which is far scarcer than the text\nand images that trained earlier systems.\nWith growing funding in this space, tech incumbents on\nboth sides of the Pacific, including Google DeepMind,\nNvidia, Alibaba, and Tencent, as well as newer startups\nsuch as World Labs,1 AMI Labs, and Odyssey, are\nleading this world-model push. Recent commercial\nsystems can now produce narrow, interactive 3D\nenvironments from text or images. However, a general-\npurpose world model capable of predicting physical\nconsequences and supporting reliable planning and\naction across diverse real-world environments remains\nan active research frontier.\nA Functional Taxonomy of\nWorld Models\nDiverse approaches are important for advancing the\nfield. Researchers are building world models using a\nrange of technical architectures (see examples of labs\nexploring different approaches), but for the purposes of\nthis brief, policymakers can better understand them by\nthe role they play in the broader context of perceiving,\nunderstanding, and acting in the physical world. Brief\nco-author and Stanford Professor Fei-Fei Li proposed\na functional taxonomy of three categories: renderers\nto help us see, simulators to help us understand, and\nplanners to help machines act. This approach views\na world model as a stack of capabilities — rendering\nwhat a world looks like, simulating how it behaves, and\nplanning how to act within it.\n1 Fei-Fei Li is currently on partial leave from Stanford University and\nserves as the co-founder and chief executive officer of World Labs\n\nThe World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nRenderers generate observations, typically images or\nvideo, from a particular viewpoint or prompt. This makes\nrenderers valuable for design, architecture, immersive\nmedia, and visualization. A renderer can generate a\nphotorealistic image of a new hospital wing to help\narchitects visualize the space before construction\nbegins. However, renderers are optimized for plausibility\nrather than underlying truth. Their output may look\nconvincing without preserving stable geometry or\nphysical consistency. In the hospital example, the model\nmay not capture how people, materials, or infrastructure\nwould behave within that environment.\nOf the three categories, renderers are the most\ncommercially mature: Interactive generators like\nWorld Labs’ Marble and Tencent’s HY-World 2.0 already\nproduce explorable scenes from text or image prompts.\nSimulators model the underlying state of the world\n— its geometry, physics, material properties, and\ndynamics. Beyond making a world appear realistic, a\nsimulator makes it behave in ways that are structurally\nconsistent and computationally useful — qualities that\nmake simulation valuable for engineering, robotics,\ndigital twins, scientific research, and industrial design.\nA simulator can test how a robot behaves in a\nwarehouse, how a molecular system evolves, or\nwhether a bridge could bear the weight of a military\nconvoy. Explicit simulation may be an important path\nto physical validity, but it is not the only one: Recent\nunified world-action models learn rendering, dynamics,\nand control jointly, with planning capability emerging\ndirectly from learned visual dynamics rather than from\nan intermediate simulator.\nConventional simulation is already mature: Factory and\ncity models run on platforms like Nvidia’s Omniverse,\nbut building each environment is slow, specialist work.\nBecause a world model learns its simulation from data,\nnew environments can be created more quickly and\nupdated as conditions change. This approach is still\nearly, limited by scarce physical data.\nPlanners generate actions. Given an observation and\na goal, they determine what an agent should do next\nand what the effect of that action will be — making\nplanners the bridge from world understanding to\nworld intervention. They are essential for robotics,\nCATEGORY CORE TASK PRIMARY OUTPUTS EXAMPLE APPLICATION AREAS\nRenderer Generate observations of\na world from a viewpoint,\nprompt, or scene\ndescriptions.\nImages, video, visual\nsequences, interactive\nviews.\nArchitecture and design visualization;\nanimated film production; digital\ncontent production.\nSimulator Model the underlying state,\ngeometry, and dynamics\nof a world; show the effect\nof changes in a given\nenvironment.\nDigital environments\nthat behave according\nto physics and\nbiological properties.\nCrash test simulator; digital twins;\npractice environment for medical\nsurgery; military training in air, land,\nsea, and space domains.\nPlanner Determine what action an\nagent should take given a\nstate or goal.\nActions, trajectories,\npolicies, intervention\nchoices.\nRobotics, autonomous vehicles,\nwarehouse systems, healthcare\nlogistics, disaster response, defense\nand security applications.\nNote: This framework is borrowed from a blog post titled “A Functional Taxonomy of World Models,” written by brief coauthor Fei-Fei Li\nand published on the World Labs Substack on June 3, 2026.\nTable 1. Core functional categories of world models",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-003",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-003",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      3,
+      4
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, pp. 3–4",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-003"
+  }
+}

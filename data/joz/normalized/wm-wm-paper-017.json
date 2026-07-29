@@ -1,0 +1,114 @@
+{
+  "slug": "wm-wm-paper-017",
+  "title": "How does world-model governance differ from LLM and agent governance?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "World-model governance must validate the modelled environment, not only content and action permissions.",
+  "body": "Language-model governance often focuses on generated content. Agent governance focuses on authority to act. World models add a third concern: whether the modelled environment is valid enough for its intended use. A false model of reality can silently propagate errors into training, testing, planning and action.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "governance",
+      "validity",
+      "agentic AI",
+      "content",
+      "authority"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model source_grounded record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "verified_fact",
+    "claims": [
+      "World-model governance must validate the modelled environment, not only content and action permissions."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "governance_difference"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "How does world-model governance differ from LLM and agent governance?\nWorld-model governance must validate the modelled environment, not only content and action permissions.\ngovernance validity agentic AI content authority\nLanguage-model governance often focuses on generated content. Agent governance focuses on authority to act. World models add a third concern: whether the modelled environment is valid enough for its intended use. A false model of reality can silently propagate errors into training, testing, planning and action.",
+    "keyword_terms": [
+      "how",
+      "does",
+      "world",
+      "model",
+      "governance",
+      "differ",
+      "from",
+      "llm",
+      "and",
+      "agent",
+      "validity",
+      "agentic ai",
+      "content",
+      "authority",
+      "governance difference"
+    ],
+    "exact_phrases": [
+      "How does world-model governance differ from LLM and agent governance?",
+      "governance",
+      "validity",
+      "agentic AI",
+      "content",
+      "authority"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "wm-paper-017",
+    "record_type": "canonical_qa",
+    "topic": "governance_difference",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#wm-paper-017",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      7
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 7"
+  }
+}

@@ -1,4 +1,5 @@
 import { getAllowedActionsForPortal, getMeetJozVoiceLayer } from "../../world-model/meetJoz";
+import { isWorldModelShadowEnabled } from "../../world-model/mode";
 
 function getKnownInteractiveMeshes(currentPortal) {
   if (currentPortal === "root") {
@@ -74,6 +75,10 @@ export function buildAgentContext({
       appPurpose:
         "3D portfolio world with portal navigation, animated meshes, AR triggers, and voice-driven state transitions.",
       ...appState,
+      worldObservation:
+        typeof window !== "undefined" && isWorldModelShadowEnabled()
+          ? window.__lastWorldObservation || null
+          : null,
     };
   }
 

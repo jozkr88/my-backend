@@ -1,19 +1,19 @@
 export const PRIVACY_POLICY_LAST_UPDATED = "28 July 2026";
 
 export const PRIVACY_POLICY_CHAT_SUMMARY =
-  "Joz LLM may process the questions, voice transcripts, and interaction context you provide to operate the app and generate responses. Some requests may use third-party AI infrastructure. Do not submit confidential information unless you are comfortable with it being processed. For privacy questions, contact joz@meetjoz.com.";
+  "Joz MAXX may process the questions, voice transcripts, and interaction context you provide to operate the app and generate responses. Some requests may use third-party AI infrastructure. Do not submit confidential information unless you are comfortable with it being processed. For privacy questions, contact joz@meetjoz.com.";
 
 export const PRIVACY_POLICY_SECTIONS = [
   {
-    title: "What Joz LLM processes",
+    title: "What Joz MAXX processes",
     paragraphs: [
-      "Joz LLM may process the questions, voice transcripts, and interaction context that you provide while using the app. The app uses this information to operate the experience and generate responses.",
+      "Joz MAXX may process the questions, voice transcripts, and interaction context that you provide while using the app. The app uses this information to operate the experience and generate responses.",
     ],
   },
   {
     title: "How information is used",
     paragraphs: [
-      "Information is used to route requests, maintain the current interaction, improve reliability, and provide relevant Joz LLM responses. Do not submit confidential information unless you are comfortable with it being processed for these purposes.",
+      "Information is used to route requests, maintain the current interaction, improve reliability, and provide relevant Joz MAXX responses. Do not submit confidential information unless you are comfortable with it being processed for these purposes.",
     ],
   },
   {
@@ -25,7 +25,7 @@ export const PRIVACY_POLICY_SECTIONS = [
   {
     title: "Retention and control",
     paragraphs: [
-      "Retention depends on the feature and the service configuration. You can stop using voice interaction at any time and close the Joz LLM panel. For privacy questions about this app, contact joz@meetjoz.com.",
+      "Retention depends on the feature and the service configuration. You can stop using voice interaction at any time and close the Joz MAXX panel. For privacy questions about this app, contact joz@meetjoz.com.",
     ],
   },
 ];
@@ -36,7 +36,7 @@ export const AI_OVERVIEW_SECTIONS = [
   {
     title: "What this system does",
     paragraphs: [
-      "Joz LLM explains Joz's work and helps frame organizational AI, data, governance, oversight, and adoption problems.",
+      "Joz MAXX explains Joz's work and helps frame organizational AI, data, governance, oversight, and adoption problems.",
     ],
   },
   {
@@ -49,7 +49,7 @@ export const AI_OVERVIEW_SECTIONS = [
   {
     title: "Human oversight and the EU AI Act",
     paragraphs: [
-      "Joz LLM is designed as an informational and decision-support experience. A person remains responsible for checking outputs, supplying context, making consequential decisions, and taking action.",
+      "Joz MAXX is designed as an informational and decision-support experience. A person remains responsible for checking outputs, supplying context, making consequential decisions, and taking action.",
       "This overview is product information, not a legal determination or compliance certification. Assess any deployment against the EU AI Act and other applicable requirements before using it in a regulated or high-impact context.",
     ],
   },
@@ -59,13 +59,13 @@ export const TERMS_SECTIONS = [
   {
     title: "Use of the experience",
     paragraphs: [
-      "Use Joz LLM as an exploratory and informational tool. You are responsible for reviewing outputs and deciding whether they are appropriate for your context.",
+      "Use Joz MAXX as an exploratory and informational tool. You are responsible for reviewing outputs and deciding whether they are appropriate for your context.",
     ],
   },
   {
     title: "No guarantee of accuracy",
     paragraphs: [
-      "Joz LLM can make mistakes, omit relevant context, or produce incomplete answers. Verify important information with authoritative sources and qualified professionals.",
+      "Joz MAXX can make mistakes, omit relevant context, or produce incomplete answers. Verify important information with authoritative sources and qualified professionals.",
     ],
   },
   {

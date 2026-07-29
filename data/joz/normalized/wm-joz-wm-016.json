@@ -1,0 +1,109 @@
+{
+  "slug": "wm-joz-wm-016",
+  "title": "How should Joz LLM explain world models?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "Explain function first, differentiate clearly and preserve claim boundaries.",
+  "body": "Lead with the functional definition in plain language, then distinguish world models from LLMs, RAG and agents. Explain Joz Exocortex as an application-level implementation and state its boundaries when relevant. Avoid claiming universal understanding, autonomous neural simulation, production-scale accuracy or physical-world perception that has not been implemented.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "response policy",
+      "accuracy",
+      "plain language",
+      "claims"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model mandatory_boundary record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "Explain function first, differentiate clearly and preserve claim boundaries."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "answer_style"
+    ],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex response policy",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "data_boundaries",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 70,
+    "semantic_text": "How should Joz LLM explain world models?\nExplain function first, differentiate clearly and preserve claim boundaries.\nresponse policy accuracy plain language claims\nLead with the functional definition in plain language, then distinguish world models from LLMs, RAG and agents. Explain Joz Exocortex as an application-level implementation and state its boundaries when relevant. Avoid claiming universal understanding, autonomous neural simulation, production-scale accuracy or physical-world perception that has not been implemented.",
+    "keyword_terms": [
+      "how",
+      "should",
+      "joz",
+      "llm",
+      "explain",
+      "world",
+      "models",
+      "response policy",
+      "accuracy",
+      "plain language",
+      "claims",
+      "answer style"
+    ],
+    "exact_phrases": [
+      "How should Joz LLM explain world models?",
+      "response policy",
+      "accuracy",
+      "plain language",
+      "claims"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-016",
+    "record_type": "response_policy",
+    "topic": "answer_style",
+    "claim_scope": "mandatory_boundary",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-016",
+    "source_title": "Joz AI Exocortex response policy",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 100,
+    "boundary_record": true,
+    "policy_record": true,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex response policy"
+  }
+}

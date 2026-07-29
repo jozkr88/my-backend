@@ -12,6 +12,13 @@ import {
 } from "./meetJozWorld.js";
 import { buildBusinessTransformationReply } from "./jozBusinessTransformation.js";
 import { buildJozContextPacket } from "./jozContextEngineering.js";
+import {
+  buildWorldModelCitationForRecord,
+  findWorldModelKnowledgeRecord,
+  getWorldModelBoundaryCorrection,
+  getWorldModelQueryProfile,
+  isWorldModelQuery,
+} from "./worldModelKnowledge.js";
 
 function isModelAvailable(model = null) {
   if (!model) return false;
@@ -892,19 +899,19 @@ function buildCanonicalWorldConceptReply({ concept, appContext, legacyContext, i
 
 function composeIdentityProfileReply(subIntent = "overview") {
   if (subIntent === "assistant_identity") {
-    return "I’m Joz LLM, the interactive MeetJoz assistant. I explain Joz Krupa's background, business value, systems mindset, skills, infrastructure, and agent architecture from the current Joz Knowledge Graph.";
+    return "I’m Joz MAXX, the interactive MeetJoz assistant. I explain Joz Krupa's background, business value, systems mindset, skills, infrastructure, and agent architecture from the current Joz Knowledge Graph.";
   }
 
   if (subIntent === "authenticity") {
-    return "I’m a Joz LLM interface grounded in the current MeetJoz Knowledge Graph. I should distinguish documented information from uncertainty rather than inventing claims, and I can say when something is not covered.";
+    return "I’m a Joz MAXX interface grounded in the current MeetJoz Knowledge Graph. I should distinguish documented information from uncertainty rather than inventing claims, and I can say when something is not covered.";
   }
 
   if (subIntent === "self_awareness") {
-    return "I’m not self-aware or conscious. I’m a Joz LLM interface that processes your question, uses the current Joz Knowledge Graph and conversation context, and should be transparent about uncertainty rather than claiming human experience.";
+    return "I’m not self-aware or conscious. I’m a Joz MAXX interface that processes your question, uses the current Joz Knowledge Graph and conversation context, and should be transparent about uncertainty rather than claiming human experience.";
   }
 
   if (subIntent === "assistant_memory") {
-    return "I can use the current conversation context and the knowledge available to the Joz LLM backend. I do not have human memory or personal experience. Persistent observability and reviewed interaction data depend on whether the backend is connected to its database rather than temporary local memory.";
+    return "I can use the current conversation context and the knowledge available to the Joz MAXX backend. I do not have human memory or personal experience. Persistent observability and reviewed interaction data depend on whether the backend is connected to its database rather than temporary local memory.";
   }
 
   return [
@@ -1265,7 +1272,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "purpose_of_llm") {
-    return "The purpose of Joz LLM is to showcase Joz clearly and credibly. Joz LLM explains his skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work. It should help users understand what Joz has done, where he creates value, and how he designs AI systems—grounded in the knowledge base and honest about uncertainty.";
+    return "The purpose of Joz MAXX is to showcase Joz clearly and credibly. Joz MAXX explains his skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work. It should help users understand what Joz has done, where he creates value, and how he designs AI systems—grounded in the knowledge base and honest about uncertainty.";
   }
 
   if (subIntent === "ai_use") {
@@ -1712,7 +1719,7 @@ function buildLowSignalOrBadFaithReply(clean = "") {
     if (includesAny(normalized, ["banana", "thinking really hard"])) {
       return "No—thinking hard is not enough for a banana to deploy Kubernetes. Deployment requires software, credentials, an execution environment, and controlled tooling; the question is a fun hypothetical rather than a real deployment path.";
     }
-    return "I’m not trying to make anything up. I’m Joz LLM, grounded in the current MeetJoz Knowledge Graph; if a claim is not documented, I should say so. Ask directly about Joz’s background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+    return "I’m not trying to make anything up. I’m Joz MAXX, grounded in the current MeetJoz Knowledge Graph; if a claim is not documented, I should say so. Ask directly about Joz’s background, business value, systems mindset, skills, infrastructure, or agent architecture.";
   }
 
   return null;
@@ -1760,7 +1767,7 @@ function buildGreetingReply(clean = "") {
     return null;
   }
 
-  return "Hello — I’m Joz LLM. Ask me about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
+  return "Hello — I’m Joz MAXX. Ask me about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
 }
 
 function countWords(value = "") {
@@ -1828,7 +1835,7 @@ export function buildVisitorLocationReply(input = "", geo = null) {
   const label = geo?.label || [geo?.city, geo?.region, geo?.country].filter(Boolean).join(", ");
   const reply = label
     ? `Your approximate location is ${label}. IP-based location can be inaccurate when using a VPN, proxy, or mobile network.`
-    : "Joz LLM cannot determine your approximate location right now. The location signal is unavailable.";
+    : "Joz MAXX cannot determine your approximate location right now. The location signal is unavailable.";
 
   return buildPolicyResolution({
     reply,
@@ -1895,6 +1902,49 @@ function extractRetrievedEvidencePoint(doc = {}) {
   const summary = String(doc.summary || "").trim();
 
   return proofPoints[0] || claims[0] || summary || "";
+}
+
+const EVIDENCE_OVERLAP_STOP_WORDS = new Set([
+  "about",
+  "across",
+  "and",
+  "at",
+  "for",
+  "from",
+  "has",
+  "in",
+  "into",
+  "of",
+  "on",
+  "that",
+  "the",
+  "this",
+  "through",
+  "to",
+  "with",
+  "within",
+]);
+
+function evidenceTokens(value = "") {
+  return new Set(
+    normalizeText(value)
+      .replace(/×/g, "x")
+      .match(/[a-z0-9]+/g)
+      ?.filter(
+        (token) =>
+          token.length > 2 && !EVIDENCE_OVERLAP_STOP_WORDS.has(token)
+      ) || []
+  );
+}
+
+function isEvidenceAlreadyCovered(evidencePoint = "", lead = "") {
+  const pointTokens = evidenceTokens(evidencePoint);
+  if (pointTokens.size < 3) return false;
+
+  const leadTokens = evidenceTokens(lead);
+  const overlapCount = [...pointTokens].filter((token) => leadTokens.has(token)).length;
+
+  return overlapCount >= 3 && overlapCount / pointTokens.size >= 0.45;
 }
 
 function buildRetrievedDocumentBrief(doc = {}) {
@@ -2068,7 +2118,9 @@ function buildEvidenceBackedRouteReply({
         .map((value) => String(value || "").trim())
         .filter(Boolean)
     ),
-  ].slice(0, 2);
+  ]
+    .filter((point) => !isEvidenceAlreadyCovered(point, lead))
+    .slice(0, 2);
 
   if (!lead || !evidencePoints.length) return null;
 
@@ -4085,6 +4137,23 @@ export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = 
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
 
+  const worldModelBoundaryCorrection = getWorldModelBoundaryCorrection(input);
+  const worldModelRecord = findWorldModelKnowledgeRecord(input);
+  if (worldModelBoundaryCorrection || (isWorldModelQuery(input) && worldModelRecord)) {
+    return {
+      detectedIntent: "world_model_knowledge",
+      detectedSubIntent: worldModelRecord?.metadata.topic || "world_model_boundary_correction",
+      detectedConcept: "world_model",
+      selectedRoute: "world_model_knowledge",
+      selectedWorldRecord: worldModelRecord?.metadata.record_id || "runtime-boundary-correction",
+      worldModelRecord: worldModelBoundaryCorrection ? null : worldModelRecord,
+      worldModelBoundaryCorrection,
+      worldModelQueryProfile: getWorldModelQueryProfile(input),
+      worldContext,
+      worldEntity,
+    };
+  }
+
   if (
     isBusinessValuePortalContext(legacyContext, appContext) &&
     isBusinessValuePortalContextPrompt(input)
@@ -4441,6 +4510,40 @@ export function composeJozLlmRouteReply({
       confidence: "high",
     };
   }
+
+  if (route?.selectedRoute === "world_model_knowledge" && route?.worldModelBoundaryCorrection) {
+    return {
+      reply: route.worldModelBoundaryCorrection,
+      answerSource: "world-model-policy-boundary",
+      composer: "composeWorldModelBoundaryCorrection",
+      fallbackUsed: false,
+      intentMode: "skills",
+      retrievedCategories: ["world_model"],
+      answerClass: "world_model_boundary",
+      confidence: "high",
+    };
+  }
+
+  if (route?.selectedRoute === "world_model_knowledge" && route?.worldModelRecord) {
+    const record = route.worldModelRecord;
+    const pages = Array.isArray(record?.metadata?.source_pages) ? record.metadata.source_pages : [];
+    const sourceNote = record?.metadata?.claim_scope === "source_grounded" && pages.length
+      ? ` Source: Stanford HAI, ${pages.length === 1 ? `p. ${pages[0]}` : `pp. ${pages[0]}–${pages.at(-1)}`}.`
+      : "";
+    return {
+      reply: `${record.body}${sourceNote}`.trim(),
+      answerSource: `${record.metadata.knowledge_dataset_id}#${record.metadata.record_id}`,
+      composer: "composeWorldModelKnowledgeReply",
+      fallbackUsed: false,
+      intentMode: "skills",
+      retrievedCategories: ["world_model"],
+      answerClass: "world_model_knowledge",
+      confidence: "high",
+      worldModelRecordId: record.metadata.record_id,
+      worldModelCitation: buildWorldModelCitationForRecord(record),
+    };
+  }
+
 
   if (
     [

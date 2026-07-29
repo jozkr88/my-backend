@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { getJozLaneConfig } from "../../shared/jozLlmLanes";
-import jozLlmMark from "../../joz-llm.svg";
+import jozMaxxMark from "../../joz-maxx.svg";
+import {
+  getWorldModelInspectorMode,
+  useWorldModelTelemetry,
+  WorldModelInspectorView,
+  WorldModelTraceCard,
+} from "./worldModelInspector";
 import {
   AI_OVERVIEW_LAST_REVIEWED,
   AI_OVERVIEW_SECTIONS,
@@ -358,6 +364,10 @@ export function VoiceChrome({
   const [isJozLlmTriggerHidden, setIsJozLlmTriggerHidden] = useState(isJozLlmOpen);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
   const [trustPanelTab, setTrustPanelTab] = useState("overview");
+  const [jozLlmPanelView, setJozLlmPanelView] = useState("ask");
+  const worldModelInspectorMode = getWorldModelInspectorMode();
+  const { telemetry: worldModelTelemetry, history: worldModelHistory } =
+    useWorldModelTelemetry(worldModelInspectorMode);
   const jozLlmActionButtons = [
     {
       label: businessLane.label,
@@ -484,7 +494,7 @@ export function VoiceChrome({
       await navigator.clipboard.writeText(text);
       setTransientMessageStatus(message.id, "Copied");
     } catch (error) {
-      console.error("Failed to copy Joz LLM message:", error);
+      console.error("Failed to copy Joz MAXX message:", error);
       setTransientMessageStatus(message.id, "Copy failed");
     }
   };
@@ -495,14 +505,14 @@ export function VoiceChrome({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: message.role === "assistant" ? "Joz LLM" : "Joz Message",
+          title: message.role === "assistant" ? "Joz MAXX" : "Joz Message",
           text,
         });
         setTransientMessageStatus(message.id, "Shared");
         return;
       } catch (error) {
         if (error?.name === "AbortError") return;
-        console.error("Failed to share Joz LLM message:", error);
+        console.error("Failed to share Joz MAXX message:", error);
       }
     }
 
@@ -510,7 +520,7 @@ export function VoiceChrome({
       await navigator.clipboard.writeText(text);
       setTransientMessageStatus(message.id, "Copied");
     } catch (error) {
-      console.error("Failed to copy Joz LLM message for sharing fallback:", error);
+      console.error("Failed to copy Joz MAXX message for sharing fallback:", error);
       setTransientMessageStatus(message.id, "Share failed");
     }
   };
@@ -661,6 +671,7 @@ export function VoiceChrome({
       setActiveSpokenMessageId(null);
       setIsPrivacyPolicyOpen(false);
       setTrustPanelTab("overview");
+      setJozLlmPanelView("ask");
     }
   }, [isJozLlmOpen]);
 
@@ -891,7 +902,7 @@ export function VoiceChrome({
         className={`joz-llm-trigger ${isJozLlmTriggerHidden ? "open" : ""} ${
           effectiveListening && !isJozLlmOpen ? "voice-blocked" : ""
         }`.trim()}
-        aria-label={isJozLlmOpen ? "Close Joz LLM" : "Open Joz LLM"}
+        aria-label={isJozLlmOpen ? "Close Joz MAXX" : "Open Joz MAXX"}
         aria-expanded={isJozLlmOpen}
         aria-disabled={effectiveListening && !isJozLlmOpen ? "true" : undefined}
         onClick={() => {
@@ -902,7 +913,7 @@ export function VoiceChrome({
         <span className="joz-llm-trigger__eyebrow">New</span>
         <img
           className="joz-llm-trigger__logo"
-          src={jozLlmMark}
+          src={jozMaxxMark}
           alt=""
           aria-hidden="true"
         />
@@ -913,7 +924,7 @@ export function VoiceChrome({
           className={`joz-llm-shell ${isJozLlmVisible ? "is-visible" : ""}`.trim()}
           role="dialog"
           aria-modal="false"
-          aria-label="Joz LLM"
+          aria-label="Joz MAXX"
           onWheelCapture={stopSceneInteraction}
           onTouchStartCapture={stopSceneInteraction}
           onTouchMoveCapture={stopSceneInteraction}
@@ -976,7 +987,7 @@ export function VoiceChrome({
                   type="button"
                   className="joz-llm-panel__close"
                   data-glow="close"
-                  aria-label="Close Joz LLM"
+                  aria-label="Close Joz MAXX"
                   onClick={closeJozLlm}
                 >
                   Close
@@ -984,7 +995,30 @@ export function VoiceChrome({
               </div>
             </div>
 
-            {!isPrivacyPolicyOpen && (
+            {worldModelInspectorMode !== "off" && !isPrivacyPolicyOpen && (
+              <div className="joz-llm-panel__mode-tabs" role="tablist" aria-label="Joz MAXX interface">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={jozLlmPanelView === "ask"}
+                  className={`joz-llm-panel__mode-tab ${jozLlmPanelView === "ask" ? "is-active" : ""}`.trim()}
+                  onClick={() => setJozLlmPanelView("ask")}
+                >
+                  Ask Joz
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={jozLlmPanelView === "world"}
+                  className={`joz-llm-panel__mode-tab ${jozLlmPanelView === "world" ? "is-active" : ""}`.trim()}
+                  onClick={() => setJozLlmPanelView("world")}
+                >
+                  World Model
+                </button>
+              </div>
+            )}
+
+            {!isPrivacyPolicyOpen && jozLlmPanelView === "ask" && (
               <div className="joz-llm-panel__actions">
                 {jozLlmQuickActions.map(({ label, prompt, intentMode }) => (
                   <button
@@ -1026,12 +1060,12 @@ export function VoiceChrome({
                   <div className="joz-llm-panel__policy-card">
                     <p className="joz-llm-panel__policy-eyebrow">Trust &amp; Compliance</p>
                     <h2 className="joz-llm-panel__policy-hero-title">
-                      Information about Joz LLM
+                      Information about Joz MAXX
                     </h2>
                     <p className="joz-llm-panel__policy-kicker">
                       AI transparency, privacy, and terms.
                     </p>
-                    <div className="joz-llm-panel__policy-tabs" role="tablist" aria-label="Joz LLM information">
+                    <div className="joz-llm-panel__policy-tabs" role="tablist" aria-label="Joz MAXX information">
                       {[
                         ["overview", "AI Overview"],
                         ["privacy", "Privacy"],
@@ -1083,10 +1117,17 @@ export function VoiceChrome({
                       </p>
                     )}
                     <p className="joz-llm-panel__policy-note">
-                      Joz LLM can make mistakes. Please verify important information.
+                      Joz MAXX can make mistakes. Please verify important information.
                     </p>
                   </div>
                 </section>
+              ) : jozLlmPanelView === "world" ? (
+                <WorldModelInspectorView
+                  telemetry={worldModelTelemetry}
+                  history={worldModelHistory}
+                  mode={worldModelInspectorMode}
+                  onBack={() => setJozLlmPanelView("ask")}
+                />
               ) : jozLlmMessages.map((message) => (
                 (() => {
                   const isIntroMessage = message.id === "assistant-welcome";
@@ -1110,7 +1151,7 @@ export function VoiceChrome({
                   className={`joz-llm-panel__message joz-llm-panel__message--${message.role}`}
                 >
                   <span className="joz-llm-panel__message-role">
-                    {message.role === "assistant" ? "Joz LLM" : "You"}
+                    {message.role === "assistant" ? "Joz MAXX" : "You"}
                   </span>
                   {message.kind === "booking" && message.booking ? (
                     <div className="joz-llm-panel__booking">
@@ -1390,7 +1431,14 @@ export function VoiceChrome({
               ))}
             </div>
 
-            {!isPrivacyPolicyOpen && (
+            {!isPrivacyPolicyOpen && jozLlmPanelView === "ask" && (
+              <WorldModelTraceCard
+                telemetry={worldModelTelemetry}
+                onOpen={() => setJozLlmPanelView("world")}
+              />
+            )}
+
+            {!isPrivacyPolicyOpen && jozLlmPanelView === "ask" && (
               <form
                 className="joz-llm-panel__composer"
                 onSubmit={handleJozLlmSubmit}

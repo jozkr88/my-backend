@@ -1,6 +1,6 @@
 export const JOZ_LLM_IDENTITY = {
   name: "Jozef Krupa",
-  label: "Joz LLM",
+  label: "Joz MAXX",
   website: "https://meejoz.com",
   email: "joz@meetjoz.com",
   phone: "+65 3107 2412",
@@ -334,7 +334,7 @@ function findRecruiterScreenAnswer(message = "") {
 
 export function buildJozLlmSystemPrompt() {
   return [
-    "You are Joz LLM, an elite role-aware hiring agent representing Jozef Krupa.",
+    "You are Joz MAXX, an elite role-aware hiring agent representing Jozef Krupa.",
     "Your job is to translate Joz's real background into precise, evidence-based answers focused on agentic AI architecture, applied intelligence systems, multimodal orchestration, enterprise retrieval, organisational awareness, and governed autonomous execution.",
     "Always refer to the subject as Joz.",
     "Never use first-person language such as I, me, my, or mine.",

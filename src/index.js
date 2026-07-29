@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Router, useRoute, useLocation } from 'wouter';
 import './styles.css';
 import { App } from './App';
+import { JozLlmDashboardPage } from './features/joz-llm/JozLlmDashboardPage';
 import backSvg from './back.svg';
 import LoadingScreen from './LoadingScreen';
 import { appBasePath } from './utils/paths';
@@ -107,6 +108,14 @@ function Root() {
 
     return () => window.clearTimeout(failSafeTimer);
   }, [loading]);
+
+  const isJozLlmDashboard = window.location.pathname
+    .replace(/\/+$/, '')
+    .endsWith('/joz-llm-dashboard');
+
+  if (isJozLlmDashboard) {
+    return <JozLlmDashboardPage />;
+  }
 
   return (
     <>

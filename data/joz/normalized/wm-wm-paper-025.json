@@ -1,0 +1,111 @@
+{
+  "slug": "wm-wm-paper-025",
+  "title": "Why might world-model capability become concentrated?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "Compute, simulation infrastructure and scarce action-labelled data favour incumbent operators.",
+  "body": "Advanced world models depend on large compute budgets, simulation infrastructure and scarce action-labelled interaction data. Organisations already operating robots, fleets or sensor-rich systems can accumulate proprietary experience that is difficult for smaller competitors or public institutions to reproduce.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "concentration",
+      "compute",
+      "action-labelled data",
+      "incumbents"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model source_grounded record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "verified_fact",
+    "claims": [
+      "Compute, simulation infrastructure and scarce action-labelled data favour incumbent operators."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "concentration"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "Why might world-model capability become concentrated?\nCompute, simulation infrastructure and scarce action-labelled data favour incumbent operators.\nconcentration compute action-labelled data incumbents\nAdvanced world models depend on large compute budgets, simulation infrastructure and scarce action-labelled interaction data. Organisations already operating robots, fleets or sensor-rich systems can accumulate proprietary experience that is difficult for smaller competitors or public institutions to reproduce.",
+    "keyword_terms": [
+      "why",
+      "might",
+      "world",
+      "model",
+      "capability",
+      "become",
+      "concentrated",
+      "concentration",
+      "compute",
+      "action-labelled data",
+      "incumbents"
+    ],
+    "exact_phrases": [
+      "Why might world-model capability become concentrated?",
+      "concentration",
+      "compute",
+      "action-labelled data",
+      "incumbents"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "wm-paper-025",
+    "record_type": "canonical_qa",
+    "topic": "concentration",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#wm-paper-025",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      9,
+      10,
+      12,
+      13
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 9, 10, 12, 13"
+  }
+}

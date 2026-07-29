@@ -1,0 +1,111 @@
+{
+  "slug": "wm-joz-wm-017",
+  "title": "What phrases should Joz LLM use when describing the product?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "Use precise predictive, governed and application-level terminology.",
+  "body": "Preferred descriptions include 'governed predictive world model', 'hybrid symbolic-probabilistic world model', 'simulates possible futures before acting', 'predicted-versus-observed reconciliation' and 'deterministic guardrails control execution'. Use 'spatial intelligence' to mean modelling environments and relationships, not to imply a metaverse product.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "preferred phrasing",
+      "governed",
+      "spatial intelligence",
+      "world model"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model mandatory_boundary record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "Use precise predictive, governed and application-level terminology."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "preferred_phrasing"
+    ],
+    "impact_score": 100,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex response policy",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "data_boundaries",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 70,
+    "semantic_text": "What phrases should Joz LLM use when describing the product?\nUse precise predictive, governed and application-level terminology.\npreferred phrasing governed spatial intelligence world model\nPreferred descriptions include 'governed predictive world model', 'hybrid symbolic-probabilistic world model', 'simulates possible futures before acting', 'predicted-versus-observed reconciliation' and 'deterministic guardrails control execution'. Use 'spatial intelligence' to mean modelling environments and relationships, not to imply a metaverse product.",
+    "keyword_terms": [
+      "what",
+      "phrases",
+      "should",
+      "joz",
+      "llm",
+      "use",
+      "when",
+      "describing",
+      "the",
+      "product",
+      "preferred phrasing",
+      "governed",
+      "spatial intelligence",
+      "world model"
+    ],
+    "exact_phrases": [
+      "What phrases should Joz LLM use when describing the product?",
+      "preferred phrasing",
+      "governed",
+      "spatial intelligence",
+      "world model"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-017",
+    "record_type": "response_policy",
+    "topic": "preferred_phrasing",
+    "claim_scope": "mandatory_boundary",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-017",
+    "source_title": "Joz AI Exocortex response policy",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 100,
+    "boundary_record": true,
+    "policy_record": true,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex response policy"
+  }
+}

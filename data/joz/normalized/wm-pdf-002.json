@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-002",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 2)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language The emergence of world models points to a broader shift in AI. The systems that define the current era operate primarily through language. Multimodal systems expand that capability to images, audio, and video, but most still cannot track a coherent environment over time. World models, by contrast, aim to maintain a coherent representation of a",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nThe emergence of world models points to a\nbroader shift in AI. The systems that define the\ncurrent era operate primarily through language.\nMultimodal systems expand that capability to\nimages, audio, and video, but most still cannot\ntrack a coherent environment over time. World\nmodels, by contrast, aim to maintain a coherent\nrepresentation of an environment over time\nand predict how it may change in response to\naction. That capacity — to understand a physical\nenvironment and use that information to guide\naction — is spatial intelligence. World models\nare one technical pathway toward achieving that\ncapability.\nBeyond crisis response, world models can help\nmanufacturers test designs before building them,\nengineers assess infrastructure under stress, and\nrobots work in settings that are too dangerous\nfor people. But moving AI closer to the physical\nworld raises new policy concerns, such as flawed\nsimulation, pervasive sensing and privacy erosion,\nquestions of liability, concentrated control of\nspatial data and infrastructure, and dual-use risks\nin national security.\nWorld models demand a broader policy\nagenda than the current wave of governance\ndiscussions around language-centered AI.\nWhile many applications will intersect with\nexisting governance regimes — such as those\nfor autonomous vehicles, medical devices,\nindustrial robotics, infrastructure planning,\nand defense systems — world models add a\ncapability layer that cuts across these sectors\nand demands attention across multiple domains.\nWorld models also raise a distinct governance\nchallenge: They can serve as stand-ins for the\nphysical world. Policymakers must therefore ask\nwhether a learned environment matches reality\nclosely enough to train a system on, test a system\nagainst, or guide a real-world decision.\nFor policymakers, the goal is twofold: to enable\nthe socially valuable uses of world models while\nguarding against flawed simulation, concentrated\ncontrol, and unsafe deployment. This brief sets\nout three governance priorities: broad access to\nthe technology, safeguards matched to how and\nwhere a system is used, and the public capacity\nto evaluate these systems independently.\nWorld Models:\nAn Introduction\nThe idea of a world model predates the term “artificial\nintelligence.” In 1943, psychologist Kenneth Craik\nproposed that human beings carry a “small-scale\nmodel” of reality to test actions internally before acting\nin the real world — for example, reasoning through\nwhether a bridge design would work in our minds\nbefore building it. Early AI researchers took up this\nconcept in the 1960s and experimented with giving\nmachines structured, internal models of how the world\nworks, though for decades, such systems remained\nrestricted to narrow environments governed by\nexplicit rules.\nSeveral recent developments changed that. First,\nadvances in reinforcement learning showed that agents\ncould learn to act through internal simulation, reducing\nWorld models raise a distinct\ngovernance challenge: They\ncan serve as stand-ins for the\nphysical world.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 2",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nThe emergence of world models points to a\nbroader shift in AI. The systems that define the\ncurrent era operate primarily through language.\nMultimodal systems expand that capability to\nimages, audio, and video, but most still cannot\ntrack a coherent environment over time. World\nmodels, by contrast, aim to maintain a coherent\nrepresentation of an environment over time\nand predict how it may change in response to\naction. That capacity — to understand a physical\nenvironment and use that information to guide\naction — is spatial intelligence. World models\nare one technical pathway toward achieving that\ncapability.\nBeyond crisis response, world models can help\nmanufacturers test designs before building them,\nengineers assess infrastructure under stress, and\nrobots work in settings that are too dangerous\nfor people. But moving AI closer to the physical\nworld raises new policy concerns, such as flawed\nsimulation, pervasive sensing and privacy erosion,\nquestions of liability, concentrated control of\nspatial data and infrastructure, and dual-use risks\nin national security.\nWorld models demand a broader policy\nagenda than the current wave of governance\ndiscussions around language-centered AI.\nWhile many applications will intersect with\nexisting governance regimes — such as those\nfor autonomous vehicles, medical devices,\nindustrial robotics, infrastructure planning,\nand defense systems — world models add a\ncapability layer that cuts across these sectors\nand demands attention across multiple domains.\nWorld models also raise a distinct governance\nchallenge: They can serve as stand-ins for the\nphysical world. Policymakers must therefore ask\nwhether a learned environment matches reality\nclosely enough to train a system on, test a system\nagainst, or guide a real-world decision.\nFor policymakers, the goal is twofold: to enable\nthe socially valuable uses of world models while\nguarding against flawed simulation, concentrated\ncontrol, and unsafe deployment. This brief sets\nout three governance priorities: broad access to\nthe technology, safeguards matched to how and\nwhere a system is used, and the public capacity\nto evaluate these systems independently.\nWorld Models:\nAn Introduction\nThe idea of a world model predates the term “artificial\nintelligence.” In 1943, psychologist Kenneth Craik\nproposed that human beings carry a “small-scale\nmodel” of reality to test actions internally before acting\nin the real world — for example, reasoning through\nwhether a bridge design would work in our minds\nbefore building it. Early AI researchers took up this\nconcept in the 1960s and experimented with giving\nmachines structured, internal models of how the world\nworks, though for decades, such systems remained\nrestricted to narrow environments governed by\nexplicit rules.\nSeveral recent developments changed that. First,\nadvances in reinforcement learning showed that agents\ncould learn to act through internal simulation, reducing\nWorld models raise a distinct\ngovernance challenge: They\ncan serve as stand-ins for the\nphysical world.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-002",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-002",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      2
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 2",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-002"
+  }
+}

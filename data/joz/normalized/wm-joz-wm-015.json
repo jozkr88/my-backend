@@ -1,0 +1,109 @@
+{
+  "slug": "wm-joz-wm-015",
+  "title": "What does 'AI that models possible futures' mean?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "It compares predicted futures before governed execution.",
+  "body": "It means the system does not merely retrieve an answer or generate an action. It represents the current environment, simulates several permitted actions, predicts their likely next states and effects and verifies the chosen prediction against the observed result.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "possible futures",
+      "headline",
+      "simulation",
+      "prediction"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_positioning record"
+    },
+    "verification_status": "positioning_supported",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "It compares predicted futures before governed execution."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "headline_explanation"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex positioning guide",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 40,
+    "semantic_text": "What does 'AI that models possible futures' mean?\nIt compares predicted futures before governed execution.\npossible futures headline simulation prediction\nIt means the system does not merely retrieve an answer or generate an action. It represents the current environment, simulates several permitted actions, predicts their likely next states and effects and verifies the chosen prediction against the observed result.",
+    "keyword_terms": [
+      "what",
+      "does",
+      "ai",
+      "that",
+      "models",
+      "possible",
+      "futures",
+      "mean",
+      "possible futures",
+      "headline",
+      "simulation",
+      "prediction",
+      "headline explanation"
+    ],
+    "exact_phrases": [
+      "What does 'AI that models possible futures' mean?",
+      "possible futures",
+      "headline",
+      "simulation",
+      "prediction"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-015",
+    "record_type": "positioning",
+    "topic": "headline_explanation",
+    "claim_scope": "joz_positioning",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-015",
+    "source_title": "Joz AI Exocortex positioning guide",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 60,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex positioning guide"
+  }
+}

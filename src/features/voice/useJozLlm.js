@@ -20,7 +20,7 @@ const CHAT_DUPLICATE_WINDOW_MS = 10000;
 const CHAT_MAX_INPUT_CHARS = 800;
 const GET_CALLED_FLOW_STEPS = ["phone", "time", "name"];
 const JOZ_LLM_WELCOME_MESSAGE =
-  "Welcome to the state-of-the-art Agentic AI experience.\n\nJoz LLM connects signal reasoning, AI architecture, orchestration, and execution into deployable intelligence.";
+  "Welcome to the state-of-the-art Agentic AI experience.\n\nJoz MAXX connects signal reasoning, AI architecture, orchestration, and execution into deployable intelligence.";
 const LANDING_ACTION_LABELS = new Set(
   Object.values(JOZ_LLM_LANES).flatMap((lane) => [lane.label, lane.title])
 );
@@ -758,7 +758,7 @@ export function useJozLlm({
               appliedCommandResult = voiceExecution.result;
             }
           } catch (voiceExecutionError) {
-            console.error("⚠️ Joz LLM command fallback to local executor:", voiceExecutionError);
+            console.error("⚠️ Joz MAXX command fallback to local executor:", voiceExecutionError);
             executeCommand?.(commandResult);
           }
         } else {
@@ -852,7 +852,7 @@ export function useJozLlm({
           setError("Wait 10s before the next question.");
           return;
         }
-        console.error("❌ Joz LLM request failed, using local fallback:", requestError);
+        console.error("❌ Joz MAXX request failed, using local fallback:", requestError);
         setMessages((current) => [
           ...current.filter((message) => message.id !== PENDING_MESSAGE_ID),
           {

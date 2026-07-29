@@ -1,0 +1,107 @@
+{
+  "slug": "wm-joz-wm-012",
+  "title": "Why is world-model AI beyond RAG?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+  "summary": "RAG retrieves what is known; a world model predicts what may happen next.",
+  "body": "RAG retrieves grounded information that is already recorded. A world model represents changing state, simulates candidate actions and predicts possible consequences. RAG can provide knowledge to a world model, but retrieval alone does not create state dynamics or counterfactual prediction.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "RAG",
+      "world model",
+      "retrieval",
+      "prediction"
+    ],
+    "verification": {
+      "status": "positioning_supported",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model joz_positioning record"
+    },
+    "verification_status": "positioning_supported",
+    "evidence_tier": "supported_claim",
+    "claims": [
+      "RAG retrieves what is known; a world model predicts what may happen next."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_models_beyond_rag"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Joz AI Exocortex positioning guide",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 40,
+    "semantic_text": "Why is world-model AI beyond RAG?\nRAG retrieves what is known; a world model predicts what may happen next.\nRAG world model retrieval prediction\nRAG retrieves grounded information that is already recorded. A world model represents changing state, simulates candidate actions and predicts possible consequences. RAG can provide knowledge to a world model, but retrieval alone does not create state dynamics or counterfactual prediction.",
+    "keyword_terms": [
+      "why",
+      "is",
+      "world",
+      "model",
+      "ai",
+      "beyond",
+      "rag",
+      "world model",
+      "retrieval",
+      "prediction",
+      "world models beyond rag"
+    ],
+    "exact_phrases": [
+      "Why is world-model AI beyond RAG?",
+      "RAG",
+      "world model",
+      "retrieval",
+      "prediction"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "joz-wm-012",
+    "record_type": "positioning",
+    "topic": "world_models_beyond_rag",
+    "claim_scope": "joz_positioning",
+    "source_id": "joz-world-model-implementation",
+    "source_key": "joz-world-model-knowledge-v1#joz-wm-012",
+    "source_title": "Joz AI Exocortex positioning guide",
+    "source_publisher": "Jozef Krupa",
+    "source_date": "2026-07-30",
+    "source_pages": [],
+    "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+    "retrieval_priority": 60,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": true,
+    "citation_label": "Joz AI Exocortex positioning guide"
+  }
+}

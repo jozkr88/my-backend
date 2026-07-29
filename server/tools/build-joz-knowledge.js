@@ -2,6 +2,10 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { mapJozQueryToOntology } from "../shared/jozOntology.js";
+import {
+  getWorldModelKnowledgeManifest,
+  loadWorldModelKnowledgeRecords,
+} from "../../shared/worldModelKnowledge.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,6 +80,7 @@ const allowedCategories = new Set([
   "feedback_loop",
   "systems_principle",
   "failure_pattern",
+  "world_model",
 ]);
 
 const allowedLanes = new Set([
@@ -646,6 +651,15 @@ function main() {
     }
   }
 
+  const worldModelRecords = loadWorldModelKnowledgeRecords();
+  for (const record of worldModelRecords) {
+    writeJson(path.join(normalizedDir, `${record.slug}.json`), record);
+  }
+
+  const worldModelModelReadyRecords = worldModelRecords.filter((record) =>
+    MODEL_READY_STATUSES.has(record.metadata.verification_status)
+  );
+
   const modelReadyRecords = records.filter((record) =>
     MODEL_READY_STATUSES.has(record.metadata.verification_status)
   );
@@ -654,7 +668,16 @@ function main() {
     counts: {
       source_files: sourceFiles.length + canonicalFiles.length,
       canonical_source_files: canonicalFiles.length,
+      world_model_source_files: 2,
+      world_model_jsonl_records: worldModelRecords.filter(
+        (record) => record.source_type === "world_model_jsonl"
+      ).length,
+      world_model_pdf_chunks: worldModelRecords.filter(
+        (record) => record.source_type === "stanford_hai_pdf"
+      ).length,
       normalized_records: records.length,
+      world_model_normalized_records: worldModelRecords.length,
+      world_model_model_ready_records: worldModelModelReadyRecords.length,
       model_ready_records: modelReadyRecords.length,
       verified_records: records.filter(
         (record) => record.metadata.verification_status === "verified"
@@ -667,9 +690,23 @@ function main() {
       errors: errors.length,
     },
     ontology_status: errors.length ? "failed" : "ok",
+    world_model_manifest: getWorldModelKnowledgeManifest(),
+    world_model_overlay_path: "data/joz/published/joz-world-model.generated.json",
     records,
     model_ready_records: modelReadyRecords,
   };
+
+  writeJson(path.join(publishedDir, "joz-world-model.generated.json"), {
+    generated_at: generatedAt,
+    dataset_id: getWorldModelKnowledgeManifest().dataset_id,
+    manifest: getWorldModelKnowledgeManifest(),
+    counts: {
+      records: worldModelRecords.length,
+      model_ready_records: worldModelModelReadyRecords.length,
+    },
+    records: worldModelRecords,
+    model_ready_records: worldModelModelReadyRecords,
+  });
 
   writeJson(path.join(publishedDir, "joz-documents.generated.json"), published);
   writeJson(path.join(publishedDir, "joz-ontology.generated.json"), ontologyBundle);
@@ -680,6 +717,8 @@ function main() {
       Object.entries(ontologyBundle).map(([key, value]) => [key, value.length])
     ),
     ontology_status: published.ontology_status,
+    world_model_manifest: published.world_model_manifest,
+    world_model_overlay_path: published.world_model_overlay_path,
     errors,
   });
 
@@ -693,7 +732,7 @@ function main() {
   }
 
   console.log(
-    `Built ${records.length} Joz knowledge record(s) and ${ontologyBundle.proofs.length} proof object(s).`
+    `Built ${records.length} Joz knowledge record(s), ${worldModelRecords.length} world-model overlay record(s) and ${ontologyBundle.proofs.length} proof object(s).`
   );
 }
 

@@ -1,0 +1,26 @@
+{
+  "dataset_id": "joz-world-model-knowledge-v1",
+  "runtime_dataset_id": "joz-public-knowledge",
+  "schema_version": "1.0",
+  "jsonl_record_count": 44,
+  "jsonl_unique_id_count": 44,
+  "jsonl_sha256": "5924acb03c79dda0562768a32a9865a10876c867072dabdeb8ad0c4e7fa035ec",
+  "stanford_hai_source": {
+    "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "publisher": "Stanford HAI",
+    "date": "2026-07",
+    "uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "sha256": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "page_count": 16,
+    "derived_page_jsonl": "stanford-hai-world-model-spatial-intelligence-2026.pages.jsonl",
+    "chunk_count": 12
+  },
+  "ingestion": {
+    "stable_record_ids": true,
+    "idempotent": true,
+    "classification": "public",
+    "retention_policy": "until_withdrawn",
+    "live_action_authority_changed": false
+  }
+}

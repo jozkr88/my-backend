@@ -1,0 +1,111 @@
+{
+  "slug": "wm-wm-paper-026",
+  "title": "Does a world model remove the need for human oversight?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "No; higher-stakes world-model use requires stronger human oversight.",
+  "body": "No. Internal reasoning remains only partly interpretable, prediction can be wrong and simulation may diverge from reality. Human oversight becomes more important as stakes and action consequences increase.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "human oversight",
+      "interpretability",
+      "risk",
+      "governance"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model source_grounded record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "verified_fact",
+    "claims": [
+      "No; higher-stakes world-model use requires stronger human oversight."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "human_oversight"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "Does a world model remove the need for human oversight?\nNo; higher-stakes world-model use requires stronger human oversight.\nhuman oversight interpretability risk governance\nNo. Internal reasoning remains only partly interpretable, prediction can be wrong and simulation may diverge from reality. Human oversight becomes more important as stakes and action consequences increase.",
+    "keyword_terms": [
+      "does",
+      "world",
+      "model",
+      "remove",
+      "the",
+      "need",
+      "for",
+      "human",
+      "oversight",
+      "human oversight",
+      "interpretability",
+      "risk",
+      "governance"
+    ],
+    "exact_phrases": [
+      "Does a world model remove the need for human oversight?",
+      "human oversight",
+      "interpretability",
+      "risk",
+      "governance"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "wm-paper-026",
+    "record_type": "canonical_qa",
+    "topic": "human_oversight",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#wm-paper-026",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      13,
+      14
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 13, 14"
+  }
+}

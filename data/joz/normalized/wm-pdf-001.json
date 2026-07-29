@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-001",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 1)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language Daniel Zhang,* Russell Wald,* Ehsan Adeli, Elena Cryst, Daniel E. Ho, Caroline Meinhardt, Jiajun Wu, Amy Zegart, Li Fei-Fei Introduction It is 2 a.m. and a wildfire is rapidly moving toward a densely populated suburb. An incident commander is trying to answer several questions at once: which evacuation routes are still passable, which hospital",
+  "body": "The World Model and\nSpatial Intelligence Era:\nGoverning AI Beyond\nLanguage\nDaniel Zhang,* Russell Wald,* Ehsan Adeli, Elena Cryst,\nDaniel E. Ho, Caroline Meinhardt, Jiajun Wu, Amy Zegart,\nLi Fei-Fei\nIntroduction\nIt is 2 a.m. and a wildfire is rapidly moving toward a densely populated\nsuburb. An incident commander is trying to answer several questions\nat once: which evacuation routes are still passable, which hospitals\nare reachable, and where the power grid is likely to fail next. Current\nincident support systems, including AI-enabled modeling and physics-\nbased simulations, provide real-time forecasts. But these projections\nremain siloed, and conditions change faster than analysts can track.\nA world model — an AI system that builds and maintains a working\nrepresentation of an environment to predict how conditions may\nchange — addresses both gaps. In this case, it could bring forecasts\nabout roads, the power grid, and hospital capacity into one\ncontinuously updated picture. The commander could use that picture\nto reroute crews, redirect resources, and test evacuation plans before\nissuing an order.\nKey Takeaways\nWorld models are AI systems that\nbuild a working representation of an\nenvironment to predict how it changes\nin response to action. They could lower\nthe cost of high-quality simulation,\nbenefiting infrastructure planning,\ncrisis response, experimentation, and\nembodied AI training.\nNo existing benchmark gives policy-\nmakers an adequate basis to evaluate a\nworld model for safety-critical deploy-\nment. Closing that gap requires public\ninvestment in measurement science.\nPolicy built for existing AI-generated\ncontent and autonomous decision-\nmaking does not fully address the risk\nprofile of world models. The distinctive\nquestion is whether a simulated\nenvironment matches physical reality\nclosely enough to train or test another\nsystem or guide a real-world decision.\nThe scarcest input is action-labeled\ninteraction data — robot trajectories\nand fleet logs that cannot be scraped\nfrom the web, which risks concentrated\ncontrol. Public datasets should be an\nexplicit target of federally funded research.\nWorld models are dual use, with national\nsecurity implications. By lowering the\ncost of capable autonomous systems,\nthey could open military advantage to\nless-resourced entrants, making early\nleadership in world-model research,\ndevelopment, and governance an urgent\nnational security priority.\n1* Equal Contribution",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 1",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and\nSpatial Intelligence Era:\nGoverning AI Beyond\nLanguage\nDaniel Zhang,* Russell Wald,* Ehsan Adeli, Elena Cryst,\nDaniel E. Ho, Caroline Meinhardt, Jiajun Wu, Amy Zegart,\nLi Fei-Fei\nIntroduction\nIt is 2 a.m. and a wildfire is rapidly moving toward a densely populated\nsuburb. An incident commander is trying to answer several questions\nat once: which evacuation routes are still passable, which hospitals\nare reachable, and where the power grid is likely to fail next. Current\nincident support systems, including AI-enabled modeling and physics-\nbased simulations, provide real-time forecasts. But these projections\nremain siloed, and conditions change faster than analysts can track.\nA world model — an AI system that builds and maintains a working\nrepresentation of an environment to predict how conditions may\nchange — addresses both gaps. In this case, it could bring forecasts\nabout roads, the power grid, and hospital capacity into one\ncontinuously updated picture. The commander could use that picture\nto reroute crews, redirect resources, and test evacuation plans before\nissuing an order.\nKey Takeaways\nWorld models are AI systems that\nbuild a working representation of an\nenvironment to predict how it changes\nin response to action. They could lower\nthe cost of high-quality simulation,\nbenefiting infrastructure planning,\ncrisis response, experimentation, and\nembodied AI training.\nNo existing benchmark gives policy-\nmakers an adequate basis to evaluate a\nworld model for safety-critical deploy-\nment. Closing that gap requires public\ninvestment in measurement science.\nPolicy built for existing AI-generated\ncontent and autonomous decision-\nmaking does not fully address the risk\nprofile of world models. The distinctive\nquestion is whether a simulated\nenvironment matches physical reality\nclosely enough to train or test another\nsystem or guide a real-world decision.\nThe scarcest input is action-labeled\ninteraction data — robot trajectories\nand fleet logs that cannot be scraped\nfrom the web, which risks concentrated\ncontrol. Public datasets should be an\nexplicit target of federally funded research.\nWorld models are dual use, with national\nsecurity implications. By lowering the\ncost of capable autonomous systems,\nthey could open military advantage to\nless-resourced entrants, making early\nleadership in world-model research,\ndevelopment, and governance an urgent\nnational security priority.\n1* Equal Contribution",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-001",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-001",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      1
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 1",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-001"
+  }
+}

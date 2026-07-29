@@ -159,13 +159,18 @@ export function useVoiceTranscriptPipeline({
 
       setVoiceProcessLine(getVoiceProcessLine(currentPortal, currentPhase));
 
+      const requestContext = {
+        ...(window.__agentContext || agentContext),
+        worldObservation: window.__lastWorldObservation || null,
+      };
+
       resolveVoicePipeline({
         rawInput: rawSpoken,
         isMobile,
         currentPortal,
         currentMesh,
         currentMeshStage,
-        context: window.__agentContext || agentContext,
+        context: requestContext,
         detectImmediateMobileCommand,
         resolveLocalVoiceCommand,
         fetchJson,

@@ -1,0 +1,104 @@
+{
+  "slug": "wm-pdf-010",
+  "title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language (p. 11)",
+  "category": "world_model",
+  "source_type": "stanford_hai_pdf",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language settings because adversaries could deceive, disrupt, or defeat these systems at machine speed, often under conditions where human oversight is either limited or too slow to matter. Because of their commercial and military potential, world models are likely to become an important arena of future geopolitical competition, particularly between th",
+  "body": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nsettings because adversaries could deceive, disrupt, or\ndefeat these systems at machine speed, often under\nconditions where human oversight is either limited or\ntoo slow to matter.\nBecause of their commercial and military potential,\nworld models are likely to become an important\narena of future geopolitical competition, particularly\nbetween the United States and China. Countries\naround the world are already aggressively pursuing\nembodied intelligence and robotics. China, for\nexample, has made them a national priority, identifying\nembodied intelligence as a strategic industry in\nits latest Five-Year Plan and directing state funds\nand shared data infrastructure toward physical AI.\nChina’s approach also emphasizes physical-world\ndata and deployment. Whether that can reduce\nreliance on frontier compute remains uncertain. The\nUnited States has led largely through private labs and\nresearch on physical AI rather than federal industrial\npolicy; however, in late 2025, the White House was\nreportedly considering an executive order on robotics,\nand in 2026, Congress introduced a bill to establish a\nNational Commission on Robotics.\nWho moves first in world-model breakthroughs\nmatters. Early deployment can generate proprietary\noperational data and help set standards, making\nsystems harder to displace across commercial and\ndefense markets. But speed without reliable and\nauditable systems can create vulnerabilities of its own.\nStrategic Advantages\n• Readiness and mission rehearsal. World models\ncould make synthetic training environments faster\nto build and adapt, allowing planners to test\ncomplex, high-stakes, rare, or dangerous scenarios\nbefore they occur. This could shift geopolitical\npower by enabling countries with limited\noperational experience to effectively test military\nplans under unfamiliar combat conditions.\n• Contested operations and logistics. World\nmodels could help planners adapt supply routes\nand depot operations under stress, while enabling\naerial, maritime, and ground robots to carry out\nlogistics missions with degraded communications\nand intermittent human supervision. Connecting\nplanning with execution could make military\nsustainment more resilient in contested settings.\n• Intelligence and decision support. Simulation\nenvironments could help intelligence analysts\nassess adversary actions, trace cascading effects,\nand better analyze “what if” scenarios. They could\nalso allow leaders to test assumptions before\ncommitting resources. At the same time, however,\nthey may make uncertain forecasts appear more\nprecise than they are.\n• Cost and scale. World models could make drones\nand robots cheaper and more adaptive across\nnational security missions, including intelligence\ncollection, deterrence, defense, and warfighting.\nFor the United States and its partners and allies,\nworld models could enable large quantities of\ncapable, low-cost systems that could improve\ndefense effectiveness at scale.\nSecurity-Critical Risks\n• New cyber-physical vulnerabilities. World\nmodels inside an operational loop give potential\nattackers a new target: the system’s picture of\nits surroundings rather than the data it holds.\nCorrupting that picture can turn a breach into a\nmisguided maneuver or strike. As these systems\nbecome more operationally valuable, securing their\ntraining data, updates, sensors, and simulation\nenvironments will need to advance alongside their\ndevelopment.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "world model",
+      "spatial intelligence",
+      "Stanford HAI",
+      "source evidence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "stanford-hai-source-ingest",
+      "reviewed_at": "2026-07-30",
+      "notes": "Page-aware source evidence derived from the official Stanford HAI PDF"
+    },
+    "verification_status": "framework_supported",
+    "evidence_tier": "framework_guidance",
+    "claims": [],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "world_model_source_evidence"
+    ],
+    "impact_score": 70,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language; p. 11",
+    "source_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "ai_governance",
+      "evaluation"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance",
+      "evaluation",
+      "data_boundaries"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "The World Model and Spatial\nIntelligence Era: Governing\nAI Beyond Language\nsettings because adversaries could deceive, disrupt, or\ndefeat these systems at machine speed, often under\nconditions where human oversight is either limited or\ntoo slow to matter.\nBecause of their commercial and military potential,\nworld models are likely to become an important\narena of future geopolitical competition, particularly\nbetween the United States and China. Countries\naround the world are already aggressively pursuing\nembodied intelligence and robotics. China, for\nexample, has made them a national priority, identifying\nembodied intelligence as a strategic industry in\nits latest Five-Year Plan and directing state funds\nand shared data infrastructure toward physical AI.\nChina’s approach also emphasizes physical-world\ndata and deployment. Whether that can reduce\nreliance on frontier compute remains uncertain. The\nUnited States has led largely through private labs and\nresearch on physical AI rather than federal industrial\npolicy; however, in late 2025, the White House was\nreportedly considering an executive order on robotics,\nand in 2026, Congress introduced a bill to establish a\nNational Commission on Robotics.\nWho moves first in world-model breakthroughs\nmatters. Early deployment can generate proprietary\noperational data and help set standards, making\nsystems harder to displace across commercial and\ndefense markets. But speed without reliable and\nauditable systems can create vulnerabilities of its own.\nStrategic Advantages\n• Readiness and mission rehearsal. World models\ncould make synthetic training environments faster\nto build and adapt, allowing planners to test\ncomplex, high-stakes, rare, or dangerous scenarios\nbefore they occur. This could shift geopolitical\npower by enabling countries with limited\noperational experience to effectively test military\nplans under unfamiliar combat conditions.\n• Contested operations and logistics. World\nmodels could help planners adapt supply routes\nand depot operations under stress, while enabling\naerial, maritime, and ground robots to carry out\nlogistics missions with degraded communications\nand intermittent human supervision. Connecting\nplanning with execution could make military\nsustainment more resilient in contested settings.\n• Intelligence and decision support. Simulation\nenvironments could help intelligence analysts\nassess adversary actions, trace cascading effects,\nand better analyze “what if” scenarios. They could\nalso allow leaders to test assumptions before\ncommitting resources. At the same time, however,\nthey may make uncertain forecasts appear more\nprecise than they are.\n• Cost and scale. World models could make drones\nand robots cheaper and more adaptive across\nnational security missions, including intelligence\ncollection, deterrence, defense, and warfighting.\nFor the United States and its partners and allies,\nworld models could enable large quantities of\ncapable, low-cost systems that could improve\ndefense effectiveness at scale.\nSecurity-Critical Risks\n• New cyber-physical vulnerabilities. World\nmodels inside an operational loop give potential\nattackers a new target: the system’s picture of\nits surroundings rather than the data it holds.\nCorrupting that picture can turn a breach into a\nmisguided maneuver or strike. As these systems\nbecome more operationally valuable, securing their\ntraining data, updates, sensors, and simulation\nenvironments will need to advance alongside their\ndevelopment.",
+    "keyword_terms": [
+      "world",
+      "model",
+      "spatial",
+      "intelligence",
+      "stanford",
+      "hai",
+      "simulation",
+      "governance"
+    ],
+    "exact_phrases": [
+      "The World Model and Spatial Intelligence Era: Governing AI Beyond Language"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "stanford-hai-world-model-2026-chunk-010",
+    "record_type": "pdf_evidence",
+    "topic": "stanford_hai_source_evidence",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#stanford-hai-world-model-2026-chunk-010",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      11
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "source_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 11",
+    "pdf_chunk_id": "stanford-hai-world-model-2026-chunk-010"
+  }
+}

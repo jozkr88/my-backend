@@ -23,6 +23,7 @@ import { Frame } from "./Frame";
 import { GpuWarmup } from "./gpuWarmup";
 import { InitialFrameSignal } from "./InitialFrameSignal";
 import { Rig } from "./Rig";
+import { SceneObservationBridge } from "./SceneObservationBridge";
 import { VibeWord } from "./VibeWord";
 
 const regular = import("../../fontx.ttf");
@@ -95,6 +96,11 @@ export function AppSceneCanvas({
     >
       {shouldWarmup && !isMobile && <GpuWarmup portalKey={currentPortal} />}
       <InitialFrameSignal onReady={onSceneReady} />
+      <SceneObservationBridge
+        currentPortal={currentPortal}
+        currentStage={meetJozCurrentStage}
+        currentMesh={meetJozCurrentMesh}
+      />
       <Center position={[0, 0, 3]} rotation={[0, Math.PI, 0]}>
         <VibeWord scale={1} />
       </Center>

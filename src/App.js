@@ -41,10 +41,11 @@ import {
 } from "./features/root/gpuWarmup";
 import { useBallPortalHud } from "./features/root/useBallPortalHud";
 import { useAppRuntimeState } from "./state/useAppRuntimeState";
+import { JozLlmDashboardPage } from "./features/joz-llm/JozLlmDashboardPage";
 
 
 import { worldMap } from "./data/worldMap";
-import { ReactComponent as GoAgenticSvg } from "./go-agentic.svg";
+import { ReactComponent as VoiceMaxxSvg } from "./voice-maxx.svg";
 import moveTheWorldsSvg from "./move-the-worlds.svg";
 import justSaySvg from "./just-say.svg";
 import slide1Svg from "./slide1.svg";
@@ -68,6 +69,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
     isMicrophoneAvailable,
   } = useSpeechRecognition();
   const [, params] = useRoute("/neo/:id");
+  const [isJozLlmDashboard] = useRoute("/joz-llm-dashboard");
   const [, setLocation] = useLocation();
 
   const [suggestionText, setSuggestionText] = useState("");
@@ -476,11 +478,15 @@ useAgentShell({
     }
   };
 
+  if (isJozLlmDashboard) {
+    return <JozLlmDashboardPage />;
+  }
+
   return (
     <>
 
       <VoiceChrome
-        AgentIcon={GoAgenticSvg}
+        AgentIcon={VoiceMaxxSvg}
         moveTheWorldsSrc={moveTheWorldsSvg}
         justSaySrc={justSaySvg}
         helpSlides={HELP_SLIDES}

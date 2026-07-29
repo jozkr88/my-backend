@@ -1,0 +1,113 @@
+{
+  "slug": "wm-wm-paper-009",
+  "title": "What does a planner do in a world-model stack?",
+  "category": "world_model",
+  "source_type": "world_model_jsonl",
+  "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+  "summary": "It chooses actions or trajectories based on state, goals and expected effects.",
+  "body": "A planner determines which action, trajectory, policy or intervention should be chosen for a given state or goal. It bridges world understanding and world intervention by evaluating what to do and what an action is expected to cause.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "planner",
+      "actions",
+      "trajectory",
+      "policy",
+      "goal"
+    ],
+    "verification": {
+      "status": "verified",
+      "reviewed_by": "world-model-knowledge-v1",
+      "reviewed_at": "2026-07-30",
+      "notes": "World-model source_grounded record"
+    },
+    "verification_status": "verified",
+    "evidence_tier": "verified_fact",
+    "claims": [
+      "It chooses actions or trajectories based on state, goals and expected effects."
+    ],
+    "proof_points": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "planners"
+    ],
+    "impact_score": 80,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_filename": "joz-world-model-knowledge-v1.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-07-30",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "spatial_ai",
+      "verification",
+      "ai_governance"
+    ],
+    "outcomes": [],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "source_authority": 58,
+    "semantic_text": "What does a planner do in a world-model stack?\nIt chooses actions or trajectories based on state, goals and expected effects.\nplanner actions trajectory policy goal\nA planner determines which action, trajectory, policy or intervention should be chosen for a given state or goal. It bridges world understanding and world intervention by evaluating what to do and what an action is expected to cause.",
+    "keyword_terms": [
+      "what",
+      "does",
+      "planner",
+      "do",
+      "in",
+      "world",
+      "model",
+      "stack",
+      "actions",
+      "trajectory",
+      "policy",
+      "goal",
+      "planners"
+    ],
+    "exact_phrases": [
+      "What does a planner do in a world-model stack?",
+      "planner",
+      "actions",
+      "trajectory",
+      "policy",
+      "goal"
+    ],
+    "dataset_id": "joz-public-knowledge",
+    "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+    "knowledge_version": "joz-world-model-knowledge-v1",
+    "record_id": "wm-paper-009",
+    "record_type": "knowledge_chunk",
+    "topic": "planners",
+    "claim_scope": "source_grounded",
+    "source_id": "stanford-hai-world-model-spatial-intelligence-2026",
+    "source_key": "joz-world-model-knowledge-v1#wm-paper-009",
+    "source_title": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language",
+    "source_publisher": "Stanford HAI",
+    "source_date": "2026-07",
+    "source_pages": [
+      4,
+      5
+    ],
+    "source_uri": "https://hai.stanford.edu/assets/files/hai-issue-brief-the-world-model-and-spatial-intelligence-era.pdf",
+    "retrieval_priority": 75,
+    "boundary_record": false,
+    "policy_record": false,
+    "world_model_record": true,
+    "joz_specific": false,
+    "citation_label": "The World Model and Spatial Intelligence Era: Governing AI Beyond Language, p. 4, 5"
+  }
+}

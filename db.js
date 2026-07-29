@@ -10,6 +10,7 @@ import {
   JOZ_PUBLIC_TENANT_ID,
 } from "./shared/jozDataGovernance.js";
 import { buildPgvectorLiteral } from "./shared/jozHybridRetrieval.js";
+import { normalizeWorldTrajectoryRecord } from "./shared/worldTrajectory.js";
 
 const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);
@@ -45,28 +46,29 @@ function resolvePublishedJozDocsPath() {
 function loadPublishedJozDocuments() {
   if (isDatabaseRequired()) return [];
   if (publishedJozDocsCache) return publishedJozDocsCache;
-  const docsPath = resolvePublishedJozDocsPath();
-  if (!fs.existsSync(docsPath)) {
+  const docsPaths = [
+    resolvePublishedJozDocsPath(),
+    path.join(path.dirname(resolvePublishedJozDocsPath()), "joz-world-model.generated.json"),
+  ].filter((docsPath, index, paths) => paths.indexOf(docsPath) === index && fs.existsSync(docsPath));
+  if (!docsPaths.length) {
     publishedJozDocsCache = [];
     return publishedJozDocsCache;
   }
 
-  const published = JSON.parse(fs.readFileSync(docsPath, "utf8"));
-  if (Array.isArray(published?.model_ready_records)) {
-    publishedJozDocsCache = published.model_ready_records;
-    return publishedJozDocsCache;
-  }
-
-  const records = Array.isArray(published?.records) ? published.records : [];
-  publishedJozDocsCache = records.filter((record) =>
-    MODEL_READY_STATUSES.has(
-      String(
-        record?.metadata?.verification_status ||
-          record?.metadata?.verification?.status ||
-          ""
-      ).trim().toLowerCase()
-    )
-  );
+  publishedJozDocsCache = docsPaths.flatMap((docsPath) => {
+    const published = JSON.parse(fs.readFileSync(docsPath, "utf8"));
+    if (Array.isArray(published?.model_ready_records)) return published.model_ready_records;
+    const records = Array.isArray(published?.records) ? published.records : [];
+    return records.filter((record) =>
+      MODEL_READY_STATUSES.has(
+        String(
+          record?.metadata?.verification_status ||
+            record?.metadata?.verification?.status ||
+            ""
+        ).trim().toLowerCase()
+      )
+    );
+  });
   return publishedJozDocsCache;
 }
 
@@ -570,6 +572,7 @@ export async function getJozDocumentsByIntent(
       "systems_principle",
       "governance",
       "governance_principle",
+      "world_model",
     ]),
   ];
   const laneAliases = [
@@ -703,6 +706,7 @@ export async function getJozSemanticDocumentsByQuery(
       "systems_principle",
       "governance",
       "governance_principle",
+      "world_model",
     ]),
   ];
   const vector = buildPgvectorLiteral(embedding);
@@ -1783,6 +1787,7 @@ export async function cleanupExpiredJozData({
   conversationRetentionDays = 30,
   callbackRetentionDays = 30,
   privacyRequestRetentionDays = 365,
+  worldModelRetentionDays = 30,
 } = {}) {
   const db = getPool();
   if (!db) {
@@ -1790,12 +1795,15 @@ export async function cleanupExpiredJozData({
       deletedConversations: 0,
       deletedCallbackRequests: 0,
       deletedPrivacyRequests: 0,
+      deletedWorldModelTrajectories: 0,
+      deletedWorldTransitionExperience: 0,
     };
   }
 
   const normalizedConversationDays = Math.max(1, Number(conversationRetentionDays) || 30);
   const normalizedCallbackDays = Math.max(1, Number(callbackRetentionDays) || 30);
   const normalizedPrivacyDays = Math.max(1, Number(privacyRequestRetentionDays) || 365);
+  const normalizedWorldModelDays = Math.max(1, Number(worldModelRetentionDays) || 30);
 
   const callbackDeleteResult = await runQuery(
     `DELETE FROM joz_callback_requests
@@ -1818,10 +1826,26 @@ export async function cleanupExpiredJozData({
     [normalizedPrivacyDays]
   );
 
+  const worldTrajectoryDeleteResult = await runQuery(
+    `DELETE FROM world_model_trajectories
+     WHERE COALESCE(observed_at, created_at) < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING trajectory_id`,
+    [normalizedWorldModelDays]
+  );
+
+  const worldExperienceDeleteResult = await runQuery(
+    `DELETE FROM world_transition_experience
+     WHERE COALESCE(last_observed_at, NOW()) < NOW() - ($1 * INTERVAL '1 day')
+     RETURNING state_key`,
+    [normalizedWorldModelDays]
+  );
+
   return {
     deletedConversations: conversationDeleteResult.rows?.length || 0,
     deletedCallbackRequests: callbackDeleteResult.rows?.length || 0,
     deletedPrivacyRequests: privacyRequestDeleteResult.rows?.length || 0,
+    deletedWorldModelTrajectories: worldTrajectoryDeleteResult.rows?.length || 0,
+    deletedWorldTransitionExperience: worldExperienceDeleteResult.rows?.length || 0,
   };
 }
 
@@ -2102,6 +2126,123 @@ export async function initDatabase() {
         phrase TEXT NOT NULL,
         PRIMARY KEY (state_key, action_key, phrase)
       )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS world_model_trajectories (
+        trajectory_id TEXT PRIMARY KEY,
+        session_id TEXT,
+        trace_id TEXT,
+        schema_version TEXT NOT NULL DEFAULT '1.0',
+        interaction_channel TEXT NOT NULL DEFAULT 'unknown',
+        state_before JSONB NOT NULL DEFAULT '{}'::jsonb,
+        state_history JSONB NOT NULL DEFAULT '[]'::jsonb,
+        proposed_action JSONB NOT NULL DEFAULT '{}'::jsonb,
+        symbolic_prediction JSONB NOT NULL DEFAULT '{}'::jsonb,
+        probabilistic_prediction JSONB NOT NULL DEFAULT '{}'::jsonb,
+        expected_effects JSONB NOT NULL DEFAULT '[]'::jsonb,
+        observation_before JSONB,
+        predicted_observation JSONB,
+        observed_observation JSONB,
+        observation_difference JSONB,
+        observation_source_versions JSONB NOT NULL DEFAULT '{}'::jsonb,
+        observed_state JSONB,
+        observed_effects JSONB NOT NULL DEFAULT '[]'::jsonb,
+        intent TEXT,
+        goal TEXT,
+        transition_duration_ms INTEGER,
+        success BOOLEAN,
+        prediction_differences JSONB NOT NULL DEFAULT '{}'::jsonb,
+        confidence_before_action NUMERIC(5,4),
+        outcome_scores JSONB NOT NULL DEFAULT '{}'::jsonb,
+        model_version TEXT,
+        transition_rule_version TEXT,
+        shadow_latency_ms INTEGER,
+        world_model_mode TEXT NOT NULL DEFAULT 'shadow',
+        planner_selected_action JSONB,
+        deterministic_approved_action JSONB,
+        candidate_plans JSONB NOT NULL DEFAULT '[]'::jsonb,
+        expected_observed_effects JSONB,
+        field_support JSONB NOT NULL DEFAULT '{}'::jsonb,
+        classification TEXT NOT NULL DEFAULT 'partial',
+        failure_category TEXT,
+        persistence_status TEXT NOT NULL DEFAULT 'pending',
+        prediction_latency_ms INTEGER,
+        observation_latency_ms INTEGER,
+        sample_rate NUMERIC(5,4),
+        sampled BOOLEAN NOT NULL DEFAULT TRUE,
+        consent_compatible BOOLEAN NOT NULL DEFAULT TRUE,
+        is_test BOOLEAN NOT NULL DEFAULT FALSE,
+        is_synthetic BOOLEAN NOT NULL DEFAULT FALSE,
+        exclusion_reason TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        observed_at TIMESTAMPTZ
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS world_model_trajectories_created_idx
+      ON world_model_trajectories (created_at DESC)
+    `);
+
+    await db.query(`
+      ALTER TABLE world_model_trajectories
+        ADD COLUMN IF NOT EXISTS observation_before JSONB,
+        ADD COLUMN IF NOT EXISTS predicted_observation JSONB,
+        ADD COLUMN IF NOT EXISTS observed_observation JSONB,
+        ADD COLUMN IF NOT EXISTS observation_difference JSONB,
+        ADD COLUMN IF NOT EXISTS observation_source_versions JSONB NOT NULL DEFAULT '{}'::jsonb,
+        ADD COLUMN IF NOT EXISTS shadow_latency_ms INTEGER,
+        ADD COLUMN IF NOT EXISTS world_model_mode TEXT NOT NULL DEFAULT 'shadow',
+        ADD COLUMN IF NOT EXISTS planner_selected_action JSONB,
+        ADD COLUMN IF NOT EXISTS deterministic_approved_action JSONB,
+        ADD COLUMN IF NOT EXISTS candidate_plans JSONB NOT NULL DEFAULT '[]'::jsonb,
+        ADD COLUMN IF NOT EXISTS expected_observed_effects JSONB,
+        ADD COLUMN IF NOT EXISTS field_support JSONB NOT NULL DEFAULT '{}'::jsonb,
+        ADD COLUMN IF NOT EXISTS classification TEXT NOT NULL DEFAULT 'partial',
+        ADD COLUMN IF NOT EXISTS failure_category TEXT,
+        ADD COLUMN IF NOT EXISTS persistence_status TEXT NOT NULL DEFAULT 'pending',
+        ADD COLUMN IF NOT EXISTS prediction_latency_ms INTEGER,
+        ADD COLUMN IF NOT EXISTS observation_latency_ms INTEGER,
+        ADD COLUMN IF NOT EXISTS sample_rate NUMERIC(5,4),
+        ADD COLUMN IF NOT EXISTS sampled BOOLEAN NOT NULL DEFAULT TRUE,
+        ADD COLUMN IF NOT EXISTS consent_compatible BOOLEAN NOT NULL DEFAULT TRUE,
+        ADD COLUMN IF NOT EXISTS is_test BOOLEAN NOT NULL DEFAULT FALSE,
+        ADD COLUMN IF NOT EXISTS is_synthetic BOOLEAN NOT NULL DEFAULT FALSE,
+        ADD COLUMN IF NOT EXISTS exclusion_reason TEXT
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS world_model_trajectories_classification_idx
+      ON world_model_trajectories (classification, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS world_model_trajectories_session_idx
+      ON world_model_trajectories (session_id, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS world_transition_experience (
+        state_key TEXT NOT NULL,
+        action_key TEXT NOT NULL,
+        next_state_key TEXT NOT NULL DEFAULT '',
+        next_portal TEXT NOT NULL DEFAULT '',
+        next_stage TEXT NOT NULL DEFAULT '',
+        target_route TEXT,
+        attempts INTEGER NOT NULL DEFAULT 0,
+        successes INTEGER NOT NULL DEFAULT 0,
+        total_duration_ms BIGINT NOT NULL DEFAULT 0,
+        total_prediction_error NUMERIC(12,4) NOT NULL DEFAULT 0,
+        last_observed_at TIMESTAMPTZ,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        PRIMARY KEY (state_key, action_key, next_state_key, next_portal, next_stage)
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS world_transition_experience_action_idx
+      ON world_transition_experience (state_key, action_key)
     `);
 
     await db.query(`
@@ -2622,6 +2763,260 @@ export async function getStructuredWorldState(portalKey, stateKey) {
       awareness: row.awareness,
       phrases: row.phrases || [],
     })),
+  };
+}
+
+export async function getWorldTransitionExperience({ stateKey = "", actionKey = "" } = {}) {
+  if (!stateKey || !actionKey) return [];
+  const result = await runQuery(
+    `SELECT
+       state_key,
+       action_key,
+       next_state_key,
+       next_portal,
+       next_stage,
+       target_route,
+       attempts,
+       successes,
+       (total_duration_ms / NULLIF(attempts, 0)) AS average_duration_ms,
+       (total_prediction_error / NULLIF(attempts, 0)) AS average_prediction_error,
+       last_observed_at,
+       metadata
+     FROM world_transition_experience
+     WHERE state_key = $1 AND action_key = $2
+     ORDER BY attempts DESC, last_observed_at DESC NULLS LAST`,
+    [stateKey, actionKey]
+  );
+  return result.rows || [];
+}
+
+export async function listWorldModelTrajectories({
+  from = null,
+  to = null,
+  schemaVersion = null,
+  limit = 10_000,
+} = {}) {
+  const safeLimit = Math.min(50_000, Math.max(1, Number(limit) || 10_000));
+  const filters = [];
+  const values = [];
+  if (from) {
+    values.push(from);
+    filters.push(`COALESCE(observed_at, created_at) >= $${values.length}`);
+  }
+  if (to) {
+    values.push(to);
+    filters.push(`COALESCE(observed_at, created_at) < $${values.length}`);
+  }
+  if (schemaVersion) {
+    values.push(String(schemaVersion));
+    filters.push(`schema_version = $${values.length}`);
+  }
+  values.push(safeLimit);
+  const result = await runQuery(
+    `SELECT trajectory_id, session_id, trace_id, schema_version,
+            interaction_channel, state_before, state_history, proposed_action,
+            symbolic_prediction, probabilistic_prediction, expected_effects,
+            observation_before, predicted_observation, observed_observation,
+            observation_difference, observation_source_versions, observed_state,
+            observed_effects, intent, goal, transition_duration_ms, success,
+            prediction_differences, confidence_before_action, outcome_scores,
+            model_version, transition_rule_version, shadow_latency_ms,
+            world_model_mode, planner_selected_action, deterministic_approved_action,
+            candidate_plans, expected_observed_effects, field_support,
+            classification, failure_category, persistence_status,
+            prediction_latency_ms, observation_latency_ms, sample_rate, sampled,
+            consent_compatible, is_test, is_synthetic, exclusion_reason,
+            created_at, observed_at
+       FROM world_model_trajectories
+      ${filters.length ? `WHERE ${filters.join(" AND ")}` : ""}
+      ORDER BY COALESCE(observed_at, created_at), trajectory_id
+      LIMIT $${values.length}`,
+    values
+  );
+  return result.rows || [];
+}
+
+export async function recordWorldModelTrajectory(input = {}) {
+  const normalized = normalizeWorldTrajectoryRecord(input);
+  if (!normalized.valid) {
+    const error = new Error(`Invalid world trajectory: ${normalized.errors.join(", ")}`);
+    error.status = 400;
+    throw error;
+  }
+
+  const record = normalized.record;
+  const stateBefore = record.stateBefore || {};
+  const observedState = record.observedState || {};
+  const stateKey = String(stateBefore.currentStateKey || stateBefore.portal || "unknown");
+  const actionKey = String(
+    record.proposedAction?.type ||
+      record.proposedAction?.action ||
+      record.proposedAction ||
+      "unknown"
+  );
+  const nextStateKey = String(observedState.currentStateKey || observedState.portal || "unknown");
+  const nextPortal = String(observedState.portal || "");
+  const nextStage = String(observedState.stage || "");
+  const errorCount = Number(record.predictionDifferences?.metrics?.mismatchCount || 0);
+  const success = record.success === true;
+
+  await runQuery(
+    `INSERT INTO world_model_trajectories (
+       trajectory_id, session_id, trace_id, schema_version, interaction_channel,
+       state_before, state_history, proposed_action, symbolic_prediction,
+       probabilistic_prediction, expected_effects, observation_before,
+       predicted_observation, observed_observation,
+       observation_difference, observation_source_versions, observed_state,
+       observed_effects, intent, goal,
+       transition_duration_ms, success, prediction_differences,
+       confidence_before_action, outcome_scores, model_version, transition_rule_version,
+       shadow_latency_ms, world_model_mode, planner_selected_action,
+       deterministic_approved_action, candidate_plans, expected_observed_effects,
+       field_support, classification, failure_category, persistence_status,
+       prediction_latency_ms, observation_latency_ms, sample_rate, sampled,
+       consent_compatible, is_test, is_synthetic, exclusion_reason, created_at, observed_at
+     )
+     VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb,
+       $10::jsonb, $11::jsonb, $12::jsonb, $13::jsonb, $14::jsonb, $15::jsonb,
+       $16::jsonb, $17::jsonb, $18::jsonb, $19, $20, $21, $22, $23::jsonb,
+       $24, $25::jsonb, $26, $27, $28, $29, $30, $31, $32::jsonb,
+       $33::jsonb, $34::jsonb, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45,
+       $46, $47)
+     ON CONFLICT (trajectory_id) DO UPDATE SET
+       observation_before = EXCLUDED.observation_before,
+       predicted_observation = EXCLUDED.predicted_observation,
+       observed_state = CASE WHEN EXCLUDED.observed_state <> '{}'::jsonb THEN EXCLUDED.observed_state ELSE world_model_trajectories.observed_state END,
+       observed_observation = CASE WHEN EXCLUDED.observed_observation <> '{}'::jsonb THEN EXCLUDED.observed_observation ELSE world_model_trajectories.observed_observation END,
+       observation_difference = CASE WHEN EXCLUDED.observation_difference <> '{}'::jsonb THEN EXCLUDED.observation_difference ELSE world_model_trajectories.observation_difference END,
+       observation_source_versions = CASE WHEN EXCLUDED.observation_source_versions <> '{}'::jsonb THEN EXCLUDED.observation_source_versions ELSE world_model_trajectories.observation_source_versions END,
+       observed_effects = CASE WHEN jsonb_array_length(EXCLUDED.observed_effects) > 0 THEN EXCLUDED.observed_effects ELSE world_model_trajectories.observed_effects END,
+       transition_duration_ms = COALESCE(EXCLUDED.transition_duration_ms, world_model_trajectories.transition_duration_ms),
+       success = COALESCE(EXCLUDED.success, world_model_trajectories.success),
+       prediction_differences = CASE WHEN EXCLUDED.prediction_differences <> '{}'::jsonb THEN EXCLUDED.prediction_differences ELSE world_model_trajectories.prediction_differences END,
+       outcome_scores = EXCLUDED.outcome_scores,
+       shadow_latency_ms = EXCLUDED.shadow_latency_ms,
+       world_model_mode = COALESCE(EXCLUDED.world_model_mode, world_model_trajectories.world_model_mode),
+       planner_selected_action = COALESCE(EXCLUDED.planner_selected_action, world_model_trajectories.planner_selected_action),
+       deterministic_approved_action = COALESCE(EXCLUDED.deterministic_approved_action, world_model_trajectories.deterministic_approved_action),
+       candidate_plans = CASE WHEN jsonb_array_length(EXCLUDED.candidate_plans) > 0 THEN EXCLUDED.candidate_plans ELSE world_model_trajectories.candidate_plans END,
+       expected_observed_effects = COALESCE(EXCLUDED.expected_observed_effects, world_model_trajectories.expected_observed_effects),
+       field_support = CASE WHEN EXCLUDED.field_support <> '{}'::jsonb THEN EXCLUDED.field_support ELSE world_model_trajectories.field_support END,
+       classification = CASE
+         WHEN EXCLUDED.classification = 'partial'
+           AND (
+             world_model_trajectories.observed_state <> '{}'::jsonb
+             OR EXCLUDED.observed_state <> '{}'::jsonb
+           )
+           AND (
+             world_model_trajectories.symbolic_prediction <> '{}'::jsonb
+             OR EXCLUDED.symbolic_prediction <> '{}'::jsonb
+           )
+           THEN 'valid'
+         WHEN EXCLUDED.classification = 'partial'
+           AND world_model_trajectories.classification IN ('valid', 'unsupported', 'invalid_action')
+           THEN world_model_trajectories.classification
+         ELSE COALESCE(EXCLUDED.classification, world_model_trajectories.classification)
+       END,
+       failure_category = COALESCE(EXCLUDED.failure_category, world_model_trajectories.failure_category),
+       persistence_status = EXCLUDED.persistence_status,
+       prediction_latency_ms = COALESCE(EXCLUDED.prediction_latency_ms, world_model_trajectories.prediction_latency_ms),
+       observation_latency_ms = COALESCE(EXCLUDED.observation_latency_ms, world_model_trajectories.observation_latency_ms),
+       sample_rate = COALESCE(EXCLUDED.sample_rate, world_model_trajectories.sample_rate),
+       sampled = EXCLUDED.sampled,
+       consent_compatible = EXCLUDED.consent_compatible,
+       is_test = EXCLUDED.is_test,
+       is_synthetic = EXCLUDED.is_synthetic,
+       exclusion_reason = COALESCE(EXCLUDED.exclusion_reason, world_model_trajectories.exclusion_reason),
+       observed_at = COALESCE(EXCLUDED.observed_at, world_model_trajectories.observed_at)`,
+    [
+      record.trajectoryId,
+      record.sessionId,
+      record.traceId,
+      record.schemaVersion,
+      record.interactionChannel,
+      JSON.stringify(record.stateBefore || {}),
+      JSON.stringify(record.stateHistory || []),
+      JSON.stringify(record.proposedAction || {}),
+      JSON.stringify(record.symbolicPrediction || {}),
+      JSON.stringify(record.probabilisticPrediction || {}),
+      JSON.stringify(record.expectedEffects || []),
+      JSON.stringify(record.observationBefore || {}),
+      JSON.stringify(record.predictedObservation || {}),
+      JSON.stringify(record.observedObservation || {}),
+      JSON.stringify(record.observationDifference || {}),
+      JSON.stringify(record.observationSourceVersions || {}),
+      JSON.stringify(record.observedState || {}),
+      JSON.stringify(record.observedEffects || []),
+      record.intent,
+      record.goal,
+      record.transitionDurationMs,
+      record.success,
+      JSON.stringify(record.predictionDifferences || {}),
+      record.confidenceBeforeAction,
+      JSON.stringify(record.outcomeScores || {}),
+      record.modelVersion,
+      record.transitionRuleVersion,
+      record.shadowLatencyMs,
+      record.worldModelMode,
+      JSON.stringify(record.plannerSelectedAction || null),
+      JSON.stringify(record.deterministicApprovedAction || null),
+      JSON.stringify(record.candidatePlans || []),
+      JSON.stringify(record.expectedObservedEffects || null),
+      JSON.stringify(record.fieldSupport || {}),
+      record.classification,
+      record.failureCategory,
+      record.persistenceStatus,
+      record.predictionLatencyMs,
+      record.observationLatencyMs,
+      record.sampleRate,
+      record.sampled,
+      record.consentCompatible,
+      record.isTest,
+      record.isSynthetic,
+      record.exclusionReason,
+      record.createdAt,
+      record.observedAt,
+    ]
+  );
+
+  if (record.observedState) {
+  await runQuery(
+    `INSERT INTO world_transition_experience (
+       state_key, action_key, next_state_key, next_portal, next_stage, target_route,
+       attempts, successes, total_duration_ms, total_prediction_error,
+       last_observed_at, metadata
+     )
+     VALUES ($1, $2, $3, $4, $5, $6, 1, $7, $8, $9, $10, $11::jsonb)
+     ON CONFLICT (state_key, action_key, next_state_key, next_portal, next_stage)
+     DO UPDATE SET
+       attempts = world_transition_experience.attempts + 1,
+       successes = world_transition_experience.successes + EXCLUDED.successes,
+       total_duration_ms = world_transition_experience.total_duration_ms + EXCLUDED.total_duration_ms,
+       total_prediction_error = world_transition_experience.total_prediction_error + EXCLUDED.total_prediction_error,
+       last_observed_at = EXCLUDED.last_observed_at,
+       metadata = EXCLUDED.metadata`,
+    [
+      stateKey,
+      actionKey,
+      nextStateKey,
+      nextPortal,
+      nextStage,
+      String(observedState.targetRoute || stateBefore.targetRoute || ""),
+      success ? 1 : 0,
+      Math.max(0, Math.round(Number(record.transitionDurationMs) || 0)),
+      Math.max(0, errorCount),
+      record.observedAt || new Date().toISOString(),
+      JSON.stringify({ schemaVersion: record.schemaVersion, modelVersion: record.modelVersion }),
+    ]
+  );
+  }
+
+  return {
+    trajectoryId: record.trajectoryId,
+    stateKey,
+    actionKey,
+    nextStateKey,
+    persisted: isDatabaseEnabled(),
   };
 }
 
