@@ -2225,6 +2225,18 @@ test("routes financial AI proof questions to the MarketClue evidence answer", ()
   assert.doesNotMatch(resolution.reply, /outside the current deterministic Joz answer set/i);
 });
 
+test("routes financial AI delivery proof phrasing to the MarketClue evidence answer", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "What can prove Joz can deliver on financial AI?";
+  const route = routeJozLlmQuery({ input: prompt, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input: prompt, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "financial_ai_proof");
+  assert.match(resolution.reply, /MarketClue USA|financial AI agents/i);
+  assert.doesNotMatch(resolution.reply, /outside the current deterministic Joz answer set/i);
+});
+
 test("soft value and anti-buzzword prompts resolve to hire-value instead of a boundary reply", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
