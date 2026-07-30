@@ -1,4 +1,5 @@
 import {
+  getSpatialAssetUrls,
   getOfferSpatialAssetUrls,
   normalizeSpatialEntitySet,
   normalizeSpatialOfferPayload,
@@ -42,6 +43,13 @@ test("extracts platform asset URLs from an offer", () => {
   })).toEqual({
     usdz: "https://meetjoz.com/neurodesign.usdz",
     glb: "https://meetjoz.com/neurovibes.glb",
+  });
+});
+
+test("uses the Meet Joz liquid glass CV AR assets for skills spatial assets", () => {
+  expect(getSpatialAssetUrls("joz_skills")).toMatchObject({
+    usdz: "https://meetjoz.com/Joz-Liquid-Glass-3D-CV.usdz",
+    glb: "https://meetjoz.com/Joz-Liquid-Glass-3D-CV.glb",
   });
 });
 

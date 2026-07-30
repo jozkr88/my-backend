@@ -208,6 +208,69 @@ function SpatialOfferCard({ entitySet, input }) {
   );
 }
 
+function entityLabel(entitySet) {
+  if (entitySet === "joz_neurons") return "Joz’s neurons";
+  if (entitySet === "joz_skills") return "Joz’s skills";
+  if (entitySet === "joz_works") return "Joz’s works";
+  return "Joz entity";
+}
+
+function contextLabel(currentPortal) {
+  if (currentPortal === "maxx" || currentPortal === "the-vibe-energy") return "MAXX neurons";
+  if (currentPortal === "meet-joz") return "Meet Joz";
+  return "Root world";
+}
+
+function WorldModelDecisionCard({ intent, currentPortal, isMobile }) {
+  if (!intent?.entitySet) return null;
+
+  const selected = isMobile
+    ? "Launch spatially"
+    : "Create mobile spatial handoff";
+  const rejected = isMobile
+    ? ["QR handoff — unnecessary on mobile", "Virtual preview — weaker than spatial launch"]
+    : ["Direct spatial launch — desktop cannot place spatial model", "Virtual preview — weaker than mobile spatial launch"];
+
+  return (
+    <section className="joz-llm-panel__world-trace" aria-label="World model decision trace">
+      <div className="joz-llm-panel__world-trace-topline">
+        <span>World Model Trace</span>
+        <span>{isMobile ? "Mobile" : "Desktop"}</span>
+      </div>
+      <div className="joz-llm-panel__world-trace-grid">
+        <div>
+          <span>Observed</span>
+          <strong>{contextLabel(currentPortal)}</strong>
+          <p>{entityLabel(intent.entitySet)} requested in space.</p>
+        </div>
+        <div>
+          <span>Simulated</span>
+          <strong>3 futures</strong>
+          <p>QR handoff · Spatial launch · Virtual preview</p>
+        </div>
+        <div>
+          <span>Selected</span>
+          <strong>{selected}</strong>
+          <p>Best match for current device and intent.</p>
+        </div>
+        <div>
+          <span>Verified</span>
+          <strong>{isMobile ? "Spatial path" : "Handoff path"}</strong>
+          <p>Trajectory is recorded for prediction-vs-observation learning.</p>
+        </div>
+      </div>
+      <details className="joz-llm-panel__world-trace-why">
+        <summary>Why this action?</summary>
+        <ul>
+          {rejected.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </details>
+    </section>
+  );
+}
+
 function SpeakIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1165,9 +1228,10 @@ export function VoiceChrome({
                   const previousUserMessage = [...jozLlmMessages.slice(0, messageIndex)]
                     .reverse()
                     .find((candidate) => candidate.role === "user");
-                  const spatialIntent = !isMobile && message.role === "assistant" && !message.isPending
+                  const spatialTraceIntent = message.role === "assistant" && !message.isPending
                     ? message.spatialIntent || resolvePlacementIntent(previousUserMessage?.content, { currentPortal })
                     : null;
+                  const spatialIntent = !isMobile ? spatialTraceIntent : null;
                   const introMessageClassName = isIntroMessage
                     ? "joz-llm-panel__message-copy--intro"
                     : "";
@@ -1427,6 +1491,13 @@ export function VoiceChrome({
                     <SpatialOfferCard
                       entitySet={spatialIntent.entitySet}
                       input={previousUserMessage?.content || ""}
+                    />
+                  )}
+                  {spatialTraceIntent?.entitySet && (
+                    <WorldModelDecisionCard
+                      intent={spatialTraceIntent}
+                      currentPortal={currentPortal}
+                      isMobile={isMobile}
                     />
                   )}
                   <div className="joz-llm-panel__message-actions">

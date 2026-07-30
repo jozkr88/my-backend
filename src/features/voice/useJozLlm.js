@@ -256,10 +256,10 @@ function buildCommandReply(result = {}, currentPortal, options = {}) {
   }
   if (normalizedAction === "experience_spatially") {
     if (isMobile) return localizedSpatialLaunched(language);
-    return awareness || "Opening a governed spatial experience.";
+    return awareness || "Opening a safe spatial AI experience.";
   }
   if (normalizedAction === "place_entity_set" || normalizedAction === "preview_entity_set") {
-    return awareness || "Preparing a governed spatial placement.";
+    return awareness || "Preparing a safe spatial placement.";
   }
   if (
     normalizedAction === "contact_joz" ||

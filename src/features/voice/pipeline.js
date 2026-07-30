@@ -65,8 +65,8 @@ async function resolveBackendSpatialIntent({
       action: payload.placement.action || "experience_spatially",
       target: null,
       awareness: payload.placement.action === "experience_spatially"
-        ? "I’ll open a governed spatial experience preview for that Joz entity."
-        : "I’ll prepare a governed spatial placement preview for your confirmation.",
+        ? "I’ll open a safe spatial AI experience."
+        : "I’ll prepare a safe spatial placement preview for your confirmation.",
       placement: payload.placement,
       semanticIntent: {
         source: payload.source,
