@@ -4132,10 +4132,40 @@ function detectSkills(clean) {
   return null;
 }
 
+function isWorldModelBusinessValueQuery(input = "") {
+  const clean = normalizeText(input);
+  return includesAny(clean, [
+    "world model",
+    "world models",
+    "spatial intelligence",
+    "spatial inteligence",
+    "spatial ai",
+  ]) && includesAny(clean, [
+    "business value",
+    "business case",
+    "commercial value",
+    "return on investment",
+    "roi",
+  ]);
+}
+
 export function routeJozLlmQuery({ input = "", appContext = {}, legacyContext = {} } = {}) {
   const clean = normalizeText(input);
   const worldContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
   const worldEntity = resolveMeetJozWorldEntity({ input, appContext, legacyContext });
+
+  if (isWorldModelBusinessValueQuery(input)) {
+    return {
+      detectedIntent: "world_model_knowledge",
+      detectedSubIntent: "world_model_business_value",
+      detectedConcept: "world_model",
+      selectedRoute: "world_model_business_value",
+      selectedWorldRecord: null,
+      worldModelQueryProfile: getWorldModelQueryProfile(input),
+      worldContext,
+      worldEntity,
+    };
+  }
 
   const worldModelBoundaryCorrection = getWorldModelBoundaryCorrection(input);
   const worldModelRecord = findWorldModelKnowledgeRecord(input);
@@ -4507,6 +4537,19 @@ export function composeJozLlmRouteReply({
       intentMode: "business_need",
       retrievedCategories: ["business_need", "systems_mindset"],
       answerClass: "business_value_portal_context",
+      confidence: "high",
+    };
+  }
+
+  if (route?.selectedRoute === "world_model_business_value") {
+    return {
+      reply: "The business value of World Model AI is that it lets companies predict the likely result of decisions before spending time, money, or resources. It can simulate workflows, identify bottlenecks, reduce failure, personalize the next action, and learn from real outcomes.\n\nIn Joz MAXX, this turns AI from an answer engine into a decision and execution system: intent → world state → predicted action → observed result → improved future decisions.",
+      answerSource: "joz-world-model-business-value-v1",
+      composer: "composeWorldModelBusinessValueReply",
+      fallbackUsed: false,
+      intentMode: "business_need",
+      retrievedCategories: ["world_model", "business_need"],
+      answerClass: "world_model_business_value",
       confidence: "high",
     };
   }
