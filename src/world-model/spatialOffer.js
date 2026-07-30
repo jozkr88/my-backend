@@ -18,8 +18,8 @@ const SPATIAL_ASSETS = {
     glb: "https://meetjoz.com/neurovibes.glb",
   },
   joz_skills: {
-    usdz: null,
-    glb: "https://meetjoz.com/skills.glb",
+    usdz: "https://meetjoz.com/Joz-Liquid-Glass-3D-CV.usdz",
+    glb: "https://meetjoz.com/Joz-Liquid-Glass-3D-CV.glb",
   },
   joz_works: {
     usdz: null,
@@ -117,8 +117,8 @@ export async function requestSemanticSpatialIntent({
     action: payload.placement.action || "experience_spatially",
     target: null,
     awareness: payload.placement.action === "experience_spatially"
-      ? "I’ll open a governed spatial experience preview for that Joz entity."
-      : "I’ll prepare a governed spatial placement preview for your confirmation.",
+      ? "I’ll open a safe spatial AI experience."
+      : "I’ll prepare a safe spatial placement preview for your confirmation.",
     placement: payload.placement,
     semanticIntent: {
       source: payload.source,

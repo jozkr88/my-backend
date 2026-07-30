@@ -90,7 +90,7 @@ export function SpatialExperiencePage({ entitySet: rawEntitySet }) {
   const startExperience = async () => {
     if (!plan || started) return;
     setStarted(true);
-    setStatus("Preparing the governed spatial state…");
+    setStatus("Preparing the safe spatial experience…");
     const offerAssets = getOfferSpatialAssetUrls(offer);
     if (query.mode === "ar" && offerAssets?.glb) {
       launchMaxxAr({ arUsdzUrl: offerAssets.usdz, arGlbUrl: offerAssets.glb });
@@ -189,13 +189,13 @@ export function SpatialExperiencePage({ entitySet: rawEntitySet }) {
           <span>JOZ SPATIAL EXPERIENCE</span>
           <span className="spatial-experience-offer">{query.offer ? `OFFER ${query.offer}` : "DIRECT LINK"}</span>
         </div>
-        <p className="spatial-experience-kicker">GOVERNED SPATIAL OFFER</p>
+        <p className="spatial-experience-kicker">SAFE SPATIAL OFFER</p>
         <h1>{ENTITY_LABELS[entitySet]}</h1>
         <p className="spatial-experience-description">
           {offerError
             ? "This spatial offer is unavailable or expired."
             : query.mode === "ar"
-            ? "AR requested. Start the experience to create a governed spatial preview on this device."
+            ? "AR requested. Start the experience to create a safe spatial preview on this device."
             : "A deterministic spatial preview of Joz’s knowledge layer."}
         </p>
         <div className="spatial-experience-stage" aria-label={`${ENTITY_LABELS[entitySet]} spatial preview`}>

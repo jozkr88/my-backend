@@ -56,10 +56,10 @@ export function resolveLocalVoiceCommand(spoken, currentPortal, currentMesh, cur
       action: placement.action,
       target: null,
       awareness: placement.action === "experience_spatially"
-        ? "I’ll open a governed spatial experience preview for that Joz entity."
+        ? "I’ll open a safe spatial AI experience."
         : placement.targetMode === "ar"
-        ? `I found ${placement.entityLabel}. I’ll prepare an AR placement preview for your confirmation.`
-        : `I found ${placement.entityLabel}. I’ll prepare a deterministic world placement preview for your confirmation.`,
+        ? `I found ${placement.entityLabel}. I’ll prepare a safe AR placement preview for your confirmation.`
+        : `I found ${placement.entityLabel}. I’ll prepare a safe world placement preview for your confirmation.`,
       placement,
     };
   }
