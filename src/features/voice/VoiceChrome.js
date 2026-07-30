@@ -2,12 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { getJozLaneConfig } from "../../shared/jozLlmLanes";
 import jozMaxxMark from "../../joz-maxx.svg";
 import {
-  getWorldModelInspectorMode,
-  useWorldModelTelemetry,
-  WorldModelInspectorView,
-  WorldModelTraceCard,
-} from "./worldModelInspector";
-import {
   AI_OVERVIEW_LAST_REVIEWED,
   AI_OVERVIEW_SECTIONS,
   PRIVACY_POLICY_LAST_UPDATED,
@@ -364,10 +358,6 @@ export function VoiceChrome({
   const [isJozLlmTriggerHidden, setIsJozLlmTriggerHidden] = useState(isJozLlmOpen);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
   const [trustPanelTab, setTrustPanelTab] = useState("overview");
-  const [jozLlmPanelView, setJozLlmPanelView] = useState("ask");
-  const worldModelInspectorMode = getWorldModelInspectorMode();
-  const { telemetry: worldModelTelemetry, history: worldModelHistory } =
-    useWorldModelTelemetry(worldModelInspectorMode);
   const jozLlmActionButtons = [
     {
       label: businessLane.label,
@@ -671,7 +661,6 @@ export function VoiceChrome({
       setActiveSpokenMessageId(null);
       setIsPrivacyPolicyOpen(false);
       setTrustPanelTab("overview");
-      setJozLlmPanelView("ask");
     }
   }, [isJozLlmOpen]);
 
@@ -963,19 +952,6 @@ export function VoiceChrome({
                     {bookJozAction.label}
                   </button>
                 ) : null}
-                <button
-                  type="button"
-                  className="joz-llm-panel__action joz-llm-panel__action--header joz-llm-panel__action--world-model"
-                  data-glow="world-model"
-                  aria-current={jozLlmPanelView === "world" ? "true" : undefined}
-                  onClick={() => {
-                    setIsPrivacyPolicyOpen(false);
-                    setTrustPanelTab("overview");
-                    setJozLlmPanelView("world");
-                  }}
-                >
-                  World Model
-                </button>
               </div>
               <div className="joz-llm-panel__header-controls">
                 <span className="joz-llm-panel__header-tag">Alpha</span>
@@ -1008,30 +984,7 @@ export function VoiceChrome({
               </div>
             </div>
 
-            {worldModelInspectorMode !== "off" && !isPrivacyPolicyOpen && (
-              <div className="joz-llm-panel__mode-tabs" role="tablist" aria-label="Joz MAXX interface">
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={jozLlmPanelView === "ask"}
-                  className={`joz-llm-panel__mode-tab ${jozLlmPanelView === "ask" ? "is-active" : ""}`.trim()}
-                  onClick={() => setJozLlmPanelView("ask")}
-                >
-                  Ask Joz
-                </button>
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={jozLlmPanelView === "world"}
-                  className={`joz-llm-panel__mode-tab ${jozLlmPanelView === "world" ? "is-active" : ""}`.trim()}
-                  onClick={() => setJozLlmPanelView("world")}
-                >
-                  World Model
-                </button>
-              </div>
-            )}
-
-            {!isPrivacyPolicyOpen && jozLlmPanelView === "ask" && (
+            {!isPrivacyPolicyOpen && (
               <div className="joz-llm-panel__actions">
                 {jozLlmQuickActions.map(({ label, prompt, intentMode }) => (
                   <button
@@ -1134,13 +1087,6 @@ export function VoiceChrome({
                     </p>
                   </div>
                 </section>
-              ) : jozLlmPanelView === "world" ? (
-                <WorldModelInspectorView
-                  telemetry={worldModelTelemetry}
-                  history={worldModelHistory}
-                  mode={worldModelInspectorMode}
-                  onBack={() => setJozLlmPanelView("ask")}
-                />
               ) : jozLlmMessages.map((message) => (
                 (() => {
                   const isIntroMessage = message.id === "assistant-welcome";
@@ -1444,14 +1390,7 @@ export function VoiceChrome({
               ))}
             </div>
 
-            {!isPrivacyPolicyOpen && jozLlmPanelView === "ask" && (
-              <WorldModelTraceCard
-                telemetry={worldModelTelemetry}
-                onOpen={() => setJozLlmPanelView("world")}
-              />
-            )}
-
-            {!isPrivacyPolicyOpen && jozLlmPanelView === "ask" && (
+            {!isPrivacyPolicyOpen && (
               <form
                 className="joz-llm-panel__composer"
                 onSubmit={handleJozLlmSubmit}
@@ -1487,7 +1426,7 @@ export function VoiceChrome({
                       handleJozLlmSubmit(event);
                     }
                   }}
-                  placeholder="Ask about the Gold Pill, Ascend, Mogg, or neomaxxing - or submit your business need."
+                  placeholder="Ask about the Gold Pill, the Exocortex, or neoMAXX"
                   rows={2}
                   disabled={jozLlmLoading}
                 />
