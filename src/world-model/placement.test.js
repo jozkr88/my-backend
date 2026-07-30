@@ -41,7 +41,7 @@ test("infers skills for bare spatial experience inside meet-joz", () => {
 
 test("resolves reality and space language as AR intent", () => {
   expect(resolvePlacementIntent("show the works of Joz around me in reality")).toMatchObject({
-    action: "preview_entity_set",
+    action: "experience_spatially",
     entitySet: "joz_works",
     targetMode: "ar",
   });
