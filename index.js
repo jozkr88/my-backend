@@ -476,10 +476,11 @@ const configuredAllowedOrigins = String(process.env.JOZ_ALLOWED_ORIGINS || "")
 const allowedOrigins = new Set([
   "https://meetjoz.com",
   "https://www.meetjoz.com",
+  // The local React client intentionally uses the hosted control plane while
+  // collecting privacy-safe world-model trajectories during development.
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
   ...configuredAllowedOrigins,
-  ...(process.env.NODE_ENV === "production"
-    ? []
-    : ["http://localhost:3000", "http://127.0.0.1:3000"]),
 ]);
 
 app.use((req, res, next) => {
