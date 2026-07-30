@@ -11,6 +11,7 @@ import LoadingScreen from './LoadingScreen';
 import { appBasePath } from './utils/paths';
 
 const FREEZE_LOADING_SCREEN = false;
+const ROOT_LOAD_STARTED_AT = typeof performance !== "undefined" ? performance.now() : Date.now();
 
 function Root() {
   const [, params] = useRoute('/neo/:id');
@@ -97,6 +98,20 @@ function Root() {
 
     setLoadingProgress(100);
     setLoading(false);
+    return undefined;
+  }, [canvasReady, loading, minimumDelayDone, sceneReady]);
+
+  useEffect(() => {
+    if (loading || typeof window === "undefined") return undefined;
+
+    const now = typeof performance !== "undefined" ? performance.now() : Date.now();
+    window.__worldModelLoadMetrics = {
+      loadMs: Math.max(0, Math.round(now - ROOT_LOAD_STARTED_AT)),
+      canvasReady,
+      minimumDelayDone,
+      sceneReady,
+      recordedAt: new Date().toISOString(),
+    };
     return undefined;
   }, [canvasReady, loading, minimumDelayDone, sceneReady]);
 

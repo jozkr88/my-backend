@@ -7,7 +7,15 @@ import { APP_ACTIONS } from "../../state/actionTypes";
 import { resolveSemanticAppAction } from "../../state/resolveSemanticAppAction";
 import { apiUrl, fetchJson } from "../../utils/api";
 import { launchMaxxAr } from "../maxx/ar";
-import { getSpatialAssetUrls, requestSpatialOffer } from "../../world-model/spatialOffer";
+import {
+  getSpatialAssetUrls,
+  requestSpatialOffer,
+} from "../../world-model/spatialOffer";
+import {
+  buildFallbackArDecision,
+  getCachedArDecision,
+  trackArHandoff,
+} from "../../world-model/arDecision";
 
 function formatVoiceSeconds(startedAt) {
   if (!startedAt) return "0.00";
@@ -116,7 +124,44 @@ export function applyVoiceReasoningResult({
         );
       const assets = getSpatialAssetUrls(placement.entitySet);
       if (assets) {
-        console.log("🚀 Launching spatial asset for", placement.entitySet);
+        const decision =
+          getCachedArDecision(placement.entitySet) ||
+          buildFallbackArDecision({
+            entitySet: placement.entitySet,
+            currentPortal,
+            isMobile: true,
+            arSupported: true,
+          });
+        const selectedAction = "direct_ar";
+
+        const targetPath = placement.entitySet === "joz_skills"
+          ? "/neo/meet-joz"
+          : "/neo/maxx";
+        const navigationHandled = dispatchAppAction?.(APP_ACTIONS.NAVIGATE, {
+          targetPath,
+          deferredAction: placement.entitySet === "joz_skills" ? "skills" : "",
+          runNuclearSkillsSequence: placement.entitySet === "joz_skills",
+        });
+        if (!navigationHandled) {
+          if (placement.entitySet === "joz_skills") {
+            setPendingMeetJozVoiceAction?.("skills");
+          }
+          announcePortalTransition(targetPath);
+          setLocation(targetPath);
+        }
+
+        trackArHandoff({
+          decision,
+          entitySet: placement.entitySet,
+          action: selectedAction,
+          currentPortal,
+        });
+
+        console.log(
+          "🧠 World model selected direct AR for",
+          placement.entitySet,
+          decision.confidence
+        );
         launchMaxxAr({ arUsdzUrl: assets.usdz, arGlbUrl: assets.glb });
       }
     }

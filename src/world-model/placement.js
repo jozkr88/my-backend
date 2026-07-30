@@ -138,7 +138,32 @@ export function resolvePlacementIntent(input = "", context = {}) {
         : null;
   const entitySet = explicitEntitySet || (experienceSpatially ? inferContextualEntitySet(context) : null);
 
-  if (!experienceSpatially && (!entitySet || !hasAny(text, ["place", "put", "bring", "show", "view", "display", "see", "ukaz", "zobraz", "otvor"]))) {
+  const explicitPlacement = hasAny(text, [
+    "place",
+    "put",
+    "bring",
+    "place in the world",
+    "in the world",
+    "umiestni",
+    "poloz",
+  ]);
+  const spatialContext = hasAny(text, [
+    "reality",
+    "real world",
+    "my space",
+    "your space",
+    "around me",
+    "camera",
+    "ar",
+    "realite",
+    "priestore",
+    "okolo mna",
+    "pri mne",
+    "prostoru",
+    "kolem me",
+  ]);
+
+  if (!experienceSpatially && (!entitySet || (!explicitPlacement && !spatialContext))) {
     return null;
   }
 
@@ -155,7 +180,7 @@ export function resolvePlacementIntent(input = "", context = {}) {
     };
   }
 
-  const targetMode = experienceSpatially || hasAny(text, ["reality", "real world", "my space", "your space", "around me", "camera", "ar", "realite", "priestore", "okolo mna", "pri mne", "prostoru", "kolem me"])
+  const targetMode = experienceSpatially || spatialContext
     ? "ar"
     : "virtual_world";
   const directSpatialView = targetMode === "ar" &&
@@ -176,6 +201,53 @@ export function resolvePlacementIntent(input = "", context = {}) {
     anchorId: targetMode === "ar" ? "current_ar_anchor" : "current_world",
     requiresApproval: true,
     sourceText: text,
+  };
+}
+
+export function resolveSpatialDemoIntent(input = "", context = {}) {
+  const placementIntent = resolvePlacementIntent(input, context);
+  if (placementIntent?.entitySet) return placementIntent;
+
+  const text = clean(input);
+  if (!text || !hasAny(text, ["show", "view", "see", "open", "display", "enter"])) {
+    return null;
+  }
+
+  const entitySet = hasAny(text, [
+    "neuron",
+    "neurons",
+    "neurony",
+    "neuronov",
+    "neurotransmitter",
+    "neurotransmitery",
+    "brain signal",
+    "brain",
+  ])
+    ? "joz_neurons"
+    : hasAny(text, [
+      "skill",
+      "skills",
+      "capabilities",
+      "schopnosti",
+      "zrucnosti",
+      "skillsy",
+      "mogg",
+    ])
+      ? "joz_skills"
+      : null;
+
+  if (!entitySet) return null;
+
+  return {
+    action: "experience_spatially",
+    entitySet,
+    entityLabel: SET_LABELS[entitySet],
+    targetMode: "ar",
+    layout: "radial",
+    anchorId: "current_ar_anchor",
+    requiresApproval: false,
+    sourceText: text,
+    demoOnly: true,
   };
 }
 

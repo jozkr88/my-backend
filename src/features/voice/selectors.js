@@ -109,9 +109,9 @@ export function buildVoiceSuggestionLines({
 
   let prompt = "";
   if (currentPortal === "root") {
-    if (lastPortal === "meet-joz") prompt = `Signal: "Enter the Brain"`;
+    if (lastPortal === "meet-joz") prompt = `Signal: "Show Neurons"`;
     else if (lastPortal === "maxx") prompt = `Signal: "Meet Joz"`;
-    else prompt = `Signal: "Enter the Brain", or "Meet Joz"`;
+    else prompt = `Signal: "Show Skills", or "Show Neurons"`;
   } else if (currentPortal === "maxx" || currentPortal === "the-vibe-energy") {
     const canLaunchSpace = Boolean(isMobile && ar);
     prompt =
@@ -124,16 +124,16 @@ export function buildVoiceSuggestionLines({
           : `Signal: "Pause Neurons", or "Exit the World"`;
   } else if (currentPortal === "meet-joz") {
     if (activeMeetJozLayer === "portal_beginning" && !pendingMeetJozVoiceAction) {
-      prompt = `Signal: "Mogg", "Contact Joz", or "Enter the Brain"`;
+      prompt = `Signal: "Mogg", "Contact Joz", or "Show Neurons"`;
     } else if (activeMeetJozLayer === "skills") {
       prompt =
         isMobile && ar
           ? `Signal: "World MAXX", "Contact Joz", or "Go Back"`
-          : `Signal: "Contact Joz", "Enter the Brain", or "Go Back"`;
+          : `Signal: "Contact Joz", "Show Neurons", or "Go Back"`;
     } else if (activeMeetJozLayer === "discover") {
       prompt = `Signal: "Mogg", "Contact Joz", or "Go Back"`;
     } else {
-      prompt = `Signal: "Ascend", "Contact Joz", or "Enter the Brain"`;
+      prompt = `Signal: "Ascend", "Contact Joz", or "Show Neurons"`;
     }
   }
 
