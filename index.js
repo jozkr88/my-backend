@@ -203,7 +203,6 @@ const LEARNED_WORLD_MODEL_ARTIFACT_PATH = String(
 const learnedWorldModel = LEARNED_WORLD_MODEL_ENABLED
   ? loadLearnedWorldModel(LEARNED_WORLD_MODEL_ARTIFACT_PATH, fs.readFileSync)
   : null;
-
 const AR_DELIVERY_MODEL_VERSION = "ar-delivery-empirical-v1";
 const AR_DELIVERY_ACTIONS = ["direct_ar", "web_preview", "qr_handoff"];
 const AR_DELIVERY_PRIOR_SUCCESS = {
