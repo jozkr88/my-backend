@@ -4,7 +4,10 @@ export const WORLD_MODEL_DEFAULTS = Object.freeze({
   maxHistory: 20,
   maxCandidates: 8,
   maxRolloutDepth: 4,
-  persistenceTimeoutMs: 250,
+  // Render/Postgres can exceed 250ms on a cold connection. Keep shadow
+  // writes bounded, but allow the configured maximum so durable trajectory
+  // records are not silently downgraded to memory fallback.
+  persistenceTimeoutMs: 2_000,
   retentionDays: 30,
 });
 
