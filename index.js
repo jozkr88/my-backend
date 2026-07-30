@@ -204,6 +204,226 @@ const learnedWorldModel = LEARNED_WORLD_MODEL_ENABLED
   ? loadLearnedWorldModel(LEARNED_WORLD_MODEL_ARTIFACT_PATH, fs.readFileSync)
   : null;
 
+const AR_DELIVERY_MODEL_VERSION = "ar-delivery-empirical-v1";
+const AR_DELIVERY_ACTIONS = ["direct_ar", "web_preview", "qr_handoff"];
+const AR_DELIVERY_PRIOR_SUCCESS = {
+  direct_ar: 0.75,
+  web_preview: 0.7,
+  qr_handoff: 0.6,
+};
+const WORLD_MODEL_RECOMMENDATION_VERSION = "contextual-intro-v1";
+const WORLD_MODEL_RECOMMENDATION_ACTIONS = [
+  "show_skills",
+  "show_neurons",
+  "enter_brain",
+  "explore_mindset",
+];
+const WORLD_MODEL_RECOMMENDATION_PRIOR_SUCCESS = {
+  show_skills: 0.72,
+  show_neurons: 0.58,
+  enter_brain: 0.6,
+  explore_mindset: 0.56,
+};
+
+function normalizeArDecisionValue(value, fallback = "unknown", maxLength = 48) {
+  const normalized = String(value || fallback)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, maxLength);
+  return normalized || fallback;
+}
+
+function normalizeArDecisionContext(body = {}) {
+  const entitySet = normalizeArDecisionValue(body.entitySet, "");
+  if (!new Set(["joz_skills", "joz_neurons"]).has(entitySet)) {
+    const error = new Error("AR decision requires joz_skills or joz_neurons");
+    error.status = 400;
+    throw error;
+  }
+
+  return {
+    entitySet,
+    currentPortal: normalizeArDecisionValue(body.currentPortal || body.portal, "root"),
+    device: normalizeArDecisionValue(body.device, "unknown"),
+    browser: normalizeArDecisionValue(body.browser, "unknown"),
+    isMobile: body.isMobile === true,
+    arSupported: body.arSupported === true,
+    loadMs: Number.isFinite(Number(body.loadMs))
+      ? Math.max(0, Math.min(120_000, Math.round(Number(body.loadMs))))
+      : null,
+    viewport: body.viewport && typeof body.viewport === "object"
+      ? {
+          width: Number(body.viewport.width) || null,
+          height: Number(body.viewport.height) || null,
+          pixelRatio: Number(body.viewport.pixelRatio) || null,
+        }
+      : {},
+  };
+}
+
+function buildArDecisionStateKey(context) {
+  return [
+    "ar-delivery",
+    context.entitySet,
+    context.device,
+    context.browser,
+    context.arSupported ? "supported" : "unsupported",
+    context.currentPortal,
+  ].join(":");
+}
+
+function summarizeArDecisionExperience(rows = []) {
+  return rows.reduce(
+    (summary, row) => ({
+      attempts: summary.attempts + Math.max(0, Number(row?.attempts) || 0),
+      successes: summary.successes + Math.max(0, Number(row?.successes) || 0),
+    }),
+    { attempts: 0, successes: 0 }
+  );
+}
+
+async function getArDecisionExperience({ stateKey, actionKey }) {
+  if (isDatabaseEnabled()) {
+    try {
+      const rows = await withWorldModelTimeout(
+        getWorldTransitionExperience({ stateKey, actionKey }),
+        WORLD_MODEL_CONTROLS.persistenceTimeoutMs
+      );
+      if (Array.isArray(rows) && rows.length) return summarizeArDecisionExperience(rows);
+    } catch (error) {
+      console.warn("⚠️ AR decision experience lookup failed:", error?.message || error);
+    }
+  }
+
+  return summarizeArDecisionExperience(
+    worldTransitionExperienceFallbackStore.filter(
+      (row) => row.state_key === stateKey && row.action_key === actionKey
+    )
+  );
+}
+
+function buildArDecisionCandidates(context, experiences) {
+  const eligibleActions = context.isMobile && context.arSupported
+    ? ["direct_ar", "web_preview"]
+    : context.isMobile
+      ? ["web_preview"]
+      : ["qr_handoff", "web_preview"];
+
+  return eligibleActions.map((action, index) => {
+    const experience = experiences[action] || { attempts: 0, successes: 0 };
+    const prior = AR_DELIVERY_PRIOR_SUCCESS[action] || 0.5;
+    const posterior = (experience.successes + prior * 2) / (experience.attempts + 2);
+    const loadPenalty = action === "direct_ar" && context.loadMs > 7000 ? 0.08 : 0;
+    const score = Math.max(0, Math.min(1, posterior - loadPenalty));
+    const confidence = experience.attempts
+      ? Math.min(0.98, 0.5 + Math.min(0.45, experience.attempts / 20))
+      : 0.5;
+
+    return {
+      action,
+      eligible: true,
+      score: Number(score.toFixed(4)),
+      probability: Number(posterior.toFixed(4)),
+      confidence: Number(confidence.toFixed(4)),
+      attempts: experience.attempts,
+      successes: experience.successes,
+      reason: experience.attempts
+        ? "learned from observed AR delivery outcomes"
+        : "cold-start capability prior",
+      priority: index,
+    };
+  });
+}
+
+function normalizeWorldModelRecommendationContext(body = {}) {
+  return {
+    currentPortal: normalizeArDecisionValue(body.currentPortal || body.portal, "root"),
+    device: normalizeArDecisionValue(body.device, "unknown"),
+    browser: normalizeArDecisionValue(body.browser, "unknown"),
+    isMobile: body.isMobile === true,
+    arSupported: body.arSupported === true,
+    dayPart: normalizeArDecisionValue(body.dayPart, "unknown"),
+    audience: normalizeArDecisionValue(body.audience, "explorer"),
+    currentMesh: normalizeArDecisionValue(body.currentMesh, "unknown"),
+    currentPhase: normalizeArDecisionValue(body.currentPhase, "unknown"),
+    loadMs: Number.isFinite(Number(body.loadMs))
+      ? Math.max(0, Math.min(120_000, Math.round(Number(body.loadMs))))
+      : null,
+  };
+}
+
+function buildWorldModelRecommendationStateKey(context) {
+  return [
+    "world-model-recommendation",
+    context.audience,
+    context.dayPart,
+    context.device,
+    context.arSupported ? "supported" : "unsupported",
+    context.currentPortal,
+  ].join(":");
+}
+
+async function getWorldModelRecommendationExperience({ stateKey, actionKey }) {
+  if (isDatabaseEnabled()) {
+    try {
+      const rows = await withWorldModelTimeout(
+        getWorldTransitionExperience({ stateKey, actionKey }),
+        WORLD_MODEL_CONTROLS.persistenceTimeoutMs
+      );
+      if (Array.isArray(rows) && rows.length) return summarizeArDecisionExperience(rows);
+    } catch (error) {
+      console.warn("⚠️ Intro recommendation experience lookup failed:", error?.message || error);
+    }
+  }
+
+  return summarizeArDecisionExperience(
+    worldTransitionExperienceFallbackStore.filter(
+      (row) => row.state_key === stateKey && row.action_key === actionKey
+    )
+  );
+}
+
+function scoreWorldModelRecommendation(action, context, experience) {
+  const prior = WORLD_MODEL_RECOMMENDATION_PRIOR_SUCCESS[action] || 0.5;
+  const posterior = (experience.successes + prior * 2) / (experience.attempts + 2);
+  let score = posterior;
+
+  if (context.audience === "business" || context.audience === "recruiter") {
+    if (action === "show_skills") score += 0.2;
+    if (action === "explore_mindset") score += context.audience === "recruiter" ? 0.12 : 0.04;
+  }
+  if (context.audience === "explorer") {
+    if (action === "enter_brain" || action === "explore_mindset") score += 0.12;
+  }
+  if (["evening", "night"].includes(context.dayPart)) {
+    if (["enter_brain", "explore_mindset"].includes(action)) score += 0.14;
+    if (action === "show_neurons") score += 0.08;
+  }
+  if (["morning", "workday"].includes(context.dayPart) && action === "show_skills") {
+    score += 0.08;
+  }
+  if (context.isMobile && !context.arSupported && ["enter_brain", "explore_mindset"].includes(action)) {
+    score -= 0.12;
+  }
+
+  return {
+    action,
+    eligible: true,
+    score: Number(Math.max(0, Math.min(1, score)).toFixed(4)),
+    probability: Number(posterior.toFixed(4)),
+    confidence: Number(
+      (experience.attempts ? Math.min(0.98, 0.5 + Math.min(0.45, experience.attempts / 20)) : 0.5).toFixed(4)
+    ),
+    attempts: experience.attempts,
+    successes: experience.successes,
+    reason: experience.attempts
+      ? "learned from recommendation selections"
+      : "contextual cold-start prior",
+  };
+}
+
 const app = express();
 app.set("trust proxy", 2);
 const isEphemeralFilesystem =
@@ -553,6 +773,85 @@ app.get("/api/world-model/status", (_req, res) => {
       transitionCount: learnedWorldModel?.training?.transitionCount || 0,
     },
   });
+});
+
+app.post("/api/world-model/ar-decision", async (req, res) => {
+  try {
+    const context = normalizeArDecisionContext(req.body || {});
+    const stateKey = buildArDecisionStateKey(context);
+    const experiences = Object.fromEntries(
+      await Promise.all(
+        AR_DELIVERY_ACTIONS.map(async (action) => [
+          action,
+          await getArDecisionExperience({ stateKey, actionKey: action }),
+        ])
+      )
+    );
+    const candidates = buildArDecisionCandidates(context, experiences);
+    const selected = candidates
+      .slice()
+      .sort((left, right) => right.score - left.score || left.priority - right.priority)[0];
+    const decisionId = randomUUID();
+    const totalAttempts = candidates.reduce((sum, candidate) => sum + candidate.attempts, 0);
+
+    return res.json({
+      ok: true,
+      decisionId,
+      trajectoryId: `ar-delivery-${decisionId}`,
+      modelVersion: AR_DELIVERY_MODEL_VERSION,
+      entitySet: context.entitySet,
+      stateKey,
+      selectedAction: selected.action,
+      confidence: selected.confidence,
+      source: totalAttempts ? "observed_trajectory_experience" : "cold_start_prior",
+      context,
+      candidates: candidates.map(({ priority, ...candidate }) => candidate),
+      executionPolicy: "allowlisted_delivery_path_with_observed_outcomes",
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/ar-decision failed:", error?.message || error);
+    return res.status(error.status || 400).json({ error: error.message });
+  }
+});
+
+app.post("/api/world-model/recommendations", async (req, res) => {
+  try {
+    const context = normalizeWorldModelRecommendationContext(req.body || {});
+    const stateKey = buildWorldModelRecommendationStateKey(context);
+    const experiences = Object.fromEntries(
+      await Promise.all(
+        WORLD_MODEL_RECOMMENDATION_ACTIONS.map(async (action) => [
+          action,
+          await getWorldModelRecommendationExperience({ stateKey, actionKey: action }),
+        ])
+      )
+    );
+    const candidates = WORLD_MODEL_RECOMMENDATION_ACTIONS
+      .map((action) => scoreWorldModelRecommendation(action, context, experiences[action]))
+      .sort((left, right) => right.score - left.score ||
+        WORLD_MODEL_RECOMMENDATION_ACTIONS.indexOf(left.action) -
+        WORLD_MODEL_RECOMMENDATION_ACTIONS.indexOf(right.action));
+    const selectedActions = candidates
+      .filter((candidate) => ["show_skills", "show_neurons"].includes(candidate.action))
+      .slice(0, 2)
+      .map((candidate) => candidate.action);
+    const totalAttempts = candidates.reduce((sum, candidate) => sum + candidate.attempts, 0);
+
+    return res.json({
+      ok: true,
+      recommendationId: randomUUID(),
+      modelVersion: WORLD_MODEL_RECOMMENDATION_VERSION,
+      source: totalAttempts ? "observed_recommendation_experience" : "contextual_cold_start",
+      context,
+      stateKey,
+      selectedActions,
+      candidates,
+      executionPolicy: "allowlisted_contextual_intro_actions",
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/recommendations failed:", error?.message || error);
+    return res.status(error.status || 400).json({ error: error.message });
+  }
 });
 
 app.get("/api/version", (req, res) => {

@@ -1,8 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getJozLaneConfig } from "../../shared/jozLlmLanes";
 import { QRCodeSVG } from "qrcode.react";
 import { requestSpatialOffer } from "../../world-model/spatialOffer";
-import { resolvePlacementIntent } from "../../world-model/placement";
+import { resolvePlacementIntent, resolveSpatialDemoIntent } from "../../world-model/placement";
+import {
+  buildArDecisionContext,
+  cacheArDecision,
+  requestArDecision,
+} from "../../world-model/arDecision";
+import {
+  buildWorldModelRecommendationContext,
+  recordWorldModelRecommendationSelection,
+  requestWorldModelRecommendations,
+} from "../../world-model/recommendation";
 import jozMaxxMark from "../../joz-maxx.svg";
 import {
   AI_OVERVIEW_LAST_REVIEWED,
@@ -141,9 +151,19 @@ function ShareIcon() {
   );
 }
 
-function SpatialOfferCard({ entitySet, input }) {
+function SpatialOfferCard({ entitySet, input, onReady, onOfferReady }) {
   const [offer, setOffer] = useState(null);
   const [error, setError] = useState("");
+  const onReadyRef = useRef(onReady);
+  const onOfferReadyRef = useRef(onOfferReady);
+
+  useEffect(() => {
+    onReadyRef.current = onReady;
+  }, [onReady]);
+
+  useEffect(() => {
+    onOfferReadyRef.current = onOfferReady;
+  }, [onOfferReady]);
 
   useEffect(() => {
     let cancelled = false;
@@ -151,11 +171,17 @@ function SpatialOfferCard({ entitySet, input }) {
     setError("");
     requestSpatialOffer({ entitySet, mode: "ar", input })
       .then((nextOffer) => {
-        if (!cancelled) setOffer(nextOffer);
+        if (!cancelled) {
+          setOffer(nextOffer);
+          onOfferReadyRef.current?.(nextOffer?.launchUrl || "");
+          onReadyRef.current?.();
+        }
       })
       .catch((requestError) => {
         if (!cancelled) {
+          onOfferReadyRef.current?.("");
           setError(requestError?.message || "Spatial offer unavailable");
+          onReadyRef.current?.();
         }
       });
     return () => {
@@ -228,8 +254,8 @@ function WorldModelDecisionCard({ intent, currentPortal, isMobile }) {
     ? "Launch spatially"
     : "Create mobile spatial handoff";
   const rejected = isMobile
-    ? ["QR handoff — unnecessary on mobile", "Virtual preview — weaker than spatial launch"]
-    : ["Direct spatial launch — desktop cannot place spatial model", "Virtual preview — weaker than mobile spatial launch"];
+    ? ["QR handoff — not needed on mobile", "Virtual preview — kept as fallback"]
+    : ["Direct spatial launch — requires a mobile spatial device", "Virtual preview — kept as fallback"];
 
   return (
     <section className="joz-llm-panel__world-trace" aria-label="World model decision trace">
@@ -453,6 +479,7 @@ export function VoiceChrome({
   fadeOut,
   currentPortal,
   isMobile = false,
+  arSupported = false,
   agentContext,
   isJozLlmOpen,
   jozLlmActiveIntentMode,
@@ -479,14 +506,82 @@ export function VoiceChrome({
   const mindsetLane = getJozLaneConfig("mindset");
   const skillsLane = getJozLaneConfig("skills");
   const bookingLane = getJozLaneConfig("booking");
+  const supportsSpatialWorldModel = isMobile && arSupported;
+  const showWorldModelActions = true;
+  const recommendationContext = useMemo(
+    () => buildWorldModelRecommendationContext({
+      currentPortal,
+      currentMesh: agentContext?.currentMesh,
+      currentPhase: agentContext?.currentPhase,
+      isMobile,
+      arSupported,
+      agentContext,
+    }),
+    [
+      agentContext?.audience,
+      agentContext?.currentMesh,
+      agentContext?.currentMeshStage,
+      agentContext?.currentPhase,
+      arSupported,
+      currentPortal,
+      isMobile,
+    ]
+  );
+  const [worldModelRecommendation, setWorldModelRecommendation] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    requestWorldModelRecommendations(recommendationContext)
+      .then((recommendation) => {
+        if (!cancelled) setWorldModelRecommendation(recommendation);
+      })
+      .catch((error) => {
+        console.warn("⚠️ World-model recommendation unavailable:", error?.message || error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [recommendationContext]);
+
+  useEffect(() => {
+    if (!isMobile || !arSupported) return undefined;
+
+    let cancelled = false;
+    const preloadArDecisions = async () => {
+      const contexts = ["joz_skills", "joz_neurons"].map((entitySet) =>
+        buildArDecisionContext({
+          entitySet,
+          currentPortal,
+          isMobile,
+          arSupported,
+        })
+      );
+
+      try {
+        const decisions = await Promise.all(contexts.map(requestArDecision));
+        if (cancelled) return;
+        decisions.forEach(cacheArDecision);
+      } catch (error) {
+        console.warn("⚠️ AR world-model preflight unavailable:", error?.message || error);
+      }
+    };
+
+    void preloadArDecisions();
+    return () => {
+      cancelled = true;
+    };
+  }, [arSupported, currentPortal, isMobile, supportsSpatialWorldModel]);
   const jozLlmMessagesRef = useRef(null);
   const jozLlmMessageNodeRefs = useRef({});
   const jozLlmInputRef = useRef(null);
   const pendingLaneStarterScrollRef = useRef(false);
+  const pendingWorldDemoScrollRef = useRef(false);
   const jozLlmTransitionTimeoutRef = useRef(null);
   const jozLlmTriggerTimeoutRef = useRef(null);
   const [revealedAssistantMessageIds, setRevealedAssistantMessageIds] = useState(() => new Set());
   const [messageActionStatus, setMessageActionStatus] = useState({});
+  const [spatialShareLinks, setSpatialShareLinks] = useState({});
   const [activeSpokenMessageId, setActiveSpokenMessageId] = useState(null);
   const [isJozLlmRendered, setIsJozLlmRendered] = useState(isJozLlmOpen);
   const [isJozLlmVisible, setIsJozLlmVisible] = useState(isJozLlmOpen);
@@ -519,12 +614,25 @@ export function VoiceChrome({
   const jozLlmQuickActions = jozLlmActionButtons.filter(
     ({ label }) => label !== bookingLane.label
   );
+  const worldModelActionOrder = [
+    ...(worldModelRecommendation?.selectedActions || []),
+    "show_skills",
+    "show_neurons",
+  ].filter((action, index, actions) =>
+    ["show_skills", "show_neurons"].includes(action) && actions.indexOf(action) === index
+  ).slice(0, 2);
+  const worldModelIntroActions = worldModelActionOrder.map((action) => ({
+    label: action === "show_skills" ? "Show Skills" : "Show Neurons",
+    prompt: action === "show_skills" ? "show skills" : "show neurons",
+    actionType: "world_model_demo",
+  }));
   const jozLlmIntroActions = [
     {
       label: businessLane.label,
       prompt: businessLane.actions[0]?.prompt || businessLane.summary,
       intentMode: businessLane.intentMode,
     },
+    ...worldModelIntroActions,
   ];
   const stopScrollPropagation = (event) => {
     event.stopPropagation();
@@ -570,6 +678,28 @@ export function VoiceChrome({
   const getMessageShareText = (message) => {
     if (!message) return "";
 
+    const spatialLinks = Object.entries(spatialShareLinks)
+      .filter(([, url]) => url)
+      .map(([entitySet, url]) => `${entitySet === "joz_skills" ? "Skills" : "Neurons"} AR link: ${url}`);
+    const appendSpatialLink = (text) => {
+      const entitySet = message.spatialIntent?.entitySet;
+      const url = entitySet ? spatialShareLinks[entitySet] : "";
+      return url ? `${text}\n\n${entitySet === "joz_skills" ? "Skills" : "Neurons"} AR link: ${url}` : text;
+    };
+
+    if (message.id === "assistant-welcome") {
+      return [
+        "Joz MAXX",
+        message.content,
+        "World Model Trajectory:",
+        ...jozLlmIntroActions.slice(1).map((action) => action.label),
+        `Discover ${jozLlmIntroActions[0]?.label || "Business Value"} or ask Joz anything.`,
+        spatialLinks.length ? spatialLinks.join("\n") : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+    }
+
     if (message.kind === "booking" && message.booking) {
       const bookingActions = message.booking.actions
         .map((action) => `${action.label}: ${action.href}`)
@@ -609,7 +739,7 @@ export function VoiceChrome({
         .join("\n\n");
     }
 
-    return String(message.content || "");
+    return appendSpatialLink(String(message.content || ""));
   };
   const handleCopyMessage = async (message) => {
     const text = getMessageShareText(message).trim();
@@ -789,6 +919,21 @@ export function VoiceChrome({
   }, [isJozLlmOpen, jozLlmMessages]);
 
   useEffect(() => {
+    if (!isJozLlmOpen || !pendingWorldDemoScrollRef.current) return;
+
+    const latestWorldDemoMessage = [...jozLlmMessages]
+      .reverse()
+      .find((message) => message.role === "assistant" && message.spatialIntent?.demoOnly);
+
+    if (!latestWorldDemoMessage) return;
+
+    window.requestAnimationFrame(() => {
+      if (scrollMessageIntoView(latestWorldDemoMessage.id)) return;
+      scrollMessagesToBottom();
+    });
+  }, [isJozLlmOpen, jozLlmMessages]);
+
+  useEffect(() => {
     if (!isJozLlmOpen) {
       if (typeof window !== "undefined" && window.speechSynthesis) {
         window.speechSynthesis.cancel();
@@ -820,7 +965,13 @@ export function VoiceChrome({
     });
   };
 
-  const handleJozLlmActionClick = (label, prompt, intentMode, href = null) => {
+  const handleJozLlmActionClick = (
+    label,
+    prompt,
+    intentMode,
+    href = null,
+    actionType = ""
+  ) => {
     if (href) {
       window.open(href, "_blank", "noopener,noreferrer");
       return;
@@ -829,11 +980,37 @@ export function VoiceChrome({
     selectJozLlmIntentMode?.(intentMode);
 
     completeReveal(latestAssistantMessageId);
-    pendingLaneStarterScrollRef.current = true;
+    if (actionType === "world_model_demo") {
+      pendingWorldDemoScrollRef.current = true;
+    } else {
+      pendingLaneStarterScrollRef.current = true;
+    }
+    const isWorldModelDemo = actionType === "world_model_demo";
+    const usesSpatialWorldModel = supportsSpatialWorldModel && isWorldModelDemo;
+
+    if (isWorldModelDemo) {
+      void recordWorldModelRecommendationSelection({
+        recommendation: worldModelRecommendation,
+        context: recommendationContext,
+        action: label === "Show Skills" ? "show_skills" : "show_neurons",
+      }).catch((error) => {
+        console.warn("⚠️ World-model recommendation outcome recording failed:", error?.message || error);
+      });
+    }
+
     sendJozLlmMessage(prompt, {
       intentMode,
-      landingOnly: true,
+      landingOnly: !isWorldModelDemo,
       skipClientGuards: true,
+      worldModelDemo: usesSpatialWorldModel,
+      desktopWorldModelAction:
+        !supportsSpatialWorldModel && isWorldModelDemo
+          ? label === "Show Skills" ? "skills" : "brain"
+          : "",
+      desktopWorldModelTarget:
+        !supportsSpatialWorldModel && isWorldModelDemo
+          ? label === "Show Skills" ? "/neo/meet-joz" : "/neo/maxx"
+          : "",
     });
   };
 
@@ -1229,7 +1406,9 @@ export function VoiceChrome({
                     .reverse()
                     .find((candidate) => candidate.role === "user");
                   const spatialTraceIntent = message.role === "assistant" && !message.isPending
-                    ? message.spatialIntent || resolvePlacementIntent(previousUserMessage?.content, { currentPortal })
+                    ? message.spatialIntent ||
+                      resolvePlacementIntent(previousUserMessage?.content, { currentPortal }) ||
+                      resolveSpatialDemoIntent(previousUserMessage?.content, { currentPortal })
                     : null;
                   const spatialIntent = !isMobile ? spatialTraceIntent : null;
                   const introMessageClassName = isIntroMessage
@@ -1430,7 +1609,13 @@ export function VoiceChrome({
                           message.id === latestAssistantMessageId &&
                           !revealedAssistantMessageIds.has(message.id)
                         }
-                        onProgress={scrollMessagesToBottom}
+                        onProgress={() => {
+                          if (spatialTraceIntent?.demoOnly) {
+                            scrollMessageIntoView(message.id);
+                            return;
+                          }
+                          scrollMessagesToBottom();
+                        }}
                         onComplete={() => {
                           if (message.role !== "assistant" || message.isPending) return;
                           setRevealedAssistantMessageIds((current) => {
@@ -1443,26 +1628,55 @@ export function VoiceChrome({
                       />
                       {isIntroMessage && (
                         <p className="joz-llm-panel__intro-hint">
-                          Start with{" "}
-                          {jozLlmIntroActions.map((action) => (
-                            <button
-                              key={action.label}
-                              type="button"
-                              className="joz-llm-panel__intro-action"
-                              onClick={() =>
-                                handleJozLlmActionClick(
-                                  action.label,
-                                  action.prompt,
-                                  action.intentMode
-                                )
-                              }
-                              disabled={jozLlmLoading}
-                            >
-                              {action.label}
-                            </button>
-                          ))}{" "}
-                          or type <span className="joz-llm-panel__intro-hint-accent">Enter the Brain</span>,
-                          or ask Joz anything.
+                          {showWorldModelActions && (
+                            <span className="joz-llm-panel__intro-line joz-llm-panel__intro-line--world">
+                              World Model Trajectory:{" "}
+                              {jozLlmIntroActions.slice(1).map((action) => (
+                                <button
+                                  key={action.label}
+                                  type="button"
+                                  className="joz-llm-panel__intro-action"
+                                  onClick={() =>
+                                    handleJozLlmActionClick(
+                                      action.label,
+                                      action.prompt,
+                                      action.intentMode,
+                                      action.href,
+                                      action.actionType
+                                    )
+                                  }
+                                  disabled={jozLlmLoading}
+                                  data-kind={action.actionType || action.intentMode || "intro"}
+                                >
+                                  {action.label}
+                                </button>
+                              ))}{" "}
+                            </span>
+                          )}
+                          <span className="joz-llm-panel__intro-line">
+                            Discover{" "}
+                            {jozLlmIntroActions.slice(0, 1).map((action) => (
+                              <button
+                                key={action.label}
+                                type="button"
+                                className="joz-llm-panel__intro-action"
+                                onClick={() =>
+                                  handleJozLlmActionClick(
+                                    action.label,
+                                    action.prompt,
+                                    action.intentMode,
+                                    action.href,
+                                    action.actionType
+                                  )
+                                }
+                                disabled={jozLlmLoading}
+                                data-kind={action.actionType || action.intentMode || "intro"}
+                              >
+                                {action.label}
+                              </button>
+                            ))}{" "}
+                            or ask Joz anything.
+                          </span>
                         </p>
                       )}
                       {!!message.actions?.length && (
@@ -1491,6 +1705,21 @@ export function VoiceChrome({
                     <SpatialOfferCard
                       entitySet={spatialIntent.entitySet}
                       input={previousUserMessage?.content || ""}
+                      onOfferReady={(launchUrl) => {
+                        setSpatialShareLinks((current) => ({
+                          ...current,
+                          [spatialIntent.entitySet]: launchUrl,
+                        }));
+                      }}
+                      onReady={() => {
+                        if (!spatialIntent.demoOnly) return;
+                        window.requestAnimationFrame(() => {
+                          if (!scrollMessageIntoView(message.id)) {
+                            scrollMessagesToBottom();
+                          }
+                          pendingWorldDemoScrollRef.current = false;
+                        });
+                      }}
                     />
                   )}
                   {spatialTraceIntent?.entitySet && (
@@ -1581,7 +1810,7 @@ export function VoiceChrome({
                       handleJozLlmSubmit(event);
                     }
                   }}
-                  placeholder="Ask about the Gold Pill, the Exocortex, or neoMAXX"
+                  placeholder="Ask about Spatial Intelligence, World Model AI, the Gold Pill, the Exocortex, or neoMAXX"
                   rows={2}
                   disabled={jozLlmLoading}
                 />

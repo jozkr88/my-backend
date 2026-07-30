@@ -2,6 +2,7 @@ import {
   buildPlacementObservedState,
   planWorldPlacement,
   resolvePlacementIntent,
+  resolveSpatialDemoIntent,
 } from "./placement";
 
 test("resolves natural language skills placement into a canonical action", () => {
@@ -52,6 +53,35 @@ test("treats view skills around me as a spatial experience", () => {
     action: "experience_spatially",
     entitySet: "joz_skills",
     targetMode: "ar",
+  });
+});
+
+test("does not treat plain show commands as spatial placement", () => {
+  expect(resolvePlacementIntent("show skills")).toBeNull();
+  expect(resolvePlacementIntent("show neurons")).toBeNull();
+});
+
+test("resolves plain show commands as desktop spatial demo intents", () => {
+  expect(resolveSpatialDemoIntent("show skills")).toMatchObject({
+    action: "experience_spatially",
+    entitySet: "joz_skills",
+    targetMode: "ar",
+    demoOnly: true,
+  });
+  expect(resolveSpatialDemoIntent("show neurons")).toMatchObject({
+    action: "experience_spatially",
+    entitySet: "joz_neurons",
+    targetMode: "ar",
+    demoOnly: true,
+  });
+});
+
+test("resolves enter the brain as a mobile neurons spatial demo", () => {
+  expect(resolveSpatialDemoIntent("enter the brain")).toMatchObject({
+    action: "experience_spatially",
+    entitySet: "joz_neurons",
+    targetMode: "ar",
+    demoOnly: true,
   });
 });
 
