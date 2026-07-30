@@ -39,7 +39,32 @@ Prediction traces expose both the highest-scoring valid simulated plan (`planner
 - `tools/evaluate-world-model.mjs`: deterministic regression fixture report and persisted-trajectory evaluation.
 - `tools/export-world-model-dataset.mjs`: read-only JSONL export with privacy filtering, manifest checksums, and session/journey splits.
 - `shared/worldModelControls.js`: sampling, payload, retention, classification, and bot/development controls.
+- `shared/learnedWorldModel.js`: a versioned, session-isolated structured transition learner that estimates observed next-state distributions from eligible trajectories, with held-out evaluation and explicit minimum-sample limitations.
+- `tools/train-world-model.mjs`: reproducible training/evaluation CLI for privacy-safe trajectory JSONL exports.
 - `src/features/voice/worldModelInspector.js`: optional read-only inspector embedded in the existing Joz MAXX popup.
+
+## Learned transition model
+
+The application now has a real trainable model component, but it is deliberately opt-in and shadow-only. `learned-structured-transition-v1` learns a probability distribution for a canonical state/action pair from observed outcomes. It is not a neural network, foundation model, or claim of general physical-world understanding. It is an application-level learned transition model inside the larger hybrid system.
+
+Train it only from privacy-safe observed trajectory exports; synthetic, invalid, unsupported, and explicitly test-labelled rows are excluded by default:
+
+```text
+npm run train:world-model -- \
+  --input ./world-model-dataset/train.jsonl \
+  --output ./data/joz/published/learned-world-model.json
+```
+
+The trainer writes a model artifact and a held-out evaluation report. Sessions are hashed into train/validation/test partitions so one session cannot leak across splits. The evaluation report remains non-meaningful until the configured minimum test count is reached. A real production claim requires a sufficiently large held-out set, coverage across the deployed state/action space, calibrated probabilities, and repeated prediction-versus-observation reconciliation.
+
+To load the artifact in shadow mode:
+
+```text
+JOZ_WORLD_MODEL_LEARNED_ENABLED=true
+JOZ_WORLD_MODEL_ARTIFACT_PATH=data/joz/published/learned-world-model.json
+```
+
+When loaded, `/api/world-model/status` reports the learned model version and training counts, and `/api/agentic` exposes its candidates under `prediction.learnedTransitionModel`. The deterministic symbolic simulator, guardrails, approval, and executor remain authoritative. No learned prediction can execute an action.
 
 ## Structured scene observation
 

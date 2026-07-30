@@ -379,6 +379,7 @@ export function buildPredictionTrace({
   observedState = null,
   observationBefore = null,
   shadowLatencyMs = null,
+  learnedTransitionModel = null,
 } = {}) {
   const comparison = selectedPlan && observedState
     ? compareWorldStates(selectedPlan.simulation.predictedState, observedState)
@@ -457,5 +458,29 @@ export function buildPredictionTrace({
     },
     observedState: clone(observedState),
     predictionError: comparison,
+    learnedTransitionModel: learnedTransitionModel
+      ? {
+          enabled: learnedTransitionModel.enabled === true,
+          loaded: learnedTransitionModel.loaded === true,
+          modelVersion: learnedTransitionModel.modelVersion || null,
+          candidates: Array.isArray(learnedTransitionModel.candidates)
+            ? learnedTransitionModel.candidates.slice(0, 24).map((candidate) => ({
+                action: candidate.action || null,
+                predictedState: clone(candidate.predictedState),
+                probability: candidate.probability ?? null,
+                confidence: candidate.confidence ?? null,
+                observations: candidate.observations ?? null,
+                evidence: candidate.evidence || null,
+                learned: candidate.learned === true,
+                modelVersion: candidate.modelVersion || null,
+              }))
+            : [],
+        }
+      : {
+          enabled: false,
+          loaded: false,
+          modelVersion: null,
+          candidates: [],
+        },
   };
 }

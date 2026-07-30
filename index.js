@@ -94,6 +94,10 @@ import {
   shouldSampleWorldTrajectory,
 } from "./shared/worldModelControls.js";
 import {
+  loadLearnedWorldModel,
+  predictLearnedNextStates,
+} from "./shared/learnedWorldModel.js";
+import {
   buildJozLlmContext,
   enforceJozLlmReplyLimit,
 } from "./shared/jozLlmProfile.js";
@@ -189,6 +193,16 @@ const WORLD_MODEL_CONTROLS = normalizeWorldModelControls(process.env, {
 });
 const WORLD_MODEL_EXPERIENCE_TIMEOUT_MS = Math.min(50, WORLD_MODEL_CONTROLS.persistenceTimeoutMs);
 const WORLD_MODEL_SESSION_HASH_SALT = String(process.env.JOZ_WORLD_MODEL_SESSION_HASH_SALT || "public-world-model");
+const LEARNED_WORLD_MODEL_ENABLED = String(
+  process.env.JOZ_WORLD_MODEL_LEARNED_ENABLED || "false"
+).trim().toLowerCase() === "true";
+const LEARNED_WORLD_MODEL_ARTIFACT_PATH = String(
+  process.env.JOZ_WORLD_MODEL_ARTIFACT_PATH ||
+    path.join(path.dirname(fileURLToPath(import.meta.url)), "data", "joz", "published", "learned-world-model.json")
+).trim();
+const learnedWorldModel = LEARNED_WORLD_MODEL_ENABLED
+  ? loadLearnedWorldModel(LEARNED_WORLD_MODEL_ARTIFACT_PATH, fs.readFileSync)
+  : null;
 
 const app = express();
 app.set("trust proxy", 2);
@@ -531,6 +545,13 @@ app.get("/api/world-model/status", (_req, res) => {
     executionPolicy: "shadow_predictions_do_not_control_live_actions",
     observationBoundary: "structured_application_scene_state; no_continuous_camera_audio_or_biometrics",
     persistence: isDatabaseEnabled() ? "postgresql" : "memory_fallback",
+    learnedTransitionModel: {
+      enabled: LEARNED_WORLD_MODEL_ENABLED,
+      loaded: Boolean(learnedWorldModel),
+      modelVersion: learnedWorldModel?.modelVersion || null,
+      trainingExamples: learnedWorldModel?.training?.trainingExamples || 0,
+      transitionCount: learnedWorldModel?.training?.transitionCount || 0,
+    },
   });
 });
 
@@ -951,6 +972,15 @@ app.post("/api/agentic", async (req, res) => {
         },
       );
     }
+    const learnedPredictionCandidates = LEARNED_WORLD_MODEL_ENABLED && learnedWorldModel
+      ? predictiveActions.flatMap((action) =>
+          predictLearnedNextStates(learnedWorldModel, initialWorldState, action, { topK: 3 })
+            .map((prediction) => ({
+              action,
+              ...prediction,
+            }))
+        )
+      : [];
     const approvedPrediction = approved?.action
       ? evaluatedPredictionCandidates.find((candidate) => {
           const candidateAction = candidate.plan?.actions?.[0];
@@ -996,6 +1026,12 @@ app.post("/api/agentic", async (req, res) => {
       probabilisticPlannerSelected: plannerSelectedProbabilisticPrediction,
       observationBefore: initialObservation,
       shadowLatencyMs: Date.now() - predictionStartedAt,
+      learnedTransitionModel: {
+        enabled: LEARNED_WORLD_MODEL_ENABLED,
+        loaded: Boolean(learnedWorldModel),
+        modelVersion: learnedWorldModel?.modelVersion || null,
+        candidates: learnedPredictionCandidates,
+      },
     });
     }
     } catch (error) {
