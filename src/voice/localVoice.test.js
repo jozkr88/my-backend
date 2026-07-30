@@ -38,3 +38,19 @@ test("keeps spatial skills requests out of the Mogg shortcut", () => {
     },
   });
 });
+
+test("keeps plain skills commands on the normal desktop skills route", () => {
+  expect(resolveLocalVoiceCommand("show skills", "root", null, null)).toEqual({
+    action: "skills",
+    target: "/neo/meet-joz",
+    awareness: "Cross-jumping to Mogg.",
+  });
+});
+
+test("keeps plain neuron commands on the normal desktop brain route", () => {
+  expect(resolveLocalVoiceCommand("show neurons", "root", null, null)).toEqual({
+    action: "brain",
+    target: "/neo/maxx",
+    awareness: "Entering the Brain…",
+  });
+});

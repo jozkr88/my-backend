@@ -11,6 +11,7 @@ import {
 import { getJozLaneConfig, JOZ_LLM_LANES, normalizeJozLaneIntent } from "../../shared/jozLlmLanes";
 import { normalizeVoiceAction } from "../../shared/voiceActions";
 import { resolveLocalVoiceCommand } from "../../voice/localVoice";
+import { resolveSpatialDemoIntent } from "../../world-model/placement";
 import { requestSemanticSpatialIntent } from "../../world-model/spatialOffer";
 
 const PENDING_MESSAGE_ID = "joz-llm-pending";
@@ -21,7 +22,7 @@ const CHAT_DUPLICATE_WINDOW_MS = 10000;
 const CHAT_MAX_INPUT_CHARS = 800;
 const GET_CALLED_FLOW_STEPS = ["phone", "time", "name"];
 const JOZ_LLM_WELCOME_MESSAGE =
-  "Welcome to the state-of-the-art AI experience.\n\nJoz MAXX connects signal reasoning, AI architecture, orchestration, and execution into deployable intelligence.";
+  "Welcome to the state-of-the-art World Model AI experience.";
 const LANDING_ACTION_LABELS = new Set(
   Object.values(JOZ_LLM_LANES).flatMap((lane) => [lane.label, lane.title])
 );
@@ -36,6 +37,11 @@ function isLandingActionUserMessage(message) {
 }
 
 function replaceLandingPanelMessage(currentMessages, nextMessage) {
+  const welcomeMessage = currentMessages.find((message) => message.id === "assistant-welcome") || {
+    id: "assistant-welcome",
+    role: "assistant",
+    content: JOZ_LLM_WELCOME_MESSAGE,
+  };
   const preservedMessages = currentMessages.filter(
     (message) =>
       message.id !== "assistant-welcome" &&
@@ -44,7 +50,7 @@ function replaceLandingPanelMessage(currentMessages, nextMessage) {
       message.kind !== "booking"
   );
 
-  return [nextMessage, ...preservedMessages];
+  return [welcomeMessage, nextMessage, ...preservedMessages];
 }
 
 function cleanAwarenessText(text = "") {
@@ -213,6 +219,15 @@ function buildCommandReply(result = {}, currentPortal, options = {}) {
   const awareness = cleanAwarenessText(String(result?.awareness || "").trim());
   const language = options.language || "en";
   const isMobile = Boolean(options.isMobile);
+  const spatialIntent = options.spatialIntent || null;
+
+  if (spatialIntent?.demoOnly && spatialIntent.entitySet === "joz_neurons") {
+    return "Opening the neurons.\n\nWorld Model AI demo ready: spatial handoff and prediction trace are shown below.";
+  }
+
+  if (spatialIntent?.demoOnly && spatialIntent.entitySet === "joz_skills") {
+    return "Opening Skills / Mogg.\n\nWorld Model AI demo ready: spatial handoff and prediction trace are shown below.";
+  }
 
   if (normalizedAction === "brain") {
     return currentPortal === "maxx"
@@ -343,6 +358,7 @@ export function useJozLlm({
   currentMeshStage,
   executeCommand,
   isMobile = false,
+  arSupported = false,
   startOpen = false,
 }) {
   const [isOpen, setIsOpen] = useState(() => Boolean(startOpen));
@@ -498,6 +514,9 @@ export function useJozLlm({
       const responseLanguage = detectChatLanguage(value);
       const intentMode = String(options?.intentMode || "").trim().toLowerCase();
       const skipClientGuards = options?.skipClientGuards === true;
+      const worldModelDemo = options?.worldModelDemo === true;
+      const desktopWorldModelAction = String(options?.desktopWorldModelAction || "").trim();
+      const desktopWorldModelTarget = String(options?.desktopWorldModelTarget || "").trim();
       const hasExplicitIntentMode = Boolean(intentMode);
       const useStarter = options?.starter !== false;
       const landingOnly = options?.landingOnly !== false;
@@ -756,6 +775,17 @@ export function useJozLlm({
         return;
       }
 
+      const mobileBrainSpatialDemo =
+        isMobile &&
+        arSupported &&
+        /^(?:please\s+)?(?:enter|open|go\s+inside)\s+(?:the\s+)?(?:brain|neurons?)\b/i.test(value);
+      const spatialDemoIntent = worldModelDemo || mobileBrainSpatialDemo
+        ? resolveSpatialDemoIntent(value, {
+            currentPortal,
+            currentMesh,
+            currentMeshStage,
+          })
+        : null;
       const resolvedLocalCommand = resolveLocalVoiceCommand(
         value,
         currentPortal,
@@ -771,6 +801,21 @@ export function useJozLlm({
       let commandResult = shouldBypassCommandRouting
         ? null
         : resolvedLocalCommand;
+      if (desktopWorldModelAction && desktopWorldModelTarget) {
+        commandResult = {
+          action: desktopWorldModelAction,
+          target: desktopWorldModelTarget,
+          awareness: desktopWorldModelAction === "skills"
+            ? "Opening the Mogg layer."
+            : "Opening the neurons layer.",
+        };
+      }
+      if (spatialDemoIntent?.entitySet) {
+        commandResult = {
+          ...spatialDemoIntent,
+          placement: spatialDemoIntent,
+        };
+      }
       if (!commandResult && !shouldBypassCommandRouting) {
         try {
           commandResult = await requestSemanticSpatialIntent({
@@ -799,31 +844,20 @@ export function useJozLlm({
       }
 
       if (commandResult) {
-        let appliedCommandResult = commandResult;
-
-        if (typeof window !== "undefined" && typeof window.__runVoiceInput === "function") {
-          try {
-            const voiceExecution = await window.__runVoiceInput({
-              input: value,
-              currentPortal,
-              currentMesh,
-              currentMeshStage,
-            });
-
-            if (voiceExecution?.result) {
-              appliedCommandResult = voiceExecution.result;
-            }
-          } catch (voiceExecutionError) {
-            console.error("⚠️ Joz MAXX command fallback to local executor:", voiceExecutionError);
-            executeCommand?.(commandResult);
-          }
-        } else {
-          executeCommand?.(commandResult);
-        }
+        const appliedCommandResult = commandResult;
+        executeCommand?.(commandResult);
 
         if (isQuestionLikePrompt(value) && effectiveIntentMode) {
           setError("");
         } else {
+          const desktopSpatialIntent = !isMobile
+            ? appliedCommandResult?.placement ||
+              resolveSpatialDemoIntent(value, {
+                currentPortal,
+                currentMesh,
+                currentMeshStage,
+              })
+            : null;
           setMessages((current) => [
             ...current,
             userMessage,
@@ -834,9 +868,10 @@ export function useJozLlm({
                 buildCommandReply(appliedCommandResult, currentPortal, {
                   isMobile,
                   language: responseLanguage,
+                  spatialIntent: desktopSpatialIntent,
                 }) ||
                 "Command recognized and executed.",
-              spatialIntent: isMobile ? null : appliedCommandResult?.placement || null,
+              spatialIntent: desktopSpatialIntent,
             },
           ]);
           setInput("");

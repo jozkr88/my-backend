@@ -335,6 +335,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
     currentMeshStage: agentCurrentMeshStage,
     executeCommand: executeJozLlmCommand,
     isMobile,
+    arSupported: ar,
     startOpen: !isMobile,
   });
 
@@ -524,6 +525,7 @@ useAgentShell({
         fadeOut={fadeOut}
         currentPortal={currentPortal}
         isMobile={isMobile}
+        arSupported={ar}
         agentContext={agentContext}
         isJozLlmOpen={isJozLlmOpen}
         jozLlmActiveIntentMode={jozLlmActiveIntentMode}
