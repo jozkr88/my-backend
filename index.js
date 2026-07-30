@@ -840,8 +840,12 @@ app.post("/api/agentic", async (req, res) => {
     const rawPredictionSessionId =
       String(context?.sessionKey || context?.session_key || context?.conversationId || "").trim() || null;
     const predictionSessionId = pseudonymizeWorldModelSession(rawPredictionSessionId);
+    const isDevelopmentRuntime = !(
+      process.env.RENDER ||
+      process.env.NODE_ENV === "production"
+    );
     const worldModelSampled = WORLD_MODEL_SHADOW_ENABLED &&
-      !WORLD_MODEL_CONTROLS.excludeDevelopment &&
+      !(WORLD_MODEL_CONTROLS.excludeDevelopment && isDevelopmentRuntime) &&
       !isLikelyWorldModelBot(req.headers["user-agent"]) &&
       shouldSampleWorldTrajectory(predictionTraceId, WORLD_MODEL_CONTROLS.sampleRate);
     const canonicalWorldReply = buildMeetJozWorldAwarenessReply({
