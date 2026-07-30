@@ -18,11 +18,15 @@ import {
   hasPhrase as hasAnyPhrase,
   normalizeVoiceTranscript,
 } from "../shared/voiceCanonical";
+import { resolvePlacementIntent } from "../world-model/placement";
 
 export function detectImmediateMobileCommand(text) {
   const lower = normalizeVoiceTranscript(text);
 
   if (!lower) return null;
+  // Preserve spatial requests such as “view skills around me” for the
+  // placement/AR resolver instead of collapsing them into the Mogg shortcut.
+  if (resolvePlacementIntent(lower)) return null;
   if (hasAnyPhrase(lower, SURPRISE_ME_PHRASES)) return "surprise me";
   if (hasAnyPhrase(lower, ROOT_MEET_JOZ_PHRASES)) return "meet joz";
   if (hasAnyPhrase(lower, [...ROOT_BRAIN_PHRASES, "open max"])) return "enter";
@@ -45,6 +49,20 @@ export function resolveLocalVoiceCommand(spoken, currentPortal, currentMesh, cur
       : String(currentMesh || "").toLowerCase().trim();
 
   if (!lower) return null;
+
+  const placement = resolvePlacementIntent(lower, { currentPortal });
+  if (placement) {
+    return {
+      action: placement.action,
+      target: null,
+      awareness: placement.action === "experience_spatially"
+        ? "I’ll open a governed spatial experience preview for that Joz entity."
+        : placement.targetMode === "ar"
+        ? `I found ${placement.entityLabel}. I’ll prepare an AR placement preview for your confirmation.`
+        : `I found ${placement.entityLabel}. I’ll prepare a deterministic world placement preview for your confirmation.`,
+      placement,
+    };
+  }
 
   if (hasAnyPhrase(lower, HIDE_CONTACT_PHRASES)) {
     return {

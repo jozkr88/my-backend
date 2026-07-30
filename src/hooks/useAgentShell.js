@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import { useAutonomousAgent } from "./useAutonomousAgent";
-import { useBackendWorldSync } from "./useBackendWorldSync";
 
 export function useAgentShell({
   effectiveTranscript,
@@ -22,8 +21,6 @@ export function useAgentShell({
   useEffect(() => {
     console.log("🎙️ Transcript from browser:", effectiveTranscript);
   }, [effectiveTranscript]);
-
-  useBackendWorldSync({ apiFetch, apiUrl, fetchJson, worldMap });
 
   useAutonomousAgent(agentState, (u) => setAgentState(u), {
     llmClient,

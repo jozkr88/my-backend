@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { getJozLaneConfig } from "../../shared/jozLlmLanes";
+import { QRCodeSVG } from "qrcode.react";
+import { requestSpatialOffer } from "../../world-model/spatialOffer";
+import { resolvePlacementIntent } from "../../world-model/placement";
 import jozMaxxMark from "../../joz-maxx.svg";
 import {
   AI_OVERVIEW_LAST_REVIEWED,
@@ -135,6 +138,73 @@ function ShareIcon() {
         strokeLinejoin="round"
       />
     </svg>
+  );
+}
+
+function SpatialOfferCard({ entitySet, input }) {
+  const [offer, setOffer] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    setOffer(null);
+    setError("");
+    requestSpatialOffer({ entitySet, mode: "ar", input })
+      .then((nextOffer) => {
+        if (!cancelled) setOffer(nextOffer);
+      })
+      .catch((requestError) => {
+        if (!cancelled) {
+          setError(requestError?.message || "Spatial offer unavailable");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [entitySet, input]);
+
+  const label = entitySet === "joz_neurons"
+    ? "Joz's neurons"
+    : entitySet === "joz_skills"
+      ? "Joz's skills"
+      : "Joz's works";
+
+  if (error) {
+    return (
+      <section className="joz-llm-panel__spatial-offer" aria-label="Mobile spatial offer">
+        <div>
+          <p className="joz-llm-panel__spatial-offer-kicker">Spatial Handoff</p>
+          <h2>Experience {label} spatially</h2>
+          <p>Spatial handoff is temporarily unavailable.</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (!offer?.launchUrl) {
+    return (
+      <section className="joz-llm-panel__spatial-offer" aria-label="Mobile spatial offer">
+        <div>
+          <p className="joz-llm-panel__spatial-offer-kicker">Spatial Handoff</p>
+          <h2>Experience {label} spatially</h2>
+          <p>Preparing mobile handoff...</p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="joz-llm-panel__spatial-offer" aria-label="Mobile spatial offer">
+      <div>
+        <p className="joz-llm-panel__spatial-offer-kicker">Spatial Handoff</p>
+        <h2>Experience {label} spatially</h2>
+        <p>Scan on your phone.</p>
+        <code>{offer.launchUrl}</code>
+      </div>
+      <a href={offer.launchUrl} target="_blank" rel="noreferrer" aria-label="Open spatial experience">
+        <QRCodeSVG value={offer.launchUrl} size={144} bgColor="#ffffff" fgColor="#07101e" includeMargin />
+      </a>
+    </section>
   );
 }
 
@@ -318,6 +388,8 @@ export function VoiceChrome({
   contactCtaLabel,
   contactCtaType,
   fadeOut,
+  currentPortal,
+  isMobile = false,
   agentContext,
   isJozLlmOpen,
   jozLlmActiveIntentMode,
@@ -1087,9 +1159,15 @@ export function VoiceChrome({
                     </p>
                   </div>
                 </section>
-              ) : jozLlmMessages.map((message) => (
+              ) : jozLlmMessages.map((message, messageIndex) => (
                 (() => {
                   const isIntroMessage = message.id === "assistant-welcome";
+                  const previousUserMessage = [...jozLlmMessages.slice(0, messageIndex)]
+                    .reverse()
+                    .find((candidate) => candidate.role === "user");
+                  const spatialIntent = !isMobile && message.role === "assistant" && !message.isPending
+                    ? message.spatialIntent || resolvePlacementIntent(previousUserMessage?.content, { currentPortal })
+                    : null;
                   const introMessageClassName = isIntroMessage
                     ? "joz-llm-panel__message-copy--intro"
                     : "";
@@ -1344,6 +1422,12 @@ export function VoiceChrome({
                         </div>
                       )}
                     </>
+                  )}
+                  {spatialIntent?.entitySet && (
+                    <SpatialOfferCard
+                      entitySet={spatialIntent.entitySet}
+                      input={previousUserMessage?.content || ""}
+                    />
                   )}
                   <div className="joz-llm-panel__message-actions">
                     {message.role === "assistant" && !message.isPending && (

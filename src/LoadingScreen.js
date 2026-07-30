@@ -268,7 +268,7 @@ const LoadingMarkWrap = styled.div`
   isolation: isolate;
 
   @media (max-width: 640px) {
-    width: min(112vw, 46vh, 520px);
+    width: min(89.6vw, 36.8vh, 416px);
   }
 
   @media (max-height: 600px) {

@@ -1,4 +1,4 @@
-import { resolveLocalVoiceCommand } from "./localVoice";
+import { detectImmediateMobileCommand, resolveLocalVoiceCommand } from "./localVoice";
 
 test("cross-jumps from maxx to ascend in meet-joz", () => {
   expect(resolveLocalVoiceCommand("ascend", "maxx", null, null)).toEqual({
@@ -26,4 +26,15 @@ test("cross-jumps from maxx to mogg in meet-joz", () => {
 
 test("does not misclassify why-questions as brain navigation", () => {
   expect(resolveLocalVoiceCommand("Why should we hire Joz?", "root", null, null)).toBeNull();
+});
+
+test("keeps spatial skills requests out of the Mogg shortcut", () => {
+  expect(detectImmediateMobileCommand("view skills around me")).toBeNull();
+  expect(resolveLocalVoiceCommand("view skills around me", "root", null, null)).toMatchObject({
+    action: "experience_spatially",
+    placement: {
+      entitySet: "joz_skills",
+      targetMode: "ar",
+    },
+  });
 });
