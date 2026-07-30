@@ -12,7 +12,13 @@ const __dirname = path.dirname(__filename);
 const graphPath = path.resolve(__dirname, "..", "data", "joz", "published", "joz-knowledge-graph.generated.json");
 
 if (!process.env.NEO4J_URI || !process.env.NEO4J_PASSWORD) {
-  throw new Error("NEO4J_URI and NEO4J_PASSWORD are required to import the Joz graph");
+  console.log(JSON.stringify({
+    graphPath,
+    configured: false,
+    imported: false,
+    reason: "NEO4J_URI and NEO4J_PASSWORD are not configured; skipping optional import",
+  }, null, 2));
+  process.exit(0);
 }
 
 try {
