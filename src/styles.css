@@ -225,7 +225,7 @@
   }
 }
 
-/* Governed spatial placement preview and virtual-world fallback. */
+/* Safe spatial placement preview and virtual-world fallback. */
 .world-placement-preview {
   position: fixed;
   left: 50%;
@@ -2382,13 +2382,18 @@ svg {
 .joz-llm-panel__spatial-offer {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   gap: 0.85rem;
   margin: 0.4rem 0.35rem 1.25rem;
   padding: 1rem;
   border: 1px solid rgba(255, 84, 202, 0.28);
   border-radius: 1.1rem;
   background: linear-gradient(135deg, rgba(55, 27, 76, 0.92), rgba(9, 23, 42, 0.9));
+  text-align: center;
+}
+
+.joz-llm-panel__spatial-offer > div {
+  width: 100%;
 }
 
 .joz-llm-panel__spatial-offer h2 {
@@ -2405,19 +2410,22 @@ svg {
 }
 
 .joz-llm-panel__spatial-offer-kicker {
-  color: rgba(255, 255, 255, 0.92) !important;
-  font-size: 0.58rem !important;
-  letter-spacing: 0.14em;
+  color: #fff !important;
+  font-size: 0.68rem !important;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   text-transform: none;
 }
 
 .joz-llm-panel__spatial-offer code {
   display: block;
+  max-width: 100%;
   overflow-wrap: anywhere;
   color: rgba(173, 226, 255, 0.84);
   font-size: 0.58rem;
   line-height: 1.45;
   white-space: normal;
+  text-align: center;
 }
 
 .joz-llm-panel__spatial-offer svg {
@@ -2450,6 +2458,101 @@ svg {
   font-size: 0.68rem;
   text-decoration: none;
   cursor: pointer;
+}
+
+.joz-llm-panel__world-trace {
+  margin: 0.35rem 0.35rem 1.15rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(121, 255, 210, 0.24);
+  border-radius: 1.1rem;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(121, 255, 210, 0.14), transparent 42%),
+    linear-gradient(135deg, rgba(7, 29, 44, 0.9), rgba(19, 12, 38, 0.92));
+  box-shadow: 0 0 1.4rem rgba(81, 213, 255, 0.08);
+}
+
+.joz-llm-panel__world-trace-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: rgba(244, 251, 255, 0.72);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.joz-llm-panel__world-trace-topline span:first-child {
+  color: #fff;
+}
+
+.joz-llm-panel__world-trace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.joz-llm-panel__world-trace-grid > div {
+  min-width: 0;
+  padding: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 0.82rem;
+  background: rgba(4, 11, 24, 0.44);
+}
+
+.joz-llm-panel__world-trace-grid span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: rgba(173, 226, 255, 0.64);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.joz-llm-panel__world-trace-grid strong {
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  font-size: 0.76rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+}
+
+.joz-llm-panel__world-trace-grid p {
+  margin: 0.3rem 0 0;
+  color: rgba(244, 251, 255, 0.68);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+.joz-llm-panel__world-trace-why {
+  margin-top: 0.65rem;
+  color: rgba(244, 251, 255, 0.72);
+  font-size: 0.66rem;
+}
+
+.joz-llm-panel__world-trace-why summary {
+  cursor: pointer;
+  color: rgba(244, 251, 255, 0.9);
+  font-weight: 750;
+}
+
+.joz-llm-panel__world-trace-why ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1rem;
+}
+
+.joz-llm-panel__world-trace-why li {
+  margin: 0.22rem 0;
+}
+
+@media (max-width: 520px) {
+  .joz-llm-panel__world-trace-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .spatial-experience-page {

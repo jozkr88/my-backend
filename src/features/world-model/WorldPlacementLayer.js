@@ -59,7 +59,7 @@ export function WorldPlacementLayer() {
     }];
 
     setPendingPlan(null);
-    setStatus("Placed in the governed world state.");
+    setStatus("Placed in the safe world state.");
     window.__worldPlacementState = {
       revision: observedState.worldRevision,
       ...observedState.placement,
@@ -127,7 +127,7 @@ export function WorldPlacementLayer() {
     <>
       {pendingPlan ? (
         <section className="world-placement-preview" aria-live="polite">
-          <div className="world-placement-kicker">GOVERNED WORLD ACTION</div>
+          <div className="world-placement-kicker">SAFE WORLD ACTION</div>
           <h2>{pendingPlan.entityLabel}</h2>
           <p>
             {pendingPlan.instances.length} entities · {pendingPlan.executionMode === "virtual_world_fallback"
