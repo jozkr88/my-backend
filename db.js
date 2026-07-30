@@ -2837,7 +2837,21 @@ export async function listWorldModelTrajectories({
 }
 
 export async function recordWorldModelTrajectory(input = {}) {
-  const normalized = normalizeWorldTrajectoryRecord(input);
+  const actionCandidates = [
+    input.proposedAction,
+    input.symbolicPrediction?.actions?.[0],
+    input.plannerSelectedAction,
+    input.plannerSelected?.actions?.[0],
+    input.deterministicApprovedAction,
+  ];
+  const proposedAction = actionCandidates.find((candidate) => {
+    if (candidate == null || candidate === "") return false;
+    const value = typeof candidate === "string"
+      ? candidate
+      : candidate?.type || candidate?.action || candidate?.id;
+    return value && !["unknown", "noop", "null"].includes(String(value).trim().toLowerCase());
+  }) || null;
+  const normalized = normalizeWorldTrajectoryRecord({ ...input, proposedAction });
   if (!normalized.valid) {
     const error = new Error(`Invalid world trajectory: ${normalized.errors.join(", ")}`);
     error.status = 400;

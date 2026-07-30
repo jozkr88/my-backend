@@ -1156,6 +1156,20 @@ app.post("/api/world-model/trajectories", async (req, res) => {
       return res.status(204).end();
     }
     const body = req.body || {};
+    const actionCandidates = [
+      body.proposedAction,
+      body.symbolicPrediction?.actions?.[0],
+      body.plannerSelectedAction,
+      body.plannerSelected?.actions?.[0],
+      body.deterministicApprovedAction,
+    ];
+    const proposedAction = actionCandidates.find((candidate) => {
+      if (candidate == null || candidate === "") return false;
+      const value = typeof candidate === "string"
+        ? candidate
+        : candidate?.type || candidate?.action || candidate?.id;
+      return value && !["unknown", "noop", "null"].includes(String(value).trim().toLowerCase());
+    }) || null;
     if (Buffer.byteLength(JSON.stringify(body)) > WORLD_MODEL_CONTROLS.maxTrajectoryBytes) {
       return res.status(413).json({ error: "World-model trajectory payload exceeds shadow limit" });
     }
@@ -1179,7 +1193,7 @@ app.post("/api/world-model/trajectories", async (req, res) => {
       traceId: body.traceId || body.trajectoryId || null,
       stateBefore: body.stateBefore || {},
       stateHistory: body.stateHistory || [],
-      proposedAction: body.proposedAction || null,
+      proposedAction,
       symbolicPrediction: body.symbolicPrediction || null,
       probabilisticPrediction: body.probabilisticPrediction || null,
       expectedEffects: body.expectedEffects || [],
