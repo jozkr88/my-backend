@@ -36,6 +36,10 @@ services:
         value: "true"
       - key: JOZ_WORLD_MODEL_SESSION_HASH_SALT
         sync: false
+      - key: JOZ_WORLD_MODEL_LEARNED_ENABLED
+        value: "false"
+      - key: JOZ_WORLD_MODEL_ARTIFACT_PATH
+        value: "data/joz/published/learned-world-model.json"
       - key: NEO4J_URI
         sync: false
       - key: NEO4J_USERNAME

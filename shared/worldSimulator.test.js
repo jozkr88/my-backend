@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   buildCanonicalWorldState,
+  buildPredictionTrace,
   chooseWorldPlan,
   compareWorldStates,
   evaluateWorldPlans,
@@ -41,6 +42,32 @@ test("world transitions are pure and produce a predicted state", () => {
   assert.equal(initial.portal, "root");
   assert.equal(initial.lastAction, null);
   assert.equal(result.expectedEffects[0].type, "navigate");
+});
+
+test("prediction traces expose learned candidates without changing execution metadata", () => {
+  const trace = buildPredictionTrace({
+    trajectoryId: "trace-learned",
+    initialState: { portal: "root" },
+    learnedTransitionModel: {
+      enabled: true,
+      loaded: true,
+      modelVersion: "learned-structured-transition-v1",
+      candidates: [{
+        action: "brain",
+        predictedState: { portal: "maxx" },
+        probability: 0.8,
+        confidence: 0.5,
+        observations: 12,
+        evidence: "learned_transition_model",
+        learned: true,
+        modelVersion: "learned-structured-transition-v1",
+      }],
+    },
+  });
+
+  assert.equal(trace.learnedTransitionModel.loaded, true);
+  assert.equal(trace.learnedTransitionModel.candidates[0].action, "brain");
+  assert.equal(trace.selected, null);
 });
 
 test("invalid actions are simulated as violations without mutating state", () => {
