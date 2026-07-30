@@ -4,6 +4,8 @@ import { Router, useRoute, useLocation } from 'wouter';
 import './styles.css';
 import { App } from './App';
 import { JozLlmDashboardPage } from './features/joz-llm/JozLlmDashboardPage';
+import { SpatialExperiencePage } from './features/world-model/SpatialExperiencePage';
+import { WorldModelDiagramPage } from './features/world-model/WorldModelDiagramPage';
 import backSvg from './back.svg';
 import LoadingScreen from './LoadingScreen';
 import { appBasePath } from './utils/paths';
@@ -12,6 +14,8 @@ const FREEZE_LOADING_SCREEN = false;
 
 function Root() {
   const [, params] = useRoute('/neo/:id');
+  const [isSpatialExperience, spatialParams] = useRoute('/space/:entitySet');
+  const [isWorldModelDiagram] = useRoute('/world-model');
   const [, setLocation] = useLocation();
 
   // ✅ Escape key = back in history (or / if no history)
@@ -115,6 +119,14 @@ function Root() {
 
   if (isJozLlmDashboard) {
     return <JozLlmDashboardPage />;
+  }
+
+  if (isSpatialExperience) {
+    return <SpatialExperiencePage entitySet={spatialParams?.entitySet} />;
+  }
+
+  if (isWorldModelDiagram) {
+    return <WorldModelDiagramPage />;
   }
 
   return (

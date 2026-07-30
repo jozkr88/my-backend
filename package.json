@@ -33,6 +33,7 @@
     "openai": "^6.7.0",
     "pg": "^8.22.0",
     "postprocessing": "^6.35.0",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^19.2.0",
