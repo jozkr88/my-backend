@@ -1840,12 +1840,19 @@ export async function cleanupExpiredJozData({
     [normalizedWorldModelDays]
   );
 
+  const spatialOfferDeleteResult = await runQuery(
+    `DELETE FROM world_model_spatial_offers
+     WHERE expires_at < NOW()
+     RETURNING offer_id`
+  );
+
   return {
     deletedConversations: conversationDeleteResult.rows?.length || 0,
     deletedCallbackRequests: callbackDeleteResult.rows?.length || 0,
     deletedPrivacyRequests: privacyRequestDeleteResult.rows?.length || 0,
     deletedWorldModelTrajectories: worldTrajectoryDeleteResult.rows?.length || 0,
     deletedWorldTransitionExperience: worldExperienceDeleteResult.rows?.length || 0,
+    deletedWorldModelSpatialOffers: spatialOfferDeleteResult.rows?.length || 0,
   };
 }
 
@@ -2220,6 +2227,30 @@ export async function initDatabase() {
     await db.query(`
       CREATE INDEX IF NOT EXISTS world_model_trajectories_session_idx
       ON world_model_trajectories (session_id, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS world_model_spatial_offers (
+        offer_id TEXT PRIMARY KEY,
+        entity_set TEXT NOT NULL,
+        mode TEXT NOT NULL DEFAULT 'ar',
+        asset_manifest JSONB NOT NULL DEFAULT '{}'::jsonb,
+        graph_evidence JSONB NOT NULL DEFAULT '{}'::jsonb,
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        expires_at TIMESTAMPTZ NOT NULL,
+        consumed_at TIMESTAMPTZ
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS world_model_spatial_offers_expiry_idx
+      ON world_model_spatial_offers (expires_at)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS world_model_spatial_offers_entity_idx
+      ON world_model_spatial_offers (entity_set, created_at DESC)
     `);
 
     await db.query(`
@@ -3036,6 +3067,82 @@ export async function recordWorldModelTrajectory(input = {}) {
     nextStateKey,
     persisted: isDatabaseEnabled(),
   };
+}
+
+export async function createWorldModelSpatialOffer(input = {}) {
+  const {
+    offerId,
+    entitySet,
+    mode = "ar",
+    assetManifest = {},
+    graphEvidence = {},
+    metadata = {},
+    createdAt = new Date().toISOString(),
+    expiresAt,
+  } = input;
+
+  if (!offerId || !entitySet || !expiresAt) {
+    const error = new Error("Invalid spatial offer: offerId, entitySet, and expiresAt are required");
+    error.status = 400;
+    throw error;
+  }
+
+  const result = await runQuery(
+    `INSERT INTO world_model_spatial_offers (
+       offer_id, entity_set, mode, asset_manifest, graph_evidence, metadata,
+       created_at, expires_at
+     )
+     VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6::jsonb, $7, $8)
+     ON CONFLICT (offer_id) DO UPDATE SET
+       entity_set = EXCLUDED.entity_set,
+       mode = EXCLUDED.mode,
+       asset_manifest = EXCLUDED.asset_manifest,
+       graph_evidence = EXCLUDED.graph_evidence,
+       metadata = EXCLUDED.metadata,
+       expires_at = EXCLUDED.expires_at
+     RETURNING offer_id, entity_set, mode, asset_manifest, graph_evidence,
+       metadata, created_at, expires_at, consumed_at`,
+    [
+      offerId,
+      entitySet,
+      mode,
+      JSON.stringify(assetManifest || {}),
+      JSON.stringify(graphEvidence || {}),
+      JSON.stringify(metadata || {}),
+      createdAt,
+      expiresAt,
+    ]
+  );
+
+  return result.rows?.[0] || null;
+}
+
+export async function getWorldModelSpatialOffer(offerId) {
+  const id = String(offerId || "").trim();
+  if (!id) return null;
+  const result = await runQuery(
+    `SELECT offer_id, entity_set, mode, asset_manifest, graph_evidence,
+            metadata, created_at, expires_at, consumed_at
+       FROM world_model_spatial_offers
+      WHERE offer_id = $1
+      LIMIT 1`,
+    [id]
+  );
+  return result.rows?.[0] || null;
+}
+
+export async function markWorldModelSpatialOfferConsumed(offerId) {
+  const id = String(offerId || "").trim();
+  if (!id) return null;
+  const result = await runQuery(
+    `UPDATE world_model_spatial_offers
+        SET consumed_at = COALESCE(consumed_at, NOW())
+      WHERE offer_id = $1
+      RETURNING offer_id, entity_set, mode, asset_manifest, graph_evidence,
+        metadata, created_at, expires_at, consumed_at`,
+    [id]
+  );
+  return result.rows?.[0] || null;
 }
 
 export async function logReasoningEvent(event) {

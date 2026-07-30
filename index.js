@@ -13,6 +13,7 @@ import {
   appendBusinessValueCaseEvent,
   upsertBusinessValueEvidence,
   cleanupExpiredJozData,
+  createWorldModelSpatialOffer,
   createJozPrivacyRequest,
   createJozAIComplianceIncident,
   createJozCallbackRequest,
@@ -25,6 +26,7 @@ import {
   getJozDataControlOverview,
   getJozDocumentsByIntent,
   getJozSemanticDocumentsByQuery,
+  getWorldModelSpatialOffer,
   getStructuredWorldState,
   getWorldTransitionExperience,
   initDatabase,
@@ -34,6 +36,7 @@ import {
   listRecentJozLlmEvaluations,
   listJozLlmRepairCandidates,
   loadJozActionProposal,
+  markWorldModelSpatialOfferConsumed,
   saveJozActionProposal,
   updateJozActionProposal,
   logReasoningEvent,
@@ -141,6 +144,12 @@ import {
 } from "./shared/jozKnowledgeGraph.js";
 import { queryJozKnowledgeGraphRuntime } from "./shared/neo4jJozKnowledgeGraph.js";
 import {
+  buildSpatialAssetManifest,
+  getSpatialOfferDefinition,
+  publicSpatialOffer,
+} from "./shared/spatialOffer.js";
+import { resolveSemanticSpatialIntentWithModel } from "./shared/semanticSpatialIntent.js";
+import {
   createJozModelGateway,
   getJozModelRuntimeDescriptor,
   isJozModelGatewayAvailable,
@@ -230,6 +239,7 @@ const jozObservabilityFallbackStore = [];
 const worldModelTrajectoryFallbackStore = [];
 const worldTransitionExperienceFallbackStore = [];
 const worldModelPredictionFallbackStore = new Map();
+const worldModelSpatialOfferFallbackStore = new Map();
 const jozRecentSessionMessagesFallbackStore = new Map();
 const jozBusinessValueCaseFallbackStore = new Map();
 const isNodeTestRuntime =
@@ -256,6 +266,15 @@ const JOZ_WORLD_MODEL_RETENTION_DAYS = parseRetentionDays(
   process.env.JOZ_WORLD_MODEL_RETENTION_DAYS,
   WORLD_MODEL_CONTROLS.retentionDays
 );
+const JOZ_SPATIAL_OFFER_TTL_HOURS = Math.min(
+  168,
+  Math.max(1, Number.parseInt(String(process.env.JOZ_SPATIAL_OFFER_TTL_HOURS || "24"), 10) || 24)
+);
+const JOZ_SPATIAL_PUBLIC_ORIGIN = String(
+  process.env.JOZ_SPATIAL_PUBLIC_ORIGIN ||
+    process.env.PUBLIC_SITE_ORIGIN ||
+    "https://meetjoz.com"
+).replace(/\/+$/, "");
 
 function pseudonymizeWorldModelSession(value) {
   const raw = String(value || "").trim();
@@ -1150,6 +1169,191 @@ app.get("/api/world-model/predictions/:trajectoryId", (req, res) => {
   return res.json({ ready: true, prediction });
 });
 
+function rememberWorldModelSpatialOffer(record = {}) {
+  const offerId = record.offerId || record.offer_id;
+  if (!offerId) return null;
+  const expiresAt = new Date(record.expiresAt || record.expires_at || Date.now());
+  if (!Number.isFinite(expiresAt.getTime())) return null;
+  worldModelSpatialOfferFallbackStore.set(offerId, record);
+  return record;
+}
+
+function getRememberedWorldModelSpatialOffer(offerId) {
+  const record = worldModelSpatialOfferFallbackStore.get(String(offerId || "").trim());
+  if (!record) return null;
+  const expiresAt = new Date(record.expiresAt || record.expires_at || 0);
+  if (Number.isFinite(expiresAt.getTime()) && expiresAt.getTime() < Date.now()) {
+    worldModelSpatialOfferFallbackStore.delete(record.offerId || record.offer_id);
+    return null;
+  }
+  return record;
+}
+
+function spatialOfferExpiry() {
+  return new Date(Date.now() + JOZ_SPATIAL_OFFER_TTL_HOURS * 60 * 60 * 1000).toISOString();
+}
+
+async function buildSpatialOfferGraphEvidence(definition, input = "") {
+  try {
+    const query = [input, definition.query].filter(Boolean).join(" ");
+    const result = await queryJozKnowledgeGraphRuntime({
+      query,
+      limit: 6,
+      env: process.env,
+    });
+    return {
+      backend: result.backend,
+      mode: result.mode || getJozKnowledgeGraphMode(),
+      matchedNodeIds: result.matchedNodeIds || [],
+      documentSlugs: result.documentSlugs || [],
+      sourcePaths: (result.documents || [])
+        .map((document) => document.sourcePath)
+        .filter(Boolean),
+      documents: (result.documents || []).map((document) => ({
+        slug: document.slug,
+        title: document.title,
+        sourcePath: document.sourcePath || null,
+        score: document.score,
+      })),
+    };
+  } catch (error) {
+    return {
+      backend: "unavailable",
+      error: String(error?.message || error).slice(0, 160),
+      documentSlugs: [],
+      sourcePaths: [],
+      documents: [],
+    };
+  }
+}
+
+function normalizeSpatialOfferRecord(record = {}) {
+  return {
+    offerId: record.offerId || record.offer_id,
+    entitySet: record.entitySet || record.entity_set,
+    mode: record.mode || "ar",
+    assetManifest: record.assetManifest || record.asset_manifest || {},
+    graphEvidence: record.graphEvidence || record.graph_evidence || {},
+    metadata: record.metadata || {},
+    createdAt: record.createdAt || record.created_at,
+    expiresAt: record.expiresAt || record.expires_at,
+    consumedAt: record.consumedAt || record.consumed_at || null,
+  };
+}
+
+app.post("/api/world-model/spatial-offers", async (req, res) => {
+  try {
+    const body = req.body || {};
+    const definition = getSpatialOfferDefinition(
+      body.entitySet || body.entity_set || body.placement?.entitySet
+    );
+    if (!definition) {
+      return res.status(400).json({ error: "Unsupported spatial entity set" });
+    }
+
+    const offerId = randomUUID();
+    const mode = body.mode === "virtual" ? "virtual" : "ar";
+    const expiresAt = spatialOfferExpiry();
+    const assetManifest = buildSpatialAssetManifest({
+      entitySet: definition.entitySet,
+      offerId,
+      mode,
+      origin: JOZ_SPATIAL_PUBLIC_ORIGIN,
+    });
+    const graphEvidence = await buildSpatialOfferGraphEvidence(definition, body.input || body.query || "");
+    const metadata = {
+      schemaVersion: "spatial-offer-v1",
+      source: "world_model_spatial_offer",
+      requestPath: req.path,
+      userAgentFamily: String(req.get("user-agent") || "").slice(0, 80),
+      createdBy: "joz-maxx",
+    };
+    const record = {
+      offerId,
+      entitySet: definition.entitySet,
+      mode,
+      assetManifest,
+      graphEvidence,
+      metadata,
+      createdAt: new Date().toISOString(),
+      expiresAt,
+    };
+
+    if (isDatabaseEnabled()) {
+      try {
+        const persisted = await createWorldModelSpatialOffer(record);
+        if (persisted) {
+          return res.status(201).json({
+            ok: true,
+            persisted: true,
+            mode: "database",
+            offer: publicSpatialOffer(normalizeSpatialOfferRecord(persisted)),
+          });
+        }
+        if (isDatabaseRequired()) {
+          return res.status(503).json({ error: "Spatial offer persistence returned no record" });
+        }
+      } catch (error) {
+        console.error("⚠️ Spatial offer persistence failed:", error?.message || error);
+        if (isDatabaseRequired()) {
+          return res.status(503).json({ error: "Spatial offer persistence is required but unavailable" });
+        }
+      }
+    }
+
+    rememberWorldModelSpatialOffer(record);
+    return res.status(202).json({
+      ok: true,
+      persisted: false,
+      mode: "memory_fallback",
+      offer: publicSpatialOffer(record),
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/spatial-offers failed:", error);
+    return res.status(error.status || 400).json({ error: error.message });
+  }
+});
+
+app.get("/api/world-model/spatial-offers/:offerId", async (req, res) => {
+  try {
+    const offerId = String(req.params.offerId || "").trim();
+    if (!offerId) return res.status(400).json({ error: "Missing offerId" });
+
+    let record = null;
+    if (isDatabaseEnabled()) {
+      record = await getWorldModelSpatialOffer(offerId);
+    }
+    if (!record) {
+      record = getRememberedWorldModelSpatialOffer(offerId);
+    }
+    if (!record) {
+      return res.status(404).json({ error: "Spatial offer not found" });
+    }
+
+    const normalized = normalizeSpatialOfferRecord(record);
+    const expiresAt = new Date(normalized.expiresAt || 0);
+    if (Number.isFinite(expiresAt.getTime()) && expiresAt.getTime() < Date.now()) {
+      return res.status(410).json({ error: "Spatial offer expired" });
+    }
+
+    if (isDatabaseEnabled()) {
+      try {
+        await markWorldModelSpatialOfferConsumed(offerId);
+      } catch (error) {
+        console.warn("⚠️ Spatial offer consume marker failed:", error?.message || error);
+      }
+    }
+
+    return res.json({
+      ok: true,
+      offer: publicSpatialOffer(normalized),
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/spatial-offers/:offerId failed:", error);
+    return res.status(error.status || 400).json({ error: error.message });
+  }
+});
+
 app.post("/api/world-model/trajectories", async (req, res) => {
   try {
     if (!WORLD_MODEL_SHADOW_ENABLED) {
@@ -1283,6 +1487,40 @@ const hostedModelClient = process.env.OPENAI_API_KEY
   : null;
 const openai = createJozModelGateway({ client: hostedModelClient });
 const modelRuntime = getJozModelRuntimeDescriptor(openai);
+
+app.post("/api/world-model/spatial-intent", async (req, res) => {
+  try {
+    const body = req.body || {};
+    const input = String(body.input || body.transcript || body.query || "").trim();
+    const context = body.context || {};
+    if (!input) {
+      return res.json({ ok: true, matched: false, confidence: 0, placement: null });
+    }
+
+    const result = await resolveSemanticSpatialIntentWithModel({
+      input,
+      context,
+      openai: isJozModelGatewayAvailable(openai) ? openai : null,
+      model: modelRuntime.model,
+    });
+
+    return res.json({
+      ok: true,
+      matched: result.matched === true,
+      source: result.source,
+      confidence: result.confidence || 0,
+      placement: result.placement || null,
+      modelRuntime: {
+        available: modelRuntime.available,
+        provider: modelRuntime.provider,
+        model: modelRuntime.model,
+      },
+    });
+  } catch (error) {
+    console.error("❌ /api/world-model/spatial-intent failed:", error);
+    return res.status(error.status || 400).json({ error: error.message });
+  }
+});
 
 function buildWorldAwarenessTrace({ input, appContext = {}, legacyContext = {}, answerSource }) {
   const answerContext = buildMeetJozWorldAnswerContext({ input, appContext, legacyContext });
