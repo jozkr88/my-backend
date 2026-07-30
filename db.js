@@ -2883,6 +2883,10 @@ export async function recordWorldModelTrajectory(input = {}) {
        $33::jsonb, $34::jsonb, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45,
        $46, $47)
      ON CONFLICT (trajectory_id) DO UPDATE SET
+       proposed_action = CASE WHEN EXCLUDED.proposed_action <> '{}'::jsonb THEN EXCLUDED.proposed_action ELSE world_model_trajectories.proposed_action END,
+       symbolic_prediction = CASE WHEN EXCLUDED.symbolic_prediction <> '{}'::jsonb THEN EXCLUDED.symbolic_prediction ELSE world_model_trajectories.symbolic_prediction END,
+       probabilistic_prediction = CASE WHEN EXCLUDED.probabilistic_prediction <> '{}'::jsonb THEN EXCLUDED.probabilistic_prediction ELSE world_model_trajectories.probabilistic_prediction END,
+       expected_effects = CASE WHEN jsonb_array_length(EXCLUDED.expected_effects) > 0 THEN EXCLUDED.expected_effects ELSE world_model_trajectories.expected_effects END,
        observation_before = EXCLUDED.observation_before,
        predicted_observation = EXCLUDED.predicted_observation,
        observed_state = CASE WHEN EXCLUDED.observed_state <> '{}'::jsonb THEN EXCLUDED.observed_state ELSE world_model_trajectories.observed_state END,
