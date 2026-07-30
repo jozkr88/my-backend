@@ -73,6 +73,30 @@ test("answers generic questions from the active Business Value portal context", 
   assert.doesNotMatch(resolution.reply, /Singapore/i);
 });
 
+test("answers the business value of World Model AI with an outcome-first explanation", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const input = "WHat is business value of world model ai?";
+  const route = routeJozLlmQuery({ input, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "world_model_business_value");
+  assert.match(resolution.reply, /predict the likely result of decisions/i);
+  assert.match(resolution.reply, /simulate workflows|identify bottlenecks/i);
+  assert.match(resolution.reply, /intent.*world state.*predicted action.*observed result.*improved future decisions/i);
+  assert.equal(resolution.answerClass, "world_model_business_value");
+});
+
+test("answers the business value of Spatial Intelligence, including a common typo", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const input = "What is business value of spatial inteligence?";
+  const route = routeJozLlmQuery({ input, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "world_model_business_value");
+  assert.match(resolution.reply, /predict the likely result of decisions/i);
+  assert.match(resolution.reply, /intent.*world state.*predicted action.*observed result.*improved future decisions/i);
+});
+
 test("routes natural AI architecture creation requests into brief intake", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQuery({
