@@ -551,6 +551,9 @@ app.get("/api/world-model/status", (_req, res) => {
       modelVersion: learnedWorldModel?.modelVersion || null,
       trainingExamples: learnedWorldModel?.training?.trainingExamples || 0,
       transitionCount: learnedWorldModel?.training?.transitionCount || 0,
+      evaluationMeaningful: learnedWorldModel?.evaluation?.meaningful === true,
+      evaluationSamples: learnedWorldModel?.evaluation?.sampleCount || 0,
+      provenance: learnedWorldModel?.provenance?.source || null,
     },
   });
 });

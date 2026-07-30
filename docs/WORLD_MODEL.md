@@ -55,6 +55,8 @@ npm run train:world-model -- \
   --output ./data/joz/published/learned-world-model.json
 ```
 
+The Render blueprint can train directly from the durable `world_model_trajectories` table during a deploy when `JOZ_WORLD_MODEL_LEARNED_ENABLED=true`. It refuses to publish an empty artifact; the source row count, training count, held-out sample count, and evaluation meaningfulness are reported by `/api/world-model/status`.
+
 The trainer writes a model artifact and a held-out evaluation report. Sessions are hashed into train/validation/test partitions so one session cannot leak across splits. The evaluation report remains non-meaningful until the configured minimum test count is reached. A real production claim requires a sufficiently large held-out set, coverage across the deployed state/action space, calibrated probabilities, and repeated prediction-versus-observation reconciliation.
 
 To load the artifact in shadow mode:

@@ -2,7 +2,7 @@ services:
   - type: web
     name: xq-backend
     runtime: node
-    buildCommand: npm install --legacy-peer-deps && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi
+    buildCommand: npm install --legacy-peer-deps && JOZ_QUALITY_WRITE_ARTIFACTS=true npm run check:joz-quality && npm run build:joz-knowledge-graph && if [ "$JOZ_WORLD_MODEL_LEARNED_ENABLED" = "true" ]; then npm run train:world-model -- --database --output data/joz/published/learned-world-model.json; fi && if [ -n "$NEO4J_URI" ] && [ -n "$NEO4J_PASSWORD" ]; then npm run import:joz-knowledge-graph:neo4j; fi
     startCommand: node index.js
     healthCheckPath: /api/hello
     envVars:
@@ -37,7 +37,7 @@ services:
       - key: JOZ_WORLD_MODEL_SESSION_HASH_SALT
         sync: false
       - key: JOZ_WORLD_MODEL_LEARNED_ENABLED
-        value: "false"
+        value: "true"
       - key: JOZ_WORLD_MODEL_ARTIFACT_PATH
         value: "data/joz/published/learned-world-model.json"
       - key: NEO4J_URI
