@@ -11,6 +11,7 @@ import {
 import { getJozLaneConfig, JOZ_LLM_LANES, normalizeJozLaneIntent } from "../../shared/jozLlmLanes";
 import { normalizeVoiceAction } from "../../shared/voiceActions";
 import { resolveLocalVoiceCommand } from "../../voice/localVoice";
+import { requestSemanticSpatialIntent } from "../../world-model/spatialOffer";
 
 const PENDING_MESSAGE_ID = "joz-llm-pending";
 const BOOKING_PROMPT = "__JOZ_BOOKING_CALENDAR__";
@@ -20,7 +21,7 @@ const CHAT_DUPLICATE_WINDOW_MS = 10000;
 const CHAT_MAX_INPUT_CHARS = 800;
 const GET_CALLED_FLOW_STEPS = ["phone", "time", "name"];
 const JOZ_LLM_WELCOME_MESSAGE =
-  "Welcome to the state-of-the-art Agentic AI experience.\n\nJoz MAXX connects signal reasoning, AI architecture, orchestration, and execution into deployable intelligence.";
+  "Welcome to the state-of-the-art AI experience.\n\nJoz MAXX connects signal reasoning, AI architecture, orchestration, and execution into deployable intelligence.";
 const LANDING_ACTION_LABELS = new Set(
   Object.values(JOZ_LLM_LANES).flatMap((lane) => [lane.label, lane.title])
 );
@@ -50,6 +51,35 @@ function cleanAwarenessText(text = "") {
   return String(text || "")
     .replace(/Cross-jumping to/gi, "Opening")
     .replace(/cross-jumps into/gi, "moves into");
+}
+
+function detectChatLanguage(text = "") {
+  const normalized = String(text || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (/\b(ukaz|zobraz|okolo mna|pri mne|priestor|priestore|realite|neurony|neuronov|schopnosti|zrucnosti|spusti|otvor)\b/.test(normalized)) {
+    return "sk";
+  }
+
+  if (/\b(ukazat|zobrazit|kolem me|prostoru|dovednosti)\b/.test(normalized)) {
+    return "cs";
+  }
+
+  return "en";
+}
+
+function localizedThinking(language) {
+  if (language === "sk") return "Premýšľam";
+  if (language === "cs") return "Přemýšlím";
+  return "Thinking";
+}
+
+function localizedSpatialLaunched(language) {
+  if (language === "sk") return "Priestorový model spustený.";
+  if (language === "cs") return "Prostorový model spuštěn.";
+  return "Spatial model launched.";
 }
 
 function buildBookingMessage() {
@@ -177,10 +207,12 @@ function buildLandingPersistencePayload(intentMode) {
   };
 }
 
-function buildCommandReply(result = {}, currentPortal) {
+function buildCommandReply(result = {}, currentPortal, options = {}) {
   const normalizedAction =
     normalizeVoiceAction(result?.action) || String(result?.action || "").toLowerCase().trim();
   const awareness = cleanAwarenessText(String(result?.awareness || "").trim());
+  const language = options.language || "en";
+  const isMobile = Boolean(options.isMobile);
 
   if (normalizedAction === "brain") {
     return currentPortal === "maxx"
@@ -221,6 +253,13 @@ function buildCommandReply(result = {}, currentPortal) {
   }
   if (normalizedAction === "launch_in_space_n2x" || normalizedAction === "launch_in_space_workf") {
     return awareness || "Opening AR.";
+  }
+  if (normalizedAction === "experience_spatially") {
+    if (isMobile) return localizedSpatialLaunched(language);
+    return awareness || "Opening a governed spatial experience.";
+  }
+  if (normalizedAction === "place_entity_set" || normalizedAction === "preview_entity_set") {
+    return awareness || "Preparing a governed spatial placement.";
   }
   if (
     normalizedAction === "contact_joz" ||
@@ -303,6 +342,7 @@ export function useJozLlm({
   currentMesh,
   currentMeshStage,
   executeCommand,
+  isMobile = false,
   startOpen = false,
 }) {
   const [isOpen, setIsOpen] = useState(() => Boolean(startOpen));
@@ -455,6 +495,7 @@ export function useJozLlm({
     async (rawValue, options = {}) => {
       const value = String(rawValue || "").trim();
       if (!value || isLoading) return;
+      const responseLanguage = detectChatLanguage(value);
       const intentMode = String(options?.intentMode || "").trim().toLowerCase();
       const skipClientGuards = options?.skipClientGuards === true;
       const hasExplicitIntentMode = Boolean(intentMode);
@@ -727,9 +768,24 @@ export function useJozLlm({
         normalizedRequestedIntentMode !== "skills" &&
         !isDirectMeetJozControlAction(resolvedLocalCommand);
 
-      const commandResult = shouldBypassCommandRouting
+      let commandResult = shouldBypassCommandRouting
         ? null
         : resolvedLocalCommand;
+      if (!commandResult && !shouldBypassCommandRouting) {
+        try {
+          commandResult = await requestSemanticSpatialIntent({
+            input: value,
+            context: {
+              currentPortal,
+              currentMesh,
+              currentMeshStage,
+              currentPath: typeof window !== "undefined" ? window.location.pathname : "",
+            },
+          });
+        } catch (semanticIntentError) {
+          console.warn("⚠️ Semantic spatial intent unavailable:", semanticIntentError?.message || semanticIntentError);
+        }
+      }
       const inferredIntentModeFromCommand = commandResult
         ? inferIntentModeFromCommandResult(commandResult)
         : "";
@@ -775,8 +831,12 @@ export function useJozLlm({
               id: `assistant-${Date.now()}`,
               role: "assistant",
               content:
-                buildCommandReply(appliedCommandResult, currentPortal) ||
+                buildCommandReply(appliedCommandResult, currentPortal, {
+                  isMobile,
+                  language: responseLanguage,
+                }) ||
                 "Command recognized and executed.",
+              spatialIntent: isMobile ? null : appliedCommandResult?.placement || null,
             },
           ]);
           setInput("");
@@ -788,7 +848,7 @@ export function useJozLlm({
       const pendingAssistantMessage = {
         id: PENDING_MESSAGE_ID,
         role: "assistant",
-        content: "Thinking",
+        content: localizedThinking(responseLanguage),
         isPending: true,
       };
       lastSubmissionRef.current = {
@@ -876,6 +936,7 @@ export function useJozLlm({
       conversationId,
       executeCommand,
       isLoading,
+      isMobile,
       messages,
       getCalledFlow,
       startCooldown,

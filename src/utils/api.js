@@ -1,11 +1,6 @@
 const trimTrailingSlash = (value = "") => value.replace(/\/+$/, "");
 const LIVE_API_BASE = "https://my-backend-qxay.onrender.com";
 
-function isLocalDevHost() {
-  if (typeof window === "undefined") return false;
-  return /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
-}
-
 function dedupe(values) {
   return [...new Set(values.filter(Boolean))];
 }
@@ -14,11 +9,7 @@ export function getApiBase() {
   const base = (process.env.REACT_APP_API_BASE || "").trim();
   if (base) return trimTrailingSlash(base);
 
-  if (isLocalDevHost()) {
-    return "http://127.0.0.1:3001";
-  }
-
-  return "";
+  return LIVE_API_BASE;
 }
 
 export function getApiBaseCandidates() {
@@ -26,11 +17,7 @@ export function getApiBaseCandidates() {
     (process.env.REACT_APP_API_BASE || "").trim()
   );
 
-  if (isLocalDevHost()) {
-    return dedupe([explicitBase, "http://127.0.0.1:3001", LIVE_API_BASE]);
-  }
-
-  return dedupe([explicitBase]);
+  return dedupe([explicitBase, LIVE_API_BASE]);
 }
 
 export function apiUrl(path) {
@@ -82,6 +69,14 @@ function isRetryableFetchError(error) {
 export async function apiFetch(input, init) {
   const candidates = getFallbackCandidates(input);
   let lastError = null;
+  const retryHttpStatuses = Array.isArray(init?.retryHttpStatuses)
+    ? init.retryHttpStatuses
+    : [];
+  const fetchInit = init && typeof init === "object"
+    ? Object.fromEntries(
+        Object.entries(init).filter(([key]) => key !== "retryHttpStatuses")
+      )
+    : init;
 
   for (let index = 0; index < candidates.length; index += 1) {
     const candidate = candidates[index];
@@ -90,7 +85,16 @@ export async function apiFetch(input, init) {
       if (index > 0) {
         console.warn(`⚠️ API fallback -> ${candidate}`);
       }
-      return await fetch(candidate, init);
+      const response = await fetch(candidate, fetchInit);
+      if (
+        !response.ok &&
+        retryHttpStatuses.includes(response.status) &&
+        index < candidates.length - 1
+      ) {
+        lastError = new Error(`API ${response.status} from ${candidate}`);
+        continue;
+      }
+      return response;
     } catch (error) {
       lastError = error;
       if (!isRetryableFetchError(error) || index === candidates.length - 1) {

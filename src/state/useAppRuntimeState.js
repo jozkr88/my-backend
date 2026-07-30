@@ -53,6 +53,11 @@ function getKnownInteractiveMeshes(currentPortal) {
   return [];
 }
 
+function portalFromPath(currentPath, fallbackPortal) {
+  const match = String(currentPath || "").match(/^\/neo\/([^/]+)/i);
+  return match?.[1] || fallbackPortal || "root";
+}
+
 export function useAppRuntimeState({
   currentPortal,
   currentMesh,
@@ -127,10 +132,14 @@ export function useAppRuntimeState({
       window.__lastWorldObservation = null;
       return;
     }
-    const sceneSnapshot = window.__sceneObservationSnapshot?.sceneState?.activePortal === appState.currentPortal
+    const observedPortal = portalFromPath(currentPath, currentPortal);
+    const observedAppState = observedPortal === appState.currentPortal
+      ? appState
+      : { ...appState, currentPortal: observedPortal };
+    const sceneSnapshot = window.__sceneObservationSnapshot?.sceneState?.activePortal === observedPortal
       ? window.__sceneObservationSnapshot
       : null;
-    const currentObservation = observeBrowserWorld({ appState, sceneSnapshot });
+    const currentObservation = observeBrowserWorld({ appState: observedAppState, sceneSnapshot });
     window.__lastWorldObservation = currentObservation;
 
     const pendingPrediction = window.__lastWorldPrediction;
@@ -139,7 +148,7 @@ export function useAppRuntimeState({
     if ((!predictedState && !predictionPending) || pendingPrediction?.observedState) return;
 
     const observedState = {
-      portal: currentPortal,
+      portal: observedPortal,
       stage: currentMeshStage || null,
     };
     const initialState = pendingPrediction.initialState || {};
@@ -228,6 +237,68 @@ export function useAppRuntimeState({
       })
     );
   }, [appState]);
+
+  // Route changes can land before the renderer publishes its next app-state
+  // snapshot. Retry the observation once at the route boundary so a valid
+  // shadow prediction is not lost to that timing window.
+  useEffect(() => {
+    if (typeof window === "undefined" || !isWorldModelShadowEnabled()) return undefined;
+
+    const timer = window.setTimeout(() => {
+      const pendingPrediction = window.__lastWorldPrediction;
+      const observedPortal = portalFromPath(currentPath, currentPortal);
+      const initialPortal = pendingPrediction?.initialState?.portal;
+      if (
+        !pendingPrediction?.trajectoryId ||
+        pendingPrediction.observedState ||
+        !observedPortal ||
+        observedPortal === initialPortal
+      ) return;
+
+      const observedState = {
+        portal: observedPortal,
+        stage: currentMeshStage || null,
+      };
+      window.__lastWorldPrediction = {
+        ...pendingPrediction,
+        observedState,
+        observedAt: new Date().toISOString(),
+      };
+
+      void apiFetch(apiUrl("/api/world-model/trajectories"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          trajectoryId: pendingPrediction.trajectoryId,
+          sessionId: pendingPrediction.sessionId,
+          traceId: pendingPrediction.traceId,
+          stateBefore: pendingPrediction.initialState || {},
+          proposedAction:
+            pendingPrediction.selected?.actions?.[0] ||
+            pendingPrediction.approvedAction ||
+            null,
+          symbolicPrediction: pendingPrediction.selected || null,
+          probabilisticPrediction: pendingPrediction.probabilistic?.selected || null,
+          candidatePlans: pendingPrediction.candidates || [],
+          observationBefore: pendingPrediction.observationBefore || null,
+          observedState,
+          observedEffects: [{ type: "navigate", target: observedPortal }],
+          intent: "spatial_navigation",
+          goal: pendingPrediction.goal || "world_navigation",
+          interactionChannel: pendingPrediction.interactionChannel || "voice",
+          modelVersion: pendingPrediction.modelVersion,
+          transitionRuleVersion: pendingPrediction.transitionRuleVersion,
+          sampled: pendingPrediction.sampled !== false,
+          createdAt: pendingPrediction.recordedAt,
+          observedAt: new Date().toISOString(),
+        }),
+      }).catch((error) => {
+        console.warn("⚠️ World-model route-boundary recording failed:", error?.message || error);
+      });
+    }, 150);
+
+    return () => window.clearTimeout(timer);
+  }, [currentMeshStage, currentPath, currentPortal]);
 
   return appState;
 }

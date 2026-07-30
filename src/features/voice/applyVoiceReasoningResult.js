@@ -5,6 +5,9 @@ import {
 } from "../../shared/voiceActions";
 import { APP_ACTIONS } from "../../state/actionTypes";
 import { resolveSemanticAppAction } from "../../state/resolveSemanticAppAction";
+import { apiUrl, fetchJson } from "../../utils/api";
+import { launchMaxxAr } from "../maxx/ar";
+import { getSpatialAssetUrls, requestSpatialOffer } from "../../world-model/spatialOffer";
 
 function formatVoiceSeconds(startedAt) {
   if (!startedAt) return "0.00";
@@ -16,6 +19,7 @@ export function applyVoiceReasoningResult({
   spoken,
   startedAt,
   source = "local",
+  isMobile = false,
   currentPortal,
   currentMesh,
   currentMeshStage,
@@ -30,15 +34,55 @@ export function applyVoiceReasoningResult({
   isWorkStepVisible = false,
   isWorkStepActive = false,
 }) {
-  const { action, target, awareness, timing, prediction } = result || {};
+  const { action, target, awareness, timing, prediction, placement } = result || {};
 
-  if (typeof window !== "undefined" && prediction?.trajectoryId && prediction?.mode === "shadow") {
+  if (typeof window !== "undefined" && prediction?.trajectoryId && prediction?.mode === "shadow" && !placement) {
     window.__lastWorldPrediction = {
       ...prediction,
       recordedAt: new Date().toISOString(),
       observedState: null,
       predictionError: null,
     };
+
+    // Persist the prediction immediately. The route-boundary observer will
+    // upsert the same trajectory with the observed state after navigation.
+    void fetchJson(apiUrl("/api/world-model/trajectories"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        trajectoryId: prediction.trajectoryId,
+        sessionId: prediction.sessionId,
+        traceId: prediction.traceId,
+        stateBefore: prediction.initialState || {},
+        proposedAction:
+          prediction.selected?.actions?.[0] ||
+          prediction.approvedAction ||
+          null,
+        symbolicPrediction: prediction.selected || null,
+        probabilisticPrediction: prediction.probabilistic?.selected || null,
+        plannerSelectedAction: prediction.plannerSelected?.actions?.[0] || null,
+        deterministicApprovedAction: prediction.approvedAction || null,
+        candidatePlans: prediction.candidates || [],
+        observationBefore: prediction.observationBefore || null,
+        predictedObservation:
+          prediction.selected?.predictedObservation ||
+          prediction.probabilistic?.selected?.predictedObservation ||
+          null,
+        intent: "spatial_navigation",
+        goal: prediction.goal || "world_navigation",
+        interactionChannel: prediction.interactionChannel || "voice",
+        modelVersion: prediction.modelVersion,
+        transitionRuleVersion: prediction.transitionRuleVersion,
+        shadowLatencyMs: prediction.shadowLatencyMs,
+        predictionLatencyMs: prediction.shadowLatencyMs,
+        sampled: prediction.sampled !== false,
+        createdAt: prediction.recordedAt || new Date().toISOString(),
+      }),
+    })
+      .then((recorded) => console.log("🌐 World-model prediction recorded:", recorded))
+      .catch((error) =>
+        console.warn("⚠️ World-model prediction recording failed:", error?.message || error)
+      );
   }
 
   console.log("🎯 Reasoning result:", { action, target, awareness, timing, source, prediction });
@@ -57,6 +101,33 @@ export function applyVoiceReasoningResult({
         startedAt
       )}s, backend=local`
     );
+  }
+
+  if (action === "experience_spatially" && placement) {
+    if (isMobile) {
+      void requestSpatialOffer({
+        entitySet: placement.entitySet,
+        mode: placement.targetMode === "virtual_world" ? "virtual" : "ar",
+        input: placement.sourceText || spoken || "",
+      })
+        .then((offer) => console.log("📱 Spatial offer created:", offer?.offerId))
+        .catch((error) =>
+          console.warn("⚠️ Spatial offer creation failed:", error?.message || error)
+        );
+      const assets = getSpatialAssetUrls(placement.entitySet);
+      if (assets) {
+        console.log("🚀 Launching spatial asset for", placement.entitySet);
+        launchMaxxAr({ arUsdzUrl: assets.usdz, arGlbUrl: assets.glb });
+      }
+    }
+    return;
+  }
+
+  if ((action === "place_entity_set" || action === "preview_entity_set") && placement) {
+    window.dispatchEvent(
+      new CustomEvent("world-placement-requested", { detail: placement })
+    );
+    return;
   }
 
   const safeTarget =

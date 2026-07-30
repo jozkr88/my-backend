@@ -11,6 +11,10 @@ export function launchMaxxAr({ arUsdzUrl, arGlbUrl }) {
   const canAndroidAR = isAndroid && !isFirefox && !isOculus;
 
   if (isiOS) {
+    if (!arUsdzUrl) {
+      if (arGlbUrl) window.location.href = arGlbUrl;
+      return;
+    }
     const link = document.createElement("a");
     link.rel = "ar";
     link.href = arUsdzUrl;
@@ -27,6 +31,7 @@ export function launchMaxxAr({ arUsdzUrl, arGlbUrl }) {
   }
 
   if (canAndroidAR) {
+    if (!arGlbUrl) return;
     const link = document.createElement("a");
     link.href =
       `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(arGlbUrl)}#Intent;` +

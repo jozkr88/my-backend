@@ -42,6 +42,7 @@ import {
 import { useBallPortalHud } from "./features/root/useBallPortalHud";
 import { useAppRuntimeState } from "./state/useAppRuntimeState";
 import { JozLlmDashboardPage } from "./features/joz-llm/JozLlmDashboardPage";
+import { WorldPlacementLayer } from "./features/world-model/WorldPlacementLayer";
 
 
 import { worldMap } from "./data/worldMap";
@@ -283,6 +284,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
         result,
         spoken: "",
         source: "joz-llm",
+        isMobile,
         currentPortal,
         currentMesh: agentCurrentMesh,
         currentMeshStage: agentCurrentMeshStage,
@@ -301,6 +303,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
       announcePortalTransition,
       currentPortal,
       hideContactCta,
+      isMobile,
       setLocation,
       showContactCta,
     ]
@@ -331,6 +334,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
     currentMesh: agentCurrentMesh,
     currentMeshStage: agentCurrentMeshStage,
     executeCommand: executeJozLlmCommand,
+    isMobile,
     startOpen: !isMobile,
   });
 
@@ -518,6 +522,8 @@ useAgentShell({
         contactCtaLabel={contactCtaLabel}
         contactCtaType={contactCtaType}
         fadeOut={fadeOut}
+        currentPortal={currentPortal}
+        isMobile={isMobile}
         agentContext={agentContext}
         isJozLlmOpen={isJozLlmOpen}
         jozLlmActiveIntentMode={jozLlmActiveIntentMode}
@@ -591,6 +597,8 @@ useAgentShell({
     triggerCount={triggerCount}
     isHelpPanelHovered={isHelpPanelHovered}
   />
+
+  <WorldPlacementLayer />
 
   <Canvas
     className="edge-glow-overlay-canvas"
