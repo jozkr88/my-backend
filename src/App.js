@@ -459,8 +459,8 @@ useAgentShell({
     };
 
     if (normalizedIntentMode === "business_need") {
-      announcePortalTransition("/");
-      setLocation("/");
+      announcePortalTransition("/consultant");
+      setLocation("/consultant");
       return;
     }
 

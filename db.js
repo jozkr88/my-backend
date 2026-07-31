@@ -825,6 +825,102 @@ export async function appendJozMessage({
   );
 }
 
+export async function upsertConsultantAssessment({
+  assessmentId,
+  sessionKey = null,
+  status = "discovery_in_progress",
+  profile = {},
+  analysis = null,
+  version = "world-model-consultant-mvp-1",
+} = {}) {
+  if (!isDatabaseEnabled() || !assessmentId) return null;
+  try {
+    const result = await runQuery(
+      `INSERT INTO joz_consultant_assessments
+         (id, session_key, status, profile, analysis, version)
+       VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6)
+       ON CONFLICT (id) DO UPDATE SET
+         session_key = COALESCE(EXCLUDED.session_key, joz_consultant_assessments.session_key),
+         status = EXCLUDED.status,
+         profile = EXCLUDED.profile,
+         analysis = EXCLUDED.analysis,
+         version = EXCLUDED.version,
+         updated_at = NOW()
+       RETURNING id, session_key, status, profile, analysis, version, created_at, updated_at`,
+      [assessmentId, sessionKey, status, JSON.stringify(profile || {}), JSON.stringify(analysis || null), version]
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to persist consultant assessment:", error.message);
+    return null;
+  }
+}
+
+export async function getConsultantAssessment(assessmentId) {
+  if (!isDatabaseEnabled() || !assessmentId) return null;
+  try {
+    const [assessmentResult, messageResult] = await Promise.all([
+      runQuery(
+        `SELECT id, session_key, status, profile, analysis, version, created_at, updated_at
+         FROM joz_consultant_assessments WHERE id = $1`,
+        [assessmentId]
+      ),
+      runQuery(
+        `SELECT id, role, field, content, created_at
+         FROM joz_consultant_assessment_messages
+         WHERE assessment_id = $1 ORDER BY created_at ASC`,
+        [assessmentId]
+      ),
+    ]);
+    const assessment = assessmentResult.rows[0];
+    return assessment ? { ...assessment, messages: messageResult.rows || [] } : null;
+  } catch (error) {
+    console.error("⚠️ Failed to load consultant assessment:", error.message);
+    return null;
+  }
+}
+
+export async function appendConsultantAssessmentMessage({ assessmentId, role, field = null, content = "" } = {}) {
+  if (!isDatabaseEnabled() || !assessmentId || !role || !content) return null;
+  try {
+    const result = await runQuery(
+      `INSERT INTO joz_consultant_assessment_messages (assessment_id, role, field, content)
+       VALUES ($1, $2, $3, $4)
+       RETURNING id, role, field, content, created_at`,
+      [assessmentId, role, field, content]
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to persist consultant assessment message:", error.message);
+    return null;
+  }
+}
+
+export async function createConsultantLead({
+  assessmentId,
+  name,
+  email,
+  company = "",
+  role = "",
+  engagement = "World Model Discovery Workshop",
+  message = "",
+} = {}) {
+  if (!isDatabaseEnabled()) return null;
+  try {
+    const result = await runQuery(
+      `INSERT INTO joz_consultant_leads
+         (assessment_id, name, email, company, role, engagement, message)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING id, assessment_id, name, email, company, role, engagement, message, created_at`,
+      [assessmentId, name, email, company, role, engagement, message]
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to persist consultant lead:", error.message);
+    return null;
+  }
+}
+
 export async function upsertBusinessValueCase({
   caseId = null,
   conversationId = null,
@@ -2599,6 +2695,59 @@ export async function initDatabase() {
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_consultant_assessments (
+        id UUID PRIMARY KEY,
+        session_key TEXT,
+        status TEXT NOT NULL DEFAULT 'discovery_in_progress',
+        profile JSONB NOT NULL DEFAULT '{}'::jsonb,
+        analysis JSONB,
+        version TEXT NOT NULL DEFAULT 'world-model-consultant-mvp-1',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_consultant_assessments_session_idx
+      ON joz_consultant_assessments (session_key, updated_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_consultant_assessment_messages (
+        id BIGSERIAL PRIMARY KEY,
+        assessment_id UUID NOT NULL REFERENCES joz_consultant_assessments(id) ON DELETE CASCADE,
+        role TEXT NOT NULL CHECK (role IN ('user', 'assistant', 'system')),
+        field TEXT,
+        content TEXT NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_consultant_messages_assessment_idx
+      ON joz_consultant_assessment_messages (assessment_id, created_at ASC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_consultant_leads (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        assessment_id UUID REFERENCES joz_consultant_assessments(id) ON DELETE SET NULL,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        company TEXT NOT NULL DEFAULT '',
+        role TEXT NOT NULL DEFAULT '',
+        engagement TEXT NOT NULL,
+        message TEXT NOT NULL DEFAULT '',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_consultant_leads_created_idx
+      ON joz_consultant_leads (created_at DESC)
     `);
 
     await db.query(`

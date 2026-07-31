@@ -71,6 +71,7 @@ export function compactJozWorldModelContext(raw = {}) {
         .slice(0, 3)
         .map((prediction) => ({
           probability: clamp(prediction?.probability, null),
+          successProbability: clamp(prediction?.successProbability, null),
           confidence: clamp(prediction?.confidence, null),
           predictedState: normalizeJozWorldModelState(prediction?.predictedState),
           evidence: clean(prediction?.evidence, "learned_transition_model", 64),
@@ -113,4 +114,3 @@ export function summarizeWorldTransitionRows(rows = []) {
     nextStates,
   };
 }
-

@@ -66,6 +66,7 @@
     "test": "react-scripts test",
     "check:joz-llm": "node check-joz-llm-responses.js",
     "train:world-model": "node tools/train-world-model.mjs",
+    "train:neural-world-model": "node tools/train-neural-world-model.mjs",
     "check:world-model-knowledge": "node tools/ingest-world-model-knowledge.mjs && node --test tools/world-model-knowledge.test.mjs",
     "check:joz-llm:gate": "node tools/run-joz-quality-gate.mjs",
     "check:joz-quality": "node tools/run-joz-quality-gate.mjs",

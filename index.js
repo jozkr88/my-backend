@@ -43,6 +43,10 @@ import {
   reviewBusinessValueEvidence,
   reviewJozLlmRepairCandidate,
   reviewJozLlmRequestEvent,
+  upsertConsultantAssessment,
+  getConsultantAssessment,
+  appendConsultantAssessmentMessage,
+  createConsultantLead,
 } from "./db.js";
 import {
   APP_CONTEXT,
@@ -97,6 +101,10 @@ import {
   loadLearnedWorldModel,
   predictLearnedNextStates,
 } from "./shared/learnedWorldModel.js";
+import {
+  loadNeuralWorldModel,
+  predictNeuralNextStates,
+} from "./shared/neuralWorldModel.js";
 import {
   buildJozLlmContext,
   enforceJozLlmReplyLimit,
@@ -171,6 +179,16 @@ import {
   buildJozSafetyRefusalResolution,
   classifyJozIntent,
 } from "./shared/jozIntent.js";
+import {
+  CONSULTANT_REPORT_PRICE_EUR,
+  CONSULTANT_VERSION,
+  applyConsultantAnswer,
+  analyzeConsultantProfile,
+  createEmptyConsultantProfile,
+  getNextConsultantField,
+  normalizeConsultantProfile,
+  validateConsultantProfile,
+} from "./shared/worldModelConsultant.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -207,6 +225,16 @@ const LEARNED_WORLD_MODEL_ARTIFACT_PATH = String(
 ).trim();
 const learnedWorldModel = LEARNED_WORLD_MODEL_ENABLED
   ? loadLearnedWorldModel(LEARNED_WORLD_MODEL_ARTIFACT_PATH, fs.readFileSync)
+  : null;
+const NEURAL_WORLD_MODEL_ENABLED = String(
+  process.env.JOZ_WORLD_MODEL_NEURAL_ENABLED || "false"
+).trim().toLowerCase() === "true";
+const NEURAL_WORLD_MODEL_ARTIFACT_PATH = String(
+  process.env.JOZ_WORLD_MODEL_NEURAL_ARTIFACT_PATH ||
+    path.join(path.dirname(fileURLToPath(import.meta.url)), "data", "joz", "published", "neural-world-model.json")
+).trim();
+const neuralWorldModel = NEURAL_WORLD_MODEL_ENABLED
+  ? loadNeuralWorldModel(NEURAL_WORLD_MODEL_ARTIFACT_PATH, fs.readFileSync)
   : null;
 const AR_DELIVERY_MODEL_VERSION = "ar-delivery-empirical-v1";
 const AR_DELIVERY_ACTIONS = ["direct_ar", "web_preview", "qr_handoff"];
@@ -456,8 +484,91 @@ const worldTransitionExperienceFallbackStore = [];
 const worldModelPredictionFallbackStore = new Map();
 const jozRecentSessionMessagesFallbackStore = new Map();
 const jozBusinessValueCaseFallbackStore = new Map();
+const consultantAssessmentFallbackStore = new Map();
+const consultantLeadFallbackStore = [];
 const isNodeTestRuntime =
   process.argv.includes("--test") || process.execArgv.includes("--test");
+
+function normalizeConsultantSessionKey(value) {
+  return String(value || "")
+    .trim()
+    .replace(/[^a-zA-Z0-9._:-]/g, "")
+    .slice(0, 160);
+}
+
+function consultantSessionKeyFromRequest(req) {
+  return normalizeConsultantSessionKey(
+    req.headers["x-consultant-session"] || req.body?.sessionKey || req.query?.sessionKey
+  );
+}
+
+function createConsultantAssessmentRecord({ assessmentId = randomUUID(), sessionKey = "" } = {}) {
+  return {
+    id: assessmentId,
+    sessionKey,
+    status: "discovery_in_progress",
+    profile: createEmptyConsultantProfile(),
+    analysis: null,
+    messages: [],
+    version: CONSULTANT_VERSION,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function publicConsultantAssessment(record) {
+  if (!record) return null;
+  const validation = validateConsultantProfile(record.profile);
+  return {
+    id: record.id,
+    status: record.status,
+    profile: normalizeConsultantProfile(record.profile),
+    analysis: record.analysis || null,
+    nextField: getNextConsultantField(record.profile),
+    progress: Math.round(((8 - validation.missing.length) / 8) * 100),
+    version: record.version || CONSULTANT_VERSION,
+    createdAt: record.createdAt,
+    updatedAt: record.updatedAt,
+  };
+}
+
+function consultantRecordMatchesSession(record, sessionKey) {
+  return !record?.sessionKey || Boolean(sessionKey && record.sessionKey === sessionKey);
+}
+
+async function persistConsultantAssessment(record) {
+  record.updatedAt = new Date().toISOString();
+  consultantAssessmentFallbackStore.set(record.id, record);
+  await upsertConsultantAssessment({
+    assessmentId: record.id,
+    sessionKey: record.sessionKey,
+    status: record.status,
+    profile: record.profile,
+    analysis: record.analysis,
+    version: record.version,
+  });
+  return record;
+}
+
+async function loadConsultantAssessmentRecord(assessmentId, sessionKey = "") {
+  const memoryRecord = consultantAssessmentFallbackStore.get(assessmentId);
+  if (memoryRecord && consultantRecordMatchesSession(memoryRecord, sessionKey)) return memoryRecord;
+  const databaseRecord = await getConsultantAssessment(assessmentId);
+  if (!databaseRecord || !consultantRecordMatchesSession(databaseRecord, sessionKey)) return null;
+  const record = {
+    id: databaseRecord.id,
+    sessionKey: databaseRecord.session_key || "",
+    status: databaseRecord.status,
+    profile: normalizeConsultantProfile(databaseRecord.profile),
+    analysis: databaseRecord.analysis || null,
+    messages: databaseRecord.messages || [],
+    version: databaseRecord.version || CONSULTANT_VERSION,
+    createdAt: databaseRecord.created_at,
+    updatedAt: databaseRecord.updated_at,
+  };
+  consultantAssessmentFallbackStore.set(record.id, record);
+  return record;
+}
 
 function parseRetentionDays(value, fallbackDays) {
   const parsed = Number.parseInt(String(value || ""), 10);
@@ -724,7 +835,7 @@ app.use(
       return callback(new Error("Origin is not allowed"));
     },
     methods: ["GET", "POST", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID", "X-Consultant-Session"],
     exposedHeaders: ["X-Request-ID", "X-AI-Interaction", "X-AI-System-Card"],
     credentials: false,
   })
@@ -746,6 +857,99 @@ app.get("/api/hello", (req, res) => {
       executionPolicy: "existing_guardrails_execute_approved_action",
     },
   });
+});
+
+// --- World Model Consultant MVP ------------------------------------------
+// This is intentionally additive: the existing Joz MAXX experience remains
+// the default route, while the consultant workflow has its own explicit API.
+app.post("/api/consultant/assessments", async (req, res) => {
+  const sessionKey = consultantSessionKeyFromRequest(req) || randomUUID();
+  const record = createConsultantAssessmentRecord({ sessionKey });
+  await persistConsultantAssessment(record);
+  return res.status(201).json({
+    ok: true,
+    assessment: publicConsultantAssessment(record),
+    sessionKey,
+    product: "World Model Consultant",
+    reportPrice: { amount: CONSULTANT_REPORT_PRICE_EUR, currency: "EUR", type: "one_off" },
+  });
+});
+
+app.get("/api/consultant/assessments/:assessmentId", async (req, res) => {
+  const sessionKey = consultantSessionKeyFromRequest(req);
+  const record = await loadConsultantAssessmentRecord(req.params.assessmentId, sessionKey);
+  if (!record) return res.status(404).json({ error: "Assessment not found." });
+  return res.json({ ok: true, assessment: publicConsultantAssessment(record) });
+});
+
+app.post("/api/consultant/assessments/:assessmentId/messages", async (req, res) => {
+  const sessionKey = consultantSessionKeyFromRequest(req);
+  const record = await loadConsultantAssessmentRecord(req.params.assessmentId, sessionKey);
+  if (!record) return res.status(404).json({ error: "Assessment not found." });
+  if (!["discovery_in_progress", "ready_for_free_analysis"].includes(record.status)) {
+    return res.status(409).json({ error: "This assessment is no longer accepting discovery answers." });
+  }
+
+  const field = String(req.body?.field || "").trim();
+  const answer = String(req.body?.answer || "").trim();
+  if (!field || !answer) return res.status(400).json({ error: "A discovery field and answer are required." });
+
+  try {
+    record.profile = applyConsultantAnswer(record.profile, field, answer);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+  record.messages.push({ role: "user", field, content: answer, createdAt: new Date().toISOString() });
+  await appendConsultantAssessmentMessage({ assessmentId: record.id, role: "user", field, content: answer });
+
+  const validation = validateConsultantProfile(record.profile);
+  if (validation.valid) {
+    record.status = "free_analysis_complete";
+    record.analysis = analyzeConsultantProfile(record.profile);
+  } else {
+    record.status = "discovery_in_progress";
+  }
+  await persistConsultantAssessment(record);
+  return res.json({ ok: true, assessment: publicConsultantAssessment(record) });
+});
+
+app.post("/api/consultant/assessments/:assessmentId/analyze", async (req, res) => {
+  const sessionKey = consultantSessionKeyFromRequest(req);
+  const record = await loadConsultantAssessmentRecord(req.params.assessmentId, sessionKey);
+  if (!record) return res.status(404).json({ error: "Assessment not found." });
+  const validation = validateConsultantProfile(record.profile);
+  if (!validation.valid) {
+    return res.status(400).json({ error: "Complete the discovery first.", missing: validation.missing });
+  }
+  record.analysis = analyzeConsultantProfile(record.profile);
+  record.status = "free_analysis_complete";
+  await persistConsultantAssessment(record);
+  return res.json({ ok: true, assessment: publicConsultantAssessment(record) });
+});
+
+app.post("/api/consultant/leads", async (req, res) => {
+  const sessionKey = consultantSessionKeyFromRequest(req);
+  const assessmentId = String(req.body?.assessmentId || "").trim();
+  const record = assessmentId ? await loadConsultantAssessmentRecord(assessmentId, sessionKey) : null;
+  if (!record) return res.status(404).json({ error: "Assessment not found." });
+  const name = String(req.body?.name || "").trim().slice(0, 160);
+  const email = String(req.body?.email || "").trim().toLowerCase().slice(0, 240);
+  const company = String(req.body?.company || record.profile.companyName || "").trim().slice(0, 160);
+  const role = String(req.body?.role || "").trim().slice(0, 160);
+  const engagement = String(req.body?.engagement || "World Model Discovery Workshop").trim().slice(0, 160);
+  const message = String(req.body?.message || "").trim().slice(0, 1600);
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: "Please provide a name and valid work email." });
+  }
+  const lead = {
+    id: randomUUID(), assessmentId, name, email, company, role, engagement, message,
+    createdAt: new Date().toISOString(),
+  };
+  consultantLeadFallbackStore.push(lead);
+  const persistedLead = await createConsultantLead(lead);
+  record.status = record.status === "free_analysis_complete" ? "lead_submitted" : record.status;
+  await persistConsultantAssessment(record);
+  return res.status(201).json({ ok: true, lead: persistedLead || lead, storage: persistedLead ? "postgresql" : "fallback" });
 });
 
 app.get("/api/world-model/status", (_req, res) => {
@@ -775,6 +979,13 @@ app.get("/api/world-model/status", (_req, res) => {
       modelVersion: learnedWorldModel?.modelVersion || null,
       trainingExamples: learnedWorldModel?.training?.trainingExamples || 0,
       transitionCount: learnedWorldModel?.training?.transitionCount || 0,
+    },
+    neuralTransitionModel: {
+      enabled: NEURAL_WORLD_MODEL_ENABLED,
+      loaded: Boolean(neuralWorldModel),
+      modelVersion: neuralWorldModel?.modelVersion || null,
+      trainingExamples: neuralWorldModel?.training?.trainingExamples || 0,
+      architecture: neuralWorldModel?.architecture?.type || null,
     },
   });
 });
@@ -1632,9 +1843,13 @@ async function buildJozWorldModelAdvisor(rawWorldModel = {}) {
     }
 
     const summary = summarizeWorldTransitionRows(rows);
-    const predictions = LEARNED_WORLD_MODEL_ENABLED && learnedWorldModel
+    const structuredPredictions = LEARNED_WORLD_MODEL_ENABLED && learnedWorldModel
       ? predictLearnedNextStates(learnedWorldModel, state, action, { topK: 3 })
       : [];
+    const neuralPredictions = NEURAL_WORLD_MODEL_ENABLED && neuralWorldModel
+      ? predictNeuralNextStates(neuralWorldModel, state, action, { topK: 3 })
+      : [];
+    const predictions = neuralPredictions.length ? neuralPredictions : structuredPredictions;
 
     return {
       action,
@@ -1643,7 +1858,11 @@ async function buildJozWorldModelAdvisor(rawWorldModel = {}) {
       nextStates: predictions.length
         ? predictions.map((prediction) => prediction.predictedState)
         : summary.nextStates,
-      evidence: predictions.length ? "learned_transition_model" : summary.evidence,
+      evidence: neuralPredictions.length
+        ? "neural_transition_model"
+        : predictions.length
+          ? "learned_transition_model"
+          : summary.evidence,
     };
   }));
 

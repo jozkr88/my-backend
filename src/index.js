@@ -6,6 +6,7 @@ import { App } from './App';
 import { JozLlmDashboardPage } from './features/joz-llm/JozLlmDashboardPage';
 import { SpatialExperiencePage } from './features/world-model/SpatialExperiencePage';
 import { WorldModelDiagramPage } from './features/world-model/WorldModelDiagramPage';
+import { WorldModelConsultantPage } from './features/consultant/WorldModelConsultantPage';
 import backSvg from './back.svg';
 import LoadingScreen from './LoadingScreen';
 import { appBasePath } from './utils/paths';
@@ -17,6 +18,8 @@ function Root() {
   const [, params] = useRoute('/neo/:id');
   const [isSpatialExperience, spatialParams] = useRoute('/space/:entitySet');
   const [isWorldModelDiagram] = useRoute('/world-model');
+  const [isWorldModelConsultant] = useRoute('/world-model-consultant');
+  const [isConsultantShortRoute] = useRoute('/consultant');
   const [, setLocation] = useLocation();
 
   // ✅ Escape key = back in history (or / if no history)
@@ -131,6 +134,10 @@ function Root() {
   const isJozLlmDashboard = window.location.pathname
     .replace(/\/+$/, '')
     .endsWith('/joz-llm-dashboard');
+
+  if (isWorldModelConsultant || isConsultantShortRoute) {
+    return <WorldModelConsultantPage />;
+  }
 
   if (isJozLlmDashboard) {
     return <JozLlmDashboardPage />;
