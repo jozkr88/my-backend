@@ -977,6 +977,14 @@ export function VoiceChrome({
       return;
     }
 
+    // Business Value is now the entry point for the structured consultant
+    // assessment. Keep Joz MAXX and its other lanes intact, but make the
+    // commercial discovery path explicit instead of burying it in chat.
+    if (intentMode === "business_need" && !actionType) {
+      onJozLlmLaneSelect?.(intentMode);
+      return;
+    }
+
     selectJozLlmIntentMode?.(intentMode);
 
     completeReveal(latestAssistantMessageId);

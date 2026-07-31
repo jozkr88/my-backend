@@ -62,3 +62,7 @@ services:
         value: "false"
       - key: JOZ_WORLD_MODEL_ARTIFACT_PATH
         value: "data/joz/published/learned-world-model.json"
+      - key: JOZ_WORLD_MODEL_NEURAL_ENABLED
+        value: "false"
+      - key: JOZ_WORLD_MODEL_NEURAL_ARTIFACT_PATH
+        value: "data/joz/published/neural-world-model.json"

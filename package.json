@@ -68,6 +68,7 @@
     "build:joz-knowledge-graph": "node tools/build-joz-knowledge-graph.mjs && if [ \"$JOZ_WORLD_MODEL_LEARNED_ENABLED\" = \"true\" ]; then npm run train:world-model -- --database --output data/joz/published/learned-world-model.json; fi",
     "import:joz-knowledge-graph:neo4j": "node tools/import-joz-knowledge-graph-to-neo4j.mjs",
     "train:world-model": "node tools/train-world-model.mjs",
+    "train:neural-world-model": "node tools/train-neural-world-model.mjs",
     "check:world-model-knowledge": "node tools/ingest-world-model-knowledge.mjs && node --test tools/world-model-knowledge.test.mjs",
     "check:joz-llm:gate": "node tools/run-joz-quality-gate.mjs",
     "check:joz-quality": "node tools/run-joz-quality-gate.mjs",
