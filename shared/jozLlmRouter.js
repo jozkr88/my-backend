@@ -5202,6 +5202,7 @@ export function buildRoleAwareJozContext({
       targetRole: context?.targetRole || "Advanced Data Scientist",
       intentMode,
       visitorGeo: context?.visitorGeo || context?.visitor_geo || null,
+      worldModel: context?.worldModel || null,
     },
     profile,
     retrievedDocuments,

@@ -13,7 +13,10 @@ import { normalizeVoiceAction } from "../../shared/voiceActions";
 import { resolveLocalVoiceCommand } from "../../voice/localVoice";
 import { resolveSpatialDemoIntent } from "../../world-model/placement";
 import { requestSemanticSpatialIntent } from "../../world-model/spatialOffer";
-import { recordWholeAppJourneyEvent } from "../../world-model/appJourney";
+import {
+  buildWholeAppWorldState,
+  recordWholeAppJourneyEvent,
+} from "../../world-model/appJourney";
 
 const PENDING_MESSAGE_ID = "joz-llm-pending";
 const BOOKING_PROMPT = "__JOZ_BOOKING_CALENDAR__";
@@ -944,6 +947,13 @@ export function useJozLlm({
               currentMeshStage,
               targetRole: TARGET_DATA_SCIENTIST_ROLE.title,
               intentMode: effectiveIntentMode || undefined,
+              worldModel: buildWholeAppWorldState({
+                appState: typeof window !== "undefined" ? window.__appState : {},
+                overrides: {
+                  action: "ask_joz",
+                  goal: effectiveIntentMode || "get_an_answer",
+                },
+              }),
             },
           }),
         });
