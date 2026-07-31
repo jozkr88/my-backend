@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { getAllowedActionsForPortal } from "../world-model/meetJoz";
 import {
@@ -6,6 +6,10 @@ import {
   reconcileBrowserWorldObservations,
 } from "../world-model/observeWorld";
 import { isWorldModelShadowEnabled } from "../world-model/mode";
+import {
+  buildWholeAppWorldState,
+  recordWholeAppJourneyEvent,
+} from "../world-model/appJourney";
 import { normalizeAgentMesh } from "../features/voice/context";
 import { apiFetch, apiUrl } from "../utils/api";
 
@@ -74,6 +78,8 @@ export function useAppRuntimeState({
   suggestionText,
   currentPhase,
 }) {
+  const previousMeaningfulStateRef = useRef(null);
+
   const appState = useMemo(() => {
     const normalizedMesh = normalizeAgentMesh({
       currentPortal,
@@ -132,6 +138,32 @@ export function useAppRuntimeState({
       window.__lastWorldObservation = null;
       return;
     }
+
+    const meaningfulState = buildWholeAppWorldState({ appState });
+    const previousMeaningfulState = previousMeaningfulStateRef.current;
+    previousMeaningfulStateRef.current = meaningfulState;
+    if (
+      previousMeaningfulState &&
+      previousMeaningfulState.currentStateKey !== meaningfulState.currentStateKey
+    ) {
+      void recordWholeAppJourneyEvent({
+        action: "state_transition",
+        target: meaningfulState.currentStateKey,
+        source: "runtime_state",
+        outcomeType: "state_observed",
+        stateBefore: previousMeaningfulState,
+        observedState: meaningfulState,
+        expectedEffects: [{ type: "state_transition" }],
+        observedEffects: [{
+          type: "portal_or_mesh_changed",
+          from: previousMeaningfulState.currentStateKey,
+          to: meaningfulState.currentStateKey,
+        }],
+      }).catch((error) => {
+        console.warn("⚠️ Whole-app state observation failed:", error?.message || error);
+      });
+    }
+
     const observedPortal = portalFromPath(currentPath, currentPortal);
     const observedAppState = observedPortal === appState.currentPortal
       ? appState

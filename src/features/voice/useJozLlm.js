@@ -13,6 +13,7 @@ import { normalizeVoiceAction } from "../../shared/voiceActions";
 import { resolveLocalVoiceCommand } from "../../voice/localVoice";
 import { resolveSpatialDemoIntent } from "../../world-model/placement";
 import { requestSemanticSpatialIntent } from "../../world-model/spatialOffer";
+import { recordWholeAppJourneyEvent } from "../../world-model/appJourney";
 
 const PENDING_MESSAGE_ID = "joz-llm-pending";
 const BOOKING_PROMPT = "__JOZ_BOOKING_CALENDAR__";
@@ -526,6 +527,16 @@ export function useJozLlm({
       const now = Date.now();
       const normalizedSignature = normalizeChatSignature(value);
 
+      void recordWholeAppJourneyEvent({
+        action: hasExplicitIntentMode ? "select_intent_lane" : "ask_joz",
+        target: hasExplicitIntentMode ? intentMode : "chat",
+        source: "joz_chat",
+        outcomeType: hasExplicitIntentMode ? "intent_submitted" : "question_submitted",
+        goal: hasExplicitIntentMode ? intentMode : "get_an_answer",
+      }).catch((error) => {
+        console.warn("⚠️ Whole-app chat event recording failed:", error?.message || error);
+      });
+
       if (value.length > CHAT_MAX_INPUT_CHARS) {
         setError(`Keep the message under ${CHAT_MAX_INPUT_CHARS} characters.`);
         return;
@@ -635,6 +646,16 @@ export function useJozLlm({
             if (payload?.conversationId) {
               setConversationId(String(payload.conversationId));
             }
+
+            void recordWholeAppJourneyEvent({
+              action: "request_callback",
+              target: "callback",
+              source: "joz_chat",
+              outcomeType: "callback_saved",
+              goal: "connect_with_joz",
+            }).catch((error) => {
+              console.warn("⚠️ Whole-app callback event recording failed:", error?.message || error);
+            });
 
             setMessages((current) => [
               ...current.filter((message) => message.id !== pendingId),
@@ -847,6 +868,15 @@ export function useJozLlm({
         const appliedCommandResult = commandResult;
         executeCommand?.(commandResult);
 
+        void recordWholeAppJourneyEvent({
+          action: "voice_command",
+          target: appliedCommandResult.action || appliedCommandResult.target || "command",
+          source: "joz_chat",
+          outcomeType: "command_executed",
+        }).catch((error) => {
+          console.warn("⚠️ Whole-app command event recording failed:", error?.message || error);
+        });
+
         if (isQuestionLikePrompt(value) && effectiveIntentMode) {
           setError("");
         } else {
@@ -935,6 +965,15 @@ export function useJozLlm({
             actions: normalizeReplyActions(payload?.actions || payload?.recommended_actions),
           },
         ]);
+        void recordWholeAppJourneyEvent({
+          action: "assistant_response",
+          target: "joz-llm",
+          source: "joz_chat",
+          outcomeType: "response_received",
+          goal: effectiveIntentMode || "get_an_answer",
+        }).catch((error) => {
+          console.warn("⚠️ Whole-app response event recording failed:", error?.message || error);
+        });
       } catch (requestError) {
         if (requestController.signal.aborted) {
           return;
@@ -956,6 +995,16 @@ export function useJozLlm({
             content: buildJozLlmFallbackReply(value),
           },
         ]);
+        void recordWholeAppJourneyEvent({
+          action: "assistant_response",
+          target: "local-fallback",
+          source: "joz_chat",
+          outcomeType: "fallback_response",
+          goal: effectiveIntentMode || "get_an_answer",
+          success: false,
+        }).catch((error) => {
+          console.warn("⚠️ Whole-app fallback event recording failed:", error?.message || error);
+        });
         setError("");
       } finally {
         if (activeRequestRef.current === requestController) {
