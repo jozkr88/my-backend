@@ -144,6 +144,7 @@ function buildRuntimeSection({ context = {}, intentMode = "skills" } = {}) {
     intentMode: cleanText(intentMode || "skills") || "skills",
     locale: cleanText(context?.locale || context?.language || "") || null,
     visitorRegion: cleanText(visitorGeo?.country || visitorGeo?.region || visitorGeo?.city || "") || null,
+    worldModel: context?.worldModel || null,
   };
 }
 

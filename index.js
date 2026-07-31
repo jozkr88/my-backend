@@ -105,6 +105,11 @@ import {
   enforceJozLlmReplyLimit,
 } from "./shared/jozLlmProfile.js";
 import {
+  compactJozWorldModelContext,
+  normalizeJozWorldModelState,
+  summarizeWorldTransitionRows,
+} from "./shared/jozWorldModelContext.js";
+import {
   assertNoFallbackHijack,
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
@@ -1861,6 +1866,56 @@ function getFallbackWorldTransitionExperience({ stateKey = "", actionKey = "" } 
   );
 }
 
+async function buildJozWorldModelAdvisor(rawWorldModel = {}) {
+  const base = compactJozWorldModelContext(rawWorldModel);
+  const state = normalizeJozWorldModelState(base.state);
+  const actions = Array.isArray(state.allowedActions) ? state.allowedActions.slice(0, 12) : [];
+  if (!state.currentStateKey || !actions.length) return base;
+
+  const learnedOptions = await Promise.all(actions.map(async (action) => {
+    let rows = [];
+    try {
+      const lookup = isDatabaseEnabled()
+        ? getWorldTransitionExperience({
+            stateKey: state.currentStateKey,
+            actionKey: action,
+          })
+        : Promise.resolve(getFallbackWorldTransitionExperience({
+            stateKey: state.currentStateKey,
+            actionKey: action,
+          }));
+      rows = await Promise.race([
+        lookup,
+        new Promise((resolve) => setTimeout(() => resolve([]), WORLD_MODEL_EXPERIENCE_TIMEOUT_MS)),
+      ]);
+    } catch (error) {
+      console.warn("⚠️ Joz World Model advisory lookup failed:", error?.message || error);
+    }
+
+    const summary = summarizeWorldTransitionRows(rows);
+    const predictions = LEARNED_WORLD_MODEL_ENABLED && learnedWorldModel
+      ? predictLearnedNextStates(learnedWorldModel, state, action, { topK: 3 })
+      : [];
+
+    return {
+      action,
+      ...summary,
+      predictions,
+      nextStates: predictions.length
+        ? predictions.map((prediction) => prediction.predictedState)
+        : summary.nextStates,
+      evidence: predictions.length ? "learned_transition_model" : summary.evidence,
+    };
+  }));
+
+  return compactJozWorldModelContext({
+    ...base,
+    state,
+    learnedOptions,
+    source: learnedWorldModel ? "learned_and_observed_transition_model" : base.source,
+  });
+}
+
 async function persistCompletedWorldModelPrediction({ prediction, approved, sampleRate } = {}) {
   if (!prediction?.trajectoryId) return null;
   const selectedAction = prediction.selected?.actions?.[0] || null;
@@ -2514,9 +2569,12 @@ app.post("/api/joz-llm", async (req, res) => {
     }
 
     const requestGeo = await requestGeoPromise;
-    const answerContext = requestGeo
-      ? { ...context, visitorGeo: requestGeo }
-      : context;
+    const worldModelAdvisory = await buildJozWorldModelAdvisor(context?.worldModel || {});
+    const answerContext = {
+      ...context,
+      ...(requestGeo ? { visitorGeo: requestGeo } : {}),
+      worldModel: worldModelAdvisory,
+    };
 
     const requestConversationMessages = messages
       .filter((message) => message?.role === "user" || message?.role === "assistant")
@@ -2781,6 +2839,7 @@ app.post("/api/joz-llm", async (req, res) => {
     let trace = {
       ...buildJozRouteTrace(route, resolution),
       modelRuntime,
+      worldModel: worldModelAdvisory,
       audienceProfile,
       intentClassification,
       agentPlan,
@@ -3058,6 +3117,7 @@ app.post("/api/joz-llm", async (req, res) => {
     const requestContext = {
       ...legacyRuntimeContext,
       ...(requestGeo ? { geo: requestGeo } : {}),
+      worldModel: worldModelAdvisory,
     };
     const observabilityEvent = {
       conversationId,
@@ -3126,6 +3186,7 @@ app.post("/api/joz-llm", async (req, res) => {
       verification,
       review,
       verificationFlow,
+      worldModel: worldModelAdvisory,
       observability: {
         latencyMs: verification.metrics.latencyMs,
         retrievedDocumentCount: verification.metrics.retrievedDocumentCount,
