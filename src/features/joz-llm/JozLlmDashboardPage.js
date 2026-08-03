@@ -48,6 +48,59 @@ function truncate(value = "", limit = 140) {
   return `${text.slice(0, limit - 1)}…`;
 }
 
+const VOICE_MAXX_SWEEP_PREFIX = "voice-maxx-100-";
+
+function getVoiceMaxxSweepId(event = {}) {
+  const sessionKey = String(event.session_key || event.sessionKey || "").trim();
+  return sessionKey.startsWith(VOICE_MAXX_SWEEP_PREFIX) ? sessionKey : null;
+}
+
+function DashboardVoiceMaxxSweep({ events, selectedRun, onSelectRun, storage }) {
+  const runs = useMemo(() => {
+    const grouped = new Map();
+    for (const event of events) {
+      const id = getVoiceMaxxSweepId(event);
+      if (!id) continue;
+      const current = grouped.get(id) || { id, total: 0, failed: 0, corrected: 0 };
+      current.total += 1;
+      if (didFailAfterRelease(event)) current.failed += 1;
+      if (wasCorrected(event)) current.corrected += 1;
+      grouped.set(id, current);
+    }
+    return [...grouped.values()];
+  }, [events]);
+
+  if (!runs.length) return null;
+
+  const latest = runs[0];
+  const active = runs.find((run) => run.id === selectedRun) || latest;
+
+  return (
+    <section className="joz-dashboard-test-run" aria-label="Voice MAXX 100 question sweep">
+      <div>
+        <div className="joz-dashboard-label">Local Voice MAXX test</div>
+        <h2>100 short questions</h2>
+        <p>
+          Typos, abstract world-model questions, vague prompts, booking requests, and playful pushback are stored as individual backend runs.
+        </p>
+      </div>
+      <div className="joz-dashboard-test-run-stats">
+        <span><strong>{active.total}</strong>/100 stored</span>
+        <span><strong>{active.failed}</strong> failed final checks</span>
+        <span><strong>{active.corrected}</strong> corrected</span>
+        <span>{storage === "database" ? "Supabase" : "local memory"}</span>
+      </div>
+      <button
+        type="button"
+        className="joz-dashboard-test-run-button"
+        onClick={() => onSelectRun(selectedRun === active.id ? "all" : active.id)}
+      >
+        {selectedRun === active.id ? "Show all runs" : "Show these 100"}
+      </button>
+    </section>
+  );
+}
+
 function summarizeCheckFailures(stage = {}) {
   const checks = Array.isArray(stage?.verificationChecks)
     ? stage.verificationChecks
@@ -571,6 +624,7 @@ export function JozLlmDashboardPage() {
   const [knowledgeFilter, setKnowledgeFilter] = useState("all");
   const [correctedOnly, setCorrectedOnly] = useState(false);
   const [failedFirstOnly, setFailedFirstOnly] = useState(false);
+  const [testRunFilter, setTestRunFilter] = useState("all");
 
   useEffect(() => {
     let cancelled = false;
@@ -658,6 +712,15 @@ export function JozLlmDashboardPage() {
     };
   }, [events]);
 
+  const testRunOptions = useMemo(() => {
+    const counts = new Map();
+    for (const event of events) {
+      const id = getVoiceMaxxSweepId(event);
+      if (id) counts.set(id, (counts.get(id) || 0) + 1);
+    }
+    return [...counts.entries()].map(([id, count]) => ({ id, count }));
+  }, [events]);
+
   const filteredEvents = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
@@ -691,6 +754,9 @@ export function JozLlmDashboardPage() {
       if (knowledgeFilter !== "all" && aiKnowledge.id !== knowledgeFilter) {
         return false;
       }
+      if (testRunFilter !== "all" && getVoiceMaxxSweepId(event) !== testRunFilter) {
+        return false;
+      }
       if (correctedOnly && !corrected) {
         return false;
       }
@@ -702,7 +768,7 @@ export function JozLlmDashboardPage() {
       }
       return true;
     });
-  }, [correctedOnly, events, failedFirstOnly, knowledgeFilter, personaFilter, query, routeFilter]);
+  }, [correctedOnly, events, failedFirstOnly, knowledgeFilter, personaFilter, query, routeFilter, testRunFilter]);
 
   const selectedEvent = useMemo(() => {
     return (
@@ -863,6 +929,13 @@ export function JozLlmDashboardPage() {
 
       <DashboardAudienceCharts events={filteredEvents} />
 
+      <DashboardVoiceMaxxSweep
+        events={events}
+        selectedRun={testRunFilter}
+        onSelectRun={setTestRunFilter}
+        storage={storage}
+      />
+
       <section className="joz-dashboard-toolbar">
         <input
           className="joz-dashboard-search"
@@ -881,6 +954,21 @@ export function JozLlmDashboardPage() {
             </option>
           ))}
         </select>
+        {testRunOptions.length ? (
+          <select
+            className="joz-dashboard-select"
+            value={testRunFilter}
+            onChange={(event) => setTestRunFilter(event.target.value)}
+            aria-label="Filter Voice MAXX 100 test runs"
+          >
+            <option value="all">All test runs</option>
+            {testRunOptions.map(({ id, count }) => (
+              <option key={id} value={id}>
+                Voice MAXX 100 · {count}/100
+              </option>
+            ))}
+          </select>
+        ) : null}
         <select
           className="joz-dashboard-select"
           value={personaFilter}

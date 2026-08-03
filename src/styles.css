@@ -668,6 +668,13 @@
 .joz-dashboard-save:disabled { opacity: 0.55; cursor: not-allowed; }
 .joz-dashboard-review-message { color: #9de1b6; font-size: 0.84rem; font-weight: 700; }
 .joz-dashboard-evaluation { margin-top: 1rem; padding: 1.3rem; border: 1px solid rgba(118, 145, 172, 0.2); border-radius: 1.3rem; background: rgba(56, 74, 96, 0.17); }
+.joz-dashboard-test-run { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 1rem; margin: 1rem 0; padding: 1.1rem 1.3rem; border: 1px solid rgba(119, 208, 162, 0.3); border-radius: 1.1rem; background: rgba(42, 92, 78, 0.18); }
+.joz-dashboard-test-run h2 { margin: 0.25rem 0 0; color: #eef8f2; font-size: 1.25rem; }
+.joz-dashboard-test-run p { max-width: 60rem; margin: 0.55rem 0 0; color: #b9cec5; line-height: 1.45; }
+.joz-dashboard-test-run-stats { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.55rem; color: #b9cec5; font-size: 0.78rem; }
+.joz-dashboard-test-run-stats span { padding: 0.55rem 0.7rem; border-radius: 0.7rem; background: rgba(51, 110, 88, 0.28); }
+.joz-dashboard-test-run-stats strong { color: #e5fff0; }
+.joz-dashboard-test-run-button { padding: 0.7rem 0.9rem; border: 1px solid rgba(143, 226, 181, 0.45); border-radius: 0.75rem; color: #e8fff1; background: rgba(57, 132, 100, 0.35); font: inherit; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .joz-dashboard-evaluation.is-empty { color: #9eafc2; }
 .joz-dashboard-evaluation h3 { margin: 0.35rem 0 0; color: #eef3fb; }
 .joz-dashboard-evaluation-scores { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.65rem; margin-top: 1rem; }
@@ -706,6 +713,9 @@
   .joz-dashboard-summary-card span { font-size: 0.8rem; }
   .joz-dashboard-summary-card strong { font-size: 2.35rem; }
   .joz-dashboard-charts { grid-template-columns: 1fr; }
+  .joz-dashboard-test-run { grid-template-columns: 1fr; align-items: stretch; }
+  .joz-dashboard-test-run-stats { justify-content: flex-start; }
+  .joz-dashboard-test-run-button { width: 100%; }
   .joz-dashboard-toolbar { grid-template-columns: 1fr; padding: 0.85rem; border-radius: 1.1rem; }
   .joz-dashboard-shell { padding: 0.8rem; border-radius: 1.1rem; }
   .joz-dashboard-detail-top,

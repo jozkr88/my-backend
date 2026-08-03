@@ -42,6 +42,30 @@ function normalizeText(value = "") {
     .replace(/^whats\b/g, "what's")
     .replace(/^whts\b/g, "what's")
     .replace(/^wht does he do\b/g, "what does he do")
+    .replace(/\bwhos\b/g, "who's")
+    .replace(/\bwat\b/g, "what")
+    .replace(/\bwht\b/g, "what")
+    .replace(/\bwats\b/g, "what's")
+    .replace(/\bwhat r\b/g, "what are")
+    .replace(/\bdos\b/g, "does")
+    .replace(/\bwether\b/g, "weather")
+    .replace(/\bplese\b/g, "please")
+    .replace(/\bworkng\b/g, "working")
+    .replace(/\bundrstand\b/g, "understand")
+    .replace(/\bexplane\b/g, "explain")
+    .replace(/\bcan u\b/g, "can you")
+    .replace(/\bdid u\b/g, "did you")
+    .replace(/\bskils\b/g, "skills")
+    .replace(/\bstak\b/g, "stack")
+    .replace(/\bspce\b/g, "space")
+    .replace(/\bstrenth\b/g, "strength")
+    .replace(/\bagen\b/g, "again")
+    .replace(/\bmeting\b/g, "meeting")
+    .replace(/\barange\b/g, "arrange")
+    .replace(/\bschedul\b/g, "schedule")
+    .replace(/\bbok\b/g, "book")
+    .replace(/\bwana\b/g, "wanna")
+    .replace(/\bjozs\b/g, "joz's")
     .replace(/\bgoldpill\b/g, "gold pill")
     .replace(/\bgold oil\b/g, "gold pill")
     .replace(/\bgold pil\b/g, "gold pill")
@@ -833,6 +857,10 @@ function buildRecruiterOperationalResolution(route = {}) {
   let selectedOperationalComposer = "";
 
   switch (route?.detectedIntent) {
+    case "recruiter_booking":
+      reply = "Absolutely. Choose the fastest way to arrange time with Joz: call or email Joz directly.";
+      selectedOperationalComposer = "composeBookingAnswer";
+      break;
     case "recruiter_location":
       reply = composeLocationAnswer(route.detectedSubIntent);
       selectedOperationalComposer = "composeLocationAnswer";
@@ -1407,9 +1435,156 @@ function buildUnknownDefinitionGapReply(clean = "") {
   if (normalized === "what is not in joz's knowledge base" || normalized === "what is not in jozs knowledge base") {
     return "The current Joz Knowledge Graph does not define arbitrary external entities. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.";
   }
-  const term = extractDefinitionTerm(clean);
+  const term = extractDefinitionTerm(normalizeText(clean));
   if (!term) return null;
   return `${term} is not in the current Joz Knowledge Graph. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
+}
+
+function pickConversationalVariant(variants = [], messages = []) {
+  if (!variants.length) return "";
+  const assistantCount = messages.filter((message) => message?.role === "assistant").length;
+  return variants[assistantCount % variants.length];
+}
+
+function buildConversationalReply(clean = "", messages = []) {
+  if (!clean) return null;
+
+  if (/^(?:what(?:'s|s| is)|tell me)\s+(?:the\s+)?(?:current\s+)?time(?:\s+now)?\??$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "In World Model AI, time is the change dimension: it gives events order, duration, recurrence, and trajectory. It helps the model distinguish what is happening now from what happened before and what may happen next.",
+      answerSource: "world_model_time_concept",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "world_model_time",
+    });
+  }
+
+  if (/\bweather\b|\bforecast\b|\btemperature\b|\braining\b|\bsnowing\b/i.test(clean)) {
+    const reply = /\bspain\b/i.test(clean)
+      ? pickConversationalVariant([
+          "I can help with Spain’s weather. Which city should I check—Madrid, Barcelona, Valencia, or somewhere else?",
+          "Spain covers a lot of ground. Which city do you mean, and are you after current conditions or a forecast?",
+          "Happy to help with that. Give me the Spanish city and I’ll frame the weather question properly.",
+        ], messages)
+      : pickConversationalVariant([
+          "I can help with the weather. Which city or region should we look at?",
+          "Sure—what location should I use for the weather question?",
+          "Weather depends on the place. Name the city and I’ll take it from there.",
+        ], messages);
+    return buildPolicyResolution({
+      reply,
+      answerSource: "deterministic_weather_follow_up",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "weather_follow_up",
+    });
+  }
+
+  if (/\bshow ai strength\b/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "Joz’s strength is connecting agentic AI architecture, world models, and production delivery into measurable enterprise outcomes.",
+      answerSource: "deterministic_strengths_summary",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("skills"),
+      answerClass: "deterministic_skills",
+    });
+  }
+
+  if (/\b(?:how does|what is|explain) rag\b/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "RAG retrieves relevant, authorised evidence before generation. Joz pairs it with ACLs, provenance, and verification so the answer is grounded and access-controlled.",
+      answerSource: "deterministic_rag_summary",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("skills"),
+      answerClass: "deterministic_skills",
+    });
+  }
+
+  if (/\b(?:explain|understand) memory\b/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "Memory holds conversation, task state, and working context. Durable business truth stays in authoritative systems such as PostgreSQL, not inside the model’s memory.",
+      answerSource: "deterministic_memory_summary",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("skills"),
+      answerClass: "deterministic_skills",
+    });
+  }
+
+  if (/^(?:what(?:'s| is)\s+)?space\??$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "In World Model AI, space is the relational dimension: where entities are, what is near them, how they connect, and which paths or constraints shape possible action. It turns a flat list of objects into a world the model can navigate and reason about.",
+      answerSource: "world_model_space_concept",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "world_model_space",
+    });
+  }
+
+  if (/\b(?:space|time|state|states|trajectory|future|observation|action|prediction|predict|simulate|simulated|simulation|reality|world model)\b|model the world/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "In World Model AI, a state describes what is true now, an action changes that state, an observation shows what happened, and a trajectory is the sequence over time. Prediction estimates likely next states so the system can compare futures before acting.",
+      answerSource: "world_model_concept",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "world_model_concept",
+    });
+  }
+
+  if (/^(?:what is the point|so what(?:, then)?|why should i care)\??$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "The point is better decisions before expensive action: represent the current world, test likely futures, act through controlled tools, and learn from what actually happened.",
+      answerSource: "world_model_value",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "world_model_value",
+    });
+  }
+
+  if (/\b(?:this is|that is|it's|its|so)\s+(?:hot|cool|fire|sick|good|amazing|beautiful|wild|insane)\b|^(?:wow|nice|love this|this is hot|this is cool|this is fire)[!. ]*$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: pickConversationalVariant([
+        "Strong signal. What’s landing for you—the visual world, the voice, or the intelligence underneath?",
+        "That’s the energy. Want to explore what makes it work—the worlds, the voice, or the AI?",
+        "Good. Follow the signal: should Joz MAXX show the visual system, the agentic AI, or Joz’s work behind it?",
+      ], messages),
+      answerSource: "deterministic_casual_reaction",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "casual_reaction",
+    });
+  }
+
+  if (/^(?:try again|did you understand|did you understand me|say that again|what did you hear|why is this not working)\??$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "I can help with Joz Worlds. Please try again.",
+      answerSource: "deterministic_retry_prompt",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "retry_prompt",
+    });
+  }
+
+  if (/^(?:is this just hype|is this buzzword soup|does this actually work|are you just guessing|is ai magic now|is this all smoke|prove it|are you taking the piss|did a robot write this|can you stop flexing|why so many arrows|is this the big brain|do you ever say no|can you be less boring|is this hot or not|can this beat a spreadsheet)\??$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "Fair question. Joz MAXX should show the reasoning, the evidence, and the boundary—not pretend certainty. Ask about a specific capability or proof point and I’ll keep it concrete.",
+      answerSource: "deterministic_skepticism_reply",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "skepticism_reply",
+    });
+  }
+
+  if (/^(?:and then|really|you sure|can you help|do it now)\??$/i.test(clean)) {
+    return buildPolicyResolution({
+      reply: "I can help with Joz Worlds. Please try again.",
+      answerSource: "deterministic_retry_prompt",
+      composer: "buildConversationalReply",
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      answerClass: "retry_prompt",
+    });
+  }
+
+  return null;
 }
 
 function buildAmbiguousFollowUpReply(clean = "") {
@@ -2555,6 +2730,31 @@ function detectRecruiterOperational(clean) {
       detectedIntent: "recruiter_location",
       detectedSubIntent: "residence",
       detectedConcept: "recruiter_location",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "book joz",
+      "book time with joz",
+      "arrange time with joz",
+      "arrange a meeting with joz",
+      "arrange a call with joz",
+      "schedule a meeting with joz",
+      "schedule time with joz",
+      "set up a meeting with joz",
+      "set up a call with joz",
+      "meet with joz",
+      "meet joz",
+      "talk to joz",
+      "speak with joz",
+      /\b(?:arrange|schedule|set up)\s+(?:a\s+)?(?:meeting|call|time)\b/,
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_booking",
+      detectedSubIntent: "booking",
+      detectedConcept: "recruiter_booking",
     };
   }
 
@@ -4156,6 +4356,10 @@ function detectSkills(clean) {
       "not buzzwords",
       "what's his edge",
       "whats his edge",
+      "what is joz's edge",
+      "what is joz's value",
+      "what is jozs edge",
+      "what is jozs value",
       "whts his edge",
       "what's joz strongest at",
       "what is joz strongest at",
@@ -4203,6 +4407,11 @@ function detectSkills(clean) {
     includesAny(clean, [
       "what is joz's ai stack",
       "what is jozs ai stack",
+      "what's joz's stack",
+      "whats jozs stack",
+      "what is joz's stack",
+      "what is jozs stack",
+      "what does joz's stack include",
       "technical stack",
       "ai stack",
       "tool stack",
@@ -5113,6 +5322,9 @@ export async function resolveUnknownJozReply({
       confidence: "high",
     });
   }
+
+  const conversationalReply = buildConversationalReply(clean, messages);
+  if (conversationalReply) return conversationalReply;
 
   const courtesyReply = buildCourtesyReply(clean);
   if (courtesyReply) {
