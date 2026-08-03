@@ -1,7 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { buildJozLlmFallbackReply } from "./shared/jozLlmProfile.js";
+import {
+  buildJozLlmFallbackReply,
+  enforceJozLlmReplyLimit,
+  getJozResponsePolicy,
+} from "./shared/jozLlmProfile.js";
 import {
   buildJozInScopeFallbackRepair,
   buildJozRouteTrace,
@@ -26,6 +30,20 @@ function buildContexts(context = {}) {
     appContext: validateAppContext({}, legacyContext).value,
   };
 }
+
+test("adapts response budgets to factual, standard, and deep questions", () => {
+  assert.equal(getJozResponsePolicy("where he lives").mode, "short");
+  assert.equal(getJozResponsePolicy("Why is Joz a fit for this role?").mode, "standard");
+  assert.equal(getJozResponsePolicy("How would Joz design an agentic AI system from scratch?").mode, "deep");
+});
+
+test("keeps overlong model replies at complete sentence boundaries", () => {
+  const reply = enforceJozLlmReplyLimit(
+    "Joz leads with the decision. This second sentence is useful but exceeds the compact budget.",
+    6,
+  );
+  assert.equal(reply, "Joz leads with the decision.");
+});
 
 test("routes identity profile queries ahead of assistant fallback", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
@@ -319,9 +337,9 @@ test("answers assistant identity and authenticity questions directly", () => {
   const { appContext, legacyContext } = buildContexts();
 
   for (const [input, subIntent, expected] of [
-    ["Who are you?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
-    ["You are who?", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
-    ["Are you fake?", "authenticity", /grounded in the current MeetJoz knowledge base/i],
+    ["Who are you?", "assistant_identity", /I'm Joz MAXX|I’m Joz MAXX/i],
+    ["You are who?", "assistant_identity", /I'm Joz MAXX|I’m Joz MAXX/i],
+    ["Are you fake?", "authenticity", /grounded in the current MeetJoz Knowledge Graph/i],
   ]) {
     const route = routeJozLlmQuery({ input, appContext, legacyContext });
     const resolution = composeJozLlmRouteReply({
@@ -343,11 +361,11 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
   const cases = [
     ["How does use AI?", "skills", "ai_use", /governed capability layer/i],
     ["How does Joz use AI?", "skills", "ai_use", /governed capability layer/i],
-    ["Are you for real?", "identity_profile", "authenticity", /grounded in the current MeetJoz knowledge base/i],
+    ["Are you for real?", "identity_profile", "authenticity", /grounded in the current MeetJoz Knowledge Graph/i],
     ["Are you self aware?", "identity_profile", "self_awareness", /not self-aware or conscious/i],
     ["Do you have memory?", "identity_profile", "assistant_memory", /conversation context/i],
-    ["Tell me more about yourself?", "identity_profile", "assistant_identity", /I'm Joz LLM|I’m Joz LLM/i],
-    ["What is this about?", "skills", "purpose_of_llm", /Joz LLM explains/i],
+    ["Tell me more about yourself?", "identity_profile", "assistant_identity", /I'm Joz MAXX|I’m Joz MAXX/i],
+    ["What is this about?", "skills", "purpose_of_llm", /Joz MAXX explains/i],
     ["How can Joz help me?", "business_need", "business_help", /helps businesses turn AI/i],
     ["I am a business - how can Joz help me?", "business_need", "business_help", /baseline metrics/i],
     ["I am d2c - how can Ai help me?", "business_need", "business_help", /For D2C/i],
@@ -469,6 +487,18 @@ test("repairs the six weak responses found by the 50-case local quality run", ()
     assert.equal(route.detectedSubIntent, expectedSubIntent, input);
     assert.match(resolution.reply, expectedReply, input);
   }
+});
+
+test("routes the Skills lane AI strengths prompt to the capability overview", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const input = "Show AI strengths";
+  const route = routeJozLlmQuery({ input, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capability_catalog");
+  assert.equal(resolution.fallbackUsed, false);
+  assert.match(resolution.reply, /capability|agentic AI/i);
 });
 
 test("repairs a misrouted in-scope business fallback only with a verified answer", () => {
@@ -608,6 +638,24 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
   assert.doesNotMatch(resolution.reply, /EU national|\bEP\b|\bPEP\b|work authorization/i);
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
+});
+
+test("routes the applied AI capability map to grouped recruiter-quality evidence", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
+  const prompt = "Show Joz's applied AI skills and capability map.";
+  const route = routeJozLlmQuery({ input: prompt, appContext, legacyContext });
+  const resolution = composeJozLlmRouteReply({ route, input: prompt, appContext, legacyContext });
+
+  assert.equal(route.selectedRoute, "skills");
+  assert.equal(route.detectedSubIntent, "capability_catalog");
+  assert.match(resolution.reply, /relational and causal modelling/i);
+  assert.match(resolution.reply, /trajectory modelling|event-sequence reasoning/i);
+  assert.match(resolution.reply, /multi-agent orchestration|multi-agent coordination/i);
+  assert.match(resolution.reply, /LangGraph|durable workflows/i);
+  assert.match(resolution.reply, /FastAPI|PostgreSQL\/pgvector/i);
+  assert.match(resolution.reply, /permissions|security/i);
+  assert.match(resolution.reply, /20x digital-sales growth|20x digital sales growth/i);
+  assert.equal(resolution.fallbackUsed, false);
 });
 
 test("short pronoun phrasing about what he does resolves to Joz capabilities, not random technical drift", () => {
@@ -2649,12 +2697,68 @@ test("routes recruiter location queries to deterministic operational answer with
   assert.equal(resolution.selectedOperationalComposer, "composeLocationAnswer");
   assert.deepEqual(
     resolution.actions.map((action) => action.id),
-    ["call_joz", "email_joz"]
+    ["book_joz", "call_joz", "email_joz"]
   );
   assert.equal(trace.selectedOperationalComposer, "composeLocationAnswer");
-  assert.deepEqual(trace.recommendedActionIds, ["call_joz", "email_joz"]);
+  assert.deepEqual(trace.recommendedActionIds, ["book_joz", "call_joz", "email_joz"]);
   assert.equal(trace.validationPassed, true);
   assert.equal(trace.fallbackUsed, false);
+});
+
+test("inherits a personal location thread and returns the in-chat Book Joz action", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const recentMessages = [
+    { role: "user", content: "Where is Joz from?" },
+    {
+      role: "assistant",
+      content: "Joz operates across Singapore, Dubai, Europe, and global markets.",
+      metadata: {
+        trace: {
+          selectedRoute: "factual_profile",
+          detectedSubIntent: "location",
+        },
+      },
+    },
+    { role: "user", content: "where he lives?" },
+  ];
+
+  const route = routeJozLlmQueryWithAwareness({
+    input: "where he lives?",
+    appContext,
+    legacyContext,
+    recentMessages,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "where he lives?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.detectedIntent, "recruiter_location");
+  assert.equal(route.detectedSubIntent, "residence");
+  assert.equal(route.selectedRoute, "joz_knowledge");
+  assert.match(resolution.reply, /current residence|legal address/i);
+  assert.ok(resolution.actions.some((action) => action.id === "book_joz"));
+  assert.equal(resolution.actions.find((action) => action.id === "book_joz")?.type, "booking");
+});
+
+test("personal factual profile answers also expose Book Joz", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
+  const route = routeJozLlmQuery({
+    input: "Where is Joz from?",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "Where is Joz from?",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.selectedRoute, "factual_profile");
+  assert.ok(resolution.actions.some((action) => action.id === "book_joz"));
 });
 
 test("routes recruiter notice period queries to deterministic operational answer with actions", () => {
@@ -2755,7 +2859,7 @@ test("unknown definition prompts return a knowledge-gap reply instead of the Joz
     assert.equal(resolution.answerSource, "knowledge_gap");
     assert.match(
       resolution.reply,
-      new RegExp(`^${expectedTerm} is not in the current Joz knowledge base\\.`, "i")
+      new RegExp(`^${expectedTerm} is not in the current Joz Knowledge Graph\\.`, "i")
     );
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
@@ -2809,7 +2913,7 @@ test("unknown definition prompts ignore unrelated retrieved docs and still retur
     assert.equal(resolution.answerSource, "knowledge_gap");
     assert.match(
       resolution.reply,
-      new RegExp(`^${expectedTerm} is not in the current Joz knowledge base\\.`, "i")
+      new RegExp(`^${expectedTerm} is not in the current Joz Knowledge Graph\\.`, "i")
     );
     assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation/i);
   }
@@ -2845,7 +2949,7 @@ test("common first-word typos still resolve unknown definition prompts to the kn
   assert.equal(resolution.answerSource, "knowledge_gap");
   assert.match(
     resolution.reply,
-    /^Paradex is not in the current Joz knowledge base\./i
+    /^Paradex is not in the current Joz Knowledge Graph\./i
   );
   assert.doesNotMatch(resolution.reply, /^Tools are functions/i);
 });
@@ -2928,7 +3032,7 @@ test("purpose-of-this phrasing routes to the Joz LLM purpose answer instead of a
     assert.equal(route.selectedRoute, "skills");
     assert.equal(route.detectedSubIntent, "purpose_of_llm");
     assert.equal(resolution.fallbackUsed, false);
-    assert.match(String(resolution.reply || ""), /purpose of Joz LLM/i);
+    assert.match(String(resolution.reply || ""), /purpose of Joz MAXX/i);
     assert.match(String(resolution.reply || ""), /showcase Joz clearly and credibly/i);
     assert.match(String(resolution.reply || ""), /skills, experience, achievements, business value, systems thinking, infrastructure approach, and agent architecture work/i);
   }
@@ -3021,7 +3125,7 @@ test("generic unknown prompts return a scope boundary instead of the old bio fal
   assert.equal(resolution.answerSource, "scope_boundary");
   assert.equal(resolution.answerClass, "scope_boundary");
   assert.equal(resolution.confidence, "high");
-  assert.match(resolution.reply, /not in the current Joz knowledge base/i);
+  assert.match(resolution.reply, /not in the current Joz Knowledge Graph/i);
   assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation|Maybank|Manulife/i);
 });
 

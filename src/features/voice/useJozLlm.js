@@ -16,7 +16,7 @@ import { requestSemanticSpatialIntent } from "../../world-model/spatialOffer";
 import {
   buildWholeAppWorldState,
   recordWholeAppJourneyEvent,
-} from "../../world-model/appJourney";
+} from "../../world-model/appJourney.js";
 
 const PENDING_MESSAGE_ID = "joz-llm-pending";
 const BOOKING_PROMPT = "__JOZ_BOOKING_CALENDAR__";

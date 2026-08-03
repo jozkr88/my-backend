@@ -3,6 +3,9 @@ import {
   JOZ_LLM_IDENTITY,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
+  buildJozResponsePolicyInstruction,
+  enforceJozLlmReplyLimit,
+  getJozResponsePolicy,
 } from "./jozLlmProfile.js";
 import {
   buildMeetJozWorldAnswerContext,
@@ -537,6 +540,12 @@ function includesWholeWord(text, words = []) {
 }
 
 const JOZ_OPERATIONAL_ACTIONS = [
+  {
+    id: "book_joz",
+    label: "Book Joz",
+    type: "booking",
+    href: "joz://booking",
+  },
   {
     id: "call_joz",
     label: "Call Joz",
@@ -1202,6 +1211,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "capability_catalog") {
+    return "Joz's applied AI capability map spans eight connected domains. Spatial intelligence: Python-based relational and causal modelling, ontology engineering, knowledge-graph topology, temporal state modelling, counterfactual simulation, and action-conditioned prediction. Multimodal and spatiotemporal AI: trajectory modelling, multimodal data fusion, event-sequence modelling, pattern detection, and cross-modal reasoning. Agentic systems: multi-agent orchestration, agent-to-agent coordination, MCP runtime harnesses, evaluation, guardrails, and governance. Runtime architecture: LangGraph, LangChain, memory, shared state, checkpointing, durable workflows, tool routing, and verification-repair loops. Production platform engineering: async Python, FastAPI, SQLAlchemy, PostgreSQL/pgvector, Redis, RabbitMQ, Kubernetes, structured outputs, testing, OpenTelemetry, monitoring, scalability, recovery, and backfilling. The delivery layer covers discovery, business framing, scoping, solution architecture, full-stack implementation, deployment, cross-functional delivery, adoption, and scale. The research layer covers world-state and latent-state representation, latent dynamics, action-conditioned rollouts, model-based reinforcement learning, synthetic environments, and calibration. Security is designed in through permissions, ACLs, secrets, policy, privacy, lineage, responsible AI, and cross-border compliance. Proof includes 20x digital-sales growth at Maybank, ML practice across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and spatial AI delivery in Dubai.";
+  }
+
   if (subIntent === "paid_architecture_boundary") {
     return "A complete company-specific architecture for a named product is the kind of work Joz would scope as a paid architecture engagement, not provide as an unbounded free blueprint. The paid review turns your brief into a concrete system design: a supervisor-led agent system, typed shared state, agent and tool boundaries, retrieval and permissions, policy and fraud/risk gates, durable execution, independent verification, observability, rollout phases, and an implementation backlog. We can collect the brief, show the draft scope, and take payment here in chat.";
   }
@@ -1307,7 +1320,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "capabilities_overview") {
-    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering. The technical layer includes retrieval, orchestration, memory, verification, observability, Python backend systems, and 3D or spatial interface delivery. The differentiator is combining that technical depth with enterprise architecture, human adoption, and measurable outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and MC USA.";
+    return "Joz's deepest skills are in Agentic AI architecture, decision intelligence, context engineering, and enterprise product engineering—connecting spatial intelligence, multimodal and spatiotemporal AI, runtime state architecture, production AI platforms, and security governance. The working layer includes relational and causal modelling, ontology and knowledge graphs, trajectory and event-sequence reasoning, multi-agent coordination, MCP harnesses, memory, durable workflows, verification-repair loops, Python backend systems, FastAPI, PostgreSQL/pgvector, Redis, observability, and structured evaluation. The delivery edge is enterprise architecture from customer discovery through implementation, deployment, adoption, and scale. Proof includes 20x digital-sales growth at Maybank, ML delivery across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and spatial AI delivery in Dubai.";
   }
 
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";
@@ -1465,6 +1478,37 @@ function inferAwarenessFromPrompt(prompt = "") {
   const clean = normalizeText(prompt);
   if (!clean) return null;
 
+  const identity = detectIdentityProfile(clean);
+  if (identity) {
+    return {
+      selectedRoute: "identity_profile",
+      detectedSubIntent: identity.detectedSubIntent,
+      answerClass: "deterministic_profile",
+      userPrompt: prompt,
+    };
+  }
+
+  const recruiterOperational = detectRecruiterOperational(clean);
+  if (recruiterOperational) {
+    return {
+      selectedRoute: "joz_knowledge",
+      detectedIntent: recruiterOperational.detectedIntent,
+      detectedSubIntent: recruiterOperational.detectedSubIntent,
+      answerClass: "deterministic_recruiter_operational",
+      userPrompt: prompt,
+    };
+  }
+
+  const factual = detectFactualProfile(clean);
+  if (factual) {
+    return {
+      selectedRoute: "factual_profile",
+      detectedSubIntent: factual.detectedSubIntent,
+      answerClass: "deterministic_profile",
+      userPrompt: prompt,
+    };
+  }
+
   const skills = detectSkills(clean);
   if (skills) {
     return {
@@ -1578,6 +1622,65 @@ function buildConversationAwareRoute(route = {}, awareness = null, input = "", r
       .map((message) => message.content)
       .join(" ")
   );
+
+  const inheritsPersonalLocationRoute =
+    includesAny(clean, [
+      "where he lives",
+      "where does he live",
+      "where joz lives",
+      "where does joz live",
+      "where he is based",
+      "where is he based",
+      "what about his location",
+      "what about where he lives",
+    ]) &&
+    (
+      ["location", "residence"].includes(priorSubIntent) ||
+      includesAny(priorPrompt, ["where joz is from", "where is joz from", "where he is from", "location", "based", "operates"])
+    );
+
+  if (inheritsPersonalLocationRoute) {
+    return {
+      ...route,
+      detectedIntent: "recruiter_location",
+      detectedSubIntent: "residence",
+      detectedConcept: "recruiter_location",
+      selectedRoute: "joz_knowledge",
+      selectedWorldRecord: null,
+      personalFollowUp: true,
+    };
+  }
+
+  const inheritsPersonalProfileRoute =
+    /^(?:what|where|when|does|is|can|how)\b.*\b(?:he|his|him|joz|joz's|jozs)\b/i.test(clean) &&
+    [
+      "nationality",
+      "contact",
+      "availability",
+      "experience",
+      "education",
+      "degree",
+      "certifications",
+      "notice_period",
+      "work_authorization",
+      "compensation",
+      "working_model",
+      "relocation",
+      "hiring",
+      "singapore_fit",
+    ].includes(priorSubIntent);
+
+  if (inheritsPersonalProfileRoute) {
+    return {
+      ...route,
+      detectedIntent: awareness?.detectedIntent || "recruiter_contact",
+      detectedSubIntent: priorSubIntent,
+      detectedConcept: awareness?.detectedConcept || "personal_profile",
+      selectedRoute: awareness?.selectedRoute || "joz_knowledge",
+      selectedWorldRecord: null,
+      personalFollowUp: true,
+    };
+  }
 
   const inheritsVerificationRoute =
     includesAny(clean, [
@@ -3299,6 +3402,26 @@ function detectSystemsMindset(clean) {
 
 function detectSkills(clean) {
   if (
+    includesAny(clean, [
+      "applied ai skills",
+      "applied ai capability",
+      "show ai strengths",
+      "capability map",
+      "capability matrix",
+      "full skills map",
+      "complete skills",
+      "spatial intelligence skills",
+      "spatiotemporal ai skills",
+      "world model ai skills",
+      "production ai platform engineering",
+      "agent runtime and state architecture",
+      "ai security and governance skills",
+    ])
+  ) {
+    return { detectedSubIntent: "capability_catalog", detectedConcept: "skills" };
+  }
+
+  if (
     includesAny(clean, ["start the paid architecture brief", "start paid architecture brief"]) ||
     /^(?:i want to|we want to|help me|please|let's|lets)\s+(?:create|build|design|develop)\s+(?:a|an|the)?\s*(?:custom\s+|company-specific\s+|agentic\s+)?(?:ai architecture|(?:custom|company-specific)\s+agentic\s+ai architecture)\b/i.test(clean)
     || /^(?:i want to|we want to|help me|please|let's|lets)\s+(?:create|build|design|develop)\s+(?:a|an|the)?\s*(?:agentic\s+)?(?:ai\s+)?(?:app|application|platform|system)\b/i.test(clean)
@@ -4681,6 +4804,8 @@ export function composeJozLlmRouteReply({
       retrievedCategories: ["bio", "proof"],
       answerClass: "deterministic_profile",
       confidence: "high",
+      actions: buildOperationalActions(),
+      recommendedActionIds: buildOperationalActions().map((action) => action.id),
     };
   }
 
@@ -4697,6 +4822,8 @@ export function composeJozLlmRouteReply({
       retrievedCategories: ["faq", "bio"],
       answerClass: "deterministic_profile",
       confidence: "high",
+      actions: buildOperationalActions(),
+      recommendedActionIds: buildOperationalActions().map((action) => action.id),
     };
   }
 
@@ -4836,6 +4963,7 @@ export function composeJozLlmRouteReply({
     const preferBaseSkillsReply =
       [
         "capabilities_overview",
+        "capability_catalog",
         "collaboration",
         "purpose_of_llm",
         "ai_use",
@@ -4860,6 +4988,7 @@ export function composeJozLlmRouteReply({
       answerSource:
         [
           "capabilities_overview",
+          "capability_catalog",
           "purpose_of_llm",
           "ai_use",
         "proof_backed_strengths",
@@ -4877,6 +5006,7 @@ export function composeJozLlmRouteReply({
       composer:
         [
           "capabilities_overview",
+          "capability_catalog",
           "purpose_of_llm",
           "ai_use",
           "proof_backed_strengths",
@@ -4926,12 +5056,18 @@ export async function resolveUnknownJozReply({
   openai = null,
   roleAwareContext = {},
   intentClassification = null,
+  route = null,
 } = {}) {
   const clean = normalizeText(input);
   const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
     ? roleAwareContext.retrievedDocuments
     : [];
   const unknownDefinitionGapReply = buildUnknownDefinitionGapReply(input);
+  const responsePolicy = getJozResponsePolicy(input, {
+    route,
+    selectedRoute: route?.selectedRoute,
+    intentClassification,
+  });
   const topProgrammeRecord = retrievedDocuments.find((doc) => doc?.category === "project");
   const shouldAnswerOpenDomainQuestion =
     intentClassification?.kind === "answer" &&
@@ -5100,12 +5236,16 @@ export async function resolveUnknownJozReply({
     try {
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
-        temperature: 0.35,
-        max_tokens: 90,
+        temperature: responsePolicy.mode === "deep" ? 0.35 : 0.25,
+        max_tokens: responsePolicy.maxTokens,
         messages: [
           {
             role: "system",
             content: buildJozLlmSystemPrompt(),
+          },
+          {
+            role: "system",
+            content: buildJozResponsePolicyInstruction(responsePolicy),
           },
           {
             role: "system",
@@ -5130,7 +5270,10 @@ export async function resolveUnknownJozReply({
         ],
       });
 
-      reply = String(response.choices?.[0]?.message?.content || "").trim();
+      reply = enforceJozLlmReplyLimit(
+        String(response.choices?.[0]?.message?.content || "").trim(),
+        responsePolicy.wordBudget,
+      );
       if (reply) {
         answerSource = "openai_model";
         composer = "openai.chat.completions.create";
@@ -5151,6 +5294,8 @@ export async function resolveUnknownJozReply({
       retrievedCategories: [],
       answerClass: "scope_boundary",
       confidence: "high",
+      responseMode: responsePolicy.mode,
+      wordBudget: responsePolicy.wordBudget,
     });
   }
 
@@ -5163,6 +5308,8 @@ export async function resolveUnknownJozReply({
     retrievedCategories: [],
     answerClass: "model_fallback",
     confidence: "low",
+    responseMode: responsePolicy.mode,
+    wordBudget: responsePolicy.wordBudget,
   };
 }
 

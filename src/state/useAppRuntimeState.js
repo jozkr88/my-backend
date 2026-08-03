@@ -9,7 +9,7 @@ import { isWorldModelShadowEnabled } from "../world-model/mode";
 import {
   buildWholeAppWorldState,
   recordWholeAppJourneyEvent,
-} from "../world-model/appJourney";
+} from "../world-model/appJourney.js";
 import { normalizeAgentMesh } from "../features/voice/context";
 import { apiFetch, apiUrl } from "../utils/api";
 

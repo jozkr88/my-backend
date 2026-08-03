@@ -46,7 +46,11 @@ function buildGroundingCheck({ route = {}, resolution = {}, retrievedDocuments =
   };
 }
 
-function resolveWordBudgetStatus(route = {}, wordCount = 0) {
+function resolveWordBudgetStatus(route = {}, wordCount = 0, resolution = {}) {
+  const declaredBudget = Number(resolution?.wordBudget);
+  if (Number.isFinite(declaredBudget) && declaredBudget > 0) {
+    return wordCount <= declaredBudget ? "pass" : "fail";
+  }
   const subIntent = route?.detectedSubIntent || "";
   const generousArchitectureSubroutes = new Set([
     "financial_intelligence_platform_architecture",
@@ -116,8 +120,8 @@ function buildBaseChecks({ route, resolution, trace, retrievedDocuments, reply, 
     },
     {
       id: "word_budget",
-      status: resolveWordBudgetStatus(route, wordCount),
-      detail: `Reply length is ${wordCount} words.`,
+      status: resolveWordBudgetStatus(route, wordCount, resolution),
+      detail: `Reply length is ${wordCount} words${resolution?.wordBudget ? ` against a ${resolution.wordBudget}-word ${resolution.responseMode || "declared"} budget` : ""}.`,
     },
     {
       id: "answer_class",

@@ -3,6 +3,9 @@ import {
   JOZ_LLM_IDENTITY,
   buildJozLlmFallbackReply,
   buildJozLlmSystemPrompt,
+  buildJozResponsePolicyInstruction,
+  enforceJozLlmReplyLimit,
+  getJozResponsePolicy,
 } from "./jozLlmProfile.js";
 import {
   buildMeetJozWorldAnswerContext,
@@ -649,6 +652,10 @@ function composeSystemsMindsetReply(subIntent = "thinking_model") {
 }
 
 function composeSkillsReply(subIntent = "capabilities_overview") {
+  if (subIntent === "capability_catalog") {
+    return "Joz's applied AI capability map spans eight connected domains. Spatial intelligence: Python-based relational and causal modelling, ontology engineering, knowledge-graph topology, temporal state modelling, counterfactual simulation, and action-conditioned prediction. Multimodal and spatiotemporal AI: trajectory modelling, multimodal data fusion, event-sequence modelling, pattern detection, and cross-modal reasoning. Agentic systems: multi-agent orchestration, agent-to-agent coordination, MCP runtime harnesses, evaluation, guardrails, and governance. Runtime architecture: LangGraph, LangChain, memory, shared state, checkpointing, durable workflows, tool routing, and verification-repair loops. Production platform engineering: async Python, FastAPI, SQLAlchemy, PostgreSQL/pgvector, Redis, RabbitMQ, Kubernetes, structured outputs, testing, OpenTelemetry, monitoring, scalability, recovery, and backfilling. The delivery layer covers discovery, business framing, scoping, solution architecture, full-stack implementation, deployment, cross-functional delivery, adoption, and scale. The research layer covers world-state and latent-state representation, latent dynamics, action-conditioned rollouts, model-based reinforcement learning, synthetic environments, and calibration. Security is designed in through permissions, ACLs, secrets, policy, privacy, lineage, responsible AI, and cross-border compliance. Proof includes 20x digital-sales growth at Maybank, ML practice across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and spatial AI delivery in Dubai.";
+  }
+
   if (subIntent === "safe_architecture_design") {
     return "Joz would design an AI platform to fail safely by separating decision-making, policy, execution, and verification so one bad model output cannot directly cause uncontrolled change. The control flow is: Policy Gate -> Approval Step -> Execution -> Verification -> Rollback or Escalation. In practice that means API boundary -> typed orchestration state -> scoped tools -> deterministic policy gates -> idempotent execution -> post-action verification -> audit trail and escalation. High-risk actions should require human approval, retries must be bounded, external dependencies need timeouts and circuit breakers, and authoritative state must stay in durable systems rather than inside the model. The goal is graceful degradation: if the model is wrong or a dependency fails, the platform slows down, stops, or escalates instead of silently taking unsafe action.";
   }
@@ -710,7 +717,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "capabilities_overview") {
-    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering. The technical layer includes retrieval, orchestration, memory, verification, observability, Python backend systems, and 3D or spatial interface delivery. The differentiator is combining that technical depth with enterprise architecture, human adoption, and measurable outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and MC USA.";
+    return "Joz's deepest skills are in Agentic AI architecture, decision intelligence, context engineering, and enterprise product engineering—connecting spatial intelligence, multimodal and spatiotemporal AI, runtime state architecture, production AI platforms, and security governance. The working layer includes relational and causal modelling, ontology and knowledge graphs, trajectory and event-sequence reasoning, multi-agent coordination, MCP harnesses, memory, durable workflows, verification-repair loops, Python backend systems, FastAPI, PostgreSQL/pgvector, Redis, observability, and structured evaluation. The delivery edge is enterprise architecture from customer discovery through implementation, deployment, adoption, and scale. Proof includes 20x digital-sales growth at Maybank, ML delivery across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and spatial AI delivery in Dubai.";
   }
 
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";
@@ -1615,6 +1622,26 @@ function detectSystemsMindset(clean) {
 function detectSkills(clean) {
   if (
     includesAny(clean, [
+      "applied ai skills",
+      "applied ai capability",
+      "show ai strengths",
+      "capability map",
+      "capability matrix",
+      "full skills map",
+      "complete skills",
+      "spatial intelligence skills",
+      "spatiotemporal ai skills",
+      "world model ai skills",
+      "production ai platform engineering",
+      "agent runtime and state architecture",
+      "ai security and governance skills",
+    ])
+  ) {
+    return { detectedSubIntent: "capability_catalog", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "design a governed agentic ai platform",
       "durable workflows, retrieval, memory, and verification",
     ]) &&
@@ -2418,14 +2445,14 @@ export function composeJozLlmRouteReply({
     return {
       reply: directKnowledgeReply || evidenceReply?.reply || baseReply,
       answerSource:
-        route.detectedSubIntent === "capabilities_overview"
+        ["capabilities_overview", "capability_catalog"].includes(route.detectedSubIntent)
           ? "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience"
           : directKnowledgeReply
             ? "retrieved_knowledge"
           : evidenceReply?.answerSource ||
             "JOZ_LLM_CV.appliedAiSkills + JOZ_LLM_CV.experience",
       composer:
-        route.detectedSubIntent === "capabilities_overview"
+        ["capabilities_overview", "capability_catalog"].includes(route.detectedSubIntent)
           ? "composeSkillsReply"
           : directKnowledgeReply
             ? "buildRetrievedKnowledgeReply"
@@ -2460,6 +2487,7 @@ export async function resolveUnknownJozReply({
   roleAwareContext = {},
 } = {}) {
   const clean = normalizeText(input);
+  const responsePolicy = getJozResponsePolicy(input, roleAwareContext);
   const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
     ? roleAwareContext.retrievedDocuments
     : [];
@@ -2528,12 +2556,16 @@ export async function resolveUnknownJozReply({
     try {
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
-        temperature: 0.35,
-        max_tokens: 90,
+        temperature: responsePolicy.mode === "deep" ? 0.35 : 0.25,
+        max_tokens: responsePolicy.maxTokens,
         messages: [
           {
             role: "system",
             content: buildJozLlmSystemPrompt(),
+          },
+          {
+            role: "system",
+            content: buildJozResponsePolicyInstruction(responsePolicy),
           },
           {
             role: "system",
@@ -2546,7 +2578,10 @@ export async function resolveUnknownJozReply({
         ],
       });
 
-      reply = String(response.choices?.[0]?.message?.content || "").trim();
+      reply = enforceJozLlmReplyLimit(
+        String(response.choices?.[0]?.message?.content || "").trim(),
+        responsePolicy.wordBudget,
+      );
       if (reply) {
         answerSource = "openai_model";
         composer = "openai.chat.completions.create";
@@ -2568,6 +2603,8 @@ export async function resolveUnknownJozReply({
     fallbackUsed,
     intentMode: mapRouteToIntentMode("unknown_fallback"),
     retrievedCategories: [],
+    responseMode: responsePolicy.mode,
+    wordBudget: responsePolicy.wordBudget,
   };
 }
 

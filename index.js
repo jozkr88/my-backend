@@ -3033,6 +3033,7 @@ app.post("/api/joz-llm", async (req, res) => {
         openai,
         roleAwareContext,
         intentClassification,
+        route,
       }));
     const resolution = architectureOfferDisabled
       ? rawResolution

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 import { APP_ACTIONS } from "./actionTypes";
-import { recordWholeAppJourneyEvent } from "../world-model/appJourney";
+import { recordWholeAppJourneyEvent } from "../world-model/appJourney.js";
 
 export function useAppActionDispatcher({
   announcePortalTransition,

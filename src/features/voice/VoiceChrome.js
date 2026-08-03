@@ -1711,7 +1711,7 @@ export function VoiceChrome({
                           </span>
                         </p>
                       )}
-                      {!!message.actions?.length && (
+                          {!!message.actions?.length && (
                         <div className="joz-llm-panel__lane-followups">
                           {message.actions.map((action) => (
                             <button
@@ -1719,6 +1719,16 @@ export function VoiceChrome({
                               type="button"
                               className="joz-llm-panel__lane-followup"
                               onClick={() => {
+                                if (action.type === "booking") {
+                                  handleJozLlmActionClick(
+                                    action.label,
+                                    jozLlmBookingPrompt,
+                                    "booking",
+                                    null,
+                                    action.type
+                                  );
+                                  return;
+                                }
                                 if (/^https?:/i.test(action.href)) {
                                   window.open(action.href, "_blank", "noopener,noreferrer");
                                   return;

@@ -85,6 +85,84 @@ export const JOZ_LLM_CV = {
       "System framing that connects signals, interfaces, and action",
     ],
   },
+  capabilityMatrix: {
+    spatialIntelligence: [
+      "Python-based relational and causal modelling",
+      "Ontology engineering",
+      "Knowledge graph topology and dependency modelling",
+      "Temporal state modelling",
+      "Counterfactual simulation",
+      "Action-conditioned prediction",
+    ],
+    multimodalSpatiotemporalAi: [
+      "Trajectory modelling",
+      "Spatiotemporal data representation",
+      "Multimodal data fusion",
+      "Event sequence modelling",
+      "Spatiotemporal pattern detection",
+      "Cross-modal reasoning",
+    ],
+    agenticAiSystems: [
+      "Multi-agent orchestration",
+      "Agent-to-agent coordination",
+      "MCP agent runtime harnesses",
+      "Agent evaluation",
+      "Guardrails and AI governance",
+    ],
+    endToEndDelivery: [
+      "Customer discovery",
+      "Business framing",
+      "Technical scoping and solution architecture",
+      "Full-stack implementation",
+      "Evaluation and deployment",
+      "Cross-functional delivery",
+      "Adoption and scale",
+    ],
+    worldModelResearch: [
+      "World-state and latent-state representation",
+      "Latent dynamics models",
+      "Action-conditioned rollouts",
+      "Model-based reinforcement learning",
+      "Synthetic environment generation",
+      "Prediction calibration",
+    ],
+    agentRuntimeStateArchitecture: [
+      "LangGraph and LangChain",
+      "Memory architectures",
+      "Shared state",
+      "Checkpointing and state persistence",
+      "Durable workflow execution",
+      "Tool routing and execution control",
+      "Verification and repair loops",
+    ],
+    productionAiPlatformEngineering: [
+      "Async Python",
+      "FastAPI",
+      "SQLAlchemy 2.0",
+      "PostgreSQL and pgvector",
+      "Redis",
+      "RabbitMQ",
+      "Secure API architecture",
+      "JWT and role-based access control",
+      "Kubernetes and cloud-native deployment",
+      "Structured outputs and schema validation",
+      "pytest and TDD",
+      "OpenTelemetry tracing",
+      "Model monitoring and performance profiling",
+      "Horizontal scalability",
+      "Failure recovery and data backfilling",
+    ],
+    aiSecurityAndGovernance: [
+      "Tool-permission boundaries",
+      "Access control lists",
+      "Secrets management",
+      "Policy enforcement",
+      "Data privacy",
+      "Model and data lineage",
+      "Responsible AI controls",
+      "Cross-border AI compliance and regulatory alignment",
+    ],
+  },
   experience: [
     {
       title: "Agentic AI Architecture and Multimodal AI Leader",
@@ -186,10 +264,63 @@ export const TARGET_DATA_SCIENTIST_ROLE = {
 export const JOZ_LLM_SUGGESTIONS = [
   "Why is Joz a fit for this role?",
   "Map Joz to the job description",
+  "Show Joz's applied AI capability map",
   "Show evidence for agentic AI and orchestration",
   "How would Joz design an agentic AI system for a signal-rich environment?",
   "What would Joz do in the first 90 days?",
 ];
+
+const JOZ_RESPONSE_POLICIES = Object.freeze({
+  short: Object.freeze({
+    mode: "short",
+    wordBudget: 55,
+    maxTokens: 110,
+    shape: "Answer directly in 1 to 3 complete sentences. Add one useful next step only when relevant.",
+  }),
+  standard: Object.freeze({
+    mode: "standard",
+    wordBudget: 110,
+    maxTokens: 220,
+    shape: "Answer directly, then add the most relevant proof or implication. Use one paragraph or up to 3 compact bullets.",
+  }),
+  deep: Object.freeze({
+    mode: "deep",
+    wordBudget: 220,
+    maxTokens: 380,
+    shape: "Give a structured answer with the decision, reasoning, capability, proof, and outcome. Use short headings or up to 5 compact bullets.",
+  }),
+});
+
+export function getJozResponsePolicy(input = "", context = {}) {
+  const clean = String(input || "").trim().toLowerCase().replace(/\s+/g, " ");
+  const selectedRoute = String(
+    context?.selectedRoute || context?.route?.selectedRoute || ""
+  ).toLowerCase();
+  const explicitDeepRequest = /\b(?:deep|deeply|detailed|detail|comprehensive|full|thorough|in depth|step by step|from scratch|trade[- ]?offs?|compare|comparison|architecture|architect|design|map|capability map|with proof|explain how|how would|why does)\b/.test(clean);
+  const shortProfileQuestion =
+    /\b(?:identity|factual_profile|recruiter|location|residence|contact|availability|nationality|citizenship|education|experience)\b/.test(selectedRoute) ||
+    /\b(?:where (?:is|does|do) (?:joz|he)|where (?:joz|he) lives|where (?:joz|he) is based|who is joz|how can i contact joz|is joz available|what is joz's nationality)\b/.test(clean);
+
+  const mode = explicitDeepRequest
+    ? "deep"
+    : shortProfileQuestion
+      ? "short"
+      : "standard";
+  return {
+    ...JOZ_RESPONSE_POLICIES[mode],
+    reason: explicitDeepRequest ? "explicit_depth_request" : shortProfileQuestion ? "factual_or_personal_question" : "default_business_answer",
+  };
+}
+
+export function buildJozResponsePolicyInstruction(policy = {}) {
+  const resolved = JOZ_RESPONSE_POLICIES[policy?.mode] || JOZ_RESPONSE_POLICIES.standard;
+  return [
+    `Response mode: ${resolved.mode}. Target no more than ${resolved.wordBudget} words; this is a semantic budget, not a reason to cut a sentence mid-thought.`,
+    resolved.shape,
+    "Use only the evidence present in the supplied context. If evidence is missing, say what should be confirmed instead of guessing.",
+    "Prefer high-signal nouns, concrete outcomes, and one or two proof points over broad skill lists. Do not repeat the user's question or add a generic closing.",
+  ].join(" ");
+}
 
 const JOZ_REFERENCE_REWRITES = [
   [/\bI am\b/gi, "Joz is"],
@@ -343,7 +474,7 @@ export function buildJozLlmSystemPrompt() {
     "Keep responses short and punchy by default.",
     "Prefer one tight paragraph or at most 2 concise bullets unless more depth is explicitly asked for.",
     "Default to 2 to 3 short sentences total.",
-    "Stay at or under roughly 55 words unless the user explicitly asks for detail.",
+    "Use the response mode supplied at runtime: short factual answers stay near 55 words, normal business answers near 110 words, and explicit architecture or depth requests near 220 words.",
     "Lead with the answer, not setup or framing.",
     "When the question is strategic or evaluative, prefer a connected answer flow of Problem, Principle, Capability, Proof, and Outcome.",
     "Do not force that five-part structure for simple factual questions such as contact details, years of experience, or availability.",
@@ -368,6 +499,9 @@ export function buildJozLlmSystemPrompt() {
     "Do not mention Paradex, DIME, Bloomberg, or any prospective employer unless that name appears in the approved retrieved knowledge.",
     "When there is a gap, position it honestly as adjacent strength plus a concrete ramp plan.",
     "Bias toward agentic AI, applied AI architecture, orchestration, multimodal intelligence, production engineering, observability, and measurable impact.",
+    "For a broad skills question, summarize the capability domains before naming tools: spatial intelligence; multimodal and spatiotemporal AI; agentic systems; end-to-end delivery; world-model research; runtime and state architecture; production AI platforms; and security and governance.",
+    "When asked for skills or capability mapping, use the capabilityMatrix as the canonical taxonomy. Group the answer by capability domain, connect each domain to a practical system outcome, and add one or two concrete proof points from the CV. Do not dump an unexplained tool list.",
+    "The capabilityMatrix describes Joz's promised applied capability surface. Distinguish demonstrated delivery from architecture depth or research direction when the question asks for proof; never imply that every named technology was personally deployed in production unless the experience record says so.",
     "Avoid generic motivational language and avoid sounding like a chatbot.",
   ].join(" ");
 }
@@ -400,9 +534,22 @@ export function enforceJozLlmReplyLimit(text = "", maxWords = 55) {
   const words = normalized.split(" ");
   if (words.length <= maxWords) return closeReplyEnding(normalized);
 
+  const completeSentences = normalized
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+  const keptSentences = [];
+  let keptWordCount = 0;
+  for (const sentence of completeSentences) {
+    const sentenceWordCount = sentence.split(/\s+/).filter(Boolean).length;
+    if (keptWordCount + sentenceWordCount > maxWords) break;
+    keptSentences.push(sentence);
+    keptWordCount += sentenceWordCount;
+  }
+  if (keptSentences.length) return keptSentences.join(" ");
+
   const truncated = words.slice(0, maxWords).join(" ");
-  const sentenceClosed = closeReplyEnding(truncated);
-  return sentenceClosed || closeReplyEnding(normalized);
+  return closeReplyEnding(truncated) || closeReplyEnding(normalized);
 }
 
 export function buildJozLlmContext() {
@@ -419,6 +566,10 @@ export function buildJozLlmFallbackReply(message = "") {
 
   if (recruiterAnswer) {
     return recruiterAnswer;
+  }
+
+  if (clean.includes("skill") || clean.includes("capabilit") || clean.includes("what can joz do")) {
+    return "Joz's applied AI skills span spatial intelligence, multimodal and spatiotemporal reasoning, agentic orchestration, runtime state architecture, production AI platforms, and AI security governance. The delivery layer runs from customer discovery and business framing through solution architecture, full-stack implementation, evaluation, deployment, adoption, and scale. Proof includes 20x digital-sales growth at Maybank, ML delivery across 11 APAC markets at Manulife, 30x audience growth at Mediacorp, and spatial AI delivery in Dubai.";
   }
 
   if (
