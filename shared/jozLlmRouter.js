@@ -3719,6 +3719,22 @@ function detectSystemsMindset(clean) {
 
 function detectSkills(clean) {
   if (
+    includesAny(clean, ["for free", "free advice", "free blueprint", "free architecture review"]) &&
+    includesAny(clean, [
+      "architecture",
+      "multi-agent",
+      "multi agent",
+      "platform",
+      "fraud",
+      "startup",
+      "production system",
+      "company-specific",
+    ])
+  ) {
+    return { detectedSubIntent: "paid_architecture_boundary", detectedConcept: "skills" };
+  }
+
+  if (
     includesAny(clean, [
       "free advice",
       "free blueprint",
@@ -3824,6 +3840,9 @@ function detectSkills(clean) {
     "full architecture blueprint",
     "full paid architecture review scope",
     "bespoke production ai platform",
+    "complete fraud platform blueprint",
+    "whole multi-agent platform",
+    "whole multi agent platform",
   ]);
   if (
     paidArchitectureTermCount >= 4 &&
@@ -5018,9 +5037,21 @@ export function composeJozLlmRouteReply({
       input,
       [],
       retrievedDocuments,
-      { policyId: "free_advice_boundary" }
     );
     if (freeAdvicePolicyReply) return freeAdvicePolicyReply;
+  }
+
+  if (
+    route?.selectedRoute === "world_model_knowledge" &&
+    route?.detectedSubIntent === "spatial_intelligence"
+  ) {
+    const worldModelPolicyReply = buildDataDrivenInteractionReply(
+      input,
+      [],
+      retrievedDocuments,
+      { policyId: "world_model_space_time" }
+    );
+    if (worldModelPolicyReply) return worldModelPolicyReply;
   }
 
   const recruiterOperationalResolution = buildRecruiterOperationalResolution(route, retrievedDocuments);

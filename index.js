@@ -2848,6 +2848,9 @@ app.post("/api/joz-llm", async (req, res) => {
         ? "booking"
         : route.detectedSubIntent === "paid_architecture_boundary"
           ? "interaction"
+        : route.selectedRoute === "world_model_knowledge" &&
+            route.detectedSubIntent === "spatial_intelligence"
+          ? "interaction"
         : route.selectedRoute === "unknown_fallback"
           ? "interaction"
           : route.selectedRoute === "business_need" ||
@@ -3017,7 +3020,11 @@ app.post("/api/joz-llm", async (req, res) => {
         legacyContext: legacyRuntimeContext,
         retrievedDocuments: retrievalContext,
       });
+    const isDataDrivenCommercialBoundary = String(ownedResolution?.answerSource || "").startsWith(
+      "supabase_interaction_policy:free_advice"
+    );
     const rawResolution =
+      (isDataDrivenCommercialBoundary ? ownedResolution : null) ||
       safetyRefusalResolution ||
       riskGateResolution ||
       ownedResolution ||
