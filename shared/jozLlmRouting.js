@@ -131,7 +131,6 @@ const FACTUAL_SUBINTENTS = {
     "citizenship",
     "citizen",
     "eu national",
-    "slovak",
   ],
   experience_years: [
     "years of experience",
