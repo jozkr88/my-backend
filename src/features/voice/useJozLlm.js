@@ -947,6 +947,10 @@ export function useJozLlm({
               currentPortal,
               currentMesh,
               currentMeshStage,
+              timeZone:
+                typeof Intl !== "undefined"
+                  ? Intl.DateTimeFormat().resolvedOptions().timeZone
+                  : undefined,
               targetRole: TARGET_DATA_SCIENTIST_ROLE.title,
               intentMode: effectiveIntentMode || undefined,
               worldModel: buildWholeAppWorldState({

@@ -751,6 +751,77 @@ function buildUnknownDefinitionGapReply(clean = "") {
   return `${term} is not in the current Joz Knowledge Graph. Ask about Joz's background, business value, systems mindset, skills, infrastructure, or agent architecture.`;
 }
 
+function pickConversationalVariant(variants = [], messages = []) {
+  if (!variants.length) return "";
+  const assistantCount = messages.filter((message) => message?.role === "assistant").length;
+  return variants[assistantCount % variants.length];
+}
+
+function buildConversationalReply(clean = "", messages = [], roleAwareContext = {}) {
+  if (!clean) return null;
+
+  if (/^(?:what(?:'s|s| is)|tell me)\s+(?:the\s+)?(?:current\s+)?time(?:\s+now)?\??$/i.test(clean)) {
+    return {
+      reply: "In World Model AI, time is the change dimension: it gives events order, duration, recurrence, and trajectory. It helps the model distinguish what is happening now from what happened before and what may happen next.",
+      answerSource: "world_model_time_concept",
+      composer: "buildConversationalReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+    };
+  }
+
+  if (/\bweather\b|\bforecast\b|\btemperature\b|\braining\b|\bsnowing\b/i.test(clean)) {
+    const reply = /\bspain\b/i.test(clean)
+      ? pickConversationalVariant([
+          "I can help with Spain’s weather. Which city should I check—Madrid, Barcelona, Valencia, or somewhere else?",
+          "Spain covers a lot of ground. Which city do you mean, and are you after current conditions or a forecast?",
+          "Happy to help with that. Give me the Spanish city and I’ll frame the weather question properly.",
+        ], messages)
+      : pickConversationalVariant([
+          "I can help with the weather. Which city or region should we look at?",
+          "Sure—what location should I use for the weather question?",
+          "Weather depends on the place. Name the city and I’ll take it from there.",
+        ], messages);
+    return {
+      reply,
+      answerSource: "deterministic_weather_follow_up",
+      composer: "buildConversationalReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+    };
+  }
+
+  if (/^(?:what(?:'s| is)\s+)?space\??$/i.test(clean)) {
+    return {
+      reply: "In World Model AI, space is the relational dimension: where entities are, what is near them, how they connect, and which paths or constraints shape possible action. It turns a flat list of objects into a world the model can navigate and reason about.",
+      answerSource: "world_model_space_concept",
+      composer: "buildConversationalReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+    };
+  }
+
+  if (/\b(?:this is|that is|it's|its|so)\s+(?:hot|cool|fire|sick|good|amazing|beautiful|wild|insane)\b|^(?:wow|nice|love this|this is hot|this is cool|this is fire)[!. ]*$/i.test(clean)) {
+    return {
+      reply: pickConversationalVariant([
+        "Strong signal. What’s landing for you—the visual world, the voice, or the intelligence underneath?",
+        "That’s the energy. Want to explore what makes it work—the worlds, the voice, or the AI?",
+        "Good. Follow the signal: should Joz MAXX show the visual system, the agentic AI, or Joz’s work behind it?",
+      ], messages),
+      answerSource: "deterministic_casual_reaction",
+      composer: "buildConversationalReply",
+      fallbackUsed: false,
+      intentMode: mapRouteToIntentMode("unknown_fallback"),
+      retrievedCategories: [],
+    };
+  }
+
+  return null;
+}
+
 function buildAmbiguousFollowUpReply(clean = "") {
   if (!clean) return null;
   const normalized = String(clean).replace(/[?!.,]+$/g, "");
@@ -2487,6 +2558,8 @@ export async function resolveUnknownJozReply({
   roleAwareContext = {},
 } = {}) {
   const clean = normalizeText(input);
+  const conversationalReply = buildConversationalReply(clean, messages, roleAwareContext);
+  if (conversationalReply) return conversationalReply;
   const responsePolicy = getJozResponsePolicy(input, roleAwareContext);
   const retrievedDocuments = Array.isArray(roleAwareContext?.retrievedDocuments)
     ? roleAwareContext.retrievedDocuments
@@ -2644,6 +2717,7 @@ export function buildRoleAwareJozContext({
       currentPortal: context?.currentPortal || "root",
       currentMesh: context?.currentMesh || null,
       currentMeshStage: context?.currentMeshStage || null,
+      timeZone: context?.timeZone || null,
       targetRole: context?.targetRole || "Advanced Data Scientist",
       intentMode,
     },
