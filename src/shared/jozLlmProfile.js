@@ -5,7 +5,7 @@ export const JOZ_LLM_IDENTITY = {
   email: "joz@meetjoz.com",
   phone: "+65 3107 2412",
   whatsapp: "+41 76 497 38 94",
-  location: "Bratislava, Slovakia / Singapore / Dubai / Zurich",
+  location: "Singapore / Dubai / Europe / global markets",
 };
 
 export const JOZ_LLM_CV = {
@@ -64,7 +64,7 @@ export const JOZ_LLM_CV = {
       period: "2018-Present",
       regions: "Singapore, Dubai, Zurich and Europe/EU/EEA",
       highlights: [
-        "Architected financial AI agents with live data and asset portfolios for MarketClue USA.",
+        "Architected financial AI agents with live data and asset portfolios for MC USA.",
         "Pioneered spatial AI for world-class art exhibitions in Dubai through ArtKorero.",
         "First in Dubai to design and launch spatial AI with volumetric 3D UI for Versace/SOA.",
         "Rapid-prototyped AI initiatives for Dubai Future Foundation and adjacent UAE innovation work.",

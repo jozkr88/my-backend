@@ -1,3 +1,9 @@
+export const JOZ_LLM_SHOW_SKILLS_ACTION = {
+  label: "Show Skills",
+  prompt: "show skills",
+  actionType: "world_model_demo",
+};
+
 export const JOZ_LLM_LANES = {
   business_need: {
     intentMode: "business_need",
@@ -66,10 +72,6 @@ export const JOZ_LLM_LANES = {
     ],
     retrievalCategories: ["skills", "case_study", "proof", "bio", "faq"],
     actions: [
-      {
-        label: "View PDF CV",
-        href: "/documents/Joz_Krupa_CV.pdf",
-      },
       {
         label: "Show AI strengths",
         prompt: "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context.",

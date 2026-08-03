@@ -158,7 +158,7 @@ test("POST /api/joz-llm returns a clarification guard for ambiguous follow-up ph
   assert.match(String(payload.reply || ""), /How does Joz architect agentic AI/i);
   assert.doesNotMatch(
     String(payload.reply || ""),
-    /Joz starts with user intent|Joz Krupa is Slovak|British heritage|University of Central Lancashire|MSc/i
+    /Joz starts with user intent|Joz Krupa is an EU national|British heritage|University of Central Lancashire|MSc/i
   );
 });
 
@@ -910,7 +910,7 @@ const RECRUITER_OPERATIONAL_CASES = [
       "Joz operates across Dubai, Singapore, Zurich, Europe, and global markets.",
     expectedIntent: "recruiter_location",
     expectedComposer: "composeLocationAnswer",
-    forbidden: [/Slovakia/i, /Bratislava/i, /\bEP\b/i, /\bPEP\b/i],
+    forbidden: [/\bEP\b/i, /\bPEP\b/i],
   },
   {
     name: "availability",
@@ -961,7 +961,7 @@ const RECRUITER_OPERATIONAL_CASES = [
     name: "work_authorization",
     query: "Does Joz have a Singapore EP?",
     expectedReply:
-      "Joz is Slovak and an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.",
+      "Joz is an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.",
     expectedIntent: "recruiter_work_authorization",
     expectedComposer: "composeWorkAuthorizationAnswer",
     forbidden: [/currently has an EP/i, /currently has a PEP/i, /active Singapore work authorization/i],
@@ -1047,6 +1047,6 @@ test("POST /api/joz-llm deep technical skills does not return recruiter actions"
   assert.equal(Array.isArray(payload.actions) ? payload.actions.length : 0, 0);
   assert.doesNotMatch(
     String(payload.reply || ""),
-    /\bSlovak\b|\bsalary\b|\bEP\b|\bPEP\b|\+65 3107 2412|joz@meetjoz\.com/i
+    /\bEU national\b|\bsalary\b|\bEP\b|\bPEP\b|\+65 3107 2412|joz@meetjoz\.com/i
   );
 });

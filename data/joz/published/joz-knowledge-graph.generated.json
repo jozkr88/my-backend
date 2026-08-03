@@ -1,7 +1,7 @@
 {
   "schema": "joz.knowledge-graph.v1",
   "version": 1,
-  "generatedAt": "2026-07-29T06:38:16.331Z",
+  "generatedAt": "2026-08-03T14:15:39.870Z",
   "source": {
     "ontology": "data/joz/published/joz-ontology.generated.json",
     "documents": "data/joz/published/joz-documents.generated.json"
@@ -201,16 +201,6 @@
       "label": "Manulife"
     },
     {
-      "id": "company:marketclue",
-      "type": "company",
-      "label": "MarketClue"
-    },
-    {
-      "id": "company:marketclue_usa",
-      "type": "company",
-      "label": "MarketClue USA"
-    },
-    {
       "id": "company:maybank",
       "type": "company",
       "label": "Maybank"
@@ -219,6 +209,11 @@
       "id": "company:maybank_ageas_etiqa",
       "type": "company",
       "label": "Maybank-Ageas Etiqa"
+    },
+    {
+      "id": "company:mc_usa",
+      "type": "company",
+      "label": "MC USA"
     },
     {
       "id": "company:mediacorp",
@@ -2267,7 +2262,7 @@
       "label": "Joz Identity Background",
       "slug": "joz-identity-background",
       "category": "bio",
-      "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
+      "summary": "Canonical identity-background record covering EU nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
       "verification": "verified",
       "impactScore": 86,
       "sourceFilename": "joz-identity-background.md",
@@ -3407,16 +3402,16 @@
       "description": "Established a Lean ML UX practice across 11 Asia Pacific markets and advised regional CEOs on digital growth."
     },
     {
-      "id": "proof:marketclue_financial_agents",
-      "type": "proof",
-      "label": "marketclue_financial_agents",
-      "description": "Architected financial AI agents using live market data and asset-portfolio context."
-    },
-    {
       "id": "proof:maybank_digital_sales_growth",
       "type": "proof",
       "label": "maybank_digital_sales_growth",
       "description": "Delivered 20× growth in digital sales within 12 months through conversational and machine-learning-enabled experience transformation."
+    },
+    {
+      "id": "proof:mc_usa_financial_agents",
+      "type": "proof",
+      "label": "mc_usa_financial_agents",
+      "description": "Architected financial AI agents using live market data and asset-portfolio context."
     },
     {
       "id": "proof:mediacorp_audience_growth",
@@ -3524,11 +3519,6 @@
       "label": "Singapore"
     },
     {
-      "id": "region:slovakia",
-      "type": "region",
-      "label": "Slovakia"
-    },
-    {
       "id": "region:uae",
       "type": "region",
       "label": "UAE"
@@ -3617,10 +3607,10 @@
       "sourceSlug": "2026-07-11-agentic-ai-architecture-proof"
     },
     {
-      "id": "document:2026_07_11_agentic_ai_architecture_proof|references|company:marketclue_usa",
+      "id": "document:2026_07_11_agentic_ai_architecture_proof|references|company:mc_usa",
       "from": "document:2026_07_11_agentic_ai_architecture_proof",
       "type": "references",
-      "to": "company:marketclue_usa",
+      "to": "company:mc_usa",
       "sourceSlug": "2026-07-11-agentic-ai-architecture-proof"
     },
     {
@@ -3813,17 +3803,17 @@
       "sourceSlug": "2026-07-11-current-agentic-ai-cv"
     },
     {
-      "id": "document:2026_07_11_current_agentic_ai_cv|references|company:marketclue_usa",
-      "from": "document:2026_07_11_current_agentic_ai_cv",
-      "type": "references",
-      "to": "company:marketclue_usa",
-      "sourceSlug": "2026-07-11-current-agentic-ai-cv"
-    },
-    {
       "id": "document:2026_07_11_current_agentic_ai_cv|references|company:maybank_ageas_etiqa",
       "from": "document:2026_07_11_current_agentic_ai_cv",
       "type": "references",
       "to": "company:maybank_ageas_etiqa",
+      "sourceSlug": "2026-07-11-current-agentic-ai-cv"
+    },
+    {
+      "id": "document:2026_07_11_current_agentic_ai_cv|references|company:mc_usa",
+      "from": "document:2026_07_11_current_agentic_ai_cv",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "2026-07-11-current-agentic-ai-cv"
     },
     {
@@ -4480,19 +4470,19 @@
       "sourceSlug": "business-need-ai-adoption-governance"
     },
     {
-      "id": "document:business_need_ai_adoption_governance|supports|proof:marketclue_financial_agents",
+      "id": "document:business_need_ai_adoption_governance|supports|proof:maybank_digital_sales_growth",
       "from": "document:business_need_ai_adoption_governance",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "capability_supported",
       "impactScore": 95,
       "sourceSlug": "business-need-ai-adoption-governance"
     },
     {
-      "id": "document:business_need_ai_adoption_governance|supports|proof:maybank_digital_sales_growth",
+      "id": "document:business_need_ai_adoption_governance|supports|proof:mc_usa_financial_agents",
       "from": "document:business_need_ai_adoption_governance",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "capability_supported",
       "impactScore": 95,
       "sourceSlug": "business-need-ai-adoption-governance"
@@ -5016,17 +5006,17 @@
       "sourceSlug": "business-need-buyer-faq"
     },
     {
-      "id": "document:business_need_buyer_faq|references|company:marketclue",
-      "from": "document:business_need_buyer_faq",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "business-need-buyer-faq"
-    },
-    {
       "id": "document:business_need_buyer_faq|references|company:maybank",
       "from": "document:business_need_buyer_faq",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "business-need-buyer-faq"
+    },
+    {
+      "id": "document:business_need_buyer_faq|references|company:mc_usa",
+      "from": "document:business_need_buyer_faq",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "business-need-buyer-faq"
     },
     {
@@ -5854,19 +5844,19 @@
       "sourceSlug": "business-need-decision-intelligence"
     },
     {
-      "id": "document:business_need_decision_intelligence|supports|proof:marketclue_financial_agents",
+      "id": "document:business_need_decision_intelligence|supports|proof:maybank_digital_sales_growth",
       "from": "document:business_need_decision_intelligence",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "capability_supported",
       "impactScore": 96,
       "sourceSlug": "business-need-decision-intelligence"
     },
     {
-      "id": "document:business_need_decision_intelligence|supports|proof:maybank_digital_sales_growth",
+      "id": "document:business_need_decision_intelligence|supports|proof:mc_usa_financial_agents",
       "from": "document:business_need_decision_intelligence",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "capability_supported",
       "impactScore": 96,
       "sourceSlug": "business-need-decision-intelligence"
@@ -6636,10 +6626,10 @@
       "sourceSlug": "business-need-enterprise-knowledge"
     },
     {
-      "id": "document:business_need_enterprise_knowledge|supports|proof:marketclue_financial_agents",
+      "id": "document:business_need_enterprise_knowledge|supports|proof:mc_usa_financial_agents",
       "from": "document:business_need_enterprise_knowledge",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "capability_supported",
       "impactScore": 94,
       "sourceSlug": "business-need-enterprise-knowledge"
@@ -7412,17 +7402,17 @@
       "sourceSlug": "business-need-hero-value"
     },
     {
-      "id": "document:business_need_hero_value|references|company:marketclue",
-      "from": "document:business_need_hero_value",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "business-need-hero-value"
-    },
-    {
       "id": "document:business_need_hero_value|references|company:maybank",
       "from": "document:business_need_hero_value",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "business-need-hero-value"
+    },
+    {
+      "id": "document:business_need_hero_value|references|company:mc_usa",
+      "from": "document:business_need_hero_value",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "business-need-hero-value"
     },
     {
@@ -8146,17 +8136,17 @@
       "sourceSlug": "business-need-problems-joz-solves"
     },
     {
-      "id": "document:business_need_problems_joz_solves|references|company:marketclue",
-      "from": "document:business_need_problems_joz_solves",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "business-need-problems-joz-solves"
-    },
-    {
       "id": "document:business_need_problems_joz_solves|references|company:maybank",
       "from": "document:business_need_problems_joz_solves",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "business-need-problems-joz-solves"
+    },
+    {
+      "id": "document:business_need_problems_joz_solves|references|company:mc_usa",
+      "from": "document:business_need_problems_joz_solves",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "business-need-problems-joz-solves"
     },
     {
@@ -8446,19 +8436,19 @@
       "sourceSlug": "business-need-problems-joz-solves"
     },
     {
-      "id": "document:business_need_problems_joz_solves|supports|proof:marketclue_financial_agents",
+      "id": "document:business_need_problems_joz_solves|supports|proof:maybank_digital_sales_growth",
       "from": "document:business_need_problems_joz_solves",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "capability_supported",
       "impactScore": 97,
       "sourceSlug": "business-need-problems-joz-solves"
     },
     {
-      "id": "document:business_need_problems_joz_solves|supports|proof:maybank_digital_sales_growth",
+      "id": "document:business_need_problems_joz_solves|supports|proof:mc_usa_financial_agents",
       "from": "document:business_need_problems_joz_solves",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "capability_supported",
       "impactScore": 97,
       "sourceSlug": "business-need-problems-joz-solves"
@@ -9436,17 +9426,17 @@
       "sourceSlug": "business-need-transformation-method"
     },
     {
-      "id": "document:business_need_transformation_method|references|company:marketclue",
-      "from": "document:business_need_transformation_method",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "business-need-transformation-method"
-    },
-    {
       "id": "document:business_need_transformation_method|references|company:maybank",
       "from": "document:business_need_transformation_method",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "business-need-transformation-method"
+    },
+    {
+      "id": "document:business_need_transformation_method|references|company:mc_usa",
+      "from": "document:business_need_transformation_method",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "business-need-transformation-method"
     },
     {
@@ -9747,17 +9737,17 @@
       "sourceSlug": "business-need-why-hire-joz-now"
     },
     {
-      "id": "document:business_need_why_hire_joz_now|references|company:marketclue",
-      "from": "document:business_need_why_hire_joz_now",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "business-need-why-hire-joz-now"
-    },
-    {
       "id": "document:business_need_why_hire_joz_now|references|company:maybank",
       "from": "document:business_need_why_hire_joz_now",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "business-need-why-hire-joz-now"
+    },
+    {
+      "id": "document:business_need_why_hire_joz_now|references|company:mc_usa",
+      "from": "document:business_need_why_hire_joz_now",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "business-need-why-hire-joz-now"
     },
     {
@@ -9993,19 +9983,19 @@
       "sourceSlug": "business-need-why-hire-joz-now"
     },
     {
-      "id": "document:business_need_why_hire_joz_now|supports|proof:marketclue_financial_agents",
+      "id": "document:business_need_why_hire_joz_now|supports|proof:maybank_digital_sales_growth",
       "from": "document:business_need_why_hire_joz_now",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "positioning_supported",
       "impactScore": 98,
       "sourceSlug": "business-need-why-hire-joz-now"
     },
     {
-      "id": "document:business_need_why_hire_joz_now|supports|proof:maybank_digital_sales_growth",
+      "id": "document:business_need_why_hire_joz_now|supports|proof:mc_usa_financial_agents",
       "from": "document:business_need_why_hire_joz_now",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "positioning_supported",
       "impactScore": 98,
       "sourceSlug": "business-need-why-hire-joz-now"
@@ -13769,13 +13759,6 @@
       "sourceSlug": "joz-identity-background"
     },
     {
-      "id": "document:joz_identity_background|applies_in|region:slovakia",
-      "from": "document:joz_identity_background",
-      "type": "applies_in",
-      "to": "region:slovakia",
-      "sourceSlug": "joz-identity-background"
-    },
-    {
       "id": "document:joz_identity_background|applies_in|region:united_kingdom",
       "from": "document:joz_identity_background",
       "type": "applies_in",
@@ -14789,10 +14772,10 @@
       "sourceSlug": "recruiter-agentic-ai-depth-questions"
     },
     {
-      "id": "document:recruiter_agentic_ai_depth_questions|references|company:marketclue",
+      "id": "document:recruiter_agentic_ai_depth_questions|references|company:mc_usa",
       "from": "document:recruiter_agentic_ai_depth_questions",
       "type": "references",
-      "to": "company:marketclue",
+      "to": "company:mc_usa",
       "sourceSlug": "recruiter-agentic-ai-depth-questions"
     },
     {
@@ -15034,17 +15017,17 @@
       "sourceSlug": "recruiter-strengths-and-skills-questions"
     },
     {
-      "id": "document:recruiter_strengths_and_skills_questions|references|company:marketclue",
-      "from": "document:recruiter_strengths_and_skills_questions",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "recruiter-strengths-and-skills-questions"
-    },
-    {
       "id": "document:recruiter_strengths_and_skills_questions|references|company:maybank_ageas_etiqa",
       "from": "document:recruiter_strengths_and_skills_questions",
       "type": "references",
       "to": "company:maybank_ageas_etiqa",
+      "sourceSlug": "recruiter-strengths-and-skills-questions"
+    },
+    {
+      "id": "document:recruiter_strengths_and_skills_questions|references|company:mc_usa",
+      "from": "document:recruiter_strengths_and_skills_questions",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "recruiter-strengths-and-skills-questions"
     },
     {
@@ -15381,10 +15364,10 @@
       "sourceSlug": "skills-agentic-ai-architecture"
     },
     {
-      "id": "document:skills_agentic_ai_architecture|references|company:marketclue",
+      "id": "document:skills_agentic_ai_architecture|references|company:mc_usa",
       "from": "document:skills_agentic_ai_architecture",
       "type": "references",
-      "to": "company:marketclue",
+      "to": "company:mc_usa",
       "sourceSlug": "skills-agentic-ai-architecture"
     },
     {
@@ -15640,19 +15623,19 @@
       "sourceSlug": "skills-agentic-ai-architecture"
     },
     {
-      "id": "document:skills_agentic_ai_architecture|supports|proof:marketclue_financial_agents",
+      "id": "document:skills_agentic_ai_architecture|supports|proof:maybank_digital_sales_growth",
       "from": "document:skills_agentic_ai_architecture",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "cv_supported",
       "impactScore": 96,
       "sourceSlug": "skills-agentic-ai-architecture"
     },
     {
-      "id": "document:skills_agentic_ai_architecture|supports|proof:maybank_digital_sales_growth",
+      "id": "document:skills_agentic_ai_architecture|supports|proof:mc_usa_financial_agents",
       "from": "document:skills_agentic_ai_architecture",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "cv_supported",
       "impactScore": 96,
       "sourceSlug": "skills-agentic-ai-architecture"
@@ -16002,17 +15985,17 @@
       "sourceSlug": "skills-career-transition-to-agentic-ai"
     },
     {
-      "id": "document:skills_career_transition_to_agentic_ai|references|company:marketclue",
-      "from": "document:skills_career_transition_to_agentic_ai",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "skills-career-transition-to-agentic-ai"
-    },
-    {
       "id": "document:skills_career_transition_to_agentic_ai|references|company:maybank",
       "from": "document:skills_career_transition_to_agentic_ai",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "skills-career-transition-to-agentic-ai"
+    },
+    {
+      "id": "document:skills_career_transition_to_agentic_ai|references|company:mc_usa",
+      "from": "document:skills_career_transition_to_agentic_ai",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "skills-career-transition-to-agentic-ai"
     },
     {
@@ -16307,17 +16290,17 @@
       "sourceSlug": "skills-financial-services-ai"
     },
     {
-      "id": "document:skills_financial_services_ai|references|company:marketclue",
-      "from": "document:skills_financial_services_ai",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "skills-financial-services-ai"
-    },
-    {
       "id": "document:skills_financial_services_ai|references|company:maybank",
       "from": "document:skills_financial_services_ai",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "skills-financial-services-ai"
+    },
+    {
+      "id": "document:skills_financial_services_ai|references|company:mc_usa",
+      "from": "document:skills_financial_services_ai",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "skills-financial-services-ai"
     },
     {
@@ -16562,19 +16545,19 @@
       "sourceSlug": "skills-financial-services-ai"
     },
     {
-      "id": "document:skills_financial_services_ai|supports|proof:marketclue_financial_agents",
+      "id": "document:skills_financial_services_ai|supports|proof:maybank_digital_sales_growth",
       "from": "document:skills_financial_services_ai",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "cv_supported",
       "impactScore": 93,
       "sourceSlug": "skills-financial-services-ai"
     },
     {
-      "id": "document:skills_financial_services_ai|supports|proof:maybank_digital_sales_growth",
+      "id": "document:skills_financial_services_ai|supports|proof:mc_usa_financial_agents",
       "from": "document:skills_financial_services_ai",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "cv_supported",
       "impactScore": 93,
       "sourceSlug": "skills-financial-services-ai"
@@ -16638,17 +16621,17 @@
       "sourceSlug": "skills-full-app-product-engineering"
     },
     {
-      "id": "document:skills_full_app_product_engineering|references|company:marketclue",
-      "from": "document:skills_full_app_product_engineering",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "skills-full-app-product-engineering"
-    },
-    {
       "id": "document:skills_full_app_product_engineering|references|company:maybank",
       "from": "document:skills_full_app_product_engineering",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "skills-full-app-product-engineering"
+    },
+    {
+      "id": "document:skills_full_app_product_engineering|references|company:mc_usa",
+      "from": "document:skills_full_app_product_engineering",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "skills-full-app-product-engineering"
     },
     {
@@ -16983,19 +16966,19 @@
       "sourceSlug": "skills-full-app-product-engineering"
     },
     {
-      "id": "document:skills_full_app_product_engineering|supports|proof:marketclue_financial_agents",
+      "id": "document:skills_full_app_product_engineering|supports|proof:maybank_digital_sales_growth",
       "from": "document:skills_full_app_product_engineering",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "project_supported",
       "impactScore": 96,
       "sourceSlug": "skills-full-app-product-engineering"
     },
     {
-      "id": "document:skills_full_app_product_engineering|supports|proof:maybank_digital_sales_growth",
+      "id": "document:skills_full_app_product_engineering|supports|proof:mc_usa_financial_agents",
       "from": "document:skills_full_app_product_engineering",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "project_supported",
       "impactScore": 96,
       "sourceSlug": "skills-full-app-product-engineering"
@@ -17082,17 +17065,17 @@
       "sourceSlug": "skills-hero-agentic-ai"
     },
     {
-      "id": "document:skills_hero_agentic_ai|references|company:marketclue",
-      "from": "document:skills_hero_agentic_ai",
-      "type": "references",
-      "to": "company:marketclue",
-      "sourceSlug": "skills-hero-agentic-ai"
-    },
-    {
       "id": "document:skills_hero_agentic_ai|references|company:maybank",
       "from": "document:skills_hero_agentic_ai",
       "type": "references",
       "to": "company:maybank",
+      "sourceSlug": "skills-hero-agentic-ai"
+    },
+    {
+      "id": "document:skills_hero_agentic_ai|references|company:mc_usa",
+      "from": "document:skills_hero_agentic_ai",
+      "type": "references",
+      "to": "company:mc_usa",
       "sourceSlug": "skills-hero-agentic-ai"
     },
     {
@@ -17391,19 +17374,19 @@
       "sourceSlug": "skills-hero-agentic-ai"
     },
     {
-      "id": "document:skills_hero_agentic_ai|supports|proof:marketclue_financial_agents",
+      "id": "document:skills_hero_agentic_ai|supports|proof:maybank_digital_sales_growth",
       "from": "document:skills_hero_agentic_ai",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:maybank_digital_sales_growth",
       "verification": "cv_supported",
       "impactScore": 100,
       "sourceSlug": "skills-hero-agentic-ai"
     },
     {
-      "id": "document:skills_hero_agentic_ai|supports|proof:maybank_digital_sales_growth",
+      "id": "document:skills_hero_agentic_ai|supports|proof:mc_usa_financial_agents",
       "from": "document:skills_hero_agentic_ai",
       "type": "supports",
-      "to": "proof:maybank_digital_sales_growth",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "cv_supported",
       "impactScore": 100,
       "sourceSlug": "skills-hero-agentic-ai"
@@ -18468,10 +18451,10 @@
       "sourceSlug": "skills-technical-platform-stack"
     },
     {
-      "id": "document:skills_technical_platform_stack|references|company:marketclue",
+      "id": "document:skills_technical_platform_stack|references|company:mc_usa",
       "from": "document:skills_technical_platform_stack",
       "type": "references",
-      "to": "company:marketclue",
+      "to": "company:mc_usa",
       "sourceSlug": "skills-technical-platform-stack"
     },
     {
@@ -18725,10 +18708,10 @@
       "sourceSlug": "skills-technical-platform-stack"
     },
     {
-      "id": "document:skills_technical_platform_stack|supports|proof:marketclue_financial_agents",
+      "id": "document:skills_technical_platform_stack|supports|proof:mc_usa_financial_agents",
       "from": "document:skills_technical_platform_stack",
       "type": "supports",
-      "to": "proof:marketclue_financial_agents",
+      "to": "proof:mc_usa_financial_agents",
       "verification": "cv_and_project_supported",
       "impactScore": 86,
       "sourceSlug": "skills-technical-platform-stack"
@@ -20491,20 +20474,20 @@
       "impactScore": 97
     },
     {
-      "id": "person:jozef_krupa|has_proof|proof:marketclue_financial_agents",
-      "from": "person:jozef_krupa",
-      "type": "has_proof",
-      "to": "proof:marketclue_financial_agents",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
       "id": "person:jozef_krupa|has_proof|proof:maybank_digital_sales_growth",
       "from": "person:jozef_krupa",
       "type": "has_proof",
       "to": "proof:maybank_digital_sales_growth",
       "verification": "cv_supported",
       "impactScore": 100
+    },
+    {
+      "id": "person:jozef_krupa|has_proof|proof:mc_usa_financial_agents",
+      "from": "person:jozef_krupa",
+      "type": "has_proof",
+      "to": "proof:mc_usa_financial_agents",
+      "verification": "project_supported",
+      "impactScore": 90
     },
     {
       "id": "person:jozef_krupa|has_proof|proof:mediacorp_audience_growth",
@@ -21239,201 +21222,6 @@
       "impactScore": 97
     },
     {
-      "id": "proof:marketclue_financial_agents|at_company|company:marketclue",
-      "from": "proof:marketclue_financial_agents",
-      "type": "at_company",
-      "to": "company:marketclue",
-      "sourceSlugs": [
-        "skills-agentic-ai-architecture",
-        "skills-financial-services-ai",
-        "business-need-decision-intelligence"
-      ]
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_capability|capability:agent_memory",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_capability",
-      "to": "capability:agent_memory",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_capability|capability:agentic_ai",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_capability",
-      "to": "capability:agentic_ai",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_capability|capability:context_engineering",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_capability",
-      "to": "capability:context_engineering",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_capability|capability:decision_intelligence",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_capability",
-      "to": "capability:decision_intelligence",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_capability|capability:rag",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_capability",
-      "to": "capability:rag",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_governance|governance:confidence_handling",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_governance",
-      "to": "governance:confidence_handling",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_governance|governance:evaluation",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_governance",
-      "to": "governance:evaluation",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_governance|governance:source_provenance",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_governance",
-      "to": "governance:source_provenance",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_industry|industry:financial_services",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_industry",
-      "to": "industry:financial_services",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_industry|industry:technology",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_industry",
-      "to": "industry:technology",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_industry|industry:wealth_management",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_industry",
-      "to": "industry:wealth_management",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_outcome|outcome:faster_decisions",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_outcome",
-      "to": "outcome:faster_decisions",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_outcome|outcome:higher_data_trust",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_outcome",
-      "to": "outcome:higher_data_trust",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_outcome|outcome:productivity_gains",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_outcome",
-      "to": "outcome:productivity_gains",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_principle|principle:appropriate_autonomy",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_principle",
-      "to": "principle:appropriate_autonomy",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_principle|principle:context_creates_intelligence",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_principle",
-      "to": "principle:context_creates_intelligence",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_principle|principle:decision_quality",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_principle",
-      "to": "principle:decision_quality",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_problem|problem:data_silos",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_problem",
-      "to": "problem:data_silos",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_problem|problem:knowledge_fragmentation",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_problem",
-      "to": "problem:knowledge_fragmentation",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|has_problem|problem:slow_decision_making",
-      "from": "proof:marketclue_financial_agents",
-      "type": "has_problem",
-      "to": "problem:slow_decision_making",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|supported_by|document:business_need_decision_intelligence",
-      "from": "proof:marketclue_financial_agents",
-      "type": "supported_by",
-      "to": "document:business_need_decision_intelligence",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|supported_by|document:skills_agentic_ai_architecture",
-      "from": "proof:marketclue_financial_agents",
-      "type": "supported_by",
-      "to": "document:skills_agentic_ai_architecture",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
-      "id": "proof:marketclue_financial_agents|supported_by|document:skills_financial_services_ai",
-      "from": "proof:marketclue_financial_agents",
-      "type": "supported_by",
-      "to": "document:skills_financial_services_ai",
-      "verification": "project_supported",
-      "impactScore": 90
-    },
-    {
       "id": "proof:maybank_digital_sales_growth|at_company|company:maybank_ageas_etiqa",
       "from": "proof:maybank_digital_sales_growth",
       "type": "at_company",
@@ -21603,6 +21391,201 @@
       "to": "document:skills_quantified_business_outcomes",
       "verification": "cv_supported",
       "impactScore": 100
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|at_company|company:mc_usa",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "at_company",
+      "to": "company:mc_usa",
+      "sourceSlugs": [
+        "skills-agentic-ai-architecture",
+        "skills-financial-services-ai",
+        "business-need-decision-intelligence"
+      ]
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_capability|capability:agent_memory",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_capability",
+      "to": "capability:agent_memory",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_capability|capability:agentic_ai",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_capability",
+      "to": "capability:agentic_ai",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_capability|capability:context_engineering",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_capability",
+      "to": "capability:context_engineering",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_capability|capability:decision_intelligence",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_capability",
+      "to": "capability:decision_intelligence",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_capability|capability:rag",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_capability",
+      "to": "capability:rag",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_governance|governance:confidence_handling",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_governance",
+      "to": "governance:confidence_handling",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_governance|governance:evaluation",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_governance",
+      "to": "governance:evaluation",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_governance|governance:source_provenance",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_governance",
+      "to": "governance:source_provenance",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_industry|industry:financial_services",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_industry",
+      "to": "industry:financial_services",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_industry|industry:technology",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_industry",
+      "to": "industry:technology",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_industry|industry:wealth_management",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_industry",
+      "to": "industry:wealth_management",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_outcome|outcome:faster_decisions",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_outcome",
+      "to": "outcome:faster_decisions",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_outcome|outcome:higher_data_trust",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_outcome",
+      "to": "outcome:higher_data_trust",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_outcome|outcome:productivity_gains",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_outcome",
+      "to": "outcome:productivity_gains",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_principle|principle:appropriate_autonomy",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_principle",
+      "to": "principle:appropriate_autonomy",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_principle|principle:context_creates_intelligence",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_principle",
+      "to": "principle:context_creates_intelligence",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_principle|principle:decision_quality",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_principle",
+      "to": "principle:decision_quality",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_problem|problem:data_silos",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_problem",
+      "to": "problem:data_silos",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_problem|problem:knowledge_fragmentation",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_problem",
+      "to": "problem:knowledge_fragmentation",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|has_problem|problem:slow_decision_making",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "has_problem",
+      "to": "problem:slow_decision_making",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|supported_by|document:business_need_decision_intelligence",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "supported_by",
+      "to": "document:business_need_decision_intelligence",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|supported_by|document:skills_agentic_ai_architecture",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "supported_by",
+      "to": "document:skills_agentic_ai_architecture",
+      "verification": "project_supported",
+      "impactScore": 90
+    },
+    {
+      "id": "proof:mc_usa_financial_agents|supported_by|document:skills_financial_services_ai",
+      "from": "proof:mc_usa_financial_agents",
+      "type": "supported_by",
+      "to": "document:skills_financial_services_ai",
+      "verification": "project_supported",
+      "impactScore": 90
     },
     {
       "id": "proof:mediacorp_audience_growth|at_company|company:mediacorp",

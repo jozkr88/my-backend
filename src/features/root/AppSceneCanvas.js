@@ -90,11 +90,11 @@ export function AppSceneCanvas({
         alpha: true,
         powerPreference: isMobile ? "low-power" : "high-performance",
       }}
-      eventSource={document.getElementById("root")}
+      eventSource={document.body}
       eventPrefix="client"
       style={{ background: "#000000" }}
     >
-      {shouldWarmup && !isMobile && <GpuWarmup portalKey={currentPortal} />}
+        {shouldWarmup && !isMobile && <GpuWarmup portalKey={currentPortal} />}
       <InitialFrameSignal onReady={onSceneReady} />
       <SceneObservationBridge
         currentPortal={currentPortal}
@@ -240,7 +240,7 @@ export function AppSceneCanvas({
         triggerCount={triggerCount}
       />
 
-      <Rig disableInteraction={isHelpPanelHovered} />
+        <Rig disableInteraction={isHelpPanelHovered} />
     </Canvas>
   );
 }

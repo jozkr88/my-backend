@@ -15,12 +15,12 @@ Answer guidance
 - Lead with the combination of agentic AI architecture, multimodal and spatial UX, enterprise product engineering, and measurable business execution.
 - Do not answer with a long tool dump unless the question asks for stack depth.
 - Frame the differentiator as the ability to connect business, product, design, engineering, and AI system delivery.
-- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI work rather than abstract claims.
+- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MC USA, and spatial AI work rather than abstract claims.
 
 Proof anchors
 - Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.
 - Manulife: Lean ML UX practice across 11 APAC markets.
 - Mediacorp: 30x audience growth and a global experience language across 30+ products.
 - Erste Bank: engineering and accessibility at 16M+ customer scale.
-- MarketClue: financial AI agents with live portfolio context.
+- MC USA: financial AI agents with live portfolio context.
 - Dubai and spatial work: Versace/SOA, ArtKorero, and other 3D or immersive system delivery.

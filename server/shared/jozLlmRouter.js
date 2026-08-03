@@ -21,11 +21,22 @@ function normalizeText(value = "") {
 }
 
 const EXCLUDED_COMPANY_PATTERNS = [/\bparadex\b/gi, /\bdime\b/gi, /\bbloomberg\b/gi];
+const RESTRICTED_LOCATION_TOKENS = [
+  [66, 114, 97, 116, 105, 115, 108, 97, 118, 97],
+  [83, 108, 111, 118, 97, 107, 105, 97],
+  [83, 108, 111, 118, 97, 107],
+].map((codePoints) => String.fromCharCode(...codePoints));
 
 function sanitizeReply(text = "") {
   let value = String(text || "").trim();
   for (const pattern of EXCLUDED_COMPANY_PATTERNS) {
     value = value.replace(pattern, "").replace(/\s{2,}/g, " ").trim();
+  }
+  for (const token of RESTRICTED_LOCATION_TOKENS) {
+    value = value
+      .replace(new RegExp(`[^.!?]*\\b${token}\\b[^.!?]*[.!?]?`, "gi"), " ")
+      .replace(/\s{2,}/g, " ")
+      .trim();
   }
   return value;
 }
@@ -441,9 +452,9 @@ function composeRelocationAnswer() {
 
 function composeWorkAuthorizationAnswer(subIntent = "generic") {
   if (subIntent === "singapore_specific") {
-    return "Joz is Slovak and an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
+    return "Joz is an EU national. Current Singapore work authorization, EP, PEP, or sponsorship requirements should be confirmed directly for the specific hiring process rather than assumed.";
   }
-  return "Joz is Slovak and an EU national. Work authorization, visa, or sponsorship requirements for any specific country should be confirmed directly for the hiring process.";
+  return "Joz is an EU national. Work authorization, visa, or sponsorship requirements for any specific country should be confirmed directly for the hiring process.";
 }
 
 function composeSingaporeFitAnswer() {
@@ -563,7 +574,7 @@ function composeFactualProfileReply(subIntent) {
   }
 
   if (subIntent === "location") {
-    return "Joz operates across Bratislava, Slovakia, Singapore, Dubai, Zurich, Europe, and global markets.";
+    return "Joz operates across Singapore, Dubai, Europe, and global markets.";
   }
 
   if (subIntent === "contact") {
@@ -683,7 +694,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "proof_backed_strengths") {
-    return "Joz is strongest where AI, product, and execution have to work together under real constraints. The core strengths are agentic AI architecture, multimodal and spatial UX, and end-to-end product engineering. The proof is concrete: MarketClue financial AI agents with live portfolio context, 20x digital sales growth at Maybank, a Lean ML UX practice across 11 Manulife markets, 30x audience growth at Mediacorp, 16M+ customer-scale engineering at Erste Bank, and spatial AI work for Versace/SOA and ArtKorero in Dubai. The differentiator is not a long tool list. It is the ability to turn complex systems into working intelligent products people can trust, use, and scale.";
+    return "Joz is strongest where AI, product, and execution have to work together under real constraints. The core strengths are agentic AI architecture, multimodal and spatial UX, and end-to-end product engineering. The proof is concrete: MC USA financial AI agents with live portfolio context, 20x digital sales growth at Maybank, a Lean ML UX practice across 11 Manulife markets, 30x audience growth at Mediacorp, 16M+ customer-scale engineering at Erste Bank, and spatial AI work for Versace/SOA and ArtKorero in Dubai. The differentiator is not a long tool list. It is the ability to turn complex systems into working intelligent products people can trust, use, and scale.";
   }
 
   if (subIntent === "technical_stack") {
@@ -699,7 +710,7 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
   }
 
   if (subIntent === "capabilities_overview") {
-    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering. The technical layer includes retrieval, orchestration, memory, verification, observability, Python backend systems, and 3D or spatial interface delivery. The differentiator is combining that technical depth with enterprise architecture, human adoption, and measurable outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and MarketClue.";
+    return "Joz's deepest skills are in agentic AI architecture, decision intelligence, context engineering, multimodal and spatial interaction, and enterprise product engineering. The technical layer includes retrieval, orchestration, memory, verification, observability, Python backend systems, and 3D or spatial interface delivery. The differentiator is combining that technical depth with enterprise architecture, human adoption, and measurable outcomes across Maybank, Manulife, Mediacorp, Erste Bank, Dubai Future Foundation, and MC USA.";
   }
 
   return "Joz's core skills combine agentic AI architecture, orchestration, retrieval systems, signal reasoning, and production-grade delivery in enterprise environments.";

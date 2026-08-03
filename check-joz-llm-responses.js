@@ -129,7 +129,7 @@ const CASES = [
     expectedSubIntent: "financial_ai_proof",
     minWords: 35,
     maxWords: 110,
-    includes: ["MarketClue", "financial AI agents"],
+    includes: ["MC USA", "financial AI agents"],
     excludes: ["outside the current deterministic Joz answer set"],
   },
 ];

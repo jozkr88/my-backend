@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getJozLaneConfig } from "../../shared/jozLlmLanes";
+import {
+  getJozLaneConfig,
+  JOZ_LLM_SHOW_SKILLS_ACTION,
+} from "../../shared/jozLlmLanes";
 import { QRCodeSVG } from "qrcode.react";
 import { requestSpatialOffer } from "../../world-model/spatialOffer";
 import { resolvePlacementIntent, resolveSpatialDemoIntent } from "../../world-model/placement";
@@ -250,12 +253,24 @@ function contextLabel(currentPortal) {
 function WorldModelDecisionCard({ intent, currentPortal, isMobile }) {
   if (!intent?.entitySet) return null;
 
+  const supportsQrHandoff = intent.entitySet !== "joz_skills";
   const selected = isMobile
     ? "Launch spatially"
     : "Create mobile spatial handoff";
   const rejected = isMobile
-    ? ["QR handoff — not needed on mobile", "Virtual preview — kept as fallback"]
-    : ["Direct spatial launch — requires a mobile spatial device", "Virtual preview — kept as fallback"];
+    ? [
+        ...(supportsQrHandoff ? ["QR handoff — not needed on mobile"] : []),
+        "Virtual preview — kept as fallback",
+      ]
+    : [
+        ...(supportsQrHandoff
+          ? ["Direct spatial launch — requires a mobile spatial device"]
+          : []),
+        "Virtual preview — kept as fallback",
+      ];
+  const simulated = supportsQrHandoff
+    ? "QR handoff · Spatial launch · Virtual preview"
+    : "Spatial launch · Virtual preview";
 
   return (
     <section className="joz-llm-panel__world-trace" aria-label="World model decision trace">
@@ -271,8 +286,8 @@ function WorldModelDecisionCard({ intent, currentPortal, isMobile }) {
         </div>
         <div>
           <span>Simulated</span>
-          <strong>3 futures</strong>
-          <p>QR handoff · Spatial launch · Virtual preview</p>
+          <strong>{supportsQrHandoff ? "3 futures" : "2 futures"}</strong>
+          <p>{simulated}</p>
         </div>
         <div>
           <span>Selected</span>
@@ -500,7 +515,6 @@ export function VoiceChrome({
   sendJozLlmMessage,
   stopJozLlmGeneration,
   handleJozLlmSubmit,
-  onJozLlmLaneSelect,
 }) {
   const businessLane = getJozLaneConfig("business_need");
   const mindsetLane = getJozLaneConfig("mindset");
@@ -575,7 +589,7 @@ export function VoiceChrome({
   const jozLlmMessagesRef = useRef(null);
   const jozLlmMessageNodeRefs = useRef({});
   const jozLlmInputRef = useRef(null);
-  const pendingLaneStarterScrollRef = useRef(false);
+  const pendingLandingScrollRef = useRef(null);
   const pendingWorldDemoScrollRef = useRef(false);
   const jozLlmTransitionTimeoutRef = useRef(null);
   const jozLlmTriggerTimeoutRef = useRef(null);
@@ -593,16 +607,19 @@ export function VoiceChrome({
       label: businessLane.label,
       prompt: businessLane.actions[0]?.prompt || businessLane.summary,
       intentMode: businessLane.intentMode,
+      actionType: "lane_select",
     },
     {
       label: mindsetLane.label,
       prompt: mindsetLane.actions[0]?.prompt || mindsetLane.summary,
       intentMode: mindsetLane.intentMode,
+      actionType: "lane_select",
     },
     {
       label: skillsLane.label,
       prompt: skillsLane.actions[0]?.prompt || skillsLane.summary,
       intentMode: skillsLane.intentMode,
+      actionType: "lane_select",
     },
     {
       label: bookingLane.label,
@@ -622,15 +639,20 @@ export function VoiceChrome({
     ["show_skills", "show_neurons"].includes(action) && actions.indexOf(action) === index
   ).slice(0, 2);
   const worldModelIntroActions = worldModelActionOrder.map((action) => ({
-    label: action === "show_skills" ? "Show Skills" : "Show Neurons",
-    prompt: action === "show_skills" ? "show skills" : "show neurons",
-    actionType: "world_model_demo",
+    ...(action === "show_skills"
+      ? JOZ_LLM_SHOW_SKILLS_ACTION
+      : {
+          label: "Show Neurons",
+          prompt: "show neurons",
+          actionType: "world_model_demo",
+        }),
   }));
   const jozLlmIntroActions = [
     {
       label: businessLane.label,
       prompt: businessLane.actions[0]?.prompt || businessLane.summary,
       intentMode: businessLane.intentMode,
+      actionType: "lane_select",
     },
     ...worldModelIntroActions,
   ];
@@ -898,22 +920,33 @@ export function VoiceChrome({
   }, [isJozLlmOpen, jozLlmMessages, jozLlmLoading]);
 
   useEffect(() => {
-    if (!isJozLlmOpen || !pendingLaneStarterScrollRef.current) return;
+    const baselineMessageIds = pendingLandingScrollRef.current;
+    if (!isJozLlmOpen || !baselineMessageIds) return;
 
-    const latestLandingMessage = [...jozLlmMessages]
+    const latestNewMessage = [...jozLlmMessages]
       .reverse()
       .find(
         (message) =>
           message.role === "assistant" &&
-          (message.kind === "laneStarter" || message.kind === "booking")
+          !message.isPending &&
+          !baselineMessageIds.has(message.id)
       );
+    if (!latestNewMessage) return;
 
-    if (!latestLandingMessage) return;
-
-    pendingLaneStarterScrollRef.current = false;
+    pendingLandingScrollRef.current = null;
+    const latestLandingResponse = [...jozLlmMessages]
+      .reverse()
+      .find(
+        (message) =>
+          message.role === "assistant" &&
+          !message.isPending &&
+          !baselineMessageIds.has(message.id) &&
+          ["laneStarter", "booking"].includes(message.kind)
+      );
+    if (!latestLandingResponse) return;
 
     window.requestAnimationFrame(() => {
-      if (scrollMessageIntoView(latestLandingMessage.id)) return;
+      if (scrollMessageIntoView(latestLandingResponse.id)) return;
       scrollMessagesToBottom();
     });
   }, [isJozLlmOpen, jozLlmMessages]);
@@ -954,7 +987,8 @@ export function VoiceChrome({
 
   const latestAssistantMessageId = [...jozLlmMessages]
     .reverse()
-    .find((message) => message.role === "assistant" && !message.isPending)?.id;
+    .find((candidate) => candidate.role === "assistant" && !candidate.isPending)?.id;
+
   const completeReveal = (messageId) => {
     if (!messageId) return;
     setRevealedAssistantMessageIds((current) => {
@@ -977,21 +1011,13 @@ export function VoiceChrome({
       return;
     }
 
-    // Business Value is now the entry point for the structured consultant
-    // assessment. Keep Joz MAXX and its other lanes intact, but make the
-    // commercial discovery path explicit instead of burying it in chat.
-    if (intentMode === "business_need" && !actionType) {
-      onJozLlmLaneSelect?.(intentMode);
-      return;
-    }
-
     selectJozLlmIntentMode?.(intentMode);
 
     completeReveal(latestAssistantMessageId);
+    const isLaneSelection = actionType === "lane_select";
+    pendingLandingScrollRef.current = new Set(jozLlmMessages.map((message) => message.id));
     if (actionType === "world_model_demo") {
       pendingWorldDemoScrollRef.current = true;
-    } else {
-      pendingLaneStarterScrollRef.current = true;
     }
     const isWorldModelDemo = actionType === "world_model_demo";
     const usesSpatialWorldModel = supportsSpatialWorldModel && isWorldModelDemo;
@@ -1008,7 +1034,8 @@ export function VoiceChrome({
 
     sendJozLlmMessage(prompt, {
       intentMode,
-      landingOnly: !isWorldModelDemo,
+      starter: isLaneSelection,
+      landingOnly: isLaneSelection || !isWorldModelDemo,
       skipClientGuards: true,
       worldModelDemo: usesSpatialWorldModel,
       desktopWorldModelAction:
@@ -1306,7 +1333,7 @@ export function VoiceChrome({
 
             {!isPrivacyPolicyOpen && (
               <div className="joz-llm-panel__actions">
-                {jozLlmQuickActions.map(({ label, prompt, intentMode }) => (
+                {jozLlmQuickActions.map(({ label, prompt, intentMode, actionType }) => (
                   <button
                     key={label}
                     type="button"
@@ -1318,7 +1345,7 @@ export function VoiceChrome({
                     data-glow={intentMode === "business_need" ? "business" : intentMode}
                     aria-current={jozLlmActiveIntentMode === intentMode ? "true" : undefined}
                     onClick={() =>
-                      handleJozLlmActionClick(label, prompt, intentMode)
+                      handleJozLlmActionClick(label, prompt, intentMode, null, actionType)
                     }
                     disabled={jozLlmLoading}
                   >
@@ -1530,25 +1557,22 @@ export function VoiceChrome({
                               <button
                                 key={action.label}
                                 type="button"
-                                className="joz-llm-panel__lane-followup"
-                                data-glow={action.intentMode || action.actionType || "followup"}
+                                className={
+                                  action.actionType === "world_model_demo"
+                                    ? "joz-llm-panel__intro-action"
+                                    : "joz-llm-panel__lane-followup"
+                                }
+                                data-kind={action.actionType || action.intentMode || "followup"}
                                 onClick={() => {
-                                  if (action.actionType === "lane_select") {
-                                    onJozLlmLaneSelect?.(action.intentMode);
-                                    return;
-                                  }
-
-                                  if (action.href) {
-                                    window.open(action.href, "_blank", "noopener,noreferrer");
-                                    return;
-                                  }
-
-                                  sendJozLlmMessage(action.prompt, {
-                                    intentMode: action.intentMode,
-                                    starter: false,
-                                    skipClientGuards: true,
-                                  });
+                                  handleJozLlmActionClick(
+                                    action.label,
+                                    action.prompt,
+                                    action.intentMode,
+                                    action.href,
+                                    action.actionType
+                                  );
                                 }}
+                                disabled={jozLlmLoading}
                               >
                                 {action.label}
                               </button>
@@ -1709,7 +1733,7 @@ export function VoiceChrome({
                       )}
                     </>
                   )}
-                  {spatialIntent?.entitySet && (
+                  {spatialIntent?.entitySet && spatialIntent.entitySet !== "joz_skills" && (
                     <SpatialOfferCard
                       entitySet={spatialIntent.entitySet}
                       input={previousUserMessage?.content || ""}

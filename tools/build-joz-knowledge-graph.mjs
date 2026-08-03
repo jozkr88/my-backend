@@ -9,18 +9,11 @@ const repoRoot = path.resolve(__dirname, "..");
 const publishedRoot = path.join(repoRoot, "data", "joz", "published");
 const ontologyPath = path.join(publishedRoot, "joz-ontology.generated.json");
 const documentsPath = path.join(publishedRoot, "joz-documents.generated.json");
-const worldModelOverlayPath = path.join(publishedRoot, "joz-world-model.generated.json");
 const outputPath = path.join(publishedRoot, "joz-knowledge-graph.generated.json");
 
 const ontology = JSON.parse(fs.readFileSync(ontologyPath, "utf8"));
 const published = JSON.parse(fs.readFileSync(documentsPath, "utf8"));
-const worldModelOverlay = fs.existsSync(worldModelOverlayPath)
-  ? JSON.parse(fs.readFileSync(worldModelOverlayPath, "utf8"))
-  : {};
-const documents = [
-  ...(published.model_ready_records || published.records || []),
-  ...(worldModelOverlay.model_ready_records || worldModelOverlay.records || []),
-];
+const documents = published.model_ready_records || published.records || [];
 const graph = buildJozKnowledgeGraph({ documents, ontology });
 
 fs.writeFileSync(outputPath, `${JSON.stringify(graph, null, 2)}\n`);

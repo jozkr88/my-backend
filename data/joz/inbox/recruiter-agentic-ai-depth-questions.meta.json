@@ -25,12 +25,12 @@
   ],
   "proof_points": [
     "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
-    "Current Joz LLM and MarketClue work provide live-system relevance."
+    "Current Joz LLM and MC USA work provide live-system relevance."
   ],
   "regions": [
     "Global"
   ],
   "companies": [
-    "MarketClue"
+    "MC USA"
   ]
 }

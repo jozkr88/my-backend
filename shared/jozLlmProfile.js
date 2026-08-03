@@ -6,7 +6,7 @@ export const JOZ_LLM_IDENTITY = {
   phone: "+65 3107 2412",
   location: "Singapore / Dubai",
   recruiterProfile: {
-    nationality: "Slovak / European Union",
+    nationality: "EU national",
     singaporeStatus: "Confirm directly with Joz; do not claim an active EP or PEP without confirmation.",
     contactEmail: "joz@meetjoz.com",
     contactPhone: "+65 3107 2412",
@@ -15,7 +15,7 @@ export const JOZ_LLM_IDENTITY = {
   },
   recruiterAnswers: {
     nationality:
-      "Joz is Slovak and an EU national. Singapore work authorization or pass status should be confirmed directly with Joz rather than assumed.",
+      "Joz is an EU national. Singapore work authorization or pass status should be confirmed directly with Joz rather than assumed.",
     contact:
       "Joz can be reached at joz@meetjoz.com and +65 3107 2412.",
     availability:
@@ -91,7 +91,7 @@ export const JOZ_LLM_CV = {
       period: "2018-Present",
       regions: "Singapore, Dubai, Europe/EU/EEA, APAC, the US, and the Middle East",
       highlights: [
-        "Architected financial AI agents with live data and asset portfolios for MarketClue USA.",
+        "Architected financial AI agents with live data and asset portfolios for MC USA.",
         "Pioneered spatial AI for world-class art exhibitions in Dubai through ArtKorero.",
         "First in Dubai to design and launch spatial AI with volumetric 3D UI for Versace/SOA.",
         "Rapid-prototyped AI initiatives for Dubai Future Foundation and adjacent UAE innovation work.",
@@ -221,7 +221,7 @@ const RECRUITER_SCREEN_PATTERNS = [
       "passport",
       "eu",
       "european union",
-      "slovak",
+      "eu_national",
       "work authorization",
       "work authorisation",
       "visa",
