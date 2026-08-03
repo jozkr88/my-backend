@@ -139,10 +139,22 @@ function inferRisk({ input, kind }) {
   };
 }
 
+function isJozBookingHandoffRequest({ input = "", route = {} } = {}) {
+  if (route?.detectedIntent !== "recruiter_booking") return false;
+
+  const clean = normalizeText(input);
+  const explicitExecution =
+    /^(?:call|email|send|message)\b/i.test(clean) ||
+    (/(?:call|email|send|message)/i.test(clean) && /\b(?:now|immediately|directly)\b/i.test(clean));
+
+  return !explicitExecution;
+}
+
 export function buildJozIntentClassification({ input = "", route = {} } = {}) {
   const clean = normalizeText(input);
   const routeKnown = Boolean(route?.selectedRoute && route.selectedRoute !== "unknown_fallback");
   const routeDomain = inferDomain(route);
+  const bookingHandoff = isJozBookingHandoffRequest({ input: clean, route });
   const looksLikeNavigation = NAVIGATION_PATTERN.test(clean);
   const isQuestion = /^(what|why|how|who|when|where|which|can|could|would|should|do|does|is|are|tell|explain)\b/i.test(
     clean
@@ -173,7 +185,12 @@ export function buildJozIntentClassification({ input = "", route = {} } = {}) {
   let domain = routeKnown ? routeDomain : "other";
   let goal = route?.detectedSubIntent || "answer_user_question";
 
-  if (UNSAFE_PATTERNS.some((pattern) => pattern.test(clean))) {
+  if (bookingHandoff) {
+    kind = "answer";
+    confidence = 0.98;
+    domain = "contact";
+    goal = "booking_handoff";
+  } else if (UNSAFE_PATTERNS.some((pattern) => pattern.test(clean))) {
     kind = "refuse";
     confidence = 0.92;
     goal = "refuse_unsafe_or_unsupported_request";
@@ -317,6 +334,7 @@ export async function classifyJozIntent({
   const fallback = buildJozIntentClassification({ input, route });
 
   if (!isModelAvailable(openai)) return fallback;
+  if (fallback.goal === "booking_handoff") return fallback;
   if (
     ["navigate", "execute", "refuse"].includes(fallback.kind) ||
     [

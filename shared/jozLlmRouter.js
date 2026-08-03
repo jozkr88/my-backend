@@ -851,15 +851,34 @@ function composeContactAnswer() {
   return "You can contact Joz by phone at +65 3107 2412 or by email at joz@meetjoz.com.";
 }
 
-function buildRecruiterOperationalResolution(route = {}) {
-  const actions = buildOperationalActions();
+function buildRecruiterOperationalResolution(route = {}, retrievedDocuments = []) {
+  const bookingDocument = Array.isArray(retrievedDocuments)
+    ? retrievedDocuments.find((document) =>
+        document?.metadata?.lane === "booking" &&
+        (document?.slug === "booking-overview" || document?.metadata?.response_contract)
+      )
+    : null;
+  const responseContract = bookingDocument?.metadata?.response_contract || {};
+  const defaultActions = buildOperationalActions();
+  const contractActionIds = Array.isArray(responseContract?.recommended_action_ids)
+    ? responseContract.recommended_action_ids.map((id) => String(id || "").trim()).filter(Boolean)
+    : [];
+  const actions = contractActionIds.length
+    ? defaultActions.filter((action) => contractActionIds.includes(action.id))
+    : defaultActions;
   let reply = "";
   let selectedOperationalComposer = "";
+  let answerSource = "deterministic_recruiter_operational";
+  let retrievedCategories = [];
 
   switch (route?.detectedIntent) {
     case "recruiter_booking":
-      reply = "Absolutely. Choose the fastest way to arrange time with Joz: call or email Joz directly.";
-      selectedOperationalComposer = "composeBookingAnswer";
+      reply =
+        responseContract?.handoff_reply ||
+        "I can help arrange time with Joz. Please choose a contact method: call or email.";
+      selectedOperationalComposer = responseContract?.composer || "composeBookingAnswer";
+      answerSource = bookingDocument ? "supabase_booking_response_contract" : answerSource;
+      retrievedCategories = bookingDocument ? ["booking"] : [];
       break;
     case "recruiter_location":
       reply = composeLocationAnswer(route.detectedSubIntent);
@@ -913,7 +932,7 @@ function buildRecruiterOperationalResolution(route = {}) {
 
   return {
     reply,
-    answerSource: "deterministic_recruiter_operational",
+    answerSource,
     composer: selectedOperationalComposer,
     selectedOperationalComposer,
     actions,
@@ -921,7 +940,20 @@ function buildRecruiterOperationalResolution(route = {}) {
     validationPassed: validateOperationalReply(route.detectedIntent, reply, actions),
     fallbackUsed: false,
     intentMode: "booking",
-    retrievedCategories: [],
+    retrievedCategories,
+    answerClass: route?.detectedIntent === "recruiter_booking" ? "booking_handoff" : "recruiter_operational",
+    confidence: "high",
+    execution:
+      route?.detectedIntent === "recruiter_booking"
+        ? {
+            status: "handoff_available",
+            proposed: false,
+            executed: false,
+            capability: responseContract?.capability || "contact.booking.offer",
+            requiresApproval: Boolean(responseContract?.execution_requires_approval ?? true),
+            policySource: bookingDocument ? "supabase" : "runtime_default",
+          }
+        : undefined,
   };
 }
 
@@ -1355,6 +1387,10 @@ function composeSkillsReply(subIntent = "capabilities_overview") {
 }
 
 export function enforceJozCommercialBoundaryResolution(route = {}, resolution = null) {
+  if (String(resolution?.answerSource || "").startsWith("supabase_interaction_policy:free_advice")) {
+    return resolution;
+  }
+
   if (
     route?.detectedSubIntent === "paid_architecture_intake_start" ||
     route?.detectedSubIntent === "paid_architecture_intake"
@@ -1446,8 +1482,89 @@ function pickConversationalVariant(variants = [], messages = []) {
   return variants[assistantCount % variants.length];
 }
 
-function buildConversationalReply(clean = "", messages = []) {
+function normalizeInteractionPolicyValue(value = "") {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[?!.,'’]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getInteractionPolicies(retrievedDocuments = []) {
+  return retrievedDocuments
+    .filter((document) =>
+      document?.metadata?.policy_type === "joz_interaction_response_policy" ||
+      document?.metadata?.lane === "interaction"
+    )
+    .flatMap((document) =>
+      Array.isArray(document?.metadata?.policies)
+        ? document.metadata.policies.map((policy) => ({ ...policy, _document: document }))
+        : []
+    );
+}
+
+function interactionPolicyMatches(policy = {}, clean = "") {
+  const normalized = normalizeInteractionPolicyValue(clean);
+  const match = policy?.match || {};
+  const values = Array.isArray(match.values)
+    ? match.values.map(normalizeInteractionPolicyValue).filter(Boolean)
+    : [];
+
+  if (!normalized || !values.length) return false;
+  if (match.mode === "exact_any") return values.includes(normalized);
+  if (match.mode === "contains_any") return values.some((value) => normalized.includes(value));
+  if (match.mode === "starts_with_any") return values.some((value) => normalized.startsWith(value));
+  if (match.mode === "regex_any") {
+    return values.some((value) => {
+      try {
+        return new RegExp(value, "i").test(normalized);
+      } catch {
+        return false;
+      }
+    });
+  }
+  return false;
+}
+
+function buildDataDrivenInteractionReply(
+  clean = "",
+  messages = [],
+  retrievedDocuments = [],
+  { policyId = null } = {}
+) {
+  const policy = getInteractionPolicies(retrievedDocuments).find(
+    (candidate) =>
+      (!policyId || candidate.id === policyId) &&
+      interactionPolicyMatches(candidate, clean)
+  );
+  if (!policy) return null;
+
+  const variants = Array.isArray(policy.variants)
+    ? policy.variants.map((variant) => String(variant || "").trim()).filter(Boolean)
+    : [];
+  const reply = pickConversationalVariant(variants, messages) || String(policy.reply || "").trim();
+  if (!reply) return null;
+
+  const actions = Array.isArray(policy.actions) ? policy.actions.filter(Boolean) : [];
+  return buildPolicyResolution({
+    reply,
+    answerSource: `supabase_interaction_policy:${policy.id || "unlabelled"}`,
+    composer: "buildDataDrivenInteractionReply",
+    intentMode: "interaction",
+    retrievedCategories: ["interaction"],
+    answerClass: policy.answer_class || policy.class || "interaction_guard",
+    confidence: "high",
+    actions,
+    recommendedActionIds: actions.map((action) => action.id).filter(Boolean),
+  });
+}
+
+function buildConversationalReply(clean = "", messages = [], retrievedDocuments = []) {
   if (!clean) return null;
+
+  const dataDrivenReply = buildDataDrivenInteractionReply(clean, messages, retrievedDocuments);
+  if (dataDrivenReply) return dataDrivenReply;
 
   if (/^(?:what(?:'s|s| is)|tell me)\s+(?:the\s+)?(?:current\s+)?time(?:\s+now)?\??$/i.test(clean)) {
     return buildPolicyResolution({
@@ -3603,6 +3720,19 @@ function detectSystemsMindset(clean) {
 function detectSkills(clean) {
   if (
     includesAny(clean, [
+      "free advice",
+      "free blueprint",
+      "free architecture review",
+      "free company-specific architecture",
+      "give me the complete architecture for my company",
+      "give me a complete architecture for our company",
+    ])
+  ) {
+    return { detectedSubIntent: "paid_architecture_boundary", detectedConcept: "skills" };
+  }
+
+  if (
+    includesAny(clean, [
       "applied ai skills",
       "applied ai capability",
       "show ai strengths",
@@ -4883,7 +5013,17 @@ export function composeJozLlmRouteReply({
   legacyContext = {},
   retrievedDocuments = [],
 } = {}) {
-  const recruiterOperationalResolution = buildRecruiterOperationalResolution(route);
+  if (route?.detectedSubIntent === "paid_architecture_boundary") {
+    const freeAdvicePolicyReply = buildDataDrivenInteractionReply(
+      input,
+      [],
+      retrievedDocuments,
+      { policyId: "free_advice_boundary" }
+    );
+    if (freeAdvicePolicyReply) return freeAdvicePolicyReply;
+  }
+
+  const recruiterOperationalResolution = buildRecruiterOperationalResolution(route, retrievedDocuments);
   if (recruiterOperationalResolution) {
     return recruiterOperationalResolution;
   }
@@ -5285,6 +5425,13 @@ export async function resolveUnknownJozReply({
     isModelAvailable(openai) &&
     !(unknownDefinitionGapReply && intentClassification?.needsClarification);
 
+  const dataDrivenInteractionReply = buildDataDrivenInteractionReply(
+    clean,
+    messages,
+    retrievedDocuments
+  );
+  if (dataDrivenInteractionReply) return dataDrivenInteractionReply;
+
   if (detectProgrammeQuery(clean) && topProgrammeRecord) {
     return buildPolicyResolution({
       reply: buildProgrammeRecordReply(topProgrammeRecord),
@@ -5323,7 +5470,7 @@ export async function resolveUnknownJozReply({
     });
   }
 
-  const conversationalReply = buildConversationalReply(clean, messages);
+  const conversationalReply = buildConversationalReply(clean, messages, retrievedDocuments);
   if (conversationalReply) return conversationalReply;
 
   const courtesyReply = buildCourtesyReply(clean);

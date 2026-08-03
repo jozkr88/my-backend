@@ -2844,11 +2844,17 @@ app.post("/api/joz-llm", async (req, res) => {
     });
 
     const retrievalIntentMode =
-      route.selectedRoute === "business_need" ||
-      route.selectedRoute === "systems_mindset" ||
-      route.selectedRoute === "skills"
-        ? route.selectedRoute
-        : "skills";
+      route.detectedIntent === "recruiter_booking"
+        ? "booking"
+        : route.detectedSubIntent === "paid_architecture_boundary"
+          ? "interaction"
+        : route.selectedRoute === "unknown_fallback"
+          ? "interaction"
+          : route.selectedRoute === "business_need" ||
+              route.selectedRoute === "systems_mindset" ||
+              route.selectedRoute === "skills"
+            ? route.selectedRoute
+            : "skills";
     const retrievalMeta = {
       method: "exact",
       semanticEnabled: false,
@@ -2857,9 +2863,10 @@ app.post("/api/joz-llm", async (req, res) => {
       semanticCount: 0,
       embeddingModel: null,
     };
-    const exactDocuments = intentClassification.needsClarification ||
-      intentClassification.kind === "execute" ||
-      intentClassification.kind === "refuse"
+    const isControlRetrievalLane = ["booking", "interaction"].includes(retrievalIntentMode);
+    const exactDocuments = intentClassification.kind === "execute" ||
+      intentClassification.kind === "refuse" ||
+      (intentClassification.needsClarification && !isControlRetrievalLane)
       ? []
       : await getJozDocumentsByIntent(retrievalIntentMode, 8, latestUserMessage);
     let retrievedDocuments = exactDocuments;
@@ -2871,7 +2878,8 @@ app.post("/api/joz-llm", async (req, res) => {
       isDatabaseEnabled() &&
       !intentClassification.needsClarification &&
       intentClassification.kind !== "execute" &&
-      intentClassification.kind !== "refuse";
+      intentClassification.kind !== "refuse" &&
+      !["booking", "interaction"].includes(retrievalIntentMode);
 
     if (canUseSemanticRetrieval) {
       retrievalMeta.semanticEnabled = true;
@@ -3012,6 +3020,7 @@ app.post("/api/joz-llm", async (req, res) => {
     const rawResolution =
       safetyRefusalResolution ||
       riskGateResolution ||
+      ownedResolution ||
       (architectureOfferDisabled
         ? {
             reply:
@@ -3026,7 +3035,6 @@ app.post("/api/joz-llm", async (req, res) => {
             actions: [],
           }
         : null) ||
-      ownedResolution ||
       (await resolveUnknownJozReply({
         input: latestUserMessage,
         messages,

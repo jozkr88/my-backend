@@ -73,6 +73,36 @@ test("requires approval for medium-risk external communication", () => {
   assert.equal(buildJozRiskGateResolution({ classification }).answerClass, "risk_gate");
 });
 
+test("treats arranging time with Joz as a booking handoff, not outbound execution", () => {
+  const classification = buildJozIntentClassification({
+    input: "Arrange time with Joz",
+    route: {
+      selectedRoute: "joz_knowledge",
+      detectedIntent: "recruiter_booking",
+      detectedSubIntent: "booking",
+    },
+  });
+
+  assert.equal(classification.kind, "answer");
+  assert.equal(classification.domain, "contact");
+  assert.equal(classification.goal, "booking_handoff");
+  assert.equal(classification.risk.requiresApproval, false);
+});
+
+test("keeps explicit outbound contact execution behind approval", () => {
+  const classification = buildJozIntentClassification({
+    input: "Call Joz now",
+    route: {
+      selectedRoute: "joz_knowledge",
+      detectedIntent: "recruiter_contact",
+      detectedSubIntent: "contact",
+    },
+  });
+
+  assert.equal(classification.kind, "execute");
+  assert.equal(classification.risk.requiresApproval, true);
+});
+
 test("keeps even low-risk execution requests in proposal mode", () => {
   const classification = buildJozIntentClassification({
     input: "Run the report.",

@@ -96,6 +96,19 @@ export const JOZ_LLM_LANES = {
     retrievalCategories: ["booking", "proof", "bio", "faq"],
     actions: [],
   },
+  interaction: {
+    intentMode: "interaction",
+    label: "Interaction policy",
+    title: "Joz MAXX Interaction Policy",
+    summary: "Data-governed handling for typos, scepticism, clarification, and commercial boundaries.",
+    highlights: [
+      "Typos resolve through stored aliases and canonical prompts",
+      "Sceptical questions receive grounded, non-defensive variants",
+      "Free company-specific advice is bounded by a stored commercial policy",
+    ],
+    retrievalCategories: ["interaction"],
+    actions: [],
+  },
 };
 
 export function normalizeJozLaneIntent(intentMode = "skills") {

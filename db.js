@@ -563,29 +563,34 @@ export async function getJozDocumentsByIntent(
 ) {
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
-  const categories = [
-    ...new Set([
-      ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
-      "skills",
-      "systems_mindset",
-      "business_need",
-      "systems_principle",
-      "governance",
-      "governance_principle",
-      "world_model",
-    ]),
-  ];
-  const laneAliases = [
-    ...new Set(
-      [
-        primaryCategory,
-        primaryCategory === "systems_mindset" ? "mindset" : null,
-        "skills",
-        "systems_mindset",
-        "business_need",
-      ].filter(Boolean)
-    ),
-  ];
+  const isControlLane = ["booking", "interaction"].includes(primaryCategory);
+  const categories = isControlLane
+    ? [primaryCategory]
+    : [
+        ...new Set([
+          ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
+          "skills",
+          "systems_mindset",
+          "business_need",
+          "systems_principle",
+          "governance",
+          "governance_principle",
+          "world_model",
+        ]),
+      ];
+  const laneAliases = isControlLane
+    ? [primaryCategory]
+    : [
+        ...new Set(
+          [
+            primaryCategory,
+            primaryCategory === "systems_mindset" ? "mindset" : null,
+            "skills",
+            "systems_mindset",
+            "business_need",
+          ].filter(Boolean)
+        ),
+      ];
   const result = await runQuery(
     `SELECT title, category, summary, body, metadata
      FROM joz_documents
@@ -697,18 +702,30 @@ export async function getJozSemanticDocumentsByQuery(
 
   const primaryCategory = normalizeJozLaneIntent(intentMode);
   const lane = getJozLaneConfig(primaryCategory);
-  const categories = [
-    ...new Set([
-      ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
-      "skills",
-      "systems_mindset",
-      "business_need",
-      "systems_principle",
-      "governance",
-      "governance_principle",
-      "world_model",
-    ]),
-  ];
+  const isControlLane = ["booking", "interaction"].includes(primaryCategory);
+  const categories = isControlLane
+    ? [primaryCategory]
+    : [
+        ...new Set([
+          ...(lane?.retrievalCategories || [primaryCategory, "case_study", "proof", "bio", "faq"]),
+          "skills",
+          "systems_mindset",
+          "business_need",
+          "systems_principle",
+          "governance",
+          "governance_principle",
+          "world_model",
+        ]),
+      ];
+  const laneAliases = isControlLane
+    ? [primaryCategory]
+    : [
+        primaryCategory,
+        primaryCategory === "systems_mindset" ? "mindset" : null,
+        "skills",
+        "systems_mindset",
+        "business_need",
+      ].filter(Boolean);
   const vector = buildPgvectorLiteral(embedding);
   const result = await runQuery(
     `WITH ranked_chunks AS (
@@ -760,13 +777,7 @@ export async function getJozSemanticDocumentsByQuery(
       String(tenantId || JOZ_PUBLIC_TENANT_ID),
       datasetId ? String(datasetId) : null,
       categories,
-      [
-        primaryCategory,
-        primaryCategory === "systems_mindset" ? "mindset" : null,
-        "skills",
-        "systems_mindset",
-        "business_need",
-      ].filter(Boolean),
+      laneAliases,
       Math.max(limit * 3, 20),
     ]
   );
