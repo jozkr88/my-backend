@@ -474,6 +474,10 @@ function buildRecruiterOperationalResolution(route = {}) {
   let selectedOperationalComposer = "";
 
   switch (route?.detectedIntent) {
+    case "recruiter_booking":
+      reply = "Absolutely. Choose the fastest way to arrange time with Joz: call or email Joz directly.";
+      selectedOperationalComposer = "composeBookingAnswer";
+      break;
     case "recruiter_location":
       reply = composeLocationAnswer(route.detectedSubIntent);
       selectedOperationalComposer = "composeLocationAnswer";
@@ -1245,6 +1249,29 @@ function detectRecruiterOperational(clean) {
       detectedIntent: "recruiter_location",
       detectedSubIntent: "residence",
       detectedConcept: "recruiter_location",
+    };
+  }
+
+  if (
+    includesAny(clean, [
+      "book joz",
+      "book time with joz",
+      "arrange time with joz",
+      "arrange a meeting with joz",
+      "arrange a call with joz",
+      "schedule a meeting with joz",
+      "schedule time with joz",
+      "set up a meeting with joz",
+      "set up a call with joz",
+      "meet with joz",
+      "talk to joz",
+      "speak with joz",
+    ])
+  ) {
+    return {
+      detectedIntent: "recruiter_booking",
+      detectedSubIntent: "booking",
+      detectedConcept: "recruiter_booking",
     };
   }
 

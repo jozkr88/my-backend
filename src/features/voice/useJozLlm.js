@@ -12,6 +12,7 @@ import { getJozLaneConfig, JOZ_LLM_LANES, normalizeJozLaneIntent } from "../../s
 import { normalizeVoiceAction } from "../../shared/voiceActions";
 import { resolveLocalVoiceCommand } from "../../voice/localVoice";
 import { resolveSpatialDemoIntent } from "../../world-model/placement";
+import { isBookingRequest } from "./bookingIntent";
 import { requestSemanticSpatialIntent } from "../../world-model/spatialOffer";
 import {
   buildWholeAppWorldState,
@@ -691,7 +692,7 @@ export function useJozLlm({
         return;
       }
 
-      if (value === BOOKING_PROMPT) {
+      if (value === BOOKING_PROMPT || isBookingRequest(value)) {
         lastSubmissionRef.current = {
           signature: normalizedSignature,
           timestamp: now,

@@ -1379,6 +1379,26 @@ test("unknown conversational prompts use natural world-model and reaction langua
   assert.doesNotMatch(reactionOne.reply, /lacks context|Knowledge Graph/i);
 });
 
+test("booking language routes to contact actions instead of a risk proposal", () => {
+  const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz" });
+  const route = routeJozLlmQuery({
+    input: "Arrange time with Joz",
+    appContext,
+    legacyContext,
+  });
+  const resolution = composeJozLlmRouteReply({
+    route,
+    input: "Arrange time with Joz",
+    appContext,
+    legacyContext,
+  });
+
+  assert.equal(route.detectedIntent, "recruiter_booking");
+  assert.equal(resolution.intentMode, "booking");
+  assert.match(resolution.reply, /arrange time with Joz/i);
+  assert.deepEqual(resolution.actions.map((action) => action.id), ["call_joz", "email_joz"]);
+});
+
 test("covers the six latest recruiter-facing quality repairs", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const cases = [

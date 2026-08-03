@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { runMeetJozWorldBuild } from "../tools/build-meetjoz-world.js";
+import { runMeetJozWorldBuild } from "../../tools/build-meetjoz-world.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
