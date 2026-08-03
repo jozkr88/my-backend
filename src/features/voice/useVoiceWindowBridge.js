@@ -109,6 +109,8 @@ export function useVoiceWindowBridge({
         mobileShortcut,
       } = resolved;
 
+      const needsRetry = result?.status === "needs_retry";
+
       return {
         rawInput,
         spoken,
@@ -259,7 +261,7 @@ export function useVoiceWindowBridge({
       });
 
       pushVoiceDebugEvent({
-        status: "applied",
+        status: needsRetry ? "needs_retry" : "applied",
         rawInput,
         spoken: resolvedSpoken,
         source: source || "local",
@@ -269,14 +271,14 @@ export function useVoiceWindowBridge({
         error: "",
       });
       finalizeVoiceSessionEntry({
-        status: "applied",
+        status: needsRetry ? "needs_retry" : "applied",
         rawInput,
         spoken: resolvedSpoken,
         source: source || "local",
         action: result?.action || "",
         target: result?.target || "",
         awareness: result?.awareness || "",
-        outcome: "resolved",
+        outcome: needsRetry ? "needs_retry" : "resolved",
       });
 
       return {
