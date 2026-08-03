@@ -5,7 +5,7 @@
   "source_type": "paste",
   "source_uri": null,
   "summary": "Banking, wealth, insurance, financial AI agents, portfolios, customer intelligence, and regulated enterprise systems.",
-  "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MarketClue financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
+  "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MC USA financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
   "metadata": {
     "lane": "skills",
     "original_lane": "skills",
@@ -30,7 +30,7 @@
       "He has worked across Singapore, APAC, Europe, and the USA."
     ],
     "proof_points": [
-      "MarketClue financial AI agents with live data and asset portfolios.",
+      "MC USA financial AI agents with live data and asset portfolios.",
       "Maybank–Ageas Etiqa wealth and insurance transformation.",
       "Manulife ML-enabled customer and investment experiences across APAC and North America.",
       "Erste Bank engineering and internal/digital portal work at 16M+ customer scale.",
@@ -48,7 +48,7 @@
       "Erste Bank",
       "Etiqa",
       "Manulife",
-      "MarketClue",
+      "MC USA",
       "Maybank",
       "Singapore Stock Exchange"
     ],
@@ -102,14 +102,14 @@
     "proofs": [
       "erste_customer_scale",
       "manulife_lean_ml_ux",
-      "marketclue_financial_agents",
+      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
       "sgx_responsive_portals"
     ],
     "related_proofs": [
       "erste_customer_scale",
       "manulife_lean_ml_ux",
-      "marketclue_financial_agents",
+      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
       "sgx_responsive_portals"
     ],

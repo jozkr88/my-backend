@@ -72,6 +72,7 @@
     "check:world-model-knowledge": "node tools/ingest-world-model-knowledge.mjs && node --test tools/world-model-knowledge.test.mjs",
     "check:joz-llm:gate": "node tools/run-joz-quality-gate.mjs",
     "check:joz-quality": "node tools/run-joz-quality-gate.mjs",
+    "migrate:private-mc-usa": "node tools/migrate-private-mc-usa-alias.mjs",
     "test:voice:frontend": "node scripts/test-voice-frontend-playwright.js",
     "eject": "react-scripts eject"
   },

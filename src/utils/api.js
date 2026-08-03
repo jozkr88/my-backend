@@ -20,9 +20,23 @@ export function getApiBaseCandidates() {
   return dedupe([explicitBase, LIVE_API_BASE]);
 }
 
+export function getPossibleWorldsApiBase() {
+  const dedicatedBase = trimTrailingSlash(
+    (process.env.REACT_APP_POSSIBLE_WORLDS_API_BASE || "").trim()
+  );
+  if (dedicatedBase) return dedicatedBase;
+  return process.env.NODE_ENV === "development" ? "http://127.0.0.1:3002" : "";
+}
+
 export function apiUrl(path) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   const base = getApiBase();
+  return base ? `${base}${normalizedPath}` : normalizedPath;
+}
+
+export function possibleWorldsApiUrl(path) {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const base = getPossibleWorldsApiBase();
   return base ? `${base}${normalizedPath}` : normalizedPath;
 }
 

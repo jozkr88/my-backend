@@ -315,7 +315,7 @@ What is already done:
 - recruiter FAQs
 - enterprise-scale proof
 - impact-based retrieval ordering
-- stronger ordering for Mediacorp / Erste / Maybank over MarketClue
+- stronger ordering for Mediacorp / Erste / Maybank over MC USA
 
 Still worth doing:
 

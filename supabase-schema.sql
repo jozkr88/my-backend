@@ -513,7 +513,7 @@ VALUES (
   'https://meetjoz.com',
   'joz@meetjoz.com',
   '+65 3107 2412',
-  'Bratislava, Slovakia / Singapore / Dubai / Zurich',
+  'Singapore / Dubai / Europe / global markets',
   TRUE
 )
 ON CONFLICT (slug)

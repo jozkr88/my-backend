@@ -6,7 +6,7 @@ const CATALOG = {
     { id: "verification", label: "Verification", kind: "neuron" },
   ],
   joz_works: [
-    { id: "marketclue", label: "MarketClue", kind: "work" },
+    { id: "MC USA", label: "MC USA", kind: "work" },
     { id: "manulife", label: "Manulife", kind: "work" },
     { id: "mediacorp", label: "Mediacorp", kind: "work" },
     { id: "erste-bank", label: "Erste Bank", kind: "work" },

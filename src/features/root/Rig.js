@@ -28,7 +28,9 @@ export const Rig = memo(function Rig({ disableInteraction = false }) {
     const active = portalId ? scene.getObjectByName(portalId) : null;
 
     if (active?.parent) {
-      const cameraOffsetZ = portalId === "meet-joz" ? 0.08 : 0.291;
+      const cameraOffsetZ = portalId === "meet-joz"
+        ? 0.08
+        : 0.291;
       active.parent.localToWorld(position.set(0, 0, cameraOffsetZ));
       active.parent.localToWorld(focus.set(0, 0, -2));
     } else {

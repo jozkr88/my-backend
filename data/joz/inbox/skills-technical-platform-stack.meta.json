@@ -32,7 +32,7 @@
     "Global"
   ],
   "companies": [
-    "MarketClue",
+    "MC USA",
     "Erste Bank",
     "Apple",
     "Pixar"
@@ -77,7 +77,7 @@
   "proofs": [
     "apple_pixar_cv_workflows",
     "dff_rapid_ai_prototyping",
-    "marketclue_financial_agents",
+    "mc_usa_financial_agents",
     "versace_spatial_ai_launch"
   ]
 }

@@ -19,10 +19,10 @@
     "status": "verified",
     "reviewed_by": "user",
     "reviewed_at": "2026-07-27",
-    "notes": "Updated from the user's new CV. Slovak/EU nationality and Singapore work-authorisation handling remain separately verified recruiter facts."
+    "notes": "Updated from the user's new CV. EU nationality and Singapore work-authorisation handling remain separately verified recruiter facts."
   },
   "claims": [
-    "Joz is Slovak and an EU national.",
+    "Joz is an EU national.",
     "Joz's Singapore status is EP/PEP.",
     "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
     "Joz has 15+ years of professional experience overall, with direct Agentic AI engineering and multimodal AI work in the current CV.",

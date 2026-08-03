@@ -16,7 +16,7 @@ Capabilities
 - Observability, governance, and production decision loops
 
 Proof and context
-- MarketClue USA: architected financial AI agents with live data and asset portfolios.
+- MC USA: architected financial AI agents with live data and asset portfolios.
 - Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.
 - Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.
 - Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.

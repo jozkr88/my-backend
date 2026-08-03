@@ -5,7 +5,7 @@
   "source_type": "derived",
   "source_uri": null,
   "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
-  "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MarketClue USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
+  "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MC USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
   "metadata": {
     "lane": "skills",
     "original_lane": "skills",
@@ -31,7 +31,7 @@
       "Joz's delivery profile combines system design, memory patterns, observability, and business-facing execution."
     ],
     "proof_points": [
-      "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+      "MC USA work is described as financial AI agents with live data and asset portfolios.",
       "Apple/Pixar-adjacent work is framed as early Python USD(z) and computer-vision AI work in Singapore.",
       "Dubai Future Foundation and Erste Bank add public-sector and enterprise-scale delivery context.",
       "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
@@ -47,7 +47,7 @@
       "Apple/Pixar",
       "Dubai Future Foundation",
       "Erste Bank",
-      "MarketClue USA"
+      "MC USA"
     ],
     "projects": [],
     "intent_families": [],

@@ -528,8 +528,8 @@
       ]
     },
     {
-      "id": "marketclue_financial_agents",
-      "company": "MarketClue",
+      "id": "mc_usa_financial_agents",
+      "company": "MC USA",
       "title": "Financial AI Agents with Live Portfolio Context",
       "description": "Architected financial AI agents using live market data and asset-portfolio context.",
       "industries": [

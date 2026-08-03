@@ -1,11 +1,11 @@
-Joz Krupa is Slovak and has British heritage.
+Joz Krupa is EU national and has British heritage.
 
 He completed postgraduate education in the United Kingdom, including an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.
 
 His international career spans Singapore, Dubai, Europe, and global markets.
 
 Important distinction
-- Slovak nationality is the direct nationality answer.
+- EU nationality is the direct nationality answer.
 - British heritage must remain separate from nationality or citizenship.
 - Do not claim British citizenship or British nationality unless explicitly confirmed.
 

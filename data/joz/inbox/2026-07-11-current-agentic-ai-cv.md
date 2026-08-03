@@ -16,7 +16,7 @@ Fortune 500 Global Experience
 Agentic AI Architecture and Multimodal AI Leader
 Singapore, Dubai and Europe/EU/EEA 2018–Present
 
-MarketClue USA — Agentic AI Financial Assistant
+MC USA — Agentic AI Financial Assistant
 Apps: AI market analyst with 50+ quant-modelling tools for portfolios, risk and alerts
 Python: FastAPI · SQLAlchemy async · PostgreSQL/pgvector · Redis · RabbitMQ
 AI/ML: Multi-agent orchestration · Real-time market data ingestion · Financial RAG

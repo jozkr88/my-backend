@@ -107,7 +107,7 @@ Stanford d.school
 
 Entities still needing higher-confidence resolution
 
-MarketClue USA
+MC USA
 - Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.
 - Status: needs_review
 

@@ -3,7 +3,7 @@
   "title": "Joz Identity Background",
   "category": "bio",
   "lane": "skills",
-  "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
+  "summary": "Canonical identity-background record covering EU nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
   "tags": [
     "identity",
     "background",
@@ -20,10 +20,10 @@
     "status": "verified",
     "reviewed_by": "user",
     "reviewed_at": "2026-07-12",
-    "notes": "User confirmed canonical identity distinctions: Slovak nationality, British heritage, UK postgraduate education, and international career span."
+    "notes": "User confirmed canonical identity distinctions: EU nationality, British heritage, UK postgraduate education, and international career span."
   },
   "claims": [
-    "Joz Krupa is Slovak.",
+    "Joz Krupa is an EU national.",
     "Joz has British heritage.",
     "Joz completed postgraduate education in the United Kingdom.",
     "Joz completed an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.",
@@ -31,13 +31,13 @@
     "British heritage must remain separate from nationality, citizenship, and work authorization."
   ],
   "proof_points": [
-    "Nationality answer must remain Slovak and must not be replaced by British nationality.",
+    "Nationality answer must remain EU national and must not be replaced by British nationality.",
     "British heritage is explicitly allowed only as heritage language, not citizenship language.",
     "The academic record anchors to the University of Central Lancashire MSc in 2008.",
     "Regional career references align with the broader CV and profile footprint."
   ],
   "regions": [
-    "Slovakia",
+    "Europe",
     "United Kingdom",
     "Singapore",
     "Dubai",

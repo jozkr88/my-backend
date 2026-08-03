@@ -212,7 +212,7 @@ test("counts the current architecture brief answer once and advances one field",
   assert.match(resolution.reply, /Who will use it/i);
 });
 
-test("keeps a Slovak organisational-memory description inside the brief intake", () => {
+test("keeps an organisational-memory description inside the brief intake", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const route = routeJozLlmQueryWithAwareness({
     input: "Cieľom je vytvoriť firemnú pamäť, ktorá priebežne buduje znalosti z GitHubu, Slacku, AI chatov a dokumentov.",
@@ -606,7 +606,7 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /retrieval|orchestration|memory|verification|observability/i);
   assert.match(resolution.reply, /Python backend systems/i);
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
-  assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
+  assert.doesNotMatch(resolution.reply, /EU national|\bEP\b|\bPEP\b|work authorization/i);
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
 });
 
@@ -722,7 +722,7 @@ test("routes enterprise agentic systems and UX orchestration prompts to proof-ri
     [
       "Show Joz's strongest agentic AI systems and orchestration capabilities, with emphasis on company scale and enterprise context.",
       "agentic_systems_orchestration",
-      /MarketClue|Maybank|Manulife|enterprise pattern/i,
+      /MC USA|Maybank|Manulife|enterprise pattern/i,
     ],
     [
       "Explain Joz's strongest agentic UX orchestration capabilities, with emphasis on multimodal systems, spatial interfaces, and company scale.",
@@ -1556,10 +1556,10 @@ test("origin and nationality profile phrasing resolves without falling to guards
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
 
   const cases = [
-    ["Where is he from?", "location", /Bratislava|Slovakia|Singapore|Dubai|Zurich/i],
-    ["Where is he from", "location", /Bratislava|Slovakia|Singapore|Dubai|Zurich/i],
-    ["Where is Joz from?", "location", /Bratislava|Slovakia|Singapore|Dubai|Zurich/i],
-    ["What nationality is he?", "nationality", /Slovak|British/i],
+    ["Where is he from?", "location", /Singapore|Dubai|Europe|global markets/i],
+    ["Where is he from", "location", /Singapore|Dubai|Europe|global markets/i],
+    ["Where is Joz from?", "location", /Singapore|Dubai|Europe|global markets/i],
+    ["What nationality is he?", "nationality", /EU national|British/i],
   ];
 
   for (const [prompt, expectedSubIntent, expectedReply] of cases) {
@@ -1626,14 +1626,14 @@ test("sets a paid architecture boundary for bespoke company blueprints", () => {
 test("commercial boundary enforcement strips evidence-enriched replies", () => {
   const route = { selectedRoute: "skills", detectedSubIntent: "paid_architecture_boundary" };
   const guarded = enforceJozCommercialBoundaryResolution(route, {
-    reply: "Proof: MarketClue financial AI agents with live portfolio context.",
+    reply: "Proof: MC USA financial AI agents with live portfolio context.",
     answerSource: "evidence",
     composer: "buildEvidenceBackedRouteReply",
   });
 
   assert.equal(guarded.answerSource, "commercial_boundary");
   assert.equal(guarded.composer, "composeSkillsReply");
-  assert.doesNotMatch(guarded.reply, /MarketClue|Maybank|Manulife|Mediacorp|Erste/i);
+  assert.doesNotMatch(guarded.reply, /MC USA|Maybank|Manulife|Mediacorp|Erste/i);
 });
 
 test("routes general agent-scope tradeoff questions to the dedicated scope answer", () => {
@@ -2216,7 +2216,7 @@ test("routes proof-not-buzzwords skills queries to an evidence-first answer", ()
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "proof_backed_strengths");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /MarketClue/i);
+  assert.match(resolution.reply, /MC USA/i);
   assert.match(resolution.reply, /20x digital sales growth at Maybank/i);
   assert.match(resolution.reply, /11 Manulife markets/i);
   assert.match(resolution.reply, /30x audience growth at Mediacorp/i);
@@ -2225,7 +2225,7 @@ test("routes proof-not-buzzwords skills queries to an evidence-first answer", ()
   assert.doesNotMatch(resolution.reply, /FastAPI|PostgreSQL|pgvector|Redis/i);
 });
 
-test("routes financial AI proof questions to the MarketClue evidence answer", () => {
+test("routes financial AI proof questions to the MC USA evidence answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "What proves Joz can build financial AI?";
   const route = routeJozLlmQuery({
@@ -2243,13 +2243,13 @@ test("routes financial AI proof questions to the MarketClue evidence answer", ()
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "financial_ai_proof");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /MarketClue USA/i);
+  assert.match(resolution.reply, /MC USA/i);
   assert.match(resolution.reply, /financial AI agents/i);
   assert.match(resolution.reply, /50 quant-modelling tools/i);
   assert.doesNotMatch(resolution.reply, /outside the current deterministic Joz answer set/i);
 });
 
-test("routes financial AI delivery proof phrasing to the MarketClue evidence answer", () => {
+test("routes financial AI delivery proof phrasing to the MC USA evidence answer", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "meet-joz", currentMesh: "skills" });
   const prompt = "What can prove Joz can deliver on financial AI?";
   const route = routeJozLlmQuery({ input: prompt, appContext, legacyContext });
@@ -2257,7 +2257,7 @@ test("routes financial AI delivery proof phrasing to the MarketClue evidence ans
 
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "financial_ai_proof");
-  assert.match(resolution.reply, /MarketClue USA|financial AI agents/i);
+  assert.match(resolution.reply, /MC USA|financial AI agents/i);
   assert.doesNotMatch(resolution.reply, /outside the current deterministic Joz answer set/i);
 });
 
@@ -2554,7 +2554,7 @@ test("skills route upgrades to retrieved proof when ranked documents are provide
         metadata: {
           slug: "2026-07-11-agentic-ai-architecture-proof",
           proof_points: [
-            "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+            "MC USA work is described as financial AI agents with live data and asset portfolios.",
           ],
         },
       },
@@ -2576,7 +2576,7 @@ test("skills route upgrades to retrieved proof when ranked documents are provide
   assert.equal(route.selectedRoute, "skills");
   assert.equal(resolution.composer, "composeSkillsReply");
   assert.match(resolution.reply, /agentic ai architecture/i);
-  assert.match(resolution.reply, /MarketClue|Maybank|Mediacorp|Erste Bank/i);
+  assert.match(resolution.reply, /MC USA|Maybank|Mediacorp|Erste Bank/i);
   assert.match(resolution.answerSource, /JOZ_LLM_CV\.appliedAiSkills \+ JOZ_LLM_CV\.experience/i);
 });
 
@@ -2885,7 +2885,7 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
   assert.equal(resolution.confidence, "high");
   assert.match(resolution.reply, /too ambiguous on its own/i);
   assert.match(resolution.reply, /How does Joz architect agentic AI/i);
-  assert.doesNotMatch(resolution.reply, /Slovak|British heritage|University of Central Lancashire|MSc/i);
+  assert.doesNotMatch(resolution.reply, /EU national|British heritage|University of Central Lancashire|MSc/i);
 });
 
 test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {
@@ -2971,7 +2971,7 @@ test("unknown Joz-scoped prompts return a scope boundary instead of model fallba
     assert.equal(resolution.answerClass, "scope_boundary");
     assert.equal(resolution.confidence, "high");
     assert.match(resolution.reply, /outside the current deterministic Joz answer set/i);
-    assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation|Slovak|University of Central Lancashire/i);
+    assert.doesNotMatch(resolution.reply, /Agentic AI Architecture and Innovation|EU national|University of Central Lancashire/i);
   }
 });
 
@@ -3367,11 +3367,11 @@ test("agentic architecture approach keeps the base technical answer even when pr
     legacyContext,
     retrievedDocuments: [
       {
-        title: "MarketClue financial AI agents",
+        title: "MC USA financial AI agents",
         category: "skills",
-        summary: "Architected financial AI agents for MarketClue.",
-        body: "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
-        metadata: { slug: "marketclue-proof" },
+        summary: "Architected financial AI agents for MC USA.",
+        body: "Architected financial AI agents for MC USA with live market data and asset portfolios.",
+        metadata: { slug: "mc-usa-proof" },
       },
     ],
   });
@@ -3517,7 +3517,7 @@ test("handles natural recruiter and product questions without falling into gener
       input: "What is Joz's strongest technical skill?",
       selectedRoute: "skills",
       detectedSubIntent: "proof_backed_strengths",
-      reply: /agentic ai architecture|MarketClue|multimodal/i,
+      reply: /agentic ai architecture|MC USA|multimodal/i,
     },
     {
       input: "How does Joz build agentic AI systems?",
@@ -3547,7 +3547,7 @@ test("handles natural recruiter and product questions without falling into gener
       input: "What was Joz's biggest enterprise achievement?",
       selectedRoute: "skills",
       detectedSubIntent: "proof_backed_strengths",
-      reply: /MarketClue|Maybank|Mediacorp|Erste/i,
+      reply: /MC USA|Maybank|Mediacorp|Erste/i,
     },
     {
       input: "What does durable execution add to an agent system?",
@@ -3583,20 +3583,20 @@ test("handles natural recruiter and product questions without falling into gener
     assert.doesNotMatch(String(resolution.reply || ""), /outside the current deterministic|not in the current joz knowledge base/i);
   }
 
-  const marketClue = await resolveUnknownJozReply({
-    input: "Tell me about MarketClue.",
+  const mcUsa = await resolveUnknownJozReply({
+    input: "Tell me about MC USA.",
     roleAwareContext: {
       retrievedDocuments: [
         {
-          title: "MarketClue USA",
+          title: "MC USA",
           category: "project",
           summary: "Financial AI agents with live market data, portfolio context, and quant tools.",
-          metadata: { companies: ["MarketClue USA"], projects: ["financial AI assistant"] },
+          metadata: { companies: ["MC USA"], projects: ["financial AI assistant"] },
         },
       ],
     },
   });
 
-  assert.equal(marketClue.answerSource, "MarketClue USA");
-  assert.match(marketClue.reply, /live market data|financial AI agents/i);
+  assert.equal(mcUsa.answerSource, "MC USA");
+  assert.match(mcUsa.reply, /live market data|financial AI agents/i);
 });

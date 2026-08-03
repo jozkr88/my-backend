@@ -2681,10 +2681,13 @@ svg {
   gap: 0.7rem;
   min-height: 0;
   margin-top: 0.82rem;
-  height: 100%;
+  height: auto;
+  box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.5rem 0.3rem 0 0;
+  padding: 0.5rem 0.3rem 1.25rem 0;
+  scroll-padding-top: 0.75rem;
+  scroll-padding-bottom: 1rem;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;

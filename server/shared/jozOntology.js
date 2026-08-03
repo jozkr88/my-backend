@@ -145,7 +145,7 @@ const FIELD_KEYWORDS = {
     erste_customer_scale: ["erste"],
     manulife_lean_ml_ux: ["manulife"],
     publicis_handoff_reduction: ["publicis", "leo burnett"],
-    marketclue_financial_agents: ["marketclue"],
+    mc_usa_financial_agents: ["MC USA"],
   },
 };
 

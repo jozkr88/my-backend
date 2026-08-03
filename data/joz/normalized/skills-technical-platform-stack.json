@@ -43,7 +43,7 @@
     "companies": [
       "Apple",
       "Erste Bank",
-      "MarketClue",
+      "MC USA",
       "Pixar"
     ],
     "projects": [],
@@ -97,13 +97,13 @@
     "proofs": [
       "apple_pixar_cv_workflows",
       "dff_rapid_ai_prototyping",
-      "marketclue_financial_agents",
+      "mc_usa_financial_agents",
       "versace_spatial_ai_launch"
     ],
     "related_proofs": [
       "apple_pixar_cv_workflows",
       "dff_rapid_ai_prototyping",
-      "marketclue_financial_agents",
+      "mc_usa_financial_agents",
       "versace_spatial_ai_launch"
     ],
     "enterprise_scale_score": 90,

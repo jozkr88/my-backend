@@ -14,11 +14,11 @@ const ontology = {
   ],
   proofs: [
     {
-      id: "marketclue_financial_agents",
-      title: "MarketClue Financial Agents",
-      company: "MarketClue USA",
+      id: "mc_usa_financial_agents",
+      title: "MC USA Financial Agents",
+      company: "MC USA",
       capabilities: ["agentic_ai"],
-      source_slugs: ["marketclue-proof"],
+      source_slugs: ["mc-usa-proof"],
       impact_score: 90,
       verification: "cv_supported",
     },
@@ -27,8 +27,8 @@ const ontology = {
 
 const documents = [
   {
-    title: "MarketClue Proof",
-    slug: "marketclue-proof",
+    title: "MC USA Proof",
+    slug: "mc-usa-proof",
     category: "proof",
     summary: "Financial AI agents with live data and portfolios.",
     metadata: {
@@ -74,7 +74,7 @@ test("document nodes retain resolvable source provenance", () => {
     }, documents[1]],
     ontology,
   });
-  const canonical = graph.nodes.find((node) => node.slug === "marketclue-proof");
+  const canonical = graph.nodes.find((node) => node.slug === "mc-usa-proof");
   const inbox = graph.nodes.find((node) => node.slug === "knowledge-graph-architecture");
 
   assert.deepEqual(
@@ -122,7 +122,7 @@ test("knowledge graph traversal returns source documents without changing answer
   });
 
   assert.deepEqual(result.matchedNodeIds, ["capability:agentic_ai"]);
-  assert.ok(result.documentSlugs.includes("marketclue-proof"));
+  assert.ok(result.documentSlugs.includes("mc-usa-proof"));
   assert.ok(result.paths.some((path) => path.edgeTypes.includes("supports")));
 });
 

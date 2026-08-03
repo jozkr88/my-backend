@@ -19,7 +19,7 @@
       "source_type": "derived",
       "source_uri": null,
       "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
-      "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MarketClue USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
+      "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MC USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -45,7 +45,7 @@
           "Joz's delivery profile combines system design, memory patterns, observability, and business-facing execution."
         ],
         "proof_points": [
-          "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+          "MC USA work is described as financial AI agents with live data and asset portfolios.",
           "Apple/Pixar-adjacent work is framed as early Python USD(z) and computer-vision AI work in Singapore.",
           "Dubai Future Foundation and Erste Bank add public-sector and enterprise-scale delivery context.",
           "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
@@ -61,7 +61,7 @@
           "Apple/Pixar",
           "Dubai Future Foundation",
           "Erste Bank",
-          "MarketClue USA"
+          "MC USA"
         ],
         "projects": [],
         "intent_families": [],
@@ -259,7 +259,7 @@
       "source_type": "paste",
       "source_uri": "source://joz/2026-07-11-current-agentic-ai-cv.md",
       "summary": "Current user-provided CV positioning Joz as an Agentic AI Engineer, AI Product Engineer, and Multimodal AI leader, with a production-oriented technical stack, Fortune 500 experience, measurable outcomes, and global operating coverage.",
-      "body": "Jozef Krupa\n+65 3107 2412\njoz@meetjoz.com\nSingapore • Dubai\n\nAgentic AI Engineering, AI Product Engineering and Multimodal AI\n500M monthly active users • APAC, Europe, US & Middle East • 30x growth, 15+ years\n[meejoz.com](http://meejoz.com)\n\nJoz LLM Agentic AI CV — The 2026 Applied AI Skills Showcase\n\nThe Stack\nPython • FastAPI • PostgreSQL/pgvector • Redis • RabbitMQ • Data Ingestion • Data Cleaning • ETL/ELT • Chunking • Embeddings • Data Validation • Vector Search • Multi-Agent Orchestration • RAG • Context Engineering • Memory • Shared State • MCP Tooling • Tool Calling • Intent Routing • NLP/CV • Voice Agents • Camera/Sensor Fusion • Multimodal Systems • Event-Driven Architecture • Tool Allowlisting • Approval Tokens • Verification • Observability\n\nFortune 500 Global Experience\nAgentic AI Architecture and Multimodal AI Leader\nSingapore, Dubai and Europe/EU/EEA 2018–Present\n\nMarketClue USA — Agentic AI Financial Assistant\nApps: AI market analyst with 50+ quant-modelling tools for portfolios, risk and alerts\nPython: FastAPI · SQLAlchemy async · PostgreSQL/pgvector · Redis · RabbitMQ\nAI/ML: Multi-agent orchestration · Real-time market data ingestion · Financial RAG\n\nVersace/SOA/ArtKorero Dubai — Agentic AI Spatial Commerce\nApps: Vision Pro/web 3D exhibitions, VIP try-ons and spatial showrooms\nPython/C++: DCC pipelines · Pixar APIs · Procedural geometry · Scene-graph/DataViz\nAI/ML: Computer vision · GenAI 3D · Image-to-3D · Camera tracking · Multimodal AI\n\nDubai Future Foundation — Applied AI Innovation (UAE Government)\nApps: AI concepts for Area 2071 innovation initiatives and spatial-computing ventures\nEngineering: Rapid AI prototyping · Systems architecture · Data workflows\nAI/ML: NLP · Human-centred AI · Computer vision · Multimodal AI · Responsible AI\n\nErste Group Europe — Accessible Banking Engineering\nApps: 200+ banking portals across 7 European markets serving 16M customers\nEngineering: AEM · Platform architecture · Workflow automation · Systems integration\nGovernance: WCAG 2.1 AA · EU Accessibility Act · Audit evidence · Compliance\n\n20+ Singapore/Dubai FinTechs — Agentic AI Product Engineering\nApps: 30+ FinTech, ERP, blockchain and logistics products spanning 1,500+ features\nPython: FastAPI · REST APIs · PostgreSQL · Data pipelines · Event-driven workflows\nAI/ML: NLP · Multi-agent orchestration · Process automation · Blockchain intelligence\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nApps: ML-enabled products driving 20× growth via 3,000+ HNW/mass-market pilots\nEngineering: Conversational architecture · Data integration · JavaScript decision logic\nAI/ML: Conversational AI · ML integration · Personalisation · Behavioural analytics · Evals\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nApps: Data-led InsurTech and investment products across APAC and North America\nEngineering: Full-stack development · API integration · Cross-platform testing\nAI/ML: Predictive modelling · Model-output interfaces · Financial data dashboards\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nApps: CNA, CH8News and Toggle/meWatch platforms driving 30× audience growth\nEngineering: Media-platform architecture · Content streaming · Cross-device delivery\nImpact: First Apple Watch news app in Asia · 40+ products · Featured globally by Apple\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nApps: P&G (SK-II, Braun, Gillette) and Samsung across the USA and 8 APAC markets\nEngineering: Full-stack commerce · Transaction logic · Regional sales platforms\nBusiness Growth: Opened and scaled P&G sales channels across 8 APAC markets\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nApps: Singapore Exchange portals, Danone UGC apps and Banyan Tree platforms\nEngineering: Backend–frontend integration · Financial-data integration · UGC pipelines\nBusiness Growth: Multimillion-dollar agency pitch wins · Scaled Danone across APAC\n\nPostgraduate Education\nMaster of Science (MSc) Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nStanford d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nApplied AI Skills\nKubernetes • Async Python • asyncpg • JWT/RBAC • Secure APIs • Data Privacy • Failure Recovery • Error Handling • Backfilling • Caching Strategies • Low-Latency Systems • Horizontal Scalability • Resilient Systems • Production AI • AI Governance • Human-in-the-Loop Controls • Model Monitoring • Drift Detection • Prompt Engineering • Structured Outputs • Schema Validation • Synthetic Testing • pytest/TDD • Risk Engines • Portfolio Analytics • Market Data Systems • Event Streaming • Time-Series Forecasting • Quantitative Models • XGBoost • VaR/CVaR • Anomaly Detection • Knowledge Graphs • Semantic Data Modelling • Data Lineage • Cloud Deployment",
+      "body": "Jozef Krupa\n+65 3107 2412\njoz@meetjoz.com\nSingapore • Dubai\n\nAgentic AI Engineering, AI Product Engineering and Multimodal AI\n500M monthly active users • APAC, Europe, US & Middle East • 30x growth, 15+ years\n[meejoz.com](http://meejoz.com)\n\nJoz LLM Agentic AI CV — The 2026 Applied AI Skills Showcase\n\nThe Stack\nPython • FastAPI • PostgreSQL/pgvector • Redis • RabbitMQ • Data Ingestion • Data Cleaning • ETL/ELT • Chunking • Embeddings • Data Validation • Vector Search • Multi-Agent Orchestration • RAG • Context Engineering • Memory • Shared State • MCP Tooling • Tool Calling • Intent Routing • NLP/CV • Voice Agents • Camera/Sensor Fusion • Multimodal Systems • Event-Driven Architecture • Tool Allowlisting • Approval Tokens • Verification • Observability\n\nFortune 500 Global Experience\nAgentic AI Architecture and Multimodal AI Leader\nSingapore, Dubai and Europe/EU/EEA 2018–Present\n\nMC USA — Agentic AI Financial Assistant\nApps: AI market analyst with 50+ quant-modelling tools for portfolios, risk and alerts\nPython: FastAPI · SQLAlchemy async · PostgreSQL/pgvector · Redis · RabbitMQ\nAI/ML: Multi-agent orchestration · Real-time market data ingestion · Financial RAG\n\nVersace/SOA/ArtKorero Dubai — Agentic AI Spatial Commerce\nApps: Vision Pro/web 3D exhibitions, VIP try-ons and spatial showrooms\nPython/C++: DCC pipelines · Pixar APIs · Procedural geometry · Scene-graph/DataViz\nAI/ML: Computer vision · GenAI 3D · Image-to-3D · Camera tracking · Multimodal AI\n\nDubai Future Foundation — Applied AI Innovation (UAE Government)\nApps: AI concepts for Area 2071 innovation initiatives and spatial-computing ventures\nEngineering: Rapid AI prototyping · Systems architecture · Data workflows\nAI/ML: NLP · Human-centred AI · Computer vision · Multimodal AI · Responsible AI\n\nErste Group Europe — Accessible Banking Engineering\nApps: 200+ banking portals across 7 European markets serving 16M customers\nEngineering: AEM · Platform architecture · Workflow automation · Systems integration\nGovernance: WCAG 2.1 AA · EU Accessibility Act · Audit evidence · Compliance\n\n20+ Singapore/Dubai FinTechs — Agentic AI Product Engineering\nApps: 30+ FinTech, ERP, blockchain and logistics products spanning 1,500+ features\nPython: FastAPI · REST APIs · PostgreSQL · Data pipelines · Event-driven workflows\nAI/ML: NLP · Multi-agent orchestration · Process automation · Blockchain intelligence\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nApps: ML-enabled products driving 20× growth via 3,000+ HNW/mass-market pilots\nEngineering: Conversational architecture · Data integration · JavaScript decision logic\nAI/ML: Conversational AI · ML integration · Personalisation · Behavioural analytics · Evals\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nApps: Data-led InsurTech and investment products across APAC and North America\nEngineering: Full-stack development · API integration · Cross-platform testing\nAI/ML: Predictive modelling · Model-output interfaces · Financial data dashboards\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nApps: CNA, CH8News and Toggle/meWatch platforms driving 30× audience growth\nEngineering: Media-platform architecture · Content streaming · Cross-device delivery\nImpact: First Apple Watch news app in Asia · 40+ products · Featured globally by Apple\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nApps: P&G (SK-II, Braun, Gillette) and Samsung across the USA and 8 APAC markets\nEngineering: Full-stack commerce · Transaction logic · Regional sales platforms\nBusiness Growth: Opened and scaled P&G sales channels across 8 APAC markets\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nApps: Singapore Exchange portals, Danone UGC apps and Banyan Tree platforms\nEngineering: Backend–frontend integration · Financial-data integration · UGC pipelines\nBusiness Growth: Multimillion-dollar agency pitch wins · Scaled Danone across APAC\n\nPostgraduate Education\nMaster of Science (MSc) Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nStanford d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nApplied AI Skills\nKubernetes • Async Python • asyncpg • JWT/RBAC • Secure APIs • Data Privacy • Failure Recovery • Error Handling • Backfilling • Caching Strategies • Low-Latency Systems • Horizontal Scalability • Resilient Systems • Production AI • AI Governance • Human-in-the-Loop Controls • Model Monitoring • Drift Detection • Prompt Engineering • Structured Outputs • Schema Validation • Synthetic Testing • pytest/TDD • Risk Engines • Portfolio Analytics • Market Data Systems • Event Streaming • Time-Series Forecasting • Quantitative Models • XGBoost • VaR/CVaR • Anomaly Detection • Knowledge Graphs • Semantic Data Modelling • Data Lineage • Cloud Deployment",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -291,11 +291,11 @@
           "Joz's current stack includes Python, FastAPI, PostgreSQL/pgvector, Redis, RabbitMQ, ingestion and data-quality workflows, RAG, multi-agent orchestration, MCP tooling, voice agents, multimodal systems, event-driven architecture, tool allowlisting, approval tokens, verification, and observability.",
           "Joz's recent experience spans financial AI, spatial commerce, UAE public-sector innovation, accessible banking, FinTech product engineering, and multimodal AI.",
           "Joz's current CV lists Singapore and Dubai as current locations, with work across Europe/EEA, APAC, the US, and the Middle East.",
-          "Joz's experience includes MarketClue financial AI agents, Versace/SOA/ArtKorero spatial AI, Dubai Future Foundation innovation, Erste Group accessibility engineering, and 20+ Singapore/Dubai FinTech products."
+          "Joz's experience includes MC USA financial AI agents, Versace/SOA/ArtKorero spatial AI, Dubai Future Foundation innovation, Erste Group accessibility engineering, and 20+ Singapore/Dubai FinTech products."
         ],
         "proof_points": [
           "500M monthly active users stated in the current CV as global scale context.",
-          "MarketClue USA: AI market analyst with 50+ quant-modelling tools, real-time market data ingestion, multi-agent orchestration, and financial RAG.",
+          "MC USA: AI market analyst with 50+ quant-modelling tools, real-time market data ingestion, multi-agent orchestration, and financial RAG.",
           "Versace/SOA/ArtKorero Dubai: Vision Pro and web 3D exhibitions, spatial showrooms, computer vision, GenAI 3D, image-to-3D, camera tracking, and multimodal AI.",
           "Dubai Future Foundation: rapid AI prototyping, systems architecture, data workflows, NLP, computer vision, multimodal AI, and responsible AI for UAE innovation initiatives.",
           "Erste Group Europe: 200+ banking portals across 7 European markets serving 16M customers, with WCAG 2.1 AA, EU Accessibility Act, audit evidence, and compliance work.",
@@ -325,7 +325,7 @@
           "Erste Group",
           "Leo Burnett/Publicis",
           "Manulife",
-          "MarketClue USA",
+          "MC USA",
           "Maybank–Ageas Etiqa",
           "Mediacorp",
           "Ogilvy/WPP",
@@ -375,7 +375,7 @@
       "source_type": "web_research",
       "source_uri": null,
       "summary": "Web-researched context for companies and institutions named across Joz CV material, used to explain their sector, scale, and why they strengthen Joz credibility.",
-      "body": "CV Company Context from Web Research\n\nPurpose\nThis record adds external context for companies and institutions referenced across Joz CV material so Joz LLM can explain why those names matter, what sectors they operate in, and why the environments are credible.\n\nVerification note\nThis file mixes official web pages and reference sources. Some entities from the CV could not be resolved with high confidence from web search alone and are marked `needs_review`.\n\nResolved company and institution context\n\nApple\n- Apple is a global technology company headquartered in Cupertino, California, known for consumer electronics, software, services, and worldwide retail operations.\n- It is one of the world’s largest technology companies and one of the most visible product and platform ecosystems globally.\n- Source: https://en.wikipedia.org/wiki/Apple_Inc.\n- Source: https://www.apple.com/newsroom/\n\nPixar\n- Pixar Animation Studios is a major computer animation studio based in Emeryville, California and a subsidiary of Walt Disney Studios.\n- It is strongly associated with advanced computer graphics, digital storytelling, and production-grade visual pipelines.\n- Source: https://en.wikipedia.org/wiki/Pixar\n\nDubai Future Foundation\n- Dubai Future Foundation is a Dubai-based innovation and future-focused institution linked to the Museum of the Future and public-sector experimentation.\n- It is associated with programs in emerging technology, strategic foresight, and innovation initiatives in the UAE.\n- Source: https://en.wikipedia.org/wiki/Museum_of_the_Future\n- Source: https://en.wikipedia.org/wiki/Khalfan_Belhoul\n- Source: https://en.wikipedia.org/wiki/Noah_Raford\n\nErste Bank\n- Erste Bank is an Austrian financial institution based in Vienna and part of the wider Erste Group ecosystem.\n- It is one of Austria’s major banking groups and serves millions of customers through a large branch and services network.\n- Source: https://en.wikipedia.org/wiki/Erste_Bank_der_oesterreichischen_Sparkassen\n\nMaybank\n- Maybank is Malaysia’s largest bank by market capitalisation and assets and is one of Southeast Asia’s major banking groups.\n- Its core markets include Malaysia, Singapore, and Indonesia.\n- Source: https://en.wikipedia.org/wiki/Maybank\n\nEtiqa\n- Etiqa is the insurance and takaful arm associated with the Maybank Group and operates across multiple ASEAN markets.\n- It is relevant as a significant regional insurance player rather than a small standalone brand.\n- Source: https://en.wikipedia.org/wiki/Etiqa\n\nManulife\n- Manulife is a Canadian multinational insurance and financial services company with large operations across Asia and North America.\n- Its scale, long operating history, and major asset-management footprint make it a strong enterprise context for innovation and transformation work.\n- Source: https://www.manulife.com/ca/en/about-us/who-we-are/our-story\n- Source: https://en.wikipedia.org/wiki/Manulife\n\nMediacorp\n- Mediacorp is Singapore’s state-owned media group and operates television, radio, news, and streaming properties including CNA and meWatch.\n- It represents a major regional media and digital distribution environment rather than a niche publisher.\n- Source: https://en.wikipedia.org/wiki/Mediacorp\n\nLeo Burnett\n- Leo Burnett is a global advertising network founded in Chicago and now part of Publicis Groupe.\n- Its current network scale spans many markets worldwide and it remains a significant multinational agency brand.\n- Source: https://en.wikipedia.org/wiki/Leo_Burnett_Worldwide\n- Source: https://leoburnett.com/\n\nPublicis Groupe\n- Publicis Groupe is a French multinational communications and marketing group and one of the largest advertising companies in the world by revenue.\n- It is relevant as the holding group behind Leo Burnett and a major global agency environment.\n- Source: https://en.wikipedia.org/wiki/Publicis\n\nOgilvy\n- Ogilvy is a global advertising, marketing, PR, consulting, and health network that operates across more than 120 offices in nearly 90 countries.\n- It is part of WPP and represents a major international agency platform.\n- Source: https://www.ogilvy.com/about\n- Source: https://en.wikipedia.org/wiki/Ogilvy_(agency)\n\nWPP\n- WPP is one of the world’s largest marketing and communications groups.\n- Its current positioning emphasizes AI-enabled marketing, integrated data, creativity, production, and enterprise transformation.\n- Source: https://www.wpp.com/en/about\n\nProcter & Gamble\n- P&G is a large multinational consumer goods company headquartered in Cincinnati with major global brands including SK-II, Braun, and Gillette.\n- It provides strong Fortune 500-scale context for product, commerce, and brand-experience work.\n- Source: https://en.wikipedia.org/wiki/Procter_%26_Gamble\n\nSamsung\n- Samsung is a major South Korean multinational technology conglomerate, with Samsung Electronics spanning semiconductors, devices, appliances, and displays.\n- It is relevant as a large-scale global technology and manufacturing environment.\n- Source: https://en.wikipedia.org/wiki/Samsung\n- Source: https://en.wikipedia.org/wiki/Samsung_Electronics\n\nSingapore Exchange\n- SGX Group is Singapore’s exchange operator and runs equity, fixed income, currency, and commodity market infrastructure.\n- It is a significant financial-market institution rather than a small local portal operator.\n- Source: https://en.wikipedia.org/wiki/Singapore_Exchange\n\nDanone\n- Danone is a French multinational food company with global consumer brands and operations across more than 100 countries.\n- It is relevant as a large multinational packaged-goods environment.\n- Source: https://en.wikipedia.org/wiki/Danone\n\nBanyan Group / Banyan Tree\n- Banyan Group is a Singapore-founded multinational hospitality group built around the Banyan Tree brand.\n- It operates resorts, hotels, spas, and branded residences across multiple regions.\n- Source: https://en.wikipedia.org/wiki/Banyan_Group\n\nStanford d.school\n- The Stanford d.school is the Hasso Plattner Institute of Design at Stanford University.\n- It is associated with interdisciplinary design, innovation, and design-thinking education.\n- Source: https://en.wikipedia.org/wiki/Hasso_Plattner_Institute_of_Design\n\nEntities still needing higher-confidence resolution\n\nMarketClue USA\n- Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.\n- Status: needs_review\n\nArtKorero\n- Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.\n- Status: needs_review\n\nSOA\n- The acronym is too ambiguous in public search results to attach a confident company description yet.\n- Status: needs_review",
+      "body": "CV Company Context from Web Research\n\nPurpose\nThis record adds external context for companies and institutions referenced across Joz CV material so Joz LLM can explain why those names matter, what sectors they operate in, and why the environments are credible.\n\nVerification note\nThis file mixes official web pages and reference sources. Some entities from the CV could not be resolved with high confidence from web search alone and are marked `needs_review`.\n\nResolved company and institution context\n\nApple\n- Apple is a global technology company headquartered in Cupertino, California, known for consumer electronics, software, services, and worldwide retail operations.\n- It is one of the world’s largest technology companies and one of the most visible product and platform ecosystems globally.\n- Source: https://en.wikipedia.org/wiki/Apple_Inc.\n- Source: https://www.apple.com/newsroom/\n\nPixar\n- Pixar Animation Studios is a major computer animation studio based in Emeryville, California and a subsidiary of Walt Disney Studios.\n- It is strongly associated with advanced computer graphics, digital storytelling, and production-grade visual pipelines.\n- Source: https://en.wikipedia.org/wiki/Pixar\n\nDubai Future Foundation\n- Dubai Future Foundation is a Dubai-based innovation and future-focused institution linked to the Museum of the Future and public-sector experimentation.\n- It is associated with programs in emerging technology, strategic foresight, and innovation initiatives in the UAE.\n- Source: https://en.wikipedia.org/wiki/Museum_of_the_Future\n- Source: https://en.wikipedia.org/wiki/Khalfan_Belhoul\n- Source: https://en.wikipedia.org/wiki/Noah_Raford\n\nErste Bank\n- Erste Bank is an Austrian financial institution based in Vienna and part of the wider Erste Group ecosystem.\n- It is one of Austria’s major banking groups and serves millions of customers through a large branch and services network.\n- Source: https://en.wikipedia.org/wiki/Erste_Bank_der_oesterreichischen_Sparkassen\n\nMaybank\n- Maybank is Malaysia’s largest bank by market capitalisation and assets and is one of Southeast Asia’s major banking groups.\n- Its core markets include Malaysia, Singapore, and Indonesia.\n- Source: https://en.wikipedia.org/wiki/Maybank\n\nEtiqa\n- Etiqa is the insurance and takaful arm associated with the Maybank Group and operates across multiple ASEAN markets.\n- It is relevant as a significant regional insurance player rather than a small standalone brand.\n- Source: https://en.wikipedia.org/wiki/Etiqa\n\nManulife\n- Manulife is a Canadian multinational insurance and financial services company with large operations across Asia and North America.\n- Its scale, long operating history, and major asset-management footprint make it a strong enterprise context for innovation and transformation work.\n- Source: https://www.manulife.com/ca/en/about-us/who-we-are/our-story\n- Source: https://en.wikipedia.org/wiki/Manulife\n\nMediacorp\n- Mediacorp is Singapore’s state-owned media group and operates television, radio, news, and streaming properties including CNA and meWatch.\n- It represents a major regional media and digital distribution environment rather than a niche publisher.\n- Source: https://en.wikipedia.org/wiki/Mediacorp\n\nLeo Burnett\n- Leo Burnett is a global advertising network founded in Chicago and now part of Publicis Groupe.\n- Its current network scale spans many markets worldwide and it remains a significant multinational agency brand.\n- Source: https://en.wikipedia.org/wiki/Leo_Burnett_Worldwide\n- Source: https://leoburnett.com/\n\nPublicis Groupe\n- Publicis Groupe is a French multinational communications and marketing group and one of the largest advertising companies in the world by revenue.\n- It is relevant as the holding group behind Leo Burnett and a major global agency environment.\n- Source: https://en.wikipedia.org/wiki/Publicis\n\nOgilvy\n- Ogilvy is a global advertising, marketing, PR, consulting, and health network that operates across more than 120 offices in nearly 90 countries.\n- It is part of WPP and represents a major international agency platform.\n- Source: https://www.ogilvy.com/about\n- Source: https://en.wikipedia.org/wiki/Ogilvy_(agency)\n\nWPP\n- WPP is one of the world’s largest marketing and communications groups.\n- Its current positioning emphasizes AI-enabled marketing, integrated data, creativity, production, and enterprise transformation.\n- Source: https://www.wpp.com/en/about\n\nProcter & Gamble\n- P&G is a large multinational consumer goods company headquartered in Cincinnati with major global brands including SK-II, Braun, and Gillette.\n- It provides strong Fortune 500-scale context for product, commerce, and brand-experience work.\n- Source: https://en.wikipedia.org/wiki/Procter_%26_Gamble\n\nSamsung\n- Samsung is a major South Korean multinational technology conglomerate, with Samsung Electronics spanning semiconductors, devices, appliances, and displays.\n- It is relevant as a large-scale global technology and manufacturing environment.\n- Source: https://en.wikipedia.org/wiki/Samsung\n- Source: https://en.wikipedia.org/wiki/Samsung_Electronics\n\nSingapore Exchange\n- SGX Group is Singapore’s exchange operator and runs equity, fixed income, currency, and commodity market infrastructure.\n- It is a significant financial-market institution rather than a small local portal operator.\n- Source: https://en.wikipedia.org/wiki/Singapore_Exchange\n\nDanone\n- Danone is a French multinational food company with global consumer brands and operations across more than 100 countries.\n- It is relevant as a large multinational packaged-goods environment.\n- Source: https://en.wikipedia.org/wiki/Danone\n\nBanyan Group / Banyan Tree\n- Banyan Group is a Singapore-founded multinational hospitality group built around the Banyan Tree brand.\n- It operates resorts, hotels, spas, and branded residences across multiple regions.\n- Source: https://en.wikipedia.org/wiki/Banyan_Group\n\nStanford d.school\n- The Stanford d.school is the Hasso Plattner Institute of Design at Stanford University.\n- It is associated with interdisciplinary design, innovation, and design-thinking education.\n- Source: https://en.wikipedia.org/wiki/Hasso_Plattner_Institute_of_Design\n\nEntities still needing higher-confidence resolution\n\nMC USA\n- Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.\n- Status: needs_review\n\nArtKorero\n- Public web resolution is not yet strong enough to publish a precise institutional description without risk of confusion.\n- Status: needs_review\n\nSOA\n- The acronym is too ambiguous in public search results to attach a confident company description yet.\n- Status: needs_review",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -424,7 +424,7 @@
           "Etiqa",
           "Leo Burnett",
           "Manulife",
-          "MarketClue USA",
+          "MC USA",
           "Maybank",
           "Mediacorp",
           "Ogilvy",
@@ -647,7 +647,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
-      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- CV / portfolio: https://meejoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 15+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present and the current CV states 15+ years.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI engineering, AI product engineering, multimodal AI, architecture, and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
+      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- CV / portfolio: https://meejoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 15+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present and the current CV states 15+ years.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI engineering, AI product engineering, multimodal AI, architecture, and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -664,11 +664,11 @@
           "status": "verified",
           "reviewed_by": "user",
           "reviewed_at": "2026-07-27",
-          "notes": "Updated from the user's new CV. Slovak/EU nationality and Singapore work-authorisation handling remain separately verified recruiter facts."
+          "notes": "Updated from the user's new CV. EU nationality and Singapore work-authorisation handling remain separately verified recruiter facts."
         },
         "verification_status": "verified",
         "claims": [
-          "Joz is Slovak and an EU national.",
+          "Joz is an EU national.",
           "Joz's Singapore status is EP/PEP.",
           "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
           "Joz has 15+ years of professional experience overall, with direct Agentic AI engineering and multimodal AI work in the current CV.",
@@ -801,7 +801,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Recruiter benchmark guidance for keeping answers generic by default while using Singapore-first proof and phrasing when Singapore is explicitly asked.",
-      "body": "Recruiter Benchmark FAQ\n\nPurpose\nThis record benchmarks recruiter-style screening and positioning questions using a Singapore-first lens internally while keeping the answer style generic unless Singapore is explicitly asked.\n\nBenchmark rule\n- Do not volunteer \"Singapore\" unless the recruiter asks about Singapore specifically.\n- Default recruiter answers should stay internationally applicable.\n- When Singapore is explicitly asked, use Singapore-relevant proof where it exists.\n\nOperational answer rules\n\nWork authorization and sponsorship\n- Joz is Slovak and an EU national.\n- For any country-specific work authorization, visa, pass status, or sponsorship requirement, Joz LLM should say it must be confirmed directly for the specific hiring process rather than assumed.\n- If Singapore is explicitly asked, Joz LLM may mention EP, PEP, work pass, or sponsorship only in the context of \"confirm directly\" wording.\n\nCompensation and package\n- Joz LLM should not invent compensation numbers, salary bands, day rates, or currency amounts.\n- Generic answers should say compensation depends on role scope, seniority, location, responsibilities, and overall package.\n- Singapore-specific answers may mention Singapore role context but should still avoid hard numbers unless separately verified.\n\nAvailability and notice period\n- Joz LLM should keep \"availability\" and \"notice period / earliest start date\" as separate recruiter answers.\n- If no verified value exists, both should be framed as direct-confirmation items rather than guesses.\n\nWorking model and relocation\n- Joz is open to remote, hybrid, or on-site arrangements depending on role, team, and location requirements.\n- Joz is open to discussing suitable international relocation where role, location, and overall fit make sense.\n\nSingapore-fit proof\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets and first-in-market ML UX solutions launched from Singapore.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Stock Exchange portals were re-engineered.\n- Apple/Pixar-adjacent Python USD(z) and computer-vision workflows were developed in Singapore.\n\nAnswering rule\n- Recruiter answers should be direct, factual, and operational.\n- Proof-led positioning answers should use evidence, not buzzwords.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz.",
+      "body": "Recruiter Benchmark FAQ\n\nPurpose\nThis record benchmarks recruiter-style screening and positioning questions using a Singapore-first lens internally while keeping the answer style generic unless Singapore is explicitly asked.\n\nBenchmark rule\n- Do not volunteer \"Singapore\" unless the recruiter asks about Singapore specifically.\n- Default recruiter answers should stay internationally applicable.\n- When Singapore is explicitly asked, use Singapore-relevant proof where it exists.\n\nOperational answer rules\n\nWork authorization and sponsorship\n- Joz is an EU national.\n- For any country-specific work authorization, visa, pass status, or sponsorship requirement, Joz LLM should say it must be confirmed directly for the specific hiring process rather than assumed.\n- If Singapore is explicitly asked, Joz LLM may mention EP, PEP, work pass, or sponsorship only in the context of \"confirm directly\" wording.\n\nCompensation and package\n- Joz LLM should not invent compensation numbers, salary bands, day rates, or currency amounts.\n- Generic answers should say compensation depends on role scope, seniority, location, responsibilities, and overall package.\n- Singapore-specific answers may mention Singapore role context but should still avoid hard numbers unless separately verified.\n\nAvailability and notice period\n- Joz LLM should keep \"availability\" and \"notice period / earliest start date\" as separate recruiter answers.\n- If no verified value exists, both should be framed as direct-confirmation items rather than guesses.\n\nWorking model and relocation\n- Joz is open to remote, hybrid, or on-site arrangements depending on role, team, and location requirements.\n- Joz is open to discussing suitable international relocation where role, location, and overall fit make sense.\n\nSingapore-fit proof\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets and first-in-market ML UX solutions launched from Singapore.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Stock Exchange portals were re-engineered.\n- Apple/Pixar-adjacent Python USD(z) and computer-vision workflows were developed in Singapore.\n\nAnswering rule\n- Recruiter answers should be direct, factual, and operational.\n- Proof-led positioning answers should use evidence, not buzzwords.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -983,13 +983,13 @@
         "proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "related_proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
@@ -1265,7 +1265,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -1626,12 +1626,12 @@
         ],
         "proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "related_proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
@@ -1965,11 +1965,11 @@
         ],
         "proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents"
+          "mc_usa_financial_agents"
         ],
         "related_proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents"
+          "mc_usa_financial_agents"
         ],
         "enterprise_scale_score": 98,
         "measurable_outcome_count": 2,
@@ -2289,7 +2289,7 @@
           "Ageas",
           "Erste Bank",
           "Etiqa",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp",
           "Publicis"
@@ -2613,7 +2613,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -2672,14 +2672,14 @@
         ],
         "proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
         ],
         "related_proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
@@ -3172,7 +3172,7 @@
         "companies": [
           "Dubai Future Foundation",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -3293,7 +3293,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -3346,7 +3346,7 @@
         "proofs": [
           "dff_rapid_ai_prototyping",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "versace_spatial_ai_launch"
@@ -3354,7 +3354,7 @@
         "related_proofs": [
           "dff_rapid_ai_prototyping",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "versace_spatial_ai_launch"
@@ -3770,8 +3770,8 @@
       "category": "bio",
       "source_type": "paste",
       "source_uri": null,
-      "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
-      "body": "Joz Krupa is Slovak and has British heritage.\n\nHe completed postgraduate education in the United Kingdom, including an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.\n\nHis international career spans Singapore, Dubai, Europe, and global markets.\n\nImportant distinction\n- Slovak nationality is the direct nationality answer.\n- British heritage must remain separate from nationality or citizenship.\n- Do not claim British citizenship or British nationality unless explicitly confirmed.\n\nRetrieval guidance\n- Use this record for identity background, nationality, British heritage, and education-origin questions.\n- Keep the answer concise, factual, and separate heritage from nationality and work authorization.",
+      "summary": "Canonical identity-background record covering EU nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
+      "body": "Joz Krupa is EU national and has British heritage.\n\nHe completed postgraduate education in the United Kingdom, including an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.\n\nHis international career spans Singapore, Dubai, Europe, and global markets.\n\nImportant distinction\n- EU nationality is the direct nationality answer.\n- British heritage must remain separate from nationality or citizenship.\n- Do not claim British citizenship or British nationality unless explicitly confirmed.\n\nRetrieval guidance\n- Use this record for identity background, nationality, British heritage, and education-origin questions.\n- Keep the answer concise, factual, and separate heritage from nationality and work authorization.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -3787,11 +3787,11 @@
           "status": "verified",
           "reviewed_by": "user",
           "reviewed_at": "2026-07-12",
-          "notes": "User confirmed canonical identity distinctions: Slovak nationality, British heritage, UK postgraduate education, and international career span."
+          "notes": "User confirmed canonical identity distinctions: EU nationality, British heritage, UK postgraduate education, and international career span."
         },
         "verification_status": "verified",
         "claims": [
-          "Joz Krupa is Slovak.",
+          "Joz Krupa is an EU national.",
           "Joz has British heritage.",
           "Joz completed postgraduate education in the United Kingdom.",
           "Joz completed an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.",
@@ -3799,7 +3799,7 @@
           "British heritage must remain separate from nationality, citizenship, and work authorization."
         ],
         "proof_points": [
-          "Nationality answer must remain Slovak and must not be replaced by British nationality.",
+          "Nationality answer must remain EU national and must not be replaced by British nationality.",
           "British heritage is explicitly allowed only as heritage language, not citizenship language.",
           "The academic record anchors to the University of Central Lancashire MSc in 2008.",
           "Regional career references align with the broader CV and profile footprint."
@@ -3809,7 +3809,7 @@
           "Europe",
           "Global",
           "Singapore",
-          "Slovakia",
+          "Europe",
           "United Kingdom"
         ],
         "companies": [
@@ -4417,7 +4417,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Recruiter-oriented question set for testing Joz's technical depth in agentic AI architecture and production AI systems.",
-      "body": "Recruiter Agentic AI Depth Questions\n\nPurpose\nThis record covers recruiter questions that probe beyond generic \"AI\" language into actual architecture depth.\n\nQuestion set\n- How technical is Joz in AI?\n- What kind of AI systems does Joz build?\n- How strong is Joz in agentic AI architecture?\n- Does Joz understand RAG, orchestration, memory, or evaluation?\n- Is Joz hands-on or just high-level?\n- Can Joz work across product, architecture, and implementation?\n\nAnswer guidance\n- Describe the full agent operating model: intent, retrieval, authorised context, reasoning, planning, execution, verification, and human escalation.\n- Make it clear Joz is not just a prompt engineer or generic AI consultant.\n- Use enterprise retrieval, ACL-aware responses, observability, governance, and production workflow language when the recruiter asks for depth.\n- Keep the explanation accessible to non-technical recruiters while still sounding technically real.\n\nProof anchors\n- Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.\n- MarketClue and current AI initiatives as live-product proof.\n- Enterprise context engineering and governance framing from current Joz LLM architecture work.",
+      "body": "Recruiter Agentic AI Depth Questions\n\nPurpose\nThis record covers recruiter questions that probe beyond generic \"AI\" language into actual architecture depth.\n\nQuestion set\n- How technical is Joz in AI?\n- What kind of AI systems does Joz build?\n- How strong is Joz in agentic AI architecture?\n- Does Joz understand RAG, orchestration, memory, or evaluation?\n- Is Joz hands-on or just high-level?\n- Can Joz work across product, architecture, and implementation?\n\nAnswer guidance\n- Describe the full agent operating model: intent, retrieval, authorised context, reasoning, planning, execution, verification, and human escalation.\n- Make it clear Joz is not just a prompt engineer or generic AI consultant.\n- Use enterprise retrieval, ACL-aware responses, observability, governance, and production workflow language when the recruiter asks for depth.\n- Keep the explanation accessible to non-technical recruiters while still sounding technically real.\n\nProof anchors\n- Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.\n- MC USA and current AI initiatives as live-product proof.\n- Enterprise context engineering and governance framing from current Joz LLM architecture work.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -4441,13 +4441,13 @@
         ],
         "proof_points": [
           "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
-          "Current Joz LLM and MarketClue work provide live-system relevance."
+          "Current Joz LLM and MC USA work provide live-system relevance."
         ],
         "regions": [
           "Global"
         ],
         "companies": [
-          "MarketClue"
+          "MC USA"
         ],
         "projects": [],
         "intent_families": [],
@@ -4562,7 +4562,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "First-pass recruiter screening questions covering positioning, experience, nationality, location, contact, availability, and notice-period handling.",
-      "body": "Recruiter Core Screening Questions\n\nPurpose\nThis record covers the first-pass questions a recruiter is most likely to ask before deeper capability discussion.\n\nQuestion set\n- Who is Joz?\n- What is Joz's current role positioning?\n- How many years of experience does Joz have?\n- How many years in AI or ML does Joz have?\n- What is Joz's nationality?\n- Where is Joz based?\n- How can I contact Joz?\n- Is Joz open to opportunities?\n- What is Joz's availability?\n- What is Joz's notice period?\n- What is Joz's earliest start date?\n\nAnswer guidance\n- Keep answers short, factual, and recruiter-safe.\n- Use \"Agentic AI Engineering, AI Product Engineering and Multimodal AI\" as the current positioning, with Agentic AI Architecture and Multimodal AI Leader as the senior experience framing.\n- Use 15+ years overall experience from the current CV.\n- For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.\n- For nationality, use Slovak and EU national or citizen wording.\n- For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.\n- Do not invent dates, salary figures, visa status, or relocation specifics.\n\nProof anchors\n- Professional timeline from 2013 to present.\n- AI and ML work from 2018 to present.\n- Direct recruiter contact: joz@meetjoz.com and +65 3107 2412.\n- Cross-market work across Singapore, APAC, Europe, Dubai, and global delivery contexts.",
+      "body": "Recruiter Core Screening Questions\n\nPurpose\nThis record covers the first-pass questions a recruiter is most likely to ask before deeper capability discussion.\n\nQuestion set\n- Who is Joz?\n- What is Joz's current role positioning?\n- How many years of experience does Joz have?\n- How many years in AI or ML does Joz have?\n- What is Joz's nationality?\n- Where is Joz based?\n- How can I contact Joz?\n- Is Joz open to opportunities?\n- What is Joz's availability?\n- What is Joz's notice period?\n- What is Joz's earliest start date?\n\nAnswer guidance\n- Keep answers short, factual, and recruiter-safe.\n- Use \"Agentic AI Engineering, AI Product Engineering and Multimodal AI\" as the current positioning, with Agentic AI Architecture and Multimodal AI Leader as the senior experience framing.\n- Use 15+ years overall experience from the current CV.\n- For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.\n- For nationality, use EU national and EU national or citizen wording.\n- For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.\n- Do not invent dates, salary figures, visa status, or relocation specifics.\n\nProof anchors\n- Professional timeline from 2013 to present.\n- AI and ML work from 2018 to present.\n- Direct recruiter contact: joz@meetjoz.com and +65 3107 2412.\n- Cross-market work across Singapore, APAC, Europe, Dubai, and global delivery contexts.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -4881,7 +4881,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Recruiter-safe framing for Joz's strongest skills, differentiators, and proof-backed strengths.",
-      "body": "Recruiter Strengths And Skills Questions\n\nPurpose\nThis record covers recruiter questions about Joz's strongest capabilities and how to explain them with evidence rather than buzzwords.\n\nQuestion set\n- What is Joz strongest at?\n- What are Joz's top skills?\n- What makes Joz different from other AI candidates?\n- Explain Joz's strengths with proof, not buzzwords.\n- Is Joz more strategy or technical?\n- Is Joz more product or engineering?\n\nAnswer guidance\n- Lead with the combination of agentic AI architecture, multimodal and spatial UX, enterprise product engineering, and measurable business execution.\n- Do not answer with a long tool dump unless the question asks for stack depth.\n- Frame the differentiator as the ability to connect business, product, design, engineering, and AI system delivery.\n- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI work rather than abstract claims.\n\nProof anchors\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Erste Bank: engineering and accessibility at 16M+ customer scale.\n- MarketClue: financial AI agents with live portfolio context.\n- Dubai and spatial work: Versace/SOA, ArtKorero, and other 3D or immersive system delivery.",
+      "body": "Recruiter Strengths And Skills Questions\n\nPurpose\nThis record covers recruiter questions about Joz's strongest capabilities and how to explain them with evidence rather than buzzwords.\n\nQuestion set\n- What is Joz strongest at?\n- What are Joz's top skills?\n- What makes Joz different from other AI candidates?\n- Explain Joz's strengths with proof, not buzzwords.\n- Is Joz more strategy or technical?\n- Is Joz more product or engineering?\n\nAnswer guidance\n- Lead with the combination of agentic AI architecture, multimodal and spatial UX, enterprise product engineering, and measurable business execution.\n- Do not answer with a long tool dump unless the question asks for stack depth.\n- Frame the differentiator as the ability to connect business, product, design, engineering, and AI system delivery.\n- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MC USA, and spatial AI work rather than abstract claims.\n\nProof anchors\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Erste Bank: engineering and accessibility at 16M+ customer scale.\n- MC USA: financial AI agents with live portfolio context.\n- Dubai and spatial work: Versace/SOA, ArtKorero, and other 3D or immersive system delivery.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -4901,14 +4901,14 @@
         "claims": [
           "Joz's strongest positioning combines agentic AI architecture, multimodal and spatial UX, and enterprise product engineering.",
           "Joz should be differentiated through measurable proof rather than buzzword-heavy capability lists.",
-          "Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI projects provide the strongest recruiter-safe evidence."
+          "Maybank, Manulife, Mediacorp, Erste Bank, MC USA, and spatial AI projects provide the strongest recruiter-safe evidence."
         ],
         "proof_points": [
           "Maybank-Ageas Etiqa: 20x digital sales growth.",
           "Manulife: Lean ML UX practice across 11 APAC markets.",
           "Mediacorp: 30x audience growth across 30+ products.",
           "Erste Bank: 16M+ customer scale engineering.",
-          "MarketClue and Dubai spatial work add current technical and multimodal proof."
+          "MC USA and Dubai spatial work add current technical and multimodal proof."
         ],
         "regions": [
           "Asia Pacific",
@@ -4919,7 +4919,7 @@
         "companies": [
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank-Ageas Etiqa",
           "Mediacorp"
         ],
@@ -5176,7 +5176,7 @@
           "His AI work is framed around business problems and operational outcomes."
         ],
         "proof_points": [
-          "MarketClue financial AI agents with live data and asset portfolio context.",
+          "MC USA financial AI agents with live data and asset portfolio context.",
           "Enterprise RAG and context-engineering architecture reflected in his current applied AI skill set.",
           "AI governance, retrieval controls, and verification are explicit parts of his architecture approach."
         ],
@@ -5189,7 +5189,7 @@
         "companies": [
           "Dubai Future Foundation",
           "Erste Bank",
-          "MarketClue"
+          "MC USA"
         ],
         "projects": [],
         "intent_families": [],
@@ -5243,12 +5243,12 @@
         ],
         "proofs": [
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "related_proofs": [
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
@@ -5430,7 +5430,7 @@
         ],
         "companies": [
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp",
           "Ogilvy",
@@ -5511,7 +5511,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Banking, wealth, insurance, financial AI agents, portfolios, customer intelligence, and regulated enterprise systems.",
-      "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MarketClue financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
+      "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MC USA financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -5536,7 +5536,7 @@
           "He has worked across Singapore, APAC, Europe, and the USA."
         ],
         "proof_points": [
-          "MarketClue financial AI agents with live data and asset portfolios.",
+          "MC USA financial AI agents with live data and asset portfolios.",
           "Maybank–Ageas Etiqa wealth and insurance transformation.",
           "Manulife ML-enabled customer and investment experiences across APAC and North America.",
           "Erste Bank engineering and internal/digital portal work at 16M+ customer scale.",
@@ -5554,7 +5554,7 @@
           "Erste Bank",
           "Etiqa",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Singapore Stock Exchange"
         ],
@@ -5608,14 +5608,14 @@
         "proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "sgx_responsive_portals"
         ],
         "related_proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "sgx_responsive_portals"
         ],
@@ -5669,7 +5669,7 @@
           "His value is especially high in products that combine technical depth with strong user-facing judgment."
         ],
         "proof_points": [
-          "Architected financial AI agents with live market and portfolio context for MarketClue.",
+          "Architected financial AI agents with live market and portfolio context for MC USA.",
           "Led product, HCD-AI, and data architecture work across large fintech and enterprise environments.",
           "The current app combines React, 3D rendering, voice interaction, world-aware agent routing, OpenAI-backed reasoning, Express APIs, structured knowledge retrieval, and automated scenario testing."
         ],
@@ -5683,7 +5683,7 @@
         "companies": [
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -5747,13 +5747,13 @@
           "technology"
         ],
         "proofs": [
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
         ],
         "related_proofs": [
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
@@ -5804,7 +5804,7 @@
           "He connects technical AI architecture to measurable enterprise outcomes."
         ],
         "proof_points": [
-          "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
+          "Architected financial AI agents for MC USA with live market data and asset portfolios.",
           "Led HCD–AI, product, and data architectures for 20+ Dubai and Singapore FinTech initiatives.",
           "Built on more than a decade of enterprise-scale product, engineering, and transformation experience."
         ],
@@ -5820,7 +5820,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -5880,14 +5880,14 @@
         "proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth"
         ],
         "related_proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth"
         ],
@@ -6166,7 +6166,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Concise operational facts for recruiter screening and follow-up.",
-      "body": "Recruiter operational summary:\n\nName: Joz Krupa\nCurrent positioning: Agentic AI Engineering, AI Product Engineering and Multimodal AI; senior framing as Agentic AI Architecture and Multimodal AI Leader\nExperience: 15+ years across Singapore, Asia Pacific, Europe, Dubai/UAE, North America, and the Middle East\nNationality: Slovak and EU citizen\nSingapore background: Professional experience across major Singapore and APAC organisations from 2013 to 2018\nLocation: Singapore / Dubai; internationally mobile with Europe/EEA, APAC, US, and Middle East experience\nSingapore work authorisation: Do not claim an active EP or PEP unless Joz explicitly confirms it for the current process\nAvailability: Confirm directly with Joz\nEmail: joz@meetjoz.com\nCurrent contact number: +65 3107 2412\nWebsite and CV: meejoz.com\n\nFor “How many years of AI?” avoid an artificially inflated single number. Explain that Joz's transition developed from machine-learning-enabled product and experience work into direct Agentic AI engineering, RAG, context engineering, governance, multimodal AI, and AI system design.",
+      "body": "Recruiter operational summary:\n\nName: Joz Krupa\nCurrent positioning: Agentic AI Engineering, AI Product Engineering and Multimodal AI; senior framing as Agentic AI Architecture and Multimodal AI Leader\nExperience: 15+ years across Singapore, Asia Pacific, Europe, Dubai/UAE, North America, and the Middle East\nNationality: EU national and EU citizen\nSingapore background: Professional experience across major Singapore and APAC organisations from 2013 to 2018\nLocation: Singapore / Dubai; internationally mobile with Europe/EEA, APAC, US, and Middle East experience\nSingapore work authorisation: Do not claim an active EP or PEP unless Joz explicitly confirms it for the current process\nAvailability: Confirm directly with Joz\nEmail: joz@meetjoz.com\nCurrent contact number: +65 3107 2412\nWebsite and CV: meejoz.com\n\nFor “How many years of AI?” avoid an artificially inflated single number. Explain that Joz's transition developed from machine-learning-enabled product and experience work into direct Agentic AI engineering, RAG, context engineering, governance, multimodal AI, and AI system design.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -6506,7 +6506,7 @@
         "companies": [
           "Apple",
           "Erste Bank",
-          "MarketClue",
+          "MC USA",
           "Pixar"
         ],
         "projects": [],
@@ -6560,13 +6560,13 @@
         "proofs": [
           "apple_pixar_cv_workflows",
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "versace_spatial_ai_launch"
         ],
         "related_proofs": [
           "apple_pixar_cv_workflows",
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "versace_spatial_ai_launch"
         ],
         "enterprise_scale_score": 90,
@@ -15945,7 +15945,7 @@
       "source_type": "derived",
       "source_uri": null,
       "summary": "Focused proof of Joz's agentic AI architecture, retrieval, orchestration, and production-minded systems capability.",
-      "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MarketClue USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
+      "body": "Agentic AI Architecture Proof\n\nPurpose\nThis record isolates Joz's strongest agentic AI architecture and orchestration capabilities so the Skills lane can answer with focused, high-signal technical credibility instead of falling back to a broad CV summary.\n\nCore positioning\n- Joz is strongest in agentic AI architecture, retrieval-backed intelligence systems, orchestration, and production-minded applied AI delivery.\n- The profile combines system design, context engineering, retrieval, memory patterns, observability, and business-facing execution.\n\nCapabilities\n- Agentic intelligence systems, autonomous reasoning, and orchestration\n- LLMs, RAG, embeddings, vector search, knowledge graphs, and context engineering\n- Memory architectures, retrieval systems, ACL-aware access, verification, and feedback loops\n- Event-driven production AI and asynchronous workflows\n- Data platforms, secure API ecosystems, and cloud-native delivery\n- Observability, governance, and production decision loops\n\nProof and context\n- MC USA: architected financial AI agents with live data and asset portfolios.\n- Apple/Pixar-adjacent work: early Python USD(z) and computer-vision AI work in Singapore.\n- Dubai Future Foundation: rapid AI prototyping for public-sector innovation initiatives.\n- Erste Bank: engineering and EU accessibility work in a large banking environment serving 16M+ customers.\n- 20+ Dubai and Singapore FinTechs: led HCD-AI, product, and data architectures across multiple operating contexts.\n\nAnswering rule\n- When the question is about AI systems depth, architecture, retrieval, orchestration, or production readiness, this record should outrank generic CV phrasing.\n- Lead with architectural strength and enterprise context before smaller novelty signals.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -15971,7 +15971,7 @@
           "Joz's delivery profile combines system design, memory patterns, observability, and business-facing execution."
         ],
         "proof_points": [
-          "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+          "MC USA work is described as financial AI agents with live data and asset portfolios.",
           "Apple/Pixar-adjacent work is framed as early Python USD(z) and computer-vision AI work in Singapore.",
           "Dubai Future Foundation and Erste Bank add public-sector and enterprise-scale delivery context.",
           "The CV explicitly lists retrieval systems, verification loops, event-driven workflows, and governance."
@@ -15987,7 +15987,7 @@
           "Apple/Pixar",
           "Dubai Future Foundation",
           "Erste Bank",
-          "MarketClue USA"
+          "MC USA"
         ],
         "projects": [],
         "intent_families": [],
@@ -16185,7 +16185,7 @@
       "source_type": "paste",
       "source_uri": "source://joz/2026-07-11-current-agentic-ai-cv.md",
       "summary": "Current user-provided CV positioning Joz as an Agentic AI Engineer, AI Product Engineer, and Multimodal AI leader, with a production-oriented technical stack, Fortune 500 experience, measurable outcomes, and global operating coverage.",
-      "body": "Jozef Krupa\n+65 3107 2412\njoz@meetjoz.com\nSingapore • Dubai\n\nAgentic AI Engineering, AI Product Engineering and Multimodal AI\n500M monthly active users • APAC, Europe, US & Middle East • 30x growth, 15+ years\n[meejoz.com](http://meejoz.com)\n\nJoz LLM Agentic AI CV — The 2026 Applied AI Skills Showcase\n\nThe Stack\nPython • FastAPI • PostgreSQL/pgvector • Redis • RabbitMQ • Data Ingestion • Data Cleaning • ETL/ELT • Chunking • Embeddings • Data Validation • Vector Search • Multi-Agent Orchestration • RAG • Context Engineering • Memory • Shared State • MCP Tooling • Tool Calling • Intent Routing • NLP/CV • Voice Agents • Camera/Sensor Fusion • Multimodal Systems • Event-Driven Architecture • Tool Allowlisting • Approval Tokens • Verification • Observability\n\nFortune 500 Global Experience\nAgentic AI Architecture and Multimodal AI Leader\nSingapore, Dubai and Europe/EU/EEA 2018–Present\n\nMarketClue USA — Agentic AI Financial Assistant\nApps: AI market analyst with 50+ quant-modelling tools for portfolios, risk and alerts\nPython: FastAPI · SQLAlchemy async · PostgreSQL/pgvector · Redis · RabbitMQ\nAI/ML: Multi-agent orchestration · Real-time market data ingestion · Financial RAG\n\nVersace/SOA/ArtKorero Dubai — Agentic AI Spatial Commerce\nApps: Vision Pro/web 3D exhibitions, VIP try-ons and spatial showrooms\nPython/C++: DCC pipelines · Pixar APIs · Procedural geometry · Scene-graph/DataViz\nAI/ML: Computer vision · GenAI 3D · Image-to-3D · Camera tracking · Multimodal AI\n\nDubai Future Foundation — Applied AI Innovation (UAE Government)\nApps: AI concepts for Area 2071 innovation initiatives and spatial-computing ventures\nEngineering: Rapid AI prototyping · Systems architecture · Data workflows\nAI/ML: NLP · Human-centred AI · Computer vision · Multimodal AI · Responsible AI\n\nErste Group Europe — Accessible Banking Engineering\nApps: 200+ banking portals across 7 European markets serving 16M customers\nEngineering: AEM · Platform architecture · Workflow automation · Systems integration\nGovernance: WCAG 2.1 AA · EU Accessibility Act · Audit evidence · Compliance\n\n20+ Singapore/Dubai FinTechs — Agentic AI Product Engineering\nApps: 30+ FinTech, ERP, blockchain and logistics products spanning 1,500+ features\nPython: FastAPI · REST APIs · PostgreSQL · Data pipelines · Event-driven workflows\nAI/ML: NLP · Multi-agent orchestration · Process automation · Blockchain intelligence\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nApps: ML-enabled products driving 20× growth via 3,000+ HNW/mass-market pilots\nEngineering: Conversational architecture · Data integration · JavaScript decision logic\nAI/ML: Conversational AI · ML integration · Personalisation · Behavioural analytics · Evals\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nApps: Data-led InsurTech and investment products across APAC and North America\nEngineering: Full-stack development · API integration · Cross-platform testing\nAI/ML: Predictive modelling · Model-output interfaces · Financial data dashboards\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nApps: CNA, CH8News and Toggle/meWatch platforms driving 30× audience growth\nEngineering: Media-platform architecture · Content streaming · Cross-device delivery\nImpact: First Apple Watch news app in Asia · 40+ products · Featured globally by Apple\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nApps: P&G (SK-II, Braun, Gillette) and Samsung across the USA and 8 APAC markets\nEngineering: Full-stack commerce · Transaction logic · Regional sales platforms\nBusiness Growth: Opened and scaled P&G sales channels across 8 APAC markets\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nApps: Singapore Exchange portals, Danone UGC apps and Banyan Tree platforms\nEngineering: Backend–frontend integration · Financial-data integration · UGC pipelines\nBusiness Growth: Multimillion-dollar agency pitch wins · Scaled Danone across APAC\n\nPostgraduate Education\nMaster of Science (MSc) Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nStanford d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nApplied AI Skills\nKubernetes • Async Python • asyncpg • JWT/RBAC • Secure APIs • Data Privacy • Failure Recovery • Error Handling • Backfilling • Caching Strategies • Low-Latency Systems • Horizontal Scalability • Resilient Systems • Production AI • AI Governance • Human-in-the-Loop Controls • Model Monitoring • Drift Detection • Prompt Engineering • Structured Outputs • Schema Validation • Synthetic Testing • pytest/TDD • Risk Engines • Portfolio Analytics • Market Data Systems • Event Streaming • Time-Series Forecasting • Quantitative Models • XGBoost • VaR/CVaR • Anomaly Detection • Knowledge Graphs • Semantic Data Modelling • Data Lineage • Cloud Deployment",
+      "body": "Jozef Krupa\n+65 3107 2412\njoz@meetjoz.com\nSingapore • Dubai\n\nAgentic AI Engineering, AI Product Engineering and Multimodal AI\n500M monthly active users • APAC, Europe, US & Middle East • 30x growth, 15+ years\n[meejoz.com](http://meejoz.com)\n\nJoz LLM Agentic AI CV — The 2026 Applied AI Skills Showcase\n\nThe Stack\nPython • FastAPI • PostgreSQL/pgvector • Redis • RabbitMQ • Data Ingestion • Data Cleaning • ETL/ELT • Chunking • Embeddings • Data Validation • Vector Search • Multi-Agent Orchestration • RAG • Context Engineering • Memory • Shared State • MCP Tooling • Tool Calling • Intent Routing • NLP/CV • Voice Agents • Camera/Sensor Fusion • Multimodal Systems • Event-Driven Architecture • Tool Allowlisting • Approval Tokens • Verification • Observability\n\nFortune 500 Global Experience\nAgentic AI Architecture and Multimodal AI Leader\nSingapore, Dubai and Europe/EU/EEA 2018–Present\n\nMC USA — Agentic AI Financial Assistant\nApps: AI market analyst with 50+ quant-modelling tools for portfolios, risk and alerts\nPython: FastAPI · SQLAlchemy async · PostgreSQL/pgvector · Redis · RabbitMQ\nAI/ML: Multi-agent orchestration · Real-time market data ingestion · Financial RAG\n\nVersace/SOA/ArtKorero Dubai — Agentic AI Spatial Commerce\nApps: Vision Pro/web 3D exhibitions, VIP try-ons and spatial showrooms\nPython/C++: DCC pipelines · Pixar APIs · Procedural geometry · Scene-graph/DataViz\nAI/ML: Computer vision · GenAI 3D · Image-to-3D · Camera tracking · Multimodal AI\n\nDubai Future Foundation — Applied AI Innovation (UAE Government)\nApps: AI concepts for Area 2071 innovation initiatives and spatial-computing ventures\nEngineering: Rapid AI prototyping · Systems architecture · Data workflows\nAI/ML: NLP · Human-centred AI · Computer vision · Multimodal AI · Responsible AI\n\nErste Group Europe — Accessible Banking Engineering\nApps: 200+ banking portals across 7 European markets serving 16M customers\nEngineering: AEM · Platform architecture · Workflow automation · Systems integration\nGovernance: WCAG 2.1 AA · EU Accessibility Act · Audit evidence · Compliance\n\n20+ Singapore/Dubai FinTechs — Agentic AI Product Engineering\nApps: 30+ FinTech, ERP, blockchain and logistics products spanning 1,500+ features\nPython: FastAPI · REST APIs · PostgreSQL · Data pipelines · Event-driven workflows\nAI/ML: NLP · Multi-agent orchestration · Process automation · Blockchain intelligence\n\nPrivate Banking Experience Architecture Manager\nMaybank–Ageas Etiqa — Singapore and Asia Pacific 2016–2018\nApps: ML-enabled products driving 20× growth via 3,000+ HNW/mass-market pilots\nEngineering: Conversational architecture · Data integration · JavaScript decision logic\nAI/ML: Conversational AI · ML integration · Personalisation · Behavioural analytics · Evals\n\nEngineering Innovation Fellow\nManulife — Singapore and Asia Pacific 2015–2016\nApps: Data-led InsurTech and investment products across APAC and North America\nEngineering: Full-stack development · API integration · Cross-platform testing\nAI/ML: Predictive modelling · Model-output interfaces · Financial data dashboards\n\nGlobal Engineering Architect\nMediacorp — Singapore and Asia Pacific 2014–2015\nApps: CNA, CH8News and Toggle/meWatch platforms driving 30× audience growth\nEngineering: Media-platform architecture · Content streaming · Cross-device delivery\nImpact: First Apple Watch news app in Asia · 40+ products · Featured globally by Apple\n\nSenior Engineer\nLeo Burnett/Publicis — Singapore and Asia Pacific 2014\nApps: P&G (SK-II, Braun, Gillette) and Samsung across the USA and 8 APAC markets\nEngineering: Full-stack commerce · Transaction logic · Regional sales platforms\nBusiness Growth: Opened and scaled P&G sales channels across 8 APAC markets\n\nSenior Interaction Engineer\nOgilvy/WPP — Singapore and Asia Pacific 2013–2014\nApps: Singapore Exchange portals, Danone UGC apps and Banyan Tree platforms\nEngineering: Backend–frontend integration · Financial-data integration · UGC pipelines\nBusiness Growth: Multimillion-dollar agency pitch wins · Scaled Danone across APAC\n\nPostgraduate Education\nMaster of Science (MSc) Strategy and Innovation 2008\nUniversity of Lancashire, United Kingdom\nInnovation Strategist (University Appointment) 2008–2012\nUniversity of Lancashire, United Kingdom\nMIT/IDEO Design Thinking 2017–2018\nCertifications in Human–Centered Design and Innovation\nApple Design Labs, Silicon Valley 2015–Present\nOngoing research in AI and spatial computing, including participation in Apple Design and Engineering Labs in Cupertino\nStanford d.school, Silicon Valley 2017–2018\nHuman–Centered Design Prototyping Labs\n\nApplied AI Skills\nKubernetes • Async Python • asyncpg • JWT/RBAC • Secure APIs • Data Privacy • Failure Recovery • Error Handling • Backfilling • Caching Strategies • Low-Latency Systems • Horizontal Scalability • Resilient Systems • Production AI • AI Governance • Human-in-the-Loop Controls • Model Monitoring • Drift Detection • Prompt Engineering • Structured Outputs • Schema Validation • Synthetic Testing • pytest/TDD • Risk Engines • Portfolio Analytics • Market Data Systems • Event Streaming • Time-Series Forecasting • Quantitative Models • XGBoost • VaR/CVaR • Anomaly Detection • Knowledge Graphs • Semantic Data Modelling • Data Lineage • Cloud Deployment",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -16217,11 +16217,11 @@
           "Joz's current stack includes Python, FastAPI, PostgreSQL/pgvector, Redis, RabbitMQ, ingestion and data-quality workflows, RAG, multi-agent orchestration, MCP tooling, voice agents, multimodal systems, event-driven architecture, tool allowlisting, approval tokens, verification, and observability.",
           "Joz's recent experience spans financial AI, spatial commerce, UAE public-sector innovation, accessible banking, FinTech product engineering, and multimodal AI.",
           "Joz's current CV lists Singapore and Dubai as current locations, with work across Europe/EEA, APAC, the US, and the Middle East.",
-          "Joz's experience includes MarketClue financial AI agents, Versace/SOA/ArtKorero spatial AI, Dubai Future Foundation innovation, Erste Group accessibility engineering, and 20+ Singapore/Dubai FinTech products."
+          "Joz's experience includes MC USA financial AI agents, Versace/SOA/ArtKorero spatial AI, Dubai Future Foundation innovation, Erste Group accessibility engineering, and 20+ Singapore/Dubai FinTech products."
         ],
         "proof_points": [
           "500M monthly active users stated in the current CV as global scale context.",
-          "MarketClue USA: AI market analyst with 50+ quant-modelling tools, real-time market data ingestion, multi-agent orchestration, and financial RAG.",
+          "MC USA: AI market analyst with 50+ quant-modelling tools, real-time market data ingestion, multi-agent orchestration, and financial RAG.",
           "Versace/SOA/ArtKorero Dubai: Vision Pro and web 3D exhibitions, spatial showrooms, computer vision, GenAI 3D, image-to-3D, camera tracking, and multimodal AI.",
           "Dubai Future Foundation: rapid AI prototyping, systems architecture, data workflows, NLP, computer vision, multimodal AI, and responsible AI for UAE innovation initiatives.",
           "Erste Group Europe: 200+ banking portals across 7 European markets serving 16M customers, with WCAG 2.1 AA, EU Accessibility Act, audit evidence, and compliance work.",
@@ -16251,7 +16251,7 @@
           "Erste Group",
           "Leo Burnett/Publicis",
           "Manulife",
-          "MarketClue USA",
+          "MC USA",
           "Maybank–Ageas Etiqa",
           "Mediacorp",
           "Ogilvy/WPP",
@@ -16471,7 +16471,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Verified recruiter-screening answers covering nationality, Singapore status, contact details, availability handling, years of experience, education, and core skills.",
-      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is Slovak and an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- CV / portfolio: https://meejoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 15+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present and the current CV states 15+ years.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI engineering, AI product engineering, multimodal AI, architecture, and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
+      "body": "Recruiter Screening FAQ\n\nPurpose\nThis record gives Joz LLM a polished, direct source for common recruiter screening questions. It should be used for fast, factual answers before deeper capability discussion.\n\nScreening Answers\n\nNationality and work status\n- Joz is an EU national.\n- Joz's Singapore status is EP/PEP.\n\nPrimary contact details\n- Email: joz@meetjoz.com\n- Phone: +65 3107 2412\n- CV / portfolio: https://meejoz.com\n\nAvailability\n- Joz's current availability and start date should be confirmed directly with Joz.\n- Joz LLM should not invent a notice period or start date if none is explicitly provided in verified source material.\n\nYears of experience\n- Joz has 15+ years of professional experience overall.\n- Joz has 8+ years in ML/AI.\n- The overall timeline is based on professional roles from 2013 to present and the current CV states 15+ years.\n- The ML/AI-focused timeline is based on work from 2018 to present.\n\nEducation\n- Joz holds an MSc in Strategy and Innovation from the University of Lancashire.\n- Joz also held an Innovation Strategist university appointment there.\n- Additional training includes MIT/IDEO Design Thinking, HPI d.school prototyping labs, and Apple Design Labs and WWDC participation focused on AI and spatial computing.\n\nCore skills\n- Agentic AI engineering, AI product engineering, multimodal AI, architecture, and orchestration\n- Retrieval systems, context engineering, embeddings, vector search, and knowledge graphs\n- Signal reasoning, operational intelligence, anomaly thinking, and monitored decision loops\n- Multimodal and agentic UX orchestration across voice, touch, gesture, gaze, and spatial interfaces\n- Python, SQL, APIs, production-minded systems, and observability\n\nAnswering rule\n- For recruiter screening questions, Joz LLM should answer directly, concretely, and without sales language.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz rather than guessing.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -16488,11 +16488,11 @@
           "status": "verified",
           "reviewed_by": "user",
           "reviewed_at": "2026-07-27",
-          "notes": "Updated from the user's new CV. Slovak/EU nationality and Singapore work-authorisation handling remain separately verified recruiter facts."
+          "notes": "Updated from the user's new CV. EU nationality and Singapore work-authorisation handling remain separately verified recruiter facts."
         },
         "verification_status": "verified",
         "claims": [
-          "Joz is Slovak and an EU national.",
+          "Joz is an EU national.",
           "Joz's Singapore status is EP/PEP.",
           "Joz's direct contact details are joz@meetjoz.com and +65 3107 2412.",
           "Joz has 15+ years of professional experience overall, with direct Agentic AI engineering and multimodal AI work in the current CV.",
@@ -16625,7 +16625,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Recruiter benchmark guidance for keeping answers generic by default while using Singapore-first proof and phrasing when Singapore is explicitly asked.",
-      "body": "Recruiter Benchmark FAQ\n\nPurpose\nThis record benchmarks recruiter-style screening and positioning questions using a Singapore-first lens internally while keeping the answer style generic unless Singapore is explicitly asked.\n\nBenchmark rule\n- Do not volunteer \"Singapore\" unless the recruiter asks about Singapore specifically.\n- Default recruiter answers should stay internationally applicable.\n- When Singapore is explicitly asked, use Singapore-relevant proof where it exists.\n\nOperational answer rules\n\nWork authorization and sponsorship\n- Joz is Slovak and an EU national.\n- For any country-specific work authorization, visa, pass status, or sponsorship requirement, Joz LLM should say it must be confirmed directly for the specific hiring process rather than assumed.\n- If Singapore is explicitly asked, Joz LLM may mention EP, PEP, work pass, or sponsorship only in the context of \"confirm directly\" wording.\n\nCompensation and package\n- Joz LLM should not invent compensation numbers, salary bands, day rates, or currency amounts.\n- Generic answers should say compensation depends on role scope, seniority, location, responsibilities, and overall package.\n- Singapore-specific answers may mention Singapore role context but should still avoid hard numbers unless separately verified.\n\nAvailability and notice period\n- Joz LLM should keep \"availability\" and \"notice period / earliest start date\" as separate recruiter answers.\n- If no verified value exists, both should be framed as direct-confirmation items rather than guesses.\n\nWorking model and relocation\n- Joz is open to remote, hybrid, or on-site arrangements depending on role, team, and location requirements.\n- Joz is open to discussing suitable international relocation where role, location, and overall fit make sense.\n\nSingapore-fit proof\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets and first-in-market ML UX solutions launched from Singapore.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Stock Exchange portals were re-engineered.\n- Apple/Pixar-adjacent Python USD(z) and computer-vision workflows were developed in Singapore.\n\nAnswering rule\n- Recruiter answers should be direct, factual, and operational.\n- Proof-led positioning answers should use evidence, not buzzwords.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz.",
+      "body": "Recruiter Benchmark FAQ\n\nPurpose\nThis record benchmarks recruiter-style screening and positioning questions using a Singapore-first lens internally while keeping the answer style generic unless Singapore is explicitly asked.\n\nBenchmark rule\n- Do not volunteer \"Singapore\" unless the recruiter asks about Singapore specifically.\n- Default recruiter answers should stay internationally applicable.\n- When Singapore is explicitly asked, use Singapore-relevant proof where it exists.\n\nOperational answer rules\n\nWork authorization and sponsorship\n- Joz is an EU national.\n- For any country-specific work authorization, visa, pass status, or sponsorship requirement, Joz LLM should say it must be confirmed directly for the specific hiring process rather than assumed.\n- If Singapore is explicitly asked, Joz LLM may mention EP, PEP, work pass, or sponsorship only in the context of \"confirm directly\" wording.\n\nCompensation and package\n- Joz LLM should not invent compensation numbers, salary bands, day rates, or currency amounts.\n- Generic answers should say compensation depends on role scope, seniority, location, responsibilities, and overall package.\n- Singapore-specific answers may mention Singapore role context but should still avoid hard numbers unless separately verified.\n\nAvailability and notice period\n- Joz LLM should keep \"availability\" and \"notice period / earliest start date\" as separate recruiter answers.\n- If no verified value exists, both should be framed as direct-confirmation items rather than guesses.\n\nWorking model and relocation\n- Joz is open to remote, hybrid, or on-site arrangements depending on role, team, and location requirements.\n- Joz is open to discussing suitable international relocation where role, location, and overall fit make sense.\n\nSingapore-fit proof\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets and first-in-market ML UX solutions launched from Singapore.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Singapore Stock Exchange portals were re-engineered.\n- Apple/Pixar-adjacent Python USD(z) and computer-vision workflows were developed in Singapore.\n\nAnswering rule\n- Recruiter answers should be direct, factual, and operational.\n- Proof-led positioning answers should use evidence, not buzzwords.\n- If a fact is not explicitly verified, Joz LLM should say it should be confirmed directly with Joz.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -16807,13 +16807,13 @@
         "proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "related_proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
@@ -17089,7 +17089,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -17450,12 +17450,12 @@
         ],
         "proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "related_proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
@@ -17789,11 +17789,11 @@
         ],
         "proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents"
+          "mc_usa_financial_agents"
         ],
         "related_proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents"
+          "mc_usa_financial_agents"
         ],
         "enterprise_scale_score": 98,
         "measurable_outcome_count": 2,
@@ -18113,7 +18113,7 @@
           "Ageas",
           "Erste Bank",
           "Etiqa",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp",
           "Publicis"
@@ -18437,7 +18437,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -18496,14 +18496,14 @@
         ],
         "proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
         ],
         "related_proofs": [
           "erste_customer_scale",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
@@ -18996,7 +18996,7 @@
         "companies": [
           "Dubai Future Foundation",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -19117,7 +19117,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -19170,7 +19170,7 @@
         "proofs": [
           "dff_rapid_ai_prototyping",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "versace_spatial_ai_launch"
@@ -19178,7 +19178,7 @@
         "related_proofs": [
           "dff_rapid_ai_prototyping",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "versace_spatial_ai_launch"
@@ -19594,8 +19594,8 @@
       "category": "bio",
       "source_type": "paste",
       "source_uri": null,
-      "summary": "Canonical identity-background record covering Slovak nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
-      "body": "Joz Krupa is Slovak and has British heritage.\n\nHe completed postgraduate education in the United Kingdom, including an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.\n\nHis international career spans Singapore, Dubai, Europe, and global markets.\n\nImportant distinction\n- Slovak nationality is the direct nationality answer.\n- British heritage must remain separate from nationality or citizenship.\n- Do not claim British citizenship or British nationality unless explicitly confirmed.\n\nRetrieval guidance\n- Use this record for identity background, nationality, British heritage, and education-origin questions.\n- Keep the answer concise, factual, and separate heritage from nationality and work authorization.",
+      "summary": "Canonical identity-background record covering EU nationality, British heritage, United Kingdom postgraduate education, and Joz's international career footprint.",
+      "body": "Joz Krupa is EU national and has British heritage.\n\nHe completed postgraduate education in the United Kingdom, including an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.\n\nHis international career spans Singapore, Dubai, Europe, and global markets.\n\nImportant distinction\n- EU nationality is the direct nationality answer.\n- British heritage must remain separate from nationality or citizenship.\n- Do not claim British citizenship or British nationality unless explicitly confirmed.\n\nRetrieval guidance\n- Use this record for identity background, nationality, British heritage, and education-origin questions.\n- Keep the answer concise, factual, and separate heritage from nationality and work authorization.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -19611,11 +19611,11 @@
           "status": "verified",
           "reviewed_by": "user",
           "reviewed_at": "2026-07-12",
-          "notes": "User confirmed canonical identity distinctions: Slovak nationality, British heritage, UK postgraduate education, and international career span."
+          "notes": "User confirmed canonical identity distinctions: EU nationality, British heritage, UK postgraduate education, and international career span."
         },
         "verification_status": "verified",
         "claims": [
-          "Joz Krupa is Slovak.",
+          "Joz Krupa is an EU national.",
           "Joz has British heritage.",
           "Joz completed postgraduate education in the United Kingdom.",
           "Joz completed an MSc in Strategy and Innovation at the University of Central Lancashire in 2008.",
@@ -19623,7 +19623,7 @@
           "British heritage must remain separate from nationality, citizenship, and work authorization."
         ],
         "proof_points": [
-          "Nationality answer must remain Slovak and must not be replaced by British nationality.",
+          "Nationality answer must remain EU national and must not be replaced by British nationality.",
           "British heritage is explicitly allowed only as heritage language, not citizenship language.",
           "The academic record anchors to the University of Central Lancashire MSc in 2008.",
           "Regional career references align with the broader CV and profile footprint."
@@ -19633,7 +19633,7 @@
           "Europe",
           "Global",
           "Singapore",
-          "Slovakia",
+          "Europe",
           "United Kingdom"
         ],
         "companies": [
@@ -20241,7 +20241,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Recruiter-oriented question set for testing Joz's technical depth in agentic AI architecture and production AI systems.",
-      "body": "Recruiter Agentic AI Depth Questions\n\nPurpose\nThis record covers recruiter questions that probe beyond generic \"AI\" language into actual architecture depth.\n\nQuestion set\n- How technical is Joz in AI?\n- What kind of AI systems does Joz build?\n- How strong is Joz in agentic AI architecture?\n- Does Joz understand RAG, orchestration, memory, or evaluation?\n- Is Joz hands-on or just high-level?\n- Can Joz work across product, architecture, and implementation?\n\nAnswer guidance\n- Describe the full agent operating model: intent, retrieval, authorised context, reasoning, planning, execution, verification, and human escalation.\n- Make it clear Joz is not just a prompt engineer or generic AI consultant.\n- Use enterprise retrieval, ACL-aware responses, observability, governance, and production workflow language when the recruiter asks for depth.\n- Keep the explanation accessible to non-technical recruiters while still sounding technically real.\n\nProof anchors\n- Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.\n- MarketClue and current AI initiatives as live-product proof.\n- Enterprise context engineering and governance framing from current Joz LLM architecture work.",
+      "body": "Recruiter Agentic AI Depth Questions\n\nPurpose\nThis record covers recruiter questions that probe beyond generic \"AI\" language into actual architecture depth.\n\nQuestion set\n- How technical is Joz in AI?\n- What kind of AI systems does Joz build?\n- How strong is Joz in agentic AI architecture?\n- Does Joz understand RAG, orchestration, memory, or evaluation?\n- Is Joz hands-on or just high-level?\n- Can Joz work across product, architecture, and implementation?\n\nAnswer guidance\n- Describe the full agent operating model: intent, retrieval, authorised context, reasoning, planning, execution, verification, and human escalation.\n- Make it clear Joz is not just a prompt engineer or generic AI consultant.\n- Use enterprise retrieval, ACL-aware responses, observability, governance, and production workflow language when the recruiter asks for depth.\n- Keep the explanation accessible to non-technical recruiters while still sounding technically real.\n\nProof anchors\n- Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.\n- MC USA and current AI initiatives as live-product proof.\n- Enterprise context engineering and governance framing from current Joz LLM architecture work.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -20265,13 +20265,13 @@
         ],
         "proof_points": [
           "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
-          "Current Joz LLM and MarketClue work provide live-system relevance."
+          "Current Joz LLM and MC USA work provide live-system relevance."
         ],
         "regions": [
           "Global"
         ],
         "companies": [
-          "MarketClue"
+          "MC USA"
         ],
         "projects": [],
         "intent_families": [],
@@ -20386,7 +20386,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "First-pass recruiter screening questions covering positioning, experience, nationality, location, contact, availability, and notice-period handling.",
-      "body": "Recruiter Core Screening Questions\n\nPurpose\nThis record covers the first-pass questions a recruiter is most likely to ask before deeper capability discussion.\n\nQuestion set\n- Who is Joz?\n- What is Joz's current role positioning?\n- How many years of experience does Joz have?\n- How many years in AI or ML does Joz have?\n- What is Joz's nationality?\n- Where is Joz based?\n- How can I contact Joz?\n- Is Joz open to opportunities?\n- What is Joz's availability?\n- What is Joz's notice period?\n- What is Joz's earliest start date?\n\nAnswer guidance\n- Keep answers short, factual, and recruiter-safe.\n- Use \"Agentic AI Engineering, AI Product Engineering and Multimodal AI\" as the current positioning, with Agentic AI Architecture and Multimodal AI Leader as the senior experience framing.\n- Use 15+ years overall experience from the current CV.\n- For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.\n- For nationality, use Slovak and EU national or citizen wording.\n- For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.\n- Do not invent dates, salary figures, visa status, or relocation specifics.\n\nProof anchors\n- Professional timeline from 2013 to present.\n- AI and ML work from 2018 to present.\n- Direct recruiter contact: joz@meetjoz.com and +65 3107 2412.\n- Cross-market work across Singapore, APAC, Europe, Dubai, and global delivery contexts.",
+      "body": "Recruiter Core Screening Questions\n\nPurpose\nThis record covers the first-pass questions a recruiter is most likely to ask before deeper capability discussion.\n\nQuestion set\n- Who is Joz?\n- What is Joz's current role positioning?\n- How many years of experience does Joz have?\n- How many years in AI or ML does Joz have?\n- What is Joz's nationality?\n- Where is Joz based?\n- How can I contact Joz?\n- Is Joz open to opportunities?\n- What is Joz's availability?\n- What is Joz's notice period?\n- What is Joz's earliest start date?\n\nAnswer guidance\n- Keep answers short, factual, and recruiter-safe.\n- Use \"Agentic AI Engineering, AI Product Engineering and Multimodal AI\" as the current positioning, with Agentic AI Architecture and Multimodal AI Leader as the senior experience framing.\n- Use 15+ years overall experience from the current CV.\n- For AI or ML experience, avoid inflated numbers and explain that Joz's progression moved from ML-enabled product and experience work into direct agentic AI architecture, RAG, context engineering, governance, and AI system design.\n- For nationality, use EU national and EU national or citizen wording.\n- For current residence, legal address, notice period, or earliest start date, say these should be confirmed directly with Joz unless explicitly verified.\n- Do not invent dates, salary figures, visa status, or relocation specifics.\n\nProof anchors\n- Professional timeline from 2013 to present.\n- AI and ML work from 2018 to present.\n- Direct recruiter contact: joz@meetjoz.com and +65 3107 2412.\n- Cross-market work across Singapore, APAC, Europe, Dubai, and global delivery contexts.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -20705,7 +20705,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Recruiter-safe framing for Joz's strongest skills, differentiators, and proof-backed strengths.",
-      "body": "Recruiter Strengths And Skills Questions\n\nPurpose\nThis record covers recruiter questions about Joz's strongest capabilities and how to explain them with evidence rather than buzzwords.\n\nQuestion set\n- What is Joz strongest at?\n- What are Joz's top skills?\n- What makes Joz different from other AI candidates?\n- Explain Joz's strengths with proof, not buzzwords.\n- Is Joz more strategy or technical?\n- Is Joz more product or engineering?\n\nAnswer guidance\n- Lead with the combination of agentic AI architecture, multimodal and spatial UX, enterprise product engineering, and measurable business execution.\n- Do not answer with a long tool dump unless the question asks for stack depth.\n- Frame the differentiator as the ability to connect business, product, design, engineering, and AI system delivery.\n- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI work rather than abstract claims.\n\nProof anchors\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Erste Bank: engineering and accessibility at 16M+ customer scale.\n- MarketClue: financial AI agents with live portfolio context.\n- Dubai and spatial work: Versace/SOA, ArtKorero, and other 3D or immersive system delivery.",
+      "body": "Recruiter Strengths And Skills Questions\n\nPurpose\nThis record covers recruiter questions about Joz's strongest capabilities and how to explain them with evidence rather than buzzwords.\n\nQuestion set\n- What is Joz strongest at?\n- What are Joz's top skills?\n- What makes Joz different from other AI candidates?\n- Explain Joz's strengths with proof, not buzzwords.\n- Is Joz more strategy or technical?\n- Is Joz more product or engineering?\n\nAnswer guidance\n- Lead with the combination of agentic AI architecture, multimodal and spatial UX, enterprise product engineering, and measurable business execution.\n- Do not answer with a long tool dump unless the question asks for stack depth.\n- Frame the differentiator as the ability to connect business, product, design, engineering, and AI system delivery.\n- Use evidence from Maybank, Manulife, Mediacorp, Erste Bank, MC USA, and spatial AI work rather than abstract claims.\n\nProof anchors\n- Maybank-Ageas Etiqa: 20x digital sales growth through conversational and ML-led UX.\n- Manulife: Lean ML UX practice across 11 APAC markets.\n- Mediacorp: 30x audience growth and a global experience language across 30+ products.\n- Erste Bank: engineering and accessibility at 16M+ customer scale.\n- MC USA: financial AI agents with live portfolio context.\n- Dubai and spatial work: Versace/SOA, ArtKorero, and other 3D or immersive system delivery.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -20725,14 +20725,14 @@
         "claims": [
           "Joz's strongest positioning combines agentic AI architecture, multimodal and spatial UX, and enterprise product engineering.",
           "Joz should be differentiated through measurable proof rather than buzzword-heavy capability lists.",
-          "Maybank, Manulife, Mediacorp, Erste Bank, MarketClue, and spatial AI projects provide the strongest recruiter-safe evidence."
+          "Maybank, Manulife, Mediacorp, Erste Bank, MC USA, and spatial AI projects provide the strongest recruiter-safe evidence."
         ],
         "proof_points": [
           "Maybank-Ageas Etiqa: 20x digital sales growth.",
           "Manulife: Lean ML UX practice across 11 APAC markets.",
           "Mediacorp: 30x audience growth across 30+ products.",
           "Erste Bank: 16M+ customer scale engineering.",
-          "MarketClue and Dubai spatial work add current technical and multimodal proof."
+          "MC USA and Dubai spatial work add current technical and multimodal proof."
         ],
         "regions": [
           "Asia Pacific",
@@ -20743,7 +20743,7 @@
         "companies": [
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank-Ageas Etiqa",
           "Mediacorp"
         ],
@@ -21000,7 +21000,7 @@
           "His AI work is framed around business problems and operational outcomes."
         ],
         "proof_points": [
-          "MarketClue financial AI agents with live data and asset portfolio context.",
+          "MC USA financial AI agents with live data and asset portfolio context.",
           "Enterprise RAG and context-engineering architecture reflected in his current applied AI skill set.",
           "AI governance, retrieval controls, and verification are explicit parts of his architecture approach."
         ],
@@ -21013,7 +21013,7 @@
         "companies": [
           "Dubai Future Foundation",
           "Erste Bank",
-          "MarketClue"
+          "MC USA"
         ],
         "projects": [],
         "intent_families": [],
@@ -21067,12 +21067,12 @@
         ],
         "proofs": [
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "related_proofs": [
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth"
         ],
         "enterprise_scale_score": 100,
@@ -21254,7 +21254,7 @@
         ],
         "companies": [
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp",
           "Ogilvy",
@@ -21335,7 +21335,7 @@
       "source_type": "paste",
       "source_uri": null,
       "summary": "Banking, wealth, insurance, financial AI agents, portfolios, customer intelligence, and regulated enterprise systems.",
-      "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MarketClue financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
+      "body": "Joz's financial-services capability combines Agentic AI, wealth and portfolio intelligence, banking and insurance product architecture, enterprise portals, customer experience, and regulated-system thinking.\n\nRelevant proof includes MC USA financial AI agents using live data and asset portfolios; Maybank–Ageas Etiqa wealth, bancassurance, and high-net-worth transformation; Manulife work across 11 APAC markets plus the USA and Canada; Erste Bank engineering and accessibility; and the Singapore Stock Exchange's responsive listings portals.\n\nFor corporate banking or financial-services questions, describe the experience accurately. Emphasise wealth, investment journeys, bancassurance, digital fund purchase, portfolio intelligence, banking portals, approvals and entitlements where supported. Do not invent direct ownership of treasury, trade finance, or corporate lending products.",
       "metadata": {
         "lane": "skills",
         "original_lane": "skills",
@@ -21360,7 +21360,7 @@
           "He has worked across Singapore, APAC, Europe, and the USA."
         ],
         "proof_points": [
-          "MarketClue financial AI agents with live data and asset portfolios.",
+          "MC USA financial AI agents with live data and asset portfolios.",
           "Maybank–Ageas Etiqa wealth and insurance transformation.",
           "Manulife ML-enabled customer and investment experiences across APAC and North America.",
           "Erste Bank engineering and internal/digital portal work at 16M+ customer scale.",
@@ -21378,7 +21378,7 @@
           "Erste Bank",
           "Etiqa",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Singapore Stock Exchange"
         ],
@@ -21432,14 +21432,14 @@
         "proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "sgx_responsive_portals"
         ],
         "related_proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "sgx_responsive_portals"
         ],
@@ -21493,7 +21493,7 @@
           "His value is especially high in products that combine technical depth with strong user-facing judgment."
         ],
         "proof_points": [
-          "Architected financial AI agents with live market and portfolio context for MarketClue.",
+          "Architected financial AI agents with live market and portfolio context for MC USA.",
           "Led product, HCD-AI, and data architecture work across large fintech and enterprise environments.",
           "The current app combines React, 3D rendering, voice interaction, world-aware agent routing, OpenAI-backed reasoning, Express APIs, structured knowledge retrieval, and automated scenario testing."
         ],
@@ -21507,7 +21507,7 @@
         "companies": [
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -21571,13 +21571,13 @@
           "technology"
         ],
         "proofs": [
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
         ],
         "related_proofs": [
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth",
           "publicis_handoff_reduction"
@@ -21628,7 +21628,7 @@
           "He connects technical AI architecture to measurable enterprise outcomes."
         ],
         "proof_points": [
-          "Architected financial AI agents for MarketClue with live market data and asset portfolios.",
+          "Architected financial AI agents for MC USA with live market data and asset portfolios.",
           "Led HCD–AI, product, and data architectures for 20+ Dubai and Singapore FinTech initiatives.",
           "Built on more than a decade of enterprise-scale product, engineering, and transformation experience."
         ],
@@ -21644,7 +21644,7 @@
           "Dubai Future Foundation",
           "Erste Bank",
           "Manulife",
-          "MarketClue",
+          "MC USA",
           "Maybank",
           "Mediacorp"
         ],
@@ -21704,14 +21704,14 @@
         "proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth"
         ],
         "related_proofs": [
           "erste_customer_scale",
           "manulife_lean_ml_ux",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "maybank_digital_sales_growth",
           "mediacorp_audience_growth"
         ],
@@ -22235,7 +22235,7 @@
         "companies": [
           "Apple",
           "Erste Bank",
-          "MarketClue",
+          "MC USA",
           "Pixar"
         ],
         "projects": [],
@@ -22289,13 +22289,13 @@
         "proofs": [
           "apple_pixar_cv_workflows",
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "versace_spatial_ai_launch"
         ],
         "related_proofs": [
           "apple_pixar_cv_workflows",
           "dff_rapid_ai_prototyping",
-          "marketclue_financial_agents",
+          "mc_usa_financial_agents",
           "versace_spatial_ai_launch"
         ],
         "enterprise_scale_score": 90,

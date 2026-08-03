@@ -155,7 +155,7 @@ test("skills query favors enterprise scale before smaller current projects", () 
   assert.ok(slugs.indexOf("skills-quantified-business-outcomes") < slugs.indexOf("skills-agentic-ai-architecture"));
 });
 
-test("biggest enterprise achievement does not rank MarketClue first", () => {
+test("biggest enterprise achievement does not rank MC USA first", () => {
   const slugs = rankedSlugs("What is Joz's biggest enterprise achievement?", "skills");
   assert.notEqual(slugs[0], "skills-agentic-ai-architecture");
   assert.equal(slugs[0], "skills-largest-enterprise-scale-proof");

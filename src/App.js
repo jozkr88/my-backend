@@ -438,51 +438,6 @@ useAgentShell({
   } = meetJozState;
 
   const showAgentButton = true;
-  const handleJozLlmLaneSelect = (intentMode) => {
-    const normalizedIntentMode = String(intentMode || "").trim().toLowerCase();
-    const preservedMeetJozLayer = String(
-      typeof window !== "undefined" ? window.__lastMeetJozMesh || "" : ""
-    )
-      .trim()
-      .toLowerCase();
-    const queueMeetJozLaneRestore = (deferredAction, runNuclearSkillsSequence = false) => {
-      pendingPortalActionRef.current = {
-        action: deferredAction,
-        runNuclearSkillsSequence,
-        requestedAt: Date.now(),
-        sourcePortal:
-          typeof window !== "undefined" ? window.location.pathname : "",
-      };
-      setPendingMeetJozVoiceAction(deferredAction);
-      announcePortalTransition("/neo/meet-joz");
-      setLocation("/neo/meet-joz");
-    };
-
-    if (normalizedIntentMode === "business_need") {
-      announcePortalTransition("/consultant");
-      setLocation("/consultant");
-      return;
-    }
-
-    if (
-      normalizedIntentMode === "mindset" ||
-      normalizedIntentMode === "systems_mindset"
-    ) {
-      announcePortalTransition("/neo/maxx");
-      setLocation("/neo/maxx");
-      return;
-    }
-
-    if (normalizedIntentMode === "skills") {
-      if (preservedMeetJozLayer === "skills") {
-        queueMeetJozLaneRestore("skills");
-        return;
-      }
-
-      executeJozLlmCommand({ action: "skills" });
-    }
-  };
-
   if (isJozLlmDashboard) {
     return <JozLlmDashboardPage />;
   }
@@ -546,7 +501,6 @@ useAgentShell({
         sendJozLlmMessage={sendJozLlmMessage}
         stopJozLlmGeneration={stopJozLlmGeneration}
         handleJozLlmSubmit={jozLlmHandleSubmit}
-        onJozLlmLaneSelect={handleJozLlmLaneSelect}
       />
 
   <AppSceneCanvas

@@ -19,5 +19,5 @@ Answer guidance
 
 Proof anchors
 - Agentic AI architecture, RAG, embeddings, vector search, knowledge graphs, memory, verification, and observability.
-- MarketClue and current AI initiatives as live-product proof.
+- MC USA and current AI initiatives as live-product proof.
 - Enterprise context engineering and governance framing from current Joz LLM architecture work.

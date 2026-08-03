@@ -101,7 +101,7 @@ test("routes deep skills queries to skills and returns technical depth reply", (
   assert.match(resolution.reply, /retrieval|orchestration|memory|verification|observability/i);
   assert.match(resolution.reply, /Python backend systems/i);
   assert.match(resolution.reply, /enterprise architecture|enterprise/i);
-  assert.doesNotMatch(resolution.reply, /Slovak|EU national|\bEP\b|\bPEP\b|work authorization/i);
+  assert.doesNotMatch(resolution.reply, /EU national|\bEP\b|\bPEP\b|work authorization/i);
   assert.equal(Array.isArray(resolution.actions) ? resolution.actions.length : 0, 0);
 });
 
@@ -712,7 +712,7 @@ test("routes proof-not-buzzwords skills queries to an evidence-first answer", ()
   assert.equal(route.selectedRoute, "skills");
   assert.equal(route.detectedSubIntent, "proof_backed_strengths");
   assert.equal(resolution.fallbackUsed, false);
-  assert.match(resolution.reply, /MarketClue/i);
+  assert.match(resolution.reply, /MC USA/i);
   assert.match(resolution.reply, /20x digital sales growth at Maybank/i);
   assert.match(resolution.reply, /11 Manulife markets/i);
   assert.match(resolution.reply, /30x audience growth at Mediacorp/i);
@@ -987,7 +987,7 @@ test("skills route upgrades to retrieved proof when ranked documents are provide
         metadata: {
           slug: "2026-07-11-agentic-ai-architecture-proof",
           proof_points: [
-            "MarketClue USA work is described as financial AI agents with live data and asset portfolios.",
+            "MC USA work is described as financial AI agents with live data and asset portfolios.",
           ],
         },
       },
@@ -1008,7 +1008,7 @@ test("skills route upgrades to retrieved proof when ranked documents are provide
 
   assert.equal(route.selectedRoute, "skills");
   assert.equal(resolution.composer, "buildEvidenceBackedRouteReply");
-  assert.match(resolution.reply, /MarketClue USA work/i);
+  assert.match(resolution.reply, /MC USA work/i);
   assert.match(resolution.reply, /Erste Bank engineering/i);
   assert.match(
     resolution.answerSource,
@@ -1318,7 +1318,7 @@ test("ambiguous follow-up prompts return a clarification guard instead of a rand
   assert.equal(resolution.answerSource, "ambiguity_guard");
   assert.match(resolution.reply, /too ambiguous on its own/i);
   assert.match(resolution.reply, /How does Joz architect agentic AI/i);
-  assert.doesNotMatch(resolution.reply, /Slovak|British heritage|University of Central Lancashire|MSc/i);
+  assert.doesNotMatch(resolution.reply, /EU national|British heritage|University of Central Lancashire|MSc/i);
 });
 
 test("punctuated ambiguous follow-up prompts still return the clarification guard", async () => {

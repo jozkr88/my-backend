@@ -364,6 +364,8 @@ export function useJozLlm({
   isMobile = false,
   arSupported = false,
   startOpen = false,
+  endpoint = "/api/joz-llm",
+  endpointBase = "",
 }) {
   const [isOpen, setIsOpen] = useState(() => Boolean(startOpen));
   const [activeIntentMode, setActiveIntentMode] = useState("");
@@ -817,10 +819,10 @@ export function useJozLlm({
         currentMeshStage
       );
       const shouldBypassCommandRouting =
-        hasExplicitIntentMode &&
+        (hasExplicitIntentMode &&
         normalizedRequestedIntentMode !== "mindset" &&
         normalizedRequestedIntentMode !== "skills" &&
-        !isDirectMeetJozControlAction(resolvedLocalCommand);
+        !isDirectMeetJozControlAction(resolvedLocalCommand));
 
       let commandResult = shouldBypassCommandRouting
         ? null
@@ -934,7 +936,7 @@ export function useJozLlm({
       setIsLoading(true);
 
       try {
-        const payload = await fetchJson(apiUrl("/api/joz-llm"), {
+        const payload = await fetchJson(endpointBase ? `${endpointBase.replace(/\/+$/, "")}/${endpoint.replace(/^\/+/, "")}` : apiUrl(endpoint), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           signal: requestController.signal,
@@ -1028,6 +1030,8 @@ export function useJozLlm({
       currentMeshStage,
       currentPortal,
       conversationId,
+      endpoint,
+      endpointBase,
       executeCommand,
       isLoading,
       isMobile,
@@ -1071,6 +1075,7 @@ export function useJozLlm({
     suggestions,
     bookingPrompt: BOOKING_PROMPT,
     startGetCalledFlow,
+    getCalledFlow,
     sendMessage,
     stopGeneration,
     handleSubmit,

@@ -132,7 +132,7 @@ const CASES = [
     expectedSubIntent: "work_authorization",
     expectedAnswerSource: "deterministic_recruiter_operational",
     expectedComposer: "composeWorkAuthorizationAnswer",
-    mustInclude: ["Slovak", "EU national", "specific country"],
+    mustInclude: ["EU national", "EU national", "specific country"],
     mustExclude: ["Singapore", "EP", "PEP"],
     expectActions: true,
   },

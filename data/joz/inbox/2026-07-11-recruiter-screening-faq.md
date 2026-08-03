@@ -6,7 +6,7 @@ This record gives Joz LLM a polished, direct source for common recruiter screeni
 Screening Answers
 
 Nationality and work status
-- Joz is Slovak and an EU national.
+- Joz is an EU national.
 - Joz's Singapore status is EP/PEP.
 
 Primary contact details
