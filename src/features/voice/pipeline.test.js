@@ -49,3 +49,42 @@ test("uses backend semantic spatial intent before generic agentic routing", asyn
   });
   expect(String(calls[0])).toContain("/api/world-model/spatial-intent");
 });
+
+test("turns an unrelated backend result into a Voice MAXX retry message", async () => {
+  const fetchJson = jest.fn(async (url) => {
+    if (String(url).includes("/api/agentic")) {
+      return {
+        params: {
+          action: "contact_joz",
+          target: "mailto:joz@meetjoz.com",
+          awareness: "Opening your email app.",
+        },
+      };
+    }
+    return {};
+  });
+
+  const result = await resolveVoicePipeline({
+    rawInput: "what's the weather like today",
+    isMobile: false,
+    currentPortal: "root",
+    currentMesh: null,
+    currentMeshStage: null,
+    context: { currentPortal: "root" },
+    detectImmediateMobileCommand: () => null,
+    resolveLocalVoiceCommand: () => null,
+    fetchJson,
+    apiUrl: (path) => path,
+  });
+
+  expect(result).toMatchObject({
+    source: "backend",
+    backendMode: "agentic",
+    result: {
+      action: null,
+      target: null,
+      status: "needs_retry",
+      awareness: "I can help with Joz Worlds. Please try again.",
+    },
+  });
+});

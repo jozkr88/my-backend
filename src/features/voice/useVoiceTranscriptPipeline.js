@@ -187,7 +187,8 @@ export function useVoiceTranscriptPipeline({
             );
           }
 
-          setVoiceProcessLine("Applying that here...");
+          const needsRetry = result?.result?.status === "needs_retry";
+          setVoiceProcessLine(needsRetry ? "" : "Applying that here...");
           processClearTimeoutRef.current = window.setTimeout(() => {
             setVoiceProcessLine("");
             processClearTimeoutRef.current = null;
@@ -217,7 +218,7 @@ export function useVoiceTranscriptPipeline({
           });
 
           pushVoiceDebugEvent({
-            status: "applied",
+            status: needsRetry ? "needs_retry" : "applied",
             rawInput: rawSpoken,
             spoken: result?.spoken || spoken,
             source: result?.source || "backend",
@@ -227,14 +228,14 @@ export function useVoiceTranscriptPipeline({
             error: "",
           });
           finalizeVoiceSessionEntry({
-            status: "applied",
+            status: needsRetry ? "needs_retry" : "applied",
             rawInput: rawSpoken,
             spoken: result?.spoken || spoken,
             source: result?.source || "backend",
             action: result?.result?.action || "",
             target: result?.result?.target || "",
             awareness: result?.result?.awareness || "",
-            outcome: "resolved",
+            outcome: needsRetry ? "needs_retry" : "resolved",
           });
           return applyResult;
         })
