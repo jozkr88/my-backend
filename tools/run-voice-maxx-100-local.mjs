@@ -7,7 +7,7 @@ for (const envPath of [".env.local", ".env", "server/.env"]) {
 const localApiUrl = String(process.env.JOZ_LOCAL_API_URL || "http://127.0.0.1:3001").replace(/\/$/, "");
 const concurrency = Math.max(1, Math.min(8, Number(process.env.JOZ_100_CONCURRENCY) || 4));
 const runId = `${Date.now()}`;
-const sessionKey = `voice-maxx-100-${runId}`;
+const sessionKey = `joz-maxx-100-${runId}`;
 
 const questions = [
   ["world_model", "what is space?"],
@@ -136,7 +136,7 @@ async function ask(question, index, category) {
         messages: [{ role: "user", content: question }],
         context: {
           currentPortal: "root",
-          testRun: { id: sessionKey, label: "Voice MAXX 100 short-question sweep", index, total: 100, category },
+          testRun: { id: sessionKey, label: "Joz MAXX 100 short-question sweep", index, total: 100, category },
         },
       }),
       signal: controller.signal,
@@ -203,6 +203,5 @@ console.log(JSON.stringify({
   modelRuntime: successful.find((result) => result.modelRuntime)?.modelRuntime || null,
   failedQuestions: failed,
   results,
-  storageNote: "Each request is logged by the local backend. With SUPABASE_DB_URL configured, rows are stored in Supabase joz_llm_request_events; otherwise they remain in the local memory fallback.",
+  storageNote: "Each Joz MAXX request is logged by the local backend. With SUPABASE_DB_URL configured, rows are stored in Supabase joz_llm_request_events; otherwise they remain in the local memory fallback.",
 }, null, 2));
-

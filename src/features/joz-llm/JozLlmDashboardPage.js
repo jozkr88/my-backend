@@ -48,18 +48,18 @@ function truncate(value = "", limit = 140) {
   return `${text.slice(0, limit - 1)}…`;
 }
 
-const VOICE_MAXX_SWEEP_PREFIX = "voice-maxx-100-";
+const JOZ_MAXX_SWEEP_PREFIX = "joz-maxx-100-";
 
-function getVoiceMaxxSweepId(event = {}) {
+function getJozMaxxSweepId(event = {}) {
   const sessionKey = String(event.session_key || event.sessionKey || "").trim();
-  return sessionKey.startsWith(VOICE_MAXX_SWEEP_PREFIX) ? sessionKey : null;
+  return sessionKey.startsWith(JOZ_MAXX_SWEEP_PREFIX) ? sessionKey : null;
 }
 
-function DashboardVoiceMaxxSweep({ events, selectedRun, onSelectRun, storage }) {
+function DashboardJozMaxxSweep({ events, selectedRun, onSelectRun, storage }) {
   const runs = useMemo(() => {
     const grouped = new Map();
     for (const event of events) {
-      const id = getVoiceMaxxSweepId(event);
+      const id = getJozMaxxSweepId(event);
       if (!id) continue;
       const current = grouped.get(id) || { id, total: 0, failed: 0, corrected: 0 };
       current.total += 1;
@@ -76,12 +76,12 @@ function DashboardVoiceMaxxSweep({ events, selectedRun, onSelectRun, storage }) 
   const active = runs.find((run) => run.id === selectedRun) || latest;
 
   return (
-    <section className="joz-dashboard-test-run" aria-label="Voice MAXX 100 question sweep">
+    <section className="joz-dashboard-test-run" aria-label="Joz MAXX 100 question sweep">
       <div>
-        <div className="joz-dashboard-label">Local Voice MAXX test</div>
+        <div className="joz-dashboard-label">Local Joz MAXX test</div>
         <h2>100 short questions</h2>
         <p>
-          Typos, abstract world-model questions, vague prompts, booking requests, and playful pushback are stored as individual backend runs.
+          Typos, abstract world-model questions, vague prompts, booking requests, and playful pushback are stored as individual Joz MAXX backend runs.
         </p>
       </div>
       <div className="joz-dashboard-test-run-stats">
@@ -715,7 +715,7 @@ export function JozLlmDashboardPage() {
   const testRunOptions = useMemo(() => {
     const counts = new Map();
     for (const event of events) {
-      const id = getVoiceMaxxSweepId(event);
+      const id = getJozMaxxSweepId(event);
       if (id) counts.set(id, (counts.get(id) || 0) + 1);
     }
     return [...counts.entries()].map(([id, count]) => ({ id, count }));
@@ -754,7 +754,7 @@ export function JozLlmDashboardPage() {
       if (knowledgeFilter !== "all" && aiKnowledge.id !== knowledgeFilter) {
         return false;
       }
-      if (testRunFilter !== "all" && getVoiceMaxxSweepId(event) !== testRunFilter) {
+      if (testRunFilter !== "all" && getJozMaxxSweepId(event) !== testRunFilter) {
         return false;
       }
       if (correctedOnly && !corrected) {
@@ -929,7 +929,7 @@ export function JozLlmDashboardPage() {
 
       <DashboardAudienceCharts events={filteredEvents} />
 
-      <DashboardVoiceMaxxSweep
+      <DashboardJozMaxxSweep
         events={events}
         selectedRun={testRunFilter}
         onSelectRun={setTestRunFilter}
@@ -959,12 +959,12 @@ export function JozLlmDashboardPage() {
             className="joz-dashboard-select"
             value={testRunFilter}
             onChange={(event) => setTestRunFilter(event.target.value)}
-            aria-label="Filter Voice MAXX 100 test runs"
+            aria-label="Filter Joz MAXX 100 test runs"
           >
             <option value="all">All test runs</option>
             {testRunOptions.map(({ id, count }) => (
               <option key={id} value={id}>
-                Voice MAXX 100 · {count}/100
+                Joz MAXX 100 · {count}/100
               </option>
             ))}
           </select>

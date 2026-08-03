@@ -73,6 +73,7 @@
     "check:joz-llm:gate": "node tools/run-joz-quality-gate.mjs",
     "check:joz-quality": "node tools/run-joz-quality-gate.mjs",
     "test:voice:100": "node tools/run-voice-maxx-100-local.mjs",
+    "test:joz-maxx:100": "node tools/run-voice-maxx-100-local.mjs",
     "migrate:private-mc-usa": "node tools/migrate-private-mc-usa-alias.mjs",
     "test:voice:frontend": "node scripts/test-voice-frontend-playwright.js",
     "eject": "react-scripts eject"
