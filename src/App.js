@@ -336,7 +336,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
     executeCommand: executeJozLlmCommand,
     isMobile,
     arSupported: ar,
-    startOpen: !isMobile,
+    startOpen: true,
   });
 
 useAgentShell({
