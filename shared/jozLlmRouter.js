@@ -1961,7 +1961,7 @@ function isEvidenceAlreadyCovered(evidencePoint = "", lead = "") {
 function hasSpecificProofSignal(evidencePoint = "") {
   return (
     /\d/.test(String(evidencePoint)) ||
-    /\b(?:Maybank|Manulife|Mediacorp|Erste|MarketClue|Publicis|Leo Burnett|SGX|Dubai Future Foundation)\b/i.test(
+    /\b(?:Maybank|Manulife|Mediacorp|Erste|MC USA|Publicis|Leo Burnett|SGX|Dubai Future Foundation)\b/i.test(
       evidencePoint
     )
   );
