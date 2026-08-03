@@ -5,7 +5,6 @@ import {
 } from "../../shared/jozLlmLanes";
 import { QRCodeSVG } from "qrcode.react";
 import { requestSpatialOffer } from "../../world-model/spatialOffer";
-import { resolvePlacementIntent, resolveSpatialDemoIntent } from "../../world-model/placement";
 import {
   buildArDecisionContext,
   cacheArDecision,
@@ -1438,13 +1437,8 @@ export function VoiceChrome({
               ) : jozLlmMessages.map((message, messageIndex) => (
                 (() => {
                   const isIntroMessage = message.id === "assistant-welcome";
-                  const previousUserMessage = [...jozLlmMessages.slice(0, messageIndex)]
-                    .reverse()
-                    .find((candidate) => candidate.role === "user");
                   const spatialTraceIntent = message.role === "assistant" && !message.isPending
-                    ? message.spatialIntent ||
-                      resolvePlacementIntent(previousUserMessage?.content, { currentPortal }) ||
-                      resolveSpatialDemoIntent(previousUserMessage?.content, { currentPortal })
+                    ? message.spatialIntent || null
                     : null;
                   const spatialIntent = !isMobile ? spatialTraceIntent : null;
                   const introMessageClassName = isIntroMessage
