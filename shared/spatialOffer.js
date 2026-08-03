@@ -53,14 +53,14 @@ const SPATIAL_OFFER_REGISTRY = {
     entitySet: "joz_works",
     routeSlug: "joz-works",
     label: "Joz's works",
-    query: "Joz work projects MarketClue Manulife Mediacorp Erste Versace spatial AI outcomes",
+    query: "Joz work projects MC USA Manulife Mediacorp Erste Versace spatial AI outcomes",
     assets: {
       ios: null,
       android: { format: "glb", url: "https://meetjoz.com/workf.glb" },
       web: { format: "web", url: "/space/joz-works" },
     },
     entities: [
-      { id: "marketclue", label: "MarketClue", kind: "work" },
+      { id: "mc_usa", label: "MC USA", kind: "work" },
       { id: "manulife", label: "Manulife", kind: "work" },
       { id: "mediacorp", label: "Mediacorp", kind: "work" },
       { id: "erste-bank", label: "Erste Bank", kind: "work" },
@@ -152,4 +152,3 @@ export function publicSpatialOffer(record = {}) {
     expiresAt: record.expiresAt || record.expires_at || null,
   };
 }
-
