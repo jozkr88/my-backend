@@ -1338,6 +1338,47 @@ test("punctuated ambiguous follow-up prompts still return the clarification guar
   }
 });
 
+test("unknown conversational prompts use natural world-model and reaction language", async () => {
+  const space = await resolveUnknownJozReply({
+    input: "what is space?",
+    messages: [{ role: "user", content: "what is space?" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.equal(space.answerSource, "world_model_space_concept");
+  assert.match(space.reply, /relational dimension|navigate and reason/i);
+  assert.doesNotMatch(space.reply, /Knowledge Graph/i);
+
+  const time = await resolveUnknownJozReply({
+    input: "whats the time",
+    messages: [{ role: "user", content: "whats the time" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.equal(time.answerSource, "world_model_time_concept");
+  assert.match(time.reply, /change dimension|trajectory/i);
+
+  const reactionOne = await resolveUnknownJozReply({
+    input: "this is hot",
+    messages: [{ role: "user", content: "this is hot" }],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  const reactionTwo = await resolveUnknownJozReply({
+    input: "this is hot",
+    messages: [
+      { role: "user", content: "previous" },
+      { role: "assistant", content: "previous reply" },
+      { role: "user", content: "this is hot" },
+    ],
+    openai: null,
+    roleAwareContext: { retrievedDocuments: [] },
+  });
+  assert.equal(reactionOne.answerSource, "deterministic_casual_reaction");
+  assert.notEqual(reactionOne.reply, reactionTwo.reply);
+  assert.doesNotMatch(reactionOne.reply, /lacks context|Knowledge Graph/i);
+});
+
 test("covers the six latest recruiter-facing quality repairs", () => {
   const { appContext, legacyContext } = buildContexts({ currentPortal: "root" });
   const cases = [
