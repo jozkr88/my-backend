@@ -11,7 +11,7 @@ export function SceneBlurSlider({ value = 0, onChange }) {
       onTouchMove={(event) => event.stopPropagation()}
     >
       <span className="scene-blur-control__label scene-blur-control__label--blur">
-        Blur
+        How AI Senses the world
       </span>
       <div className="scene-blur-control__track">
         <input
@@ -28,7 +28,7 @@ export function SceneBlurSlider({ value = 0, onChange }) {
         />
       </div>
       <span className="scene-blur-control__label scene-blur-control__label--clear">
-        Clear
+        How humans Sense the world
       </span>
     </div>
   );
