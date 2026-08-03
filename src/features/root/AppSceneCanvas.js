@@ -79,6 +79,7 @@ export function AppSceneCanvas({
   aurxPlaybackDelay,
   triggerCount,
   isHelpPanelHovered,
+  sceneBlur = 0,
 }) {
   return (
     <Canvas
@@ -92,7 +93,11 @@ export function AppSceneCanvas({
       }}
       eventSource={document.body}
       eventPrefix="client"
-      style={{ background: "#000000" }}
+      style={{
+        background: "#000000",
+        filter: `blur(${Math.max(0, Number(sceneBlur) || 0)}px)`,
+        willChange: sceneBlur ? "filter" : "auto",
+      }}
     >
         {shouldWarmup && !isMobile && <GpuWarmup portalKey={currentPortal} />}
       <InitialFrameSignal onReady={onSceneReady} />

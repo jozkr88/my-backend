@@ -33,6 +33,7 @@ import { useAgentWorldState } from "./features/voice/useAgentWorldState";
 import { useVoiceHudStatus } from "./features/voice/useVoiceHudStatus";
 import { useVoiceDebugState } from "./features/voice/useVoiceDebugState";
 import { AppSceneCanvas } from "./features/root/AppSceneCanvas";
+import { SceneBlurSlider } from "./features/root/SceneBlurSlider";
 import { EdgeGlowOverlay } from "./features/root/EdgeGlowOverlay";
 import {
   DESKTOP_ONLY_MODELS,
@@ -74,6 +75,7 @@ export const App = ({ onSceneReady, isInitialLoading = false }) => {
   const [, setLocation] = useLocation();
 
   const [suggestionText, setSuggestionText] = useState("");
+  const [sceneBlurAmount, setSceneBlurAmount] = useState(0);
   const [micEnabled, setMicEnabled] = useState(false);
   const [voiceProcessLine, setVoiceProcessLine] = useState("");
   const [pendingMeetJozVoiceAction, setPendingMeetJozVoiceAction] =
@@ -552,6 +554,12 @@ useAgentShell({
     aurxOutDelay={aurxOutDelay}
     triggerCount={triggerCount}
     isHelpPanelHovered={isHelpPanelHovered}
+    sceneBlur={(sceneBlurAmount / 100) * 14}
+  />
+
+  <SceneBlurSlider
+    value={sceneBlurAmount}
+    onChange={setSceneBlurAmount}
   />
 
   <WorldPlacementLayer />
