@@ -1741,7 +1741,7 @@ export function VoiceChrome({
                   {spatialIntent?.entitySet && spatialIntent.entitySet !== "joz_skills" && (
                     <SpatialOfferCard
                       entitySet={spatialIntent.entitySet}
-                      input={previousUserMessage?.content || ""}
+                      input={spatialIntent.sourceText || ""}
                       onOfferReady={(launchUrl) => {
                         setSpatialShareLinks((current) => ({
                           ...current,
