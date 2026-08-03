@@ -58,6 +58,15 @@ function replaceLandingPanelMessage(currentMessages, nextMessage) {
   return [welcomeMessage, nextMessage, ...preservedMessages];
 }
 
+function clearWorldModelDemoTraces(currentMessages) {
+  return currentMessages.map((message) => {
+    if (!message?.spatialIntent?.demoOnly) return message;
+
+    const { spatialIntent, ...messageWithoutTrace } = message;
+    return messageWithoutTrace;
+  });
+}
+
 function cleanAwarenessText(text = "") {
   return String(text || "")
     .replace(/Cross-jumping to/gi, "Opening")
@@ -573,6 +582,13 @@ export function useJozLlm({
         role: "user",
         content: value,
       };
+
+      // A spatial trace belongs to the spatial demo that produced it. Do not
+      // let it follow the user into an ordinary Joz MAXX lane question such as
+      // Skills / Show AI strengths.
+      if (!worldModelDemo && !desktopWorldModelAction) {
+        setMessages(clearWorldModelDemoTraces);
+      }
 
       if (isPrivacyQuestion(value)) {
         lastSubmissionRef.current = {
