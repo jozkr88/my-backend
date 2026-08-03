@@ -4,6 +4,7 @@ import {
   getMeetJozLogicalLayer,
   MEET_JOZ_ACTION_LABELS,
 } from "../../world-model/meetJoz";
+import { VOICE_RETRY_MESSAGE } from "./voiceMessages";
 
 export function summarizeVoiceActionLine({
   action,
@@ -31,6 +32,8 @@ export function summarizeVoiceActionLine({
     if (/backend did not respond|failed|error/i.test(cleanError)) return "Action: Backend unavailable";
     return "Action: Needs retry";
   }
+
+  if (cleanAwareness === VOICE_RETRY_MESSAGE) return VOICE_RETRY_MESSAGE;
 
   const actionMap = {
     ...MEET_JOZ_ACTION_LABELS,

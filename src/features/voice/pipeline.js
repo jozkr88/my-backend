@@ -1,5 +1,21 @@
 import { isWorldModelShadowEnabled } from "../../world-model/mode";
 import { apiUrl as defaultApiUrl, fetchJson as defaultFetchJson } from "../../utils/api";
+import { VOICE_RETRY_MESSAGE } from "./voiceMessages";
+
+function normalizeUnresolvedBackendResult(result = {}) {
+  const action = String(result?.action || "").trim().toLowerCase();
+  const untrustedUtilityAction = ["contact_joz", "call_joz"].includes(action);
+
+  if ((result?.action || result?.target) && !untrustedUtilityAction) return result;
+
+  return {
+    ...result,
+    action: null,
+    target: null,
+    status: "needs_retry",
+    awareness: VOICE_RETRY_MESSAGE,
+  };
+}
 
 async function attachShadowPrediction({
   rawInput,
@@ -178,13 +194,13 @@ export async function resolveVoicePipeline({
       spoken,
       source: "backend",
       backendMode: "agentic",
-      result: {
+      result: normalizeUnresolvedBackendResult({
         action: agenticParams.action || null,
         target: agenticParams.target || null,
         awareness: agenticParams.awareness || agenticResult?.response || null,
         source: agenticParams.source || "agentic",
         prediction: agenticResult?.prediction || null,
-      },
+      }),
     };
   }
 
@@ -206,11 +222,11 @@ export async function resolveVoicePipeline({
     spoken,
     source: "backend",
     backendMode: "think_fallback",
-    result: {
+    result: normalizeUnresolvedBackendResult({
       action: thinkResult?.action || null,
       target: thinkResult?.target || null,
       awareness: thinkResult?.awareness || null,
       timing: thinkResult?.timing || null,
-    },
+    }),
   };
 }
