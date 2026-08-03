@@ -1107,6 +1107,7 @@ export function VoiceChrome({
           className={`ai-agent ${isJozLlmOpen ? "inactive" : "active"}`}
           aria-label="Go Agentic"
           aria-disabled={isJozLlmOpen ? "true" : undefined}
+          disabled={isJozLlmOpen}
         >
           <span className="ai-agent-stack" aria-hidden="true">
             <AgentIcon className="ai-agent-mark" focusable="false" />
