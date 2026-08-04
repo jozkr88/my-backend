@@ -4453,6 +4453,22 @@
       "id": "region:vienna",
       "type": "region",
       "label": "Vienna"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "document",
+      "label": "Spatial Intelligence: Humans Perceive, AI Reconstructs",
+      "slug": "systems-principle-humans-perceive-ai-reconstructs",
+      "category": "systems_principle",
+      "summary": "A conceptual model explaining the canvas as a continuum between human perception and AI world-model reconstruction, where blur represents uncertainty and incomplete grounding rather than literal machine vision.",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceFilename": "systems-principle-humans-perceive-ai-reconstructs.md",
+      "sourceMetaFilename": "systems-principle-humans-perceive-ai-reconstructs.meta.json",
+      "sourceUri": "source://joz/canvas/spatial-intelligence-human-perception",
+      "sourcePath": "source://joz/canvas/spatial-intelligence-human-perception",
+      "sourceChecksum": "572969a086130f5819aa3de3f82a940bdf03df51f84eaddc36bebb8129404b45",
+      "evidenceTier": "framework_guidance"
     }
   ],
   "edges": [
@@ -25320,6 +25336,166 @@
       "to": "document:skills_agentic_ai_ux_orchestration",
       "verification": "cv_supported",
       "impactScore": 79
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|problem:ai_adoption_failure",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "problem:ai_adoption_failure",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|problem:knowledge_fragmentation",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "problem:knowledge_fragmentation",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|problem:low_trust",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "problem:low_trust",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|principle:context_creates_intelligence",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "principle:context_creates_intelligence",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|principle:signal_over_noise",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "principle:signal_over_noise",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|capability:computer_vision",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "capability:computer_vision",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|capability:decision_intelligence",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "capability:decision_intelligence",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|capability:multimodal_ai",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "capability:multimodal_ai",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|capability:spatial_ai",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "capability:spatial_ai",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|outcome:better_customer_experience",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "outcome:better_customer_experience",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|outcome:faster_decisions",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "outcome:faster_decisions",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|outcome:higher_data_trust",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "outcome:higher_data_trust",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|governance:confidence_handling",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "governance:confidence_handling",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|governance:evaluation",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "governance:evaluation",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|governance:source_provenance",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "governance:source_provenance",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|industry:spatial_computing",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "industry:spatial_computing",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|supports|industry:technology",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "supports",
+      "to": "industry:technology",
+      "verification": "framework_supported",
+      "impactScore": 96,
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
+    },
+    {
+      "id": "document:systems-principle-humans-perceive-ai-reconstructs|applies_in|region:global",
+      "from": "document:systems-principle-humans-perceive-ai-reconstructs",
+      "type": "applies_in",
+      "to": "region:global",
+      "sourceSlug": "systems-principle-humans-perceive-ai-reconstructs"
     }
   ]
 }

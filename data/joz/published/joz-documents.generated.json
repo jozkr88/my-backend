@@ -1,10 +1,10 @@
 {
   "generated_at": "2026-07-28T07:19:37.859Z",
   "counts": {
-    "source_files": 78,
+    "source_files": 79,
     "canonical_source_files": 2,
-    "normalized_records": 162,
-    "model_ready_records": 160,
+    "normalized_records": 163,
+    "model_ready_records": 161,
     "verified_records": 18,
     "ontology_entities": 81,
     "proofs": 12,
@@ -15935,6 +15935,102 @@
         "source_checksum": "9d4521c7c830b33d6fa99d91c5bbcfe71acde2a9bf5b922589088d7fff2789d0",
         "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049"
       }
+    },
+    {
+      "slug": "systems-principle-humans-perceive-ai-reconstructs",
+      "title": "Spatial Intelligence: Humans Perceive, AI Reconstructs",
+      "category": "systems_principle",
+      "source_type": "owner_concept",
+      "source_uri": "source://joz/canvas/spatial-intelligence-human-perception",
+      "summary": "A conceptual model explaining the canvas as a continuum between human perception and AI world-model reconstruction, where blur represents uncertainty and incomplete grounding rather than literal machine vision.",
+      "body": "# Spatial intelligence: humans perceive, AI reconstructs\n\nJoz uses the canvas slider as a visual model for the difference between human perception and AI world-model construction.\n\nHumans experience the world as immediately present, continuous, and contextual. AI does not literally see a blurred image. It reconstructs a usable model from signals, training, memory, spatial relationships, and confidence. When the environment is well represented and grounded, the model can become clear: objects, depth, movement, relationships, likely next events, and possible actions are easier to infer. When the situation is unfamiliar, untrained, weakly grounded, or missing important relationships, the model becomes less resolved. The canvas blur represents that uncertainty and incomplete world-model knowledge.\n\nThe top-to-bottom slider is therefore a continuum between human sensing and AI sensing. The sharp end represents clear, grounded world understanding. The blurred end represents an unfamiliar or insufficiently learned environment. The percentage in the circle is an experience-state indicator, not a scientific measurement of intelligence or a claim that AI literally sees blur.\n\nSpatial intelligence means more than recognizing objects. It is the ability to understand where things are, how they relate, what may happen next, what actions are possible, and what remains uncertain. The central circle represents the current state of that world understanding; the line represents movement through the continuum; and the changing scene represents the difference between raw information and a coherent, actionable model.\n\nThe core idea is: humans perceive the world; AI builds a model of it; spatial intelligence determines how coherent and usable that model becomes.\n\nWhen asked what the canvas means, Joz should explain it as a conceptual metaphor for grounding, uncertainty, and spatial intelligence—not as a literal description of machine vision.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "ai-literacy",
+          "computer-vision",
+          "grounding",
+          "human-perception",
+          "spatial-intelligence",
+          "uncertainty",
+          "world-model-ai"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "owner_conversation",
+          "reviewed_at": "2026-08-04",
+          "notes": "Conceptual explanation derived from the owner's canvas discussion. Treat the blur as metaphorical representation of uncertainty and incomplete grounding, not literal AI vision."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Humans experience the world as immediately present, continuous, and contextual.",
+          "AI reconstructs a usable world model from signals, training, memory, spatial relationships, and confidence.",
+          "The canvas blur represents uncertainty, unfamiliarity, and incomplete world-model grounding rather than literal machine vision.",
+          "Spatial intelligence includes understanding location, relationships, depth, movement, likely next events, possible actions, and remaining uncertainty."
+        ],
+        "proof_points": [
+          "The Joz canvas implements the concept as a vertical continuum between human sensing and AI sensing.",
+          "The circle shows the current experience state while the surrounding scene communicates changing clarity and uncertainty."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 96,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "systems-principle-humans-perceive-ai-reconstructs.md",
+        "source_meta_filename": "systems-principle-humans-perceive-ai-reconstructs.meta.json",
+        "reviewed_at": "2026-08-04",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "low_trust"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "computer_vision",
+          "decision_intelligence",
+          "multimodal_ai",
+          "spatial_ai"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_decisions",
+          "higher_data_trust"
+        ],
+        "governance": [
+          "confidence_handling",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1,
+        "schema_version": "1.0",
+        "dataset_id": "joz-public-knowledge",
+        "tenant_id": "public",
+        "owner": "joz",
+        "classification": "public",
+        "visibility": "public",
+        "retention_policy": "until_withdrawn",
+        "evidence_tier": "framework_guidance",
+        "source_checksum": "572969a086130f5819aa3de3f82a940bdf03df51f84eaddc36bebb8129404b45"
+      }
     }
   ],
   "model_ready_records": [
@@ -31663,6 +31759,102 @@
         "evidence_tier": "framework_guidance",
         "source_checksum": "9d4521c7c830b33d6fa99d91c5bbcfe71acde2a9bf5b922589088d7fff2789d0",
         "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049"
+      }
+    },
+    {
+      "slug": "systems-principle-humans-perceive-ai-reconstructs",
+      "title": "Spatial Intelligence: Humans Perceive, AI Reconstructs",
+      "category": "systems_principle",
+      "source_type": "owner_concept",
+      "source_uri": "source://joz/canvas/spatial-intelligence-human-perception",
+      "summary": "A conceptual model explaining the canvas as a continuum between human perception and AI world-model reconstruction, where blur represents uncertainty and incomplete grounding rather than literal machine vision.",
+      "body": "# Spatial intelligence: humans perceive, AI reconstructs\n\nJoz uses the canvas slider as a visual model for the difference between human perception and AI world-model construction.\n\nHumans experience the world as immediately present, continuous, and contextual. AI does not literally see a blurred image. It reconstructs a usable model from signals, training, memory, spatial relationships, and confidence. When the environment is well represented and grounded, the model can become clear: objects, depth, movement, relationships, likely next events, and possible actions are easier to infer. When the situation is unfamiliar, untrained, weakly grounded, or missing important relationships, the model becomes less resolved. The canvas blur represents that uncertainty and incomplete world-model knowledge.\n\nThe top-to-bottom slider is therefore a continuum between human sensing and AI sensing. The sharp end represents clear, grounded world understanding. The blurred end represents an unfamiliar or insufficiently learned environment. The percentage in the circle is an experience-state indicator, not a scientific measurement of intelligence or a claim that AI literally sees blur.\n\nSpatial intelligence means more than recognizing objects. It is the ability to understand where things are, how they relate, what may happen next, what actions are possible, and what remains uncertain. The central circle represents the current state of that world understanding; the line represents movement through the continuum; and the changing scene represents the difference between raw information and a coherent, actionable model.\n\nThe core idea is: humans perceive the world; AI builds a model of it; spatial intelligence determines how coherent and usable that model becomes.\n\nWhen asked what the canvas means, Joz should explain it as a conceptual metaphor for grounding, uncertainty, and spatial intelligence—not as a literal description of machine vision.",
+      "metadata": {
+        "lane": "systems_mindset",
+        "original_lane": "systems_mindset",
+        "tags": [
+          "ai-literacy",
+          "computer-vision",
+          "grounding",
+          "human-perception",
+          "spatial-intelligence",
+          "uncertainty",
+          "world-model-ai"
+        ],
+        "verification": {
+          "status": "framework_supported",
+          "reviewed_by": "owner_conversation",
+          "reviewed_at": "2026-08-04",
+          "notes": "Conceptual explanation derived from the owner's canvas discussion. Treat the blur as metaphorical representation of uncertainty and incomplete grounding, not literal AI vision."
+        },
+        "verification_status": "framework_supported",
+        "claims": [
+          "Humans experience the world as immediately present, continuous, and contextual.",
+          "AI reconstructs a usable world model from signals, training, memory, spatial relationships, and confidence.",
+          "The canvas blur represents uncertainty, unfamiliarity, and incomplete world-model grounding rather than literal machine vision.",
+          "Spatial intelligence includes understanding location, relationships, depth, movement, likely next events, possible actions, and remaining uncertainty."
+        ],
+        "proof_points": [
+          "The Joz canvas implements the concept as a vertical continuum between human sensing and AI sensing.",
+          "The circle shows the current experience state while the surrounding scene communicates changing clarity and uncertainty."
+        ],
+        "regions": [
+          "Global"
+        ],
+        "companies": [],
+        "projects": [],
+        "intent_families": [],
+        "sub_intents": [],
+        "impact_score": 96,
+        "priority_label": "hero",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": null,
+        "source_filename": "systems-principle-humans-perceive-ai-reconstructs.md",
+        "source_meta_filename": "systems-principle-humans-perceive-ai-reconstructs.meta.json",
+        "reviewed_at": "2026-08-04",
+        "problems": [
+          "ai_adoption_failure",
+          "knowledge_fragmentation",
+          "low_trust"
+        ],
+        "principles": [
+          "context_creates_intelligence",
+          "signal_over_noise"
+        ],
+        "capabilities": [
+          "computer_vision",
+          "decision_intelligence",
+          "multimodal_ai",
+          "spatial_ai"
+        ],
+        "outcomes": [
+          "better_customer_experience",
+          "faster_decisions",
+          "higher_data_trust"
+        ],
+        "governance": [
+          "confidence_handling",
+          "evaluation",
+          "source_provenance"
+        ],
+        "industries": [
+          "spatial_computing",
+          "technology"
+        ],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 1,
+        "schema_version": "1.0",
+        "dataset_id": "joz-public-knowledge",
+        "tenant_id": "public",
+        "owner": "joz",
+        "classification": "public",
+        "visibility": "public",
+        "retention_policy": "until_withdrawn",
+        "evidence_tier": "framework_guidance",
+        "source_checksum": "572969a086130f5819aa3de3f82a940bdf03df51f84eaddc36bebb8129404b45"
       }
     }
   ]
