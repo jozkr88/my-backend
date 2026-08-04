@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T22:39:32.327Z",
+  "generated_at": "2026-08-04T09:08:55.693Z",
   "dataset_id": "joz-world-model-knowledge-v1",
   "manifest": {
     "dataset_id": "joz-world-model-knowledge-v1",
@@ -11,15 +11,15 @@
     "source_date": "2026-07",
     "source_pdf_filename": "stanford-hai-world-model-spatial-intelligence-2026.pdf",
     "source_pdf_checksum": "a292fb2a86b53b11952f080a677636f847210beb6de176fdbca05df34151b90a",
-    "dataset_checksum": "5924acb03c79dda0562768a32a9865a10876c867072dabdeb8ad0c4e7fa035ec",
+    "dataset_checksum": "cce8fbccf3715510f6ef636e0e451092a373817b036c7650ce6f9f5287e41cd0",
     "source_pdf_page_count": 16,
-    "jsonl_record_count": 44,
+    "jsonl_record_count": 45,
     "pdf_chunk_count": 12,
     "generated_by": "shared/worldModelKnowledge.js"
   },
   "counts": {
-    "records": 56,
-    "model_ready_records": 56
+    "records": 57,
+    "model_ready_records": 57
   },
   "records": [
     {
@@ -4853,6 +4853,127 @@
         "world_model_record": true,
         "joz_specific": true,
         "citation_label": "Joz AI Exocortex response policy"
+      }
+    },
+    {
+      "slug": "wm-joz-wm-019",
+      "title": "What is the Spatial Intelligence slider?",
+      "category": "world_model",
+      "source_type": "world_model_jsonl",
+      "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+      "summary": "A visual metaphor for spatial grounding: blur represents uncertainty, not a measured AI confidence score.",
+      "body": "The Spatial Intelligence slider is a frontend visual metaphor for spatial grounding in a world-model interface. It changes only the canvas blur; it does not change a model's actual knowledge, confidence or perception. The 100% Human end represents clear, grounded spatial representation. The 0% AI end uses strong blur to represent uncertainty, incomplete learned representation and unresolved spatial relationships. The middle suggests partial inference between a structured but uncertain representation and a more grounded view.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "spatial intelligence",
+          "spatial grounding",
+          "perceptual fidelity",
+          "uncertainty",
+          "world model",
+          "slider",
+          "blur",
+          "human perception",
+          "AI perception"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "world-model-knowledge-v1",
+          "reviewed_at": "2026-07-30",
+          "notes": "World-model joz_positioning record"
+        },
+        "verification_status": "positioning_supported",
+        "evidence_tier": "supported_claim",
+        "claims": [
+          "A visual metaphor for spatial grounding: blur represents uncertainty, not a measured AI confidence score."
+        ],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "projects": [],
+        "intent_families": [
+          "skills",
+          "systems_mindset"
+        ],
+        "sub_intents": [
+          "spatial_intelligence_slider"
+        ],
+        "impact_score": 80,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": "Joz Spatial Intelligence interface concept",
+        "source_filename": "joz-world-model-knowledge-v1.jsonl",
+        "source_meta_filename": null,
+        "reviewed_at": "2026-07-30",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "spatial_ai",
+          "verification",
+          "ai_governance"
+        ],
+        "outcomes": [],
+        "governance": [
+          "source_provenance"
+        ],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0,
+        "source_authority": 40,
+        "semantic_text": "What is the Spatial Intelligence slider?\nA visual metaphor for spatial grounding: blur represents uncertainty, not a measured AI confidence score.\nspatial intelligence spatial grounding perceptual fidelity uncertainty world model slider blur human perception AI perception\nThe Spatial Intelligence slider is a frontend visual metaphor for spatial grounding in a world-model interface. It changes only the canvas blur; it does not change a model's actual knowledge, confidence or perception. The 100% Human end represents clear, grounded spatial representation. The 0% AI end uses strong blur to represent uncertainty, incomplete learned representation and unresolved spatial relationships. The middle suggests partial inference between a structured but uncertain representation and a more grounded view.",
+        "keyword_terms": [
+          "what",
+          "is",
+          "the",
+          "spatial",
+          "intelligence",
+          "slider",
+          "spatial intelligence",
+          "spatial grounding",
+          "perceptual fidelity",
+          "uncertainty",
+          "world model",
+          "blur",
+          "human perception",
+          "ai perception",
+          "spatial intelligence slider"
+        ],
+        "exact_phrases": [
+          "What is the Spatial Intelligence slider?",
+          "spatial intelligence",
+          "spatial grounding",
+          "perceptual fidelity",
+          "uncertainty",
+          "world model",
+          "slider",
+          "blur",
+          "human perception",
+          "AI perception"
+        ],
+        "dataset_id": "joz-public-knowledge",
+        "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+        "knowledge_version": "joz-world-model-knowledge-v1",
+        "record_id": "joz-wm-019",
+        "record_type": "positioning",
+        "topic": "spatial_intelligence_slider",
+        "claim_scope": "joz_positioning",
+        "source_id": "joz-world-model-implementation",
+        "source_key": "joz-world-model-knowledge-v1#joz-wm-019",
+        "source_title": "Joz Spatial Intelligence interface concept",
+        "source_publisher": "Joz",
+        "source_date": "2026-08-04",
+        "source_pages": [],
+        "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+        "retrieval_priority": 60,
+        "boundary_record": false,
+        "policy_record": false,
+        "world_model_record": true,
+        "joz_specific": true,
+        "citation_label": "Joz Spatial Intelligence interface concept"
       }
     },
     {
@@ -10940,6 +11061,127 @@
         "world_model_record": true,
         "joz_specific": true,
         "citation_label": "Joz AI Exocortex response policy"
+      }
+    },
+    {
+      "slug": "wm-joz-wm-019",
+      "title": "What is the Spatial Intelligence slider?",
+      "category": "world_model",
+      "source_type": "world_model_jsonl",
+      "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+      "summary": "A visual metaphor for spatial grounding: blur represents uncertainty, not a measured AI confidence score.",
+      "body": "The Spatial Intelligence slider is a frontend visual metaphor for spatial grounding in a world-model interface. It changes only the canvas blur; it does not change a model's actual knowledge, confidence or perception. The 100% Human end represents clear, grounded spatial representation. The 0% AI end uses strong blur to represent uncertainty, incomplete learned representation and unresolved spatial relationships. The middle suggests partial inference between a structured but uncertain representation and a more grounded view.",
+      "metadata": {
+        "lane": "skills",
+        "original_lane": "skills",
+        "tags": [
+          "spatial intelligence",
+          "spatial grounding",
+          "perceptual fidelity",
+          "uncertainty",
+          "world model",
+          "slider",
+          "blur",
+          "human perception",
+          "AI perception"
+        ],
+        "verification": {
+          "status": "positioning_supported",
+          "reviewed_by": "world-model-knowledge-v1",
+          "reviewed_at": "2026-07-30",
+          "notes": "World-model joz_positioning record"
+        },
+        "verification_status": "positioning_supported",
+        "evidence_tier": "supported_claim",
+        "claims": [
+          "A visual metaphor for spatial grounding: blur represents uncertainty, not a measured AI confidence score."
+        ],
+        "proof_points": [],
+        "regions": [],
+        "companies": [],
+        "projects": [],
+        "intent_families": [
+          "skills",
+          "systems_mindset"
+        ],
+        "sub_intents": [
+          "spatial_intelligence_slider"
+        ],
+        "impact_score": 80,
+        "priority_label": "high",
+        "valid_from": null,
+        "valid_to": null,
+        "source_notes": "Joz Spatial Intelligence interface concept",
+        "source_filename": "joz-world-model-knowledge-v1.jsonl",
+        "source_meta_filename": null,
+        "reviewed_at": "2026-07-30",
+        "problems": [],
+        "principles": [],
+        "capabilities": [
+          "spatial_ai",
+          "verification",
+          "ai_governance"
+        ],
+        "outcomes": [],
+        "governance": [
+          "source_provenance"
+        ],
+        "industries": [],
+        "proofs": [],
+        "related_proofs": [],
+        "enterprise_scale_score": 0,
+        "measurable_outcome_count": 0,
+        "source_authority": 40,
+        "semantic_text": "What is the Spatial Intelligence slider?\nA visual metaphor for spatial grounding: blur represents uncertainty, not a measured AI confidence score.\nspatial intelligence spatial grounding perceptual fidelity uncertainty world model slider blur human perception AI perception\nThe Spatial Intelligence slider is a frontend visual metaphor for spatial grounding in a world-model interface. It changes only the canvas blur; it does not change a model's actual knowledge, confidence or perception. The 100% Human end represents clear, grounded spatial representation. The 0% AI end uses strong blur to represent uncertainty, incomplete learned representation and unresolved spatial relationships. The middle suggests partial inference between a structured but uncertain representation and a more grounded view.",
+        "keyword_terms": [
+          "what",
+          "is",
+          "the",
+          "spatial",
+          "intelligence",
+          "slider",
+          "spatial intelligence",
+          "spatial grounding",
+          "perceptual fidelity",
+          "uncertainty",
+          "world model",
+          "blur",
+          "human perception",
+          "ai perception",
+          "spatial intelligence slider"
+        ],
+        "exact_phrases": [
+          "What is the Spatial Intelligence slider?",
+          "spatial intelligence",
+          "spatial grounding",
+          "perceptual fidelity",
+          "uncertainty",
+          "world model",
+          "slider",
+          "blur",
+          "human perception",
+          "AI perception"
+        ],
+        "dataset_id": "joz-public-knowledge",
+        "knowledge_dataset_id": "joz-world-model-knowledge-v1",
+        "knowledge_version": "joz-world-model-knowledge-v1",
+        "record_id": "joz-wm-019",
+        "record_type": "positioning",
+        "topic": "spatial_intelligence_slider",
+        "claim_scope": "joz_positioning",
+        "source_id": "joz-world-model-implementation",
+        "source_key": "joz-world-model-knowledge-v1#joz-wm-019",
+        "source_title": "Joz Spatial Intelligence interface concept",
+        "source_publisher": "Joz",
+        "source_date": "2026-08-04",
+        "source_pages": [],
+        "source_uri": "source://joz/joz-world-model-knowledge-v1/implementation",
+        "retrieval_priority": 60,
+        "boundary_record": false,
+        "policy_record": false,
+        "world_model_record": true,
+        "joz_specific": true,
+        "citation_label": "Joz Spatial Intelligence interface concept"
       }
     },
     {
