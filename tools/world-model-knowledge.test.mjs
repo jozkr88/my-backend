@@ -14,10 +14,10 @@ const byId = new Map(records.map((record) => [record.metadata.record_id, record]
 test("validates the v1 dataset, source PDF and page-aware extraction", () => {
   const result = validateWorldModelKnowledge();
   assert.equal(result.ok, true, result.errors.join("; "));
-  assert.equal(result.recordCount, 44);
-  assert.equal(result.uniqueIdCount, 44);
+  assert.equal(result.recordCount, 45);
+  assert.equal(result.uniqueIdCount, 45);
   assert.equal(result.pdfPageCount, 16);
-  assert.equal(records.length, 56);
+  assert.equal(records.length, 57);
 });
 
 test("keeps source scopes and record types separate", () => {
@@ -62,6 +62,7 @@ const requiredCases = [
   ["How is a world model different from RAG?", "joz-wm-012"],
   ["Are agents obsolete now?", "joz-wm-013"],
   ["What is spatial intelligence?", "wm-paper-003"],
+  ["What is the Spatial Intelligence slider?", "joz-wm-019"],
   ["What are renderers, simulators and planners?", "wm-paper-006"],
   ["What is counterfactual reasoning?", "wm-paper-004"],
   ["What is action-conditioned simulation?", "wm-paper-004"],

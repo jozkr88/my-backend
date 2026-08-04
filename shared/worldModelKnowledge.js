@@ -388,7 +388,7 @@ export function validateWorldModelKnowledge({ includePdf = true } = {}) {
       errors.push(`${prefix}: incomplete source metadata`);
     }
   }
-  if (records.length !== 44) errors.push(`expected 44 JSONL records, found ${records.length}`);
+  if (records.length !== 45) errors.push(`expected 45 JSONL records, found ${records.length}`);
   if (includePdf && (!fs.existsSync(pdfPath) || !fs.existsSync(pdfPagesPath))) {
     errors.push("Stanford HAI PDF and page-aware derived extraction are required");
   }
@@ -415,6 +415,7 @@ function normaliseQuestion(value = "") {
 }
 
 const WORLD_MODEL_QUERY_HINTS = [
+  ["joz-wm-019", ["spatial intelligence slider", "spatial grounding", "perceptual fidelity", "blur slider", "what is the slider"]],
   ["wm-paper-006", ["renderers", "simulators", "planners", "functional categories", "three categories"]],
   ["wm-paper-004", ["counterfactual", "action-conditioned", "what happens if", "possible consequences"]],
   ["wm-paper-012", ["object permanence", "coherent environment", "scene consistency"]],
