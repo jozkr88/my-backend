@@ -1,0 +1,70 @@
+{
+  "slug": "systems-principle-humans-perceive-ai-reconstructs",
+  "title": "Spatial Intelligence: Humans Perceive, AI Reconstructs",
+  "category": "systems_principle",
+  "lane": "systems_mindset",
+  "summary": "A conceptual model explaining the canvas as a continuum between human perception and AI world-model reconstruction, where blur represents uncertainty and incomplete grounding rather than literal machine vision.",
+  "tags": [
+    "spatial-intelligence",
+    "world-model-ai",
+    "human-perception",
+    "uncertainty",
+    "grounding",
+    "computer-vision",
+    "ai-literacy"
+  ],
+  "impact_score": 96,
+  "priority_label": "hero",
+  "source_type": "owner_concept",
+  "source_uri": "source://joz/canvas/spatial-intelligence-human-perception",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "owner_conversation",
+    "reviewed_at": "2026-08-04",
+    "notes": "Conceptual explanation derived from the owner's canvas discussion. Treat the blur as metaphorical representation of uncertainty and incomplete grounding, not literal AI vision."
+  },
+  "claims": [
+    "Humans experience the world as immediately present, continuous, and contextual.",
+    "AI reconstructs a usable world model from signals, training, memory, spatial relationships, and confidence.",
+    "The canvas blur represents uncertainty, unfamiliarity, and incomplete world-model grounding rather than literal machine vision.",
+    "Spatial intelligence includes understanding location, relationships, depth, movement, likely next events, possible actions, and remaining uncertainty."
+  ],
+  "proof_points": [
+    "The Joz canvas implements the concept as a vertical continuum between human sensing and AI sensing.",
+    "The circle shows the current experience state while the surrounding scene communicates changing clarity and uncertainty."
+  ],
+  "regions": [
+    "Global"
+  ],
+  "companies": [],
+  "problems": [
+    "low_trust",
+    "ai_adoption_failure",
+    "knowledge_fragmentation"
+  ],
+  "principles": [
+    "context_creates_intelligence",
+    "signal_over_noise"
+  ],
+  "capabilities": [
+    "spatial_ai",
+    "computer_vision",
+    "multimodal_ai",
+    "decision_intelligence"
+  ],
+  "outcomes": [
+    "higher_data_trust",
+    "better_customer_experience",
+    "faster_decisions"
+  ],
+  "governance": [
+    "confidence_handling",
+    "evaluation",
+    "source_provenance"
+  ],
+  "industries": [
+    "spatial_computing",
+    "technology"
+  ],
+  "proofs": []
+}
