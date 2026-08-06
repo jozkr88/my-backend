@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "unclear_roi"
     ],
@@ -71,6 +74,10 @@
       "finops",
       "optimization"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Cost Management\nCost Management\ncost finops optimization\ncost finops optimization\nInfrastructure must be cost-aware.\n\nControl costs through:\nAutoscaling\nRight-sizing\nCaching\nModel routing\nSpot instances where safe\nStorage lifecycle policies\nRequest quotas\nCost observability\nEnvironment shutdown schedules\n\nCost is an architecture constraint, not an afterthought.",
     "keyword_terms": [
@@ -85,15 +92,6 @@
       "finops",
       "optimization"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "08fc22d8aeefd2353c7f34b7c1c73dcfb44b37bab1af406f056e21166fd16c22",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_043"
+    "source_checksum": "88ec063984fc6d6f359ad1af18d080372801528fb78d676fb19a856e0eb754a8"
   }
 }

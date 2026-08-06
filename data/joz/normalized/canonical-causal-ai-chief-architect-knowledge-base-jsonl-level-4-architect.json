@@ -1,0 +1,88 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-level-4-architect",
+  "title": "Level 4 — Architect",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-68-level-4-architect",
+  "summary": "## Level 4 — Architect",
+  "body": "## Level 4 — Architect\n\nCan place the capability correctly inside a secure, scalable production platform.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-68-level-4-architect",
+    "canonical_record_title": "Level 4 — Architect",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "Level 4 — Architect",
+    "canonical_parent": "12. Definition of Mastery",
+    "source_line_start": 1907,
+    "source_line_end": 1910,
+    "source_authority": 12,
+    "semantic_text": "Level 4 — Architect\nLevel 4 — Architect\nai_architecture causal_intelligence enterprise_architecture\nai_architecture causal_intelligence enterprise_architecture\n## Level 4 — Architect\n\nCan place the capability correctly inside a secure, scalable production platform.",
+    "keyword_terms": [
+      "ai_architecture",
+      "architect",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "level"
+    ],
+    "exact_phrases": [
+      "Level 4 — Architect",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "d53fb51da0124bdc7be2225c06bd74691e32a5f0ed6dfccd4c98e8e25651a157"
+  }
+}

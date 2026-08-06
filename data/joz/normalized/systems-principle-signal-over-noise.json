@@ -23,6 +23,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -35,6 +38,7 @@
     "source_notes": null,
     "source_filename": "systems-principle-signal-over-noise.md",
     "source_meta_filename": "systems-principle-signal-over-noise.meta.json",
+    "source_checksum": "7761c4d1d897c266be63fd6f0035f3e2bb8f6cbb1781b21d5185972df0407c4d",
     "reviewed_at": "",
     "problems": [
       "knowledge_fragmentation",
@@ -56,16 +60,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "f2f315c4664429487ee5ee549728516f163b44b53caee86acaaa1370c92da62f",
-    "source_uri": null
+    "measurable_outcome_count": 1
   }
 }

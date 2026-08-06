@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -38,7 +41,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [
       "systems_before_features"
@@ -64,6 +67,10 @@
       "canonical",
       "infrastructure"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Canonical Infrastructure Principle\nCanonical Infrastructure Principle\ncanonical infrastructure\ncanonical infrastructure\nContainers package services.\nKubernetes runs and scales them.\nCloud provides the environment.\nDatabases store durable state.\nQueues and events coordinate work.\nSecrets systems protect credentials.\nObservability explains what happened.\nCI/CD ships changes safely.",
     "keyword_terms": [
@@ -76,15 +83,6 @@
       "canonical",
       "infrastructure"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "ec3d71fa31a5bc1037305c239ec7b49deefe4d75ebe1ca94901158ecb632db55",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_048"
+    "source_checksum": "868181d9e0f7dc95af38808a854a0bfc7ff30c552b12a4d45fe810d9b4888316"
   }
 }

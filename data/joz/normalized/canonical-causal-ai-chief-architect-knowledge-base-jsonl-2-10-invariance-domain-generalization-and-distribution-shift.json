@@ -1,0 +1,115 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-10-invariance-domain-generalization-and-distribution-shift",
+  "title": "2.10 Invariance, Domain Generalization and Distribution Shift",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-11-2-10-invariance-domain-generalization-and-distribution-shift",
+  "summary": "## 2.10 Invariance, Domain Generalization and Distribution Shift",
+  "body": "## 2.10 Invariance, Domain Generalization and Distribution Shift\n\n### Essential concepts\n\n- Covariate shift\n- Label shift\n- Concept drift\n- Mechanism shift\n- Environment variables\n- Invariant predictors\n- Invariant risk minimization\n- Stable prediction\n- Domain adaptation\n- Domain generalization\n- Out-of-distribution detection\n- Change-point detection\n- Regime switching\n- Transportability\n- Dataset shift monitoring\n\n### Mastery questions\n\n- Which causal mechanisms are expected to remain stable?\n- Which mechanisms can change across sites, markets or regimes?\n- What environmental variation helps identify stable predictors?\n- When does an invariant model sacrifice in-distribution accuracy for robustness?\n- How is the system prevented from acting under unsupported distribution shift?\n\n### Implementation exercises\n\n- Train predictive and invariant models across multiple environments.\n- Simulate supply-chain shocks and sensor failures.\n- Compare in-distribution and OOD performance.\n- Build a shift-triggered safe-mode policy.\n- Revalidate causal assumptions after regime changes.\n\n### Evidence artifacts\n\n- Environment registry\n- Invariance test suite\n- OOD monitoring service\n- Safe-degradation policy\n- Transportability assessment\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "observability"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-11-2-10-invariance-domain-generalization-and-distribution-shift",
+    "canonical_record_title": "2.10 Invariance, Domain Generalization and Distribution Shift",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "mlops_observability"
+    ],
+    "canonical_section": "2.10 Invariance, Domain Generalization and Distribution Shift",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 504,
+    "source_line_end": 549,
+    "source_authority": 12,
+    "semantic_text": "2.10 Invariance, Domain Generalization and Distribution Shift\n2.10 Invariance, Domain Generalization and Distribution Shift\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture mlops_observability\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture mlops_observability\n## 2.10 Invariance, Domain Generalization and Distribution Shift\n\n### Essential concepts\n\n- Covariate shift\n- Label shift\n- Concept drift\n- Mechanism shift\n- Environment variables\n- Invariant predictors\n- Invariant risk minimization\n- Stable prediction\n- Domain adaptation\n- Domain generalization\n- Out-of-distribution detection\n- Change-point detection\n- Regime switching\n- Transportability\n- Dataset shift monitoring\n\n### Mastery questions\n\n- Which causal mechanisms are expected to remain stable?\n- Which mechanisms can change across sites, markets or regimes?\n- What environmental variation helps identify stable predictors?\n- When does an invariant model sacrifice in-distribution accuracy for robustness?\n- How is the system prevented from acting under unsupported distribution shift?\n\n### Implementation exercises\n\n- Train predictive and invariant models across multiple environments.\n- Simulate supply-chain shocks and sensor failures.\n- Compare in-distribution and OOD performance.\n- Build a shift-triggered safe-mode policy.\n- Revalidate causal assumptions after regime changes.\n\n### Evidence artifacts\n\n- Environment registry\n- Invariance test suite\n- OOD monitoring service\n- Safe-degradation policy\n- Transportability assessment\n\n---",
+    "keyword_terms": [
+      "10",
+      "ai_architecture",
+      "and",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distribution",
+      "domain",
+      "enterprise_architecture",
+      "generalization",
+      "invariance",
+      "mlops_observability",
+      "shift"
+    ],
+    "exact_phrases": [
+      "2.10 Invariance, Domain Generalization and Distribution Shift",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "mlops_observability"
+    ],
+    "source_checksum": "12435cd8c61c0eafd617f516330a5a0f5c9016da6fe840ccf2e97b40c9e9ee73"
+  }
+}

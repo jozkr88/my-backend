@@ -1,0 +1,113 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-days-61-75-agentic-decision-workflow",
+  "title": "Days 61–75 — Agentic decision workflow",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-55-days-61-75-agentic-decision-workflow",
+  "summary": "## Days 61–75 — Agentic decision workflow",
+  "body": "## Days 61–75 — Agentic decision workflow\n\n- natural-language query\n- typed causal request\n- agent orchestration\n- durable workflow\n- human approval\n- explanation and audit\n\nDeliverable: end-to-end decision workflow.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-55-days-61-75-agentic-decision-workflow",
+    "canonical_record_title": "Days 61–75 — Agentic decision workflow",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "Days 61–75 — Agentic decision workflow",
+    "canonical_parent": "10. 90-Day Build Sequence",
+    "source_line_start": 1792,
+    "source_line_end": 1802,
+    "source_authority": 12,
+    "semantic_text": "Days 61–75 — Agentic decision workflow\nDays 61–75 — Agentic decision workflow\nagentic_ai ai_architecture causal_inference causal_intelligence governance\nagentic_ai ai_architecture causal_inference causal_intelligence governance\n## Days 61–75 — Agentic decision workflow\n\n- natural-language query\n- typed causal request\n- agent orchestration\n- durable workflow\n- human approval\n- explanation and audit\n\nDeliverable: end-to-end decision workflow.",
+    "keyword_terms": [
+      "61",
+      "75",
+      "agentic",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "days",
+      "decision",
+      "governance",
+      "workflow"
+    ],
+    "exact_phrases": [
+      "Days 61–75 — Agentic decision workflow",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "04983c3aec70a258f8121e4bdfdd8757e176f7ca69a85bf1be418be0b4174b36"
+  }
+}

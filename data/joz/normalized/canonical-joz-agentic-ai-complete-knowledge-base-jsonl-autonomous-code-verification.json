@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -64,6 +67,10 @@
       "testing",
       "verification"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Autonomous Code Verification\nAutonomous Code Verification\nautonomous-code testing verification\nautonomous-code testing verification\nEvery autonomous code change should pass:\n\nUnit tests\nIntegration tests\nType checking\nLinting\nSecurity scanning\nDependency checks\nArchitectural checks\nBusiness-intent validation\n\nIf verification fails, the agent repairs the issue and repeats the verification cycle.",
     "keyword_terms": [
@@ -79,15 +86,6 @@
       "testing",
       "verification"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "076c96ea9a500a0ef57875c5da6107312b2c1adbd2ef4acdaf073b1201775946",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_033"
+    "source_checksum": "8d454fc190872c2a30cd2f2653730a48d3510a4921e2fc30c8863833603f93f6"
   }
 }

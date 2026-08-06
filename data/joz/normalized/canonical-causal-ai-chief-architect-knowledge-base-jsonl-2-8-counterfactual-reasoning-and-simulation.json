@@ -1,0 +1,104 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-8-counterfactual-reasoning-and-simulation",
+  "title": "2.8 Counterfactual Reasoning and Simulation",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-09-2-8-counterfactual-reasoning-and-simulation",
+  "summary": "## 2.8 Counterfactual Reasoning and Simulation",
+  "body": "## 2.8 Counterfactual Reasoning and Simulation\n\n### Essential concepts\n\n- Unit-level counterfactuals\n- Population interventions\n- Abduction-action-prediction\n- Twin networks\n- Counterfactual fairness\n- Scenario trees\n- Monte Carlo simulation\n- Sequential interventions\n- Dynamic treatment regimes\n- Policy simulation\n- Uncertainty propagation\n- Sensitivity analysis\n- Rare-event simulation\n- Surrogate models\n\n### High-throughput engine architecture\n\n- Scenario compiler\n- Intervention normalizer\n- Model snapshot resolver\n- Parameter sampler\n- Distributed simulation scheduler\n- State-transition engine\n- Constraint evaluator\n- Result aggregator\n- Uncertainty calculator\n- Provenance recorder\n- Cache and deduplication layer\n- Reproducibility manifest\n\n### Performance questions\n\n- What is the unit of parallelism?\n- Which simulations are independent?\n- Which state is shared?\n- How are random seeds controlled?\n- How are repeated subgraphs cached?\n- When should execution use CPU, GPU or C++?\n- How are failed or partial simulations resumed?\n- How is result determinism tested?\n\n### Evidence artifacts\n\n- Distributed counterfactual simulator\n- Scenario DSL\n- Simulation manifest\n- Reproducibility test suite\n- Performance and scaling benchmark\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [
+      "confidence_handling",
+      "evaluation",
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-09-2-8-counterfactual-reasoning-and-simulation",
+    "canonical_record_title": "2.8 Counterfactual Reasoning and Simulation",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "2.8 Counterfactual Reasoning and Simulation",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 402,
+    "source_line_end": 456,
+    "source_authority": 12,
+    "semantic_text": "2.8 Counterfactual Reasoning and Simulation\n2.8 Counterfactual Reasoning and Simulation\nai_architecture causal_inference causal_intelligence distributed_systems enterprise_architecture\nai_architecture causal_inference causal_intelligence distributed_systems enterprise_architecture\n## 2.8 Counterfactual Reasoning and Simulation\n\n### Essential concepts\n\n- Unit-level counterfactuals\n- Population interventions\n- Abduction-action-prediction\n- Twin networks\n- Counterfactual fairness\n- Scenario trees\n- Monte Carlo simulation\n- Sequential interventions\n- Dynamic treatment regimes\n- Policy simulation\n- Uncertainty propagation\n- Sensitivity analysis\n- Rare-event simulation\n- Surrogate models\n\n### High-throughput engine architecture\n\n- Scenario compiler\n- Intervention normalizer\n- Model snapshot resolver\n- Parameter sampler\n- Distributed simulation scheduler\n- State-transition engine\n- Constraint evaluator\n- Result aggregator\n- Uncertainty calculator\n- Provenance recorder\n- Cache and deduplication layer\n- Reproducibility manifest\n\n### Performance questions\n\n- What is the unit of parallelism?\n- Which simulations are independent?\n- Which state is shared?\n- How are random seeds controlled?\n- How are repeated subgraphs cached?\n- When should execution use CPU, GPU or C++?\n- How are failed or partial simulations resumed?\n- How is result determinism tested?\n\n### Evidence artifacts\n\n- Distributed counterfactual simulator\n- Scenario DSL\n- Simulation manifest\n- Reproducibility test suite\n- Performance and scaling benchmark\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal_inference",
+      "causal_intelligence",
+      "counterfactual",
+      "distributed_systems",
+      "enterprise_architecture",
+      "reasoning",
+      "simulation"
+    ],
+    "exact_phrases": [
+      "2.8 Counterfactual Reasoning and Simulation",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "04d81f38f199d96eb72b53cffb63c20fe1f63b76b5ba2edbc5a937637e014f85"
+  }
+}

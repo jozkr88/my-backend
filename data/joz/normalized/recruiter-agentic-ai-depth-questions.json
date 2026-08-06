@@ -31,6 +31,9 @@
       "Existing architecture records cover orchestration, RAG, embeddings, memory, ACL-aware retrieval, verification, and observability.",
       "Current Joz LLM and MC USA work provide live-system relevance."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -47,6 +50,7 @@
     "source_notes": null,
     "source_filename": "recruiter-agentic-ai-depth-questions.md",
     "source_meta_filename": "recruiter-agentic-ai-depth-questions.meta.json",
+    "source_checksum": "f52c44cffcbf1f70662e957d128a103d287ad9d342ad00f929456292c2e57cdd",
     "reviewed_at": "2026-07-14",
     "problems": [],
     "principles": [],
@@ -57,16 +61,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "246496654f994221d6c828ffedd35bd7533f2ff69f21f215eef8a5eb635c823f",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

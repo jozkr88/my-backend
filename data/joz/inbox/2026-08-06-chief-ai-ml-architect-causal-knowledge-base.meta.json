@@ -1,0 +1,82 @@
+{
+  "slug": "2026-08-06-chief-ai-ml-architect-causal-knowledge-base",
+  "title": "Chief AI/ML Architect — Causal AI and Enterprise Decision Operating Systems",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "A structured blueprint covering causal inference, causal graphs, enterprise knowledge systems, agentic decisioning, deterministic controls, platform architecture, and a 90-day evidence-building sequence.",
+  "tags": [
+    "causal_intelligence",
+    "ai_architecture",
+    "enterprise_decision_systems",
+    "causal_inference",
+    "structural_causal_models",
+    "causal_discovery",
+    "counterfactuals",
+    "knowledge_graphs",
+    "agentic_ai",
+    "neuro_symbolic_ai",
+    "enterprise_architecture",
+    "governance",
+    "mlops",
+    "distributed_systems"
+  ],
+  "impact_score": 98,
+  "priority_label": "hero",
+  "source_type": "reference_dataset",
+  "source_uri": "source://joz/causal-intelligence/chief-ai-ml-architect-knowledge-base",
+  "dataset_id": "joz-causal-ai-chief-architect-v1",
+  "causal_model_version": "joz-causal-architecture-v2",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "codex",
+    "reviewed_at": "2026-08-06",
+    "notes": "Supplied master blueprint. It is a learning and architecture corpus, not evidence of personal production delivery. Section-level canonical records are generated from this source for retrieval and study."
+  },
+  "claims": [
+    "A chief-level causal AI architecture must connect theory, algorithms, implementation, enterprise application, validation, and leadership decisions.",
+    "A causal decision operating system should connect observations to causal models, interventions, counterfactuals, deterministic controls, approved actions, and post-action verification.",
+    "Causal discovery outputs candidate structures and must not be treated as proven causal evidence without assumptions, domain review, and validation.",
+    "Knowledge graphs, causal models, evidence, and model versions should be connected while remaining distinct system boundaries."
+  ],
+  "proof_points": [],
+  "regions": [],
+  "companies": [],
+  "projects": [],
+  "intent_families": ["skills", "business_need", "systems_mindset"],
+  "sub_intents": ["technical_stack", "system_architecture", "governance", "orchestration", "retrieval"],
+  "causal_claims": [
+    {
+      "id": "decision-os-connects-observation-to-verification",
+      "subject": "Enterprise Observation",
+      "object": "Verified Operational Action",
+      "relation": "is_transformed_into",
+      "claim_type": "decision_operating_system",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.96,
+      "assumptions": ["Observations have usable provenance and the action boundary is governed."],
+      "evidence": ["chief-ai-ml-architect-knowledge-base"]
+    },
+    {
+      "id": "causal-discovery-requires-domain-validation",
+      "subject": "Causal Discovery Output",
+      "object": "Validated Causal Model",
+      "relation": "requires",
+      "claim_type": "causal_governance",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["Discovery assumptions, domain constraints, and refutation results are retained."],
+      "evidence": ["chief-ai-ml-architect-knowledge-base"]
+    },
+    {
+      "id": "evidence-and-model-versions-should-be-linked",
+      "subject": "Causal Claim",
+      "object": "Evidence and Model Version",
+      "relation": "requires_provenance_from",
+      "claim_type": "causal_governance",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["Claims can be reviewed, refuted, superseded, or restricted to a context."],
+      "evidence": ["chief-ai-ml-architect-knowledge-base"]
+    }
+  ]
+}

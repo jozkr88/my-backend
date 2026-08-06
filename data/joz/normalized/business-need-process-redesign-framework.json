@@ -33,6 +33,9 @@
       "This framework is aligned with governance, evaluation, and decision-quality principles already present in the corpus.",
       "Process redesign language is stronger for enterprise stakeholders than generic automation claims."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -49,6 +52,7 @@
     "source_notes": null,
     "source_filename": "business-need-process-redesign-framework.md",
     "source_meta_filename": "business-need-process-redesign-framework.meta.json",
+    "source_checksum": "110edea4926c181e79bef69a816004d4102c2dde2de411752ae650084338dfeb",
     "reviewed_at": "",
     "problems": [
       "manual_knowledge_work",
@@ -86,16 +90,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "56bea4939cc7430d1b78327bfe6b0cb71143f5cb38e0996750b0007d4bb32c2f",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

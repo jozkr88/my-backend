@@ -32,6 +32,9 @@
       "The broader Maybank proof includes 20× digital sales growth within 12 months.",
       "The broader programme also includes 3,000+ wealth pilots and ML models for HNW and mass-market contexts."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Singapore"
@@ -65,6 +68,7 @@
     "source_notes": "Grouped programme record. Quantified Maybank growth is referenced only through existing proof objects.",
     "source_filename": "maybank-private-banking-digital.md",
     "source_meta_filename": "maybank-private-banking-digital.meta.json",
+    "source_checksum": "06e092d95cbbd9342fee3ca27b6616df7ded2e4b372d772d4fbe5253e5a2a2f5",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -94,16 +98,6 @@
       "maybank_digital_sales_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "f96201bc4db937789162f3c3e7a394c70f18fc699b4cc69691adda71a36491c4",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

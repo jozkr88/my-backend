@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -64,6 +67,10 @@
       "ingress",
       "kubernetes"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Ingress and API Gateway\nIngress and API Gateway\napi-gateway ingress kubernetes\napi-gateway ingress kubernetes\nIngress routes external HTTP traffic into Kubernetes services.\n\nAn API Gateway adds:\nAuthentication\nRate limiting\nRequest routing\nVersioning\nQuotas\nTraffic policies\nObservability\n\nIngress = traffic entry into the cluster.\nAPI Gateway = managed front door and control layer for APIs.",
     "keyword_terms": [
@@ -80,15 +87,6 @@
       "ingress",
       "kubernetes"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "a3d0661ee158b90a7108b04838cbca0b2ba1cb104993cda7c60f5d91f6648b5f",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_009"
+    "source_checksum": "725ce34274eba8c5971e2df2077abf6d65e1aa65fed2da51ad7aabe8540bb71d"
   }
 }

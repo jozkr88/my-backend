@@ -34,6 +34,9 @@
       "Existing operational recruiter records establish direct contact details at joz@meetjoz.com and +65 3107 2412.",
       "Recruiter benchmark rules define how to handle unverified operational facts."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA",
@@ -53,6 +56,7 @@
     "source_notes": null,
     "source_filename": "recruiter-core-screening-questions.md",
     "source_meta_filename": "recruiter-core-screening-questions.meta.json",
+    "source_checksum": "0de1153c6149f039a2937595986d84b5069983a94e6a49a9b20349100e84b59b",
     "reviewed_at": "2026-07-27",
     "problems": [],
     "principles": [],
@@ -63,16 +67,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "db10282737efb1bcba6e18dab188d3716f5f944ff0332da2889f54c364b30c6b",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

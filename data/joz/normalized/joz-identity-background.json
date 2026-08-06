@@ -38,12 +38,14 @@
       "The academic record anchors to the University of Central Lancashire MSc in 2008.",
       "Regional career references align with the broader CV and profile footprint."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Dubai",
       "Europe",
       "Global",
       "Singapore",
-      "Europe",
       "United Kingdom"
     ],
     "companies": [
@@ -67,6 +69,7 @@
     "source_notes": "Canonical identity-background record. Heritage must not be upgraded into nationality or citizenship.",
     "source_filename": "joz-identity-background.md",
     "source_meta_filename": "joz-identity-background.meta.json",
+    "source_checksum": "ba99503a876133a2107dd440da3f2efa93584d17b8b375313f5a8a005aa3a54d",
     "reviewed_at": "2026-07-12",
     "problems": [],
     "principles": [],
@@ -77,16 +80,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "7df6c55b2cca69684e582dfadb3f8dc5e547de2edab07fbf7345864a08e2debd",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

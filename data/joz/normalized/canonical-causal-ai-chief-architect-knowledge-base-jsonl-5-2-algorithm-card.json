@@ -1,0 +1,90 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-5-2-algorithm-card",
+  "title": "5.2 Algorithm Card",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-39-5-2-algorithm-card",
+  "summary": "## 5.2 Algorithm Card",
+  "body": "## 5.2 Algorithm Card\n\n```yaml\nalgorithm:\nproblem:\ninputs:\noutputs:\nassumptions:\nobjective:\nprocedure:\ncomplexity:\nhyperparameters:\nstrengths:\nlimitations:\nfailure_modes:\ndiagnostics:\nalternatives:\nimplementation:\nbenchmark:\nenterprise_fit:\n```",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "organizational_complexity"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-39-5-2-algorithm-card",
+    "canonical_record_title": "5.2 Algorithm Card",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "5.2 Algorithm Card",
+    "canonical_parent": "5. Knowledge Object Templates",
+    "source_line_start": 1465,
+    "source_line_end": 1486,
+    "source_authority": 12,
+    "semantic_text": "5.2 Algorithm Card\n5.2 Algorithm Card\nai_architecture causal_intelligence enterprise_architecture\nai_architecture causal_intelligence enterprise_architecture\n## 5.2 Algorithm Card\n\n```yaml\nalgorithm:\nproblem:\ninputs:\noutputs:\nassumptions:\nobjective:\nprocedure:\ncomplexity:\nhyperparameters:\nstrengths:\nlimitations:\nfailure_modes:\ndiagnostics:\nalternatives:\nimplementation:\nbenchmark:\nenterprise_fit:\n```",
+    "keyword_terms": [
+      "ai_architecture",
+      "algorithm",
+      "card",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "exact_phrases": [
+      "5.2 Algorithm Card",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "88ff7fa5de8515a46df98a75a7975ce841da789d46f9b634cc08ea823480574b"
+  }
+}

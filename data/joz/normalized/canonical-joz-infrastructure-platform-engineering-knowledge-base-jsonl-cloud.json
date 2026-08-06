@@ -18,12 +18,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "unclear_roi"
     ],
@@ -73,6 +76,10 @@
       "cloud",
       "gcp"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Cloud\nCloud\naws azure cloud gcp\naws azure cloud gcp\nCloud provides compute, networking, storage, managed databases, queues, identity, observability, and deployment services.\n\nTypical providers:\nAWS\nMicrosoft Azure\nGoogle Cloud Platform\n\nCloud = where the platform runs.\nIt should be designed for availability, isolation, cost control, scalability, and recoverability.",
     "keyword_terms": [
@@ -88,15 +95,6 @@
       "cloud",
       "gcp"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "a35204e24b63a32aaff51ee01832a3282e3f4824f298377656d2dacd032baf9e",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_003"
+    "source_checksum": "97d3185b8036a8192c0589573d3bf0be3b9ec58712eb6f40a36e86e5f1f513bb"
   }
 }

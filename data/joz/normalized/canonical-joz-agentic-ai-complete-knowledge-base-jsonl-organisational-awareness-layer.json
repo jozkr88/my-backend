@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -43,7 +46,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "knowledge_fragmentation",
       "low_trust"
@@ -80,6 +83,10 @@
       "enterprise-ai",
       "organisational-awareness"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Organisational Awareness Layer\nOrganisational Awareness Layer\nbrain enterprise-ai organisational-awareness\nbrain enterprise-ai organisational-awareness\nThe Organisational Awareness Layer transforms fragmented company information into trusted collective intelligence.\n\nArchitecture:\nConnectors → Processing → Knowledge Layer → ACL-Aware Retrieval → Answering\n\nConnectors ingest data from GitHub, Slack, documentation systems, wikis, ticketing tools, architecture repositories, and other approved enterprise sources.\n\nProcessing performs data cleaning, normalization, deduplication, chunking, metadata tagging, sensitivity classification, ownership extraction, recency analysis, and embedding generation.",
     "keyword_terms": [
@@ -96,15 +103,6 @@
       "enterprise-ai",
       "organisational-awareness"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "6e8ca2da9c0bb065db8a2a6c80c8a79e6758119bbdff8ed96b553339dd13a8ca",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_026"
+    "source_checksum": "bd3557c42e5c6bd057e2c05b4ceece0e345b8a9e34e93af8bec80d234553f9ab"
   }
 }

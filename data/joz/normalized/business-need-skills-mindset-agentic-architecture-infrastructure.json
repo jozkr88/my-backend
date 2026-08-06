@@ -33,6 +33,9 @@
       "The distinction supports cleaner positioning and cleaner implementation decisions.",
       "It aligns with the current direction of separating business-useful knowledge from runtime and control mechanics."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -49,6 +52,7 @@
     "source_notes": null,
     "source_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.md",
     "source_meta_filename": "business-need-skills-mindset-agentic-architecture-infrastructure.meta.json",
+    "source_checksum": "e803211ca695420719a18d9a765aa3ef943d2583570ceb01ea43616baeec3fbb",
     "reviewed_at": "",
     "problems": [
       "knowledge_fragmentation",
@@ -81,16 +85,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "4e3a56183c729297f0463f21a1eadcfa2acd72fcd1005490c10ce16943439886",
-    "source_uri": null
+    "measurable_outcome_count": 1
   }
 }

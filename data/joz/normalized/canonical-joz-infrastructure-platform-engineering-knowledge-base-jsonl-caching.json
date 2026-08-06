@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "unclear_roi"
     ],
@@ -69,6 +72,10 @@
       "performance",
       "redis"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Caching\nCaching\ncache performance redis\ncache performance redis\nCaching stores frequently used data closer to the application.\n\nBenefits:\nLower latency\nReduced database load\nReduced external API cost\nHigher throughput\n\nRisks:\nStale data\nIncorrect invalidation\nMemory pressure\nInconsistent state\n\nNever treat cache as the source of truth.",
     "keyword_terms": [
@@ -83,15 +90,6 @@
       "performance",
       "redis"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "c3a19516f2441e2f504db15f1d907c6d865f327fa7290e27a81239ea9a2d0914",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_017"
+    "source_checksum": "298834a66866c17bec8d8874212d6c38efd36fb9bd8a53553f5eaaf5ee443263"
   }
 }

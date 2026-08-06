@@ -1,0 +1,108 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-layer-9-platform-operations",
+  "title": "Layer 9 — Platform Operations",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-37-layer-9-platform-operations",
+  "summary": "## Layer 9 — Platform Operations",
+  "body": "## Layer 9 — Platform Operations\n\n- Kubernetes\n- infrastructure as code\n- model and graph registry\n- CI/CD\n- observability\n- security\n- audit\n- disaster recovery\n\n---\n\n# 5. Knowledge Object Templates",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "observability"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-37-layer-9-platform-operations",
+    "canonical_record_title": "Layer 9 — Platform Operations",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "canonical_section": "Layer 9 — Platform Operations",
+    "canonical_parent": "4. Reference Platform Architecture",
+    "source_line_start": 1431,
+    "source_line_end": 1445,
+    "source_authority": 12,
+    "semantic_text": "Layer 9 — Platform Operations\nLayer 9 — Platform Operations\nai_architecture causal_intelligence enterprise_architecture governance mlops_observability\nai_architecture causal_intelligence enterprise_architecture governance mlops_observability\n## Layer 9 — Platform Operations\n\n- Kubernetes\n- infrastructure as code\n- model and graph registry\n- CI/CD\n- observability\n- security\n- audit\n- disaster recovery\n\n---\n\n# 5. Knowledge Object Templates",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "layer",
+      "mlops_observability",
+      "operations",
+      "platform"
+    ],
+    "exact_phrases": [
+      "Layer 9 — Platform Operations",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "source_checksum": "93978ee2ddad52f48bdb80a03778b9f6569f512f3d621fcc384b7c9dfb4f4eda"
+  }
+}

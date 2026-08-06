@@ -1,0 +1,104 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-5-causal-graph-discovery",
+  "title": "2.5 Causal Graph Discovery",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-06-2-5-causal-graph-discovery",
+  "summary": "## 2.5 Causal Graph Discovery",
+  "body": "## 2.5 Causal Graph Discovery\n\n### Algorithm families\n\n- Constraint-based methods\n- Score-based methods\n- Functional causal models\n- Continuous optimization methods\n- Hybrid methods\n- Interventional causal discovery\n- Latent-confounder-aware discovery\n- Nonlinear discovery\n- Differentiable discovery\n\n### Algorithms to study\n\n- PC\n- FCI and RFCI\n- GES\n- LiNGAM\n- NOTEARS\n- DAG-GNN\n- additive-noise models\n- post-nonlinear models\n- invariant-based discovery\n- interventional discovery methods\n\n### Critical assumptions\n\n- Causal sufficiency\n- Faithfulness\n- Acyclicity\n- Independent noise\n- Functional form\n- Sampling regime\n- Stationarity\n- Absence or modeling of selection bias\n\n### Implementation exercises\n\n- Benchmark several discovery algorithms on synthetic ground truth.\n- Measure structural Hamming distance.\n- Vary sample size, noise, latent confounding and nonlinearities.\n- Inject domain constraints before and after discovery.\n- Compare discovered graphs with expert-authored graphs.\n\n### Evidence artifacts\n\n- Discovery benchmark suite\n- Synthetic causal-data generator\n- Graph-confidence report\n- Expert-review workflow\n- Edge provenance and confidence model\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "low_trust",
+      "operational_friction"
+    ],
+    "principles": [
+      "signal_over_noise"
+    ],
+    "capabilities": [
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [
+      "confidence_handling",
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-06-2-5-causal-graph-discovery",
+    "canonical_record_title": "2.5 Causal Graph Discovery",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "canonical_section": "2.5 Causal Graph Discovery",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 241,
+    "source_line_end": 296,
+    "source_authority": 12,
+    "semantic_text": "2.5 Causal Graph Discovery\n2.5 Causal Graph Discovery\nai_architecture causal_discovery causal_inference causal_intelligence\nai_architecture causal_discovery causal_inference causal_intelligence\n## 2.5 Causal Graph Discovery\n\n### Algorithm families\n\n- Constraint-based methods\n- Score-based methods\n- Functional causal models\n- Continuous optimization methods\n- Hybrid methods\n- Interventional causal discovery\n- Latent-confounder-aware discovery\n- Nonlinear discovery\n- Differentiable discovery\n\n### Algorithms to study\n\n- PC\n- FCI and RFCI\n- GES\n- LiNGAM\n- NOTEARS\n- DAG-GNN\n- additive-noise models\n- post-nonlinear models\n- invariant-based discovery\n- interventional discovery methods\n\n### Critical assumptions\n\n- Causal sufficiency\n- Faithfulness\n- Acyclicity\n- Independent noise\n- Functional form\n- Sampling regime\n- Stationarity\n- Absence or modeling of selection bias\n\n### Implementation exercises\n\n- Benchmark several discovery algorithms on synthetic ground truth.\n- Measure structural Hamming distance.\n- Vary sample size, noise, latent confounding and nonlinearities.\n- Inject domain constraints before and after discovery.\n- Compare discovered graphs with expert-authored graphs.\n\n### Evidence artifacts\n\n- Discovery benchmark suite\n- Synthetic causal-data generator\n- Graph-confidence report\n- Expert-review workflow\n- Edge provenance and confidence model\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "discovery",
+      "graph"
+    ],
+    "exact_phrases": [
+      "2.5 Causal Graph Discovery",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "source_checksum": "49f565f29861fd4a58f7cdb456520e17fd7f6fcf9e87009b82598957469c7b81"
+  }
+}

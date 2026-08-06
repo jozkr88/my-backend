@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -37,7 +40,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [
       "systems_before_features"
@@ -60,6 +63,10 @@
       "resilience",
       "retries"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Retries and Backoff\nRetries and Backoff\nbackoff resilience retries\nbackoff resilience retries\nRetries should use bounded attempts, exponential backoff, and jitter.\n\nUncontrolled retries can overload failing systems and create cascading failures.\n\nRetry only operations that are safe and idempotent.",
     "keyword_terms": [
@@ -74,15 +81,6 @@
       "resilience",
       "retries"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "cfbf3a27c9dcf028e18e51b1eac380ec8f6e11e9382f57af166e4782be4a344b",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_036"
+    "source_checksum": "8e21d70f23cabf6beade8f180f9e15b07a828e6e16f26fda22b01ad1ceb923f8"
   }
 }

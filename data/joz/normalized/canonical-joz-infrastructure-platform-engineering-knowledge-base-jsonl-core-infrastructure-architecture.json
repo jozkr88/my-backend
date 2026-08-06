@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -45,7 +48,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -78,6 +81,10 @@
       "cloud",
       "platform"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Core Infrastructure Architecture\nCore Infrastructure Architecture\narchitecture cloud platform\narchitecture cloud platform\nUser → DNS/CDN → Load Balancer or API Gateway → FastAPI/API Services → Agent Workers → Tools and Domain Services → Databases and External Systems\n\nSupporting layers:\nContainers\nKubernetes\nWorkflow durability\nCaching\nEvent transport\nSecrets management\nObservability\nCI/CD\nSecurity controls\nDisaster recovery",
     "keyword_terms": [
@@ -93,15 +100,6 @@
       "cloud",
       "platform"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "3bed866de82b2eb0d9841efb8298ce461989942f6788fa8afcf43fa6024b70f1",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_002"
+    "source_checksum": "45b4fbd8636600831ba2fe9191220ba0b4f2891d5fe448807701a7f2ab6ea60a"
   }
 }

@@ -1,0 +1,121 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-13-neuro-symbolic-ai",
+  "title": "2.13 Neuro-Symbolic AI",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-14-2-13-neuro-symbolic-ai",
+  "summary": "## 2.13 Neuro-Symbolic AI",
+  "body": "## 2.13 Neuro-Symbolic AI\n\n### Core architecture\n\nNeural and probabilistic components provide:\n\n- perception;\n- representation learning;\n- language understanding;\n- uncertainty estimates;\n- candidate generation;\n- pattern recognition.\n\nSymbolic components provide:\n\n- business rules;\n- conservation laws;\n- accounting invariants;\n- safety constraints;\n- permissions;\n- logical consistency;\n- planning operators;\n- proof and validation.\n\n### Methods to study\n\n- Logic programming\n- Datalog\n- Rule engines\n- Constraint programming\n- SAT and SMT solving\n- Probabilistic logic\n- Differentiable logic\n- Neural theorem proving\n- Program synthesis\n- Knowledge-graph reasoning\n- Planning-domain languages\n\n### Integration patterns\n\n- Neural proposal, symbolic verification\n- Symbolic planner, neural heuristic\n- LLM translation, schema validation, deterministic execution\n- Probabilistic estimate, rule-based eligibility\n- Causal recommendation, optimization under constraints\n- Knowledge-graph retrieval, theorem or constraint checking\n\n### Evidence artifacts\n\n- Constraint-backed planning demo\n- Rule-and-model conflict resolver\n- Symbolic proof trace\n- Neural proposal acceptance gate\n- Deterministic fallback path\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "acl",
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "ai_governance",
+      "enterprise_architecture",
+      "rag",
+      "verification"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "confidence_handling",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-14-2-13-neuro-symbolic-ai",
+    "canonical_record_title": "2.13 Neuro-Symbolic AI",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "canonical_section": "2.13 Neuro-Symbolic AI",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 667,
+    "source_line_end": 723,
+    "source_authority": 12,
+    "semantic_text": "2.13 Neuro-Symbolic AI\n2.13 Neuro-Symbolic AI\nagentic_ai ai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture governance\nagentic_ai ai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture governance\n## 2.13 Neuro-Symbolic AI\n\n### Core architecture\n\nNeural and probabilistic components provide:\n\n- perception;\n- representation learning;\n- language understanding;\n- uncertainty estimates;\n- candidate generation;\n- pattern recognition.\n\nSymbolic components provide:\n\n- business rules;\n- conservation laws;\n- accounting invariants;\n- safety constraints;\n- permissions;\n- logical consistency;\n- planning operators;\n- proof and validation.\n\n### Methods to study\n\n- Logic programming\n- Datalog\n- Rule engines\n- Constraint programming\n- SAT and SMT solving\n- Probabilistic logic\n- Differentiable logic\n- Neural theorem proving\n- Program synthesis\n- Knowledge-graph reasoning\n- Planning-domain languages\n\n### Integration patterns\n\n- Neural proposal, symbolic verification\n- Symbolic planner, neural heuristic\n- LLM translation, schema validation, deterministic execution\n- Probabilistic estimate, rule-based eligibility\n- Causal recommendation, optimization under constraints\n- Knowledge-graph retrieval, theorem or constraint checking\n\n### Evidence artifacts\n\n- Constraint-backed planning demo\n- Rule-and-model conflict resolver\n- Symbolic proof trace\n- Neural proposal acceptance gate\n- Deterministic fallback path\n\n---",
+    "keyword_terms": [
+      "13",
+      "agentic_ai",
+      "ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "neuro",
+      "symbolic"
+    ],
+    "exact_phrases": [
+      "2.13 Neuro-Symbolic AI",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "source_checksum": "9aad8981a22da081eb6771a08cb102c0e1a97875a910dd97ce3454b076a4fbe5"
+  }
+}

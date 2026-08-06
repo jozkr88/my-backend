@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "unclear_roi"
     ],
@@ -73,6 +76,10 @@
       "approach",
       "joz"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "How Joz Builds\nHow Joz Builds\napproach joz\napproach joz\nJoz starts with user intent, defines architecture boundaries, exposes capabilities through tools, adds security and policy controls, implements deterministic execution, verifies outcomes, and improves the system through measurement and feedback.\n\nJoz combines systems thinking, financial architecture, AI orchestration, product judgment, and AI-assisted implementation.",
     "keyword_terms": [
@@ -86,15 +93,6 @@
       "approach",
       "joz"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "45cef6b1d7b8794a8e87ca6c0ad36ba4432ea48664651cca9e579dd490b3e5a9",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_025"
+    "source_checksum": "ea60844ac56e423964982e1425d6dae0f0e2f13c1c645558454a26ab5ff65085"
   }
 }

@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "manual_knowledge_work"
     ],
@@ -66,6 +69,10 @@
       "multi-agent",
       "shared-state"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Single-Agent and Multi-Agent\nSingle-Agent and Multi-Agent\nmulti-agent shared-state\nmulti-agent shared-state\nStart with one orchestrator agent. Use multiple agents only when responsibilities are clearly separable.\n\nTypical specialists:\nResearch Agent\nPortfolio Agent\nRisk Agent\nExecution Agent\nVerification Agent\nSupervisor Agent\n\nAgents should communicate through typed shared state rather than unrestricted free-form conversations.",
     "keyword_terms": [
@@ -81,15 +88,6 @@
       "multi-agent",
       "shared-state"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "80b95c81e6f5c65acf89b21abd27c6e5859f4ce7c270800c98b222022a8607b3",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_005"
+    "source_checksum": "bd18596358f847ec354b54a2869a7fc504a6a62eb0d0cf508d70ba4f2d08676f"
   }
 }

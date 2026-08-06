@@ -23,6 +23,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -35,6 +38,7 @@
     "source_notes": null,
     "source_filename": "systems-principle-systems-before-features.md",
     "source_meta_filename": "systems-principle-systems-before-features.meta.json",
+    "source_checksum": "d1f1ed6159f3216e91fd67baab8887deabbf86c4410d19511340ea194ddecc1a",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -59,16 +63,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "a432e2b8fb1039c41b894649cc2a7f06968778ef29f510f597718eb97d3d8f79",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

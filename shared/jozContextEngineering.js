@@ -356,6 +356,10 @@ export function buildJozContextPacket({
     profile: profileSection,
   };
 
+  if (retrievalMeta?.causalKnowledge) {
+    packet.causalReasoning = retrievalMeta.causalKnowledge;
+  }
+
   const budgetResult = enforceTotalBudget(packet, budget.totalTokens);
   const sectionTokens = {
     policy: estimateContextTokens(policy),

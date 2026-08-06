@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { createHash } from "crypto";
 import { fileURLToPath } from "url";
 import { mapJozQueryToOntology } from "../shared/jozOntology.js";
 import {
@@ -126,6 +127,10 @@ function readJsonLines(filePath) {
 
 function writeJson(filePath, value) {
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function checksum(value) {
+  return createHash("sha256").update(String(value || ""), "utf8").digest("hex");
 }
 
 function normalizeLane(value = "") {
@@ -369,12 +374,31 @@ function validateMeta(meta, body, sourceName, ontologyIndexes) {
   if (!Array.isArray(meta.tags)) errors.push("`tags` must be an array.");
   if (!Array.isArray(meta.claims || [])) errors.push("`claims` must be an array.");
   if (!Array.isArray(meta.proof_points || [])) errors.push("`proof_points` must be an array.");
+  if (!Array.isArray(meta.causal_claims || [])) errors.push("`causal_claims` must be an array.");
   if (!Array.isArray(meta.projects || [])) errors.push("`projects` must be an array.");
   if (!Array.isArray(meta.intent_families || [])) errors.push("`intent_families` must be an array.");
   if (!Array.isArray(meta.sub_intents || [])) errors.push("`sub_intents` must be an array.");
 
   if (!String(verification.status || "").trim()) {
     errors.push("Missing `verification.status`.");
+  }
+
+  for (const [index, claim] of (Array.isArray(meta.causal_claims) ? meta.causal_claims : []).entries()) {
+    if (!claim || typeof claim !== "object" || Array.isArray(claim)) {
+      errors.push(`${sourceName}: causal claim ${index} must be an object`);
+      continue;
+    }
+    for (const field of ["id", "subject", "object", "relation", "status"]) {
+      if (!String(claim[field] || "").trim()) {
+        errors.push(`${sourceName}: causal claim ${index} is missing \`${field}\``);
+      }
+    }
+    if (claim.assumptions !== undefined && !Array.isArray(claim.assumptions)) {
+      errors.push(`${sourceName}: causal claim ${index} assumptions must be an array`);
+    }
+    if (claim.evidence !== undefined && !Array.isArray(claim.evidence)) {
+      errors.push(`${sourceName}: causal claim ${index} evidence must be an array`);
+    }
   }
 
   for (const field of ontologyFields) {
@@ -402,6 +426,7 @@ function buildNormalizedRecord(baseName, sourceFilename, ontologyIndexes, proofs
 
   const body = fs.readFileSync(sourcePath, "utf8").trim();
   const meta = readJson(metaPath);
+  const sourceChecksum = checksum(`${body}\n${JSON.stringify(meta)}`);
   const errors = validateMeta(meta, body, sourceFilename, ontologyIndexes);
   const verification = normalizeVerification(meta.verification);
   const slug = String(meta.slug || "").trim();
@@ -430,6 +455,9 @@ function buildNormalizedRecord(baseName, sourceFilename, ontologyIndexes, proofs
       verification_status: verification.status,
       claims: Array.isArray(meta.claims) ? meta.claims : [],
       proof_points: Array.isArray(meta.proof_points) ? meta.proof_points : [],
+      dataset_id: normalizeScalar(meta.dataset_id),
+      causal_model_version: normalizeScalar(meta.causal_model_version),
+      causal_claims: Array.isArray(meta.causal_claims) ? meta.causal_claims : [],
       regions: normalizeStringArray(meta.regions),
       companies: normalizeStringArray(meta.companies),
       projects: normalizeStringArray(meta.projects),
@@ -444,6 +472,7 @@ function buildNormalizedRecord(baseName, sourceFilename, ontologyIndexes, proofs
       source_notes: normalizeScalar(meta.source_notes),
       source_filename: sourceFilename,
       source_meta_filename: `${baseName}.meta.json`,
+      source_checksum: sourceChecksum,
       reviewed_at: verification.reviewed_at || "",
       problems: normalizeStringArray(meta.problems),
       principles: normalizeStringArray(meta.principles),
@@ -519,6 +548,9 @@ function buildCanonicalRecord(rawRecord, sourceFilename, generatedAt = "") {
         verification_status: "framework_supported",
         claims: [],
         proof_points: [],
+        dataset_id: normalizeScalar(rawRecord?.dataset_id),
+        causal_model_version: normalizeScalar(rawRecord?.causal_model_version),
+        causal_claims: Array.isArray(rawRecord?.causal_claims) ? rawRecord.causal_claims : [],
         regions: [],
         companies: [],
         projects: [],
@@ -548,6 +580,14 @@ function buildCanonicalRecord(rawRecord, sourceFilename, generatedAt = "") {
         canonical_record_source: source,
         canonical_record_priority: priorityLabel,
         canonical_record_tags: tags,
+        canonical_section: normalizeScalar(rawRecord?.corpus_section),
+        canonical_parent: normalizeScalar(rawRecord?.corpus_parent),
+        source_line_start: Number.isFinite(Number(rawRecord?.source_line_start))
+          ? Number(rawRecord.source_line_start)
+          : null,
+        source_line_end: Number.isFinite(Number(rawRecord?.source_line_end))
+          ? Number(rawRecord.source_line_end)
+          : null,
         source_authority: source === "Joz canonical knowledge" ? 24 : 12,
         semantic_text: semanticText,
         keyword_terms: normalizeStringArray([
@@ -555,6 +595,7 @@ function buildCanonicalRecord(rawRecord, sourceFilename, generatedAt = "") {
           ...tags.map((tag) => String(tag || "").toLowerCase()),
         ]).filter((term) => term.length > 1),
         exact_phrases: normalizeStringArray([title, ...tags]),
+        source_checksum: checksum(JSON.stringify(rawRecord)),
       },
     },
   };

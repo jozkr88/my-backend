@@ -37,6 +37,9 @@
       "SGX is Singapore's exchange operator.",
       "P&G, Samsung, Apple, and Pixar provide major global enterprise context."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe",
@@ -53,8 +56,8 @@
       "Erste Bank",
       "Etiqa",
       "Leo Burnett",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp",
       "Ogilvy",
@@ -77,6 +80,7 @@
     "source_notes": null,
     "source_filename": "2026-07-11-cv-company-context-web-research.md",
     "source_meta_filename": "2026-07-11-cv-company-context-web-research.meta.json",
+    "source_checksum": "7036fa719f1addcd1a6470259124d77f5c1cf114ea93bf3b506729f4cb4c39e1",
     "reviewed_at": "2026-07-11",
     "problems": [],
     "principles": [],
@@ -87,16 +91,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "unverified",
-    "source_checksum": "9bfec5fa97b69b37941b21d419a2da0d3f2ecac34170595488e830f8d86b4743",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

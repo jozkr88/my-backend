@@ -33,6 +33,9 @@
       "It matches the backend direction of tool routing, traceability, and validation rather than blind autonomy.",
       "It provides a safer explanation of tool use than generic agent demos or prompt-only positioning."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -49,6 +52,7 @@
     "source_notes": null,
     "source_filename": "skills-agentic-ai-tools-best-practice.md",
     "source_meta_filename": "skills-agentic-ai-tools-best-practice.meta.json",
+    "source_checksum": "6954942a9b652ef69a7cf3f9b01281d4e091fc0013c16b0ff8756009a6445fca",
     "reviewed_at": "",
     "problems": [
       "governance_gaps",

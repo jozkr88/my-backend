@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -66,6 +69,10 @@
       "cloud",
       "infrastructure"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Infrastructure\nInfrastructure\ncloud infrastructure\ncloud infrastructure\nCloud = where the platform runs.\nDocker = packages services.\nKubernetes = deploys, restarts, and scales containers.\nLoad balancer = distributes traffic.\nPostgreSQL = persistent state and audits.\nRedis = cache and short-lived state.\nKafka or NATS = event transport.\nVault or KMS = secrets and signing-key protection.\nOpenTelemetry = traces, metrics, and logs.\nCI/CD = automated build, test, security checks, and deployment.",
     "keyword_terms": [
@@ -77,15 +84,6 @@
       "cloud",
       "infrastructure"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "7744fe22911e3dc479359e16b525f4923dac85b2cc51565e15e3c48f49e4a672",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_021"
+    "source_checksum": "15188f9622ce1e9c90c708b1ceababe443e6a2d31711f239e9497ff4805bf4f4"
   }
 }

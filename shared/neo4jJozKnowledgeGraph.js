@@ -103,6 +103,13 @@ export async function importJozKnowledgeGraphToNeo4j({ graph, env = process.env,
       sourcePath: node.sourcePath,
       sourceChecksum: node.sourceChecksum,
       evidenceTier: node.evidenceTier,
+      claimType: node.claimType,
+      relation: node.relation,
+      claimStatus: node.claimStatus,
+      confidence: node.confidence,
+      datasetId: node.datasetId,
+      modelVersion: node.modelVersion,
+      sourceSlug: node.sourceSlug,
     }),
   }));
   const edges = (graph?.edges || []).map((edge) => ({
@@ -115,6 +122,11 @@ export async function importJozKnowledgeGraphToNeo4j({ graph, env = process.env,
       impactScore: edge.impactScore,
       sourceSlug: edge.sourceSlug,
       sourceSlugs: Array.isArray(edge.sourceSlugs) ? edge.sourceSlugs.join(",") : null,
+      claimStatus: edge.claimStatus,
+      relation: edge.relation,
+      confidence: edge.confidence,
+      datasetId: edge.datasetId,
+      modelVersion: edge.modelVersion,
     }),
   }));
 
@@ -150,6 +162,65 @@ export async function importJozKnowledgeGraphToNeo4j({ graph, env = process.env,
   } finally {
     await session.close();
   }
+}
+
+export async function upsertJozCausalDatasetMetadataToNeo4j({ dataset = {}, env = process.env } = {}) {
+  if (!dataset?.dataset_id || !dataset?.model_version) {
+    return { configured: false, importedNodes: 0, importedEdges: 0, reason: "dataset_identity_required" };
+  }
+  const nodes = [
+    {
+      id: `causal_dataset:${dataset.dataset_id}`,
+      type: "causal_dataset",
+      label: dataset.dataset_id,
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+      tenantId: dataset.tenant_id || "public",
+      rowCount: Array.isArray(dataset.data) ? dataset.data.length : 0,
+      checksum: dataset.checksum || null,
+    },
+    {
+      id: `causal_model_version:${dataset.dataset_id}:${dataset.model_version}`,
+      type: "causal_model_version",
+      label: dataset.model_version,
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+    },
+    ...(dataset.nodes || []).map((node) => ({
+      id: `causal_variable:${dataset.dataset_id}:${dataset.model_version}:${node.id}`,
+      type: "causal_variable",
+      label: node.label || node.id,
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+    })),
+  ];
+  const edges = [
+    {
+      id: `causal_dataset_uses_version:${dataset.dataset_id}:${dataset.model_version}`,
+      from: `causal_dataset:${dataset.dataset_id}`,
+      to: `causal_model_version:${dataset.dataset_id}:${dataset.model_version}`,
+      type: "uses_model_version",
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+    },
+    ...(dataset.nodes || []).map((node) => ({
+      id: `causal_dataset_contains_variable:${dataset.dataset_id}:${dataset.model_version}:${node.id}`,
+      from: `causal_model_version:${dataset.dataset_id}:${dataset.model_version}`,
+      to: `causal_variable:${dataset.dataset_id}:${dataset.model_version}:${node.id}`,
+      type: "contains_variable",
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+    })),
+    ...(dataset.edges || []).map((edge) => ({
+      id: `causal_edge:${dataset.dataset_id}:${dataset.model_version}:${edge.source}:${edge.target}`,
+      from: `causal_variable:${dataset.dataset_id}:${dataset.model_version}:${edge.source}`,
+      to: `causal_variable:${dataset.dataset_id}:${dataset.model_version}:${edge.target}`,
+      type: edge.type || "CAUSES",
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+    })),
+  ];
+  return importJozKnowledgeGraphToNeo4j({ graph: { nodes, edges }, env });
 }
 
 export async function queryNeo4jJozKnowledgeGraph({ query = "", limit = 8, env = process.env } = {}) {

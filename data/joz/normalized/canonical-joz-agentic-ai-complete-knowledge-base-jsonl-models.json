@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -72,6 +75,10 @@
       "ml",
       "models"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Models\nModels\nfinance ml models\nfinance ml models\nLLMs such as GPT, Claude, Gemini, Llama, and Qwen handle language reasoning and tool selection.\n\nXGBoost and LightGBM handle structured financial prediction.\nGARCH handles volatility forecasting.\nMonte Carlo handles scenario and risk simulation.\nVaR and CVaR estimate portfolio risk.\nIsolation Forest and autoencoders detect anomalies.\nEmbedding models support semantic retrieval.\n\nAgent = decides what to do.\nModel = produces a prediction or representation.\nTool = performs an action.",
     "keyword_terms": [
@@ -85,15 +92,6 @@
       "ml",
       "models"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "9ee2c63adc98178b84ed22958a49324da78626d9a96f490f3effeb341ce35332",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_015"
+    "source_checksum": "6a9ddab490caa8932cc2a37a1927940e60082cd8b1e62438551a6c7633cfc9a6"
   }
 }

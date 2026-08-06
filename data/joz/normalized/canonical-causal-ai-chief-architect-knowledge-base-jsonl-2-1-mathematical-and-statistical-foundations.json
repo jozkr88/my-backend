@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-1-mathematical-and-statistical-foundations",
+  "title": "2.1 Mathematical and Statistical Foundations",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-02-2-1-mathematical-and-statistical-foundations",
+  "summary": "## 2.1 Mathematical and Statistical Foundations",
+  "body": "## 2.1 Mathematical and Statistical Foundations\n\n### Essential subjects\n\n- Probability theory\n- Conditional probability and Bayes’ rule\n- Random variables and distributions\n- Conditional independence\n- Graph theory\n- Linear algebra\n- Matrix calculus\n- Optimization\n- Convex and non-convex optimization\n- Statistical estimation\n- Hypothesis testing\n- Confidence intervals\n- Bootstrap methods\n- Bayesian inference\n- Time-series analysis\n- Stochastic processes\n- Information theory\n- Numerical methods\n\n### Mastery questions\n\n- What is the difference between statistical dependence and causal dependence?\n- How is conditional independence represented in a directed acyclic graph?\n- What assumptions make an estimator identifiable?\n- How do bias, variance, consistency and efficiency differ?\n- How do confidence intervals differ from posterior credible intervals?\n- What numerical issues appear in high-dimensional estimation?\n\n### Evidence artifacts\n\n- Mathematical glossary\n- Probability and graph-theory notebooks\n- Derivations of common causal estimators\n- Simulation showing bias under confounding\n- Numerical-stability test suite\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "low_trust"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "productivity_gains"
+    ],
+    "governance": [
+      "confidence_handling"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-02-2-1-mathematical-and-statistical-foundations",
+    "canonical_record_title": "2.1 Mathematical and Statistical Foundations",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "canonical_section": "2.1 Mathematical and Statistical Foundations",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 64,
+    "source_line_end": 105,
+    "source_authority": 12,
+    "semantic_text": "2.1 Mathematical and Statistical Foundations\n2.1 Mathematical and Statistical Foundations\nai_architecture causal_inference causal_intelligence time_series\nai_architecture causal_inference causal_intelligence time_series\n## 2.1 Mathematical and Statistical Foundations\n\n### Essential subjects\n\n- Probability theory\n- Conditional probability and Bayes’ rule\n- Random variables and distributions\n- Conditional independence\n- Graph theory\n- Linear algebra\n- Matrix calculus\n- Optimization\n- Convex and non-convex optimization\n- Statistical estimation\n- Hypothesis testing\n- Confidence intervals\n- Bootstrap methods\n- Bayesian inference\n- Time-series analysis\n- Stochastic processes\n- Information theory\n- Numerical methods\n\n### Mastery questions\n\n- What is the difference between statistical dependence and causal dependence?\n- How is conditional independence represented in a directed acyclic graph?\n- What assumptions make an estimator identifiable?\n- How do bias, variance, consistency and efficiency differ?\n- How do confidence intervals differ from posterior credible intervals?\n- What numerical issues appear in high-dimensional estimation?\n\n### Evidence artifacts\n\n- Mathematical glossary\n- Probability and graph-theory notebooks\n- Derivations of common causal estimators\n- Simulation showing bias under confounding\n- Numerical-stability test suite\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal_inference",
+      "causal_intelligence",
+      "foundations",
+      "mathematical",
+      "statistical",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.1 Mathematical and Statistical Foundations",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "source_checksum": "586bcb5b8579c4f36d449deeaf732e537da6903caf1151597fbe75e4655af592"
+  }
+}

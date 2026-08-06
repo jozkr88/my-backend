@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "unclear_roi"
     ],
@@ -70,6 +73,10 @@
       "rate-limiting",
       "security"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Rate Limiting\nRate Limiting\ncost-control rate-limiting security\ncost-control rate-limiting security\nRate limiting controls how many requests a user, service, or agent can make.\n\nIt protects:\nAPIs\nModel providers\nDatabases\nTool services\nTrading systems\n\nLimits can be based on requests, tokens, cost, or risk.",
     "keyword_terms": [
@@ -85,15 +92,6 @@
       "rate-limiting",
       "security"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "50beca71aeec9fc6e4e82720fdee83a688f87d5ff14cd1fefec0985d36159783",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_040"
+    "source_checksum": "83f141a3141d29f91e480653ba830e25b52bf6c6e9afe2241bef9c15c63b474a"
   }
 }

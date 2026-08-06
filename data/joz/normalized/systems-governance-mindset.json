@@ -24,6 +24,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -36,6 +39,7 @@
     "source_notes": null,
     "source_filename": "systems-governance-mindset.md",
     "source_meta_filename": "systems-governance-mindset.meta.json",
+    "source_checksum": "ead51f24b65fcc9011321d18d0d77b64d70fd3757f8b8b70fe75726045812efc",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -68,16 +72,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "09b07ac60304d8a167061f71d0c4fcf182cdf6c140d65ffbd2cb3cd7bca0f388",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

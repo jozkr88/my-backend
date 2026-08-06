@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction",
       "unclear_roi"
@@ -73,6 +76,10 @@
       "langsmith",
       "observability"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Observability\nObservability\nlangsmith observability\nlangsmith observability\nObservability means tracing prompts, agent decisions, tool calls, model usage, latency, cost, errors, retries, policy decisions, and final outcomes.\n\nLangSmith can trace and evaluate agent workflows.\nOpenTelemetry can trace the full distributed system.",
     "keyword_terms": [
@@ -84,15 +91,6 @@
       "langsmith",
       "observability"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "a1cbb2fbe8d30090493cb92d15163e9135245955ce9cf8dc27f24734f3790ae7",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_022"
+    "source_checksum": "079370812dbc36262e651fa985bcd25f04c165b0860a1f4daefe3fc1b0876b3d"
   }
 }

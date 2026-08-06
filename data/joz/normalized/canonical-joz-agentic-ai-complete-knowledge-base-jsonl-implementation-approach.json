@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust",
       "manual_knowledge_work",
@@ -76,6 +79,10 @@
       "implementation",
       "roadmap"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Implementation Approach\nImplementation Approach\nimplementation roadmap\nimplementation roadmap\nStart with one narrow, read-only workflow.\n\nPhase 1:\nReceive a user question.\nRetrieve trusted data.\nRun one agent workflow.\nReturn a structured, cited answer.\n\nPhase 2:\nGenerate a typed proposal.\nSimulate risk.\nApply policy.\nRequest approval.\n\nPhase 3:\nExecute through a restricted service.\nVerify the final state.\nReconcile failures.\nMaintain a complete audit trail.",
     "keyword_terms": [
@@ -88,15 +95,6 @@
       "implementation",
       "roadmap"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "7dcc96e352855de55efe559a07b6e327492ddb050f94366a744aaa5b45d05fc8",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_023"
+    "source_checksum": "806d902325a5955ac92c14c0b0e7c282dad03f79a80fb9db4aac0434c8270350"
   }
 }

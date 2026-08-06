@@ -1,0 +1,96 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-discovery",
+  "title": "Discovery",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-58-discovery",
+  "summary": "## Discovery",
+  "body": "## Discovery\n\n- Compare PC, FCI, GES, LiNGAM and NOTEARS.\n- What assumptions make causal discovery possible?\n- How would you add domain knowledge?\n- How would you evaluate a discovered graph without ground truth?\n- How would you discover causal structure in high-frequency time series?",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-58-discovery",
+    "canonical_record_title": "Discovery",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "canonical_section": "Discovery",
+    "canonical_parent": "11. Interview Question Bank",
+    "source_line_start": 1830,
+    "source_line_end": 1837,
+    "source_authority": 12,
+    "semantic_text": "Discovery\nDiscovery\nai_architecture causal_discovery causal_inference causal_intelligence time_series\nai_architecture causal_discovery causal_inference causal_intelligence time_series\n## Discovery\n\n- Compare PC, FCI, GES, LiNGAM and NOTEARS.\n- What assumptions make causal discovery possible?\n- How would you add domain knowledge?\n- How would you evaluate a discovered graph without ground truth?\n- How would you discover causal structure in high-frequency time series?",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "discovery",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "Discovery",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "source_checksum": "0360268f9a94937fca91db62f1ae905f59e142e831fcb2adf4a634a498714605"
+  }
+}

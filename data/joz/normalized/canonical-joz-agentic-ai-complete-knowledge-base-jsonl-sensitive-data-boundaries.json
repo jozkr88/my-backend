@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -66,6 +69,10 @@
       "security",
       "sensitive-data"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Sensitive Data Boundaries\nSensitive Data Boundaries\ngovernance security sensitive-data\ngovernance security sensitive-data\nDo not ingest or expose highly sensitive sources by default, including:\n\nHR files\nSalary information\nPerformance reviews\nPrivate messages\nSecrets\nCredentials\nPrivate keys\nUnapproved personal data\n\nData-source admission should be explicit, reviewed, and governed.",
     "keyword_terms": [
@@ -82,15 +89,6 @@
       "security",
       "sensitive-data"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "bec3ff65eaeb0dc26d549e7af4b9ee77113e41299d382839c0c2f04fcbc5a2ae",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_030"
+    "source_checksum": "fc80c84c641b49d187270d2b36a2c0908f3b4047a32ba46a2fd0e751bbf456a2"
   }
 }

@@ -32,6 +32,9 @@
       "The broader Leo Burnett/Publicis proof includes a 70% reduction in handoff friction through code-based prototyping.",
       "This record narrows retrieval to the grouped commerce and consumer platform programme."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Singapore",
@@ -67,6 +70,7 @@
     "source_notes": "Grouped programme record. The 70% handoff-friction metric belongs to the broader Publicis delivery environment, not every individual client project.",
     "source_filename": "leo-burnett-commerce-platforms.md",
     "source_meta_filename": "leo-burnett-commerce-platforms.meta.json",
+    "source_checksum": "1ce5bb00edf50c7d1511d68d26479885281c12a45f2ba0074d3ef4efd4c5107e",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -94,16 +98,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 96,
-    "measurable_outcome_count": 1,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "c84a595c2754e561f552b52340a81879f2db9cb2635f904dfdd189f4e0bf8621",
-    "source_uri": null
+    "measurable_outcome_count": 1
   }
 }

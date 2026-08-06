@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -36,7 +39,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -58,6 +61,10 @@
       "circuit-breaker",
       "resilience"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Circuit Breaker\nCircuit Breaker\ncircuit-breaker resilience\ncircuit-breaker resilience\nA circuit breaker stops repeated calls to an unhealthy dependency.\n\nStates:\nClosed = calls allowed\nOpen = calls blocked\nHalf-open = limited test calls\n\nCircuit breakers prevent cascading failures.",
     "keyword_terms": [
@@ -71,15 +78,6 @@
       "circuit-breaker",
       "resilience"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "c6bfe0ac578c630568dbed3526d96013d9e0cd25735f432a952a37d51426486a",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_037"
+    "source_checksum": "937c85c0dbe06010f875a8e3abae473f0cdee448c9c0b15367f3f427fbcc5335"
   }
 }

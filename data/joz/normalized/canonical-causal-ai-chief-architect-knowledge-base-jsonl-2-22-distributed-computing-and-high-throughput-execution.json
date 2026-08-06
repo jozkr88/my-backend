@@ -1,0 +1,97 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-22-distributed-computing-and-high-throughput-execution",
+  "title": "2.22 Distributed Computing and High-Throughput Execution",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-23-2-22-distributed-computing-and-high-throughput-execution",
+  "summary": "## 2.22 Distributed Computing and High-Throughput Execution",
+  "body": "## 2.22 Distributed Computing and High-Throughput Execution\n\n### Essential concepts\n\n- Tasks and actors\n- Data parallelism\n- Model parallelism\n- Distributed state\n- Scheduling\n- Resource allocation\n- Fault tolerance\n- Backpressure\n- Work stealing\n- Serialization\n- Shared-memory object stores\n- CPU/GPU placement\n- Distributed caching\n- Determinism\n- Reproducibility\n- Performance profiling\n\n### C++ focus\n\nStudy C++ where it materially improves:\n\n- simulation kernels;\n- graph algorithms;\n- numerical optimization;\n- low-latency inference;\n- memory control;\n- sensor processing;\n- custom operators;\n- Python extension modules.\n\n### Evidence artifacts\n\n- Python-to-C++ simulation kernel\n- Distributed scenario executor\n- Scaling report\n- Memory and latency profile\n- Failure-injection benchmark\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-23-2-22-distributed-computing-and-high-throughput-execution",
+    "canonical_record_title": "2.22 Distributed Computing and High-Throughput Execution",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems"
+    ],
+    "canonical_section": "2.22 Distributed Computing and High-Throughput Execution",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 1074,
+    "source_line_end": 1117,
+    "source_authority": 12,
+    "semantic_text": "2.22 Distributed Computing and High-Throughput Execution\n2.22 Distributed Computing and High-Throughput Execution\nai_architecture causal_intelligence distributed_systems\nai_architecture causal_intelligence distributed_systems\n## 2.22 Distributed Computing and High-Throughput Execution\n\n### Essential concepts\n\n- Tasks and actors\n- Data parallelism\n- Model parallelism\n- Distributed state\n- Scheduling\n- Resource allocation\n- Fault tolerance\n- Backpressure\n- Work stealing\n- Serialization\n- Shared-memory object stores\n- CPU/GPU placement\n- Distributed caching\n- Determinism\n- Reproducibility\n- Performance profiling\n\n### C++ focus\n\nStudy C++ where it materially improves:\n\n- simulation kernels;\n- graph algorithms;\n- numerical optimization;\n- low-latency inference;\n- memory control;\n- sensor processing;\n- custom operators;\n- Python extension modules.\n\n### Evidence artifacts\n\n- Python-to-C++ simulation kernel\n- Distributed scenario executor\n- Scaling report\n- Memory and latency profile\n- Failure-injection benchmark\n\n---",
+    "keyword_terms": [
+      "22",
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "computing",
+      "distributed",
+      "distributed_systems",
+      "execution",
+      "high",
+      "throughput"
+    ],
+    "exact_phrases": [
+      "2.22 Distributed Computing and High-Throughput Execution",
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems"
+    ],
+    "source_checksum": "da19b85fe53b6f670bdcaf32b78161fdb12c0b02d94af5fb8bc2e4fbca45223f"
+  }
+}

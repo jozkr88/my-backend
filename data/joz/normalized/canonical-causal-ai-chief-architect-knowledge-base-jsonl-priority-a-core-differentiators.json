@@ -1,0 +1,110 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-priority-a-core-differentiators",
+  "title": "Priority A — Core differentiators",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-47-priority-a-core-differentiators",
+  "summary": "## Priority A — Core differentiators",
+  "body": "## Priority A — Core differentiators\n\n- Structural causal models\n- Identification\n- Causal discovery\n- Treatment-effect estimation\n- Counterfactual simulation\n- Refutation and sensitivity\n- Invariance and OOD generalization\n- Neuro-symbolic guardrails",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "structural_causal_models"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-47-priority-a-core-differentiators",
+    "canonical_record_title": "Priority A — Core differentiators",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "structural_causal_models"
+    ],
+    "canonical_section": "Priority A — Core differentiators",
+    "canonical_parent": "8. Priority Model",
+    "source_line_start": 1686,
+    "source_line_end": 1696,
+    "source_authority": 12,
+    "semantic_text": "Priority A — Core differentiators\nPriority A — Core differentiators\nagentic_ai ai_architecture causal_discovery causal_inference causal_intelligence governance structural_causal_models\nagentic_ai ai_architecture causal_discovery causal_inference causal_intelligence governance structural_causal_models\n## Priority A — Core differentiators\n\n- Structural causal models\n- Identification\n- Causal discovery\n- Treatment-effect estimation\n- Counterfactual simulation\n- Refutation and sensitivity\n- Invariance and OOD generalization\n- Neuro-symbolic guardrails",
+    "keyword_terms": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "core",
+      "differentiators",
+      "governance",
+      "priority",
+      "structural_causal_models"
+    ],
+    "exact_phrases": [
+      "Priority A — Core differentiators",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "structural_causal_models"
+    ],
+    "source_checksum": "ebd17ec35cfdcdcbe935f1a438d7f2ed4056df379a206d1dc7a60cef55ce86ef"
+  }
+}

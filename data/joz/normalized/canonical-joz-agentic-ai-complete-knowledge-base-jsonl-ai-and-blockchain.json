@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -44,7 +47,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -73,6 +76,10 @@
       "security",
       "signing"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "AI and Blockchain\nAI and Blockchain\nai-blockchain security signing\nai-blockchain security signing\nAI should never directly control unrestricted private keys.\n\nPreferred flow:\nAgent → Policy → Risk → Approval → Signing Service → Smart Contract or Execution Network → Verification\n\nUse scoped session keys, workload identity, signing policies, transaction simulation, and explicit limits on assets, contracts, amounts, duration, and permissions.",
     "keyword_terms": [
@@ -89,15 +96,6 @@
       "security",
       "signing"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "235a237746ae886619d86cae73f24e1e0a4c8ce59cc13a890a6f806eccd6a755",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_018"
+    "source_checksum": "f8074312beb120cd7f9dd25834077b0cf9928d6e00d1ed9b3f0ba2fb6cbe0617"
   }
 }

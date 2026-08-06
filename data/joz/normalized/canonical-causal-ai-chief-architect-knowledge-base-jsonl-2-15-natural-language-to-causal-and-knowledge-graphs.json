@@ -1,0 +1,128 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-15-natural-language-to-causal-and-knowledge-graphs",
+  "title": "2.15 Natural Language to Causal and Knowledge Graphs",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-16-2-15-natural-language-to-causal-and-knowledge-graphs",
+  "summary": "## 2.15 Natural Language to Causal and Knowledge Graphs",
+  "body": "## 2.15 Natural Language to Causal and Knowledge Graphs\n\n### Pipeline\n\n1. Parse the executive’s intent.\n2. Identify decision, intervention, outcome and scope.\n3. Resolve entities against enterprise ontology.\n4. Retrieve relevant graph and data context.\n5. Convert the request into a typed intermediate representation.\n6. Validate variables, units, time horizon and constraints.\n7. Check whether the requested causal quantity is identifiable.\n8. Select or construct an SCM.\n9. Estimate or simulate.\n10. Run refutations and guardrails.\n11. Generate a recommendation with provenance and uncertainty.\n12. Require approval or dispatch action according to policy.\n\n### Anti-hallucination design\n\n- constrained schemas;\n- ontology-grounded entity resolution;\n- typed intermediate representations;\n- executable query plans;\n- explicit unknown and not-identifiable states;\n- citations to enterprise records;\n- deterministic numerical tools;\n- graph-shape validation;\n- policy checks;\n- reproducible execution traces.\n\n### Evidence artifacts\n\n- Causal-query intermediate representation\n- Natural-language parsing benchmark\n- Ambiguity-resolution protocol\n- Query-plan visualizer\n- Hallucination and unsupported-claim test set\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "structural_causal_models"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [
+      "context_creates_intelligence"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "context_engineering",
+      "enterprise_architecture",
+      "knowledge_graphs"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "confidence_handling",
+      "human_approval",
+      "source_provenance"
+    ],
+    "industries": [
+      "media"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-16-2-15-natural-language-to-causal-and-knowledge-graphs",
+    "canonical_record_title": "2.15 Natural Language to Causal and Knowledge Graphs",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "structural_causal_models"
+    ],
+    "canonical_section": "2.15 Natural Language to Causal and Knowledge Graphs",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 771,
+    "source_line_end": 810,
+    "source_authority": 12,
+    "semantic_text": "2.15 Natural Language to Causal and Knowledge Graphs\n2.15 Natural Language to Causal and Knowledge Graphs\nai_architecture causal_inference causal_intelligence enterprise_architecture governance knowledge_graphs structural_causal_models\nai_architecture causal_inference causal_intelligence enterprise_architecture governance knowledge_graphs structural_causal_models\n## 2.15 Natural Language to Causal and Knowledge Graphs\n\n### Pipeline\n\n1. Parse the executive’s intent.\n2. Identify decision, intervention, outcome and scope.\n3. Resolve entities against enterprise ontology.\n4. Retrieve relevant graph and data context.\n5. Convert the request into a typed intermediate representation.\n6. Validate variables, units, time horizon and constraints.\n7. Check whether the requested causal quantity is identifiable.\n8. Select or construct an SCM.\n9. Estimate or simulate.\n10. Run refutations and guardrails.\n11. Generate a recommendation with provenance and uncertainty.\n12. Require approval or dispatch action according to policy.\n\n### Anti-hallucination design\n\n- constrained schemas;\n- ontology-grounded entity resolution;\n- typed intermediate representations;\n- executable query plans;\n- explicit unknown and not-identifiable states;\n- citations to enterprise records;\n- deterministic numerical tools;\n- graph-shape validation;\n- policy checks;\n- reproducible execution traces.\n\n### Evidence artifacts\n\n- Causal-query intermediate representation\n- Natural-language parsing benchmark\n- Ambiguity-resolution protocol\n- Query-plan visualizer\n- Hallucination and unsupported-claim test set\n\n---",
+    "keyword_terms": [
+      "15",
+      "ai_architecture",
+      "and",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "graphs",
+      "knowledge",
+      "knowledge_graphs",
+      "language",
+      "natural",
+      "structural_causal_models",
+      "to"
+    ],
+    "exact_phrases": [
+      "2.15 Natural Language to Causal and Knowledge Graphs",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "structural_causal_models"
+    ],
+    "source_checksum": "4f3df26d8c949e761163b5c71b8386934ebd60d4910ef00dc83bbb44ec7ce898"
+  }
+}

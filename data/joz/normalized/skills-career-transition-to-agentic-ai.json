@@ -33,6 +33,9 @@
       "ML UX practices and pilots at Manulife and Maybank–Ageas Etiqa.",
       "Current Agentic AI, RAG, financial agents, spatial AI, context engineering, and governance focus."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Dubai",
@@ -41,8 +44,8 @@
       "USA"
     ],
     "companies": [
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp",
       "Ogilvy",
@@ -58,6 +61,7 @@
     "source_notes": null,
     "source_filename": "skills-career-transition-to-agentic-ai.md",
     "source_meta_filename": "skills-career-transition-to-agentic-ai.meta.json",
+    "source_checksum": "f4e4f25a457d49cb4c1fb17a43c8ef8d51ba89e6a7090df02d6927e6be119adc",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -103,16 +107,6 @@
       "versace_spatial_ai_launch"
     ],
     "enterprise_scale_score": 97,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "15fb3b610f203235aced44726dd4b45a1a116549f230e96221172b57dc240e23",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

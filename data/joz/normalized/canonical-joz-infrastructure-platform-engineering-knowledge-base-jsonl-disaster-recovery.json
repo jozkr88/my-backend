@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -62,6 +65,10 @@
       "rpo",
       "rto"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Disaster Recovery\nDisaster Recovery\ndisaster-recovery rpo rto\ndisaster-recovery rpo rto\nDisaster recovery prepares the platform for major failures.\n\nCore practices:\nBackups\nCross-region replication\nRecovery procedures\nFailover testing\nInfrastructure as Code\nDefined RTO and RPO\n\nRTO = maximum acceptable recovery time.\nRPO = maximum acceptable data loss.",
     "keyword_terms": [
@@ -77,15 +84,6 @@
       "rpo",
       "rto"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "bd19b10f1f2fcee8093a8cf8c4114fb8f020c7c10df75ec0173ceb39936b2d58",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_041"
+    "source_checksum": "33833e1da18b67ded32139d2d129b0d072472de89cbb98285c0948fa8f8143a3"
   }
 }

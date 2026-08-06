@@ -35,6 +35,9 @@
       "The Joz canvas implements the concept as a vertical continuum between human sensing and AI sensing.",
       "The circle shows the current experience state while the surrounding scene communicates changing clarity and uncertainty."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -49,6 +52,7 @@
     "source_notes": null,
     "source_filename": "systems-principle-humans-perceive-ai-reconstructs.md",
     "source_meta_filename": "systems-principle-humans-perceive-ai-reconstructs.meta.json",
+    "source_checksum": "905e17a690e615a9047af21a00320c2d45c6b61d9a6a48a7f9309838c537aa3e",
     "reviewed_at": "2026-08-04",
     "problems": [
       "ai_adoption_failure",

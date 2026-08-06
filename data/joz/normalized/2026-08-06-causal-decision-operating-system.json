@@ -1,0 +1,116 @@
+{
+  "slug": "2026-08-06-causal-decision-operating-system",
+  "title": "Causal Decision Operating System",
+  "category": "business_need",
+  "source_type": "framework",
+  "source_uri": "source://joz/causal-intelligence/decision-operating-system",
+  "summary": "A decision-intelligence operating model connecting causal evidence, interventions, counterfactuals, approvals, and verified action.",
+  "body": "# Causal Decision Operating System\n\nThe causal decision operating system connects data, candidate causal\ndiscovery, human review, structural causal models, intervention analysis,\ncounterfactual simulation, and controlled action orchestration.\n\nThe flow is:\n\n```text\nData sources and event streams\n  → candidate causal discovery\n  → domain and human review\n  → identification, estimation, and refutation\n  → versioned causal knowledge graph\n  → decision and simulation layer\n  → approval-gated action\n  → verification against authoritative state\n```\n\nJoz's existing knowledge base remains the foundation for identity, experience,\narchitecture, skills, business value, and governance. This dataset adds the\ndecision-intelligence layer that explains how those capabilities can be\norganized into a controlled causal operating system.",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "agentic_workflows",
+      "approval",
+      "causal_intelligence",
+      "counterfactual",
+      "decision_intelligence",
+      "decision_operating_system",
+      "intervention",
+      "verification"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-08-06",
+      "notes": "Additive decision-intelligence framework. It does not convert Joz's existing experience records into unsupported causal proof."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "A causal decision operating system should connect discovery, identification, estimation, refutation, simulation, action, and verification.",
+      "High-impact actions should pass deterministic policy and approval gates before execution.",
+      "Post-action verification should reconcile the expected outcome with the authoritative system of record."
+    ],
+    "proof_points": [],
+    "dataset_id": "joz-causal-decision-intelligence-v1",
+    "causal_model_version": "joz-causal-decision-os-v1",
+    "causal_claims": [
+      {
+        "id": "intervention-analysis-supports-decision-proposals",
+        "subject": "Intervention Analysis",
+        "object": "Decision Proposal",
+        "relation": "supports",
+        "claim_type": "decision_workflow",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.96,
+        "assumptions": [
+          "The intervention is identifiable under the declared assumptions."
+        ],
+        "evidence": [
+          "causal-decision-operating-system-attachment"
+        ]
+      },
+      {
+        "id": "approval-constrains-action-execution",
+        "subject": "Approval and Policy Gates",
+        "object": "Action Execution",
+        "relation": "constrains",
+        "claim_type": "governance_control",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.99,
+        "assumptions": [
+          "Actions can affect external systems or consequential state."
+        ],
+        "evidence": [
+          "causal-decision-operating-system-attachment"
+        ]
+      },
+      {
+        "id": "verification-closes-decision-loop",
+        "subject": "Post-Action Verification",
+        "object": "Authoritative System State",
+        "relation": "reconciles",
+        "claim_type": "feedback_loop",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.98,
+        "assumptions": [
+          "An authoritative source of truth is available for reconciliation."
+        ],
+        "evidence": [
+          "causal-decision-operating-system-attachment"
+        ]
+      }
+    ],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills"
+    ],
+    "sub_intents": [
+      "governance",
+      "orchestration",
+      "system_architecture"
+    ],
+    "impact_score": 92,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-08-06-causal-decision-operating-system.md",
+    "source_meta_filename": "2026-08-06-causal-decision-operating-system.meta.json",
+    "source_checksum": "db4183c2b60f177a9114206ff19ec09bbef915f8c95567a94ea46dc86b67bbea",
+    "reviewed_at": "2026-08-06",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}

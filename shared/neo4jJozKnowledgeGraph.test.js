@@ -4,6 +4,7 @@ import {
   getNeo4jJozKnowledgeGraphConfig,
   isNeo4jJozKnowledgeGraphConfigured,
   queryJozKnowledgeGraphRuntime,
+  upsertJozCausalDatasetMetadataToNeo4j,
 } from "./neo4jJozKnowledgeGraph.js";
 
 test("Neo4j configuration requires URI, username, and password", () => {
@@ -41,4 +42,13 @@ test("runtime falls back to the published graph artifact when Neo4j is not confi
 
   assert.equal(result.backend, "artifact");
   assert.ok(result.documentSlugs.length > 0);
+});
+
+test("causal dataset projection is safe when Neo4j is not configured", async () => {
+  const result = await upsertJozCausalDatasetMetadataToNeo4j({
+    env: {},
+    dataset: { dataset_id: "dataset-a", model_version: "v1", nodes: [], edges: [], data: [] },
+  });
+  assert.equal(result.configured, false);
+  assert.equal(result.importedNodes, 0);
 });

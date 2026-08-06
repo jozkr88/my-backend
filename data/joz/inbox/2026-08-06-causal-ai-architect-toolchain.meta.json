@@ -1,0 +1,81 @@
+{
+  "slug": "2026-08-06-causal-ai-architect-toolchain",
+  "title": "Causal AI Architect Toolchain and Platform Boundaries",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Recommended tools and architectural boundaries for a production causal decision-intelligence platform.",
+  "tags": [
+    "causal_intelligence",
+    "ai_architecture",
+    "causal_discovery",
+    "causal_inference",
+    "counterfactuals",
+    "knowledge_graphs",
+    "neo4j",
+    "dowhy_gcm",
+    "causal_learn",
+    "tigramite",
+    "fastapi",
+    "networkx",
+    "graphdb",
+    "shacl"
+  ],
+  "impact_score": 95,
+  "priority_label": "hero",
+  "source_type": "reference_dataset",
+  "source_uri": "source://joz/causal-intelligence/chief-architect-toolchain",
+  "dataset_id": "joz-causal-ai-chief-architect-v1",
+  "causal_model_version": "joz-causal-architecture-v2",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "codex",
+    "reviewed_at": "2026-08-06",
+    "notes": "Reference architecture and tool-selection guidance. It is framework knowledge, not personal production proof."
+  },
+  "claims": [
+    "Causal discovery should propose candidate structures while DoWhy or DoWhy-GCM handles identification, estimation, refutation, and counterfactual analysis.",
+    "Neo4j should store versioned causal graph structures and provenance, while the causal engine remains a separate statistical computation boundary.",
+    "The semantic knowledge graph, causal model, supporting evidence, and model versions should remain connected but not collapsed into one undifferentiated graph."
+  ],
+  "proof_points": [],
+  "regions": [],
+  "companies": [],
+  "projects": [],
+  "intent_families": ["skills", "business_need", "systems_mindset"],
+  "sub_intents": ["technical_stack", "system_architecture", "governance", "retrieval"],
+  "causal_claims": [
+    {
+      "id": "discovery-produces-candidates-not-proof",
+      "subject": "Causal Discovery",
+      "object": "Candidate Causal Structure",
+      "relation": "proposes",
+      "claim_type": "causal_workflow",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["Data, domain constraints, and discovery assumptions are explicitly recorded."],
+      "evidence": ["causal-ai-architect-toolchain-reference"]
+    },
+    {
+      "id": "causal-engine-validates-graph-claims",
+      "subject": "Causal Inference Engine",
+      "object": "Causal Claim",
+      "relation": "validates",
+      "claim_type": "architecture_boundary",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.98,
+      "assumptions": ["A causal claim has an identifiable estimand, declared assumptions, and retained refutation results."],
+      "evidence": ["causal-ai-architect-toolchain-reference"]
+    },
+    {
+      "id": "neo4j-stores-causal-provenance",
+      "subject": "Neo4j Operational Graph",
+      "object": "Causal Provenance",
+      "relation": "stores",
+      "claim_type": "platform_architecture",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.95,
+      "assumptions": ["Statistical evidence remains linked as first-class records rather than being reduced to an edge label."],
+      "evidence": ["causal-ai-architect-toolchain-reference"]
+    }
+  ]
+}

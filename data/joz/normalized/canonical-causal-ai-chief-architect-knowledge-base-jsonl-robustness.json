@@ -1,0 +1,98 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-robustness",
+  "title": "Robustness",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-60-robustness",
+  "summary": "## Robustness",
+  "body": "## Robustness\n\n- Explain invariant causal prediction.\n- What is mechanism shift?\n- How should the platform behave under OOD inputs?\n- Which refutation tests would block model promotion?\n- How do you test sensitivity to unobserved confounding?",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-60-robustness",
+    "canonical_record_title": "Robustness",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "canonical_section": "Robustness",
+    "canonical_parent": "11. Interview Question Bank",
+    "source_line_start": 1846,
+    "source_line_end": 1853,
+    "source_authority": 12,
+    "semantic_text": "Robustness\nRobustness\nai_architecture causal_inference causal_intelligence enterprise_architecture governance\nai_architecture causal_inference causal_intelligence enterprise_architecture governance\n## Robustness\n\n- Explain invariant causal prediction.\n- What is mechanism shift?\n- How should the platform behave under OOD inputs?\n- Which refutation tests would block model promotion?\n- How do you test sensitivity to unobserved confounding?",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "robustness"
+    ],
+    "exact_phrases": [
+      "Robustness",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "source_checksum": "c88f3fc603bc539aa3cbb68cb9d345ec2504461d3baefeeca6850859e4950798"
+  }
+}

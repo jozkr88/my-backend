@@ -1,0 +1,101 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-days-31-45-discovery-and-invariance",
+  "title": "Days 31–45 — Discovery and invariance",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-53-days-31-45-discovery-and-invariance",
+  "summary": "## Days 31–45 — Discovery and invariance",
+  "body": "## Days 31–45 — Discovery and invariance\n\n- static causal discovery\n- temporal discovery\n- environment-based invariance\n- regime change\n- OOD testing\n\nDeliverable: synthetic discovery and OOD benchmark.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-53-days-31-45-discovery-and-invariance",
+    "canonical_record_title": "Days 31–45 — Discovery and invariance",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "canonical_section": "Days 31–45 — Discovery and invariance",
+    "canonical_parent": "10. 90-Day Build Sequence",
+    "source_line_start": 1770,
+    "source_line_end": 1779,
+    "source_authority": 12,
+    "semantic_text": "Days 31–45 — Discovery and invariance\nDays 31–45 — Discovery and invariance\nai_architecture causal_discovery causal_inference causal_intelligence time_series\nai_architecture causal_discovery causal_inference causal_intelligence time_series\n## Days 31–45 — Discovery and invariance\n\n- static causal discovery\n- temporal discovery\n- environment-based invariance\n- regime change\n- OOD testing\n\nDeliverable: synthetic discovery and OOD benchmark.",
+    "keyword_terms": [
+      "31",
+      "45",
+      "ai_architecture",
+      "and",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "days",
+      "discovery",
+      "invariance",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "Days 31–45 — Discovery and invariance",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "time_series"
+    ],
+    "source_checksum": "5d4cd2b5a4f119caa97c0ae71ef42937651fa5ace9932bc5be026f16e60c5a1c"
+  }
+}

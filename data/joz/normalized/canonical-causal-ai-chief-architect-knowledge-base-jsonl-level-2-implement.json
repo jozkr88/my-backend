@@ -1,0 +1,83 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-level-2-implement",
+  "title": "Level 2 — Implement",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-66-level-2-implement",
+  "summary": "## Level 2 — Implement",
+  "body": "## Level 2 — Implement\n\nCan build a working example from first principles or a specialist framework.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-66-level-2-implement",
+    "canonical_record_title": "Level 2 — Implement",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "canonical_section": "Level 2 — Implement",
+    "canonical_parent": "12. Definition of Mastery",
+    "source_line_start": 1899,
+    "source_line_end": 1902,
+    "source_authority": 12,
+    "semantic_text": "Level 2 — Implement\nLevel 2 — Implement\nai_architecture causal_intelligence\nai_architecture causal_intelligence\n## Level 2 — Implement\n\nCan build a working example from first principles or a specialist framework.",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "implement",
+      "level"
+    ],
+    "exact_phrases": [
+      "Level 2 — Implement",
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "source_checksum": "1cd08295aa6d55adeca89d874e1f64e7766fff3704b8ef581c200f248e09d4cd"
+  }
+}

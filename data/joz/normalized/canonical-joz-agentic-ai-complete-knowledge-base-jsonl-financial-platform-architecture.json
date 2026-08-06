@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "manual_knowledge_work"
     ],
@@ -73,6 +76,10 @@
       "finance",
       "platform"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Financial Platform Architecture\nFinancial Platform Architecture\nfinance platform\nfinance platform\nA modern financial intelligence platform can combine:\nMarket data\nPortfolio data\nNews and research\nRisk analytics\nPrediction models\nNatural-language interaction\nAlerts\nExecution\nVerification\n\nThe architecture should move from insight to action while keeping deterministic control over permissions, risk, and financial correctness.",
     "keyword_terms": [
@@ -86,15 +93,6 @@
       "finance",
       "platform"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "3f82eafc9524a238bf44d45593bbd361676bc6a2b3b0cb617c5000327c65596b",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_019"
+    "source_checksum": "3dbe9a896f96de2d8a685f36f9d95109ebf1aad979708f9e4bccb53852476bfa"
   }
 }

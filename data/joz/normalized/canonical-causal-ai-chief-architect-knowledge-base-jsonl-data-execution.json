@@ -1,0 +1,128 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-data-execution",
+  "title": "Data execution",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-74-data-execution",
+  "summary": "## Data execution",
+  "body": "## Data execution\n\n- Polars documentation\n- DuckDB documentation\n- PyTorch documentation\n\n---\n\n# 14. Final Portfolio Package\n\nThe finished knowledge base should produce a portfolio containing:\n\n1. Causal Decision OS reference architecture\n2. Causal foundations codebase\n3. Discovery benchmark\n4. Treatment-effect benchmark\n5. Refutation framework\n6. OOD and invariance benchmark\n7. Enterprise ontology\n8. Relational GNN demonstration\n9. Neuro-symbolic guardrail engine\n10. Natural-language causal query compiler\n11. Distributed counterfactual simulator\n12. Closed-loop action workflow\n13. Security and on-prem deployment architecture\n14. Observability dashboard\n15. Research-to-product roadmap\n16. Chief-architect interview dossier\n\nThis turns the job description into evidence of capability rather than a list of concepts.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "manual_knowledge_work",
+      "operational_friction"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-74-data-execution",
+    "canonical_record_title": "Data execution",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "canonical_section": "Data execution",
+    "canonical_parent": "13. Initial Primary Source Map",
+    "source_line_start": 1951,
+    "source_line_end": 1981,
+    "source_authority": 12,
+    "semantic_text": "Data execution\nData execution\nagentic_ai ai_architecture causal_inference causal_intelligence distributed_systems enterprise_architecture governance knowledge_graphs mlops_observability\nagentic_ai ai_architecture causal_inference causal_intelligence distributed_systems enterprise_architecture governance knowledge_graphs mlops_observability\n## Data execution\n\n- Polars documentation\n- DuckDB documentation\n- PyTorch documentation\n\n---\n\n# 14. Final Portfolio Package\n\nThe finished knowledge base should produce a portfolio containing:\n\n1. Causal Decision OS reference architecture\n2. Causal foundations codebase\n3. Discovery benchmark\n4. Treatment-effect benchmark\n5. Refutation framework\n6. OOD and invariance benchmark\n7. Enterprise ontology\n8. Relational GNN demonstration\n9. Neuro-symbolic guardrail engine\n10. Natural-language causal query compiler\n11. Distributed counterfactual simulator\n12. Closed-loop action workflow\n13. Security and on-prem deployment architecture\n14. Observability dashboard\n15. Research-to-product roadmap\n16. Chief-architect interview dossier\n\nThis turns the job description into evidence of capability rather than a list of concepts.",
+    "keyword_terms": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "data",
+      "distributed_systems",
+      "enterprise_architecture",
+      "execution",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "exact_phrases": [
+      "Data execution",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "source_checksum": "35999fc0f8e679d12bda2621146a43624d7a04ffe876558ed45a7b1e9c9f38cc"
+  }
+}

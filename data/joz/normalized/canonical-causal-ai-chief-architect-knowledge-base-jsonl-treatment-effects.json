@@ -1,0 +1,87 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-treatment-effects",
+  "title": "Treatment effects",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-59-treatment-effects",
+  "summary": "## Treatment effects",
+  "body": "## Treatment effects\n\n- Compare ATE, CATE and ITE.\n- Explain Double Machine Learning.\n- When would you use a causal forest?\n- How do you diagnose poor overlap?\n- How do you estimate effects under endogenous treatment?",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-59-treatment-effects",
+    "canonical_record_title": "Treatment effects",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "canonical_section": "Treatment effects",
+    "canonical_parent": "11. Interview Question Bank",
+    "source_line_start": 1838,
+    "source_line_end": 1845,
+    "source_authority": 12,
+    "semantic_text": "Treatment effects\nTreatment effects\nai_architecture causal_inference causal_intelligence\nai_architecture causal_inference causal_intelligence\n## Treatment effects\n\n- Compare ATE, CATE and ITE.\n- Explain Double Machine Learning.\n- When would you use a causal forest?\n- How do you diagnose poor overlap?\n- How do you estimate effects under endogenous treatment?",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "effects",
+      "treatment"
+    ],
+    "exact_phrases": [
+      "Treatment effects",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "source_checksum": "d005291f7d37a085aea11376ed3b6bcd8f95586d1fa63372eb829525c5a9803c"
+  }
+}

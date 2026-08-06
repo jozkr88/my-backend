@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -63,6 +66,10 @@
       "kubernetes",
       "reliability"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Health Checks\nHealth Checks\nhealth-checks kubernetes reliability\nhealth-checks kubernetes reliability\nHealth checks tell the platform whether a service is alive and ready.\n\nLiveness check = should the process be restarted?\nReadiness check = can the service receive traffic?\n\nKubernetes uses these checks for self-healing and safe routing.",
     "keyword_terms": [
@@ -78,15 +85,6 @@
       "kubernetes",
       "reliability"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "30477c8165869b846f7374df81be2cb74dd23f930a119add46def3c6d509bf8c",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_035"
+    "source_checksum": "769a857f4b35a593d8050b89c2b55816728bd5ee0031178352e9c047b1356db0"
   }
 }

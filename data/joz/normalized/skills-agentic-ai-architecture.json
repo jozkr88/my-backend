@@ -36,6 +36,9 @@
       "Enterprise RAG and context-engineering architecture reflected in his current applied AI skill set.",
       "AI governance, retrieval controls, and verification are explicit parts of his architecture approach."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Europe",
       "Singapore",
@@ -57,6 +60,7 @@
     "source_notes": null,
     "source_filename": "skills-agentic-ai-architecture.md",
     "source_meta_filename": "skills-agentic-ai-architecture.meta.json",
+    "source_checksum": "e00d2c51c31553f2dbb2c156af8f41b5908d142ee174dc4bb6ade63278332089",
     "reviewed_at": "",
     "problems": [
       "data_silos",
@@ -99,25 +103,15 @@
     ],
     "proofs": [
       "dff_rapid_ai_prototyping",
-      "mc_usa_financial_agents",
-      "maybank_digital_sales_growth"
+      "maybank_digital_sales_growth",
+      "mc_usa_financial_agents"
     ],
     "related_proofs": [
       "dff_rapid_ai_prototyping",
-      "mc_usa_financial_agents",
-      "maybank_digital_sales_growth"
+      "maybank_digital_sales_growth",
+      "mc_usa_financial_agents"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 1,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "fc7fcbe44abfd07bb9de1684df2202334c8718a30e4e0aaf590efd79ae170987",
-    "source_uri": null
+    "measurable_outcome_count": 1
   }
 }

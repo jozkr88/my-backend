@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "description": "Golden prompts for causal knowledge augmentation and ordinary-query regression.",
+  "cases": [
+    {
+      "id": "causal-correlation-vs-causation",
+      "category": "causal_foundations",
+      "question": "What is the difference between correlation and causation in an enterprise decision system?",
+      "expectedCausal": true,
+      "requiredAny": [["association", "correlation"], ["causal", "cause"]],
+      "forbiddenPhrases": ["correlation proves causation"]
+    },
+    {
+      "id": "causal-confounder-collider",
+      "category": "causal_graphs",
+      "question": "How do confounders and colliders differ in a causal graph?",
+      "expectedCausal": true,
+      "requiredAny": [["confound"], ["collider"]],
+      "forbiddenPhrases": ["always proves", "guarantees causation"]
+    },
+    {
+      "id": "causal-identifiability",
+      "category": "identification",
+      "question": "When is a causal effect identifiable, and which assumptions must an AI architect state?",
+      "expectedCausal": true,
+      "requiredAny": [["identif"], ["assumption"]],
+      "forbiddenPhrases": ["always identifiable", "no assumptions are needed"]
+    },
+    {
+      "id": "causal-intervention-counterfactual",
+      "category": "counterfactuals",
+      "question": "Explain the difference between an intervention and a counterfactual for a decision system.",
+      "expectedCausal": true,
+      "requiredAny": [["intervention"], ["counterfactual"]],
+      "forbiddenPhrases": ["certainty", "guaranteed outcome"]
+    },
+    {
+      "id": "causal-decision-operating-system",
+      "category": "causal_architecture",
+      "question": "How would you design a causal decision operating system for an enterprise?",
+      "expectedCausal": true,
+      "requiredAny": [["decision"], ["evidence", "assumption", "uncertainty"]],
+      "forbiddenPhrases": ["automatically makes the right decision"]
+    },
+    {
+      "id": "causal-refutation",
+      "category": "causal_governance",
+      "question": "How should causal claims be refuted and governed before they influence an enterprise decision?",
+      "expectedCausal": true,
+      "requiredAny": [["refut", "robust"], ["evidence", "uncertainty", "assumption"]],
+      "forbiddenPhrases": ["causal proof is permanent"]
+    },
+    {
+      "id": "causal-intelligence-agentic-ai",
+      "category": "causal_architecture",
+      "question": "What does causal intelligence add to an agentic AI architecture?",
+      "expectedCausal": true,
+      "requiredAny": [["causal"], ["decision", "intervention", "counterfactual"]],
+      "forbiddenPhrases": ["the model knows the true cause"]
+    },
+    {
+      "id": "causal-estimate-card",
+      "category": "causal_evidence",
+      "question": "What should a causal estimate card contain before an AI system recommends an action?",
+      "expectedCausal": true,
+      "requiredAny": [["treatment", "intervention"], ["outcome", "effect"], ["assumption", "uncertainty", "evidence"]],
+      "forbiddenPhrases": ["guaranteed effect"]
+    },
+    {
+      "id": "ordinary-joz-business-value",
+      "category": "ordinary_regression",
+      "question": "What business value can Joz create for an organisation?",
+      "expectedCausal": false,
+      "requiredAny": [],
+      "forbiddenPhrases": []
+    },
+    {
+      "id": "ordinary-joz-agentic-ux",
+      "category": "ordinary_regression",
+      "question": "What is Joz's approach to agentic UX and multimodal interaction?",
+      "expectedCausal": false,
+      "requiredAny": [],
+      "forbiddenPhrases": []
+    }
+  ]
+}

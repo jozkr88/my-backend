@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-graph-systems",
+  "title": "Graph systems",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-71-graph-systems",
+  "summary": "## Graph systems",
+  "body": "## Graph systems\n\n- PyTorch Geometric documentation\n- W3C RDF, SPARQL and SHACL specifications\n- Graph database official documentation",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "knowledge_graphs"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "acl"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [
+      "access_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-71-graph-systems",
+    "canonical_record_title": "Graph systems",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "knowledge_graphs"
+    ],
+    "canonical_section": "Graph systems",
+    "canonical_parent": "13. Initial Primary Source Map",
+    "source_line_start": 1931,
+    "source_line_end": 1936,
+    "source_authority": 12,
+    "semantic_text": "Graph systems\nGraph systems\nai_architecture causal_intelligence knowledge_graphs\nai_architecture causal_intelligence knowledge_graphs\n## Graph systems\n\n- PyTorch Geometric documentation\n- W3C RDF, SPARQL and SHACL specifications\n- Graph database official documentation",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "graph",
+      "knowledge_graphs",
+      "systems"
+    ],
+    "exact_phrases": [
+      "Graph systems",
+      "ai_architecture",
+      "causal_intelligence",
+      "knowledge_graphs"
+    ],
+    "source_checksum": "8745e48e2db89533d5c8024a7dd1a6206100bfa0e92b9c4d17cc9dbe19acb94f"
+  }
+}

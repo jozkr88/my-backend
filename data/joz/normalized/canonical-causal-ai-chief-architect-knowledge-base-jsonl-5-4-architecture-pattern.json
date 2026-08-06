@@ -1,0 +1,109 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-5-4-architecture-pattern",
+  "title": "5.4 Architecture Pattern",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-41-5-4-architecture-pattern",
+  "summary": "## 5.4 Architecture Pattern",
+  "body": "## 5.4 Architecture Pattern\n\n```yaml\npattern:\nproblem:\ncontext:\nforces:\nsolution:\ncomponents:\ndata_flow:\nstate:\nfailure_modes:\nsecurity:\nobservability:\ntradeoffs:\nalternatives:\nreference_implementation:\n```",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "context_creates_intelligence"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "context_engineering",
+      "enterprise_architecture",
+      "observability"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-41-5-4-architecture-pattern",
+    "canonical_record_title": "5.4 Architecture Pattern",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "canonical_section": "5.4 Architecture Pattern",
+    "canonical_parent": "5. Knowledge Object Templates",
+    "source_line_start": 1509,
+    "source_line_end": 1527,
+    "source_authority": 12,
+    "semantic_text": "5.4 Architecture Pattern\n5.4 Architecture Pattern\nai_architecture causal_intelligence enterprise_architecture governance mlops_observability\nai_architecture causal_intelligence enterprise_architecture governance mlops_observability\n## 5.4 Architecture Pattern\n\n```yaml\npattern:\nproblem:\ncontext:\nforces:\nsolution:\ncomponents:\ndata_flow:\nstate:\nfailure_modes:\nsecurity:\nobservability:\ntradeoffs:\nalternatives:\nreference_implementation:\n```",
+    "keyword_terms": [
+      "ai_architecture",
+      "architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability",
+      "pattern"
+    ],
+    "exact_phrases": [
+      "5.4 Architecture Pattern",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "source_checksum": "887e9a2e306a03eb00917b5f471162dcac0dc1aa4ab582270b4dc96a35e2e6a7"
+  }
+}

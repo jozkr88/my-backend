@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import app from "./index.js";
+import app from "../index.js";
 
 const BANNED_GOLD_PILL_TERMS = [
   "online communities",

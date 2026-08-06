@@ -34,6 +34,9 @@
       "Current contact: joz@meetjoz.com and +65 3107 2412.",
       "Portfolio and Agentic AI CV: meejoz.com."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Dubai",
@@ -61,6 +64,7 @@
     "source_notes": null,
     "source_filename": "skills-recruiter-operational-facts.md",
     "source_meta_filename": "skills-recruiter-operational-facts.meta.json",
+    "source_checksum": "0483d596ddba4b9d5ac13a30d12233c3012dfb4837e15048bd3eb79a49b8fd15",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -80,16 +84,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "unverified",
-    "source_checksum": "7d84649c541d56d1fb2b3551428e2db2c10d312c9423816e880848711666bf5d",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

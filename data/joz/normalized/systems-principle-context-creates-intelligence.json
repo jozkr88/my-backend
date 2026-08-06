@@ -24,6 +24,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -36,6 +39,7 @@
     "source_notes": null,
     "source_filename": "systems-principle-context-creates-intelligence.md",
     "source_meta_filename": "systems-principle-context-creates-intelligence.meta.json",
+    "source_checksum": "75011aa21af6fa6fdc72650e075ea0f6a8aef05995fba632e784edfefda3fc80",
     "reviewed_at": "",
     "problems": [
       "data_silos",
@@ -61,16 +65,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "40006324b007c740c939b7043a3317e3f8e8131d82bc0c578d2d062e771d5080",
-    "source_uri": null
+    "measurable_outcome_count": 1
   }
 }

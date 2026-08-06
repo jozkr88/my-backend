@@ -1,0 +1,139 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-causal-supply-chain-decision-operating-system",
+  "title": "Causal Supply-Chain Decision Operating System",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-28-causal-supply-chain-decision-operating-system",
+  "summary": "## Causal Supply-Chain Decision Operating System",
+  "body": "## Causal Supply-Chain Decision Operating System\n\n### Business question\n\n> A critical supplier has reduced capacity by 35%. Which combination of alternate sourcing, inventory allocation, transport changes and production rescheduling minimizes margin loss while preserving customer-service and plant-safety constraints?\n\n### Required system behavior\n\n1. Ingest ERP orders, inventory and supplier records.\n2. Ingest WMS inventory state.\n3. Ingest TMS shipment state and route constraints.\n4. Ingest MES production capacity and machine telemetry.\n5. Resolve all entities into an enterprise knowledge graph.\n6. Detect the operating regime and distribution shift.\n7. Select or construct the relevant causal model.\n8. Identify effects of proposed interventions.\n9. Simulate thousands of intervention combinations.\n10. Reject options violating accounting, inventory, capacity or safety rules.\n11. Rank feasible policies by financial value and risk.\n12. Produce an explainable recommendation.\n13. Require approval based on action tier.\n14. Dispatch approved changes.\n15. Monitor expected versus realized effects.\n16. Roll back or compensate when thresholds are breached.\n17. update evidence without silently rewriting causal assumptions.\n\n### Example agents\n\n- Intent agent\n- Data-availability agent\n- Ontology agent\n- Causal graph agent\n- Identification agent\n- Treatment-effect agent\n- Simulation agent\n- Optimization agent\n- Policy agent\n- Explanation agent\n- Approval agent\n- Execution agent\n- Monitoring agent\n\n### Core guardrails\n\n- Inventory cannot become negative.\n- Units must balance across source, transit and destination.\n- Financial postings must balance.\n- Production plans cannot exceed validated capacity.\n- Machine operating envelopes cannot be violated.\n- Contractual minimums and maximums must be enforced.\n- High-value actions require human approval.\n- Actions must be idempotent and auditable.\n\n### Evaluation\n\n- Causal-estimate accuracy on synthetic ground truth\n- Financial regret against an oracle policy\n- Constraint-violation rate\n- OOD detection rate\n- Action success and rollback rate\n- Explanation completeness\n- Reproducibility\n- Latency and throughput\n- Human acceptance and override rate\n\n---\n\n# 4. Reference Platform Architecture",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "retrieval",
+      "acl",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "agentic_ai",
+      "ai_governance",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "observability"
+    ],
+    "outcomes": [
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "auditability",
+      "evaluation",
+      "human_approval",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-28-causal-supply-chain-decision-operating-system",
+    "canonical_record_title": "Causal Supply-Chain Decision Operating System",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "canonical_section": "Causal Supply-Chain Decision Operating System",
+    "canonical_parent": "3. Cross-Domain Capstone Project",
+    "source_line_start": 1280,
+    "source_line_end": 1348,
+    "source_authority": 12,
+    "semantic_text": "Causal Supply-Chain Decision Operating System\nCausal Supply-Chain Decision Operating System\nai_architecture causal_discovery causal_inference causal_intelligence decision_intelligence enterprise_architecture governance knowledge_graphs mlops_observability\nai_architecture causal_discovery causal_inference causal_intelligence decision_intelligence enterprise_architecture governance knowledge_graphs mlops_observability\n## Causal Supply-Chain Decision Operating System\n\n### Business question\n\n> A critical supplier has reduced capacity by 35%. Which combination of alternate sourcing, inventory allocation, transport changes and production rescheduling minimizes margin loss while preserving customer-service and plant-safety constraints?\n\n### Required system behavior\n\n1. Ingest ERP orders, inventory and supplier records.\n2. Ingest WMS inventory state.\n3. Ingest TMS shipment state and route constraints.\n4. Ingest MES production capacity and machine telemetry.\n5. Resolve all entities into an enterprise knowledge graph.\n6. Detect the operating regime and distribution shift.\n7. Select or construct the relevant causal model.\n8. Identify effects of proposed interventions.\n9. Simulate thousands of intervention combinations.\n10. Reject options violating accounting, inventory, capacity or safety rules.\n11. Rank feasible policies by financial value and risk.\n12. Produce an explainable recommendation.\n13. Require approval based on action tier.\n14. Dispatch approved changes.\n15. Monitor expected versus realized effects.\n16. Roll back or compensate when thresholds are breached.\n17. update evidence without silently rewriting causal assumptions.\n\n### Example agents\n\n- Intent agent\n- Data-availability agent\n- Ontology agent\n- Causal graph agent\n- Identification agent\n- Treatment-effect agent\n- Simulation agent\n- Optimization agent\n- Policy agent\n- Explanation agent\n- Approval agent\n- Execution agent\n- Monitoring agent\n\n### Core guardrails\n\n- Inventory cannot become negative.\n- Units must balance across source, transit and destination.\n- Financial postings must balance.\n- Production plans cannot exceed validated capacity.\n- Machine operating envelopes cannot be violated.\n- Contractual minimums and maximums must be enforced.\n- High-value actions require human approval.\n- Actions must be idempotent and auditable.\n\n### Evaluation\n\n- Causal-estimate accuracy on synthetic ground truth\n- Financial regret against an oracle policy\n- Constraint-violation rate\n- OOD detection rate\n- Action success and rollback rate\n- Explanation completeness\n- Reproducibility\n- Latency and throughput\n- Human acceptance and override rate\n\n---\n\n# 4. Reference Platform Architecture",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "chain",
+      "decision",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability",
+      "operating",
+      "supply",
+      "system"
+    ],
+    "exact_phrases": [
+      "Causal Supply-Chain Decision Operating System",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "source_checksum": "ffd6a2b1625f428e280417eba17ba909dfbb2b3814d56b740b92e9a4feca8e82"
+  }
+}

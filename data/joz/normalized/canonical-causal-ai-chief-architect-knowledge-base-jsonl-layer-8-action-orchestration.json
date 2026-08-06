@@ -1,0 +1,97 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-layer-8-action-orchestration",
+  "title": "Layer 8 — Action Orchestration",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-36-layer-8-action-orchestration",
+  "summary": "## Layer 8 — Action Orchestration",
+  "body": "## Layer 8 — Action Orchestration\n\n- durable workflows\n- connector actions\n- retries\n- idempotency\n- compensation\n- rollback\n- action monitoring",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [],
+    "governance": [
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-36-layer-8-action-orchestration",
+    "canonical_record_title": "Layer 8 — Action Orchestration",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "mlops_observability"
+    ],
+    "canonical_section": "Layer 8 — Action Orchestration",
+    "canonical_parent": "4. Reference Platform Architecture",
+    "source_line_start": 1421,
+    "source_line_end": 1430,
+    "source_authority": 12,
+    "semantic_text": "Layer 8 — Action Orchestration\nLayer 8 — Action Orchestration\nai_architecture causal_intelligence mlops_observability\nai_architecture causal_intelligence mlops_observability\n## Layer 8 — Action Orchestration\n\n- durable workflows\n- connector actions\n- retries\n- idempotency\n- compensation\n- rollback\n- action monitoring",
+    "keyword_terms": [
+      "action",
+      "ai_architecture",
+      "causal_intelligence",
+      "layer",
+      "mlops_observability",
+      "orchestration"
+    ],
+    "exact_phrases": [
+      "Layer 8 — Action Orchestration",
+      "ai_architecture",
+      "causal_intelligence",
+      "mlops_observability"
+    ],
+    "source_checksum": "82d872d7d2c673a9563c47b4b77f56022a522b90d308484b0841a07a9891ff2a"
+  }
+}

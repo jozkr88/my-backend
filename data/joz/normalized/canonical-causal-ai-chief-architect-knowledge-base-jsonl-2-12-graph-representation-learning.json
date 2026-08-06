@@ -1,0 +1,111 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-12-graph-representation-learning",
+  "title": "2.12 Graph Representation Learning",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-13-2-12-graph-representation-learning",
+  "summary": "## 2.12 Graph Representation Learning",
+  "body": "## 2.12 Graph Representation Learning\n\n### Essential concepts\n\n- Message passing\n- Node, edge and graph prediction\n- Graph convolution\n- Attention on graphs\n- Relational graphs\n- Heterogeneous graphs\n- Temporal graphs\n- Dynamic graphs\n- Link prediction\n- Graph embeddings\n- Oversmoothing\n- Oversquashing\n- Graph sampling\n- Inductive versus transductive learning\n- Explainability for graph models\n\n### Models to study\n\n- GCN\n- GraphSAGE\n- GAT\n- R-GCN\n- GIN\n- heterogeneous graph transformers\n- temporal graph networks\n- graph autoencoders\n- graph transformers\n\n### Enterprise uses\n\n- Supplier-risk propagation\n- Fraud rings\n- Asset dependency prediction\n- Root-cause candidate ranking\n- Missing-edge suggestions\n- Entity resolution\n- Failure propagation\n- Process and workflow representation\n\n### Evidence artifacts\n\n- Relational GCN implementation\n- Heterogeneous enterprise graph benchmark\n- Temporal graph model\n- Graph-explanation report\n- Comparison between learned and explicitly causal edges\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-13-2-12-graph-representation-learning",
+    "canonical_record_title": "2.12 Graph Representation Learning",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "time_series"
+    ],
+    "canonical_section": "2.12 Graph Representation Learning",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 614,
+    "source_line_end": 666,
+    "source_authority": 12,
+    "semantic_text": "2.12 Graph Representation Learning\n2.12 Graph Representation Learning\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture time_series\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture time_series\n## 2.12 Graph Representation Learning\n\n### Essential concepts\n\n- Message passing\n- Node, edge and graph prediction\n- Graph convolution\n- Attention on graphs\n- Relational graphs\n- Heterogeneous graphs\n- Temporal graphs\n- Dynamic graphs\n- Link prediction\n- Graph embeddings\n- Oversmoothing\n- Oversquashing\n- Graph sampling\n- Inductive versus transductive learning\n- Explainability for graph models\n\n### Models to study\n\n- GCN\n- GraphSAGE\n- GAT\n- R-GCN\n- GIN\n- heterogeneous graph transformers\n- temporal graph networks\n- graph autoencoders\n- graph transformers\n\n### Enterprise uses\n\n- Supplier-risk propagation\n- Fraud rings\n- Asset dependency prediction\n- Root-cause candidate ranking\n- Missing-edge suggestions\n- Entity resolution\n- Failure propagation\n- Process and workflow representation\n\n### Evidence artifacts\n\n- Relational GCN implementation\n- Heterogeneous enterprise graph benchmark\n- Temporal graph model\n- Graph-explanation report\n- Comparison between learned and explicitly causal edges\n\n---",
+    "keyword_terms": [
+      "12",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "graph",
+      "learning",
+      "representation",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.12 Graph Representation Learning",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "time_series"
+    ],
+    "source_checksum": "d93f0f8e80df74f24bd82c9509f970943c8d268bc2a2f0d61378e09d59d24e98"
+  }
+}

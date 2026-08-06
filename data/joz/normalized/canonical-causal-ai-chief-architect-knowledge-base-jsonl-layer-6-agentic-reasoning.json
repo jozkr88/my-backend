@@ -1,0 +1,99 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-layer-6-agentic-reasoning",
+  "title": "Layer 6 — Agentic Reasoning",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-34-layer-6-agentic-reasoning",
+  "summary": "## Layer 6 — Agentic Reasoning",
+  "body": "## Layer 6 — Agentic Reasoning\n\n- intent interpretation\n- planning\n- tool routing\n- memory and state\n- verification\n- explanation\n- human escalation",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "agent_memory",
+      "enterprise_architecture",
+      "verification"
+    ],
+    "outcomes": [],
+    "governance": [
+      "escalation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-34-layer-6-agentic-reasoning",
+    "canonical_record_title": "Layer 6 — Agentic Reasoning",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "Layer 6 — Agentic Reasoning",
+    "canonical_parent": "4. Reference Platform Architecture",
+    "source_line_start": 1402,
+    "source_line_end": 1411,
+    "source_authority": 12,
+    "semantic_text": "Layer 6 — Agentic Reasoning\nLayer 6 — Agentic Reasoning\nagentic_ai ai_architecture causal_intelligence enterprise_architecture\nagentic_ai ai_architecture causal_intelligence enterprise_architecture\n## Layer 6 — Agentic Reasoning\n\n- intent interpretation\n- planning\n- tool routing\n- memory and state\n- verification\n- explanation\n- human escalation",
+    "keyword_terms": [
+      "agentic",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "layer",
+      "reasoning"
+    ],
+    "exact_phrases": [
+      "Layer 6 — Agentic Reasoning",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "ceb43ab9a404e3458843d96c93f6149377179f1bbc9b1e45c3b84c794dd73bf6"
+  }
+}

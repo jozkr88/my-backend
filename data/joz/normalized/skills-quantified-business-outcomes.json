@@ -35,6 +35,9 @@
       "Engineering and accessibility impact across services used by 16M+ Erste customers.",
       "Interaction and product work spanning hundreds of millions of cumulative users across the career."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe",
@@ -60,6 +63,7 @@
     "source_notes": null,
     "source_filename": "skills-quantified-business-outcomes.md",
     "source_meta_filename": "skills-quantified-business-outcomes.meta.json",
+    "source_checksum": "6d34bcdfdd9100a5a34fc3c880b2bb0a0ca3f5798cf768adbcf117d64ec550e1",
     "reviewed_at": "",
     "problems": [
       "operational_friction",
@@ -109,16 +113,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 5,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "f1d889ccf9e0a25903cdcb2defb48ef765e1b4536fff497f4cef4c9903b1efb1",
-    "source_uri": null
+    "measurable_outcome_count": 5
   }
 }

@@ -35,6 +35,9 @@
       "Singapore Exchange: regulated portal re-engineering.",
       "Apple/Pixar-adjacent work: Python USD(z), computer vision, and spatial-computing workflows in Singapore."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Singapore"
@@ -57,6 +60,7 @@
     "source_notes": null,
     "source_filename": "skills-singapore-market-proof.md",
     "source_meta_filename": "skills-singapore-market-proof.meta.json",
+    "source_checksum": "ba618e062696aa8668d72a0276f3f3fc016caf98b83ed13b76fc4b79a414a9aa",
     "reviewed_at": "2026-07-14",
     "problems": [],
     "principles": [],
@@ -67,16 +71,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "a1b22b938f891ebf18e9a4d51d481017ba343c5b18df2468d0048446d3b5594c",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

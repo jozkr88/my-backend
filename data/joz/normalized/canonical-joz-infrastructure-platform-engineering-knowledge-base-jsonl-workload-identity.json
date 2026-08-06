@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -64,6 +67,10 @@
       "security",
       "workload-identity"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Workload Identity\nWorkload Identity\nidentity security workload-identity\nidentity security workload-identity\nWorkload identity lets services prove who they are without sharing long-lived static credentials.\n\nExamples:\nAWS IAM roles for workloads\nKubernetes service accounts\nOIDC-based federation\nShort-lived tokens\n\nWorkload identity is safer than embedding shared secrets in services.",
     "keyword_terms": [
@@ -78,15 +85,6 @@
       "security",
       "workload-identity"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "6c64f5020a9b983e6903aaf5154ae157d90cdec2493efb18080a0c961c421cc2",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_023"
+    "source_checksum": "7fe06c5d0655504b82049372f7f8fdf1778ac5f179e74afa8b919466d510fbfc"
   }
 }

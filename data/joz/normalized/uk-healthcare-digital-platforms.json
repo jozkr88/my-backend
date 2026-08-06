@@ -32,6 +32,9 @@
       "This record is scoped to platform and communication delivery rather than medical or clinical claims.",
       "A dedicated healthcare industry tag is used because the existing ontology previously lacked one."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Europe",
       "United Kingdom"
@@ -61,6 +64,7 @@
     "source_notes": "Grouped programme record. Healthcare industry ID added because the controlled ontology previously lacked a safe healthcare bucket.",
     "source_filename": "uk-healthcare-digital-platforms.md",
     "source_meta_filename": "uk-healthcare-digital-platforms.meta.json",
+    "source_checksum": "4aaf45a39d79da1c82c5733d5bdf9c442218a2e5999d7343ccfd3ce5172aabb3",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -82,16 +86,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "7f0122750747c1df1f514c970a4bcb1197767ba4c804e8696af751e47e52a895",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

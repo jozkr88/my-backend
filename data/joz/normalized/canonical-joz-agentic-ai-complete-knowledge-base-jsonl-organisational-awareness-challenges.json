@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust"
     ],
@@ -75,6 +78,10 @@
       "challenges",
       "organisational-awareness"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Organisational Awareness Challenges\nOrganisational Awareness Challenges\nchallenges organisational-awareness\nchallenges organisational-awareness\nThe primary challenges are:\n\nACL enforcement\nOwnership inference\nKnowledge freshness\nConflicting sources\nSource trust\nStale decisions\nEntity resolution\nMaintaining citations\nPreventing unauthorized retrieval\nPreserving user trust as organisational knowledge changes",
     "keyword_terms": [
@@ -88,15 +95,6 @@
       "challenges",
       "organisational-awareness"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "d17be517bce16011b373edef9b1ec4a47494c4bd23fd90e3173f91d011d18363",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_031"
+    "source_checksum": "2dd5c4d4ecea5ff73c48ea8b844b6bd1d13f4f8d780154869eca8274a0458959"
   }
 }

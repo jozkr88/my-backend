@@ -35,14 +35,17 @@
       "Joz combines agentic AI architecture, decision intelligence, context engineering, enterprise product engineering, governance, and human-centred adoption.",
       "The dataset follows Joz's systems-before-features and trust-before-autonomy principles."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
     "companies": [
       "Dubai Future Foundation",
       "Erste Bank",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp"
     ],
@@ -56,6 +59,7 @@
     "source_notes": null,
     "source_filename": "business-transformation-knowledge.md",
     "source_meta_filename": "business-transformation-knowledge.meta.json",
+    "source_checksum": "7f0618ed05749f0f847bcd58e654e82342e94bbd106ba45bad6ff477c34b69a2",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",

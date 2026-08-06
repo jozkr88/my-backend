@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust"
     ],
@@ -70,6 +73,10 @@
       "security",
       "zero-trust"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Security\nSecurity\nkeys security zero-trust\nkeys security zero-trust\nThe hardest problem is safely turning intelligence into action.\n\nPrinciples:\nZero trust\nLeast privilege\nScoped tools\nTyped outputs\nDeterministic validation\nSandboxed execution\nApproval gates\nRate limits\nKill switches\nFull auditability\n\nLLMs must never see private keys, seed phrases, or unrestricted credentials.",
     "keyword_terms": [
@@ -83,15 +90,6 @@
       "security",
       "zero-trust"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "4d836b489e56d1b7fff860d1dc4832655c6e605e51d168e6d7934726dc5eb15b",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_011"
+    "source_checksum": "fc9c801b49f3d589126f74d496938b5229a856c7483ea3b8e92045510ca144a3"
   }
 }

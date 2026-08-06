@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -62,6 +65,10 @@
       "queues",
       "workers"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Queues and Workers\nQueues and Workers\nasync queues workers\nasync queues workers\nQueues separate request intake from background processing.\n\nFlow:\nAPI receives request\n→ Queue\n→ Worker processes task\n→ Result stored\n→ User notified\n\nQueues are useful for:\nLong-running agent tasks\nDocument ingestion\nEmbedding generation\nModel evaluation\nBatch processing\nNotifications",
     "keyword_terms": [
@@ -76,15 +83,6 @@
       "queues",
       "workers"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "21cbfd9e010699b34c64e1fdf8021a7fcf17103f02d0a1daad0dc8939c5f3002",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_020"
+    "source_checksum": "5b576e246d8d4d54f7d41fd0221dd3da2fe7642a2775a226d7d571a3b5fa0599"
   }
 }

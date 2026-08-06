@@ -35,6 +35,9 @@
       "Engineering and accessibility work serving 16M+ Erste customers.",
       "Current Agentic AI, RAG, financial-agent, context-engineering, and governance work."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Dubai",
@@ -62,6 +65,7 @@
     "source_notes": null,
     "source_filename": "business-need-hero-value.md",
     "source_meta_filename": "business-need-hero-value.meta.json",
+    "source_checksum": "6c6bbd7514c92963eb42c160202c62faf71068da4ae7b4c8e0cab9672566606f",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -113,16 +117,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 4,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "5f525abe2b09ef9c67a0a20134adf36e6ada3f15150f4506e5fc6ad8ed3b7c94",
-    "source_uri": null
+    "measurable_outcome_count": 4
   }
 }

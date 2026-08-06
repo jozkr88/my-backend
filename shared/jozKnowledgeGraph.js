@@ -5,7 +5,7 @@ import { mapJozQueryToOntology } from "./jozOntology.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const GRAPH_SCHEMA = "joz.knowledge-graph.v1";
+const GRAPH_SCHEMA = "joz.knowledge-graph.v2";
 const GRAPH_FILE = "joz-knowledge-graph.generated.json";
 const GRAPH_FIELDS = [
   "problems",
@@ -42,6 +42,15 @@ function asList(value) {
   if (Array.isArray(value)) return value.map(cleanText).filter(Boolean);
   if (typeof value === "string") return value.split(",").map(cleanText).filter(Boolean);
   return [];
+}
+
+function asObjectList(value) {
+  return Array.isArray(value) ? value.filter((item) => item && typeof item === "object" && !Array.isArray(item)) : [];
+}
+
+function numericOrNull(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
 }
 
 function nodeId(type, value) {
@@ -167,14 +176,19 @@ function graphNodeMap(graph = {}) {
 }
 
 function graphEdgeScore(edge = {}) {
-  const verification = cleanText(edge.verification || edge.verificationStatus).toLowerCase();
+  const verification = cleanText(
+    edge.verification || edge.verificationStatus || edge.claimStatus
+  ).toLowerCase();
   const verificationScore =
-    verification === "cv_supported" || verification === "verified"
+    verification === "cv_supported" || verification === "verified" || verification === "framework_supported"
       ? 20
       : verification.includes("supported")
         ? 14
         : 5;
-  return verificationScore + Number(edge.impactScore || 0) / 20;
+  const edgeTypeScore = ["contains_claim", "supported_by", "requires_assumption", "evaluated_with"].includes(edge.type)
+    ? 16
+    : 0;
+  return verificationScore + edgeTypeScore + Number(edge.impactScore || 0) / 20;
 }
 
 export function queryJozKnowledgeGraph({ graph = loadPublishedJozKnowledgeGraph(), query = "", limit = 8 } = {}) {
@@ -203,7 +217,11 @@ export function queryJozKnowledgeGraph({ graph = loadPublishedJozKnowledgeGraph(
       const current = queue.shift();
       const currentNode = nodes.get(current.id);
       if (currentNode?.type === "document" && currentNode.slug) {
-        const score = current.edges.reduce((total, edge) => total + graphEdgeScore(edge), 0) - current.distance * 4;
+        const causalPath = current.path.some((nodeId) => String(nodes.get(nodeId)?.type || "").startsWith("causal_"));
+        const score =
+          current.edges.reduce((total, edge) => total + graphEdgeScore(edge), 0) -
+          current.distance * 4 +
+          (causalPath ? 30 : 0);
         const previous = documentCandidates.get(currentNode.slug);
         if (!previous || score > previous.score) {
           documentCandidates.set(currentNode.slug, {
@@ -341,6 +359,78 @@ export function buildJozKnowledgeGraph({ documents = [], ontology = {} } = {}) {
       const regionId = addNode(nodes, "region", region);
       addEdge(edges, documentId, "applies_in", regionId, { sourceSlug: slug });
     }
+
+    for (const [index, claim] of asObjectList(metadata.causal_claims).entries()) {
+      const claimKey = `${slug}:${cleanText(claim.id || `claim-${index + 1}`)}`;
+      const claimId = addNode(nodes, "causal_claim", claimKey, {
+        label: cleanText(claim.label || claim.id || `Causal claim ${index + 1}`),
+        description: cleanText(claim.description || claim.statement || null) || null,
+        claimType: cleanText(claim.claim_type || "causal") || "causal",
+        relation: cleanText(claim.relation || "associated_with") || "associated_with",
+        claimStatus: cleanText(claim.status || "HYPOTHESIZED_CAUSE") || "HYPOTHESIZED_CAUSE",
+        confidence: numericOrNull(claim.confidence),
+        datasetId: cleanText(claim.dataset_id || metadata.dataset_id) || null,
+        modelVersion: cleanText(claim.model_version || metadata.causal_model_version) || null,
+        sourceSlug: slug,
+      });
+      const subjectId = addNode(nodes, "causal_variable", claim.subject, {
+        label: cleanText(claim.subject),
+      });
+      const objectId = addNode(nodes, "causal_variable", claim.object, {
+        label: cleanText(claim.object),
+      });
+
+      addEdge(edges, documentId, "contains_claim", claimId, {
+        sourceSlug: slug,
+        claimStatus: cleanText(claim.status) || "HYPOTHESIZED_CAUSE",
+        datasetId: cleanText(claim.dataset_id || metadata.dataset_id) || null,
+      });
+      addEdge(edges, claimId, "claims_about", subjectId, {
+        claimStatus: cleanText(claim.status) || "HYPOTHESIZED_CAUSE",
+        relation: cleanText(claim.relation || "associated_with") || "associated_with",
+      });
+      addEdge(edges, claimId, "predicts", objectId, {
+        claimStatus: cleanText(claim.status) || "HYPOTHESIZED_CAUSE",
+        relation: cleanText(claim.relation || "associated_with") || "associated_with",
+      });
+
+      for (const assumption of asList(claim.assumptions)) {
+        const assumptionId = addNode(nodes, "causal_assumption", `${claimKey}:${assumption}`, {
+          label: assumption,
+          sourceSlug: slug,
+        });
+        addEdge(edges, claimId, "requires_assumption", assumptionId, {
+          claimStatus: cleanText(claim.status) || "HYPOTHESIZED_CAUSE",
+        });
+      }
+      for (const evidence of asList(claim.evidence)) {
+        const evidenceId = addNode(nodes, "causal_evidence", `${claimKey}:${evidence}`, {
+          label: evidence,
+          sourceSlug: slug,
+        });
+        addEdge(edges, claimId, "supported_by", evidenceId, {
+          claimStatus: cleanText(claim.status) || "HYPOTHESIZED_CAUSE",
+        });
+      }
+      if (claim.dataset_id || metadata.dataset_id) {
+        const datasetId = addNode(nodes, "causal_dataset", claim.dataset_id || metadata.dataset_id, {
+          label: claim.dataset_name || claim.dataset_id || metadata.dataset_id,
+          sourceSlug: slug,
+        });
+        addEdge(edges, claimId, "evaluated_with", datasetId, {
+          modelVersion: cleanText(claim.model_version || metadata.causal_model_version) || null,
+        });
+      }
+      if (claim.model_version || metadata.causal_model_version) {
+        const modelId = addNode(nodes, "causal_model_version", claim.model_version || metadata.causal_model_version, {
+          label: claim.model_version || metadata.causal_model_version,
+          sourceSlug: slug,
+        });
+        addEdge(edges, claimId, "uses_model_version", modelId, {
+          claimStatus: cleanText(claim.status) || "HYPOTHESIZED_CAUSE",
+        });
+      }
+    }
   }
 
   for (const proof of ontology.proofs || []) {
@@ -379,7 +469,7 @@ export function buildJozKnowledgeGraph({ documents = [], ontology = {} } = {}) {
 
   return {
     schema: GRAPH_SCHEMA,
-    version: 1,
+    version: 2,
     generatedAt: new Date().toISOString(),
     source: {
       ontology: "data/joz/published/joz-ontology.generated.json",

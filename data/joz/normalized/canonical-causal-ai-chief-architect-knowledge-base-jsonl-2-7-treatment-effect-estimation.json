@@ -1,0 +1,110 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-7-treatment-effect-estimation",
+  "title": "2.7 Treatment-Effect Estimation",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-08-2-7-treatment-effect-estimation",
+  "summary": "## 2.7 Treatment-Effect Estimation",
+  "body": "## 2.7 Treatment-Effect Estimation\n\n### Estimands\n\n- Average Treatment Effect\n- Average Treatment Effect on the Treated\n- Conditional Average Treatment Effect\n- Individual Treatment Effect\n- Local Average Treatment Effect\n- Marginal treatment effects\n- Dynamic treatment effects\n- Policy value\n\n### Estimator families\n\n- Regression adjustment\n- Matching\n- Propensity-score methods\n- Inverse-probability weighting\n- Doubly robust estimators\n- Meta-learners\n- Double Machine Learning\n- Causal forests\n- Orthogonal random forests\n- Bayesian causal forests\n- Instrumental-variable estimators\n- Difference-in-differences\n- Synthetic controls\n- Regression discontinuity\n- Panel-data methods\n\n### Mastery questions\n\n- What estimand matches the enterprise decision?\n- Is treatment binary, categorical, continuous or sequential?\n- Are all confounders observed?\n- Is overlap adequate?\n- Does heterogeneity matter operationally?\n- How should uncertainty affect action selection?\n\n### Implementation exercises\n\n- Estimate ATE, CATE and ITE on synthetic and semi-synthetic data.\n- Compare DML, causal forests and doubly robust learners.\n- Test overlap and covariate balance.\n- Calibrate effect uncertainty.\n- Convert estimated effects into policy recommendations.\n\n### Evidence artifacts\n\n- Treatment-effect benchmark\n- Overlap and balance diagnostic report\n- Heterogeneity explorer\n- Policy-value evaluator\n- Confidence-aware intervention API\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "retrieval"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "low_trust",
+      "operational_friction",
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "rag"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "confidence_handling",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-08-2-7-treatment-effect-estimation",
+    "canonical_record_title": "2.7 Treatment-Effect Estimation",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "2.7 Treatment-Effect Estimation",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 344,
+    "source_line_end": 401,
+    "source_authority": 12,
+    "semantic_text": "2.7 Treatment-Effect Estimation\n2.7 Treatment-Effect Estimation\nai_architecture causal_inference causal_intelligence decision_intelligence enterprise_architecture\nai_architecture causal_inference causal_intelligence decision_intelligence enterprise_architecture\n## 2.7 Treatment-Effect Estimation\n\n### Estimands\n\n- Average Treatment Effect\n- Average Treatment Effect on the Treated\n- Conditional Average Treatment Effect\n- Individual Treatment Effect\n- Local Average Treatment Effect\n- Marginal treatment effects\n- Dynamic treatment effects\n- Policy value\n\n### Estimator families\n\n- Regression adjustment\n- Matching\n- Propensity-score methods\n- Inverse-probability weighting\n- Doubly robust estimators\n- Meta-learners\n- Double Machine Learning\n- Causal forests\n- Orthogonal random forests\n- Bayesian causal forests\n- Instrumental-variable estimators\n- Difference-in-differences\n- Synthetic controls\n- Regression discontinuity\n- Panel-data methods\n\n### Mastery questions\n\n- What estimand matches the enterprise decision?\n- Is treatment binary, categorical, continuous or sequential?\n- Are all confounders observed?\n- Is overlap adequate?\n- Does heterogeneity matter operationally?\n- How should uncertainty affect action selection?\n\n### Implementation exercises\n\n- Estimate ATE, CATE and ITE on synthetic and semi-synthetic data.\n- Compare DML, causal forests and doubly robust learners.\n- Test overlap and covariate balance.\n- Calibrate effect uncertainty.\n- Convert estimated effects into policy recommendations.\n\n### Evidence artifacts\n\n- Treatment-effect benchmark\n- Overlap and balance diagnostic report\n- Heterogeneity explorer\n- Policy-value evaluator\n- Confidence-aware intervention API\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "effect",
+      "enterprise_architecture",
+      "estimation",
+      "treatment"
+    ],
+    "exact_phrases": [
+      "2.7 Treatment-Effect Estimation",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "cc67db748602652d82bd5c49e81d47a552294efb018f50e0d4e574b9d26eba75"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-2-causal-inference-foundations",
+  "title": "2.2 Causal Inference Foundations",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-03-2-2-causal-inference-foundations",
+  "summary": "## 2.2 Causal Inference Foundations",
+  "body": "## 2.2 Causal Inference Foundations\n\n### Essential concepts\n\n- Association, intervention and counterfactual reasoning\n- Pearl’s Ladder of Causation\n- Potential-outcomes framework\n- Structural causal models\n- Structural equation models\n- Directed acyclic graphs\n- Causal Markov condition\n- Faithfulness\n- Consistency\n- Positivity\n- Exchangeability\n- Stable Unit Treatment Value Assumption\n- Confounding\n- Selection bias\n- Collider bias\n- Mediation\n- Moderation\n- Instrumental variables\n- Front-door and back-door criteria\n\n### Mastery questions\n\n- Why can a highly accurate predictive model produce a bad intervention decision?\n- What does `P(Y | X)` tell us that `P(Y | do(X))` does not?\n- Which assumptions connect observational data to intervention effects?\n- How can conditioning on a collider create bias?\n- When is a causal effect not identifiable from available data?\n\n### Implementation exercises\n\n- Build a small SCM from explicit structural equations.\n- Simulate observational and interventional distributions.\n- Demonstrate confounding, mediation and collider bias.\n- Compare regression coefficients with causal-effect estimates.\n- Generate counterfactual outcomes for individual units.\n\n### Evidence artifacts\n\n- Causal assumptions catalogue\n- DAG examples library\n- Identification decision tree\n- Causal-versus-predictive demonstration notebook\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "structural_causal_models"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [
+      "media"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-03-2-2-causal-inference-foundations",
+    "canonical_record_title": "2.2 Causal Inference Foundations",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "structural_causal_models"
+    ],
+    "canonical_section": "2.2 Causal Inference Foundations",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 106,
+    "source_line_end": 154,
+    "source_authority": 12,
+    "semantic_text": "2.2 Causal Inference Foundations\n2.2 Causal Inference Foundations\nai_architecture causal_inference causal_intelligence enterprise_architecture structural_causal_models\nai_architecture causal_inference causal_intelligence enterprise_architecture structural_causal_models\n## 2.2 Causal Inference Foundations\n\n### Essential concepts\n\n- Association, intervention and counterfactual reasoning\n- Pearl’s Ladder of Causation\n- Potential-outcomes framework\n- Structural causal models\n- Structural equation models\n- Directed acyclic graphs\n- Causal Markov condition\n- Faithfulness\n- Consistency\n- Positivity\n- Exchangeability\n- Stable Unit Treatment Value Assumption\n- Confounding\n- Selection bias\n- Collider bias\n- Mediation\n- Moderation\n- Instrumental variables\n- Front-door and back-door criteria\n\n### Mastery questions\n\n- Why can a highly accurate predictive model produce a bad intervention decision?\n- What does `P(Y | X)` tell us that `P(Y | do(X))` does not?\n- Which assumptions connect observational data to intervention effects?\n- How can conditioning on a collider create bias?\n- When is a causal effect not identifiable from available data?\n\n### Implementation exercises\n\n- Build a small SCM from explicit structural equations.\n- Simulate observational and interventional distributions.\n- Demonstrate confounding, mediation and collider bias.\n- Compare regression coefficients with causal-effect estimates.\n- Generate counterfactual outcomes for individual units.\n\n### Evidence artifacts\n\n- Causal assumptions catalogue\n- DAG examples library\n- Identification decision tree\n- Causal-versus-predictive demonstration notebook\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "foundations",
+      "inference",
+      "structural_causal_models"
+    ],
+    "exact_phrases": [
+      "2.2 Causal Inference Foundations",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "structural_causal_models"
+    ],
+    "source_checksum": "c80c27c505b179a772431fff1fd60717e8b129b9559c36458dc749af83c808bd"
+  }
+}
