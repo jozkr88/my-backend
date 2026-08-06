@@ -1,0 +1,135 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-priority-d-executive-leadership",
+  "title": "Priority D — Executive leadership",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-50-priority-d-executive-leadership",
+  "summary": "## Priority D — Executive leadership",
+  "body": "## Priority D — Executive leadership\n\n- Research translation\n- Architecture governance\n- Hiring and standards\n- Product roadmap\n- Client and board communication\n\n---\n\n# 9. Personal Gap-to-Evidence Strategy\n\nFor a candidate with strong systems architecture, agentic AI, product engineering, spatial systems and digital-twin experience, the highest-value evidence expansion is:\n\n1. **Formal causal identification**\n2. **Treatment-effect estimation**\n3. **Causal discovery benchmarking**\n4. **Refutation and sensitivity testing**\n5. **Invariant prediction and OOD evaluation**\n6. **Graph neural-network implementation**\n7. **Constraint-solving and policy-as-code**\n8. **High-throughput distributed simulation**\n9. **ERP/WMS/TMS/MES process depth**\n10. **Security-hardened on-prem deployment**\n\nThe objective is not to collect terminology. It is to produce visible evidence that connects mathematical validity to enterprise execution.\n\n---\n\n# 10. 90-Day Build Sequence",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "manual_knowledge_work",
+      "unclear_roi"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "product_strategy",
+      "spatial_ai"
+    ],
+    "outcomes": [
+      "better_customer_experience",
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [
+      "spatial_computing"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-50-priority-d-executive-leadership",
+    "canonical_record_title": "Priority D — Executive leadership",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "canonical_section": "Priority D — Executive leadership",
+    "canonical_parent": "8. Priority Model",
+    "source_line_start": 1715,
+    "source_line_end": 1745,
+    "source_authority": 12,
+    "semantic_text": "Priority D — Executive leadership\nPriority D — Executive leadership\nagentic_ai ai_architecture causal_discovery causal_inference causal_intelligence distributed_systems enterprise_architecture governance mlops_observability\nagentic_ai ai_architecture causal_discovery causal_inference causal_intelligence distributed_systems enterprise_architecture governance mlops_observability\n## Priority D — Executive leadership\n\n- Research translation\n- Architecture governance\n- Hiring and standards\n- Product roadmap\n- Client and board communication\n\n---\n\n# 9. Personal Gap-to-Evidence Strategy\n\nFor a candidate with strong systems architecture, agentic AI, product engineering, spatial systems and digital-twin experience, the highest-value evidence expansion is:\n\n1. **Formal causal identification**\n2. **Treatment-effect estimation**\n3. **Causal discovery benchmarking**\n4. **Refutation and sensitivity testing**\n5. **Invariant prediction and OOD evaluation**\n6. **Graph neural-network implementation**\n7. **Constraint-solving and policy-as-code**\n8. **High-throughput distributed simulation**\n9. **ERP/WMS/TMS/MES process depth**\n10. **Security-hardened on-prem deployment**\n\nThe objective is not to collect terminology. It is to produce visible evidence that connects mathematical validity to enterprise execution.\n\n---\n\n# 10. 90-Day Build Sequence",
+    "keyword_terms": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "executive",
+      "governance",
+      "leadership",
+      "mlops_observability",
+      "priority"
+    ],
+    "exact_phrases": [
+      "Priority D — Executive leadership",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "source_checksum": "50090d43366ed05d2a8f0ef2064f5169f70982fb97e4bcaf8bd04c302919d3be"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-distributed-and-streaming-systems",
+  "title": "Distributed and streaming systems",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-73-distributed-and-streaming-systems",
+  "summary": "## Distributed and streaming systems",
+  "body": "## Distributed and streaming systems\n\n- Ray documentation\n- Apache Kafka documentation\n- Apache Flink documentation\n- Kubernetes documentation\n- Temporal documentation",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-73-distributed-and-streaming-systems",
+    "canonical_record_title": "Distributed and streaming systems",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "time_series"
+    ],
+    "canonical_section": "Distributed and streaming systems",
+    "canonical_parent": "13. Initial Primary Source Map",
+    "source_line_start": 1943,
+    "source_line_end": 1950,
+    "source_authority": 12,
+    "semantic_text": "Distributed and streaming systems\nDistributed and streaming systems\nai_architecture causal_intelligence distributed_systems time_series\nai_architecture causal_intelligence distributed_systems time_series\n## Distributed and streaming systems\n\n- Ray documentation\n- Apache Kafka documentation\n- Apache Flink documentation\n- Kubernetes documentation\n- Temporal documentation",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "distributed",
+      "distributed_systems",
+      "streaming",
+      "systems",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "Distributed and streaming systems",
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "time_series"
+    ],
+    "source_checksum": "00b6a6e7a670b6deb2e0e7f1f90f3613e518e085f654418b9e58a97579518cf9"
+  }
+}

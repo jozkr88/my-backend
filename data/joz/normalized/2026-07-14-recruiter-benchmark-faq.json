@@ -38,6 +38,9 @@
       "Mediacorp provides Singapore media and design-system scale proof across 30+ products.",
       "Singapore Exchange and Apple/Pixar-adjacent work add local technical and spatial-computing credibility."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA",
@@ -63,6 +66,7 @@
     "source_notes": null,
     "source_filename": "2026-07-14-recruiter-benchmark-faq.md",
     "source_meta_filename": "2026-07-14-recruiter-benchmark-faq.meta.json",
+    "source_checksum": "50b3208bc11dcbd8b1c1fe018eef479d012746c8b87cb0212b10663b554ab586",
     "reviewed_at": "2026-07-14",
     "problems": [],
     "principles": [],
@@ -73,16 +77,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "8503bb741d801e8b1b44d270c3582c74023183370d3fbcdb96aada422d9946b4",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

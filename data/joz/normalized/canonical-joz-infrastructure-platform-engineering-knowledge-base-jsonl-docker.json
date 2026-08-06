@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -38,7 +41,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -58,6 +61,10 @@
       "containers",
       "docker"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Docker\nDocker\ncontainers docker\ncontainers docker\nDocker packages an application and its dependencies into a portable container image.\n\nDocker solves environment consistency:\nThe same image can run locally, in testing, and in production.\n\nDocker = shipping container for software.\nIt packages the service, runtime, libraries, and configuration required to run.",
     "keyword_terms": [
@@ -69,15 +76,6 @@
       "containers",
       "docker"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "2c01d68a3d6d9a0e4c4cda7cb31234c366b8107c7aa7a8a96918e2856bc70b0a",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_004"
+    "source_checksum": "f9fd6a08b7c392a590327fd4ebf77fac43397038e98f3a912344280397b0e475"
   }
 }

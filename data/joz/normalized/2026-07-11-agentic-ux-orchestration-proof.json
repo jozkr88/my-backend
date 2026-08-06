@@ -36,6 +36,9 @@
       "Mediacorp/CNA and Maybank-Ageas Etiqa add measurable high-scale transformation outcomes.",
       "The CV explicitly lists multimodal interaction, telemetry-driven feedback loops, intent modeling, and semantic retrieval."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA",
@@ -59,6 +62,7 @@
     "source_notes": null,
     "source_filename": "2026-07-11-agentic-ux-orchestration-proof.md",
     "source_meta_filename": "2026-07-11-agentic-ux-orchestration-proof.meta.json",
+    "source_checksum": "d219ccbf2ae6b42a3840e052e241b28c9f5b20a2edae9d09b936a197e7a05486",
     "reviewed_at": "2026-07-11",
     "problems": [],
     "principles": [],
@@ -69,16 +73,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "27424cfa3750e21b3a7d1b4820052def78639e87be6b834d8ae6023fa7e3013b",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

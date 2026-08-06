@@ -24,6 +24,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -36,6 +39,7 @@
     "source_notes": null,
     "source_filename": "systems-agentic-ai-judgment.md",
     "source_meta_filename": "systems-agentic-ai-judgment.meta.json",
+    "source_checksum": "7ebcc3cac49267072301447b9d3a623d16a0fe40a02e9ebfc02e5f5c4fa018cb",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -68,16 +72,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "195779e825919242ec42843399c589f533b3705bb6275028e2b53c2e4f02329e",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

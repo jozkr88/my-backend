@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust"
     ],
@@ -71,6 +74,10 @@
       "guardrails",
       "prompt-injection"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Prompt Injection Defense\nPrompt Injection Defense\nguardrails prompt-injection\nguardrails prompt-injection\nTreat all external content as untrusted data.\n\nSeparate system instructions from retrieved content.\nNever allow retrieved text to modify security policy.\nRestrict tool permissions by user and agent.\nValidate tool arguments against schemas.\nApply deterministic policy checks before side effects.\nTrace and audit all tool use.",
     "keyword_terms": [
@@ -85,15 +92,6 @@
       "guardrails",
       "prompt-injection"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "5e2d6cad474d88649bbb40128f6e889b09f8f6874703fb7ee6feb42de06bdffc",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_012"
+    "source_checksum": "1ec0811e11cc2570c03819e62f388331865f24b4b087092f008609237129f18e"
   }
 }

@@ -1,0 +1,76 @@
+{
+  "slug": "2026-08-06-causal-decision-operating-system",
+  "title": "Causal Decision Operating System",
+  "category": "business_need",
+  "lane": "business_need",
+  "summary": "A decision-intelligence operating model connecting causal evidence, interventions, counterfactuals, approvals, and verified action.",
+  "tags": [
+    "causal_intelligence",
+    "decision_intelligence",
+    "decision_operating_system",
+    "intervention",
+    "counterfactual",
+    "approval",
+    "verification",
+    "agentic_workflows"
+  ],
+  "impact_score": 92,
+  "priority_label": "hero",
+  "source_type": "framework",
+  "source_uri": "source://joz/causal-intelligence/decision-operating-system",
+  "dataset_id": "joz-causal-decision-intelligence-v1",
+  "causal_model_version": "joz-causal-decision-os-v1",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-08-06",
+    "notes": "Additive decision-intelligence framework. It does not convert Joz's existing experience records into unsupported causal proof."
+  },
+  "claims": [
+    "A causal decision operating system should connect discovery, identification, estimation, refutation, simulation, action, and verification.",
+    "High-impact actions should pass deterministic policy and approval gates before execution.",
+    "Post-action verification should reconcile the expected outcome with the authoritative system of record."
+  ],
+  "proof_points": [],
+  "regions": [],
+  "companies": [],
+  "projects": [],
+  "intent_families": ["business_need", "skills"],
+  "sub_intents": ["system_architecture", "orchestration", "governance"],
+  "causal_claims": [
+    {
+      "id": "intervention-analysis-supports-decision-proposals",
+      "subject": "Intervention Analysis",
+      "object": "Decision Proposal",
+      "relation": "supports",
+      "claim_type": "decision_workflow",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.96,
+      "assumptions": ["The intervention is identifiable under the declared assumptions."],
+      "evidence": ["causal-decision-operating-system-attachment"]
+    },
+    {
+      "id": "approval-constrains-action-execution",
+      "subject": "Approval and Policy Gates",
+      "object": "Action Execution",
+      "relation": "constrains",
+      "claim_type": "governance_control",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["Actions can affect external systems or consequential state."],
+      "evidence": ["causal-decision-operating-system-attachment"]
+    },
+    {
+      "id": "verification-closes-decision-loop",
+      "subject": "Post-Action Verification",
+      "object": "Authoritative System State",
+      "relation": "reconciles",
+      "claim_type": "feedback_loop",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.98,
+      "assumptions": ["An authoritative source of truth is available for reconciliation."],
+      "evidence": ["causal-decision-operating-system-attachment"]
+    }
+  ]
+}
+

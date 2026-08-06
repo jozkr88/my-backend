@@ -1,0 +1,96 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-21-streaming-and-stateful-processing",
+  "title": "2.21 Streaming and Stateful Processing",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-22-2-21-streaming-and-stateful-processing",
+  "summary": "## 2.21 Streaming and Stateful Processing",
+  "body": "## 2.21 Streaming and Stateful Processing\n\n### Essential concepts\n\n- Event time versus processing time\n- Watermarks\n- Windows\n- Late data\n- Out-of-order events\n- Exactly-once and at-least-once semantics\n- Checkpoints\n- Savepoints\n- Stateful operators\n- Stream joins\n- Change data capture\n- Event sourcing\n- Backpressure\n- Replay\n- Schema evolution\n\n### Evidence artifacts\n\n- Stateful sensor-plus-transaction pipeline\n- Replay and recovery test\n- Late-event handling specification\n- Online graph update service\n- Stream consistency benchmark\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-22-2-21-streaming-and-stateful-processing",
+    "canonical_record_title": "2.21 Streaming and Stateful Processing",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "time_series"
+    ],
+    "canonical_section": "2.21 Streaming and Stateful Processing",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 1044,
+    "source_line_end": 1073,
+    "source_authority": 12,
+    "semantic_text": "2.21 Streaming and Stateful Processing\n2.21 Streaming and Stateful Processing\nai_architecture causal_intelligence distributed_systems time_series\nai_architecture causal_intelligence distributed_systems time_series\n## 2.21 Streaming and Stateful Processing\n\n### Essential concepts\n\n- Event time versus processing time\n- Watermarks\n- Windows\n- Late data\n- Out-of-order events\n- Exactly-once and at-least-once semantics\n- Checkpoints\n- Savepoints\n- Stateful operators\n- Stream joins\n- Change data capture\n- Event sourcing\n- Backpressure\n- Replay\n- Schema evolution\n\n### Evidence artifacts\n\n- Stateful sensor-plus-transaction pipeline\n- Replay and recovery test\n- Late-event handling specification\n- Online graph update service\n- Stream consistency benchmark\n\n---",
+    "keyword_terms": [
+      "21",
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "distributed_systems",
+      "processing",
+      "stateful",
+      "streaming",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.21 Streaming and Stateful Processing",
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "time_series"
+    ],
+    "source_checksum": "aee41f368c9a53a4b90ec94112ef0c8724ab316766b9571cdc901eac486c7d61"
+  }
+}

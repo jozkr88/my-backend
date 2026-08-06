@@ -32,14 +32,17 @@
       "Enterprise outcomes across financial services, national media, public systems, and technology.",
       "Current Agentic AI, RAG, context engineering, governance, and decision-intelligence capability."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
     "companies": [
       "Dubai Future Foundation",
       "Erste Bank",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp"
     ],
@@ -53,6 +56,7 @@
     "source_notes": null,
     "source_filename": "business-need-buyer-faq.md",
     "source_meta_filename": "business-need-buyer-faq.meta.json",
+    "source_checksum": "737a04c770790586152aa0cd15425233cb28368e3091df66fe17cfa77f7eb3fb",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -96,16 +100,6 @@
       "mediacorp_audience_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "376b47e3d33057e69dcb70bab709373f8b84578b2895b70a1cb5a81529b5d5f5",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

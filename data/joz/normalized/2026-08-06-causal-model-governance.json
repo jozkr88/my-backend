@@ -1,0 +1,99 @@
+{
+  "slug": "2026-08-06-causal-model-governance",
+  "title": "Causal Model Governance and Evidence",
+  "category": "systems_mindset",
+  "source_type": "framework",
+  "source_uri": "source://joz/causal-intelligence/model-governance",
+  "summary": "Governance rules for distinguishing associations, hypotheses, supported causes, refuted causes, and counterfactual claims.",
+  "body": "# Causal Model Governance and Evidence\n\nCausal intelligence needs stronger evidence discipline than ordinary semantic\nretrieval. A relationship can be a hypothesis, a discovered association, a\nsupported cause, a refuted cause, or a context-dependent cause. The status must\nbe visible to the runtime and traceable to data, assumptions, estimators,\nrefutation results, and model versions.\n\nThe model context should carry the result, uncertainty, assumptions, and\nprovenance—not only a natural-language conclusion. If the evidence is\ninsufficient, Joz should answer at the association level or ask for the missing\ndataset and assumptions.",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "auditability",
+      "causal_intelligence",
+      "evidence",
+      "model_governance",
+      "provenance",
+      "refutation",
+      "uncertainty"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "assistant",
+      "reviewed_at": "2026-08-06",
+      "notes": "Additive governance dataset for causal reasoning boundaries."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Causal claims require explicit status, assumptions, evidence, and model version metadata.",
+      "Refutation results should be retained as first-class evidence rather than discarded after estimation.",
+      "Insufficient causal evidence should produce an association-level answer or a focused request for missing inputs."
+    ],
+    "proof_points": [],
+    "dataset_id": "joz-causal-governance-v1",
+    "causal_model_version": "joz-causal-governance-v1",
+    "causal_claims": [
+      {
+        "id": "causal-status-must-be-visible",
+        "subject": "Causal Claim Status",
+        "object": "Causal Runtime Context",
+        "relation": "must_be_visible_in",
+        "claim_type": "governance_requirement",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.99,
+        "assumptions": [
+          "The model must distinguish evidence strength from generated prose."
+        ],
+        "evidence": [
+          "causal-model-governance-attachment"
+        ]
+      },
+      {
+        "id": "refutation-results-are-evidence",
+        "subject": "Refutation Result",
+        "object": "Causal Claim",
+        "relation": "tests",
+        "claim_type": "causal_validation",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.98,
+        "assumptions": [
+          "The refutation method and dataset are retained with the result."
+        ],
+        "evidence": [
+          "causal-model-governance-attachment"
+        ]
+      }
+    ],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "retrieval"
+    ],
+    "impact_score": 90,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-08-06-causal-model-governance.md",
+    "source_meta_filename": "2026-08-06-causal-model-governance.meta.json",
+    "source_checksum": "676eaaf7004b67fd5ba517a568c050c16caae6a9f00650819522f3a0499aa71b",
+    "reviewed_at": "2026-08-06",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}

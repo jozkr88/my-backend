@@ -1,0 +1,135 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-14-agentic-architecture-and-multi-step-planning",
+  "title": "2.14 Agentic Architecture and Multi-Step Planning",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-15-2-14-agentic-architecture-and-multi-step-planning",
+  "summary": "## 2.14 Agentic Architecture and Multi-Step Planning",
+  "body": "## 2.14 Agentic Architecture and Multi-Step Planning\n\n### Essential concepts\n\n- Goal decomposition\n- Planning\n- Tool selection\n- State management\n- Memory\n- Reflection and verification\n- Multi-agent coordination\n- Event-driven agents\n- Durable workflows\n- Human approval\n- Idempotency\n- Compensation\n- Retry semantics\n- Permission boundaries\n- Agent evaluation\n\n### Agent roles in a Causal Decision OS\n\n- Query interpretation agent\n- Ontology-mapping agent\n- Causal-model selection agent\n- Identification agent\n- Estimation agent\n- Refutation agent\n- Scenario-simulation agent\n- Constraint-checking agent\n- Optimization agent\n- Explanation agent\n- Approval agent\n- Execution agent\n- Monitoring and rollback agent\n\n### Evidence artifacts\n\n- Agent responsibility matrix\n- State-machine specification\n- Tool contract registry\n- Agent permission model\n- Failure-recovery design\n- Agent evaluation suite\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "human_accountability"
+    ],
+    "capabilities": [
+      "agent_memory",
+      "agentic_ai",
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "verification",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "data_boundaries",
+      "evaluation",
+      "human_approval",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-15-2-14-agentic-architecture-and-multi-step-planning",
+    "canonical_record_title": "2.14 Agentic Architecture and Multi-Step Planning",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "canonical_section": "2.14 Agentic Architecture and Multi-Step Planning",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 724,
+    "source_line_end": 770,
+    "source_authority": 12,
+    "semantic_text": "2.14 Agentic Architecture and Multi-Step Planning\n2.14 Agentic Architecture and Multi-Step Planning\nagentic_ai ai_architecture causal_inference causal_intelligence enterprise_architecture governance knowledge_graphs mlops_observability\nagentic_ai ai_architecture causal_inference causal_intelligence enterprise_architecture governance knowledge_graphs mlops_observability\n## 2.14 Agentic Architecture and Multi-Step Planning\n\n### Essential concepts\n\n- Goal decomposition\n- Planning\n- Tool selection\n- State management\n- Memory\n- Reflection and verification\n- Multi-agent coordination\n- Event-driven agents\n- Durable workflows\n- Human approval\n- Idempotency\n- Compensation\n- Retry semantics\n- Permission boundaries\n- Agent evaluation\n\n### Agent roles in a Causal Decision OS\n\n- Query interpretation agent\n- Ontology-mapping agent\n- Causal-model selection agent\n- Identification agent\n- Estimation agent\n- Refutation agent\n- Scenario-simulation agent\n- Constraint-checking agent\n- Optimization agent\n- Explanation agent\n- Approval agent\n- Execution agent\n- Monitoring and rollback agent\n\n### Evidence artifacts\n\n- Agent responsibility matrix\n- State-machine specification\n- Tool contract registry\n- Agent permission model\n- Failure-recovery design\n- Agent evaluation suite\n\n---",
+    "keyword_terms": [
+      "14",
+      "agentic",
+      "agentic_ai",
+      "ai_architecture",
+      "and",
+      "architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability",
+      "multi",
+      "planning",
+      "step"
+    ],
+    "exact_phrases": [
+      "2.14 Agentic Architecture and Multi-Step Planning",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "source_checksum": "c65584dd010dac02368430ac28171f0555ffe56aa306d068e706d40660d7b4eb"
+  }
+}

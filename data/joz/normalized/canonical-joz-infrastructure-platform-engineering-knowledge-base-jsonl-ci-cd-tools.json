@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -64,6 +67,10 @@
       "github-actions",
       "jenkins"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "CI/CD Tools\nCI/CD Tools\nargocd github-actions jenkins\nargocd github-actions jenkins\nCommon CI/CD tools:\nGitHub Actions\nGitLab CI\nJenkins\nCircleCI\nAzure DevOps\nArgo CD\n\nA production pipeline should support approvals, rollback, environment promotion, and auditability.",
     "keyword_terms": [
@@ -80,15 +87,6 @@
       "github-actions",
       "jenkins"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "ed282662bd5b04bca77db07da3307a6910f3933f55d753d50bd2377110291ea8",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_031"
+    "source_checksum": "4f2b249c485b87a6b8ad0f970a76944995e87da92fe44f7b0a97a9e1bee75e28"
   }
 }

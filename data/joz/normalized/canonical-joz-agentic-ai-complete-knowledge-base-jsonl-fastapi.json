@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -67,6 +70,10 @@
       "backend",
       "fastapi"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "FastAPI\nFastAPI\napi backend fastapi\napi backend fastapi\nFastAPI is a Python framework used to build backend APIs and services.\n\nIn a web application:\nFrontend → FastAPI → Orchestrator → Agents → Tools → Response\n\nFastAPI receives requests, authenticates users, validates input, calls workflows or services, and returns structured responses. It is the API entry point, not the AI reasoning layer.",
     "keyword_terms": [
@@ -80,15 +87,6 @@
       "backend",
       "fastapi"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "b5a3f4ca17488bff13084ad6c32c7f6676c9b7f355555e4dd3725cac09631aa9",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_008"
+    "source_checksum": "4efc102b9e716186745bba528b88d46d72cba2ef45dd81678b8c83f4b7b16297"
   }
 }

@@ -1,0 +1,118 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-days-46-60-knowledge-and-neuro-symbolic-layer",
+  "title": "Days 46–60 — Knowledge and neuro-symbolic layer",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-54-days-46-60-knowledge-and-neuro-symbolic-layer",
+  "summary": "## Days 46–60 — Knowledge and neuro-symbolic layer",
+  "body": "## Days 46–60 — Knowledge and neuro-symbolic layer\n\n- enterprise ontology\n- temporal knowledge graph\n- graph validation\n- GNN\n- rule engine\n- constraint solver\n- policy engine\n\nDeliverable: enterprise graph plus deterministic guardrails.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "retrieval",
+      "governance"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "knowledge_graphs"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-54-days-46-60-knowledge-and-neuro-symbolic-layer",
+    "canonical_record_title": "Days 46–60 — Knowledge and neuro-symbolic layer",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "time_series"
+    ],
+    "canonical_section": "Days 46–60 — Knowledge and neuro-symbolic layer",
+    "canonical_parent": "10. 90-Day Build Sequence",
+    "source_line_start": 1780,
+    "source_line_end": 1791,
+    "source_authority": 12,
+    "semantic_text": "Days 46–60 — Knowledge and neuro-symbolic layer\nDays 46–60 — Knowledge and neuro-symbolic layer\nagentic_ai ai_architecture causal_intelligence enterprise_architecture governance knowledge_graphs time_series\nagentic_ai ai_architecture causal_intelligence enterprise_architecture governance knowledge_graphs time_series\n## Days 46–60 — Knowledge and neuro-symbolic layer\n\n- enterprise ontology\n- temporal knowledge graph\n- graph validation\n- GNN\n- rule engine\n- constraint solver\n- policy engine\n\nDeliverable: enterprise graph plus deterministic guardrails.",
+    "keyword_terms": [
+      "46",
+      "60",
+      "agentic_ai",
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "days",
+      "enterprise_architecture",
+      "governance",
+      "knowledge",
+      "knowledge_graphs",
+      "layer",
+      "neuro",
+      "symbolic",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "Days 46–60 — Knowledge and neuro-symbolic layer",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "time_series"
+    ],
+    "source_checksum": "bbc442a5bf8cace210dab21de96904c54508b84264a7ec386dec631d24b52ea5"
+  }
+}

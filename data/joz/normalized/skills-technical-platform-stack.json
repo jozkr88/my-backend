@@ -37,6 +37,9 @@
       "USD(z), Unity/Unreal workflows, computer vision, 3D mathematics and spatial interfaces.",
       "WCAG and European Accessibility Act implementation experience."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -56,6 +59,7 @@
     "source_notes": null,
     "source_filename": "skills-technical-platform-stack.md",
     "source_meta_filename": "skills-technical-platform-stack.meta.json",
+    "source_checksum": "9da37a606ce9405efb51120c36832602258aecbbcd75fcd0ad6a71c343f6e0c4",
     "reviewed_at": "",
     "problems": [
       "data_silos",
@@ -107,16 +111,6 @@
       "versace_spatial_ai_launch"
     ],
     "enterprise_scale_score": 90,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "63271fcafc1412b3e31d9307da3a228646c9f2e153e68aedf2a616b79f588433",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

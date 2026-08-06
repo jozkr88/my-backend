@@ -1,0 +1,116 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-9-causal-refutation-and-robustness-testing",
+  "title": "2.9 Causal Refutation and Robustness Testing",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-10-2-9-causal-refutation-and-robustness-testing",
+  "summary": "## 2.9 Causal Refutation and Robustness Testing",
+  "body": "## 2.9 Causal Refutation and Robustness Testing\n\n### Refutation families\n\n- Random common-cause tests\n- Placebo treatment tests\n- Dummy outcome tests\n- Data-subset refuters\n- Bootstrap refuters\n- Simulated unobserved confounding\n- Sensitivity to omitted variables\n- Negative controls\n- Graph conditional-independence tests\n- Alternative adjustment sets\n- Alternative estimators\n- Temporal placebo tests\n- Pre-trend tests\n- Falsification outcomes\n\n### Platform design\n\nEvery causal estimate should carry:\n\n- estimand;\n- graph version;\n- identification method;\n- adjustment set;\n- estimator;\n- hyperparameters;\n- confidence interval;\n- overlap diagnostics;\n- refutation results;\n- sensitivity results;\n- data version;\n- code version;\n- approval status.\n\n### Evidence artifacts\n\n- Automated refutation pipeline\n- Causal model card\n- Sensitivity dashboard\n- Estimate promotion gate\n- Competing-estimator comparison report\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "low_trust",
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "confidence_handling",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-10-2-9-causal-refutation-and-robustness-testing",
+    "canonical_record_title": "2.9 Causal Refutation and Robustness Testing",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "time_series"
+    ],
+    "canonical_section": "2.9 Causal Refutation and Robustness Testing",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 457,
+    "source_line_end": 503,
+    "source_authority": 12,
+    "semantic_text": "2.9 Causal Refutation and Robustness Testing\n2.9 Causal Refutation and Robustness Testing\nai_architecture causal_inference causal_intelligence enterprise_architecture governance time_series\nai_architecture causal_inference causal_intelligence enterprise_architecture governance time_series\n## 2.9 Causal Refutation and Robustness Testing\n\n### Refutation families\n\n- Random common-cause tests\n- Placebo treatment tests\n- Dummy outcome tests\n- Data-subset refuters\n- Bootstrap refuters\n- Simulated unobserved confounding\n- Sensitivity to omitted variables\n- Negative controls\n- Graph conditional-independence tests\n- Alternative adjustment sets\n- Alternative estimators\n- Temporal placebo tests\n- Pre-trend tests\n- Falsification outcomes\n\n### Platform design\n\nEvery causal estimate should carry:\n\n- estimand;\n- graph version;\n- identification method;\n- adjustment set;\n- estimator;\n- hyperparameters;\n- confidence interval;\n- overlap diagnostics;\n- refutation results;\n- sensitivity results;\n- data version;\n- code version;\n- approval status.\n\n### Evidence artifacts\n\n- Automated refutation pipeline\n- Causal model card\n- Sensitivity dashboard\n- Estimate promotion gate\n- Competing-estimator comparison report\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "refutation",
+      "robustness",
+      "testing",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.9 Causal Refutation and Robustness Testing",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "time_series"
+    ],
+    "source_checksum": "b8430b4b2bc6a0ef8172e4d8c3ecd6912a586104a86e5260688b4d7a122af709"
+  }
+}

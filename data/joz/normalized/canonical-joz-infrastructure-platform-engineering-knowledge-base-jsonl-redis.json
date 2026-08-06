@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -66,6 +69,10 @@
       "redis",
       "sessions"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Redis\nRedis\ncache redis sessions\ncache redis sessions\nRedis is an in-memory data store used for low-latency access.\n\nTypical uses:\nCaching\nSessions\nRate limits\nDistributed locks\nShort-lived workflow state\nQueues\nPub/sub\n\nRedis = desk drawer.\nPostgreSQL = warehouse.",
     "keyword_terms": [
@@ -79,15 +86,6 @@
       "redis",
       "sessions"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "533c7fa01ef162e5855149de5f54fd17050a58346ea1fdaf0cd9843638d0c7a1",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_016"
+    "source_checksum": "c42156ddab8c2b11456bd5a15d180575d205a11ca97a6e1d084cbd2c135bc7b0"
   }
 }

@@ -38,6 +38,9 @@
       "The dated professional timeline runs from 2013 to present.",
       "ML/AI-focused work is framed from 2018 to present."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA",
@@ -58,6 +61,7 @@
     "source_notes": null,
     "source_filename": "2026-07-11-recruiter-screening-faq.md",
     "source_meta_filename": "2026-07-11-recruiter-screening-faq.meta.json",
+    "source_checksum": "9efe6db282f29a6ba98d61b5b0cd62a1d08b191e1556355f28ade2fcf17713cf",
     "reviewed_at": "2026-07-27",
     "problems": [],
     "principles": [],
@@ -68,16 +72,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "a0e66b899978cf68d684cc0df4cf7bfe8b4c2a835eb75028e02ec79559d29f87",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -69,6 +72,10 @@
       "agent",
       "definition"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Agent Definition\nAgent Definition\nagent definition\nagent definition\nAgent = LLM + instructions + tools + memory + reasoning loop.\n\nAn agent is an AI worker with a defined responsibility. It interprets a goal, selects approved tools, reads relevant context, updates workflow state, and iterates until the task is complete or requires human input.",
     "keyword_terms": [
@@ -80,15 +87,6 @@
       "agent",
       "definition"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "0e2db22e7b74152c5d7b75761d18e2af213c5d48a41406e45651c122322133c3",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_003"
+    "source_checksum": "f6745751207d30cc90c2d99b191d2dfa17cc22d4663b9b0018ad41877e5da921"
   }
 }

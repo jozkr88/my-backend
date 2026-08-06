@@ -1,0 +1,88 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-symbolic-controls",
+  "title": "Symbolic controls",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-72-symbolic-controls",
+  "summary": "## Symbolic controls",
+  "body": "## Symbolic controls\n\n- Microsoft Z3 Guide\n- Open Policy Agent documentation\n- Constraint and optimization solver documentation",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-72-symbolic-controls",
+    "canonical_record_title": "Symbolic controls",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "canonical_section": "Symbolic controls",
+    "canonical_parent": "13. Initial Primary Source Map",
+    "source_line_start": 1937,
+    "source_line_end": 1942,
+    "source_authority": 12,
+    "semantic_text": "Symbolic controls\nSymbolic controls\nai_architecture causal_intelligence\nai_architecture causal_intelligence\n## Symbolic controls\n\n- Microsoft Z3 Guide\n- Open Policy Agent documentation\n- Constraint and optimization solver documentation",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "controls",
+      "symbolic"
+    ],
+    "exact_phrases": [
+      "Symbolic controls",
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "source_checksum": "8c1688a63e296e848c130aff90bd4a9cb9ba3c6c8f5b1ad49ef26e9d5007658a"
+  }
+}

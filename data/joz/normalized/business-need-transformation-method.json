@@ -33,13 +33,16 @@
       "Rapid AI prototyping for Dubai Future Foundation and current AI initiatives.",
       "Long record of transformation across multiple industries and markets."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
     "companies": [
       "Dubai Future Foundation",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp"
     ],
@@ -53,6 +56,7 @@
     "source_notes": null,
     "source_filename": "business-need-transformation-method.md",
     "source_meta_filename": "business-need-transformation-method.meta.json",
+    "source_checksum": "036def24d61b905f4754f809682b2b7a2fcea1136a189d580e04e6f5dee80ebe",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -101,16 +105,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "eb3ecdbd3914ddd455ad60c8f44dc0f6ab782f0998b50bdcc0ad5616e4704af3",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

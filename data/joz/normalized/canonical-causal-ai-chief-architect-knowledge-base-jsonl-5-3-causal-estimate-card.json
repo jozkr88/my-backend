@@ -1,0 +1,103 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-5-3-causal-estimate-card",
+  "title": "5.3 Causal Estimate Card",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-40-5-3-causal-estimate-card",
+  "summary": "## 5.3 Causal Estimate Card",
+  "body": "## 5.3 Causal Estimate Card\n\n```yaml\ndecision_question:\ntreatment:\noutcome:\npopulation:\nestimand:\ngraph_version:\nidentification_method:\nadjustment_set:\nestimator:\ndata_version:\noverlap_diagnostics:\neffect:\nuncertainty:\nrefutations:\nsensitivity:\nlimitations:\napproval_status:\n```",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "governance"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "confidence_handling",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-40-5-3-causal-estimate-card",
+    "canonical_record_title": "5.3 Causal Estimate Card",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "5.3 Causal Estimate Card",
+    "canonical_parent": "5. Knowledge Object Templates",
+    "source_line_start": 1487,
+    "source_line_end": 1508,
+    "source_authority": 12,
+    "semantic_text": "5.3 Causal Estimate Card\n5.3 Causal Estimate Card\nai_architecture causal_inference causal_intelligence governance\nai_architecture causal_inference causal_intelligence governance\n## 5.3 Causal Estimate Card\n\n```yaml\ndecision_question:\ntreatment:\noutcome:\npopulation:\nestimand:\ngraph_version:\nidentification_method:\nadjustment_set:\nestimator:\ndata_version:\noverlap_diagnostics:\neffect:\nuncertainty:\nrefutations:\nsensitivity:\nlimitations:\napproval_status:\n```",
+    "keyword_terms": [
+      "ai_architecture",
+      "card",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "estimate",
+      "governance"
+    ],
+    "exact_phrases": [
+      "5.3 Causal Estimate Card",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "4f4e3407d5789730af3dc800b33d367e6c377102f26841e913a517e454014cd6"
+  }
+}

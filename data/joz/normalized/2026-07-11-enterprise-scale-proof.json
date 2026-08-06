@@ -37,6 +37,9 @@
       "Apple/Pixar-adjacent Python USD(z) and computer-vision AI work.",
       "Ogilvy/WPP, Leo Burnett/Publicis, Samsung, P&G, SGX, and Danone as large multinational delivery environments."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA",
@@ -68,6 +71,7 @@
     "source_notes": null,
     "source_filename": "2026-07-11-enterprise-scale-proof.md",
     "source_meta_filename": "2026-07-11-enterprise-scale-proof.meta.json",
+    "source_checksum": "a552e0aeb58d29ded743e426a241e1c683f0d6fa6405f4de220843cf981a0037",
     "reviewed_at": "2026-07-11",
     "problems": [],
     "principles": [],
@@ -78,16 +82,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "59475e63f06b388e2e3179091cd65298daeb8f4cb83a10894c84ac0cd4c5eac3",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

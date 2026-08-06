@@ -23,6 +23,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -35,6 +38,7 @@
     "source_notes": null,
     "source_filename": "systems-organizational-failure-patterns.md",
     "source_meta_filename": "systems-organizational-failure-patterns.meta.json",
+    "source_checksum": "f1e4fcca5277398c0784db1cc6fc70fbaa11125277c8547844423b9f30839e82",
     "reviewed_at": "",
     "problems": [
       "data_silos",
@@ -60,16 +64,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "f8ed212472829567b26d14d68abf8d1502bfa0c1a831af471d5fbb3f8dc9bead",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

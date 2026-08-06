@@ -18,12 +18,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -43,7 +46,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "organizational_complexity"
     ],
@@ -78,6 +81,10 @@
       "security",
       "verification-framework"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Multi-Layer Verification Framework\nMulti-Layer Verification Framework\narchitecture business security verification-framework\narchitecture business security verification-framework\nVerification should operate across multiple layers:\n\nTechnical Verification = tests, linting, type checking, runtime checks\nSecurity Verification = permissions, policy compliance, vulnerability checks\nArchitectural Verification = alignment with platform standards and approved patterns\nBusiness Verification = alignment with user intent and business requirements\nHuman Verification = approval gates for high-risk actions\n\nVerification is a system-level function, not merely an LLM self-check.",
     "keyword_terms": [
@@ -97,15 +104,6 @@
       "security",
       "verification-framework"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "547137133a0ed8c5c1a900b527bf2d4f4d8cdc55a9528e5c601be59de5a52f25",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_035"
+    "source_checksum": "3cd90422cc6c07a2086497d0c4636e36c2236848c19a96483b3d40cabb8b4dd7"
   }
 }

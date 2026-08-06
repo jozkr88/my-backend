@@ -34,6 +34,9 @@
       "Led HCD–AI, product, and data architectures for 20+ Dubai and Singapore FinTech initiatives.",
       "Built on more than a decade of enterprise-scale product, engineering, and transformation experience."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Dubai",
@@ -45,8 +48,8 @@
     "companies": [
       "Dubai Future Foundation",
       "Erste Bank",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp"
     ],
@@ -60,6 +63,7 @@
     "source_notes": null,
     "source_filename": "skills-hero-agentic-ai.md",
     "source_meta_filename": "skills-hero-agentic-ai.meta.json",
+    "source_checksum": "25d57838e7141796d818b9a6a489468052dc51e0fc11835f59ee90b01186c23a",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -106,28 +110,18 @@
     "proofs": [
       "erste_customer_scale",
       "manulife_lean_ml_ux",
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "mediacorp_audience_growth"
     ],
     "related_proofs": [
       "erste_customer_scale",
       "manulife_lean_ml_ux",
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "mediacorp_audience_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "b099f2d35979976e51099162f2a8909a78c2630fa071896c9d3f53d8b8d5fa7a",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -63,6 +66,10 @@
       "kubernetes",
       "orchestration"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Kubernetes\nKubernetes\ncontainers kubernetes orchestration\ncontainers kubernetes orchestration\nKubernetes deploys, schedules, scales, restarts, and manages containers across multiple machines.\n\nCore responsibilities:\nPod scheduling\nHorizontal scaling\nHealth checks\nSelf-healing\nService discovery\nRolling deployments\nConfiguration and secret injection\nResource allocation\nTraffic routing\n\nDocker packages services.\nKubernetes runs and manages them.",
     "keyword_terms": [
@@ -76,15 +83,6 @@
       "kubernetes",
       "orchestration"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "2078e63ef99ebc9ca99451ccc5a1fcacaefeb528c1d0ba361ccc2eee216bb81e",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_005"
+    "source_checksum": "66e59692d3fd268d3cca7c0f99b42f3cc442ef50c6d1e6896b69ec579622c7fd"
   }
 }

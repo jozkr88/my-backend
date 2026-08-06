@@ -1,0 +1,115 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-25-security-and-client-network-deployment",
+  "title": "2.25 Security and Client-Network Deployment",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-26-2-25-security-and-client-network-deployment",
+  "summary": "## 2.25 Security and Client-Network Deployment",
+  "body": "## 2.25 Security and Client-Network Deployment\n\n### Essential subjects\n\n- VPC architecture\n- On-premise deployment\n- Network segmentation\n- Private endpoints\n- Zero-trust architecture\n- Workload identity\n- Secrets management\n- Encryption\n- Key management\n- RBAC and ABAC\n- Least privilege\n- Supply-chain security\n- Container hardening\n- Image signing\n- Software bills of materials\n- Audit logging\n- Data residency\n- Air-gapped operation\n- Disaster recovery\n\n### Evidence artifacts\n\n- Security reference architecture\n- Threat model\n- Agent tool-permission matrix\n- Hardened Kubernetes deployment\n- On-prem installation and upgrade plan\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "governance",
+      "technical_stack",
+      "blockchain"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "low_trust"
+    ],
+    "principles": [
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "higher_data_trust",
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-26-2-25-security-and-client-network-deployment",
+    "canonical_record_title": "2.25 Security and Client-Network Deployment",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "canonical_section": "2.25 Security and Client-Network Deployment",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 1202,
+    "source_line_end": 1235,
+    "source_authority": 12,
+    "semantic_text": "2.25 Security and Client-Network Deployment\n2.25 Security and Client-Network Deployment\nai_architecture causal_discovery causal_intelligence enterprise_architecture governance\nai_architecture causal_discovery causal_intelligence enterprise_architecture governance\n## 2.25 Security and Client-Network Deployment\n\n### Essential subjects\n\n- VPC architecture\n- On-premise deployment\n- Network segmentation\n- Private endpoints\n- Zero-trust architecture\n- Workload identity\n- Secrets management\n- Encryption\n- Key management\n- RBAC and ABAC\n- Least privilege\n- Supply-chain security\n- Container hardening\n- Image signing\n- Software bills of materials\n- Audit logging\n- Data residency\n- Air-gapped operation\n- Disaster recovery\n\n### Evidence artifacts\n\n- Security reference architecture\n- Threat model\n- Agent tool-permission matrix\n- Hardened Kubernetes deployment\n- On-prem installation and upgrade plan\n\n---",
+    "keyword_terms": [
+      "25",
+      "ai_architecture",
+      "and",
+      "causal_discovery",
+      "causal_intelligence",
+      "client",
+      "deployment",
+      "enterprise_architecture",
+      "governance",
+      "network",
+      "security"
+    ],
+    "exact_phrases": [
+      "2.25 Security and Client-Network Deployment",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "source_checksum": "a0bd34cf5bdd72b82475cda5cbcc28b83c6a02849cd077d62163351506dcc4dd"
+  }
+}

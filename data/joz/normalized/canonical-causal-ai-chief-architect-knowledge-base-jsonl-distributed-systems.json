@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-distributed-systems",
+  "title": "Distributed systems",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-62-distributed-systems",
+  "summary": "## Distributed systems",
+  "body": "## Distributed systems\n\n- How would you scale millions of counterfactual simulations?\n- How do tasks, actors and stream processors differ?\n- How do you preserve reproducibility in distributed simulation?\n- How do you update an online causal graph safely?\n- How do you deploy zero-downtime model and agent updates?",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-62-distributed-systems",
+    "canonical_record_title": "Distributed systems",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems"
+    ],
+    "canonical_section": "Distributed systems",
+    "canonical_parent": "11. Interview Question Bank",
+    "source_line_start": 1862,
+    "source_line_end": 1869,
+    "source_authority": 12,
+    "semantic_text": "Distributed systems\nDistributed systems\nai_architecture causal_inference causal_intelligence distributed_systems\nai_architecture causal_inference causal_intelligence distributed_systems\n## Distributed systems\n\n- How would you scale millions of counterfactual simulations?\n- How do tasks, actors and stream processors differ?\n- How do you preserve reproducibility in distributed simulation?\n- How do you update an online causal graph safely?\n- How do you deploy zero-downtime model and agent updates?",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed",
+      "distributed_systems",
+      "systems"
+    ],
+    "exact_phrases": [
+      "Distributed systems",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems"
+    ],
+    "source_checksum": "21ad3a5482e4cf12d4b1ae82aa1dbd03b3a2a04fd25be7e5b921e1d9b0d7c0c7"
+  }
+}

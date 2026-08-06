@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -72,6 +75,10 @@
       "autonomous-execution",
       "hands"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Autonomous Execution Layer\nAutonomous Execution Layer\nagent-loop autonomous-execution hands\nagent-loop autonomous-execution hands\nThe Autonomous Execution Layer transforms organisational awareness into governed action.\n\nAgent loop:\nTask → Plan → Retrieve Context → Implement → Verify → Repair → Verify → Pull Request\n\nAgents retrieve ownership information, historical decisions, architecture constraints, coding standards, operational requirements, and relevant documentation before making changes.",
     "keyword_terms": [
@@ -88,15 +95,6 @@
       "autonomous-execution",
       "hands"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "4ea5d472e0d7d6313d7bf881a0f2dde034a2a7b4b0565e16c248a9e40e0d1058",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_032"
+    "source_checksum": "196f386e5a9a6982d643157e5ec869d95a68d05619450422fa4797f0bab7a595"
   }
 }

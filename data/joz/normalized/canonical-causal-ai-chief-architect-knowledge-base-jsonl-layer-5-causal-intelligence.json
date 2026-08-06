@@ -1,0 +1,95 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-layer-5-causal-intelligence",
+  "title": "Layer 5 — Causal Intelligence",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-33-layer-5-causal-intelligence",
+  "summary": "## Layer 5 — Causal Intelligence",
+  "body": "## Layer 5 — Causal Intelligence\n\n- discovery\n- identification\n- treatment-effect estimation\n- counterfactual simulation\n- invariance testing\n- refutation\n- sensitivity analysis",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-33-layer-5-causal-intelligence",
+    "canonical_record_title": "Layer 5 — Causal Intelligence",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "Layer 5 — Causal Intelligence",
+    "canonical_parent": "4. Reference Platform Architecture",
+    "source_line_start": 1392,
+    "source_line_end": 1401,
+    "source_authority": 12,
+    "semantic_text": "Layer 5 — Causal Intelligence\nLayer 5 — Causal Intelligence\nai_architecture causal_inference causal_intelligence governance\nai_architecture causal_inference causal_intelligence governance\n## Layer 5 — Causal Intelligence\n\n- discovery\n- identification\n- treatment-effect estimation\n- counterfactual simulation\n- invariance testing\n- refutation\n- sensitivity analysis",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "intelligence",
+      "layer"
+    ],
+    "exact_phrases": [
+      "Layer 5 — Causal Intelligence",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "9ff686dfb633846a5147a08e7e81139b9c701ca89d047f070bbe0bd721516390"
+  }
+}

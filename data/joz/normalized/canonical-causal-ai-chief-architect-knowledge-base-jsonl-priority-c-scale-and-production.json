@@ -1,0 +1,106 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-priority-c-scale-and-production",
+  "title": "Priority C — Scale and production",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-49-priority-c-scale-and-production",
+  "summary": "## Priority C — Scale and production",
+  "body": "## Priority C — Scale and production\n\n- Distributed simulation\n- Streaming\n- Kubernetes\n- Security-hardened client deployment\n- C++ optimization\n- Zero-downtime lifecycle",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "governance",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-49-priority-c-scale-and-production",
+    "canonical_record_title": "Priority C — Scale and production",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "governance",
+      "time_series"
+    ],
+    "canonical_section": "Priority C — Scale and production",
+    "canonical_parent": "8. Priority Model",
+    "source_line_start": 1706,
+    "source_line_end": 1714,
+    "source_authority": 12,
+    "semantic_text": "Priority C — Scale and production\nPriority C — Scale and production\nai_architecture causal_intelligence distributed_systems governance time_series\nai_architecture causal_intelligence distributed_systems governance time_series\n## Priority C — Scale and production\n\n- Distributed simulation\n- Streaming\n- Kubernetes\n- Security-hardened client deployment\n- C++ optimization\n- Zero-downtime lifecycle",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "distributed_systems",
+      "governance",
+      "priority",
+      "production",
+      "scale",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "Priority C — Scale and production",
+      "ai_architecture",
+      "causal_intelligence",
+      "distributed_systems",
+      "governance",
+      "time_series"
+    ],
+    "source_checksum": "5756754ec0d008ce84539899799d214bfacf9fecbe5b70db2a71c06b6a30001a"
+  }
+}

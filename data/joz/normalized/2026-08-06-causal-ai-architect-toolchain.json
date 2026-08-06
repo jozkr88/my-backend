@@ -1,0 +1,124 @@
+{
+  "slug": "2026-08-06-causal-ai-architect-toolchain",
+  "title": "Causal AI Architect Toolchain and Platform Boundaries",
+  "category": "skills",
+  "source_type": "reference_dataset",
+  "source_uri": "source://joz/causal-intelligence/chief-architect-toolchain",
+  "summary": "Recommended tools and architectural boundaries for a production causal decision-intelligence platform.",
+  "body": "Recommended tool categories\nPurpose\tTools\tBest use\nVisual causal modelling\tDAGitty\tManually draw DAGs, identify confounders and examine adjustment sets\nOntology engineering\tProtégé / WebProtégé\tDefine enterprise concepts, causal relation types and OWL ontologies\nCausal discovery\tcausal-learn, Tetrad, Tigramite\tPropose causal structures from observational or time-series data\nCausal inference\tDoWhy\tIdentification, effect estimation, assumption testing and refutation\nCounterfactuals and root cause\tDoWhy-GCM\tStructural causal models, interventions, counterfactuals and anomaly attribution\nHeterogeneous effects\tEconML\tEstimate how interventions affect different customers, assets or operational segments\nBayesian causal modelling\tpgmpy\tBayesian networks, structural learning, probabilistic inference and do() queries\nGraph prototyping\tNetworkX\tDAG validation, ancestors, descendants, cycles and topological operations\nProduction property graph\tNeo4j\tOperational storage, traversal, Cypher querying and application integration\nSemantic knowledge graph\tGraphDB or Stardog\tRDF, SPARQL, ontology reasoning and enterprise semantic integration\nRDF development\tRDFLib\tCreate, transform and query RDF graphs in Python\nGraph validation\tSHACL\tEnforce structural and semantic constraints on RDF knowledge graphs\nVisual exploration\tNeo4j Bloom\tLet analysts explore stored entities and relationships visually\n\nDAGitty is specifically designed for creating and analysing causal DAGs. Protégé supports OWL ontology development and collaborative WebProtégé editing.\n\nFor data-driven discovery, causal-learn provides Python implementations of causal discovery algorithms, while Tigramite is particularly useful for high-dimensional time-series data and lagged causal relationships. Causal discovery should generate candidate structures rather than automatically declaring relationships to be proven causes; the results still need assumptions, domain constraints and validation.\n\nFor the executable causal layer, DoWhy is the strongest general starting point. It models assumptions explicitly and supports identification, estimation and refutation. Its graphical causal model functionality adds counterfactual analysis, causal-strength estimation and root-cause attribution. EconML complements it when you need individual or segment-level treatment effects.\n\npgmpy is useful when the system must combine causal and probabilistic reasoning—for example, calculating downstream probability distributions after an intervention or working with discrete, Gaussian or dynamic Bayesian networks.\n\nThe stack I would recommend for you\n\nGiven your Python, FastAPI and agentic-system background:\n\nData sources\n    ↓\nPostgreSQL / Parquet / event streams\n    ↓\ncausal-learn or Tigramite\nCandidate causal discovery\n    ↓\nHuman and domain-expert review\n    ↓\nDoWhy / DoWhy-GCM\nIdentification, estimation, refutation and counterfactuals\n    ↓\nNeo4j\nVersioned causal knowledge graph\n    ↓\nFastAPI causal-query service\n    ↓\nAgentic decision and simulation layer\n\nNeo4j is a practical choice for the operational graph because its property-graph model supports nodes and typed relationships, while its Graph Data Science library provides DAG, path, similarity and machine-learning functionality. Bloom provides visual exploration. Neo4j itself, however, is the storage and graph-computation layer, not the statistical proof that an edge is causal.\n\nA simple relationship might look like:\n\n(:Variable {name: \"Price\"})\n-[:CAUSES {\n    sign: \"negative\",\n    lag: \"7d\",\n    confidence: 0.84,\n    status: \"experimentally_supported\",\n    model_version: \"v12\",\n    valid_from: \"2026-01-01\"\n}]->\n(:Variable {name: \"Demand\"})\n\nBut avoid putting all evidence into the relationship itself. Model evidence as first-class nodes:\n\n(Variable)-[:CAUSES]->(Variable)\n                    |\n                    [:SUPPORTED_BY]\n                    ↓\n             (Experiment)\n\nExperiment → Dataset\nExperiment → Estimator\nExperiment → AssumptionSet\nExperiment → RefutationResult\nExperiment → ModelVersion\n\nThis gives you provenance, auditability and the ability to distinguish:\n\nHYPOTHESIZED_CAUSE\nDISCOVERED_ASSOCIATION\nSUPPORTED_CAUSE\nREFUTED_CAUSE\nCONTEXT_DEPENDENT_CAUSE\nWhen to choose RDF instead\n\nUse GraphDB or Stardog with RDF/OWL/SHACL rather than Neo4j when you need formal enterprise semantics, ontology interoperability, logical inference, globally unique identifiers or strict graph validation. GraphDB and Stardog both support RDF reasoning; SHACL formally validates RDF graphs against defined structural conditions.\n\nA strong semantic stack would be:\n\nProtégé\n    ↓ OWL ontology\nRDFLib\n    ↓ RDF ingestion\nGraphDB or Stardog\n    ↓ SPARQL + reasoning\nSHACL\n    ↓ validation\nDoWhy service\n    ↓ causal computation\nEnterprise applications and agents\nBest starting combination\n\nFor an initial working causal decision platform, I would select:\n\nNeo4j + DoWhy-GCM + causal-learn + Tigramite + NetworkX + FastAPI\n\nAdd Protégé, RDF and SHACL later when the graph must become a shared enterprise ontology across departments, systems and organisations. The essential design principle is to keep the knowledge graph, causal model, supporting evidence and model versions connected—but not collapsed into one undifferentiated graph.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "causal_learn",
+      "counterfactuals",
+      "dowhy_gcm",
+      "fastapi",
+      "graphdb",
+      "knowledge_graphs",
+      "neo4j",
+      "networkx",
+      "shacl",
+      "tigramite"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06",
+      "notes": "Reference architecture and tool-selection guidance. It is framework knowledge, not personal production proof."
+    },
+    "verification_status": "framework_supported",
+    "claims": [
+      "Causal discovery should propose candidate structures while DoWhy or DoWhy-GCM handles identification, estimation, refutation, and counterfactual analysis.",
+      "Neo4j should store versioned causal graph structures and provenance, while the causal engine remains a separate statistical computation boundary.",
+      "The semantic knowledge graph, causal model, supporting evidence, and model versions should remain connected but not collapsed into one undifferentiated graph."
+    ],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [
+      {
+        "id": "discovery-produces-candidates-not-proof",
+        "subject": "Causal Discovery",
+        "object": "Candidate Causal Structure",
+        "relation": "proposes",
+        "claim_type": "causal_workflow",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.99,
+        "assumptions": [
+          "Data, domain constraints, and discovery assumptions are explicitly recorded."
+        ],
+        "evidence": [
+          "causal-ai-architect-toolchain-reference"
+        ]
+      },
+      {
+        "id": "causal-engine-validates-graph-claims",
+        "subject": "Causal Inference Engine",
+        "object": "Causal Claim",
+        "relation": "validates",
+        "claim_type": "architecture_boundary",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.98,
+        "assumptions": [
+          "A causal claim has an identifiable estimand, declared assumptions, and retained refutation results."
+        ],
+        "evidence": [
+          "causal-ai-architect-toolchain-reference"
+        ]
+      },
+      {
+        "id": "neo4j-stores-causal-provenance",
+        "subject": "Neo4j Operational Graph",
+        "object": "Causal Provenance",
+        "relation": "stores",
+        "claim_type": "platform_architecture",
+        "status": "FRAMEWORK_SUPPORTED",
+        "confidence": 0.95,
+        "assumptions": [
+          "Statistical evidence remains linked as first-class records rather than being reduced to an edge label."
+        ],
+        "evidence": [
+          "causal-ai-architect-toolchain-reference"
+        ]
+      }
+    ],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "governance",
+      "retrieval",
+      "system_architecture",
+      "technical_stack"
+    ],
+    "impact_score": 95,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": null,
+    "source_filename": "2026-08-06-causal-ai-architect-toolchain.md",
+    "source_meta_filename": "2026-08-06-causal-ai-architect-toolchain.meta.json",
+    "source_checksum": "04b746f35f1f233d988e17fc01ddec79c90bd5826f5bc396a823fe21c045c42d",
+    "reviewed_at": "2026-08-06",
+    "problems": [],
+    "principles": [],
+    "capabilities": [],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0
+  }
+}

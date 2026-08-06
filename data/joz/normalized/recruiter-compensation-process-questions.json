@@ -32,6 +32,9 @@
       "Recruiter benchmark rules define compensation, working-model, and relocation handling.",
       "Existing operational facts provide the direct contact path."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -48,6 +51,7 @@
     "source_notes": null,
     "source_filename": "recruiter-compensation-process-questions.md",
     "source_meta_filename": "recruiter-compensation-process-questions.meta.json",
+    "source_checksum": "a835104cab3faa207abb776e463a1538a753e28dfef72ab4a3981d65c3a71456",
     "reviewed_at": "2026-07-14",
     "problems": [],
     "principles": [],
@@ -58,16 +62,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "0c7bb87e9186e9a8556dd31e4b67c7fcc8cf167d22b795e0f06c983cf616024b",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

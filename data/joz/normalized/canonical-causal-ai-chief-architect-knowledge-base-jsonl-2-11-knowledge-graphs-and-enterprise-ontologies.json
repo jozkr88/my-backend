@@ -1,0 +1,120 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-11-knowledge-graphs-and-enterprise-ontologies",
+  "title": "2.11 Knowledge Graphs and Enterprise Ontologies",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-12-2-11-knowledge-graphs-and-enterprise-ontologies",
+  "summary": "## 2.11 Knowledge Graphs and Enterprise Ontologies",
+  "body": "## 2.11 Knowledge Graphs and Enterprise Ontologies\n\n### Essential concepts\n\n- RDF and property graphs\n- Triples and labeled property graphs\n- Ontologies\n- Taxonomies\n- Schemas\n- Entity resolution\n- Identity and master data\n- Provenance\n- Temporal knowledge graphs\n- Event knowledge graphs\n- Semantic constraints\n- Graph query languages\n- Knowledge-graph embeddings\n- Graph validation\n- Graph versioning\n\n### Enterprise ontology domains\n\n- Organization\n- Facility\n- Asset\n- Machine\n- Sensor\n- Product\n- Material\n- Supplier\n- Customer\n- Contract\n- Order\n- Shipment\n- Inventory\n- Ledger account\n- Transaction\n- Process\n- Event\n- KPI\n- Risk\n- Policy\n- Intervention\n- Outcome\n- Causal assumption\n\n### Implementation exercises\n\n- Model a supply-chain ontology.\n- Link transactional and sensor entities.\n- Validate graph instances against constraints.\n- Track temporal changes and provenance.\n- Map enterprise events into a causal graph.\n\n### Evidence artifacts\n\n- Enterprise ontology\n- Knowledge-graph ingestion pipeline\n- Entity-resolution benchmark\n- Graph validation rules\n- Provenance specification\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "retrieval",
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "knowledge_graphs"
+    ],
+    "outcomes": [
+      "lower_risk"
+    ],
+    "governance": [
+      "source_provenance"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-12-2-11-knowledge-graphs-and-enterprise-ontologies",
+    "canonical_record_title": "2.11 Knowledge Graphs and Enterprise Ontologies",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "time_series"
+    ],
+    "canonical_section": "2.11 Knowledge Graphs and Enterprise Ontologies",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 550,
+    "source_line_end": 613,
+    "source_authority": 12,
+    "semantic_text": "2.11 Knowledge Graphs and Enterprise Ontologies\n2.11 Knowledge Graphs and Enterprise Ontologies\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture knowledge_graphs time_series\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture knowledge_graphs time_series\n## 2.11 Knowledge Graphs and Enterprise Ontologies\n\n### Essential concepts\n\n- RDF and property graphs\n- Triples and labeled property graphs\n- Ontologies\n- Taxonomies\n- Schemas\n- Entity resolution\n- Identity and master data\n- Provenance\n- Temporal knowledge graphs\n- Event knowledge graphs\n- Semantic constraints\n- Graph query languages\n- Knowledge-graph embeddings\n- Graph validation\n- Graph versioning\n\n### Enterprise ontology domains\n\n- Organization\n- Facility\n- Asset\n- Machine\n- Sensor\n- Product\n- Material\n- Supplier\n- Customer\n- Contract\n- Order\n- Shipment\n- Inventory\n- Ledger account\n- Transaction\n- Process\n- Event\n- KPI\n- Risk\n- Policy\n- Intervention\n- Outcome\n- Causal assumption\n\n### Implementation exercises\n\n- Model a supply-chain ontology.\n- Link transactional and sensor entities.\n- Validate graph instances against constraints.\n- Track temporal changes and provenance.\n- Map enterprise events into a causal graph.\n\n### Evidence artifacts\n\n- Enterprise ontology\n- Knowledge-graph ingestion pipeline\n- Entity-resolution benchmark\n- Graph validation rules\n- Provenance specification\n\n---",
+    "keyword_terms": [
+      "11",
+      "ai_architecture",
+      "and",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise",
+      "enterprise_architecture",
+      "graphs",
+      "knowledge",
+      "knowledge_graphs",
+      "ontologies",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.11 Knowledge Graphs and Enterprise Ontologies",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "time_series"
+    ],
+    "source_checksum": "c9181b2310256945c4eca334a3d7165046614ed0c3f9d7eee862d7c547c49eec"
+  }
+}

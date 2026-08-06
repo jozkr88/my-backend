@@ -36,6 +36,9 @@
       "Erste Bank engineering and internal/digital portal work at 16M+ customer scale.",
       "Singapore Stock Exchange responsive listings portals."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Canada",
@@ -47,8 +50,8 @@
       "Ageas",
       "Erste Bank",
       "Etiqa",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Singapore Stock Exchange"
     ],
@@ -62,6 +65,7 @@
     "source_notes": null,
     "source_filename": "skills-financial-services-ai.md",
     "source_meta_filename": "skills-financial-services-ai.meta.json",
+    "source_checksum": "2aa9189592fa2b04d3008ecfe35ddf88c73e2e6949b4342b23782d2e3797e49b",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -102,28 +106,18 @@
     "proofs": [
       "erste_customer_scale",
       "manulife_lean_ml_ux",
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "sgx_responsive_portals"
     ],
     "related_proofs": [
       "erste_customer_scale",
       "manulife_lean_ml_ux",
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "sgx_responsive_portals"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "be775e2a56a5a7da754dbc1bb8ee5726a99330e00ebbe6b69e33e5f0323c9513",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

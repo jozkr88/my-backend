@@ -1,0 +1,89 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-causal-inference-and-robustness",
+  "title": "Causal inference and robustness",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-70-causal-inference-and-robustness",
+  "summary": "## Causal inference and robustness",
+  "body": "## Causal inference and robustness\n\n- PyWhy / DoWhy documentation\n- EconML documentation\n- Original Invariant Causal Prediction papers\n- Original causal-discovery papers\n- Original Double Machine Learning and causal-forest papers",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-70-causal-inference-and-robustness",
+    "canonical_record_title": "Causal inference and robustness",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "canonical_section": "Causal inference and robustness",
+    "canonical_parent": "13. Initial Primary Source Map",
+    "source_line_start": 1923,
+    "source_line_end": 1930,
+    "source_authority": 12,
+    "semantic_text": "Causal inference and robustness\nCausal inference and robustness\nai_architecture causal_inference causal_intelligence\nai_architecture causal_inference causal_intelligence\n## Causal inference and robustness\n\n- PyWhy / DoWhy documentation\n- EconML documentation\n- Original Invariant Causal Prediction papers\n- Original causal-discovery papers\n- Original Double Machine Learning and causal-forest papers",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "inference",
+      "robustness"
+    ],
+    "exact_phrases": [
+      "Causal inference and robustness",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "source_checksum": "b36d89aa63ec7e57a1ec86b3402e9cf243834b54c57c4835c761ca999c2d6c1f"
+  }
+}

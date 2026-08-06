@@ -1,0 +1,101 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-days-16-30-effect-estimation-and-refutation",
+  "title": "Days 16–30 — Effect estimation and refutation",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-52-days-16-30-effect-estimation-and-refutation",
+  "summary": "## Days 16–30 — Effect estimation and refutation",
+  "body": "## Days 16–30 — Effect estimation and refutation\n\n- ATE/CATE/ITE\n- DML\n- causal forests\n- overlap\n- uncertainty\n- refutation\n- sensitivity\n\nDeliverable: treatment-effect benchmark and model card.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "confidence_handling"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-52-days-16-30-effect-estimation-and-refutation",
+    "canonical_record_title": "Days 16–30 — Effect estimation and refutation",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "Days 16–30 — Effect estimation and refutation",
+    "canonical_parent": "10. 90-Day Build Sequence",
+    "source_line_start": 1758,
+    "source_line_end": 1769,
+    "source_authority": 12,
+    "semantic_text": "Days 16–30 — Effect estimation and refutation\nDays 16–30 — Effect estimation and refutation\nai_architecture causal_inference causal_intelligence governance\nai_architecture causal_inference causal_intelligence governance\n## Days 16–30 — Effect estimation and refutation\n\n- ATE/CATE/ITE\n- DML\n- causal forests\n- overlap\n- uncertainty\n- refutation\n- sensitivity\n\nDeliverable: treatment-effect benchmark and model card.",
+    "keyword_terms": [
+      "16",
+      "30",
+      "ai_architecture",
+      "and",
+      "causal_inference",
+      "causal_intelligence",
+      "days",
+      "effect",
+      "estimation",
+      "governance",
+      "refutation"
+    ],
+    "exact_phrases": [
+      "Days 16–30 — Effect estimation and refutation",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "b26febd12867fdc176aa4aef7d1cd76b9cdee703b3249eb008f5750c08e1160a"
+  }
+}

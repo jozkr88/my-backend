@@ -1,0 +1,137 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-master-knowledge-base-blueprint",
+  "title": "Master Knowledge Base Blueprint",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-01-master-knowledge-base-blueprint",
+  "summary": "## Master Knowledge Base Blueprint",
+  "body": "## Master Knowledge Base Blueprint\n\nThis knowledge base converts the role description into a complete capability system. It is designed to support:\n\n- deep technical learning;\n- architecture design;\n- hands-on implementation;\n- research-paper digestion;\n- interview preparation;\n- portfolio development;\n- executive technical leadership;\n- design of a production-grade Causal Decision Operating System.\n\n---\n\n# 0. Role Decomposition\n\nThis role combines seven senior disciplines:\n\n1. **Causal machine-learning scientist**\n2. **Graph and knowledge-systems architect**\n3. **Agentic and neuro-symbolic AI architect**\n4. **Distributed AI-platform architect**\n5. **Enterprise integration architect**\n6. **AI safety, reliability and governance authority**\n7. **Chief-level technical strategist**\n\nThe central product thesis is:\n\n> Convert enterprise observations into causal models, use those models to evaluate interventions and possible futures, constrain decisions through deterministic business and physical rules, and safely dispatch approved actions into operational systems.\n\nThe system is therefore not merely an LLM application, predictive model, optimization engine, digital twin or workflow platform. It is an integrated **enterprise decision operating system**.\n\n---\n\n# 1. Knowledge-Base Design Principles\n\nEvery topic should be documented through seven connected views:\n\n1. **Theory** — definitions, assumptions and mathematical foundations.\n2. **Algorithms** — procedures, complexity, strengths and failure modes.\n3. **Implementation** — libraries, APIs, data structures and tests.\n4. **Architecture** — system boundaries, state, interfaces and deployment.\n5. **Enterprise application** — business process, operational decision and value.\n6. **Validation** — falsification, sensitivity, monitoring and auditability.\n7. **Leadership** — build-versus-buy choices, standards, hiring and roadmap implications.\n\nAvoid disconnected notes. Every note should answer:\n\n- What problem does this solve?\n- Under which assumptions is it valid?\n- What data does it require?\n- What can make it fail?\n- How is it tested?\n- Where does it run in the platform?\n- What enterprise decision does it improve?\n- What evidence proves competence?\n\n---\n\n# 2. Master Capability Map",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "technical_stack",
+      "blockchain"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "manual_knowledge_work",
+      "operational_friction",
+      "organizational_complexity",
+      "unclear_roi"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "data_boundaries",
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-01-master-knowledge-base-blueprint",
+    "canonical_record_title": "Master Knowledge Base Blueprint",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "canonical_section": "Master Knowledge Base Blueprint",
+    "canonical_parent": "Chief AI/ML Architect — Causal AI & Enterprise Decision Operating Systems",
+    "source_line_start": 2,
+    "source_line_end": 63,
+    "source_authority": 12,
+    "semantic_text": "Master Knowledge Base Blueprint\nMaster Knowledge Base Blueprint\nagentic_ai ai_architecture causal_inference causal_intelligence decision_intelligence distributed_systems enterprise_architecture governance mlops_observability\nagentic_ai ai_architecture causal_inference causal_intelligence decision_intelligence distributed_systems enterprise_architecture governance mlops_observability\n## Master Knowledge Base Blueprint\n\nThis knowledge base converts the role description into a complete capability system. It is designed to support:\n\n- deep technical learning;\n- architecture design;\n- hands-on implementation;\n- research-paper digestion;\n- interview preparation;\n- portfolio development;\n- executive technical leadership;\n- design of a production-grade Causal Decision Operating System.\n\n---\n\n# 0. Role Decomposition\n\nThis role combines seven senior disciplines:\n\n1. **Causal machine-learning scientist**\n2. **Graph and knowledge-systems architect**\n3. **Agentic and neuro-symbolic AI architect**\n4. **Distributed AI-platform architect**\n5. **Enterprise integration architect**\n6. **AI safety, reliability and governance authority**\n7. **Chief-level technical strategist**\n\nThe central product thesis is:\n\n> Convert enterprise observations into causal models, use those models to evaluate interventions and possible futures, constrain decisions through deterministic business and physical rules, and safely dispatch approved actions into operational systems.\n\nThe system is therefore not merely an LLM application, predictive model, optimization engine, digital twin or workflow platform. It is an integrated **enterprise decision operating system**.\n\n---\n\n# 1. Knowledge-Base Design Principles\n\nEvery topic should be documented through seven connected views:\n\n1. **Theory** — definitions, assumptions and mathematical foundations.\n2. **Algorithms** — procedures, complexity, strengths and failure modes.\n3. **Implementation** — libraries, APIs, data structures and tests.\n4. **Architecture** — system boundaries, state, interfaces and deployment.\n5. **Enterprise application** — business process, operational decision and value.\n6. **Validation** — falsification, sensitivity, monitoring and auditability.\n7. **Leadership** — build-versus-buy choices, standards, hiring and roadmap implications.\n\nAvoid disconnected notes. Every note should answer:\n\n- What problem does this solve?\n- Under which assumptions is it valid?\n- What data does it require?\n- What can make it fail?\n- How is it tested?\n- Where does it run in the platform?\n- What enterprise decision does it improve?\n- What evidence proves competence?\n\n---\n\n# 2. Master Capability Map",
+    "keyword_terms": [
+      "agentic_ai",
+      "ai_architecture",
+      "base",
+      "blueprint",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "knowledge",
+      "master",
+      "mlops_observability"
+    ],
+    "exact_phrases": [
+      "Master Knowledge Base Blueprint",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "source_checksum": "0f29e23dc3e1d3c51a73d77218106c5e4150b8f54be8a994d9211dcd6ddf87e4"
+  }
+}

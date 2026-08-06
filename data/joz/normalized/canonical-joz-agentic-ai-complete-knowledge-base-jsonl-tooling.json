@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [
       "systems_before_features"
@@ -68,6 +71,10 @@
       "function-calling",
       "tools"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Tooling\nTooling\napi function-calling tools\napi function-calling tools\nTools are functions, APIs, services, databases, models, or external systems that agents can call.\n\nExamples:\nget_portfolio()\nget_market_data()\nsearch_documents()\ncalculate_risk()\ncreate_order()\nverify_transaction()\n\nA tool executes a capability. An agent decides which capability is needed to achieve a goal.",
     "keyword_terms": [
@@ -82,15 +89,6 @@
       "function-calling",
       "tools"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "9fe4583190669930137e603f47501f7e7209bcc9aa9a9a6a3215120301f547db",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_006"
+    "source_checksum": "842a31802bbc63095e14a7e8b8d7a54c337a486761b5293151fc7bc2d624f1ad"
   }
 }

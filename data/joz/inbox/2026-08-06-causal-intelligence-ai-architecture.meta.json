@@ -1,0 +1,78 @@
+{
+  "slug": "2026-08-06-causal-intelligence-ai-architecture",
+  "title": "Causal Intelligence AI Architecture",
+  "category": "skills",
+  "lane": "skills",
+  "summary": "Additive architecture knowledge for extending Joz from agentic retrieval into evidence-backed causal intelligence.",
+  "tags": [
+    "causal_intelligence",
+    "ai_architecture",
+    "causal_discovery",
+    "structural_causal_models",
+    "counterfactuals",
+    "neo4j",
+    "dowhy_gcm",
+    "tigramite",
+    "networkx",
+    "fastapi"
+  ],
+  "impact_score": 94,
+  "priority_label": "hero",
+  "source_type": "framework",
+  "source_uri": "source://joz/causal-intelligence/ai-architecture",
+  "dataset_id": "joz-ai-architecture-causal-v1",
+  "causal_model_version": "joz-causal-architecture-v1",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-08-06",
+    "notes": "Additive architecture dataset based on the supplied causal knowledge graph and decision-intelligence specification. It describes an implementation framework, not personal production proof."
+  },
+  "claims": [
+    "Joz's architecture can extend the existing retrieval and agent runtime with a separate causal-intelligence service.",
+    "The semantic graph, causal engine, evidence store, and model versions should remain connected but distinct.",
+    "Causal discovery should produce candidate structures that require assumptions, review, and validation before causal claims are promoted."
+  ],
+  "proof_points": [],
+  "regions": [],
+  "companies": [],
+  "projects": [],
+  "intent_families": ["skills"],
+  "sub_intents": ["technical_stack", "retrieval", "governance"],
+  "causal_claims": [
+    {
+      "id": "semantic-graph-causal-engine-separation",
+      "subject": "Semantic Knowledge Graph",
+      "object": "Causal Inference Engine",
+      "relation": "must_be_separate_from",
+      "claim_type": "architectural_principle",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.98,
+      "assumptions": ["Graph relationships alone do not establish causal effects."],
+      "evidence": ["causal-intelligence-architecture-attachment"]
+    },
+    {
+      "id": "causal-discovery-produces-candidates",
+      "subject": "Causal Discovery",
+      "object": "Candidate Causal Structures",
+      "relation": "proposes",
+      "claim_type": "causal_workflow",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.97,
+      "assumptions": ["Observed data and domain constraints are available."],
+      "evidence": ["causal-intelligence-architecture-attachment"]
+    },
+    {
+      "id": "causal-claim-provenance-required",
+      "subject": "Causal Claim",
+      "object": "Evidence Provenance",
+      "relation": "requires",
+      "claim_type": "governance_requirement",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["Claims may be reviewed, refuted, versioned, and superseded."],
+      "evidence": ["causal-intelligence-architecture-attachment"]
+    }
+  ]
+}
+

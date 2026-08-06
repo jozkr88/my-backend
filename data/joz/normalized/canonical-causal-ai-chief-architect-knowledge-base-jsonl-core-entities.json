@@ -1,0 +1,102 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-core-entities",
+  "title": "Core entities",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-45-core-entities",
+  "summary": "## Core entities",
+  "body": "## Core entities\n\n- RoleCapability\n- Domain\n- Concept\n- MathematicalAssumption\n- CausalAssumption\n- Algorithm\n- Estimand\n- Dataset\n- DataSource\n- EnterpriseSystem\n- BusinessProcess\n- Decision\n- Intervention\n- Outcome\n- Constraint\n- Policy\n- ArchitecturePattern\n- Component\n- API\n- Experiment\n- Benchmark\n- FailureMode\n- Refutation\n- Metric\n- Paper\n- Tool\n- CodeArtifact\n- PortfolioArtifact\n- InterviewQuestion",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-45-core-entities",
+    "canonical_record_title": "Core entities",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "canonical_section": "Core entities",
+    "canonical_parent": "6. Knowledge Graph Ontology for the Knowledge Base",
+    "source_line_start": 1588,
+    "source_line_end": 1619,
+    "source_authority": 12,
+    "semantic_text": "Core entities\nCore entities\nai_architecture causal_inference causal_intelligence enterprise_architecture governance\nai_architecture causal_inference causal_intelligence enterprise_architecture governance\n## Core entities\n\n- RoleCapability\n- Domain\n- Concept\n- MathematicalAssumption\n- CausalAssumption\n- Algorithm\n- Estimand\n- Dataset\n- DataSource\n- EnterpriseSystem\n- BusinessProcess\n- Decision\n- Intervention\n- Outcome\n- Constraint\n- Policy\n- ArchitecturePattern\n- Component\n- API\n- Experiment\n- Benchmark\n- FailureMode\n- Refutation\n- Metric\n- Paper\n- Tool\n- CodeArtifact\n- PortfolioArtifact\n- InterviewQuestion",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "core",
+      "enterprise_architecture",
+      "entities",
+      "governance"
+    ],
+    "exact_phrases": [
+      "Core entities",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "source_checksum": "9308af0fd19c3acefa78439f0e2571d12874b5ad36ff65fde5b5a39dce39d479"
+  }
+}

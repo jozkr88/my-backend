@@ -19,5 +19,11 @@ npm run build:joz-knowledge-graph
 npm run import:joz-knowledge-graph:neo4j
 ```
 
-`shadow` records Neo4j evidence paths without changing answers. Use `augment` only after reviewing graph traces; it adds graph evidence to documents that were already selected by the existing retrieval path.
+The import is additive. It preserves the existing document, proof, ontology,
+and evidence graph while also carrying causal claim metadata such as
+`claimStatus`, `relation`, `datasetId`, `modelVersion`, and `confidence`.
+Causal assumptions, evidence, datasets, and model versions are imported as
+separate graph nodes and relationships, so they can be inspected without
+overwriting the current knowledge base.
 
+`shadow` records Neo4j evidence paths without changing answers. Use `augment` only after reviewing graph traces; it adds graph evidence to documents that were already selected by the existing retrieval path.

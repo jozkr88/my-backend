@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust"
     ],
@@ -74,6 +77,10 @@
       "canonical",
       "trust"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Core Trust Principle\nCore Trust Principle\nautonomy canonical trust\nautonomy canonical trust\nThe largest risk is not code generation itself. The largest risk is inaccurate context, misunderstood business intent, weak verification, and loss of trust in autonomous decision-making.",
     "keyword_terms": [
@@ -89,15 +96,6 @@
       "canonical",
       "trust"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "e4e59e324899e3b45a05ec02a2e73145f26736f375eb0c01dbf2e5853fdf7d62",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_037"
+    "source_checksum": "be561b1a030967504b7aecec33ad5c223343a67a5fbff2f6a93faba792d3f10c"
   }
 }

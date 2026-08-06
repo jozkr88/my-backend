@@ -1,0 +1,128 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-core-relationships",
+  "title": "Core relationships",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-46-core-relationships",
+  "summary": "## Core relationships",
+  "body": "## Core relationships\n\n- `REQUIRES`\n- `DEPENDS_ON`\n- `IMPLEMENTS`\n- `ESTIMATES`\n- `IDENTIFIES`\n- `REFUTES`\n- `VALIDATES`\n- `VIOLATES`\n- `CONSTRAINS`\n- `EXECUTES`\n- `OBSERVES`\n- `UPDATES`\n- `GENERALIZES_TO`\n- `FAILS_UNDER`\n- `BENCHMARKED_BY`\n- `APPLIES_TO`\n- `INTEGRATES_WITH`\n- `PROVEN_BY`\n- `EXPLAINED_BY`\n\n---\n\n# 7. Suggested Repository Structure\n\n```text\ncausal-decision-os-kb/\n├── 00-role-map/\n├── 01-math-statistics/\n├── 02-causal-foundations/\n├── 03-structural-causal-models/\n├── 04-identification/\n├── 05-causal-discovery/\n├── 06-temporal-causality/\n├── 07-treatment-effects/\n├── 08-counterfactual-simulation/\n├── 09-refutation-sensitivity/\n├── 10-invariance-ood/\n├── 11-knowledge-graphs/\n├── 12-graph-neural-networks/\n├── 13-neuro-symbolic-ai/\n├── 14-agentic-planning/\n├── 15-natural-language-causal-query/\n├── 16-guardrails-constraints/\n├── 17-action-orchestration/\n├── 18-enterprise-systems/\n├── 19-physical-systems-digital-twins/\n├── 20-data-streaming/\n├── 21-distributed-computing/\n├── 22-mlops-aiops/\n├── 23-security-deployment/\n├── 24-observability-evaluation/\n├── 25-leadership-strategy/\n├── 26-capstone/\n├── 27-paper-cards/\n├── 28-algorithm-cards/\n├── 29-architecture-decisions/\n├── 30-interview-bank/\n└── templates/\n```\n\n---\n\n# 8. Priority Model",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "product_strategy"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [
+      "banking"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-46-core-relationships",
+    "canonical_record_title": "Core relationships",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability",
+      "time_series"
+    ],
+    "canonical_section": "Core relationships",
+    "canonical_parent": "6. Knowledge Graph Ontology for the Knowledge Base",
+    "source_line_start": 1620,
+    "source_line_end": 1685,
+    "source_authority": 12,
+    "semantic_text": "Core relationships\nCore relationships\nagentic_ai ai_architecture causal_inference causal_intelligence distributed_systems enterprise_architecture governance mlops_observability time_series\nagentic_ai ai_architecture causal_inference causal_intelligence distributed_systems enterprise_architecture governance mlops_observability time_series\n## Core relationships\n\n- `REQUIRES`\n- `DEPENDS_ON`\n- `IMPLEMENTS`\n- `ESTIMATES`\n- `IDENTIFIES`\n- `REFUTES`\n- `VALIDATES`\n- `VIOLATES`\n- `CONSTRAINS`\n- `EXECUTES`\n- `OBSERVES`\n- `UPDATES`\n- `GENERALIZES_TO`\n- `FAILS_UNDER`\n- `BENCHMARKED_BY`\n- `APPLIES_TO`\n- `INTEGRATES_WITH`\n- `PROVEN_BY`\n- `EXPLAINED_BY`\n\n---\n\n# 7. Suggested Repository Structure\n\n```text\ncausal-decision-os-kb/\n├── 00-role-map/\n├── 01-math-statistics/\n├── 02-causal-foundations/\n├── 03-structural-causal-models/\n├── 04-identification/\n├── 05-causal-discovery/\n├── 06-temporal-causality/\n├── 07-treatment-effects/\n├── 08-counterfactual-simulation/\n├── 09-refutation-sensitivity/\n├── 10-invariance-ood/\n├── 11-knowledge-graphs/\n├── 12-graph-neural-networks/\n├── 13-neuro-symbolic-ai/\n├── 14-agentic-planning/\n├── 15-natural-language-causal-query/\n├── 16-guardrails-constraints/\n├── 17-action-orchestration/\n├── 18-enterprise-systems/\n├── 19-physical-systems-digital-twins/\n├── 20-data-streaming/\n├── 21-distributed-computing/\n├── 22-mlops-aiops/\n├── 23-security-deployment/\n├── 24-observability-evaluation/\n├── 25-leadership-strategy/\n├── 26-capstone/\n├── 27-paper-cards/\n├── 28-algorithm-cards/\n├── 29-architecture-decisions/\n├── 30-interview-bank/\n└── templates/\n```\n\n---\n\n# 8. Priority Model",
+    "keyword_terms": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "core",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability",
+      "relationships",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "Core relationships",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability",
+      "time_series"
+    ],
+    "source_checksum": "21a034fa66dcbdf76dd3f0cc52504e100323867191c1ecdd2d9ee5478f2ac8e9"
+  }
+}

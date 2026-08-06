@@ -25,6 +25,9 @@
     "verification_status": "positioning_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -37,6 +40,7 @@
     "source_notes": null,
     "source_filename": "systems-mindset-hero.md",
     "source_meta_filename": "systems-mindset-hero.meta.json",
+    "source_checksum": "ef4110b77d565728b059fe619c86f20a9396a0080eda0dea520af465d8ec75f9",
     "reviewed_at": "",
     "problems": [
       "knowledge_fragmentation",
@@ -67,16 +71,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 1,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "92a8dc46844867fac608703585bd74afe63f3c151a9c51b8a2dd3a52c31ed41b",
-    "source_uri": null
+    "measurable_outcome_count": 1
   }
 }

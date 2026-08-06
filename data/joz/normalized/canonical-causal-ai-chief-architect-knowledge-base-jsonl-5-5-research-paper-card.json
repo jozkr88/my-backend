@@ -1,0 +1,91 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-5-5-research-paper-card",
+  "title": "5.5 Research Paper Card",
+  "category": "business_need",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-42-5-5-research-paper-card",
+  "summary": "## 5.5 Research Paper Card",
+  "body": "## 5.5 Research Paper Card\n\n```yaml\npaper:\nauthors:\nyear:\nproblem:\nmain_claim:\nmethod:\nassumptions:\ndatasets:\nbaselines:\nresults:\nlimitations:\nreproduction_status:\nenterprise_relevance:\nimplementation_decision:\n```",
+  "metadata": {
+    "lane": "business_need",
+    "original_lane": "business_need",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "business_need",
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "manual_knowledge_work"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-42-5-5-research-paper-card",
+    "canonical_record_title": "5.5 Research Paper Card",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "5.5 Research Paper Card",
+    "canonical_parent": "5. Knowledge Object Templates",
+    "source_line_start": 1528,
+    "source_line_end": 1546,
+    "source_authority": 12,
+    "semantic_text": "5.5 Research Paper Card\n5.5 Research Paper Card\nai_architecture causal_intelligence enterprise_architecture\nai_architecture causal_intelligence enterprise_architecture\n## 5.5 Research Paper Card\n\n```yaml\npaper:\nauthors:\nyear:\nproblem:\nmain_claim:\nmethod:\nassumptions:\ndatasets:\nbaselines:\nresults:\nlimitations:\nreproduction_status:\nenterprise_relevance:\nimplementation_decision:\n```",
+    "keyword_terms": [
+      "ai_architecture",
+      "card",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "paper",
+      "research"
+    ],
+    "exact_phrases": [
+      "5.5 Research Paper Card",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "42b33c9339f034f78df711469ac98aa2f33020087d90554d25c37e9ed80d50dc"
+  }
+}

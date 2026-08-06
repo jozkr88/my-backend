@@ -1,0 +1,85 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-level-1-explain",
+  "title": "Level 1 — Explain",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-65-level-1-explain",
+  "summary": "## Level 1 — Explain",
+  "body": "## Level 1 — Explain\n\nCan define the concept accurately and distinguish it from adjacent concepts.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-65-level-1-explain",
+    "canonical_record_title": "Level 1 — Explain",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "canonical_section": "Level 1 — Explain",
+    "canonical_parent": "12. Definition of Mastery",
+    "source_line_start": 1895,
+    "source_line_end": 1898,
+    "source_authority": 12,
+    "semantic_text": "Level 1 — Explain\nLevel 1 — Explain\nai_architecture causal_intelligence\nai_architecture causal_intelligence\n## Level 1 — Explain\n\nCan define the concept accurately and distinguish it from adjacent concepts.",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "explain",
+      "level"
+    ],
+    "exact_phrases": [
+      "Level 1 — Explain",
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "source_checksum": "fcb3f13c8fb23988fec2c57742df9b9f5cae4b1231c46be9c8b3282a2951786e"
+  }
+}

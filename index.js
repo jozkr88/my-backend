@@ -18,6 +18,10 @@ import {
   createJozAIComplianceIncident,
   createJozCallbackRequest,
   createJozConversation,
+  createJozCausalToolRun,
+  completeJozCausalToolRun,
+  getPublishedJozCausalDataset,
+  listPublishedJozCausalDatasets,
   deleteJozPrivacyBundle,
   exportJozPrivacyBundle,
   getPortalTransition,
@@ -155,7 +159,35 @@ import {
 import {
   getJozKnowledgeGraphMode,
 } from "./shared/jozKnowledgeGraph.js";
-import { queryJozKnowledgeGraphRuntime } from "./shared/neo4jJozKnowledgeGraph.js";
+import {
+  queryJozKnowledgeGraphRuntime,
+  upsertJozCausalDatasetMetadataToNeo4j,
+} from "./shared/neo4jJozKnowledgeGraph.js";
+import {
+  requestJozCausalCounterfactual,
+  getJozCausalServiceMode,
+  requestJozCausalEffectEstimate,
+  requestJozCausalRefutation,
+  requestJozCausalAnalysis,
+} from "./shared/jozCausalService.js";
+import { executeJozCausalTool } from "./shared/jozCausalToolRegistry.js";
+import { selectJozCausalTool } from "./shared/jozCausalToolSelection.js";
+import {
+  authorizeJozCausalTool,
+  buildJozCausalPrincipal,
+  buildJozCausalRunRecord,
+  completeJozCausalRunRecord,
+} from "./shared/jozCausalAuthorization.js";
+import {
+  resolveJozCausalDataset,
+  validateJozCausalDataset,
+} from "./shared/jozCausalDatasetRegistry.js";
+import {
+  buildJozCausalReasoningContext,
+  isJozCausalKnowledgeDocument,
+  isJozCausalKnowledgeQuestion,
+  promoteJozCausalKnowledgeIntent,
+} from "./shared/jozCausalKnowledge.js";
 import {
   buildSpatialAssetManifest,
   getSpatialOfferDefinition,
@@ -1111,6 +1143,114 @@ app.get("/api/ai-system-card", (_req, res) => {
     governanceVersion: AI_ACT_GOVERNANCE_VERSION,
     aiActReadiness: "engineering-safeguards-implemented-legal-review-required",
   });
+});
+
+function causalDatasetRequestPayload(req) {
+  const payload = req.body?.dataset && typeof req.body.dataset === "object"
+    ? req.body.dataset
+    : req.body;
+  return payload && typeof payload === "object" && !Array.isArray(payload) ? payload : {};
+}
+
+function causalDatasetSummary(dataset = {}) {
+  return {
+    schemaVersion: dataset.schema_version || "joz.causal-dataset.v1",
+    datasetId: dataset.dataset_id || dataset.metadata?.dataset_id || null,
+    modelVersion: dataset.model_version || dataset.metadata?.model_version || null,
+    tenantId: dataset.tenant_id || dataset.metadata?.tenant_id || "public",
+    checksum: dataset.checksum || null,
+    rowCount: Array.isArray(dataset.data) ? dataset.data.length : 0,
+    variableCount: Array.isArray(dataset.nodes) ? dataset.nodes.length : 0,
+    edgeCount: Array.isArray(dataset.edges) ? dataset.edges.length : 0,
+    hasFactualRow: Boolean(dataset.factual),
+  };
+}
+
+function causalDatasetTenantForRequest(req, dataset) {
+  return String(
+    dataset?.tenant_id ||
+      dataset?.metadata?.tenant_id ||
+      req.jozAuth?.companyKey ||
+      "public"
+  ).trim() || "public";
+}
+
+app.post("/api/causal/datasets/validate", requireJozAuth, async (req, res) => {
+  const payload = causalDatasetRequestPayload(req);
+  const validation = validateJozCausalDataset(payload);
+  if (!validation.ok) {
+    return res.status(400).json({ ok: false, status: "invalid", errors: validation.errors });
+  }
+  const requestTenant = causalDatasetTenantForRequest(req, payload);
+  if (requestTenant !== "public" && req.jozAuth?.companyKey && requestTenant !== req.jozAuth.companyKey) {
+    return res.status(403).json({ ok: false, error: "Dataset tenant does not match authenticated tenant" });
+  }
+  return res.json({ ok: true, status: "validated", dataset: causalDatasetSummary(validation.dataset) });
+});
+
+app.get("/api/causal/datasets", requireJozAuth, async (req, res) => {
+  const tenantId = req.jozAuth?.companyKey || "public";
+  const datasets = await listPublishedJozCausalDatasets({ tenantId });
+  return res.json({ ok: true, tenantId, datasets, storage: isDatabaseEnabled() ? "postgresql" : "unavailable" });
+});
+
+app.get("/api/causal/datasets/:datasetId/versions/:modelVersion", requireJozAuth, async (req, res) => {
+  const tenantId = req.jozAuth?.companyKey || "public";
+  const dataset = await getPublishedJozCausalDataset({
+    datasetId: String(req.params.datasetId || "").trim(),
+    modelVersion: String(req.params.modelVersion || "").trim(),
+    tenantId,
+  });
+  if (!dataset) return res.status(404).json({ ok: false, error: "Published causal dataset version not found" });
+  const includeData = String(req.query?.includeData || "").toLowerCase() === "true";
+  return res.json({
+    ok: true,
+    dataset: includeData ? dataset : { ...dataset, data: undefined, factual: undefined },
+    storage: isDatabaseEnabled() ? "postgresql" : "unavailable",
+  });
+});
+
+app.post("/api/causal/datasets/publish", requireJozAuth, async (req, res) => {
+  const payload = causalDatasetRequestPayload(req);
+  const requestedStatus = String(req.body?.status || "published").trim().toLowerCase();
+  if (!["draft", "validated", "published", "deprecated"].includes(requestedStatus)) {
+    return res.status(400).json({ ok: false, error: "Unsupported causal dataset lifecycle status" });
+  }
+  const validation = validateJozCausalDataset(payload);
+  if (!validation.ok) {
+    return res.status(400).json({ ok: false, status: "invalid", errors: validation.errors });
+  }
+  const datasetTenant = causalDatasetTenantForRequest(req, validation.dataset);
+  if (req.jozAuth?.companyKey && datasetTenant !== req.jozAuth.companyKey) {
+    return res.status(403).json({ ok: false, error: "Dataset tenant does not match authenticated tenant" });
+  }
+  if (!isDatabaseEnabled()) {
+    return res.status(503).json({ ok: false, error: "PostgreSQL is required for causal dataset publishing" });
+  }
+  try {
+    const dataset = {
+      ...validation.dataset,
+      tenant_id: datasetTenant,
+      metadata: {
+        ...(validation.dataset.metadata || {}),
+        tenant_id: datasetTenant,
+        published_by: req.jozAuth?.userId || "local_development",
+      },
+    };
+    const published = await publishJozCausalDataset({ dataset, status: requestedStatus });
+    let neo4j = { configured: false, skipped: true };
+    if (requestedStatus === "published") {
+      try {
+        neo4j = await upsertJozCausalDatasetMetadataToNeo4j({ dataset });
+      } catch (error) {
+        neo4j = { configured: true, skipped: false, error: String(error?.message || error).slice(0, 160) };
+      }
+    }
+    return res.status(201).json({ ok: true, status: requestedStatus, dataset: published, neo4j });
+  } catch (error) {
+    console.error("❌ /api/causal/datasets/publish failed:", error?.message || error);
+    return res.status(500).json({ ok: false, error: "Causal dataset publish failed" });
+  }
 });
 
 app.post("/api/ai-compliance/incidents", requireJozAuth, async (req, res) => {
@@ -2822,12 +2962,17 @@ app.post("/api/joz-llm", async (req, res) => {
       /\b(?:paid\s+architecture\s+brief|architecture\s+review|pay\s+and\s+start|start\s+(?:the\s+)?brief)\b/i.test(
         latestUserMessage
       );
-    const intentClassification = await classifyJozIntent({
+    let intentClassification = await classifyJozIntent({
       openai,
       input: latestUserMessage,
       messages,
       context,
       route,
+    });
+    const causalKnowledgeQuestion = isJozCausalKnowledgeQuestion(latestUserMessage);
+    intentClassification = promoteJozCausalKnowledgeIntent({
+      input: latestUserMessage,
+      classification: intentClassification,
     });
     const agentPlan = buildJozAgentPlan({ classification: intentClassification });
     const laneHint = String(context?.intentMode || "").trim().toLowerCase();
@@ -2928,7 +3073,6 @@ app.post("/api/joz-llm", async (req, res) => {
       body: doc.body,
       metadata: doc.metadata,
     }));
-
     // Graph retrieval starts in shadow mode. It observes the same request and
     // records evidence paths, but it does not enter the model context unless
     // the deployment explicitly promotes it to augment mode.
@@ -2989,6 +3133,325 @@ app.post("/api/joz-llm", async (req, res) => {
       };
     }
 
+    if (causalKnowledgeQuestion) {
+      const causalCandidates = await getJozDocumentsByIntent(
+        "systems_mindset",
+        16,
+        latestUserMessage,
+        { datasetId: null }
+      );
+      const causalDocuments = causalCandidates
+        .filter(isJozCausalKnowledgeDocument)
+        .slice(0, 8)
+        .map((doc) => ({
+          title: doc.title,
+          category: doc.category,
+          summary: doc.summary,
+          body: doc.body,
+          metadata: {
+            ...(doc.metadata || {}),
+            causalKnowledge: true,
+          },
+        }));
+      const existingDocumentKeys = new Set(
+        retrievalContext.map((doc) => doc?.metadata?.slug || `${doc?.title || ""}::${doc?.category || ""}`)
+      );
+      const additiveCausalDocuments = causalDocuments.filter((doc) => {
+        const key = doc?.metadata?.slug || `${doc?.title || ""}::${doc?.category || ""}`;
+        if (existingDocumentKeys.has(key)) return false;
+        existingDocumentKeys.add(key);
+        return true;
+      });
+      retrievalContext = [...additiveCausalDocuments, ...retrievalContext].slice(0, 12);
+      retrievalMeta.causalKnowledge = buildJozCausalReasoningContext({
+        query: latestUserMessage,
+        documents: additiveCausalDocuments,
+        graph: knowledgeGraph,
+      });
+      retrievalMeta.causalKnowledge.activeInContext = additiveCausalDocuments.length > 0;
+      retrievalMeta.causalKnowledge.documentCount = additiveCausalDocuments.length;
+    }
+
+    // Causal analysis is intentionally feature-flagged and shadow-only at
+    // first. It can observe the same authorized evidence as Joz retrieval,
+    // but it does not alter the answer until the causal service is promoted.
+    const causalMode = getJozCausalServiceMode();
+    let causalAnalysis = {
+      mode: causalMode,
+      status: causalMode === "disabled" ? "disabled" : "not_requested",
+      queryType: "unknown",
+      claimStatus: "not_requested",
+      provenance: [],
+    };
+    if (
+      causalMode !== "disabled" &&
+      intentClassification.kind !== "execute" &&
+      intentClassification.kind !== "refuse"
+    ) {
+      causalAnalysis = await requestJozCausalAnalysis({
+        query: latestUserMessage,
+        graphEvidence: knowledgeGraph
+          ? {
+              matchedNodeIds: knowledgeGraph.matchedNodeIds || [],
+              documentSlugs: knowledgeGraph.documentSlugs || [],
+              paths: (knowledgeGraph.paths || []).slice(0, 12),
+            }
+          : {},
+        retrievedDocuments: retrievalContext,
+      });
+    }
+    const requestedCausalTool = context?.causalToolRequest || context?.causal_tool_request || null;
+    const causalPrincipal = buildJozCausalPrincipal({ auth: req.jozAuth });
+    let causalToolSelection = {
+      status: causalMode === "disabled" ? "disabled" : "not_requested",
+      toolName: null,
+      args: null,
+      errorCode: null,
+      source: null,
+    };
+    if (
+      causalMode !== "disabled" &&
+      intentClassification.kind !== "execute" &&
+      intentClassification.kind !== "refuse"
+    ) {
+      if (requestedCausalTool && typeof requestedCausalTool === "object" && !Array.isArray(requestedCausalTool)) {
+        causalToolSelection = {
+          status: "selected",
+          toolName: String(requestedCausalTool.name || requestedCausalTool.toolName || "").trim(),
+          args: requestedCausalTool.arguments || requestedCausalTool.args || {},
+          errorCode: null,
+          source: "context",
+        };
+      } else {
+        causalToolSelection = await selectJozCausalTool({
+          model: openai,
+          input: latestUserMessage,
+          messages: recentSessionMessages,
+          context,
+        });
+        causalToolSelection.source = "llm";
+      }
+    }
+    let causalTool = {
+      mode: causalMode,
+      status: causalToolSelection.status === "selected" ? "not_executed" : causalToolSelection.status,
+      toolName: null,
+      result: null,
+      errorCode: causalToolSelection.errorCode || null,
+      selection: causalToolSelection,
+      authorization: null,
+      run: null,
+    };
+    if (
+      causalMode !== "disabled" &&
+      causalToolSelection.status === "selected" &&
+      intentClassification.kind !== "execute" &&
+      intentClassification.kind !== "refuse"
+    ) {
+      const toolName = causalToolSelection.toolName;
+      const authorization = authorizeJozCausalTool({
+        toolName,
+        args: causalToolSelection.args || {},
+        mode: causalMode,
+        intentKind: intentClassification.kind,
+        principal: causalPrincipal,
+      });
+      if (!authorization.allowed) {
+        causalTool = {
+          mode: causalMode,
+          status: "unauthorized",
+          toolName,
+          result: null,
+          errorCode: authorization.code,
+          selection: causalToolSelection,
+          authorization,
+          run: null,
+        };
+      } else {
+        const causalRun = buildJozCausalRunRecord({
+          runId: randomUUID(),
+          requestId,
+          conversationId,
+          sessionKey,
+          toolName,
+          args: authorization.args,
+          mode: causalMode,
+          authorization,
+        });
+        if (isDatabaseEnabled()) {
+          await createJozCausalToolRun({
+            runId: causalRun.runId,
+            requestId: causalRun.requestId,
+            conversationId: causalRun.conversationId,
+            sessionKey: causalRun.sessionKey,
+            tenantId: authorization.principal?.tenantId || "public",
+            principalId: authorization.principal?.userId || null,
+            toolName: causalRun.toolName,
+            args: causalRun.args,
+            mode: causalRun.mode,
+            authorization,
+          });
+        }
+        try {
+          let result;
+          const needsRuntimeDataset = [
+            "estimate_causal_effect",
+            "run_counterfactual",
+            "refute_causal_structure",
+          ].includes(toolName);
+          const publishedCausalDataset = needsRuntimeDataset && !context?.causalData && !context?.causal_data
+            ? await getPublishedJozCausalDataset({
+                datasetId: authorization.args.model_id,
+                modelVersion: authorization.args.model_version,
+                tenantId: causalPrincipal.tenantId || "public",
+              })
+            : null;
+          const causalDatasetResolution = needsRuntimeDataset
+            ? resolveJozCausalDataset({
+                context: publishedCausalDataset ? { ...context, causalData: publishedCausalDataset } : context,
+                requestedModelId: authorization.args.model_id,
+                requestedModelVersion: authorization.args.model_version,
+                principal: causalPrincipal,
+              })
+            : null;
+          if (needsRuntimeDataset && !causalDatasetResolution.ok) {
+            result = {
+              tool: toolName,
+              operation:
+                toolName === "estimate_causal_effect"
+                  ? "effect_estimation"
+                  : toolName === "run_counterfactual"
+                    ? "counterfactual"
+                    : "refutation",
+              status: causalDatasetResolution.code === "CAUSAL_DATA_REQUIRED" ? "data_required" : "data_invalid",
+              model_id: authorization.args.model_id,
+              model_version: authorization.args.model_version,
+              errors: causalDatasetResolution.errors,
+              warnings: ["The causal dataset failed the versioned dataset contract and was not sent to the causal service."],
+            };
+          } else if (toolName === "estimate_causal_effect") {
+            const causalDataset = causalDatasetResolution.dataset;
+            result = await requestJozCausalEffectEstimate({
+              request: {
+                nodes: causalDataset.nodes,
+                edges: causalDataset.edges,
+                data: causalDataset.data,
+                treatment: authorization.args.treatment_variable_id,
+                outcome: authorization.args.outcome_variable_id,
+                treatment_value: authorization.args.treatment_value,
+                control_value: authorization.args.control_value,
+                samples: authorization.args.samples,
+              },
+            });
+          } else if (toolName === "run_counterfactual") {
+            const causalDataset = causalDatasetResolution.dataset;
+            if (!causalDataset.factual) {
+              result = {
+                tool: "run_counterfactual",
+                operation: "counterfactual",
+                status: "data_required",
+                model_id: authorization.args.model_id,
+                model_version: authorization.args.model_version,
+                warnings: ["A factual row must be supplied in the versioned context.causalData contract."],
+              };
+            } else {
+              result = await requestJozCausalCounterfactual({
+                request: {
+                  nodes: causalDataset.nodes,
+                  edges: causalDataset.edges,
+                  data: causalDataset.data,
+                  factual: causalDataset.factual,
+                  intervention_variable: authorization.args.intervention_variable_id,
+                  intervention_value: authorization.args.intervention_value,
+                  target: authorization.args.target_variable_id,
+                },
+              });
+            }
+          } else if (toolName === "refute_causal_structure") {
+            const causalDataset = causalDatasetResolution.dataset;
+            result = await requestJozCausalRefutation({
+              request: {
+                nodes: causalDataset.nodes,
+                edges: causalDataset.edges,
+                data: causalDataset.data,
+                significance_level: authorization.args.significance_level,
+              },
+            });
+          } else {
+            result = executeJozCausalTool({
+              toolName,
+              args: authorization.args,
+            });
+          }
+          const completedRun = completeJozCausalRunRecord(causalRun, {
+            status: ["ok", "estimated"].includes(result.status) ? "completed" : "completed_with_warning",
+            result,
+          });
+          if (isDatabaseEnabled()) {
+            await completeJozCausalToolRun({
+              runId: completedRun.runId,
+              status: completedRun.status,
+              result,
+            });
+          }
+          causalTool = {
+            mode: causalMode,
+            status: completedRun.status,
+            toolName,
+            result,
+            errorCode: null,
+            selection: causalToolSelection,
+            authorization,
+            run: completedRun,
+          };
+        } catch (error) {
+          const completedRun = completeJozCausalRunRecord(causalRun, {
+            status: "failed",
+            errorCode: String(error?.code || "CAUSAL_TOOL_FAILURE").slice(0, 120),
+          });
+          if (isDatabaseEnabled()) {
+            await completeJozCausalToolRun({
+              runId: completedRun.runId,
+              status: completedRun.status,
+              errorCode: completedRun.errorCode,
+            });
+          }
+          causalTool = {
+            mode: causalMode,
+            status: "failed",
+            toolName: toolName || null,
+            result: null,
+            errorCode: completedRun.errorCode,
+            selection: causalToolSelection,
+            authorization,
+            run: completedRun,
+          };
+        }
+      }
+    }
+    retrievalMeta.causal = {
+      mode: causalAnalysis.mode || causalMode,
+      status: causalAnalysis.status || "unknown",
+      queryType: causalAnalysis.queryType || "unknown",
+      claimStatus: causalAnalysis.claimStatus || "unknown",
+      capabilities: causalAnalysis.capabilities || {},
+      error: causalAnalysis.error || null,
+    };
+    retrievalMeta.causalTool = {
+      mode: causalTool.mode,
+      status: causalTool.status,
+      toolName: causalTool.toolName,
+      errorCode: causalTool.errorCode,
+      selection: causalTool.selection,
+      authorization: causalTool.authorization,
+      run: causalTool.run,
+      result: causalTool.result,
+    };
+    const roleAwareRetrievalMeta =
+      causalMode === "augment" || causalMode === "decision_support"
+        ? retrievalMeta
+        : Object.fromEntries(Object.entries(retrievalMeta).filter(([key]) => !["causal", "causalTool"].includes(key)));
+
     const roleAwareContext = buildRoleAwareJozContext({
       buildJozLlmContext,
       profile,
@@ -3000,7 +3463,7 @@ app.post("/api/joz-llm", async (req, res) => {
       intentClassification,
       agentPlan,
       retrievedDocuments: retrievalContext,
-      retrievalMeta,
+      retrievalMeta: roleAwareRetrievalMeta,
     });
     roleAwareContext.intentClassification = intentClassification;
     roleAwareContext.agentPlan = agentPlan;
@@ -3086,6 +3549,8 @@ app.post("/api/joz-llm", async (req, res) => {
           }
         : null,
       retrieval: retrievalMeta,
+      causalAnalysis,
+      causalTool,
       risk: intentClassification.risk,
       execution: {
         status: intentClassification.kind === "execute" ? "approval_required" : "not_required",
@@ -3131,6 +3596,7 @@ app.post("/api/joz-llm", async (req, res) => {
             }
           : null,
         retrieval: retrievalMeta,
+        causalTool,
         risk: intentClassification.risk,
         execution: {
           status: intentClassification.kind === "execute" ? "approval_required" : "not_required",
@@ -3353,6 +3819,7 @@ app.post("/api/joz-llm", async (req, res) => {
       ...legacyRuntimeContext,
       ...(requestGeo ? { geo: requestGeo } : {}),
       worldModel: worldModelAdvisory,
+      causalTool,
     };
     const observabilityEvent = {
       conversationId,
@@ -3422,6 +3889,7 @@ app.post("/api/joz-llm", async (req, res) => {
       review,
       verificationFlow,
       worldModel: worldModelAdvisory,
+      causalTool,
       observability: {
         latencyMs: verification.metrics.latencyMs,
         retrievedDocumentCount: verification.metrics.retrievedDocumentCount,

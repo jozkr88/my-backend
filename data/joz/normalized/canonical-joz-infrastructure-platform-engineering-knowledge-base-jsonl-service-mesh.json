@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "organizational_complexity"
     ],
@@ -66,6 +69,10 @@
       "linkerd",
       "service-mesh"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Service Mesh\nService Mesh\nistio linkerd service-mesh\nistio linkerd service-mesh\nA service mesh manages service-to-service communication.\n\nCapabilities can include:\nMutual TLS\nTraffic policies\nRetries\nCircuit breaking\nObservability\nService identity\n\nExamples:\nIstio\nLinkerd\n\nUse a service mesh only when complexity justifies it.",
     "keyword_terms": [
@@ -81,15 +88,6 @@
       "linkerd",
       "service-mesh"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "94ab2abbeacb92e75a6be102f4fcb49d319684466d0f37ca2c9b13a656d5fa35",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_025"
+    "source_checksum": "9c11e8b5ad6bbc9d100bc639f95f90aa06ba2634ea348585e3c506458d4915dc"
   }
 }

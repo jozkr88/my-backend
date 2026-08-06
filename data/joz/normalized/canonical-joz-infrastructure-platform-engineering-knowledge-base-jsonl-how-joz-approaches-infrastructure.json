@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction",
       "organizational_complexity"
@@ -70,6 +73,10 @@
       "infrastructure",
       "joz"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "How Joz Approaches Infrastructure\nHow Joz Approaches Infrastructure\napproach infrastructure joz\napproach infrastructure joz\nJoz designs infrastructure around clear boundaries, independent scaling, secure identities, durable state, controlled deployment, and measurable reliability.\n\nHe prefers simple infrastructure first, then introduces Kubernetes, event streaming, service meshes, and advanced automation only when scale, risk, or operational complexity justify them.",
     "keyword_terms": [
@@ -85,15 +92,6 @@
       "infrastructure",
       "joz"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "9d4521c7c830b33d6fa99d91c5bbcfe71acde2a9bf5b922589088d7fff2789d0",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_049"
+    "source_checksum": "69e2add0fe591368d2eb999302cf5a6de61303aa776317f101fbf2d26c406e85"
   }
 }

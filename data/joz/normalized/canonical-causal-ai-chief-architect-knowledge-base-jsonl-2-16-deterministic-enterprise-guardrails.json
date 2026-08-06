@@ -1,0 +1,113 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-16-deterministic-enterprise-guardrails",
+  "title": "2.16 Deterministic Enterprise Guardrails",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-17-2-16-deterministic-enterprise-guardrails",
+  "summary": "## 2.16 Deterministic Enterprise Guardrails",
+  "body": "## 2.16 Deterministic Enterprise Guardrails\n\n### Guardrail categories\n\n- Double-entry accounting invariants\n- Inventory conservation\n- Capacity constraints\n- Safety envelopes\n- Regulatory limits\n- Contractual obligations\n- Segregation of duties\n- Authorization limits\n- Data residency\n- Model-risk limits\n- Budget and risk thresholds\n- Human-approval requirements\n- Temporal constraints\n- Operational dependency constraints\n\n### Implementation mechanisms\n\n- Policy engines\n- Rules engines\n- Constraint solvers\n- Optimization solvers\n- Graph validation\n- Database constraints\n- Typed schemas\n- State machines\n- Access-control systems\n- Approval workflows\n- Safety interlocks\n\n### Evidence artifacts\n\n- Enterprise invariant catalogue\n- Policy-as-code repository\n- Constraint test suite\n- Approval matrix\n- Guardrail decision log\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-17-2-16-deterministic-enterprise-guardrails",
+    "canonical_record_title": "2.16 Deterministic Enterprise Guardrails",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "time_series"
+    ],
+    "canonical_section": "2.16 Deterministic Enterprise Guardrails",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 811,
+    "source_line_end": 853,
+    "source_authority": 12,
+    "semantic_text": "2.16 Deterministic Enterprise Guardrails\n2.16 Deterministic Enterprise Guardrails\nai_architecture causal_intelligence enterprise_architecture governance time_series\nai_architecture causal_intelligence enterprise_architecture governance time_series\n## 2.16 Deterministic Enterprise Guardrails\n\n### Guardrail categories\n\n- Double-entry accounting invariants\n- Inventory conservation\n- Capacity constraints\n- Safety envelopes\n- Regulatory limits\n- Contractual obligations\n- Segregation of duties\n- Authorization limits\n- Data residency\n- Model-risk limits\n- Budget and risk thresholds\n- Human-approval requirements\n- Temporal constraints\n- Operational dependency constraints\n\n### Implementation mechanisms\n\n- Policy engines\n- Rules engines\n- Constraint solvers\n- Optimization solvers\n- Graph validation\n- Database constraints\n- Typed schemas\n- State machines\n- Access-control systems\n- Approval workflows\n- Safety interlocks\n\n### Evidence artifacts\n\n- Enterprise invariant catalogue\n- Policy-as-code repository\n- Constraint test suite\n- Approval matrix\n- Guardrail decision log\n\n---",
+    "keyword_terms": [
+      "16",
+      "ai_architecture",
+      "causal_intelligence",
+      "deterministic",
+      "enterprise",
+      "enterprise_architecture",
+      "governance",
+      "guardrails",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.16 Deterministic Enterprise Guardrails",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "time_series"
+    ],
+    "source_checksum": "5f05ac1674d06e329abec348f5e4d88e5c00d9b315b01b4198db2ffd450abdf4"
+  }
+}

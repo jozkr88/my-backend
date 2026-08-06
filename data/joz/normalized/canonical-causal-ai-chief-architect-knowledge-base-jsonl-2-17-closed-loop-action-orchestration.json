@@ -1,0 +1,111 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-17-closed-loop-action-orchestration",
+  "title": "2.17 Closed-Loop Action Orchestration",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-18-2-17-closed-loop-action-orchestration",
+  "summary": "## 2.17 Closed-Loop Action Orchestration",
+  "body": "## 2.17 Closed-Loop Action Orchestration\n\n### Control loop\n\n1. Observe\n2. Diagnose\n3. Model\n4. Propose\n5. Simulate\n6. Validate\n7. Approve\n8. Execute\n9. Verify\n10. Monitor\n11. Roll back or compensate\n12. Learn\n\n### Safety requirements\n\n- idempotent actions;\n- action deduplication;\n- dry-run mode;\n- shadow mode;\n- canary execution;\n- bounded autonomy;\n- human approval tiers;\n- circuit breakers;\n- rollback and compensation;\n- effect monitoring;\n- immutable audit logs;\n- kill switch.\n\n### Evidence artifacts\n\n- Action orchestration state machine\n- Compensation catalogue\n- Execution simulator\n- Shadow-mode evaluation\n- Rollback drill report\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "appropriate_autonomy",
+      "trust_before_autonomy"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "observability"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "evaluation",
+      "human_approval",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-18-2-17-closed-loop-action-orchestration",
+    "canonical_record_title": "2.17 Closed-Loop Action Orchestration",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance",
+      "mlops_observability"
+    ],
+    "canonical_section": "2.17 Closed-Loop Action Orchestration",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 854,
+    "source_line_end": 895,
+    "source_authority": 12,
+    "semantic_text": "2.17 Closed-Loop Action Orchestration\n2.17 Closed-Loop Action Orchestration\nai_architecture causal_intelligence governance mlops_observability\nai_architecture causal_intelligence governance mlops_observability\n## 2.17 Closed-Loop Action Orchestration\n\n### Control loop\n\n1. Observe\n2. Diagnose\n3. Model\n4. Propose\n5. Simulate\n6. Validate\n7. Approve\n8. Execute\n9. Verify\n10. Monitor\n11. Roll back or compensate\n12. Learn\n\n### Safety requirements\n\n- idempotent actions;\n- action deduplication;\n- dry-run mode;\n- shadow mode;\n- canary execution;\n- bounded autonomy;\n- human approval tiers;\n- circuit breakers;\n- rollback and compensation;\n- effect monitoring;\n- immutable audit logs;\n- kill switch.\n\n### Evidence artifacts\n\n- Action orchestration state machine\n- Compensation catalogue\n- Execution simulator\n- Shadow-mode evaluation\n- Rollback drill report\n\n---",
+    "keyword_terms": [
+      "17",
+      "action",
+      "ai_architecture",
+      "causal_intelligence",
+      "closed",
+      "governance",
+      "loop",
+      "mlops_observability",
+      "orchestration"
+    ],
+    "exact_phrases": [
+      "2.17 Closed-Loop Action Orchestration",
+      "ai_architecture",
+      "causal_intelligence",
+      "governance",
+      "mlops_observability"
+    ],
+    "source_checksum": "1988b39e114dd76db0a6eced64c51d7968c34c2ac4fa72a7178a6cab512bf784"
+  }
+}

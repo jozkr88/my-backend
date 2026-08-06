@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -43,7 +46,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [
       "systems_before_features"
@@ -72,6 +75,10 @@
       "golang",
       "python"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Golang and Python\nGolang and Python\narchitecture golang python\narchitecture golang python\nPython is suited to AI, machine learning, retrieval, agent orchestration, FastAPI, data science, and rapid experimentation.\n\nGo is suited to high-performance APIs, concurrency, streaming systems, networking, distributed infrastructure, and latency-sensitive execution services.\n\nA practical polyglot architecture can use Python for intelligence and Go for execution-heavy services.",
     "keyword_terms": [
@@ -86,15 +93,6 @@
       "golang",
       "python"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "053c117eefd7f8c65f341dc4307a5c2af82141bcdd164048fdfd95e6dacbef33",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_016"
+    "source_checksum": "0d2fe83e5a21f17b799963fe4a7e63bcf1509254075a8941f6d93edc4aabb8d0"
   }
 }

@@ -1,0 +1,83 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-level-3-diagnose",
+  "title": "Level 3 — Diagnose",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-67-level-3-diagnose",
+  "summary": "## Level 3 — Diagnose",
+  "body": "## Level 3 — Diagnose\n\nCan identify invalid assumptions, failure modes and misleading outputs.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-67-level-3-diagnose",
+    "canonical_record_title": "Level 3 — Diagnose",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "canonical_section": "Level 3 — Diagnose",
+    "canonical_parent": "12. Definition of Mastery",
+    "source_line_start": 1903,
+    "source_line_end": 1906,
+    "source_authority": 12,
+    "semantic_text": "Level 3 — Diagnose\nLevel 3 — Diagnose\nai_architecture causal_intelligence\nai_architecture causal_intelligence\n## Level 3 — Diagnose\n\nCan identify invalid assumptions, failure modes and misleading outputs.",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "diagnose",
+      "level"
+    ],
+    "exact_phrases": [
+      "Level 3 — Diagnose",
+      "ai_architecture",
+      "causal_intelligence"
+    ],
+    "source_checksum": "56a0e74533f31d7609475cd7f3f4fb8f82b72383bff9d619cc9b1f35cc5876ce"
+  }
+}

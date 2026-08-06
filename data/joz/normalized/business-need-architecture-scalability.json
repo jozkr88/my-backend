@@ -33,6 +33,9 @@
       "The publish process is batch-oriented rather than designed for rapid operational data ingestion.",
       "The current runtime is strong at retrieval and routing but not yet built as a broad analytical platform."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -49,6 +52,7 @@
     "source_notes": null,
     "source_filename": "business-need-architecture-scalability.md",
     "source_meta_filename": "business-need-architecture-scalability.meta.json",
+    "source_checksum": "59f91c04cb3a7b4e4f468798436af04c28fb8aa841489961675f94fe44acfa4b",
     "reviewed_at": "",
     "problems": [
       "knowledge_fragmentation",
@@ -85,16 +89,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "e2c171a34d1cd115a4ed9c00758601c6778840e08102eb020b0e74eb0eb03e43",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

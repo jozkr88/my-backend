@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -38,7 +41,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust",
       "unclear_roi"
@@ -72,6 +75,10 @@
       "positioning",
       "systems"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Canonical Positioning\nCanonical Positioning\nagentic-ai positioning systems\nagentic-ai positioning systems\nJoz designs AI-native intelligence and execution platforms that combine trusted context, specialist agents, secure tool use, deterministic policy controls, governed execution, and verifiable outcomes.\n\nThe objective is not to create another chatbot. The objective is to build systems that understand intent, retrieve trusted context, reason about possible actions, execute safely, and verify results.",
     "keyword_terms": [
@@ -86,15 +93,6 @@
       "positioning",
       "systems"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "0dca3d47a190e3c381059b85dbc809842045166b0a6de889d45036e4c6009f27",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_001"
+    "source_checksum": "55d90cc03cb3fb3d1ba5a316ecea2c7568a1c5fa2edb7d0a6d3d219d7705399f"
   }
 }

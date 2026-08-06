@@ -113,6 +113,37 @@ The build adds governance metadata to every normalized and published record:
 - `evidence_tier` to distinguish verified facts from supported claims and framework guidance
 - `source_checksum` for content integrity
 
+## Causal intelligence expansion
+
+Causal intelligence is additive to the existing Joz corpus. Existing source
+records remain available and continue to use the same retrieval and evidence
+controls. Add causal architecture and decision-intelligence material as new
+inbox records with these optional metadata fields:
+
+- `dataset_id` to identify the causal dataset boundary
+- `causal_model_version` to identify the model or framework version
+- `causal_claims` for explicit subject/object relationships, status,
+  assumptions, and evidence provenance
+
+The knowledge-graph build publishes these claims as first-class causal claim,
+variable, dataset, model-version, assumption, and evidence nodes. A claim is
+stored as framework support or a hypothesis until it has appropriate evidence;
+the graph does not turn semantic proximity into causal proof.
+
+After rebuilding the published corpus, rebuild the graph before importing it
+into Neo4j:
+
+```bash
+cd server && npm run build:joz-knowledge
+cd .. && npm run build:joz-knowledge-graph
+```
+
+Run the corpus retrieval check after rebuilding:
+
+```bash
+npm run check:causal-corpus
+```
+
 The public corpus uses dataset `joz-public-knowledge` and tenant `public`. Customer data must use a separate dataset and tenant and must pass an authorization-aware retrieval path before it reaches model context. The generated `published/joz-dataset-manifest.json` records the dataset checksum and build counts.
 
 Internal filesystem paths are converted to stable `source://joz/...` identifiers during the build. Do not commit `.env` files or credentials; use local environment files or deployment secret storage.

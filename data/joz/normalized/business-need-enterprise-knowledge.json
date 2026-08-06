@@ -32,6 +32,9 @@
       "Applied skills in RAG, embeddings, vector search, knowledge graphs, context engineering, memory, ACL-aware access, and verification.",
       "Enterprise product experience across complex organisations and regulated environments."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -51,6 +54,7 @@
     "source_notes": null,
     "source_filename": "business-need-enterprise-knowledge.md",
     "source_meta_filename": "business-need-enterprise-knowledge.meta.json",
+    "source_checksum": "9a34b39446a149a90d0ec0b6aa2fb09ff5856795e645559a18c1bd25b9fd7a2b",
     "reviewed_at": "",
     "problems": [
       "data_silos",
@@ -95,16 +99,6 @@
       "mc_usa_financial_agents"
     ],
     "enterprise_scale_score": 98,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "7dbd174b112339e90299b6aef94af8c476ad69ff3fa54d387249349e208d342f",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

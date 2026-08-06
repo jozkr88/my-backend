@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -63,6 +66,10 @@
       "pulumi",
       "terraform"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Infrastructure as Code\nInfrastructure as Code\ninfrastructure-as-code pulumi terraform\ninfrastructure-as-code pulumi terraform\nInfrastructure as Code defines cloud resources through version-controlled code.\n\nTools:\nTerraform\nPulumi\nAWS CloudFormation\n\nBenefits:\nRepeatability\nReviewability\nAuditability\nEnvironment consistency\nAutomated provisioning\nDisaster recovery",
     "keyword_terms": [
@@ -79,15 +86,6 @@
       "pulumi",
       "terraform"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "0264c0037a3365d721618d9eb4693cf4843bdd5694f05b458fb839a16fbb1d17",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_032"
+    "source_checksum": "050c293b5787848f34d63fd5520efddda5a0e653cca995753df111bd72122475"
   }
 }

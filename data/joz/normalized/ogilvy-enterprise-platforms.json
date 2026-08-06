@@ -32,6 +32,9 @@
       "Existing proof objects already cover SGX responsive portal re-engineering and the Banyan Tree pitch-winning prototype.",
       "This record groups the broader Ogilvy platform programme for employer-specific retrieval."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Global",
@@ -65,6 +68,7 @@
     "source_notes": "Grouped programme record. No unsupported campaign metrics added.",
     "source_filename": "ogilvy-enterprise-platforms.md",
     "source_meta_filename": "ogilvy-enterprise-platforms.meta.json",
+    "source_checksum": "fb2f0d0948fd054b42004bca6e9ab7e24507bc6167e95ca8411f52ce3d509ce5",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -95,16 +99,6 @@
       "sgx_responsive_portals"
     ],
     "enterprise_scale_score": 83,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "d11a3cd2d4f43d57f8e8ab18066d3ba65d9c52855dd62d84fd94793116b7e10c",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

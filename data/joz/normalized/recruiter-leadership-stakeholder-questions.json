@@ -34,6 +34,9 @@
       "Mediacorp: shared language across 30+ products.",
       "Erste Bank: enterprise-scale engineering context."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA"
@@ -55,6 +58,7 @@
     "source_notes": null,
     "source_filename": "recruiter-leadership-stakeholder-questions.md",
     "source_meta_filename": "recruiter-leadership-stakeholder-questions.meta.json",
+    "source_checksum": "d362c792af5c40ef57b9de059d808b68c452fc872d41bfc659bed2db32d16fe0",
     "reviewed_at": "2026-07-14",
     "problems": [],
     "principles": [],
@@ -65,16 +69,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "972a3bc656d24f3b1f60df101fc086a4fbf55aec7371a6036a8d37d3d58dc925",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

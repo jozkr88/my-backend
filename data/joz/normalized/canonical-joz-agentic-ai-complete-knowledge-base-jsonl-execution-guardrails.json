@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -66,6 +69,10 @@
       "human-approval",
       "sandbox"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Execution Guardrails\nExecution Guardrails\nguardrails human-approval sandbox\nguardrails human-approval sandbox\nAutonomous agents must not:\n\nDeploy directly to production\nPush directly to the main branch\nAccess unrestricted secrets\nPerform destructive operations without approval\nBypass tests\nBypass policy checks\nMerge their own pull requests\n\nExecution should occur in an isolated Docker sandbox or equivalent restricted environment.\n\nDatabase migrations, security changes, infrastructure changes, production deployments, and code merges require explicit human approval.",
     "keyword_terms": [
@@ -80,15 +87,6 @@
       "human-approval",
       "sandbox"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "9eae3ee557d72450e753731778d5626af3792f845abe59d9668f44dbba676242",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_034"
+    "source_checksum": "286b7fbb7f08d89eda340e2d96f6aa5aa0ff4f0e1ee15206832b4333c100a8e4"
   }
 }

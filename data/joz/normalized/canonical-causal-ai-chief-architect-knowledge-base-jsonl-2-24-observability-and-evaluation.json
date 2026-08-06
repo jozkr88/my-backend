@@ -1,0 +1,117 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-24-observability-and-evaluation",
+  "title": "2.24 Observability and Evaluation",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-25-2-24-observability-and-evaluation",
+  "summary": "## 2.24 Observability and Evaluation",
+  "body": "## 2.24 Observability and Evaluation\n\n### Observability layers\n\n- Infrastructure\n- Data\n- Model\n- Causal assumptions\n- Agent behavior\n- Tool calls\n- Policy decisions\n- Actions\n- Business outcomes\n- Physical outcomes\n\n### Metrics\n\n- predictive performance;\n- effect-estimation error;\n- interval coverage;\n- graph recovery;\n- refutation pass rate;\n- OOD detection;\n- policy violations;\n- action success;\n- rollback frequency;\n- human override rate;\n- time to decision;\n- financial value;\n- safety incidents.\n\n### Evidence artifacts\n\n- Unified decision trace\n- Causal observability dashboard\n- Agent trajectory viewer\n- Business-effect monitor\n- Incident and postmortem template\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "retrieval",
+      "technical_stack"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "unclear_roi"
+    ],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "observability",
+      "rag"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "evaluation",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-25-2-24-observability-and-evaluation",
+    "canonical_record_title": "2.24 Observability and Evaluation",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "canonical_section": "2.24 Observability and Evaluation",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 1161,
+    "source_line_end": 1201,
+    "source_authority": 12,
+    "semantic_text": "2.24 Observability and Evaluation\n2.24 Observability and Evaluation\nai_architecture causal_inference causal_intelligence enterprise_architecture governance mlops_observability\nai_architecture causal_inference causal_intelligence enterprise_architecture governance mlops_observability\n## 2.24 Observability and Evaluation\n\n### Observability layers\n\n- Infrastructure\n- Data\n- Model\n- Causal assumptions\n- Agent behavior\n- Tool calls\n- Policy decisions\n- Actions\n- Business outcomes\n- Physical outcomes\n\n### Metrics\n\n- predictive performance;\n- effect-estimation error;\n- interval coverage;\n- graph recovery;\n- refutation pass rate;\n- OOD detection;\n- policy violations;\n- action success;\n- rollback frequency;\n- human override rate;\n- time to decision;\n- financial value;\n- safety incidents.\n\n### Evidence artifacts\n\n- Unified decision trace\n- Causal observability dashboard\n- Agent trajectory viewer\n- Business-effect monitor\n- Incident and postmortem template\n\n---",
+    "keyword_terms": [
+      "24",
+      "ai_architecture",
+      "and",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "evaluation",
+      "governance",
+      "mlops_observability",
+      "observability"
+    ],
+    "exact_phrases": [
+      "2.24 Observability and Evaluation",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "mlops_observability"
+    ],
+    "source_checksum": "74e584d4585980e81bd3c0ae07269e61ccbd84e5f83b8728567a1e57658220c6"
+  }
+}

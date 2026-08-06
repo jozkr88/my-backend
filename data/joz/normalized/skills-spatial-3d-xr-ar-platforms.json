@@ -39,6 +39,9 @@
       "Built Python USD(z) and computer-vision-adjacent workflows tied to Apple/Pixar-style pipelines.",
       "The current app itself uses a portal-based 3D architecture with GLB assets, AR launch flows, spatial placement logic, semantic world modeling, and device-specific immersive behavior."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Dubai",
       "Europe",
@@ -62,6 +65,7 @@
     "source_notes": null,
     "source_filename": "skills-spatial-3d-xr-ar-platforms.md",
     "source_meta_filename": "skills-spatial-3d-xr-ar-platforms.meta.json",
+    "source_checksum": "42d3507d2355261ec094d2e1c79fae5bc3c04287a5d873e14ab1f869f070ab1b",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -110,16 +114,6 @@
       "versace_spatial_ai_launch"
     ],
     "enterprise_scale_score": 80,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "db3f84100700bad7902b75c56dab04d7bd743c183b23c1519961e5f514a43c08",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

@@ -1,0 +1,118 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-20-data-architecture-and-high-dimensional-pipelines",
+  "title": "2.20 Data Architecture and High-Dimensional Pipelines",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-21-2-20-data-architecture-and-high-dimensional-pipelines",
+  "summary": "## 2.20 Data Architecture and High-Dimensional Pipelines",
+  "body": "## 2.20 Data Architecture and High-Dimensional Pipelines\n\n### Data types\n\n- Transactional records\n- Event logs\n- Sensor time series\n- Text\n- Documents\n- Images\n- Graphs\n- Geospatial data\n- Master data\n- Policies and rules\n- Simulation outputs\n- Model and decision telemetry\n\n### Pipeline capabilities\n\n- batch ingestion;\n- change data capture;\n- event streaming;\n- schema registry;\n- time synchronization;\n- entity resolution;\n- unit normalization;\n- data quality;\n- feature computation;\n- graph construction;\n- lineage;\n- retention;\n- privacy controls;\n- online and offline consistency.\n\n### Evidence artifacts\n\n- Canonical event schema\n- Data-contract standard\n- Lineage graph\n- Time-alignment service\n- Data-quality and causal-readiness checks\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "organizational_complexity"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "enterprise_architecture",
+      "observability",
+      "spatial_ai"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [
+      "spatial_computing"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-21-2-20-data-architecture-and-high-dimensional-pipelines",
+    "canonical_record_title": "2.20 Data Architecture and High-Dimensional Pipelines",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "time_series"
+    ],
+    "canonical_section": "2.20 Data Architecture and High-Dimensional Pipelines",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 1000,
+    "source_line_end": 1043,
+    "source_authority": 12,
+    "semantic_text": "2.20 Data Architecture and High-Dimensional Pipelines\n2.20 Data Architecture and High-Dimensional Pipelines\nai_architecture causal_discovery causal_inference causal_intelligence distributed_systems enterprise_architecture time_series\nai_architecture causal_discovery causal_inference causal_intelligence distributed_systems enterprise_architecture time_series\n## 2.20 Data Architecture and High-Dimensional Pipelines\n\n### Data types\n\n- Transactional records\n- Event logs\n- Sensor time series\n- Text\n- Documents\n- Images\n- Graphs\n- Geospatial data\n- Master data\n- Policies and rules\n- Simulation outputs\n- Model and decision telemetry\n\n### Pipeline capabilities\n\n- batch ingestion;\n- change data capture;\n- event streaming;\n- schema registry;\n- time synchronization;\n- entity resolution;\n- unit normalization;\n- data quality;\n- feature computation;\n- graph construction;\n- lineage;\n- retention;\n- privacy controls;\n- online and offline consistency.\n\n### Evidence artifacts\n\n- Canonical event schema\n- Data-contract standard\n- Lineage graph\n- Time-alignment service\n- Data-quality and causal-readiness checks\n\n---",
+    "keyword_terms": [
+      "20",
+      "ai_architecture",
+      "and",
+      "architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "data",
+      "dimensional",
+      "distributed_systems",
+      "enterprise_architecture",
+      "high",
+      "pipelines",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.20 Data Architecture and High-Dimensional Pipelines",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "distributed_systems",
+      "enterprise_architecture",
+      "time_series"
+    ],
+    "source_checksum": "e4a8941f4ea9712cccdd94edaa3efc52986c0329a5bd36302bee169cce542693"
+  }
+}

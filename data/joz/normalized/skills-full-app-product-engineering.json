@@ -38,6 +38,9 @@
       "Led product, HCD-AI, and data architecture work across large fintech and enterprise environments.",
       "The current app combines React, 3D rendering, voice interaction, world-aware agent routing, OpenAI-backed reasoning, Express APIs, structured knowledge retrieval, and automated scenario testing."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Dubai",
       "Europe",
@@ -47,8 +50,8 @@
     ],
     "companies": [
       "Erste Bank",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp"
     ],
@@ -62,6 +65,7 @@
     "source_notes": null,
     "source_filename": "skills-full-app-product-engineering.md",
     "source_meta_filename": "skills-full-app-product-engineering.meta.json",
+    "source_checksum": "d4468d15513d8fdc4e4de036b804276b588709b82d192480fb0f9736fd83b5f5",
     "reviewed_at": "",
     "problems": [
       "data_silos",
@@ -112,28 +116,18 @@
       "technology"
     ],
     "proofs": [
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "mediacorp_audience_growth",
       "publicis_handoff_reduction"
     ],
     "related_proofs": [
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "mediacorp_audience_growth",
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 4,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "798e3912228489385f1806e72ac4af32ecdf20585763a54603e74838f28decd4",
-    "source_uri": null
+    "measurable_outcome_count": 4
   }
 }

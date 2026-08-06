@@ -1,0 +1,121 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-priority-b-product-architecture",
+  "title": "Priority B — Product architecture",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-48-priority-b-product-architecture",
+  "summary": "## Priority B — Product architecture",
+  "body": "## Priority B — Product architecture\n\n- Knowledge graphs\n- Natural-language causal query\n- Agentic planning\n- Closed-loop execution\n- Enterprise systems integration\n- Observability and audit",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "technical_stack"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "knowledge_graphs",
+      "observability"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "observability_control"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-48-priority-b-product-architecture",
+    "canonical_record_title": "Priority B — Product architecture",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "canonical_section": "Priority B — Product architecture",
+    "canonical_parent": "8. Priority Model",
+    "source_line_start": 1697,
+    "source_line_end": 1705,
+    "source_authority": 12,
+    "semantic_text": "Priority B — Product architecture\nPriority B — Product architecture\nagentic_ai ai_architecture causal_inference causal_intelligence enterprise_architecture governance knowledge_graphs mlops_observability\nagentic_ai ai_architecture causal_inference causal_intelligence enterprise_architecture governance knowledge_graphs mlops_observability\n## Priority B — Product architecture\n\n- Knowledge graphs\n- Natural-language causal query\n- Agentic planning\n- Closed-loop execution\n- Enterprise systems integration\n- Observability and audit",
+    "keyword_terms": [
+      "agentic_ai",
+      "ai_architecture",
+      "architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability",
+      "priority",
+      "product"
+    ],
+    "exact_phrases": [
+      "Priority B — Product architecture",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance",
+      "knowledge_graphs",
+      "mlops_observability"
+    ],
+    "source_checksum": "922340e3eb138440f3316730b88ec6e6656a3051152d404d1d714ad00f9287c1"
+  }
+}

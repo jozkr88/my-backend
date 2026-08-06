@@ -33,6 +33,9 @@
       "The map converts abstract AI language into function-level business opportunities.",
       "It aligns with Joz's workflow, operating-model, and enterprise-transformation positioning."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -52,6 +55,7 @@
     "source_notes": null,
     "source_filename": "business-need-erp-finance-hr-marketing-opportunity-map.md",
     "source_meta_filename": "business-need-erp-finance-hr-marketing-opportunity-map.meta.json",
+    "source_checksum": "6954ea6dd71d80597e16cf1cce832ce368d391c1d7f72b3a45589a923eca168d",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -103,16 +107,6 @@
       "mediacorp_audience_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 4,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "59b43edf2671ab0a361b2581f3559aa56cbd0e97ea9f6cb72f2e1ccf9a0aa138",
-    "source_uri": null
+    "measurable_outcome_count": 4
   }
 }

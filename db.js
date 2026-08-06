@@ -1207,6 +1207,273 @@ export async function logJozLlmRequestEvent({
   return result.rows[0]?.id || null;
 }
 
+export async function createJozCausalToolRun({
+  runId,
+  requestId = null,
+  conversationId = null,
+  sessionKey = null,
+  tenantId = "public",
+  principalId = null,
+  toolName = null,
+  args = {},
+  mode = "disabled",
+  authorization = {},
+} = {}) {
+  if (!isDatabaseEnabled() || !runId || !toolName) return null;
+  try {
+    const result = await runQuery(
+      `INSERT INTO joz_causal_tool_runs (
+         run_id, request_id, conversation_id, session_key, tenant_id,
+         principal_id, tool_name, arguments, mode, status, authorization
+       )
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, 'authorized', $10::jsonb)
+       RETURNING run_id, request_id, conversation_id, session_key, tenant_id,
+         principal_id, tool_name, arguments, mode, status, authorization,
+         result, error_code, started_at, completed_at`,
+      [
+        runId,
+        requestId,
+        conversationId,
+        sessionKey,
+        tenantId,
+        principalId,
+        toolName,
+        JSON.stringify(args || {}),
+        mode,
+        JSON.stringify(authorization || {}),
+      ]
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to persist causal tool run:", error.message);
+    return null;
+  }
+}
+
+export async function completeJozCausalToolRun({
+  runId,
+  status = "completed",
+  result = null,
+  errorCode = null,
+} = {}) {
+  if (!isDatabaseEnabled() || !runId) return null;
+  try {
+    const queryResult = await runQuery(
+      `UPDATE joz_causal_tool_runs
+       SET status = $2,
+           result = $3::jsonb,
+           error_code = $4,
+           completed_at = NOW()
+       WHERE run_id = $1
+       RETURNING run_id, status, result, error_code, started_at, completed_at`,
+      [runId, status, JSON.stringify(result || null), errorCode]
+    );
+    return queryResult.rows[0] || null;
+  } catch (error) {
+    console.error("⚠️ Failed to complete causal tool run:", error.message);
+    return null;
+  }
+}
+
+export async function publishJozCausalDataset({
+  dataset = {},
+  status = "published",
+} = {}) {
+  if (!isDatabaseEnabled() || !dataset?.dataset_id || !dataset?.model_version) return null;
+  const db = getPool();
+  if (!db) return null;
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    await client.query(
+      `INSERT INTO joz_causal_datasets
+         (dataset_id, tenant_id, owner, classification, visibility, status, metadata)
+       VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb)
+       ON CONFLICT (dataset_id) DO UPDATE SET
+         tenant_id = EXCLUDED.tenant_id,
+         owner = EXCLUDED.owner,
+         classification = EXCLUDED.classification,
+         visibility = EXCLUDED.visibility,
+         status = EXCLUDED.status,
+         metadata = EXCLUDED.metadata,
+         updated_at = NOW()`,
+      [
+        dataset.dataset_id,
+        dataset.tenant_id || "public",
+        dataset.metadata?.owner || "joz",
+        dataset.metadata?.classification || "public",
+        dataset.metadata?.visibility || "public",
+        status,
+        JSON.stringify(dataset.metadata || {}),
+      ]
+    );
+    await client.query(
+      `INSERT INTO joz_causal_dataset_versions
+         (dataset_id, model_version, schema_version, graph, factual, checksum, row_count, status, metadata, published_at)
+       VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6, $7, $8, $9::jsonb, CASE WHEN $8 = 'published' THEN NOW() ELSE NULL END)
+       ON CONFLICT (dataset_id, model_version) DO UPDATE SET
+         schema_version = EXCLUDED.schema_version,
+         graph = EXCLUDED.graph,
+         factual = EXCLUDED.factual,
+         checksum = EXCLUDED.checksum,
+         row_count = EXCLUDED.row_count,
+         status = EXCLUDED.status,
+         metadata = EXCLUDED.metadata,
+         published_at = CASE WHEN EXCLUDED.status = 'published' THEN NOW() ELSE joz_causal_dataset_versions.published_at END,
+         updated_at = NOW()`,
+      [
+        dataset.dataset_id,
+        dataset.model_version,
+        dataset.schema_version || "joz.causal-dataset.v1",
+        JSON.stringify({ nodes: dataset.nodes || [], edges: dataset.edges || [] }),
+        JSON.stringify(dataset.factual || null),
+        dataset.checksum || null,
+        Array.isArray(dataset.data) ? dataset.data.length : 0,
+        status,
+        JSON.stringify(dataset.metadata || {}),
+      ]
+    );
+    await client.query(
+      `DELETE FROM joz_causal_dataset_variables WHERE dataset_id = $1 AND model_version = $2`,
+      [dataset.dataset_id, dataset.model_version]
+    );
+    for (const node of dataset.nodes || []) {
+      await client.query(
+        `INSERT INTO joz_causal_dataset_variables
+           (dataset_id, model_version, variable_id, label, data_type, metadata)
+         VALUES ($1, $2, $3, $4, $5, $6::jsonb)`,
+        [
+          dataset.dataset_id,
+          dataset.model_version,
+          node.id,
+          node.label || node.id,
+          node.data_type || "numeric",
+          JSON.stringify(node),
+        ]
+      );
+    }
+    await client.query(
+      `DELETE FROM joz_causal_dataset_observations WHERE dataset_id = $1 AND model_version = $2`,
+      [dataset.dataset_id, dataset.model_version]
+    );
+    for (const [rowIndex, values] of (dataset.data || []).entries()) {
+      await client.query(
+        `INSERT INTO joz_causal_dataset_observations
+           (dataset_id, model_version, row_index, row_values)
+         VALUES ($1, $2, $3, $4::jsonb)`,
+        [dataset.dataset_id, dataset.model_version, rowIndex, JSON.stringify(values)]
+      );
+    }
+    await client.query("COMMIT");
+    return {
+      datasetId: dataset.dataset_id,
+      modelVersion: dataset.model_version,
+      status,
+      rowCount: Array.isArray(dataset.data) ? dataset.data.length : 0,
+      checksum: dataset.checksum || null,
+    };
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    console.error("⚠️ Failed to publish causal dataset:", error.message);
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+export async function getPublishedJozCausalDataset({
+  datasetId,
+  modelVersion,
+  tenantId = "public",
+} = {}) {
+  if (!isDatabaseEnabled() || !datasetId || !modelVersion) return null;
+  try {
+    const versionResult = await runQuery(
+      `SELECT v.dataset_id, v.model_version, v.schema_version, v.graph,
+              v.factual, v.checksum, v.row_count, v.metadata,
+              d.tenant_id, d.owner, d.classification, d.visibility, d.status
+       FROM joz_causal_dataset_versions v
+       JOIN joz_causal_datasets d ON d.dataset_id = v.dataset_id
+       WHERE v.dataset_id = $1
+         AND ($2 = 'latest_published' OR v.model_version = $2)
+         AND v.status = 'published'
+         AND d.status = 'published'
+         AND d.tenant_id = $3
+       ORDER BY v.published_at DESC NULLS LAST, v.created_at DESC
+       LIMIT 1`,
+      [datasetId, modelVersion, tenantId]
+    );
+    const version = versionResult.rows?.[0];
+    if (!version) return null;
+    const observations = await runQuery(
+      `SELECT row_values FROM joz_causal_dataset_observations
+       WHERE dataset_id = $1 AND model_version = $2
+       ORDER BY row_index ASC`,
+      [datasetId, modelVersion]
+    );
+    const graph = version.graph || {};
+    return {
+      schema_version: version.schema_version,
+      metadata: {
+        ...(version.metadata || {}),
+        dataset_id: version.dataset_id,
+        model_version: version.model_version,
+        tenant_id: version.tenant_id,
+        owner: version.owner,
+        classification: version.classification,
+        visibility: version.visibility,
+      },
+      dataset_id: version.dataset_id,
+      model_version: version.model_version,
+      tenant_id: version.tenant_id,
+      nodes: graph.nodes || [],
+      edges: graph.edges || [],
+      data: (observations.rows || []).map((row) => row.row_values),
+      ...(version.factual ? { factual: version.factual } : {}),
+      checksum: version.checksum || null,
+    };
+  } catch (error) {
+    console.error("⚠️ Failed to load published causal dataset:", error.message);
+    return null;
+  }
+}
+
+export async function listPublishedJozCausalDatasets({ tenantId = "public" } = {}) {
+  if (!isDatabaseEnabled()) return [];
+  try {
+    const result = await runQuery(
+      `SELECT d.dataset_id, d.tenant_id, d.owner, d.classification, d.visibility,
+              v.model_version, v.schema_version, v.checksum, v.row_count,
+              v.graph, v.metadata, v.published_at
+       FROM joz_causal_datasets d
+       JOIN joz_causal_dataset_versions v ON v.dataset_id = d.dataset_id
+       WHERE d.tenant_id = $1
+         AND d.status = 'published'
+         AND v.status = 'published'
+       ORDER BY v.published_at DESC NULLS LAST, d.dataset_id ASC`,
+      [tenantId]
+    );
+    return (result.rows || []).map((row) => ({
+      datasetId: row.dataset_id,
+      tenantId: row.tenant_id,
+      owner: row.owner,
+      classification: row.classification,
+      visibility: row.visibility,
+      modelVersion: row.model_version,
+      schemaVersion: row.schema_version,
+      checksum: row.checksum,
+      rowCount: row.row_count,
+      variableCount: Array.isArray(row.graph?.nodes) ? row.graph.nodes.length : 0,
+      edgeCount: Array.isArray(row.graph?.edges) ? row.graph.edges.length : 0,
+      metadata: row.metadata || {},
+      publishedAt: row.published_at,
+    }));
+  } catch (error) {
+    console.error("⚠️ Failed to list published causal datasets:", error.message);
+    return [];
+  }
+}
+
 export async function saveJozActionProposal({
   proposal = {},
   sessionKey = null,
@@ -2613,6 +2880,97 @@ export async function initDatabase() {
       CREATE INDEX IF NOT EXISTS joz_llm_request_events_route_idx
       ON joz_llm_request_events (route, created_at DESC)
     `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_causal_tool_runs (
+        run_id UUID PRIMARY KEY,
+        request_id TEXT,
+        conversation_id UUID REFERENCES joz_conversations(id) ON DELETE SET NULL,
+        session_key TEXT,
+        tenant_id TEXT NOT NULL DEFAULT 'public',
+        principal_id TEXT,
+        tool_name TEXT NOT NULL,
+        arguments JSONB NOT NULL DEFAULT '{}'::jsonb,
+        mode TEXT NOT NULL DEFAULT 'shadow',
+        status TEXT NOT NULL DEFAULT 'authorized',
+        authorization JSONB NOT NULL DEFAULT '{}'::jsonb,
+        result JSONB,
+        error_code TEXT,
+        started_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        completed_at TIMESTAMPTZ
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_causal_tool_runs_created_idx
+      ON joz_causal_tool_runs (started_at DESC)
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_causal_tool_runs_tenant_idx
+      ON joz_causal_tool_runs (tenant_id, started_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_causal_datasets (
+        dataset_id TEXT PRIMARY KEY,
+        tenant_id TEXT NOT NULL DEFAULT 'public',
+        owner TEXT NOT NULL DEFAULT 'joz',
+        classification TEXT NOT NULL DEFAULT 'public',
+        visibility TEXT NOT NULL DEFAULT 'public',
+        status TEXT NOT NULL DEFAULT 'draft',
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_causal_dataset_versions (
+        dataset_id TEXT NOT NULL REFERENCES joz_causal_datasets(dataset_id) ON DELETE CASCADE,
+        model_version TEXT NOT NULL,
+        schema_version TEXT NOT NULL DEFAULT 'joz.causal-dataset.v1',
+        graph JSONB NOT NULL DEFAULT '{}'::jsonb,
+        factual JSONB,
+        checksum TEXT,
+        row_count INTEGER NOT NULL DEFAULT 0,
+        status TEXT NOT NULL DEFAULT 'draft',
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        published_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        PRIMARY KEY (dataset_id, model_version)
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_causal_dataset_variables (
+        dataset_id TEXT NOT NULL,
+        model_version TEXT NOT NULL,
+        variable_id TEXT NOT NULL,
+        label TEXT,
+        data_type TEXT NOT NULL DEFAULT 'numeric',
+        metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+        PRIMARY KEY (dataset_id, model_version, variable_id),
+        FOREIGN KEY (dataset_id, model_version)
+          REFERENCES joz_causal_dataset_versions(dataset_id, model_version) ON DELETE CASCADE
+      )
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_causal_dataset_observations (
+        dataset_id TEXT NOT NULL,
+        model_version TEXT NOT NULL,
+        row_index INTEGER NOT NULL,
+        row_values JSONB NOT NULL,
+        PRIMARY KEY (dataset_id, model_version, row_index),
+        FOREIGN KEY (dataset_id, model_version)
+          REFERENCES joz_causal_dataset_versions(dataset_id, model_version) ON DELETE CASCADE
+      )
+    `);
+
+    await db.query(`CREATE INDEX IF NOT EXISTS joz_causal_datasets_tenant_idx ON joz_causal_datasets (tenant_id, status)`);
+    await db.query(`CREATE INDEX IF NOT EXISTS joz_causal_dataset_versions_status_idx ON joz_causal_dataset_versions (status, published_at DESC)`);
 
     await db.query(`
       CREATE TABLE IF NOT EXISTS joz_llm_evaluations (

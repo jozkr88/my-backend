@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -73,6 +76,10 @@
       "integration",
       "organisational-intelligence"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Organisational Intelligence Integration\nOrganisational Intelligence Integration\nexecution integration organisational-intelligence\nexecution integration organisational-intelligence\nThe Organisational Awareness Layer is the knowledge foundation for the Autonomous Execution Layer.\n\nBefore acting, agents retrieve:\nOwnership\nHistorical decisions\nArchitecture constraints\nOperational standards\nRelevant documentation\nSecurity policies\nBusiness requirements\n\nThis grounds actions in organisational context rather than relying only on repository contents or model assumptions.",
     "keyword_terms": [
@@ -88,15 +95,6 @@
       "integration",
       "organisational-intelligence"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "754843f6d2d4d171ef2e1b8655e41e99dcbe1d05519e66e7c843b30cf760b6a5",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_036"
+    "source_checksum": "49203187de3520a44968bac0840e72524e365445f29f7b006a194b4c68610d68"
   }
 }

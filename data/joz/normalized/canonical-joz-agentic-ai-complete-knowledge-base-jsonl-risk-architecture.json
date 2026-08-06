@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -74,6 +77,10 @@
       "pre-trade",
       "risk"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Risk Architecture\nRisk Architecture\ncontrols pre-trade risk\ncontrols pre-trade risk\nRisk is evaluated before execution.\n\nInputs:\nStructured action proposal\nLive portfolio and balances\nMarket data\nAccount limits\nLiquidity and volatility data\nCollateral and margin state\n\nOutputs:\nApprove\nReject\nRequire human approval\nRequest a safer alternative\n\nChecks include permissions, balance, collateral, leverage, exposure, concentration, slippage, liquidity, liquidation risk, and transaction limits.",
     "keyword_terms": [
@@ -88,15 +95,6 @@
       "pre-trade",
       "risk"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "e7a82ead0fb6a0f96131544085f5ca614f5a74b6ad8d729fce2eb13c10a7042d",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_009"
+    "source_checksum": "0be6e4ef6b607478b900075d536d6dc30fa5cf784b52a143ba74ba48bc6de6ad"
   }
 }

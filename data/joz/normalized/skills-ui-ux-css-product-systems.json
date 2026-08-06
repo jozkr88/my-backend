@@ -40,6 +40,9 @@
       "Reduced handoff friction by 70% at Leo Burnett/Publicis through code-based prototyping.",
       "The current app includes custom voice UX, AI shell UX, styled component systems, motion-driven interface behavior, responsive 3D overlays, and privacy/accessibility-aware interaction design."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe",
@@ -64,6 +67,7 @@
     "source_notes": null,
     "source_filename": "skills-ui-ux-css-product-systems.md",
     "source_meta_filename": "skills-ui-ux-css-product-systems.meta.json",
+    "source_checksum": "44f0b50d589d0308c2c1a98a780d71f250582ca707fd9c3313a8e93fcbae40cf",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -120,16 +124,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "f32cc0d33af5afaad06727e000dcf73c8a0b5c4baa866ddf9d263369fd5fe4df",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

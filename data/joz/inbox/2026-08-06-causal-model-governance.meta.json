@@ -1,0 +1,64 @@
+{
+  "slug": "2026-08-06-causal-model-governance",
+  "title": "Causal Model Governance and Evidence",
+  "category": "systems_mindset",
+  "lane": "systems_mindset",
+  "summary": "Governance rules for distinguishing associations, hypotheses, supported causes, refuted causes, and counterfactual claims.",
+  "tags": [
+    "causal_intelligence",
+    "model_governance",
+    "evidence",
+    "provenance",
+    "refutation",
+    "uncertainty",
+    "auditability"
+  ],
+  "impact_score": 90,
+  "priority_label": "high",
+  "source_type": "framework",
+  "source_uri": "source://joz/causal-intelligence/model-governance",
+  "dataset_id": "joz-causal-governance-v1",
+  "causal_model_version": "joz-causal-governance-v1",
+  "verification": {
+    "status": "framework_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-08-06",
+    "notes": "Additive governance dataset for causal reasoning boundaries."
+  },
+  "claims": [
+    "Causal claims require explicit status, assumptions, evidence, and model version metadata.",
+    "Refutation results should be retained as first-class evidence rather than discarded after estimation.",
+    "Insufficient causal evidence should produce an association-level answer or a focused request for missing inputs."
+  ],
+  "proof_points": [],
+  "regions": [],
+  "companies": [],
+  "projects": [],
+  "intent_families": ["systems_mindset", "skills"],
+  "sub_intents": ["governance", "retrieval"],
+  "causal_claims": [
+    {
+      "id": "causal-status-must-be-visible",
+      "subject": "Causal Claim Status",
+      "object": "Causal Runtime Context",
+      "relation": "must_be_visible_in",
+      "claim_type": "governance_requirement",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["The model must distinguish evidence strength from generated prose."],
+      "evidence": ["causal-model-governance-attachment"]
+    },
+    {
+      "id": "refutation-results-are-evidence",
+      "subject": "Refutation Result",
+      "object": "Causal Claim",
+      "relation": "tests",
+      "claim_type": "causal_validation",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.98,
+      "assumptions": ["The refutation method and dataset are retained with the result."],
+      "evidence": ["causal-model-governance-attachment"]
+    }
+  ]
+}
+

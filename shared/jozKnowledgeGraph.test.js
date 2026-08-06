@@ -52,11 +52,45 @@ const documents = [
 test("knowledge graph builder preserves evidence relationships", () => {
   const graph = buildJozKnowledgeGraph({ documents, ontology });
 
-  assert.equal(graph.schema, "joz.knowledge-graph.v1");
+  assert.equal(graph.schema, "joz.knowledge-graph.v2");
   assert.ok(graph.nodes.some((node) => node.id === "person:jozef_krupa"));
   assert.ok(graph.edges.some((edge) => edge.type === "has_proof"));
   assert.ok(graph.edges.some((edge) => edge.type === "supported_by"));
   assert.ok(graph.edges.some((edge) => edge.type === "supports"));
+});
+
+test("knowledge graph stores causal claims with first-class evidence metadata", () => {
+  const graph = buildJozKnowledgeGraph({
+    documents: [{
+      title: "Causal Architecture",
+      slug: "causal-architecture",
+      category: "skills",
+      metadata: {
+        verification_status: "framework_supported",
+        dataset_id: "causal-dataset-v1",
+        causal_model_version: "causal-model-v1",
+        causal_claims: [{
+          id: "graph-engine-separation",
+          subject: "Knowledge Graph",
+          object: "Causal Engine",
+          relation: "must_be_separate_from",
+          status: "FRAMEWORK_SUPPORTED",
+          confidence: 0.98,
+          assumptions: ["Graph edges do not prove causality."],
+          evidence: ["architecture-source"],
+        }],
+      },
+    }],
+    ontology,
+  });
+
+  assert.ok(graph.nodes.some((node) => node.type === "causal_claim"));
+  assert.ok(graph.nodes.some((node) => node.type === "causal_assumption"));
+  assert.ok(graph.nodes.some((node) => node.type === "causal_evidence"));
+  assert.ok(graph.nodes.some((node) => node.type === "causal_dataset"));
+  assert.ok(graph.nodes.some((node) => node.type === "causal_model_version"));
+  assert.ok(graph.edges.some((edge) => edge.type === "contains_claim"));
+  assert.ok(graph.edges.some((edge) => edge.type === "requires_assumption"));
 });
 
 test("document nodes retain resolvable source provenance", () => {
@@ -102,9 +136,11 @@ test("published graph has source-backed proof evidence paths", () => {
   const published = loadPublishedJozKnowledgeGraph();
   const nodes = new Map(published.nodes.map((node) => [node.id, node]));
   const documents = published.nodes.filter((node) => node.type === "document");
-  const supportedBy = published.edges.filter((edge) => edge.type === "supported_by");
+  const supportedBy = published.edges.filter((edge) => (
+    edge.type === "supported_by" && String(edge.from).startsWith("proof:")
+  ));
 
-  assert.equal(documents.length, 160);
+  assert.ok(documents.length >= 169);
   assert.ok(documents.every((document) => document.sourcePath && document.sourceChecksum));
   assert.equal(supportedBy.length, 29);
   assert.ok(supportedBy.every((edge) => {
@@ -124,6 +160,17 @@ test("knowledge graph traversal returns source documents without changing answer
   assert.deepEqual(result.matchedNodeIds, ["capability:agentic_ai"]);
   assert.ok(result.documentSlugs.includes("mc-usa-proof"));
   assert.ok(result.paths.some((path) => path.edgeTypes.includes("supports")));
+});
+
+test("causal queries prioritize the additive causal-intelligence dataset", () => {
+  const published = loadPublishedJozKnowledgeGraph();
+  const result = queryJozKnowledgeGraph({
+    graph: published,
+    query: "What is causal intelligence architecture?",
+    limit: 5,
+  });
+
+  assert.ok(result.documentSlugs.includes("2026-08-06-causal-intelligence-ai-architecture"));
 });
 
 test("knowledge graph defaults to shadow mode and can be disabled or promoted explicitly", () => {

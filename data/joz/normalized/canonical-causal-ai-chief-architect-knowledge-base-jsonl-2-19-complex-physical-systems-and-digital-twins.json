@@ -1,0 +1,107 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-19-complex-physical-systems-and-digital-twins",
+  "title": "2.19 Complex Physical Systems and Digital Twins",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-20-2-19-complex-physical-systems-and-digital-twins",
+  "summary": "## 2.19 Complex Physical Systems and Digital Twins",
+  "body": "## 2.19 Complex Physical Systems and Digital Twins\n\n### Essential concepts\n\n- State estimation\n- Dynamical systems\n- Control theory\n- System identification\n- Kalman filtering\n- Particle filtering\n- Physics-informed models\n- Hybrid physical/data-driven models\n- Discrete-event simulation\n- Co-simulation\n- Digital twins\n- Fault detection and isolation\n- Predictive maintenance\n- Safety envelopes\n- Model predictive control\n\n### Key distinction\n\nA digital twin models state and evolution.  \nA causal model explains intervention effects.  \nA decision operating system combines both with optimization, rules, agents and execution.\n\n### Evidence artifacts\n\n- Physical-system state model\n- Hybrid digital-twin prototype\n- Fault-simulation benchmark\n- Safety-envelope checker\n- Intervention-aware twin\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "agentic_ai",
+      "ai_governance",
+      "enterprise_architecture",
+      "rapid_prototyping"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-20-2-19-complex-physical-systems-and-digital-twins",
+    "canonical_record_title": "2.19 Complex Physical Systems and Digital Twins",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "governance"
+    ],
+    "canonical_section": "2.19 Complex Physical Systems and Digital Twins",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 964,
+    "source_line_end": 999,
+    "source_authority": 12,
+    "semantic_text": "2.19 Complex Physical Systems and Digital Twins\n2.19 Complex Physical Systems and Digital Twins\nai_architecture causal_inference causal_intelligence decision_intelligence governance\nai_architecture causal_inference causal_intelligence decision_intelligence governance\n## 2.19 Complex Physical Systems and Digital Twins\n\n### Essential concepts\n\n- State estimation\n- Dynamical systems\n- Control theory\n- System identification\n- Kalman filtering\n- Particle filtering\n- Physics-informed models\n- Hybrid physical/data-driven models\n- Discrete-event simulation\n- Co-simulation\n- Digital twins\n- Fault detection and isolation\n- Predictive maintenance\n- Safety envelopes\n- Model predictive control\n\n### Key distinction\n\nA digital twin models state and evolution.  \nA causal model explains intervention effects.  \nA decision operating system combines both with optimization, rules, agents and execution.\n\n### Evidence artifacts\n\n- Physical-system state model\n- Hybrid digital-twin prototype\n- Fault-simulation benchmark\n- Safety-envelope checker\n- Intervention-aware twin\n\n---",
+    "keyword_terms": [
+      "19",
+      "ai_architecture",
+      "and",
+      "causal_inference",
+      "causal_intelligence",
+      "complex",
+      "decision_intelligence",
+      "digital",
+      "governance",
+      "physical",
+      "systems",
+      "twins"
+    ],
+    "exact_phrases": [
+      "2.19 Complex Physical Systems and Digital Twins",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "decision_intelligence",
+      "governance"
+    ],
+    "source_checksum": "8d31c054038738d1802253efd357c1dd6234da1593d4c8461539df59c914637d"
+  }
+}

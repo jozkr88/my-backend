@@ -51,6 +51,9 @@
       "Mediacorp: first Apple Watch news app in Asia, 30x audience growth, and 40+ products.",
       "Leo Burnett/Publicis and Ogilvy/WPP: P&G, Samsung, Singapore Exchange, Danone, Banyan Tree, and APAC commerce and platform delivery."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "APAC",
       "Canada",
@@ -70,8 +73,8 @@
       "Dubai Future Foundation",
       "Erste Group",
       "Leo Burnett/Publicis",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank–Ageas Etiqa",
       "Mediacorp",
       "Ogilvy/WPP",
@@ -91,6 +94,7 @@
     "source_notes": null,
     "source_filename": "2026-07-11-current-agentic-ai-cv.md",
     "source_meta_filename": "2026-07-11-current-agentic-ai-cv.meta.json",
+    "source_checksum": "d7eb149c61f0c14eec4f116a18ed8af7b3bd0d9a79e9b5a6c61d287a2c8d5db9",
     "reviewed_at": "2026-07-27",
     "problems": [],
     "principles": [],
@@ -101,16 +105,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "6b2d58812cb50350da0e03e8baac68a3ec17dd56d2d18cb617af46d018b5200b",
-    "source_uri": "source://joz/2026-07-11-current-agentic-ai-cv.md"
+    "measurable_outcome_count": 0
   }
 }

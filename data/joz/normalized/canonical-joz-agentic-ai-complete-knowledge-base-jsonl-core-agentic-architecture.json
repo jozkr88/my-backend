@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -43,7 +46,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -79,6 +82,10 @@
       "architecture",
       "orchestration"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Core Agentic Architecture\nCore Agentic Architecture\nagents architecture orchestration\nagents architecture orchestration\nUser Intent → API Layer → Orchestrator → Specialist Agents → Tools → Risk and Policy → Execution → Verification\n\nThe API layer receives authenticated requests.\nThe orchestrator manages workflow state, routing, loops, branching, and retries.\nAgents interpret goals and decide which tools are required.\nTools expose APIs, databases, models, and external systems.\nRisk and policy services validate permissions, limits, safety, and approvals.\nExecution services perform approved actions.\nVerification services confirm the final result using authoritative systems.",
     "keyword_terms": [
@@ -94,15 +101,6 @@
       "architecture",
       "orchestration"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "6a307589de8fbad17e837ee3558d56dd0e707ba8c5fd3800da3b005309d7b565",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_002"
+    "source_checksum": "546fe4b2e9f4f0d54eacb2792aa3b28452ddd4d741ddbf9e071e038f7b82063c"
   }
 }

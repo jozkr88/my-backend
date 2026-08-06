@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -66,6 +69,10 @@
       "idempotency",
       "reliability"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Idempotency\nIdempotency\nfinance idempotency reliability\nfinance idempotency reliability\nIdempotency ensures repeated execution of the same request produces one logical result.\n\nIt is essential for:\nPayments\nOrders\nTransactions\nWorkflow retries\nWebhook processing\n\nUse idempotency keys and durable records.",
     "keyword_terms": [
@@ -79,15 +86,6 @@
       "idempotency",
       "reliability"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "63510ad69432cdfa02e151c9cf0cc7734af141f36c5c5aa80d8b8bc8c3b6761a",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_038"
+    "source_checksum": "bafe5a91f73cf6b6f3cac9a665df9f32fc5f1b40a9c16b0c34f8a8e525e3088a"
   }
 }

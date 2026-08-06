@@ -1,0 +1,106 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-3-structural-causal-models",
+  "title": "2.3 Structural Causal Models",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-04-2-3-structural-causal-models",
+  "summary": "## 2.3 Structural Causal Models",
+  "body": "## 2.3 Structural Causal Models\n\n### Essential concepts\n\n- Endogenous and exogenous variables\n- Structural assignments\n- Causal mechanisms\n- Intervention operators\n- Modular causal mechanisms\n- Acyclic and cyclic SCMs\n- Dynamic SCMs\n- Stochastic SCMs\n- Markovian and semi-Markovian models\n- Latent confounding\n- Twin networks\n- Abduction, action and prediction\n- Structural counterfactual semantics\n\n### Architecture questions\n\n- How is an SCM represented in storage?\n- How are equations versioned?\n- How are assumptions linked to source evidence?\n- How are model changes reviewed and approved?\n- How do online observations update model parameters without silently changing causal structure?\n- How are alternative competing SCMs retained?\n\n### Implementation exercises\n\n- Define SCM schemas in Python.\n- Store graph structure and equation metadata.\n- Execute interventions against a versioned model.\n- Implement abduction-action-prediction.\n- Compare multiple SCM hypotheses over the same domain.\n\n### Evidence artifacts\n\n- SCM model registry\n- Structural-equation DSL\n- Model-versioning specification\n- Counterfactual execution API\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "structural_causal_models"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [
+      "retrieval",
+      "technical_stack",
+      "blockchain"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture",
+      "rag"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-04-2-3-structural-causal-models",
+    "canonical_record_title": "2.3 Structural Causal Models",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "structural_causal_models"
+    ],
+    "canonical_section": "2.3 Structural Causal Models",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 155,
+    "source_line_end": 198,
+    "source_authority": 12,
+    "semantic_text": "2.3 Structural Causal Models\n2.3 Structural Causal Models\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture structural_causal_models\nai_architecture causal_discovery causal_inference causal_intelligence enterprise_architecture structural_causal_models\n## 2.3 Structural Causal Models\n\n### Essential concepts\n\n- Endogenous and exogenous variables\n- Structural assignments\n- Causal mechanisms\n- Intervention operators\n- Modular causal mechanisms\n- Acyclic and cyclic SCMs\n- Dynamic SCMs\n- Stochastic SCMs\n- Markovian and semi-Markovian models\n- Latent confounding\n- Twin networks\n- Abduction, action and prediction\n- Structural counterfactual semantics\n\n### Architecture questions\n\n- How is an SCM represented in storage?\n- How are equations versioned?\n- How are assumptions linked to source evidence?\n- How are model changes reviewed and approved?\n- How do online observations update model parameters without silently changing causal structure?\n- How are alternative competing SCMs retained?\n\n### Implementation exercises\n\n- Define SCM schemas in Python.\n- Store graph structure and equation metadata.\n- Execute interventions against a versioned model.\n- Implement abduction-action-prediction.\n- Compare multiple SCM hypotheses over the same domain.\n\n### Evidence artifacts\n\n- SCM model registry\n- Structural-equation DSL\n- Model-versioning specification\n- Counterfactual execution API\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "models",
+      "structural",
+      "structural_causal_models"
+    ],
+    "exact_phrases": [
+      "2.3 Structural Causal Models",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "structural_causal_models"
+    ],
+    "source_checksum": "a65f6130eadea20f0a8fedd3dc1e45408651dd4241cece580a77f1ff230c7239"
+  }
+}

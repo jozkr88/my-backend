@@ -1,0 +1,96 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-level-5-lead",
+  "title": "Level 5 — Lead",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-69-level-5-lead",
+  "summary": "## Level 5 — Lead",
+  "body": "## Level 5 — Lead\n\nCan define standards, compare alternatives, review others’ work and defend the decision to executives, researchers, clients and auditors.\n\nThe target for this role is Level 4 or Level 5 in all Priority A and Priority B domains.\n\n---\n\n# 13. Initial Primary Source Map\n\nUse primary documentation and original papers wherever possible.",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "blockchain"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "manual_knowledge_work"
+    ],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-69-level-5-lead",
+    "canonical_record_title": "Level 5 — Lead",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "Level 5 — Lead",
+    "canonical_parent": "12. Definition of Mastery",
+    "source_line_start": 1911,
+    "source_line_end": 1922,
+    "source_authority": 12,
+    "semantic_text": "Level 5 — Lead\nLevel 5 — Lead\nai_architecture causal_intelligence governance\nai_architecture causal_intelligence governance\n## Level 5 — Lead\n\nCan define standards, compare alternatives, review others’ work and defend the decision to executives, researchers, clients and auditors.\n\nThe target for this role is Level 4 or Level 5 in all Priority A and Priority B domains.\n\n---\n\n# 13. Initial Primary Source Map\n\nUse primary documentation and original papers wherever possible.",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance",
+      "lead",
+      "level"
+    ],
+    "exact_phrases": [
+      "Level 5 — Lead",
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "78c39a3f029d88779e3956c63565d055b2a2e3640ec04b3f27f7cbbbd340b573"
+  }
+}

@@ -35,6 +35,9 @@
       "Maybank–Ageas Etiqa: 20× digital sales growth within 12 months and 3,000+ wealth pilots and ML models.",
       "Manulife: Lean ML UX practice across 11 APAC markets and first-in-market solutions in the USA, Canada, and Singapore."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Canada",
@@ -60,6 +63,7 @@
     "source_notes": null,
     "source_filename": "skills-largest-enterprise-scale-proof.md",
     "source_meta_filename": "skills-largest-enterprise-scale-proof.meta.json",
+    "source_checksum": "e1dece1e2d6390cb9e324a084f1f73fb73fef3753c704b6b4ac5cee7a22a56b1",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -115,16 +119,6 @@
       "sgx_responsive_portals"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 4,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "1425be86060d91724331644a01ed16b44fa4c60521e78fdaaa29818541ce5c1f",
-    "source_uri": null
+    "measurable_outcome_count": 4
   }
 }

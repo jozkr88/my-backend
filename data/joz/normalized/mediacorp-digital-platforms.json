@@ -32,6 +32,9 @@
       "The broader Mediacorp proof already covers 30× monthly active audience growth and mobile-first transformation.",
       "This grouped programme record exists to answer employer-specific questions with more concrete project detail."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Singapore",
@@ -72,6 +75,7 @@
     "source_notes": "Grouped programme record. The 30× MAU proof belongs to the broader Mediacorp transformation context, not each individual sub-project.",
     "source_filename": "mediacorp-digital-platforms.md",
     "source_meta_filename": "mediacorp-digital-platforms.meta.json",
+    "source_checksum": "95dd8c5c04f9b54918aca50cd2059e45d7f2d01434c79c9a3f7c0fa9a0c596d2",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -98,16 +102,6 @@
       "mediacorp_audience_growth"
     ],
     "enterprise_scale_score": 99,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "990de96c7bb92d5443414c6c8683757a372ae51100942b3669cfc81abfbece39",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

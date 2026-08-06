@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "low_trust"
     ],
@@ -73,6 +76,10 @@
       "hybrid-retrieval",
       "ranking"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Organisational Retrieval Strategy\nOrganisational Retrieval Strategy\ngraph hybrid-retrieval ranking\ngraph hybrid-retrieval ranking\nUse hybrid retrieval:\n\nMetadata filtering\nKeyword search\nVector search\nGraph traversal\nRecency scoring\nSource-trust scoring\nOwnership weighting\n\nRetrieved results should be ranked by relevance, freshness, authority, and permission validity before they are supplied to the LLM.",
     "keyword_terms": [
@@ -89,15 +96,6 @@
       "hybrid-retrieval",
       "ranking"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "ec48ce332f086263b5da6b1a5d0b8d8c42c04bf069a9114bca34b6e7ef7474db",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_029"
+    "source_checksum": "a9e5d711a426ecfb4a0633b73d09974bdef889de0f918d7d92e20c3fd1a92c9b"
   }
 }

@@ -1,0 +1,108 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-agentic-and-neuro-symbolic-systems",
+  "title": "Agentic and neuro-symbolic systems",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-61-agentic-and-neuro-symbolic-systems",
+  "summary": "## Agentic and neuro-symbolic systems",
+  "body": "## Agentic and neuro-symbolic systems\n\n- Where should LLM reasoning stop and deterministic execution begin?\n- How do you combine probabilistic recommendations with hard rules?\n- How do you prevent hallucinated entities or actions?\n- How do you make an agent workflow durable and auditable?\n- How do you evaluate multi-agent systems?",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills"
+    ],
+    "sub_intents": [
+      "agent_definition",
+      "orchestration"
+    ],
+    "impact_score": 82,
+    "priority_label": "high",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "auditability",
+      "evaluation"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-61-agentic-and-neuro-symbolic-systems",
+    "canonical_record_title": "Agentic and neuro-symbolic systems",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "high",
+    "canonical_record_tags": [
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "Agentic and neuro-symbolic systems",
+    "canonical_parent": "11. Interview Question Bank",
+    "source_line_start": 1854,
+    "source_line_end": 1861,
+    "source_authority": 12,
+    "semantic_text": "Agentic and neuro-symbolic systems\nAgentic and neuro-symbolic systems\nagentic_ai ai_architecture causal_intelligence governance\nagentic_ai ai_architecture causal_intelligence governance\n## Agentic and neuro-symbolic systems\n\n- Where should LLM reasoning stop and deterministic execution begin?\n- How do you combine probabilistic recommendations with hard rules?\n- How do you prevent hallucinated entities or actions?\n- How do you make an agent workflow durable and auditable?\n- How do you evaluate multi-agent systems?",
+    "keyword_terms": [
+      "agentic",
+      "agentic_ai",
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "governance",
+      "neuro",
+      "symbolic",
+      "systems"
+    ],
+    "exact_phrases": [
+      "Agentic and neuro-symbolic systems",
+      "agentic_ai",
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "c95b1d1e75029c6392852cc7dc847a6cad7bc409a3f839d1622cdc3aff882d2f"
+  }
+}

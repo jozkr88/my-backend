@@ -33,6 +33,9 @@
       "Track record across regulated financial services, national media, government, and enterprise technology.",
       "Ability to work across executive strategy, product architecture, engineering, and human adoption."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe",
@@ -43,8 +46,8 @@
     "companies": [
       "Dubai Future Foundation",
       "Erste Bank",
-      "Manulife",
       "MC USA",
+      "Manulife",
       "Maybank",
       "Mediacorp"
     ],
@@ -58,6 +61,7 @@
     "source_notes": null,
     "source_filename": "business-need-why-hire-joz-now.md",
     "source_meta_filename": "business-need-why-hire-joz-now.meta.json",
+    "source_checksum": "2d8e19d0ebaaaa8c4ca09b4d8cc17a62943e932cc328b6b1da244f4105759eea",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -97,30 +101,20 @@
     "proofs": [
       "dff_rapid_ai_prototyping",
       "manulife_lean_ml_ux",
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "mediacorp_audience_growth",
       "versace_spatial_ai_launch"
     ],
     "related_proofs": [
       "dff_rapid_ai_prototyping",
       "manulife_lean_ml_ux",
-      "mc_usa_financial_agents",
       "maybank_digital_sales_growth",
+      "mc_usa_financial_agents",
       "mediacorp_audience_growth",
       "versace_spatial_ai_launch"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 3,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "456a9c9cff87a27ae441a26c705c733339898f9433a6244d0aa99154915211f7",
-    "source_uri": null
+    "measurable_outcome_count": 3
   }
 }

@@ -33,6 +33,9 @@
       "The current knowledge base already supports workflow redesign and business-value positioning.",
       "Department-level framing is a natural extension of the existing business-need lane."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -52,6 +55,7 @@
     "source_notes": null,
     "source_filename": "business-need-ai-by-function.md",
     "source_meta_filename": "business-need-ai-by-function.meta.json",
+    "source_checksum": "ffad27be6d26c17c5def32d5e10a6ced0f3635adb49df2d5d1e9fc05abfcc447",
     "reviewed_at": "",
     "problems": [
       "ai_adoption_failure",
@@ -103,16 +107,6 @@
       "mediacorp_audience_growth"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 4,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "56639b6a16b5f3560e7aa55ce1901acf3f029650b6e9510dacaad4dd16795427",
-    "source_uri": null
+    "measurable_outcome_count": 4
   }
 }

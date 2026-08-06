@@ -1,0 +1,93 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-4-causal-identification-and-do-calculus",
+  "title": "2.4 Causal Identification and Do-Calculus",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-05-2-4-causal-identification-and-do-calculus",
+  "summary": "## 2.4 Causal Identification and Do-Calculus",
+  "body": "## 2.4 Causal Identification and Do-Calculus\n\n### Essential concepts\n\n- Identifiability\n- Adjustment sets\n- Minimal sufficient adjustment\n- Back-door criterion\n- Front-door criterion\n- Do-calculus rules\n- Truncated factorization\n- Instrumental-variable identification\n- Mediation formulas\n- Selection diagrams\n- Transportability\n- Recoverability under missing data\n- Partial identification and bounds\n\n### Mastery questions\n\n- Can the requested effect be estimated from the available data?\n- Which variables must be adjusted for?\n- Which variables must not be adjusted for?\n- What additional experiment or instrument would make the effect identifiable?\n- When should the system return “not identifiable” rather than a numerical answer?\n\n### Implementation exercises\n\n- Create an automated adjustment-set finder.\n- Build an identification report generator.\n- Return explicit non-identifiability results.\n- Link every estimated effect to its identification assumptions.\n\n### Evidence artifacts\n\n- Identification service\n- Assumption graph\n- Adjustment-set validator\n- Human-readable identification report\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [],
+    "industries": [
+      "media"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-05-2-4-causal-identification-and-do-calculus",
+    "canonical_record_title": "2.4 Causal Identification and Do-Calculus",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "canonical_section": "2.4 Causal Identification and Do-Calculus",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 199,
+    "source_line_end": 240,
+    "source_authority": 12,
+    "semantic_text": "2.4 Causal Identification and Do-Calculus\n2.4 Causal Identification and Do-Calculus\nai_architecture causal_inference causal_intelligence\nai_architecture causal_inference causal_intelligence\n## 2.4 Causal Identification and Do-Calculus\n\n### Essential concepts\n\n- Identifiability\n- Adjustment sets\n- Minimal sufficient adjustment\n- Back-door criterion\n- Front-door criterion\n- Do-calculus rules\n- Truncated factorization\n- Instrumental-variable identification\n- Mediation formulas\n- Selection diagrams\n- Transportability\n- Recoverability under missing data\n- Partial identification and bounds\n\n### Mastery questions\n\n- Can the requested effect be estimated from the available data?\n- Which variables must be adjusted for?\n- Which variables must not be adjusted for?\n- What additional experiment or instrument would make the effect identifiable?\n- When should the system return “not identifiable” rather than a numerical answer?\n\n### Implementation exercises\n\n- Create an automated adjustment-set finder.\n- Build an identification report generator.\n- Return explicit non-identifiability results.\n- Link every estimated effect to its identification assumptions.\n\n### Evidence artifacts\n\n- Identification service\n- Assumption graph\n- Adjustment-set validator\n- Human-readable identification report\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "calculus",
+      "causal",
+      "causal_inference",
+      "causal_intelligence",
+      "do",
+      "identification"
+    ],
+    "exact_phrases": [
+      "2.4 Causal Identification and Do-Calculus",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence"
+    ],
+    "source_checksum": "16f2bda33167050fb0c48960ac679bea36f2c1383720c2eec1594819cb8ae55f"
+  }
+}

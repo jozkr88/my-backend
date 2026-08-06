@@ -1,0 +1,105 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-26-technical-leadership-and-research-translation",
+  "title": "2.26 Technical Leadership and Research Translation",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-27-2-26-technical-leadership-and-research-translation",
+  "summary": "## 2.26 Technical Leadership and Research Translation",
+  "body": "## 2.26 Technical Leadership and Research Translation\n\n### Chief-architect responsibilities\n\n- Technical vision\n- Architecture principles\n- Research portfolio\n- Engineering standards\n- Model-risk standards\n- Platform boundaries\n- Build-versus-buy decisions\n- Technical hiring\n- Staff development\n- Design review\n- Incident authority\n- Client architecture\n- Board and executive communication\n\n### Research-to-product pipeline\n\n1. Identify enterprise problem.\n2. Formulate measurable technical capability.\n3. Review research and assumptions.\n4. Reproduce benchmark.\n5. Test on representative enterprise data.\n6. Evaluate robustness and failure modes.\n7. Design a production interface.\n8. Integrate with platform controls.\n9. Run shadow deployment.\n10. Promote, revise or reject.\n\n### Evidence artifacts\n\n- Architecture decision records\n- Research reproduction reports\n- Capability maturity model\n- Platform roadmap\n- Technical due-diligence template\n- Hiring rubric\n\n---\n\n# 3. Cross-Domain Capstone Project",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset",
+      "business_need"
+    ],
+    "sub_intents": [
+      "governance"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "manual_knowledge_work"
+    ],
+    "principles": [],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [
+      "lower_risk",
+      "stronger_governance"
+    ],
+    "governance": [
+      "data_boundaries",
+      "evaluation"
+    ],
+    "industries": [
+      "technology"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-27-2-26-technical-leadership-and-research-translation",
+    "canonical_record_title": "2.26 Technical Leadership and Research Translation",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "canonical_section": "2.26 Technical Leadership and Research Translation",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 1236,
+    "source_line_end": 1279,
+    "source_authority": 12,
+    "semantic_text": "2.26 Technical Leadership and Research Translation\n2.26 Technical Leadership and Research Translation\nai_architecture causal_intelligence enterprise_architecture\nai_architecture causal_intelligence enterprise_architecture\n## 2.26 Technical Leadership and Research Translation\n\n### Chief-architect responsibilities\n\n- Technical vision\n- Architecture principles\n- Research portfolio\n- Engineering standards\n- Model-risk standards\n- Platform boundaries\n- Build-versus-buy decisions\n- Technical hiring\n- Staff development\n- Design review\n- Incident authority\n- Client architecture\n- Board and executive communication\n\n### Research-to-product pipeline\n\n1. Identify enterprise problem.\n2. Formulate measurable technical capability.\n3. Review research and assumptions.\n4. Reproduce benchmark.\n5. Test on representative enterprise data.\n6. Evaluate robustness and failure modes.\n7. Design a production interface.\n8. Integrate with platform controls.\n9. Run shadow deployment.\n10. Promote, revise or reject.\n\n### Evidence artifacts\n\n- Architecture decision records\n- Research reproduction reports\n- Capability maturity model\n- Platform roadmap\n- Technical due-diligence template\n- Hiring rubric\n\n---\n\n# 3. Cross-Domain Capstone Project",
+    "keyword_terms": [
+      "26",
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "leadership",
+      "research",
+      "technical",
+      "translation"
+    ],
+    "exact_phrases": [
+      "2.26 Technical Leadership and Research Translation",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture"
+    ],
+    "source_checksum": "809d36c09b280ca7eb0031557c2649d8ce6d339712036086d9ac5e5b81e69f53"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-5-7-incident-and-refutation-card",
+  "title": "5.7 Incident and Refutation Card",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-44-5-7-incident-and-refutation-card",
+  "summary": "## 5.7 Incident and Refutation Card",
+  "body": "## 5.7 Incident and Refutation Card\n\n```yaml\nincident:\naffected_decision:\ndetected_by:\ndata_state:\nmodel_state:\nassumption_failure:\npolicy_failure:\nimpact:\ncontainment:\nrollback:\nroot_cause:\ncorrective_action:\nnew_test:\n```\n\n---\n\n# 6. Knowledge Graph Ontology for the Knowledge Base",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "knowledge_graphs"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "systems_mindset"
+    ],
+    "sub_intents": [
+      "retrieval"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [],
+    "principles": [],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "knowledge_graphs"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-44-5-7-incident-and-refutation-card",
+    "canonical_record_title": "5.7 Incident and Refutation Card",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "knowledge_graphs"
+    ],
+    "canonical_section": "5.7 Incident and Refutation Card",
+    "canonical_parent": "5. Knowledge Object Templates",
+    "source_line_start": 1566,
+    "source_line_end": 1587,
+    "source_authority": 12,
+    "semantic_text": "5.7 Incident and Refutation Card\n5.7 Incident and Refutation Card\nai_architecture causal_inference causal_intelligence governance knowledge_graphs\nai_architecture causal_inference causal_intelligence governance knowledge_graphs\n## 5.7 Incident and Refutation Card\n\n```yaml\nincident:\naffected_decision:\ndetected_by:\ndata_state:\nmodel_state:\nassumption_failure:\npolicy_failure:\nimpact:\ncontainment:\nrollback:\nroot_cause:\ncorrective_action:\nnew_test:\n```\n\n---\n\n# 6. Knowledge Graph Ontology for the Knowledge Base",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "card",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "incident",
+      "knowledge_graphs",
+      "refutation"
+    ],
+    "exact_phrases": [
+      "5.7 Incident and Refutation Card",
+      "ai_architecture",
+      "causal_inference",
+      "causal_intelligence",
+      "governance",
+      "knowledge_graphs"
+    ],
+    "source_checksum": "cf78618a8b14ff277a3515e5ce71e2cae6d9c5cea2d0a9aca53a782b81a79e8c"
+  }
+}

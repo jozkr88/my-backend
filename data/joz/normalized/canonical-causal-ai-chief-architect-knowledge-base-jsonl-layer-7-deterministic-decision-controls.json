@@ -1,0 +1,104 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-layer-7-deterministic-decision-controls",
+  "title": "Layer 7 — Deterministic Decision Controls",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-35-layer-7-deterministic-decision-controls",
+  "summary": "## Layer 7 — Deterministic Decision Controls",
+  "body": "## Layer 7 — Deterministic Decision Controls\n\n- policy engine\n- constraint solver\n- optimization engine\n- graph validation\n- permissions\n- approval workflow",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "acl",
+      "governance"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction"
+    ],
+    "principles": [],
+    "capabilities": [
+      "acl_aware_retrieval",
+      "ai_governance",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "stronger_governance"
+    ],
+    "governance": [
+      "access_control",
+      "human_approval"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-35-layer-7-deterministic-decision-controls",
+    "canonical_record_title": "Layer 7 — Deterministic Decision Controls",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "canonical_section": "Layer 7 — Deterministic Decision Controls",
+    "canonical_parent": "4. Reference Platform Architecture",
+    "source_line_start": 1412,
+    "source_line_end": 1420,
+    "source_authority": 12,
+    "semantic_text": "Layer 7 — Deterministic Decision Controls\nLayer 7 — Deterministic Decision Controls\nai_architecture causal_intelligence governance\nai_architecture causal_intelligence governance\n## Layer 7 — Deterministic Decision Controls\n\n- policy engine\n- constraint solver\n- optimization engine\n- graph validation\n- permissions\n- approval workflow",
+    "keyword_terms": [
+      "ai_architecture",
+      "causal_intelligence",
+      "controls",
+      "decision",
+      "deterministic",
+      "governance",
+      "layer"
+    ],
+    "exact_phrases": [
+      "Layer 7 — Deterministic Decision Controls",
+      "ai_architecture",
+      "causal_intelligence",
+      "governance"
+    ],
+    "source_checksum": "4de72fcbd33ee817b0b8f4bb0011904bab3dc045640cef7fb9adcda4a4fb7fb2"
+  }
+}

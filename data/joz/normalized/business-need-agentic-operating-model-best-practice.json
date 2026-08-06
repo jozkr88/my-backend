@@ -33,6 +33,9 @@
       "It aligns with Joz's broader principles of systems before features, decision quality, and appropriate autonomy.",
       "It gives a business-safe explanation for how agentic AI becomes operationally credible."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -49,6 +52,7 @@
     "source_notes": null,
     "source_filename": "business-need-agentic-operating-model-best-practice.md",
     "source_meta_filename": "business-need-agentic-operating-model-best-practice.meta.json",
+    "source_checksum": "44e3075bda350beecfec2303e0a9c67cf6776de78e72e993abc762140a228d8b",
     "reviewed_at": "",
     "problems": [
       "governance_gaps",

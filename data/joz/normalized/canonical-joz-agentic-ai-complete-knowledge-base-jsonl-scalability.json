@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -41,7 +44,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [
       "operational_friction"
     ],
@@ -71,6 +74,10 @@
       "distributed-systems",
       "scalability"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Scalability\nScalability\ndistributed-systems scalability\ndistributed-systems scalability\nScale by separating reasoning, policy, execution, and verification into independently deployable services.\n\nUse stateless APIs behind load balancers, horizontal scaling, Redis caching, event streams, durable workflows, database replication, backpressure, rate limits, and full observability.",
     "keyword_terms": [
@@ -82,15 +89,6 @@
       "distributed-systems",
       "scalability"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "b13e2486a089e1ead653262b3eeb0bf75b137223e9d20e52ca74e0f7a7c8fcc7",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_020"
+    "source_checksum": "f5fa6c6b00b18b8502c3ecbc049a802bd65fb671851594b26ee7a71007252eb3"
   }
 }

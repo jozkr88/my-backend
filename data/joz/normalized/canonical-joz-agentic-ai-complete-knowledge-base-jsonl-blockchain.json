@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -66,6 +69,10 @@
       "crypto",
       "defi"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "Blockchain\nBlockchain\nblockchain crypto defi\nblockchain crypto defi\nBlockchain is a distributed ledger for transaction ordering, state, ownership, and settlement.\n\nRelevant concepts:\nSmart contracts\nWallets\nPrivate keys\nLayer 1 and Layer 2 networks\nDeFi\nDecentralized exchanges\nOn-chain settlement\nTokenized assets\nOracles\nAccount abstraction\nSession keys\nMultisignature and MPC custody",
     "keyword_terms": [
@@ -79,15 +86,6 @@
       "crypto",
       "defi"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "8ceef8332f4e446bae4a9c24583905f24d7b68d4af9e9f457d4db37171458c00",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_017"
+    "source_checksum": "08a02fe991cd677a0a5ab8f800c203476ba2e917808a2c9abc47e7254d3e1de8"
   }
 }

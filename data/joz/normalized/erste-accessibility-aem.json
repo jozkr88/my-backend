@@ -31,6 +31,9 @@
       "Erste Bank already exists in the proof layer as engineering and accessibility work at 16M+ customer scale.",
       "This record narrows retrieval to the accessibility and AEM programme rather than the broader hero proof."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Austria",
       "Europe",
@@ -60,6 +63,7 @@
     "source_notes": "Grouped programme record. 16M+ scale may be referenced only through the existing Erste proof object.",
     "source_filename": "erste-accessibility-aem.md",
     "source_meta_filename": "erste-accessibility-aem.meta.json",
+    "source_checksum": "792c5dccda2df15855cc588220a1f07e454e759fce361f2c2884834627239c05",
     "reviewed_at": "",
     "problems": [],
     "principles": [],
@@ -85,16 +89,6 @@
       "erste_customer_scale"
     ],
     "enterprise_scale_score": 98,
-    "measurable_outcome_count": 2,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "supported_claim",
-    "source_checksum": "694c5e9e036527602900131414b729ddb624833fc8324d5e4fb538021a0a43e2",
-    "source_uri": null
+    "measurable_outcome_count": 2
   }
 }

@@ -16,12 +16,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -38,7 +41,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -58,6 +61,10 @@
       "load-balancer",
       "scalability"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "Load Balancer\nLoad Balancer\nload-balancer scalability\nload-balancer scalability\nA load balancer distributes incoming traffic across multiple service instances.\n\nBenefits:\nHigher availability\nHorizontal scaling\nFailure isolation\nBetter resource use\n\nLoad Balancer = receptionist directing users to available servers.",
     "keyword_terms": [
@@ -71,15 +78,6 @@
       "load-balancer",
       "scalability"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "fc78114eab0894d57199882cfbbeda060d687bbbcf47441ee4e4dd84f95224aa",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_010"
+    "source_checksum": "f6b6834686715aa490fe13dbc74eb0ef6d1fa8e7a63964a01df96c252969c3b0"
   }
 }

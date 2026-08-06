@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -39,7 +42,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [],
@@ -60,6 +63,10 @@
       "flux",
       "gitops"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "GitOps\nGitOps\nargocd flux gitops\nargocd flux gitops\nGitOps uses Git as the source of truth for infrastructure and deployment state.\n\nFlow:\nChange configuration in Git\n→ Review\n→ Merge\n→ Automated reconciliation\n→ Cluster updated\n\nArgo CD and Flux are common GitOps tools.",
     "keyword_terms": [
@@ -73,15 +80,6 @@
       "flux",
       "gitops"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "2023178f50d34583c73e88ab9bb73e36829a347e1a3ed4b4733159acb0e36f4a",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_033"
+    "source_checksum": "966f071dee19a911cd5ab01775707c35d7ea15986ba436f1790c0e402d7a77f3"
   }
 }

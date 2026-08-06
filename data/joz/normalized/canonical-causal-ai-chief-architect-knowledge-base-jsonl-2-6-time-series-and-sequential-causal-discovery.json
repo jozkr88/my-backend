@@ -1,0 +1,113 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-6-time-series-and-sequential-causal-discovery",
+  "title": "2.6 Time-Series and Sequential Causal Discovery",
+  "category": "skills",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-07-2-6-time-series-and-sequential-causal-discovery",
+  "summary": "## 2.6 Time-Series and Sequential Causal Discovery",
+  "body": "## 2.6 Time-Series and Sequential Causal Discovery\n\n### Essential concepts\n\n- Temporal precedence\n- Lagged and contemporaneous effects\n- Autocorrelation\n- Nonstationarity\n- Regime changes\n- Granger causality versus structural causality\n- Vector autoregression\n- Dynamic Bayesian networks\n- Temporal causal graphs\n- Instantaneous effects\n- Feedback loops\n- Irregular sampling\n- Missing sensor observations\n- Time-varying confounding\n\n### Methods to study\n\n- Granger tests\n- VAR and SVAR\n- PCMCI and PCMCI+\n- temporal LiNGAM\n- invariant causal prediction for sequential data\n- dynamic SCMs\n- state-space causal models\n- neural temporal causal discovery\n\n### Implementation exercises\n\n- Recover causal relationships from multivariate sensor streams.\n- Compare lag-selection methods.\n- Simulate sensor delay, dropout and clock skew.\n- Detect regime-specific causal mechanisms.\n- Separate predictive lead-lag relationships from intervention-relevant effects.\n\n### Evidence artifacts\n\n- Temporal causal-discovery service\n- Sensor-alignment pipeline\n- Regime-detection module\n- Temporal-edge confidence dashboard\n\n---",
+  "metadata": {
+    "lane": "skills",
+    "original_lane": "skills",
+    "tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "structural_causal_models",
+      "time_series"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "skills",
+      "business_need"
+    ],
+    "sub_intents": [
+      "orchestration"
+    ],
+    "impact_score": 96,
+    "priority_label": "hero",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "low_trust",
+      "organizational_complexity"
+    ],
+    "principles": [
+      "feedback_loops"
+    ],
+    "capabilities": [
+      "enterprise_architecture"
+    ],
+    "outcomes": [],
+    "governance": [
+      "confidence_handling"
+    ],
+    "industries": [],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-07-2-6-time-series-and-sequential-causal-discovery",
+    "canonical_record_title": "2.6 Time-Series and Sequential Causal Discovery",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "hero",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "structural_causal_models",
+      "time_series"
+    ],
+    "canonical_section": "2.6 Time-Series and Sequential Causal Discovery",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 297,
+    "source_line_end": 343,
+    "source_authority": 12,
+    "semantic_text": "2.6 Time-Series and Sequential Causal Discovery\n2.6 Time-Series and Sequential Causal Discovery\nai_architecture causal_discovery causal_inference causal_intelligence structural_causal_models time_series\nai_architecture causal_discovery causal_inference causal_intelligence structural_causal_models time_series\n## 2.6 Time-Series and Sequential Causal Discovery\n\n### Essential concepts\n\n- Temporal precedence\n- Lagged and contemporaneous effects\n- Autocorrelation\n- Nonstationarity\n- Regime changes\n- Granger causality versus structural causality\n- Vector autoregression\n- Dynamic Bayesian networks\n- Temporal causal graphs\n- Instantaneous effects\n- Feedback loops\n- Irregular sampling\n- Missing sensor observations\n- Time-varying confounding\n\n### Methods to study\n\n- Granger tests\n- VAR and SVAR\n- PCMCI and PCMCI+\n- temporal LiNGAM\n- invariant causal prediction for sequential data\n- dynamic SCMs\n- state-space causal models\n- neural temporal causal discovery\n\n### Implementation exercises\n\n- Recover causal relationships from multivariate sensor streams.\n- Compare lag-selection methods.\n- Simulate sensor delay, dropout and clock skew.\n- Detect regime-specific causal mechanisms.\n- Separate predictive lead-lag relationships from intervention-relevant effects.\n\n### Evidence artifacts\n\n- Temporal causal-discovery service\n- Sensor-alignment pipeline\n- Regime-detection module\n- Temporal-edge confidence dashboard\n\n---",
+    "keyword_terms": [
+      "ai_architecture",
+      "and",
+      "causal",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "discovery",
+      "sequential",
+      "series",
+      "structural_causal_models",
+      "time",
+      "time_series"
+    ],
+    "exact_phrases": [
+      "2.6 Time-Series and Sequential Causal Discovery",
+      "ai_architecture",
+      "causal_discovery",
+      "causal_inference",
+      "causal_intelligence",
+      "structural_causal_models",
+      "time_series"
+    ],
+    "source_checksum": "8d30e0f232af3ff838f1b4dc873a949db10312a7bce50a3b4762c38be3c05ae0"
+  }
+}

@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -40,7 +43,7 @@
     "source_notes": "Joz infrastructure canonical knowledge",
     "source_filename": "joz-infrastructure-platform-engineering-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -65,6 +68,10 @@
       "high-availability",
       "postgresql"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 12,
     "semantic_text": "PostgreSQL High Availability\nPostgreSQL High Availability\nbackups high-availability postgresql\nbackups high-availability postgresql\nProduction PostgreSQL should use:\nReplication\nAutomated backups\nPoint-in-time recovery\nFailover\nConnection pooling\nRead replicas where needed\nSchema migrations\nMonitoring\n\nThe database is often the most important stateful dependency in the platform.",
     "keyword_terms": [
@@ -80,15 +87,6 @@
       "high-availability",
       "postgresql"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "b174f04d3ac7a314fca932c1c2096a426d4ebe059d1263e0e463cd3c9690d467",
-    "source_uri": "data/joz/canonical/joz-infrastructure-platform-engineering-knowledge-base.jsonl#joz_infra_015"
+    "source_checksum": "cf21466588dff4d7bd92dbde7b81feb1d383fbff343b90b77e38883f1b1ae2d9"
   }
 }

@@ -1,0 +1,115 @@
+{
+  "slug": "canonical-causal-ai-chief-architect-knowledge-base-jsonl-2-18-enterprise-systems-erp-wms-tms-and-mes",
+  "title": "2.18 Enterprise Systems: ERP, WMS, TMS and MES",
+  "category": "systems_mindset",
+  "source_type": "canonical_jsonl",
+  "source_uri": "data/joz/canonical/causal-ai-chief-architect-knowledge-base.jsonl#causal-architect-19-2-18-enterprise-systems-erp-wms-tms-and-mes",
+  "summary": "## 2.18 Enterprise Systems: ERP, WMS, TMS and MES",
+  "body": "## 2.18 Enterprise Systems: ERP, WMS, TMS and MES\n\n### ERP\n\nStudy:\n\n- finance and controlling;\n- procurement;\n- order management;\n- materials;\n- asset management;\n- production planning;\n- master data;\n- approval workflows;\n- ledgers and journal entries.\n\n### WMS\n\nStudy:\n\n- receiving;\n- put-away;\n- slotting;\n- picking;\n- packing;\n- replenishment;\n- cycle counting;\n- inventory accuracy;\n- labor and equipment allocation.\n\n### TMS\n\nStudy:\n\n- carrier selection;\n- route planning;\n- load planning;\n- freight costing;\n- tendering;\n- tracking;\n- exceptions;\n- delivery performance.\n\n### MES\n\nStudy:\n\n- production orders;\n- machine state;\n- work instructions;\n- quality;\n- genealogy;\n- downtime;\n- OEE;\n- maintenance;\n- process parameters;\n- safety limits.\n\n### Evidence artifacts\n\n- Canonical enterprise event model\n- Connector architecture\n- Process maps\n- Read-versus-write permission model\n- Sandbox enterprise integration\n\n---",
+  "metadata": {
+    "lane": "systems_mindset",
+    "original_lane": "systems_mindset",
+    "tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "verification": {
+      "status": "framework_supported",
+      "reviewed_by": "codex",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
+      "notes": "Canonical JSONL knowledge ingest"
+    },
+    "verification_status": "framework_supported",
+    "claims": [],
+    "proof_points": [],
+    "dataset_id": "joz-causal-ai-chief-architect-v1",
+    "causal_model_version": "joz-causal-architecture-v2",
+    "causal_claims": [],
+    "regions": [],
+    "companies": [],
+    "projects": [],
+    "intent_families": [
+      "systems_mindset",
+      "skills"
+    ],
+    "sub_intents": [
+      "orchestration",
+      "governance"
+    ],
+    "impact_score": 68,
+    "priority_label": "standard",
+    "valid_from": null,
+    "valid_to": null,
+    "source_notes": "Causal AI Chief Architect Knowledge Base",
+    "source_filename": "causal-ai-chief-architect-knowledge-base.jsonl",
+    "source_meta_filename": null,
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
+    "problems": [
+      "operational_friction",
+      "unclear_roi"
+    ],
+    "principles": [
+      "systems_before_features"
+    ],
+    "capabilities": [
+      "ai_governance",
+      "enterprise_architecture",
+      "workflow_redesign"
+    ],
+    "outcomes": [
+      "cost_reduction",
+      "stronger_governance"
+    ],
+    "governance": [
+      "human_approval"
+    ],
+    "industries": [
+      "financial_services"
+    ],
+    "proofs": [],
+    "related_proofs": [],
+    "enterprise_scale_score": 0,
+    "measurable_outcome_count": 0,
+    "canonical_record": true,
+    "canonical_record_id": "causal-architect-19-2-18-enterprise-systems-erp-wms-tms-and-mes",
+    "canonical_record_title": "2.18 Enterprise Systems: ERP, WMS, TMS and MES",
+    "canonical_record_source": "Causal AI Chief Architect Knowledge Base",
+    "canonical_record_priority": "standard",
+    "canonical_record_tags": [
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "canonical_section": "2.18 Enterprise Systems: ERP, WMS, TMS and MES",
+    "canonical_parent": "2. Master Capability Map",
+    "source_line_start": 896,
+    "source_line_end": 963,
+    "source_authority": 12,
+    "semantic_text": "2.18 Enterprise Systems: ERP, WMS, TMS and MES\n2.18 Enterprise Systems: ERP, WMS, TMS and MES\nai_architecture causal_intelligence enterprise_architecture governance\nai_architecture causal_intelligence enterprise_architecture governance\n## 2.18 Enterprise Systems: ERP, WMS, TMS and MES\n\n### ERP\n\nStudy:\n\n- finance and controlling;\n- procurement;\n- order management;\n- materials;\n- asset management;\n- production planning;\n- master data;\n- approval workflows;\n- ledgers and journal entries.\n\n### WMS\n\nStudy:\n\n- receiving;\n- put-away;\n- slotting;\n- picking;\n- packing;\n- replenishment;\n- cycle counting;\n- inventory accuracy;\n- labor and equipment allocation.\n\n### TMS\n\nStudy:\n\n- carrier selection;\n- route planning;\n- load planning;\n- freight costing;\n- tendering;\n- tracking;\n- exceptions;\n- delivery performance.\n\n### MES\n\nStudy:\n\n- production orders;\n- machine state;\n- work instructions;\n- quality;\n- genealogy;\n- downtime;\n- OEE;\n- maintenance;\n- process parameters;\n- safety limits.\n\n### Evidence artifacts\n\n- Canonical enterprise event model\n- Connector architecture\n- Process maps\n- Read-versus-write permission model\n- Sandbox enterprise integration\n\n---",
+    "keyword_terms": [
+      "18",
+      "ai_architecture",
+      "and",
+      "causal_intelligence",
+      "enterprise",
+      "enterprise_architecture",
+      "erp",
+      "governance",
+      "mes",
+      "systems",
+      "tms",
+      "wms"
+    ],
+    "exact_phrases": [
+      "2.18 Enterprise Systems: ERP, WMS, TMS and MES",
+      "ai_architecture",
+      "causal_intelligence",
+      "enterprise_architecture",
+      "governance"
+    ],
+    "source_checksum": "b434d4a170d05fafd9544da6f2cc0776f7961ee6e62905f019f88a1fe7f7d703"
+  }
+}

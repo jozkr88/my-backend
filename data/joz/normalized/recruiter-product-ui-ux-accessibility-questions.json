@@ -34,6 +34,9 @@
       "Maybank: 20x digital sales growth through conversational and ML-led UX.",
       "Erste Bank: accessibility at 16M+ customer scale."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Asia Pacific",
       "Europe/EEA"
@@ -54,6 +57,7 @@
     "source_notes": null,
     "source_filename": "recruiter-product-ui-ux-accessibility-questions.md",
     "source_meta_filename": "recruiter-product-ui-ux-accessibility-questions.meta.json",
+    "source_checksum": "3e4598e3b122d25cbbee551b80ec98559fbde8634d6301437a9c4fd2e9c62f53",
     "reviewed_at": "2026-07-14",
     "problems": [],
     "principles": [],
@@ -64,16 +68,6 @@
     "proofs": [],
     "related_proofs": [],
     "enterprise_scale_score": 0,
-    "measurable_outcome_count": 0,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "verified_fact",
-    "source_checksum": "45345578471d6c9230d08ae3f177e7f572bdcd49f47af2aebabd1b8230d049a8",
-    "source_uri": null
+    "measurable_outcome_count": 0
   }
 }

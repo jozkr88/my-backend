@@ -33,6 +33,9 @@
       "Separating these frames helps avoid vague ROI language.",
       "This distinction matches how leaders evaluate cost programs versus growth programs."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -51,6 +54,7 @@
     "source_notes": null,
     "source_filename": "business-need-efficiency-vs-growth.md",
     "source_meta_filename": "business-need-efficiency-vs-growth.meta.json",
+    "source_checksum": "21824609bc7b3d6ebf3a96d06d0e2602c31364f01fa96a588a76ccf8710df4bc",
     "reviewed_at": "",
     "problems": [
       "operational_friction",
@@ -95,16 +99,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 4,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "06c2e0e2b2eeb14952b0722a9069278c30942af81354924a2b4bb9e47d390be6",
-    "source_uri": null
+    "measurable_outcome_count": 4
   }
 }

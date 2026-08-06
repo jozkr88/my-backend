@@ -35,6 +35,9 @@
       "70% reduction in handoff friction at Publicis.",
       "Large-scale accessibility and engineering impact at Erste."
     ],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [
       "Global"
     ],
@@ -56,6 +59,7 @@
     "source_notes": null,
     "source_filename": "business-need-roi-model.md",
     "source_meta_filename": "business-need-roi-model.meta.json",
+    "source_checksum": "ff4eed1fa4f102a8492cda0bab0ef5b316fdbabb564e0c2e43e1fc89dbd362af",
     "reviewed_at": "",
     "problems": [
       "manual_knowledge_work",
@@ -107,16 +111,6 @@
       "publicis_handoff_reduction"
     ],
     "enterprise_scale_score": 100,
-    "measurable_outcome_count": 6,
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "9d5b0541df92967062e08f59abb21d5238cd8d0155a6996fb4f1b3e93f8a5162",
-    "source_uri": null
+    "measurable_outcome_count": 6
   }
 }

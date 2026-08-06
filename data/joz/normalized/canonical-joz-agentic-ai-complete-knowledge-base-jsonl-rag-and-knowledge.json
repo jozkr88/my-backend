@@ -17,12 +17,15 @@
     "verification": {
       "status": "framework_supported",
       "reviewed_by": "codex",
-      "reviewed_at": "2026-07-28T07:19:37.859Z",
+      "reviewed_at": "2026-08-06T21:45:29.248Z",
       "notes": "Canonical JSONL knowledge ingest"
     },
     "verification_status": "framework_supported",
     "claims": [],
     "proof_points": [],
+    "dataset_id": null,
+    "causal_model_version": null,
+    "causal_claims": [],
     "regions": [],
     "companies": [],
     "projects": [],
@@ -42,7 +45,7 @@
     "source_notes": "Joz canonical knowledge",
     "source_filename": "joz-agentic-ai-complete-knowledge-base.jsonl",
     "source_meta_filename": null,
-    "reviewed_at": "2026-07-28T07:19:37.859Z",
+    "reviewed_at": "2026-08-06T21:45:29.248Z",
     "problems": [],
     "principles": [],
     "capabilities": [
@@ -70,6 +73,10 @@
       "rag",
       "retrieval"
     ],
+    "canonical_section": null,
+    "canonical_parent": null,
+    "source_line_start": null,
+    "source_line_end": null,
     "source_authority": 24,
     "semantic_text": "RAG and Knowledge\nRAG and Knowledge\nknowledge rag retrieval\nknowledge rag retrieval\nRAG retrieves relevant information before generation.\n\nPipeline:\nConnectors → Processing → Embeddings → Vector Store → Retrieval → Reranking → LLM\n\nUse PostgreSQL for metadata and permissions, pgvector or another vector store for semantic search, and a knowledge graph when entity relationships and dependencies matter.",
     "keyword_terms": [
@@ -84,15 +91,6 @@
       "rag",
       "retrieval"
     ],
-    "schema_version": "1.0",
-    "dataset_id": "joz-public-knowledge",
-    "tenant_id": "public",
-    "owner": "joz",
-    "classification": "public",
-    "visibility": "public",
-    "retention_policy": "until_withdrawn",
-    "evidence_tier": "framework_guidance",
-    "source_checksum": "49164fd0f1f4fdb30bde149b070a2b5b11c498fe93158feea1427c2a0e5cf2f1",
-    "source_uri": "data/joz/canonical/joz-agentic-ai-complete-knowledge-base.jsonl#joz_complete_013"
+    "source_checksum": "5f93e2930a196f9a9256401fe392607ccbeb494c138e030a7a76291791552b44"
   }
 }
