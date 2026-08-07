@@ -26,6 +26,12 @@ services:
         value: text-embedding-3-small
       - key: JOZ_REQUIRE_DATABASE
         value: "true"
+      - key: JOZ_CAUSAL_MODE
+        sync: false
+      - key: JOZ_CAUSAL_SERVICE_URL
+        sync: false
+      - key: JOZ_CAUSAL_SERVICE_TOKEN
+        sync: false
       - key: JOZ_KNOWLEDGE_GRAPH_MODE
         value: "augment"
       - key: JOZ_WORLD_MODEL_MODE

@@ -4,6 +4,23 @@ function cleanText(value = "") {
   return String(value ?? "").replace(/\s+/g, " ").trim();
 }
 
+function getCausalServiceBaseUrl(env = process.env) {
+  const configured = cleanText(env?.JOZ_CAUSAL_SERVICE_URL);
+  if (!configured) return "http://127.0.0.1:8010";
+  const withProtocol = /^[a-z][a-z\d+.-]*:\/\//i.test(configured)
+    ? configured
+    : `http://${configured}`;
+  return withProtocol.replace(/\/$/, "");
+}
+
+function getCausalServiceHeaders(env = process.env) {
+  const token = cleanText(env?.JOZ_CAUSAL_SERVICE_TOKEN);
+  return {
+    "content-type": "application/json",
+    ...(token ? { authorization: `Bearer ${token}` } : {}),
+  };
+}
+
 function getJozCausalMode(env = process.env) {
   const configured = cleanText(env?.JOZ_CAUSAL_MODE).toLowerCase();
   return VALID_MODES.has(configured) ? configured : "disabled";
@@ -75,7 +92,7 @@ export async function requestJozCausalAnalysis({
     };
   }
 
-  const baseUrl = cleanText(env?.JOZ_CAUSAL_SERVICE_URL || "http://127.0.0.1:8010").replace(/\/$/, "");
+  const baseUrl = getCausalServiceBaseUrl(env);
   const timeoutMs = Math.max(100, Number(env?.JOZ_CAUSAL_SERVICE_TIMEOUT_MS) || 800);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -83,7 +100,7 @@ export async function requestJozCausalAnalysis({
   try {
     const response = await fetchImpl(`${baseUrl}/v1/analyze`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: getCausalServiceHeaders(env),
       body: JSON.stringify({
         query: cleanText(query).slice(0, 2000),
         query_type: classifyCausalQuery(query),
@@ -128,14 +145,14 @@ export async function requestJozCausalEffectEstimate({
     return { mode, status: "unavailable", operation: "effect_estimation", error: "fetch_unavailable" };
   }
 
-  const baseUrl = cleanText(env?.JOZ_CAUSAL_SERVICE_URL || "http://127.0.0.1:8010").replace(/\/$/, "");
+  const baseUrl = getCausalServiceBaseUrl(env);
   const timeoutMs = Math.max(100, Number(env?.JOZ_CAUSAL_SERVICE_TIMEOUT_MS) || 8000);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl(`${baseUrl}/v1/causal/effect`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: getCausalServiceHeaders(env),
       body: JSON.stringify(request || {}),
       signal: controller.signal,
     });
@@ -170,14 +187,14 @@ export async function requestJozCausalCounterfactual({
     return { mode, status: "unavailable", operation: "counterfactual", error: "fetch_unavailable" };
   }
 
-  const baseUrl = cleanText(env?.JOZ_CAUSAL_SERVICE_URL || "http://127.0.0.1:8010").replace(/\/$/, "");
+  const baseUrl = getCausalServiceBaseUrl(env);
   const timeoutMs = Math.max(100, Number(env?.JOZ_CAUSAL_SERVICE_TIMEOUT_MS) || 8000);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl(`${baseUrl}/v1/causal/counterfactual`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: getCausalServiceHeaders(env),
       body: JSON.stringify(request || {}),
       signal: controller.signal,
     });
@@ -212,14 +229,14 @@ export async function requestJozCausalRefutation({
     return { mode, status: "unavailable", operation: "refutation", error: "fetch_unavailable" };
   }
 
-  const baseUrl = cleanText(env?.JOZ_CAUSAL_SERVICE_URL || "http://127.0.0.1:8010").replace(/\/$/, "");
+  const baseUrl = getCausalServiceBaseUrl(env);
   const timeoutMs = Math.max(100, Number(env?.JOZ_CAUSAL_SERVICE_TIMEOUT_MS) || 8000);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl(`${baseUrl}/v1/causal/refute`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: getCausalServiceHeaders(env),
       body: JSON.stringify(request || {}),
       signal: controller.signal,
     });

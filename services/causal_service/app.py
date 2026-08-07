@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+import os
+
+from fastapi import Depends, FastAPI, Header, HTTPException
 
 from .adapters import build_analysis, dependency_capabilities
 from .graph_validation import validate_dag
@@ -23,6 +25,12 @@ app = FastAPI(
 )
 
 
+def require_service_auth(authorization: str | None = Header(default=None)) -> None:
+    expected_token = os.getenv("CAUSAL_SERVICE_TOKEN", "").strip()
+    if expected_token and authorization != f"Bearer {expected_token}":
+        raise HTTPException(status_code=401, detail="causal_service_unauthorized")
+
+
 @app.get("/health")
 def health() -> dict:
     return {
@@ -32,7 +40,7 @@ def health() -> dict:
     }
 
 
-@app.get("/v1/capabilities")
+@app.get("/v1/capabilities", dependencies=[Depends(require_service_auth)])
 def capabilities() -> dict:
     return {
         "schema_version": "joz.causal-capabilities.v1",
@@ -47,7 +55,7 @@ def capabilities() -> dict:
     }
 
 
-@app.post("/v1/graph/validate")
+@app.post("/v1/graph/validate", dependencies=[Depends(require_service_auth)])
 def graph_validate(request: GraphValidateRequest) -> dict:
     return validate_dag(
         [node.model_dump() for node in request.nodes],
@@ -55,31 +63,31 @@ def graph_validate(request: GraphValidateRequest) -> dict:
     )
 
 
-@app.post("/v1/analyze", response_model=CausalAnalysisResponse)
+@app.post("/v1/analyze", response_model=CausalAnalysisResponse, dependencies=[Depends(require_service_auth)])
 def analyze(request: CausalAnalysisRequest) -> CausalAnalysisResponse:
     return CausalAnalysisResponse(**build_analysis(request))
 
 
-@app.post("/v1/causal/intervene")
+@app.post("/v1/causal/intervene", dependencies=[Depends(require_service_auth)])
 def intervene(request: CausalRunRequest) -> dict:
     return run_intervention(request)
 
 
-@app.post("/v1/causal/effect")
+@app.post("/v1/causal/effect", dependencies=[Depends(require_service_auth)])
 def effect(request: CausalEffectRequest) -> dict:
     return run_effect_estimation(request)
 
 
-@app.post("/v1/causal/counterfactual")
+@app.post("/v1/causal/counterfactual", dependencies=[Depends(require_service_auth)])
 def counterfactual(request: CausalCounterfactualRequest) -> dict:
     return run_counterfactual(request)
 
 
-@app.post("/v1/causal/refute")
+@app.post("/v1/causal/refute", dependencies=[Depends(require_service_auth)])
 def refute(request: CausalRefutationRequest) -> dict:
     return run_refutation(request)
 
 
-@app.post("/v1/causal/discover")
+@app.post("/v1/causal/discover", dependencies=[Depends(require_service_auth)])
 def discover(request: DiscoveryRequest) -> dict:
     return discover_candidates(request)

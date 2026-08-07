@@ -71,3 +71,31 @@ the source of truth. The current registry provides neighbourhood, causal-path,
 claim-inspection, governed effect-estimation, and governed counterfactual
 operations, plus governed refutation; the result remains advisory until the
 model, data, assumptions, and evidence are reviewed.
+
+## Cloud Run deployment
+
+The service can run separately from the Render Node gateway. Build the existing
+Dockerfile from the repository root and deploy the resulting image to Cloud Run:
+
+```bash
+export PROJECT_ID="your-gcp-project"
+export REGION="europe-west6"
+export REPOSITORY="joz"
+export IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/causal-service:latest"
+
+gcloud auth login
+gcloud config set project "$PROJECT_ID"
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+gcloud artifacts repositories create "$REPOSITORY" --repository-format=docker --location="$REGION"
+gcloud builds submit --config services/causal_service/cloudbuild.yaml --substitutions=_IMAGE="$IMAGE" .
+gcloud run deploy joz-causal-service \
+  --image "$IMAGE" \
+  --region "$REGION" \
+  --allow-unauthenticated
+```
+
+The API requires `Authorization: Bearer <token>` when `CAUSAL_SERVICE_TOKEN`
+is set. Store that value in Google Secret Manager and attach it to Cloud Run,
+then set the same token in Render as `JOZ_CAUSAL_SERVICE_TOKEN`. Set the Cloud
+Run HTTPS URL as `JOZ_CAUSAL_SERVICE_URL` and set
+`JOZ_CAUSAL_MODE=decision_support` in Render.
