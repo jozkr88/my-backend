@@ -357,7 +357,10 @@ test("routes business help, AI use, self-awareness, memory, and purpose question
     ["How can Joz help an insurance company reduce claims delays?", "business_need", "business_help", /faster claims/i],
     ["We are ready to use agents in our logistics business. What should we do?", "business_need", "business_help", /Agentic operations|verified agents/i],
     ["What business and operational problems is Joz best positioned to solve?", "business_need", "business_help", /helps businesses turn AI|measurable improvements/i],
-    ["Is Joz a consultant or a builder?", "business_need", "consultant_builder", /both a consultant and a builder/i],
+    ["Is Joz a consultant or a builder?", "business_need", "consultant_builder", /builder-first/i],
+    ["Is Joz a consultnat or builder?!", "business_need", "consultant_builder", /builder-first/i],
+    ["is joz a consultnat or builder? please keep the answer practical.", "business_need", "consultant_builder", /builder-first/i],
+    ["  Is   Joz   a   consultnat   or   builder?  ", "business_need", "consultant_builder", /builder-first/i],
   ];
 
   for (const [input, selectedRoute, subIntent, expected] of cases) {
