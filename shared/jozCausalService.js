@@ -93,7 +93,7 @@ export async function requestJozCausalAnalysis({
   }
 
   const baseUrl = getCausalServiceBaseUrl(env);
-  const timeoutMs = Math.max(100, Number(env?.JOZ_CAUSAL_SERVICE_TIMEOUT_MS) || 800);
+  const timeoutMs = Math.max(100, Number(env?.JOZ_CAUSAL_SERVICE_TIMEOUT_MS) || 8000);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 

@@ -12,7 +12,7 @@ test("composes an evidence-bounded intervention response", () => {
   });
 
   assert.equal(result.answerSource, "causal_decision_support");
-  assert.match(result.reply, /intervention question/i);
+  assert.match(result.reply, /an intervention question/i);
   assert.match(result.reply, /versioned dataset/i);
   assert.match(result.reply, /not a causal estimate/i);
 });

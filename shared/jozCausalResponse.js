@@ -16,10 +16,11 @@ export function buildJozCausalDecisionSupportReply({
   const queryType = normalizeQueryType(causalAnalysis?.queryType);
   const status = cleanText(causalAnalysis?.status).toLowerCase() || "not_executed";
   const query = cleanText(input);
+  const article = queryType === "intervention" ? "an" : "a";
 
   if (status === "unavailable") {
     return {
-      reply: `This is a ${queryType} question: ${query} The causal service is temporarily unavailable, so I will not invent an effect. Once it is available, the analysis still needs a versioned dataset, an explicit outcome, and stated causal assumptions.`,
+      reply: `This is ${article} ${queryType} question: ${query} The causal service is temporarily unavailable, so I will not invent an effect. Once it is available, the analysis still needs a versioned dataset, an explicit outcome, and stated causal assumptions.`,
       answerSource: "causal_decision_support",
       composer: "buildJozCausalDecisionSupportReply",
       fallbackUsed: false,
