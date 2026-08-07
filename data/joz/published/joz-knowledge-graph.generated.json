@@ -1,7 +1,7 @@
 {
   "schema": "joz.knowledge-graph.v2",
   "version": 2,
-  "generatedAt": "2026-08-07T08:19:28.632Z",
+  "generatedAt": "2026-08-07T12:34:21.477Z",
   "source": {
     "ontology": "data/joz/published/joz-ontology.generated.json",
     "documents": "data/joz/published/joz-documents.generated.json"
@@ -200,6 +200,18 @@
       "sourceSlug": "2026-08-06-chief-ai-ml-architect-causal-knowledge-base"
     },
     {
+      "id": "causal_assumption:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary_the_pathway_is_evaluated_in_an_organisation_with_a_relevant_baseline_and_measurable_outcome",
+      "type": "causal_assumption",
+      "label": "The pathway is evaluated in an organisation with a relevant baseline and measurable outcome.",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "causal_assumption:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof_a_causal_effect_requires_organisation_specific_data_and_an_explicit_identification_strategy",
+      "type": "causal_assumption",
+      "label": "A causal effect requires organisation-specific data and an explicit identification strategy.",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
       "id": "causal_claim:2026_08_06_causal_ai_architect_toolchain_causal_engine_validates_graph_claims",
       "type": "causal_claim",
       "label": "causal-engine-validates-graph-claims",
@@ -382,6 +394,32 @@
       "sourceSlug": "2026-08-06-chief-ai-ml-architect-causal-knowledge-base"
     },
     {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "causal_claim",
+      "label": "skill-method-evidence-outcome-boundary",
+      "description": null,
+      "claimType": "value_pathway",
+      "relation": "supports",
+      "claimStatus": "POSITIONING_SUPPORTED",
+      "confidence": 0.94,
+      "datasetId": "joz-value-pathways-v1",
+      "modelVersion": "joz-value-pathways-v1",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "causal_claim",
+      "label": "value-pathway-not-roi-proof",
+      "description": null,
+      "claimType": "claim_boundary",
+      "relation": "does_not_establish",
+      "claimStatus": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "datasetId": "joz-value-pathways-v1",
+      "modelVersion": "joz-value-pathways-v1",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
       "id": "causal_dataset:joz_ai_architecture_causal_v1",
       "type": "causal_dataset",
       "label": "joz-ai-architecture-causal-v1",
@@ -404,6 +442,12 @@
       "type": "causal_dataset",
       "label": "joz-causal-governance-v1",
       "sourceSlug": "2026-08-06-causal-model-governance"
+    },
+    {
+      "id": "causal_dataset:joz_value_pathways_v1",
+      "type": "causal_dataset",
+      "label": "joz-value-pathways-v1",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
     },
     {
       "id": "causal_evidence:2026_08_06_causal_ai_architect_toolchain_causal_engine_validates_graph_claims_causal_ai_architect_toolchain_reference",
@@ -490,6 +534,18 @@
       "sourceSlug": "2026-08-06-chief-ai-ml-architect-causal-knowledge-base"
     },
     {
+      "id": "causal_evidence:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary_existing_joz_skills_and_business_value_corpus",
+      "type": "causal_evidence",
+      "label": "existing-joz-skills-and-business-value-corpus",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "causal_evidence:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof_causal_intelligence_governance_principles",
+      "type": "causal_evidence",
+      "label": "causal-intelligence-governance-principles",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
       "id": "causal_model_version:joz_causal_architecture_v1",
       "type": "causal_model_version",
       "label": "joz-causal-architecture-v1",
@@ -514,6 +570,12 @@
       "sourceSlug": "2026-08-06-causal-model-governance"
     },
     {
+      "id": "causal_model_version:joz_value_pathways_v1",
+      "type": "causal_model_version",
+      "label": "joz-value-pathways-v1",
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
       "id": "causal_variable:action_execution",
       "type": "causal_variable",
       "label": "Action Execution"
@@ -527,6 +589,11 @@
       "id": "causal_variable:authoritative_system_state",
       "type": "causal_variable",
       "label": "Authoritative System State"
+    },
+    {
+      "id": "causal_variable:business_value_explanation",
+      "type": "causal_variable",
+      "label": "Business value explanation"
     },
     {
       "id": "causal_variable:candidate_causal_structure",
@@ -579,6 +646,11 @@
       "label": "Decision Proposal"
     },
     {
+      "id": "causal_variable:empirical_causal_effect",
+      "type": "causal_variable",
+      "label": "Empirical causal effect"
+    },
+    {
       "id": "causal_variable:enterprise_observation",
       "type": "causal_variable",
       "label": "Enterprise Observation"
@@ -597,6 +669,11 @@
       "id": "causal_variable:intervention_analysis",
       "type": "causal_variable",
       "label": "Intervention Analysis"
+    },
+    {
+      "id": "causal_variable:joz_skill_to_method_pathway",
+      "type": "causal_variable",
+      "label": "Joz skill-to-method pathway"
     },
     {
       "id": "causal_variable:neo4j_operational_graph",
@@ -622,6 +699,11 @@
       "id": "causal_variable:validated_causal_model",
       "type": "causal_variable",
       "label": "Validated Causal Model"
+    },
+    {
+      "id": "causal_variable:value_pathway",
+      "type": "causal_variable",
+      "label": "Value pathway"
     },
     {
       "id": "causal_variable:verified_operational_action",
@@ -1055,6 +1137,22 @@
       "sourceUri": "source://joz/causal-intelligence/chief-ai-ml-architect-knowledge-base",
       "sourcePath": "source://joz/causal-intelligence/chief-ai-ml-architect-knowledge-base",
       "sourceChecksum": "e388fdbe8e25bbf60d7b8a9ae0237def8365c568c86eaa707bf4e629987d730f",
+      "evidenceTier": null
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model",
+      "type": "document",
+      "label": "Joz Value Pathways",
+      "slug": "2026-08-07-joz-value-causal-model",
+      "category": "business_need",
+      "summary": "Evidence-bounded pathways connecting Joz's skills and methods to plausible business value without claiming unsupported ROI.",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceFilename": "2026-08-07-joz-value-causal-model.md",
+      "sourceMetaFilename": "2026-08-07-joz-value-causal-model.meta.json",
+      "sourceUri": "source://joz/value-pathways/causal-model",
+      "sourcePath": "source://joz/value-pathways/causal-model",
+      "sourceChecksum": "87e978a85865b88e97577cd251507870365499b58321afd22d93764d755f0e0e",
       "evidenceTier": null
     },
     {
@@ -6040,6 +6138,94 @@
       "claimStatus": "FRAMEWORK_SUPPORTED"
     },
     {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary|claims_about|causal_variable:joz_skill_to_method_pathway",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "claims_about",
+      "to": "causal_variable:joz_skill_to_method_pathway",
+      "claimStatus": "POSITIONING_SUPPORTED",
+      "relation": "supports"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary|evaluated_with|causal_dataset:joz_value_pathways_v1",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "evaluated_with",
+      "to": "causal_dataset:joz_value_pathways_v1",
+      "modelVersion": "joz-value-pathways-v1"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary|predicts|causal_variable:business_value_explanation",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "predicts",
+      "to": "causal_variable:business_value_explanation",
+      "claimStatus": "POSITIONING_SUPPORTED",
+      "relation": "supports"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary|requires_assumption|causal_assumption:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary_the_pathway_is_evaluated_in_an_organisation_with_a_relevant_baseline_and_measurable_outcome",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "requires_assumption",
+      "to": "causal_assumption:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary_the_pathway_is_evaluated_in_an_organisation_with_a_relevant_baseline_and_measurable_outcome",
+      "claimStatus": "POSITIONING_SUPPORTED"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary|supported_by|causal_evidence:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary_existing_joz_skills_and_business_value_corpus",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "supported_by",
+      "to": "causal_evidence:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary_existing_joz_skills_and_business_value_corpus",
+      "claimStatus": "POSITIONING_SUPPORTED"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary|uses_model_version|causal_model_version:joz_value_pathways_v1",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "type": "uses_model_version",
+      "to": "causal_model_version:joz_value_pathways_v1",
+      "claimStatus": "POSITIONING_SUPPORTED"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof|claims_about|causal_variable:value_pathway",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "claims_about",
+      "to": "causal_variable:value_pathway",
+      "claimStatus": "FRAMEWORK_SUPPORTED",
+      "relation": "does_not_establish"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof|evaluated_with|causal_dataset:joz_value_pathways_v1",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "evaluated_with",
+      "to": "causal_dataset:joz_value_pathways_v1",
+      "modelVersion": "joz-value-pathways-v1"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof|predicts|causal_variable:empirical_causal_effect",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "predicts",
+      "to": "causal_variable:empirical_causal_effect",
+      "claimStatus": "FRAMEWORK_SUPPORTED",
+      "relation": "does_not_establish"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof|requires_assumption|causal_assumption:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof_a_causal_effect_requires_organisation_specific_data_and_an_explicit_identification_strategy",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "requires_assumption",
+      "to": "causal_assumption:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof_a_causal_effect_requires_organisation_specific_data_and_an_explicit_identification_strategy",
+      "claimStatus": "FRAMEWORK_SUPPORTED"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof|supported_by|causal_evidence:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof_causal_intelligence_governance_principles",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "supported_by",
+      "to": "causal_evidence:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof_causal_intelligence_governance_principles",
+      "claimStatus": "FRAMEWORK_SUPPORTED"
+    },
+    {
+      "id": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof|uses_model_version|causal_model_version:joz_value_pathways_v1",
+      "from": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "type": "uses_model_version",
+      "to": "causal_model_version:joz_value_pathways_v1",
+      "claimStatus": "FRAMEWORK_SUPPORTED"
+    },
+    {
       "id": "document:2026_07_11_agentic_ai_architecture_proof|applies_in|region:asia_pacific",
       "from": "document:2026_07_11_agentic_ai_architecture_proof",
       "type": "applies_in",
@@ -6759,6 +6945,222 @@
       "sourceSlug": "2026-08-06-chief-ai-ml-architect-causal-knowledge-base",
       "claimStatus": "FRAMEWORK_SUPPORTED",
       "datasetId": "joz-causal-ai-chief-architect-v1"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|contains_claim|causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "contains_claim",
+      "to": "causal_claim:2026_08_07_joz_value_causal_model_skill_method_evidence_outcome_boundary",
+      "sourceSlug": "2026-08-07-joz-value-causal-model",
+      "claimStatus": "POSITIONING_SUPPORTED",
+      "datasetId": "joz-value-pathways-v1"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|contains_claim|causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "contains_claim",
+      "to": "causal_claim:2026_08_07_joz_value_causal_model_value_pathway_not_roi_proof",
+      "sourceSlug": "2026-08-07-joz-value-causal-model",
+      "claimStatus": "FRAMEWORK_SUPPORTED",
+      "datasetId": "joz-value-pathways-v1"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|capability:agentic_ai",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "capability:agentic_ai",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|capability:decision_intelligence",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "capability:decision_intelligence",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|capability:enterprise_architecture",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "capability:enterprise_architecture",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|capability:product_strategy",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "capability:product_strategy",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|capability:spatial_ai",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "capability:spatial_ai",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|governance:clear_ownership",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "governance:clear_ownership",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|governance:confidence_handling",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "governance:confidence_handling",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|governance:evaluation",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "governance:evaluation",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|governance:source_provenance",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "governance:source_provenance",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|outcome:faster_decisions",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "outcome:faster_decisions",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|outcome:faster_time_to_value",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "outcome:faster_time_to_value",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|outcome:higher_adoption",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "outcome:higher_adoption",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|outcome:higher_data_trust",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "outcome:higher_data_trust",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|outcome:stronger_governance",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "outcome:stronger_governance",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|principle:context_creates_intelligence",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "principle:context_creates_intelligence",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|principle:decision_quality",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "principle:decision_quality",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|principle:systems_before_features",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "principle:systems_before_features",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|principle:trust_before_autonomy",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "principle:trust_before_autonomy",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|problem:knowledge_fragmentation",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "problem:knowledge_fragmentation",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|problem:low_trust",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "problem:low_trust",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|problem:slow_decision_making",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "problem:slow_decision_making",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
+    },
+    {
+      "id": "document:2026_08_07_joz_value_causal_model|supports|problem:unclear_roi",
+      "from": "document:2026_08_07_joz_value_causal_model",
+      "type": "supports",
+      "to": "problem:unclear_roi",
+      "verification": "positioning_supported",
+      "impactScore": 95,
+      "sourceSlug": "2026-08-07-joz-value-causal-model"
     },
     {
       "id": "document:business_need_agentic_operating_model_best_practice|applies_in|region:global",

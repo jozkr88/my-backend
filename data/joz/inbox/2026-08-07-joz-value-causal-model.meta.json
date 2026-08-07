@@ -1,0 +1,70 @@
+{
+  "slug": "2026-08-07-joz-value-causal-model",
+  "title": "Joz Value Pathways",
+  "category": "business_need",
+  "lane": "business_need",
+  "summary": "Evidence-bounded pathways connecting Joz's skills and methods to plausible business value without claiming unsupported ROI.",
+  "tags": [
+    "joz",
+    "business_value",
+    "causal_intelligence",
+    "skills",
+    "evidence",
+    "outcomes",
+    "agentic_ai",
+    "decision_intelligence"
+  ],
+  "impact_score": 95,
+  "priority_label": "hero",
+  "source_type": "positioning",
+  "source_uri": "source://joz/value-pathways/causal-model",
+  "dataset_id": "joz-value-pathways-v1",
+  "causal_model_version": "joz-value-pathways-v1",
+  "verification": {
+    "status": "positioning_supported",
+    "reviewed_by": "assistant",
+    "reviewed_at": "2026-08-07",
+    "notes": "Structured synthesis of existing Joz skills, proof, business-value, and causal-intelligence records. Not an empirical ROI dataset."
+  },
+  "claims": [
+    "Joz's business value is best explained through skill-to-method-to-evidence-to-outcome pathways.",
+    "A value pathway explains a plausible mechanism but does not establish an empirical causal effect or guaranteed ROI.",
+    "Organisation-specific causal claims require a baseline, intervention, outcome, time window, assumptions, and validation data."
+  ],
+  "proof_points": [
+    "Existing agentic AI architecture and quantified business outcome records.",
+    "Existing systems, decision-intelligence, spatial, and UX-orchestration records.",
+    "Existing causal architecture and decision operating system records."
+  ],
+  "problems": ["unclear_roi", "knowledge_fragmentation", "slow_decision_making", "low_trust"],
+  "principles": ["context_creates_intelligence", "systems_before_features", "decision_quality", "trust_before_autonomy"],
+  "capabilities": ["agentic_ai", "decision_intelligence", "enterprise_architecture", "spatial_ai", "product_strategy"],
+  "outcomes": ["faster_decisions", "higher_adoption", "higher_data_trust", "faster_time_to_value", "stronger_governance"],
+  "governance": ["confidence_handling", "source_provenance", "evaluation", "clear_ownership"],
+  "intent_families": ["business_need", "skills", "systems_mindset"],
+  "sub_intents": ["business_value", "decision_support", "governance"],
+  "causal_claims": [
+    {
+      "id": "skill-method-evidence-outcome-boundary",
+      "subject": "Joz skill-to-method pathway",
+      "object": "Business value explanation",
+      "relation": "supports",
+      "claim_type": "value_pathway",
+      "status": "POSITIONING_SUPPORTED",
+      "confidence": 0.94,
+      "assumptions": ["The pathway is evaluated in an organisation with a relevant baseline and measurable outcome."],
+      "evidence": ["existing-joz-skills-and-business-value-corpus"]
+    },
+    {
+      "id": "value-pathway-not-roi-proof",
+      "subject": "Value pathway",
+      "object": "Empirical causal effect",
+      "relation": "does_not_establish",
+      "claim_type": "claim_boundary",
+      "status": "FRAMEWORK_SUPPORTED",
+      "confidence": 0.99,
+      "assumptions": ["A causal effect requires organisation-specific data and an explicit identification strategy."],
+      "evidence": ["causal-intelligence-governance-principles"]
+    }
+  ]
+}

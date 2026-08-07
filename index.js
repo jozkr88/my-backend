@@ -195,6 +195,10 @@ import {
 } from "./shared/jozCustomerWaitTimeCausalDataset.js";
 import { buildJozCausalDecisionSupportReply } from "./shared/jozCausalResponse.js";
 import {
+  buildJozValueCausalReply,
+  isJozValueCausalQuestion,
+} from "./shared/jozValueCausalModel.js";
+import {
   buildSpatialAssetManifest,
   getSpatialOfferDefinition,
   publicSpatialOffer,
@@ -2976,6 +2980,7 @@ app.post("/api/joz-llm", async (req, res) => {
       route,
     });
     const causalKnowledgeQuestion = isJozCausalKnowledgeQuestion(latestUserMessage);
+    const jozValueCausalQuestion = isJozValueCausalQuestion(latestUserMessage);
     intentClassification = promoteJozCausalKnowledgeIntent({
       input: latestUserMessage,
       classification: intentClassification,
@@ -3232,7 +3237,7 @@ app.post("/api/joz-llm", async (req, res) => {
           errorCode: null,
           source: "context",
         };
-      } else {
+      } else if (!jozValueCausalQuestion) {
         causalToolSelection = await selectJozCausalTool({
           model: openai,
           input: latestUserMessage,
@@ -3546,6 +3551,9 @@ app.post("/api/joz-llm", async (req, res) => {
           causalTool,
         })
       : ownedResolution;
+    const jozValueCausalResolution = jozValueCausalQuestion
+      ? buildJozValueCausalReply({ input: latestUserMessage })
+      : ownedResolution;
     const isDataDrivenCommercialBoundary = String(ownedResolution?.answerSource || "").startsWith(
       "supabase_interaction_policy:free_advice"
     );
@@ -3553,6 +3561,7 @@ app.post("/api/joz-llm", async (req, res) => {
       (isDataDrivenCommercialBoundary ? causalPriorityResolution : null) ||
       safetyRefusalResolution ||
       riskGateResolution ||
+      (jozValueCausalQuestion ? jozValueCausalResolution : null) ||
       causalPriorityResolution ||
       (architectureOfferDisabled
         ? {
