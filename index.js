@@ -189,6 +189,7 @@ import {
   isJozCausalKnowledgeQuestion,
   promoteJozCausalKnowledgeIntent,
 } from "./shared/jozCausalKnowledge.js";
+import { buildJozCausalDecisionSupportReply } from "./shared/jozCausalResponse.js";
 import {
   buildSpatialAssetManifest,
   getSpatialOfferDefinition,
@@ -3488,7 +3489,12 @@ app.post("/api/joz-llm", async (req, res) => {
         legacyContext: legacyRuntimeContext,
         retrievedDocuments: retrievalContext,
       });
-    const causalPriorityResolution = shouldPrioritizeCausalResponse ? null : ownedResolution;
+    const causalPriorityResolution = shouldPrioritizeCausalResponse
+      ? buildJozCausalDecisionSupportReply({
+          input: latestUserMessage,
+          causalAnalysis,
+        })
+      : ownedResolution;
     const isDataDrivenCommercialBoundary = String(ownedResolution?.answerSource || "").startsWith(
       "supabase_interaction_policy:free_advice"
     );
