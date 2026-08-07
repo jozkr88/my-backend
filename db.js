@@ -1224,11 +1224,11 @@ export async function createJozCausalToolRun({
     const result = await runQuery(
       `INSERT INTO joz_causal_tool_runs (
          run_id, request_id, conversation_id, session_key, tenant_id,
-         principal_id, tool_name, arguments, mode, status, authorization
+         principal_id, tool_name, arguments, mode, status, authorization_json
        )
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, 'authorized', $10::jsonb)
        RETURNING run_id, request_id, conversation_id, session_key, tenant_id,
-         principal_id, tool_name, arguments, mode, status, authorization,
+         principal_id, tool_name, arguments, mode, status, authorization_json AS authorization,
          result, error_code, started_at, completed_at`,
       [
         runId,
@@ -2893,7 +2893,7 @@ export async function initDatabase() {
         arguments JSONB NOT NULL DEFAULT '{}'::jsonb,
         mode TEXT NOT NULL DEFAULT 'shadow',
         status TEXT NOT NULL DEFAULT 'authorized',
-        authorization JSONB NOT NULL DEFAULT '{}'::jsonb,
+        authorization_json JSONB NOT NULL DEFAULT '{}'::jsonb,
         result JSONB,
         error_code TEXT,
         started_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
