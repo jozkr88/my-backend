@@ -5,7 +5,7 @@ function cleanText(value = "") {
 export function isJozCausalKnowledgeQuestion(input = "") {
   const text = cleanText(input).toLowerCase();
   return Boolean(
-    text && /\b(caus(?:e|al|ation)|counterfactual|intervention|do[- ]calculus|effect estimation|treatment effect|refut(?:e|ation)|structural causal|identif(?:y|iable|ication)|mechanism|confound|dag|causal graph|decision operating system|world model)\b/.test(text)
+    text && /\b(caus(?:e|al|ation)|counterfactual|intervention|what would happen if|what if|do[- ]calculus|effect estimation|treatment effect|refut(?:e|ation)|structural causal|identif(?:y|iable|ication)|mechanism|confound|dag|causal graph|decision operating system|world model)\b/.test(text)
   );
 }
 

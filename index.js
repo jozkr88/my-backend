@@ -164,6 +164,7 @@ import {
   upsertJozCausalDatasetMetadataToNeo4j,
 } from "./shared/neo4jJozKnowledgeGraph.js";
 import {
+  classifyJozCausalQuery,
   requestJozCausalCounterfactual,
   getJozCausalServiceMode,
   requestJozCausalEffectEstimate,
@@ -3176,6 +3177,10 @@ app.post("/api/joz-llm", async (req, res) => {
     // first. It can observe the same authorized evidence as Joz retrieval,
     // but it does not alter the answer until the causal service is promoted.
     const causalMode = getJozCausalServiceMode();
+    const causalQueryType = classifyJozCausalQuery(latestUserMessage);
+    const shouldPrioritizeCausalResponse =
+      causalMode === "decision_support" &&
+      ["intervention", "counterfactual", "decision"].includes(causalQueryType);
     let causalAnalysis = {
       mode: causalMode,
       status: causalMode === "disabled" ? "disabled" : "not_requested",
@@ -3483,14 +3488,15 @@ app.post("/api/joz-llm", async (req, res) => {
         legacyContext: legacyRuntimeContext,
         retrievedDocuments: retrievalContext,
       });
+    const causalPriorityResolution = shouldPrioritizeCausalResponse ? null : ownedResolution;
     const isDataDrivenCommercialBoundary = String(ownedResolution?.answerSource || "").startsWith(
       "supabase_interaction_policy:free_advice"
     );
     const rawResolution =
-      (isDataDrivenCommercialBoundary ? ownedResolution : null) ||
+      (isDataDrivenCommercialBoundary ? causalPriorityResolution : null) ||
       safetyRefusalResolution ||
       riskGateResolution ||
-      ownedResolution ||
+      causalPriorityResolution ||
       (architectureOfferDisabled
         ? {
             reply:

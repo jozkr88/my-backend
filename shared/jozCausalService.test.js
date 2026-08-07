@@ -58,6 +58,7 @@ test("refutation uses the causal service boundary", async () => {
 test("classifies counterfactual and intervention questions", () => {
   assert.equal(classifyJozCausalQuery("What would have happened if we changed price?"), "counterfactual");
   assert.equal(classifyJozCausalQuery("What if we increase inventory?"), "intervention");
+  assert.equal(classifyJozCausalQuery("What would happen if customer wait time decreased by 20%?"), "intervention");
 });
 
 test("returns a safe service response in shadow mode", async () => {

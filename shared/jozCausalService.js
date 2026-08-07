@@ -30,7 +30,7 @@ function classifyCausalQuery(query = "") {
   const text = cleanText(query).toLowerCase();
   if (!text) return "unknown";
   if (/\b(would have|if we had|counterfactual|instead)\b/.test(text)) return "counterfactual";
-  if (/\b(what if|intervene|change|increase|decrease)\b/.test(text)) return "intervention";
+  if (/\b(what would happen if|what if|intervene|change|increase|decrease)\b/.test(text)) return "intervention";
   if (/\b(should we|which action|recommend|decision)\b/.test(text)) return "decision";
   if (/\b(cause|related|pattern|correlat|associated)\w*/.test(text)) return "association";
   return "unknown";

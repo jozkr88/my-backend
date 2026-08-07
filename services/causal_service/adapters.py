@@ -23,7 +23,7 @@ def infer_query_type(query: str, requested: str = "unknown") -> str:
     text = query.lower()
     if any(term in text for term in ("would have", "if we had", "counterfactual", "instead")):
         return "counterfactual"
-    if any(term in text for term in ("what if", "intervene", "change", "increase", "decrease")):
+    if any(term in text for term in ("what would happen if", "what if", "intervene", "change", "increase", "decrease")):
         return "intervention"
     if any(term in text for term in ("should we", "which action", "recommend", "decision")):
         return "decision"
