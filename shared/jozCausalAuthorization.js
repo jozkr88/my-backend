@@ -1,8 +1,9 @@
 import { validateJozCausalToolArguments } from "./jozCausalToolRegistry.js";
 import { loadPublishedJozKnowledgeGraph } from "./jozKnowledgeGraph.js";
+import { JOZ_CUSTOMER_WAIT_TIME_DATASET_ID } from "./jozCustomerWaitTimeCausalDataset.js";
 
 const PUBLIC_TENANT_ID = "public";
-const PUBLIC_DATASET_IDS = new Set(["joz-public-knowledge"]);
+const PUBLIC_DATASET_IDS = new Set(["joz-public-knowledge", JOZ_CUSTOMER_WAIT_TIME_DATASET_ID]);
 
 function cleanText(value = "", max = 240) {
   return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, max);

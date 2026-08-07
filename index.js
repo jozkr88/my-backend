@@ -189,6 +189,10 @@ import {
   isJozCausalKnowledgeQuestion,
   promoteJozCausalKnowledgeIntent,
 } from "./shared/jozCausalKnowledge.js";
+import {
+  JOZ_CUSTOMER_WAIT_TIME_DEMO_DATASET,
+  getJozCustomerWaitTimeDemoRequest,
+} from "./shared/jozCustomerWaitTimeCausalDataset.js";
 import { buildJozCausalDecisionSupportReply } from "./shared/jozCausalResponse.js";
 import {
   buildSpatialAssetManifest,
@@ -3238,6 +3242,28 @@ app.post("/api/joz-llm", async (req, res) => {
         causalToolSelection.source = "llm";
       }
     }
+    const customerWaitTimeDemoRequest = getJozCustomerWaitTimeDemoRequest(latestUserMessage);
+    if (
+      causalMode === "decision_support" &&
+      customerWaitTimeDemoRequest &&
+      !requestedCausalTool
+    ) {
+      causalToolSelection = {
+        status: "selected",
+        toolName: "estimate_causal_effect",
+        args: {
+          model_id: customerWaitTimeDemoRequest.modelId,
+          model_version: customerWaitTimeDemoRequest.modelVersion,
+          treatment_variable_id: customerWaitTimeDemoRequest.treatmentVariableId,
+          outcome_variable_id: customerWaitTimeDemoRequest.outcomeVariableId,
+          treatment_value: customerWaitTimeDemoRequest.treatmentValue,
+          control_value: customerWaitTimeDemoRequest.controlValue,
+          samples: customerWaitTimeDemoRequest.samples,
+        },
+        errorCode: null,
+        source: "deterministic_demo_intervention",
+      };
+    }
     let causalTool = {
       mode: causalMode,
       status: causalToolSelection.status === "selected" ? "not_executed" : causalToolSelection.status,
@@ -3312,9 +3338,17 @@ app.post("/api/joz-llm", async (req, res) => {
                 tenantId: causalPrincipal.tenantId || "public",
               })
             : null;
+          const bundledCausalDataset =
+            needsRuntimeDataset && authorization.args.model_id === JOZ_CUSTOMER_WAIT_TIME_DEMO_DATASET.dataset_id
+              ? JOZ_CUSTOMER_WAIT_TIME_DEMO_DATASET
+              : null;
           const causalDatasetResolution = needsRuntimeDataset
             ? resolveJozCausalDataset({
-                context: publishedCausalDataset ? { ...context, causalData: publishedCausalDataset } : context,
+                context: publishedCausalDataset
+                  ? { ...context, causalData: publishedCausalDataset }
+                  : bundledCausalDataset
+                    ? { ...context, causalData: bundledCausalDataset }
+                    : context,
                 requestedModelId: authorization.args.model_id,
                 requestedModelVersion: authorization.args.model_version,
                 principal: causalPrincipal,
@@ -3388,6 +3422,22 @@ app.post("/api/joz-llm", async (req, res) => {
               toolName,
               args: authorization.args,
             });
+          }
+          if (
+            toolName === "estimate_causal_effect" &&
+            authorization.args.model_id === JOZ_CUSTOMER_WAIT_TIME_DEMO_DATASET.dataset_id &&
+            causalDatasetResolution?.ok
+          ) {
+            const dataset = causalDatasetResolution.dataset;
+            const refutation = await requestJozCausalRefutation({
+              request: {
+                nodes: dataset.nodes,
+                edges: dataset.edges,
+                data: dataset.data,
+                significance_level: 0.05,
+              },
+            });
+            result = { ...result, refutation };
           }
           const completedRun = completeJozCausalRunRecord(causalRun, {
             status: ["ok", "estimated"].includes(result.status) ? "completed" : "completed_with_warning",
@@ -3493,6 +3543,7 @@ app.post("/api/joz-llm", async (req, res) => {
       ? buildJozCausalDecisionSupportReply({
           input: latestUserMessage,
           causalAnalysis,
+          causalTool,
         })
       : ownedResolution;
     const isDataDrivenCommercialBoundary = String(ownedResolution?.answerSource || "").startsWith(

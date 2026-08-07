@@ -1,0 +1,113 @@
+export const JOZ_CUSTOMER_WAIT_TIME_DATASET_ID = "joz-customer-wait-time-demo";
+export const JOZ_CUSTOMER_WAIT_TIME_MODEL_VERSION = "customer-wait-time-v1";
+
+export const JOZ_CUSTOMER_WAIT_TIME_DEMO_DATASET = {
+  schema_version: "joz.causal-dataset.v1",
+  dataset_id: JOZ_CUSTOMER_WAIT_TIME_DATASET_ID,
+  model_version: JOZ_CUSTOMER_WAIT_TIME_MODEL_VERSION,
+  tenant_id: "public",
+  metadata: {
+    dataset_id: JOZ_CUSTOMER_WAIT_TIME_DATASET_ID,
+    model_version: JOZ_CUSTOMER_WAIT_TIME_MODEL_VERSION,
+    owner: "joz",
+    classification: "public_demo",
+    visibility: "public",
+    source: "synthetic_demo",
+    treatment_variable: "customer_wait_time",
+    outcome_variable: "conversion_rate",
+    baseline_treatment: 10,
+    twenty_percent_reduction_treatment: 8,
+    description: "Synthetic demonstration dataset for bounded customer wait-time intervention analysis.",
+  },
+  nodes: [
+    { id: "customer_wait_time", type: "treatment", label: "Customer wait time" },
+    { id: "traffic_load", type: "confounder", label: "Traffic load" },
+    { id: "conversion_rate", type: "outcome", label: "Conversion rate" },
+  ],
+  edges: [
+    { source: "traffic_load", target: "customer_wait_time", type: "CAUSES" },
+    { source: "traffic_load", target: "conversion_rate", type: "CAUSES" },
+    { source: "customer_wait_time", target: "conversion_rate", type: "CAUSES" },
+  ],
+  data: [
+    { customer_wait_time: 6.685, traffic_load: 1.7, conversion_rate: 0.4834 },
+    { customer_wait_time: 7.08, traffic_load: 2.4, conversion_rate: 0.4481 },
+    { customer_wait_time: 7.475, traffic_load: 3.1, conversion_rate: 0.4128 },
+    { customer_wait_time: 7.87, traffic_load: 3.8, conversion_rate: 0.3655 },
+    { customer_wait_time: 7.865, traffic_load: 4.5, conversion_rate: 0.3563 },
+    { customer_wait_time: 8.26, traffic_load: 5.2, conversion_rate: 0.321 },
+    { customer_wait_time: 8.655, traffic_load: 5.9, conversion_rate: 0.2857 },
+    { customer_wait_time: 9.05, traffic_load: 6.6, conversion_rate: 0.2385 },
+    { customer_wait_time: 9.445, traffic_load: 7.3, conversion_rate: 0.2032 },
+    { customer_wait_time: 9.44, traffic_load: 8, conversion_rate: 0.1939 },
+    { customer_wait_time: 9.835, traffic_load: 8.7, conversion_rate: 0.1586 },
+    { customer_wait_time: 6.45, traffic_load: 1, conversion_rate: 0.5082 },
+    { customer_wait_time: 6.845, traffic_load: 1.7, conversion_rate: 0.473 },
+    { customer_wait_time: 7.24, traffic_load: 2.4, conversion_rate: 0.4377 },
+    { customer_wait_time: 7.235, traffic_load: 3.1, conversion_rate: 0.4284 },
+    { customer_wait_time: 7.63, traffic_load: 3.8, conversion_rate: 0.3811 },
+    { customer_wait_time: 8.025, traffic_load: 4.5, conversion_rate: 0.3459 },
+    { customer_wait_time: 8.42, traffic_load: 5.2, conversion_rate: 0.3106 },
+    { customer_wait_time: 8.815, traffic_load: 5.9, conversion_rate: 0.2753 },
+    { customer_wait_time: 8.81, traffic_load: 6.6, conversion_rate: 0.2541 },
+    { customer_wait_time: 9.205, traffic_load: 7.3, conversion_rate: 0.2188 },
+    { customer_wait_time: 9.6, traffic_load: 8, conversion_rate: 0.1835 },
+    { customer_wait_time: 9.995, traffic_load: 8.7, conversion_rate: 0.1482 },
+    { customer_wait_time: 6.61, traffic_load: 1, conversion_rate: 0.4978 },
+    { customer_wait_time: 6.605, traffic_load: 1.7, conversion_rate: 0.4886 },
+    { customer_wait_time: 7, traffic_load: 2.4, conversion_rate: 0.4533 },
+    { customer_wait_time: 7.395, traffic_load: 3.1, conversion_rate: 0.418 },
+    { customer_wait_time: 7.79, traffic_load: 3.8, conversion_rate: 0.3707 },
+    { customer_wait_time: 8.185, traffic_load: 4.5, conversion_rate: 0.3355 },
+    { customer_wait_time: 8.18, traffic_load: 5.2, conversion_rate: 0.3262 },
+    { customer_wait_time: 8.575, traffic_load: 5.9, conversion_rate: 0.2909 },
+    { customer_wait_time: 8.97, traffic_load: 6.6, conversion_rate: 0.2437 },
+    { customer_wait_time: 9.365, traffic_load: 7.3, conversion_rate: 0.2084 },
+    { customer_wait_time: 9.76, traffic_load: 8, conversion_rate: 0.1731 },
+    { customer_wait_time: 9.755, traffic_load: 8.7, conversion_rate: 0.1638 },
+    { customer_wait_time: 6.37, traffic_load: 1, conversion_rate: 0.5134 },
+    { customer_wait_time: 6.765, traffic_load: 1.7, conversion_rate: 0.4782 },
+    { customer_wait_time: 7.16, traffic_load: 2.4, conversion_rate: 0.4429 },
+    { customer_wait_time: 7.555, traffic_load: 3.1, conversion_rate: 0.4076 },
+    { customer_wait_time: 7.55, traffic_load: 3.8, conversion_rate: 0.3863 },
+    { customer_wait_time: 7.945, traffic_load: 4.5, conversion_rate: 0.3511 },
+    { customer_wait_time: 8.34, traffic_load: 5.2, conversion_rate: 0.3158 },
+    { customer_wait_time: 8.735, traffic_load: 5.9, conversion_rate: 0.2805 },
+    { customer_wait_time: 9.13, traffic_load: 6.6, conversion_rate: 0.2333 },
+    { customer_wait_time: 9.125, traffic_load: 7.3, conversion_rate: 0.224 },
+    { customer_wait_time: 9.52, traffic_load: 8, conversion_rate: 0.1887 },
+    { customer_wait_time: 9.915, traffic_load: 8.7, conversion_rate: 0.1534 },
+    { customer_wait_time: 6.53, traffic_load: 1, conversion_rate: 0.503 },
+    { customer_wait_time: 6.925, traffic_load: 1.7, conversion_rate: 0.4678 },
+    { customer_wait_time: 6.92, traffic_load: 2.4, conversion_rate: 0.4585 },
+    { customer_wait_time: 7.315, traffic_load: 3.1, conversion_rate: 0.4232 },
+    { customer_wait_time: 7.71, traffic_load: 3.8, conversion_rate: 0.3759 },
+    { customer_wait_time: 8.105, traffic_load: 4.5, conversion_rate: 0.3407 },
+    { customer_wait_time: 8.5, traffic_load: 5.2, conversion_rate: 0.3054 },
+    { customer_wait_time: 8.495, traffic_load: 5.9, conversion_rate: 0.2961 },
+    { customer_wait_time: 8.89, traffic_load: 6.6, conversion_rate: 0.2488 },
+    { customer_wait_time: 9.285, traffic_load: 7.3, conversion_rate: 0.2136 },
+    { customer_wait_time: 9.68, traffic_load: 8, conversion_rate: 0.1783 },
+    { customer_wait_time: 10.075, traffic_load: 8.7, conversion_rate: 0.143 },
+    { customer_wait_time: 6.29, traffic_load: 1, conversion_rate: 0.5187 },
+  ],
+};
+
+export function getJozCustomerWaitTimeDemoRequest(input = "") {
+  const text = String(input || "").toLowerCase();
+  const isWaitTimeIntervention =
+    /\b(?:customer|client|user)\s+(?:wait|waiting)\s+time\b/.test(text) &&
+    /\b(?:decrease|decreased|reduce|reduced|lower|lowered|cut)\b/.test(text) &&
+    /\b(?:what would happen|what if|intervention|effect|impact)\b/.test(text);
+  if (!isWaitTimeIntervention) return null;
+
+  return {
+    modelId: JOZ_CUSTOMER_WAIT_TIME_DATASET_ID,
+    modelVersion: JOZ_CUSTOMER_WAIT_TIME_MODEL_VERSION,
+    treatmentVariableId: "customer_wait_time",
+    outcomeVariableId: "conversion_rate",
+    treatmentValue: 8,
+    controlValue: 10,
+    samples: 1000,
+  };
+}
