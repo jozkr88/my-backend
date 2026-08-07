@@ -24,8 +24,19 @@ test("composes bounded Joz value reasoning", () => {
   assert.equal(result.answerSource, "joz_value_causal_model");
   assert.match(result.reply, /skill → method → evidence → business outcome/);
   assert.doesNotMatch(result.reply, /by turn fragmented/i);
-  assert.match(result.reply, /by turning fragmented/i);
+  assert.match(result.reply, /through turning fragmented/i);
   assert.match(result.reply, /supported by Joz's skills and project evidence/i);
   assert.match(result.reply, /unsupported causal or ROI claim/i);
   assert.equal(result.causalValue.modelVersion, "joz-value-pathways-v1");
+});
+
+test("uses grammatical value pathway verbs", () => {
+  for (const input of [
+    "What business value does Joz create through systems thinking?",
+    "What business value does Joz create through spatial intelligence?",
+    "What business value does Joz create through causal AI?",
+  ]) {
+    const result = buildJozValueCausalReply({ input });
+    assert.doesNotMatch(result.reply, /by (increase|improve|creates)\b/i);
+  }
 });

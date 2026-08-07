@@ -18,7 +18,7 @@ const JOZ_VALUE_PATHWAYS = [
     label: "Systems and decision intelligence",
     terms: ["systems thinking", "systems mindset", "decision intelligence", "decision quality", "operating model", "causal intelligence"],
     method: "maps business priorities, constraints, evidence, feedback loops, and accountable decisions across the whole system",
-    value: "improves prioritisation and execution by making dependencies, ownership, risk, and measurable outcomes visible",
+    value: "improving prioritisation and execution by making dependencies, ownership, risk, and measurable outcomes visible",
     evidence: "Systems decision thinking, decision-intelligence, and enterprise operating-model records",
     evidenceTier: "capability_supported",
     sourceSlugs: ["systems-decision-thinking", "business-need-decision-intelligence", "business-need-operating-model-blueprint"],
@@ -28,7 +28,7 @@ const JOZ_VALUE_PATHWAYS = [
     label: "Human-centred and spatial AI",
     terms: ["spatial intelligence", "spatial ai", "spatial computing", "3d", "xr", "ar", "immersive", "ux orchestration"],
     method: "uses interaction design, multimodal signals, and spatial interfaces to make complex intelligence understandable and actionable",
-    value: "increase adoption and decision confidence by fitting AI into real human workflows rather than forcing people to adapt to the model",
+    value: "increasing adoption and decision confidence by fitting AI into real human workflows rather than forcing people to adapt to the model",
     evidence: "Spatial 3D/XR/AR platform work and Agentic AI UX Orchestration",
     evidenceTier: "capability_supported",
     sourceSlugs: ["skills-spatial-3d-xr-ar-platforms", "skills-agentic-ai-ux-orchestration"],
@@ -38,7 +38,7 @@ const JOZ_VALUE_PATHWAYS = [
     label: "Causal decision architecture",
     terms: ["causal ai", "causal intelligence", "causal inference", "counterfactual", "intervention", "world model"],
     method: "keeps the knowledge graph, causal model, evidence, assumptions, and model versions connected but distinct",
-    value: "creates a safer path from observation to intervention by separating what is known, what is hypothesised, and what must be validated",
+    value: "creating a safer path from observation to intervention by separating what is known, what is hypothesised, and what must be validated",
     evidence: "Causal Intelligence AI Architecture and Causal Decision Operating System records",
     evidenceTier: "framework_guidance",
     sourceSlugs: ["2026-08-06-causal-intelligence-ai-architecture", "2026-08-06-causal-decision-operating-system"],
@@ -88,7 +88,7 @@ function evidenceLabel(evidenceTier = "") {
 export function buildJozValueCausalReply({ input = "" } = {}) {
   const pathways = matchJozValueCausalPathways(input).slice(0, 3);
   const pathwayText = pathways
-    .map((pathway) => `${pathway.label}: ${pathway.method}; this creates value by ${pathway.value}. Evidence: ${pathway.evidence} (${evidenceLabel(pathway.evidenceTier)}).`)
+    .map((pathway) => `${pathway.label}: ${pathway.method}; this creates value through ${pathway.value}. Evidence: ${pathway.evidence} (${evidenceLabel(pathway.evidenceTier)}).`)
     .join(" ");
 
   return {
