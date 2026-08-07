@@ -23,6 +23,8 @@ test("composes bounded Joz value reasoning", () => {
   });
   assert.equal(result.answerSource, "joz_value_causal_model");
   assert.match(result.reply, /skill → method → evidence → business outcome/);
+  assert.doesNotMatch(result.reply, /by turn fragmented/i);
+  assert.match(result.reply, /by turning fragmented/i);
   assert.match(result.reply, /supported by Joz's skills and project evidence/i);
   assert.match(result.reply, /unsupported causal or ROI claim/i);
   assert.equal(result.causalValue.modelVersion, "joz-value-pathways-v1");

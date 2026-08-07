@@ -8,7 +8,7 @@ const JOZ_VALUE_PATHWAYS = [
     label: "Agentic AI architecture",
     terms: ["agentic ai", "agentic architecture", "ai architecture", "rag", "context engineering", "ai agents"],
     method: "connects context, retrieval, orchestration, verification, and governed tool use into an operating system",
-    value: "turn fragmented knowledge and AI experiments into trusted decision support and usable execution",
+    value: "turning fragmented knowledge and AI experiments into trusted decision support and usable execution",
     evidence: "Agentic AI architecture, MC USA financial agents, and the quantified outcomes corpus",
     evidenceTier: "supported_claim",
     sourceSlugs: ["skills-agentic-ai-architecture", "skills-quantified-business-outcomes", "business-need-why-hire-joz-now"],
