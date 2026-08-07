@@ -74,6 +74,9 @@ function normalizeText(value = "") {
     .replace(/\bligistics\b/g, "logistics")
     .replace(/\boriganisational\b/g, "organisational")
     .replace(/\boriganizational\b/g, "organizational")
+    .replace(/\bconsultnat\b/g, "consultant")
+    .replace(/\bconsultent\b/g, "consultant")
+    .replace(/\bcots\b/g, "costs")
     .replace(/\bthnk\b/g, "think");
 }
 
@@ -1040,7 +1043,7 @@ function composeFactualProfileReply(subIntent) {
 
 function composeBusinessNeedReply(subIntent = "hire_value", input = "") {
   if (subIntent === "consultant_builder") {
-    return "Joz is both a consultant and a builder. He starts by diagnosing the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. He is not strategy-only consulting or code-only contracting: he connects business decisions to working systems and accountable execution.";
+    return "Joz is builder-first, with consulting as part of how he works. He diagnoses the business problem, operating model, risks, and measurable outcomes, then builds the architecture, prototypes, AI agents, retrieval and verification flows, and product experiences needed to deliver it. He is not strategy-only consulting or code-only contracting: he connects business decisions to working systems and accountable execution.";
   }
 
   if (subIntent === "business_help") {
