@@ -29,6 +29,24 @@ test("keeps ordinary questions out of spatial routing", () => {
   assert.equal(result.matched, false);
 });
 
+test("does not mistake identity questions for AR requests", () => {
+  for (const input of [
+    "What are you?",
+    "Why are you launching spatial model when I ask who are you?",
+    "Why you launched spatial model?",
+  ]) {
+    const result = resolveSemanticSpatialIntent(input, { currentPortal: "maxx" });
+    assert.equal(result.matched, false, input);
+  }
+});
+
+test("does not launch spatial routing for explanatory questions that mention space", () => {
+  const result = resolveSemanticSpatialIntent("Why are you launching spatial model?", {
+    currentPortal: "maxx",
+  });
+  assert.equal(result.matched, false);
+});
+
 test("uses optional model classification for ambiguous spatial requests", async () => {
   const calls = [];
   const openai = {

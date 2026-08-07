@@ -12,6 +12,14 @@ function hasAny(value, phrases) {
   return phrases.some((phrase) => value.includes(phrase));
 }
 
+function hasWord(value, word) {
+  return new RegExp(`\\b${String(word || "").replace(/[.*+?^${}()|[\\]\\]/g, "\\\\$&")}\\b`, "i").test(value);
+}
+
+function isExplanatoryQuestion(value) {
+  return /^(what|why|who|how|when|where)\b/i.test(value);
+}
+
 function inferContextualEntitySet(context = {}) {
   const portal = clean(context.currentPortal || context.portal || "");
   const path = clean(context.path || context.currentPath || "");
@@ -47,15 +55,16 @@ function inferTargetMode(text) {
     "in reality",
     "real world",
     "camera",
-    "ar",
     "on my phone",
     "phone",
-  ])
+  ]) || hasWord(text, "ar")
     ? "ar"
     : "ar";
 }
 
 function isSpatialCandidate(text) {
+  if (isExplanatoryQuestion(text)) return false;
+
   return hasAny(text, [
     "spatial",
     "space",
@@ -66,7 +75,6 @@ function isSpatialCandidate(text) {
     "real world",
     "reality",
     "camera",
-    "ar",
     "3d",
     "immersive",
     "walk through",
@@ -79,7 +87,7 @@ function isSpatialCandidate(text) {
     "view this",
     "open this on my phone",
     "phone",
-  ]);
+  ]) || hasWord(text, "ar");
 }
 
 function actionForText(text) {
@@ -138,7 +146,7 @@ export function resolveSemanticSpatialIntent(input = "", context = {}) {
     entitySet,
     targetMode: inferTargetMode(text),
     sourceText: text,
-    confidence: hasAny(text, ["spatial", "ar", "around me", "my room", "my space", "3d", "immersive"])
+    confidence: hasAny(text, ["spatial", "around me", "my room", "my space", "3d", "immersive"]) || hasWord(text, "ar")
       ? 0.86
       : 0.68,
   });
