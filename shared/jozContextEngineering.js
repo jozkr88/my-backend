@@ -359,6 +359,9 @@ export function buildJozContextPacket({
   if (retrievalMeta?.causalKnowledge) {
     packet.causalReasoning = retrievalMeta.causalKnowledge;
   }
+  if (retrievalMeta?.selfCorrection) {
+    packet.selfCorrection = retrievalMeta.selfCorrection;
+  }
 
   const budgetResult = enforceTotalBudget(packet, budget.totalTokens);
   const sectionTokens = {

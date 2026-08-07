@@ -5,9 +5,11 @@ import {
   initDatabase,
   isDatabaseEnabled,
   listUnevaluatedJozLlmRequestEvents,
+  applyJozLlmCorrectionRule,
   saveJozLlmEvaluation,
   saveJozLlmRepairCandidate,
 } from "../db.js";
+import { classifyJozRepairCandidate } from "../shared/jozSelfCorrection.js";
 
 for (const envPath of [path.resolve(process.cwd(), "server/.env"), path.resolve(process.cwd(), ".env")]) {
   dotenv.config({ path: envPath });
@@ -145,7 +147,17 @@ async function evaluateEvent(event) {
   });
 
   let repairCandidateId = null;
+  let selfCorrectionPolicy = null;
   if (evaluation.repairNeeded && evaluation.repairType !== "none" && evaluation.repairSuggestion) {
+    selfCorrectionPolicy = classifyJozRepairCandidate({
+      repairType: evaluation.repairType,
+      targetKey: event.route,
+      question: event.user_message,
+      suggestion: evaluation.repairSuggestion,
+      verdict: evaluation.verdict,
+      safety: evaluation.safety,
+      correctness: evaluation.correctness,
+    });
     repairCandidateId = await saveJozLlmRepairCandidate({
       evaluationId,
       requestEventId: event.id,
@@ -162,17 +174,32 @@ async function evaluateEvent(event) {
         correctionEffective: evaluation.correctionEffective,
         verdict: evaluation.verdict,
         evaluatorModel: model,
+        selfCorrectionPolicy,
       },
+      status: selfCorrectionPolicy.autoApply ? "auto_eligible" : "pending",
     });
+    if (repairCandidateId && selfCorrectionPolicy.autoApply) {
+      await applyJozLlmCorrectionRule({
+        candidateId: repairCandidateId,
+        scope: selfCorrectionPolicy.rule.scope,
+        triggerTerms: selfCorrectionPolicy.rule.triggerTerms,
+        instruction: selfCorrectionPolicy.rule.instruction,
+      });
+    }
   }
 
-  return { verdict: evaluation.verdict, repairCandidateId };
+  return {
+    verdict: evaluation.verdict,
+    repairCandidateId,
+    autoApplied: Boolean(selfCorrectionPolicy?.autoApply),
+  };
 }
 
 let passed = 0;
 let warned = 0;
 let failed = 0;
 let repairs = 0;
+let autoApplied = 0;
 
 for (const event of events) {
   const result = await evaluateEvent(event);
@@ -180,6 +207,7 @@ for (const event of events) {
   if (result.verdict === "warn") warned += 1;
   if (result.verdict === "fail") failed += 1;
   if (result.repairCandidateId) repairs += 1;
+  if (result.autoApplied) autoApplied += 1;
 }
 
 console.log(JSON.stringify({
@@ -189,5 +217,7 @@ console.log(JSON.stringify({
   warned,
   failed,
   repairCandidatesCreated: repairs,
-  note: "Repair candidates are pending review; no production knowledge or routing was changed.",
+  lowRiskCorrectionsAutoApplied: autoApplied,
+  humanReviewCorrections: repairs - autoApplied,
+  note: "Only bounded low-risk presentation rules may be auto-applied. Knowledge, causal, routing, identity, commercial, and action changes remain pending human review; no production knowledge or routing is mutated automatically.",
 }, null, 2));

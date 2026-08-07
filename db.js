@@ -1769,13 +1769,14 @@ export async function saveJozLlmRepairCandidate({
   targetKey = null,
   proposedChange = "",
   evidence = {},
+  status = "pending",
 } = {}) {
   const result = await runQuery(
     `INSERT INTO joz_llm_repair_candidates (
        evaluation_id, request_event_id, repair_type, target_key,
-       proposed_change, evidence
+       proposed_change, evidence, status
      )
-     VALUES ($1, $2, $3, $4, $5, $6::jsonb)
+     VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7)
      RETURNING id`,
     [
       evaluationId,
@@ -1784,9 +1785,64 @@ export async function saveJozLlmRepairCandidate({
       targetKey,
       String(proposedChange || "").slice(0, 4000),
       JSON.stringify(evidence || {}),
+      String(status || "pending").slice(0, 40),
     ]
   );
   return result.rows[0]?.id || null;
+}
+
+export async function applyJozLlmCorrectionRule({
+  candidateId,
+  scope = "global",
+  triggerTerms = [],
+  instruction = "",
+} = {}) {
+  const normalizedScope = String(scope || "global").trim().toLowerCase() || "global";
+  const normalizedTerms = [...new Set((Array.isArray(triggerTerms) ? triggerTerms : []).map((term) => String(term || "").trim()).filter(Boolean))].slice(0, 8);
+  const normalizedInstruction = String(instruction || "").replace(/\s+/g, " ").trim().slice(0, 600);
+  if (!normalizedInstruction) return null;
+  const fingerprint = `${normalizedScope}|${normalizedTerms.join(",")}|${normalizedInstruction}`;
+  const ruleResult = await runQuery(
+    `INSERT INTO joz_llm_correction_rules (
+       fingerprint, source_candidate_id, scope, trigger_terms, instruction, status
+     )
+     VALUES ($1, $2, $3, $4::jsonb, $5, 'active')
+     ON CONFLICT (fingerprint) DO UPDATE SET
+       source_candidate_id = COALESCE(EXCLUDED.source_candidate_id, joz_llm_correction_rules.source_candidate_id),
+       updated_at = NOW()
+     RETURNING id, fingerprint, source_candidate_id, scope, trigger_terms,
+               instruction, status, created_at, updated_at`,
+    [
+      fingerprint,
+      candidateId || null,
+      normalizedScope,
+      JSON.stringify(normalizedTerms),
+      normalizedInstruction,
+    ]
+  );
+  if (candidateId) {
+    await runQuery(
+      `UPDATE joz_llm_repair_candidates
+       SET status = 'auto_applied', applied_at = NOW(),
+           evidence = evidence || $2::jsonb
+       WHERE id = $1`,
+      [candidateId, JSON.stringify({ selfCorrection: { lane: "automatic_low_risk", ruleFingerprint: fingerprint } })]
+    );
+  }
+  return ruleResult.rows[0] || null;
+}
+
+export async function listActiveJozLlmCorrectionRules(limit = 20) {
+  const result = await runQuery(
+    `SELECT id, fingerprint, source_candidate_id, scope, trigger_terms,
+            instruction, status, created_at, updated_at
+     FROM joz_llm_correction_rules
+     WHERE status = 'active'
+     ORDER BY updated_at DESC
+     LIMIT $1`,
+    [Math.max(1, Math.min(50, Number(limit) || 20))]
+  );
+  return result.rows || [];
 }
 
 export async function reviewJozLlmRequestEvent({
@@ -3038,6 +3094,25 @@ export async function initDatabase() {
     await db.query(`
       CREATE INDEX IF NOT EXISTS joz_llm_repairs_status_idx
       ON joz_llm_repair_candidates (status, created_at DESC)
+    `);
+
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS joz_llm_correction_rules (
+        id BIGSERIAL PRIMARY KEY,
+        fingerprint TEXT NOT NULL UNIQUE,
+        source_candidate_id BIGINT REFERENCES joz_llm_repair_candidates(id) ON DELETE SET NULL,
+        scope TEXT NOT NULL DEFAULT 'global',
+        trigger_terms JSONB NOT NULL DEFAULT '[]'::jsonb,
+        instruction TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'active',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await db.query(`
+      CREATE INDEX IF NOT EXISTS joz_llm_correction_rules_status_idx
+      ON joz_llm_correction_rules (status, created_at DESC)
     `);
 
     await db.query(`

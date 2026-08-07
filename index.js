@@ -38,6 +38,7 @@ import {
   isDatabaseRequired,
   listRecentJozLlmRequestEvents,
   listRecentJozLlmEvaluations,
+  listActiveJozLlmCorrectionRules,
   listJozLlmRepairCandidates,
   loadJozActionProposal,
   markWorldModelSpatialOfferConsumed,
@@ -194,6 +195,7 @@ import {
   getJozCustomerWaitTimeDemoRequest,
 } from "./shared/jozCustomerWaitTimeCausalDataset.js";
 import { buildJozCausalDecisionSupportReply } from "./shared/jozCausalResponse.js";
+import { buildJozSelfCorrectionContext } from "./shared/jozSelfCorrection.js";
 import {
   buildJozValueCausalReply,
   isJozValueCausalQuestion,
@@ -3022,6 +3024,18 @@ app.post("/api/joz-llm", async (req, res) => {
       semanticCount: 0,
       embeddingModel: null,
     };
+    let selfCorrectionContext = null;
+    if (isDatabaseEnabled()) {
+      try {
+        selfCorrectionContext = buildJozSelfCorrectionContext(
+          await listActiveJozLlmCorrectionRules(12),
+          route.selectedRoute
+        );
+      } catch (error) {
+        console.warn("⚠️ Self-correction rules unavailable; continuing without runtime guidance:", error?.message || error);
+      }
+    }
+    if (selfCorrectionContext) retrievalMeta.selfCorrection = selfCorrectionContext;
     const isControlRetrievalLane = ["booking", "interaction"].includes(retrievalIntentMode);
     const exactDocuments = intentClassification.kind === "execute" ||
       intentClassification.kind === "refuse" ||
