@@ -47,5 +47,6 @@ test("surfaces an estimated effect and refutation status", () => {
 
   assert.match(result.reply, /\+5\.2 percentage points/);
   assert.match(result.reply, /not_refuted/i);
+  assert.match(result.reply, /from 10 to 8 minutes/i);
   assert.match(result.reply, /synthetic customer-wait-time dataset/i);
 });

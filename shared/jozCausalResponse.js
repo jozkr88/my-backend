@@ -28,7 +28,7 @@ export function buildJozCausalDecisionSupportReply({
       ? ` The refutation check returned ${refutationStatus}; this does not prove causality, but it did not reject the tested structure.`
       : "";
     return {
-      reply: `Using the versioned synthetic customer-wait-time dataset, reducing wait time from ${estimate.treatment_value} to ${estimate.control_value} minutes is estimated to change conversion rate by ${effectPoints}. This is a model-based estimate for demonstration, not a production claim; validate it with real customer data and a controlled test.${refutationText}`,
+      reply: `Using the versioned synthetic customer-wait-time dataset, reducing wait time from ${estimate.control_value} to ${estimate.treatment_value} minutes is estimated to change conversion rate by ${effectPoints}. This is a model-based estimate for demonstration, not a production claim; validate it with real customer data and a controlled test.${refutationText}`,
       answerSource: "causal_effect_estimate",
       composer: "buildJozCausalDecisionSupportReply",
       fallbackUsed: false,
